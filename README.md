@@ -3,7 +3,6 @@ Rhomicom ERP is a complete Enterprise Resource Planning System proudly started i
 The company behind this project is Rhomicom Systems Tech. Ltd.(http://rhomicom.com)
 The software can be used to manage both backend and front-end operations of all kinds of institutions and organisations.
 
-====================================================================
 Capabilities of the Rhomicom ERP (Web/Desktop Renditions)
 ====================================================================
 1. Capture/Upload all Bio and Allied Data on Members, Staff, Students, Board Members, and Directors Etc.													
@@ -32,7 +31,6 @@ Capabilities of the Rhomicom ERP (Web/Desktop Renditions)
 24. Projects Management
 25. Automated Stock Management with regards to Restaurant Recipes Creation, New Product Creation and Manufacturing of Items
 
-=======================================
 Various Modules currently completed are
 =======================================
 1. Accounting
@@ -43,7 +41,6 @@ Various Modules currently completed are
 6. Events Management
 7. Facility Rentals/Hospitality Management
 
-=======================
 Outstanding Modules are
 =======================
 1. Projects Management
@@ -52,7 +49,6 @@ Outstanding Modules are
 This is currently a Desktop application written in C# with Visual Studio 2015 Community Edition.
 Work on the web-based version has also started and will be published soon.
 
-=========================================
 Typical Target institutions/organisations
 =========================================
 1. Hotels/Restaurants/Coffee shops
@@ -61,7 +57,6 @@ Typical Target institutions/organisations
 4. Construction Firms
 5. Academic Institutions
 
-=======================
 Sofware Requirements
 =======================
 1. Windows XP or later
@@ -70,12 +65,10 @@ Sofware Requirements
 4. Any FTP Server (Can be hosted on any Operating System)
 5. Java 1.6 or later
 
-=====================
 Hardware Requirements
 =====================
 Same hardware requirements for above Sofware requirements
 
-==================================================
 Technologies/Tools Used (Credits/Acknowledgements)
 ==================================================
 1. C# (.Net)-Visual Studio
