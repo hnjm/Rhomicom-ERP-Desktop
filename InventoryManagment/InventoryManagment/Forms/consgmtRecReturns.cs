@@ -4248,7 +4248,24 @@ namespace StoresAndInventoryManager.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::StoresAndInventoryManager.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 

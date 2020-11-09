@@ -204,6 +204,18 @@ namespace Accounting.Forms
                 this.addDscntButton.Enabled = false;
                 this.addChrgButton.Enabled = false;
             }
+            else
+            {
+                this.addButton.Enabled = this.addRecsSSP || this.addRecsSAP || this.addRecsSDMIT || this.addRecsSCMIR || this.addRecsDRFS || this.addRecsDTFS;
+                this.editButton.Enabled = this.editRecsSSP || this.editRecsSAP || this.editRecsSDMIT || this.editRecsSCMIR || this.editRecsDRFS || this.editRecsDTFS;
+                this.delButton.Enabled = this.delRecsSSP || this.delRecsSAP || this.delRecsSDMIT || this.delRecsSCMIR || this.delRecsDRFS || this.delRecsDTFS;
+                this.addLineButton.Enabled = this.addButton.Enabled;
+                this.delLineButton.Enabled = this.editButton.Enabled;
+                this.addTaxButton.Enabled = false;
+                this.addDscntButton.Enabled = false;
+                this.addChrgButton.Enabled = false;
+                this.applyPrpymntButton.Enabled = false;
+            }
         }
         #endregion
 
@@ -284,15 +296,14 @@ namespace Accounting.Forms
               int.Parse(this.dsplySizeComboBox.Text), Global.mnFrm.cmCde.Org_id,
               this.showUnpaidCheckBox.Checked);
             this.pyblsDocListView.Items.Clear();
-
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
                 this.last_rec_num = Global.mnFrm.cmCde.navFuncts.startIndex() + i;
                 ListViewItem nwItem = new ListViewItem(new string[] {
-    (Global.mnFrm.cmCde.navFuncts.startIndex() + i).ToString(),
-    dtst.Tables[0].Rows[i][1].ToString(),
-    dtst.Tables[0].Rows[i][0].ToString(),
-    dtst.Tables[0].Rows[i][2].ToString()});
+                    (Global.mnFrm.cmCde.navFuncts.startIndex() + i).ToString(),
+                    dtst.Tables[0].Rows[i][1].ToString(),
+                    dtst.Tables[0].Rows[i][0].ToString(),
+                    dtst.Tables[0].Rows[i][2].ToString()});
 
                 if (dtst.Tables[0].Rows[i][4].ToString() == "Cancelled")
                 {
@@ -394,6 +405,12 @@ namespace Accounting.Forms
                "scm.scm_process_run", "process_run_id", "batch_code_num",
                long.Parse(dtst.Tables[0].Rows[i][26].ToString()));
                 }
+                else if (dtst.Tables[0].Rows[i][28].ToString() == "Customer File Number")
+                {
+                    this.rgstrNumTextBox.Text = Global.mnFrm.cmCde.getGnrlRecNm(
+               "accb.accb_rcvbls_invc_hdr", "rcvbls_invc_hdr_id", "cstmrs_doc_num",
+               long.Parse(dtst.Tables[0].Rows[i][26].ToString()));
+                }
                 else
                 {
                     this.rgstrNumTextBox.Text = "";
@@ -410,6 +427,7 @@ namespace Accounting.Forms
                 double.TryParse(dtst.Tables[0].Rows[i][14].ToString(), out invAmnt);//.ToString("#,##0.00");
                 double.TryParse(dtst.Tables[0].Rows[i][19].ToString(), out amntPaid);//
                 decimal.TryParse(dtst.Tables[0].Rows[i][29].ToString(), out nextAmnt);
+                this.firstCheckNumTextBox.Text = dtst.Tables[0].Rows[i][30].ToString();
                 this.invcAmntTextBox.Text = invAmnt.ToString("#,##0.00");
                 this.amntPaidTextBox.Text = amntPaid.ToString("#,##0.00");
                 this.nextPaymentNumUpDown.Value = nextAmnt;
@@ -633,7 +651,7 @@ namespace Accounting.Forms
             this.docCommentsTextBox.Text = "";
             this.pymntTermsTextBox.Text = "";
             this.spplrsInvcNumTextBox.Text = "";
-
+            this.firstCheckNumTextBox.Text = "";
             this.pymntMthdIDTextBox.Text = "-1";
             this.pymntMthdTextBox.Text = "";
             this.rgstrIDTextBox.Text = "-1";
@@ -682,7 +700,7 @@ namespace Accounting.Forms
             this.docIDNumTextBox.ReadOnly = false;
             this.docIDNumTextBox.BackColor = Color.FromArgb(255, 255, 128);
             this.docCommentsTextBox.ReadOnly = false;
-            this.docCommentsTextBox.BackColor = Color.White;
+            this.docCommentsTextBox.BackColor = Color.FromArgb(255, 255, 128);
 
             this.pymntTermsTextBox.ReadOnly = false;
             this.pymntTermsTextBox.BackColor = Color.White;
@@ -692,6 +710,9 @@ namespace Accounting.Forms
 
             this.costCtgrTextBox.ReadOnly = true;
             this.costCtgrTextBox.BackColor = Color.White;
+
+            this.firstCheckNumTextBox.ReadOnly = false;
+            this.firstCheckNumTextBox.BackColor = Color.White;
 
             this.docDteTextBox.ReadOnly = false;
             this.docDteTextBox.BackColor = Color.FromArgb(255, 255, 128);
@@ -734,6 +755,7 @@ namespace Accounting.Forms
             this.lnkdEventComboBox.Items.Add("None");
             this.lnkdEventComboBox.Items.Add("Attendance Register");
             this.lnkdEventComboBox.Items.Add("Production Process Run");
+            this.lnkdEventComboBox.Items.Add("Customer File Number");
 
             string selItm = this.docTypeComboBox.Text;
             this.docTypeComboBox.Items.Clear();
@@ -795,7 +817,8 @@ namespace Accounting.Forms
 
             this.costCtgrTextBox.ReadOnly = true;
             this.costCtgrTextBox.BackColor = Color.WhiteSmoke;
-
+            this.firstCheckNumTextBox.ReadOnly = true;
+            this.firstCheckNumTextBox.BackColor = Color.WhiteSmoke;
             this.docDteTextBox.ReadOnly = true;
             this.docDteTextBox.BackColor = Color.WhiteSmoke;
             this.invcAmntTextBox.ReadOnly = true;
@@ -1711,6 +1734,7 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("You must be in ADD/EDIT mode first!", 0);
                 return;
             }
+
             if (this.invcCurrTextBox.Text == "")
             {
                 this.invcCurrIDTextBox.Text = this.curid.ToString();
@@ -1718,6 +1742,7 @@ namespace Accounting.Forms
                 this.txtChngd = false;
                 return;
             }
+
             if (!this.invcCurrTextBox.Text.Contains("%"))
             {
                 this.invcCurrIDTextBox.Text = "-1";
@@ -1987,6 +2012,19 @@ namespace Accounting.Forms
                     " this action!\nContact your System Administrator!", 0);
                 return;
             }
+            string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
+            double invcAmnt = 1;
+            int smplAcntID = Global.get_DfltPyblAcnt(Global.mnFrm.cmCde.Org_id);
+            if (smplAcntID <= 0)
+            {
+                Global.mnFrm.cmCde.showMsg("Default Payables Account has not been defined!", 0);
+                return;
+            }
+            else if (!this.isPayTrnsValid(smplAcntID, "I", invcAmnt, dateStr))
+            {
+                this.rfrshButton_Click(this.rfrshButton, e);
+                return;
+            }
             this.clearDetInfo();
             this.clearLnsInfo();
             this.addRec = true;
@@ -2006,6 +2044,21 @@ namespace Accounting.Forms
             this.editButton.Enabled = false;
             this.prpareForLnsEdit();
             this.obey_evnts = true;
+        }
+
+        private bool isPayTrnsValid(int accntID, string incrsDcrs, double amnt, string date1)
+        {
+            double netamnt = 0;
+
+            netamnt = Global.mnFrm.cmCde.dbtOrCrdtAccntMultiplier(accntID,
+         incrsDcrs) * amnt;
+
+            if (!Global.mnFrm.cmCde.isTransPrmttd(
+         accntID, date1, netamnt))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -2581,8 +2634,47 @@ namespace Accounting.Forms
                     srchWrd = "%" + srchWrd + "%";
                     //this.smmryDataGridView.Rows[e.RowIndex].Cells[4].Value = "-1";
                 }
+                int lnAccntID = int.Parse(this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString());
+                bool isReadOnly = false;
+                DialogResult dgRes = Global.mnFrm.cmCde.showAcntsDiag(ref lnAccntID, true,
+              true, srchWrd, "Account Details", this.autoLoad, isReadOnly, Global.mnFrm.cmCde);
+                this.autoLoad = false;
+                if (dgRes == DialogResult.OK)
+                {
+                    this.obey_evnts = false;
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value = lnAccntID.ToString();
+                    //this.smmryDataGridView.Rows[e.RowIndex].Cells[6].Value = 
 
-                string[] selVals = new string[1];
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[9].Value = Global.mnFrm.cmCde.getAccntNum(lnAccntID) +
+              "." + Global.mnFrm.cmCde.getAccntName(lnAccntID);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
+                    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", lnAccntID));
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[25].Value = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[26].Value = accntCurrID;
+
+                    string slctdCurrID = this.smmryDataGridView.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[19].Value = Math.Round(
+                        Global.get_LtstExchRate(int.Parse(slctdCurrID), this.curid,
+                        this.docDteTextBox.Text + " 00:00:00"), 15);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[20].Value = Math.Round(
+                      Global.get_LtstExchRate(int.Parse(slctdCurrID), accntCurrID,
+                      this.docDteTextBox.Text + " 00:00:00"), 15);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    double funcCurrRate = 0;
+                    double accntCurrRate = 0;
+                    double entrdAmnt = 0;
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(), out entrdAmnt);
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[19].Value.ToString(), out funcCurrRate);
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[20].Value.ToString(), out accntCurrRate);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[21].Value = (funcCurrRate * entrdAmnt).ToString("#,##0.00");
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[24].Value = (accntCurrRate * entrdAmnt).ToString("#,##0.00");
+                    System.Windows.Forms.Application.DoEvents();
+                }
+
+                /*string[] selVals = new string[1];
                 selVals[0] = this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString();
                 DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                   Global.mnFrm.cmCde.getLovID("Transaction Accounts"),
@@ -2626,7 +2718,7 @@ namespace Accounting.Forms
                         System.Windows.Forms.Application.DoEvents();
 
                     }
-                }
+                }*/
                 //SendKeys.Send("{Tab}"); 
                 //SendKeys.Send("{Tab}"); 
                 this.smmryDataGridView.EndEdit();
@@ -3102,7 +3194,7 @@ namespace Accounting.Forms
                   int.Parse(this.pymntMthdIDTextBox.Text), 0, -1,
                   this.spplrsInvcNumTextBox.Text, this.docClsfctnTextBox.Text,
                   int.Parse(this.invcCurrIDTextBox.Text), 0,
-                  long.Parse(this.rgstrIDTextBox.Text), this.costCtgrTextBox.Text, this.lnkdEventComboBox.Text);
+                  long.Parse(this.rgstrIDTextBox.Text), this.costCtgrTextBox.Text, this.lnkdEventComboBox.Text, this.firstCheckNumTextBox.Text);
 
                 this.saveButton.Enabled = false;
                 this.addRec = false;
@@ -3149,7 +3241,7 @@ namespace Accounting.Forms
                   int.Parse(this.pymntMthdIDTextBox.Text), 0, -1,
                   this.spplrsInvcNumTextBox.Text, this.docClsfctnTextBox.Text,
                   int.Parse(this.invcCurrIDTextBox.Text), 0,
-                  long.Parse(this.rgstrIDTextBox.Text), this.costCtgrTextBox.Text, this.lnkdEventComboBox.Text);
+                  long.Parse(this.rgstrIDTextBox.Text), this.costCtgrTextBox.Text, this.lnkdEventComboBox.Text, this.firstCheckNumTextBox.Text);
 
                 this.saveButton.Enabled = false;
                 this.addRec = false;
@@ -3172,6 +3264,10 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("Please select a saved Record First!", 0);
                 return;
             }
+            else
+            {
+                this.nxtApprvlStatusButton.Enabled = true;
+            }
             decimal outstndng = 0;
             decimal.TryParse(this.outstndngBalsTextBox.Text.Replace(",", ""), out outstndng);
             if (outstndng > 0 && this.nextPaymentNumUpDown.Value <= 0)
@@ -3180,6 +3276,7 @@ namespace Accounting.Forms
                 Global.updateNextPayment(long.Parse(this.docIDTextBox.Text), outstndng);
                 Global.updtPyblsDocAmnt(long.Parse(this.docIDTextBox.Text), (double)outstndng);
             }
+            this.nxtApprvlStatusButton_Click(this.nxtApprvlStatusButton, e);
         }
 
         private bool checkRqrmnts()
@@ -3208,9 +3305,15 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("New Document Number is already in use in this Organisation!", 0);
                 return false;
             }
+
             if (this.docTypeComboBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Document Type cannot be empty!", 0);
+                return false;
+            }
+            if (this.docCommentsTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Document Description cannot be empty!", 0);
                 return false;
             }
 
@@ -3243,13 +3346,17 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("Payment Method cannot be empty!", 0);
                 return false;
             }
-
+            if ((this.pymntMthdTextBox.Text.Contains("Cheque") || this.pymntMthdTextBox.Text.Contains("Check"))
+                && this.firstCheckNumTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("First Cheque Number is empty! Ignore Message if it's Deliberate!", 0);
+                //return true;
+            }
             if (this.invcAmntTextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Invoice Amount cannot be empty!", 0);
                 return false;
             }
-
             /*if (this.docClsfctnTextBox.Text == "")
             {
               Global.mnFrm.cmCde.showMsg("Document Classification cannot be empty!", 0);
@@ -3765,7 +3872,7 @@ namespace Accounting.Forms
                             Global.createTransaction(accntID1,
                               lneDesc, lnAmnt,
                               lnDte, funcCurrID, glBatchID, 0.00,
-                              netAmnt, entrdAmnt, entrdCurrID, acntAmnt, accntCurrID, funcCurrRate, accntCurrRate, "D", "");
+                              netAmnt, entrdAmnt, entrdCurrID, acntAmnt, accntCurrID, funcCurrRate, accntCurrRate, "D", this.firstCheckNumTextBox.Text);
                         }
                         else
                         {
@@ -3773,7 +3880,7 @@ namespace Accounting.Forms
                               lneDesc, 0.00,
                               lnDte, funcCurrID,
                               glBatchID, lnAmnt, netAmnt,
-                      entrdAmnt, entrdCurrID, acntAmnt, accntCurrID, funcCurrRate, accntCurrRate, "C", "");
+                      entrdAmnt, entrdCurrID, acntAmnt, accntCurrID, funcCurrRate, accntCurrRate, "C", this.firstCheckNumTextBox.Text);
                         }
                     }
                 }
@@ -3813,7 +3920,7 @@ namespace Accounting.Forms
                       this.docIDNumTextBox.Text + ")" + " (" + this.spplrNmTextBox.Text + ")").Replace(" ()", ""), funcCurrAmnt,
                       lnDte, this.curid, glBatchID, 0.00,
                       netAmnt1, grndAmnt, int.Parse(this.invcCurrIDTextBox.Text),
-                      accntCurrAmnt, accntCurrID1, funcCurrRate1, accntCurrRate1, "D", "");
+                      accntCurrAmnt, accntCurrID1, funcCurrRate1, accntCurrRate1, "D", this.firstCheckNumTextBox.Text);
                 }
                 else
                 {
@@ -3824,7 +3931,7 @@ namespace Accounting.Forms
                       lnDte, this.curid,
                       glBatchID, funcCurrAmnt, netAmnt1,
                grndAmnt, int.Parse(this.invcCurrIDTextBox.Text), accntCurrAmnt,
-               accntCurrID1, funcCurrRate1, accntCurrRate1, "C", "");
+               accntCurrID1, funcCurrRate1, accntCurrRate1, "C", this.firstCheckNumTextBox.Text);
                 }
                 if (Global.get_Batch_CrdtSum(glBatchID) == Global.get_Batch_DbtSum(glBatchID))
                 {
@@ -3989,7 +4096,7 @@ namespace Accounting.Forms
                 string pyblDoctype = this.docTypeComboBox.Text;
                 double pymntsAmnt = Math.Round(Global.getPyblsDocTtlPymnts(pyblHdrID, pyblDoctype), 2);
                 double amntAppldEslwhr = Global.get_PyblPrepayDocAppldAmnt(pyblHdrID);
-
+                long getPrpyDcUsgsCnt = Global.get_PyblPrepayDocUsages(pyblHdrID, pyblDoctype);
                 //double amntAppldEslwhr = 0;//invc_amnt_appld_elswhr
                 if (pymntsAmnt != 0)
                 {
@@ -3997,13 +4104,11 @@ namespace Accounting.Forms
                      "\r\n(TOTAL AMOUNT PAID=" + pymntsAmnt.ToString("#,##0.00") + ")", 0);
                     return;
                 }
-
-                if (amntAppldEslwhr > 0)
+                if (getPrpyDcUsgsCnt > 0)
                 {
                     Global.mnFrm.cmCde.showMsg("Please Release this Document from all Other Documents it has been applied to First!", 0);
                     return;
                 }
-
                 if (Global.mnFrm.cmCde.showMsg("Are you sure you want to CANCEL the selected Document?" +
                 "\r\nThis action cannot be undone!", 1) == DialogResult.No)
                 {
@@ -4012,7 +4117,6 @@ namespace Accounting.Forms
                     Cursor.Current = Cursors.Default;
                     return;
                 }
-
                 //this.saveLabel.Text = "CANCELLING DOCUMENT....PLEASE WAIT....";
                 //this.saveLabel.Visible = true;
                 Cursor.Current = Cursors.WaitCursor;
@@ -4172,7 +4276,7 @@ namespace Accounting.Forms
              int.Parse(this.pymntMthdIDTextBox.Text), "Supplier Payments",
              int.Parse(this.spplrIDTextBox.Text), int.Parse(this.spplrSiteIDTextBox.Text),
              long.Parse(this.docIDTextBox.Text),
-             this.docTypeComboBox.Text, Global.mnFrm.cmCde);
+             this.docTypeComboBox.Text, Global.mnFrm.cmCde, this.firstCheckNumTextBox.Text);
 
             /*addPymntDiag nwdiag = new addPymntDiag();
             nwdiag.amntToPay = double.Parse(this.outstndngBalsTextBox.Text);
@@ -4362,6 +4466,24 @@ namespace Accounting.Forms
                     }
                 }
             }
+            else if (this.lnkdEventComboBox.Text == "Customer File Number")
+            {
+                string[] selVals = new string[1];
+                selVals[0] = this.rgstrIDTextBox.Text;
+                DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                  Global.mnFrm.cmCde.getLovID("Customer File Numbers"), ref selVals,
+                  true, false, Global.mnFrm.cmCde.Org_id, "", "",
+                 "%", "Both", true);
+                if (dgRes == DialogResult.OK)
+                {
+                    for (int i = 0; i < selVals.Length; i++)
+                    {
+                        this.rgstrIDTextBox.Text = selVals[i];
+                        this.rgstrNumTextBox.Text = Global.mnFrm.cmCde.getGnrlRecNm(
+                   "accb.accb_rcvbls_invc_hdr", "rcvbls_invc_hdr_id", "cstmrs_doc_num", long.Parse(selVals[i]));
+                    }
+                }
+            }
             else
             {
                 string[] selVals = new string[1];
@@ -4422,6 +4544,11 @@ namespace Accounting.Forms
                     //DataGridViewCellEventArgs ex = new DataGridViewCellEventArgs(0, e.RowIndex);
                     //this.costingDataGridView_CellValueChanged(this.costingDataGridView, ex);
                 }
+            }
+            else if (this.lnkdEventComboBox.Text == "Customer File Number")
+            {
+                Global.mnFrm.cmCde.showMsg("Category not Required for this Type!", 0);
+                return;
             }
             else
             {
@@ -4488,6 +4615,10 @@ namespace Accounting.Forms
             this.rgstrIDTextBox.Text = "-1";
             this.rgstrNumTextBox.Text = "";
             this.costCtgrTextBox.Text = "";
+            if (this.lnkdEventComboBox.Text == "Customer File Number")
+            {
+                this.costCtgrTextBox.Text = "Payables";
+            }
         }
 
         private void prvwInvoiceButton_Click(object sender, EventArgs e)
@@ -4533,6 +4664,12 @@ namespace Accounting.Forms
             ((ToolStrip)this.printPreviewDialog1.Controls[1]).Items.Add(this.printRcptButton1);
 
             this.printDocument1.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 850, 1100);
+            //if (this.pageNo == 1)
+            //{
+            //e.PageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 850, 1100);
+            pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width - 40;
+            pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height - 40;
+            //}
             //this.printPreviewDialog1.FindForm().Height = Global.mnFrm.Height;
             //this.printPreviewDialog1.FindForm().StartPosition = FormStartPosition.Manual;
             this.printPreviewDialog1.FindForm().WindowState = FormWindowState.Maximized;
@@ -4551,16 +4688,18 @@ namespace Accounting.Forms
         int prcStartX = 0;
         int amntWdth = 0;
         int amntStartX = 0;
+        float pageWidth = 0; //e.PageSettings.PaperSize.Width - 40;//e.PageSettings.PrintableArea.Width;
+        float pageHeight = 0;// e.PageSettings.PaperSize.Height - 40;// e.PageSettings.PrintableArea.Height;
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            //MessageBox.Show("TT_B41");
             long rcvblHdrID = long.Parse(this.docIDTextBox.Text);
             string rcvblDoctype = this.docTypeComboBox.Text;
-
+            //MessageBox.Show("TT_B4");
             Graphics g = e.Graphics;
             Pen aPen = new Pen(Brushes.Black, 1);
-            e.PageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 850, 1100);
-            //e.PageSettings.
+
             Font font1 = new Font("Times New Roman", 12.25f, FontStyle.Underline | FontStyle.Bold);
             Font font11 = new Font("Times New Roman", 12.25f, FontStyle.Bold);
             Font font2 = new Font("Times New Roman", 12.25f, FontStyle.Bold);
@@ -4579,8 +4718,7 @@ namespace Accounting.Forms
             int font4Hght = font4.Height;
             int font5Hght = font5.Height;
 
-            float pageWidth = e.PageSettings.PaperSize.Width - 40;//e.PageSettings.PrintableArea.Width;
-            float pageHeight = e.PageSettings.PaperSize.Height - 40;// e.PageSettings.PrintableArea.Height;
+
             //Global.mnFrm.cmCde.showMsg(pageWidth.ToString(), 0);
             int startX = 60;
             int startY = 20;
@@ -4599,14 +4737,33 @@ namespace Accounting.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::Accounting.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
+
+
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
-
+                //MessageBox.Show("TT_1123");
                 g.DrawImage(img, startX, startY + offsetY, picWdth, picHght);
                 //g.DrawImage(this.LargerImage, destRect, srcRect, GraphicsUnit.Pixel);
                 //Org Name
-
+                //MessageBox.Show("TT1");
                 nwLn = Global.mnFrm.cmCde.breakTxtDown(
                   Global.mnFrm.cmCde.getOrgName(Global.mnFrm.cmCde.Org_id),
                   pageWidth + 85, font2, g);

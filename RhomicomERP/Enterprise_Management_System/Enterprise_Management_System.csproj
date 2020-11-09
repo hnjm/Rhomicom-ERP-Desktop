@@ -121,8 +121,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Npgsql, Version=2.0.11.92, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Npgsql2.0.11.92-bin-ms.net\Npgsql.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>bin\Debug\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="OrganizationSetup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

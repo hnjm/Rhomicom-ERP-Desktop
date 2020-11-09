@@ -865,7 +865,7 @@ namespace StoresAndInventoryManager.Forms
                     pyblDocNum = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_pybls_invc_hdr",
                   "pybls_invc_hdr_id", "pybls_invc_number", pyblHdrID);
 
-                    pyblDocType = "Supplier Standard Payment";
+                    pyblDocType = "Supplier Credit Memo (InDirect Refund)";
                     Global.updtPyblsDocHdr(pyblHdrID, this.hdrTrnxDatetextBox.Text,
                       pyblDocNum, pyblDocType, this.hdrDesctextBox.Text,
                       long.Parse(this.hdrRecNotextBox.Text), int.Parse(this.hdrSupIDtextBox.Text),
@@ -10536,7 +10536,24 @@ c.lifespan, c.tag_number, c.serial_number, c.consignmt_condition, c.remarks, " +
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::StoresAndInventoryManager.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -11095,6 +11112,11 @@ c.lifespan, c.tag_number, c.serial_number, c.consignmt_condition, c.remarks, " +
             + "   Website:www.rhomicomgh.com Mobile: 0544709501/0266245395"
             , font5, Brushes.Black, startX, startY + offsetY);
             offsetY += font5Hght;
+        }
+
+        private void dataGridViewRcptDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
 

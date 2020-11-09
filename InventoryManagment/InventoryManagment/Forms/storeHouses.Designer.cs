@@ -63,6 +63,14 @@ namespace StoresAndInventoryManager.Forms
             this.canceltoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.storeNametextBox = new System.Windows.Forms.TextBox();
+            this.lnkdSiteButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.grpNmTextBox = new System.Windows.Forms.TextBox();
+            this.grpComboBox = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.grpNmButton = new System.Windows.Forms.Button();
+            this.grpNmIDTextBox = new System.Windows.Forms.TextBox();
             this.invAccbutton = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
             this.invAcctextBox = new System.Windows.Forms.TextBox();
@@ -94,6 +102,7 @@ namespace StoresAndInventoryManager.Forms
             this.userIDtextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.editShelfButton = new System.Windows.Forms.Button();
             this.deleteShelfbutton = new System.Windows.Forms.Button();
             this.addShelfbutton = new System.Windows.Forms.Button();
             this.shelflistView = new System.Windows.Forms.ListView();
@@ -101,6 +110,19 @@ namespace StoresAndInventoryManager.Forms
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader33 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader35 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.storeHseMgrgroupBox = new System.Windows.Forms.GroupBox();
             this.addStoreHseMgrbutton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -111,8 +133,9 @@ namespace StoresAndInventoryManager.Forms
             this.storeDesctextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.storeNametextBox = new System.Windows.Forms.TextBox();
             this.storeIDtextBox = new System.Windows.Forms.TextBox();
+            this.lnkdSiteTextBox = new System.Windows.Forms.TextBox();
+            this.lnkdSiteIDTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.storeHouselistView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -124,6 +147,10 @@ namespace StoresAndInventoryManager.Forms
             this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -473,6 +500,13 @@ namespace StoresAndInventoryManager.Forms
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.storeNametextBox);
+            this.groupBox2.Controls.Add(this.lnkdSiteButton);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.grpNmTextBox);
+            this.groupBox2.Controls.Add(this.grpComboBox);
+            this.groupBox2.Controls.Add(this.label37);
+            this.groupBox2.Controls.Add(this.grpNmButton);
+            this.groupBox2.Controls.Add(this.grpNmIDTextBox);
             this.groupBox2.Controls.Add(this.invAccbutton);
             this.groupBox2.Controls.Add(this.label32);
             this.groupBox2.Controls.Add(this.invAcctextBox);
@@ -487,7 +521,9 @@ namespace StoresAndInventoryManager.Forms
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.storeIDtextBox);
-            this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Controls.Add(this.lnkdSiteTextBox);
+            this.groupBox2.Controls.Add(this.lnkdSiteIDTextBox);
+            this.groupBox2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Location = new System.Drawing.Point(631, -5);
             this.groupBox2.Name = "groupBox2";
@@ -495,11 +531,110 @@ namespace StoresAndInventoryManager.Forms
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
+            // storeNametextBox
+            // 
+            this.storeNametextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.storeNametextBox.Location = new System.Drawing.Point(118, 15);
+            this.storeNametextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.storeNametextBox.Name = "storeNametextBox";
+            this.storeNametextBox.ReadOnly = true;
+            this.storeNametextBox.Size = new System.Drawing.Size(335, 21);
+            this.storeNametextBox.TabIndex = 0;
+            this.storeNametextBox.Text = "   ";
+            // 
+            // lnkdSiteButton
+            // 
+            this.lnkdSiteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkdSiteButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lnkdSiteButton.Location = new System.Drawing.Point(427, 83);
+            this.lnkdSiteButton.Name = "lnkdSiteButton";
+            this.lnkdSiteButton.Size = new System.Drawing.Size(28, 23);
+            this.lnkdSiteButton.TabIndex = 163;
+            this.lnkdSiteButton.Text = "...";
+            this.lnkdSiteButton.UseVisualStyleBackColor = true;
+            this.lnkdSiteButton.Click += new System.EventHandler(this.lnkdSiteButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(13, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 13);
+            this.label4.TabIndex = 164;
+            this.label4.Text = "Linked Site/Branch:";
+            // 
+            // grpNmTextBox
+            // 
+            this.grpNmTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.grpNmTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpNmTextBox.Location = new System.Drawing.Point(245, 149);
+            this.grpNmTextBox.Multiline = true;
+            this.grpNmTextBox.Name = "grpNmTextBox";
+            this.grpNmTextBox.Size = new System.Drawing.Size(183, 21);
+            this.grpNmTextBox.TabIndex = 157;
+            // 
+            // grpComboBox
+            // 
+            this.grpComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.grpComboBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpComboBox.FormattingEnabled = true;
+            this.grpComboBox.Items.AddRange(new object[] {
+            "Everyone",
+            "Divisions/Groups",
+            "Grade",
+            "Job",
+            "Position",
+            "Site/Location",
+            "Person Type",
+            "Single Person"});
+            this.grpComboBox.Location = new System.Drawing.Point(118, 149);
+            this.grpComboBox.Name = "grpComboBox";
+            this.grpComboBox.Size = new System.Drawing.Size(122, 21);
+            this.grpComboBox.TabIndex = 156;
+            this.grpComboBox.SelectedIndexChanged += new System.EventHandler(this.grpComboBox_SelectedIndexChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.White;
+            this.label37.Location = new System.Drawing.Point(5, 153);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(107, 13);
+            this.label37.TabIndex = 161;
+            this.label37.Text = "Allowed Group Type:";
+            // 
+            // grpNmButton
+            // 
+            this.grpNmButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpNmButton.ForeColor = System.Drawing.Color.Black;
+            this.grpNmButton.Location = new System.Drawing.Point(428, 148);
+            this.grpNmButton.Name = "grpNmButton";
+            this.grpNmButton.Size = new System.Drawing.Size(28, 22);
+            this.grpNmButton.TabIndex = 158;
+            this.grpNmButton.Text = "...";
+            this.grpNmButton.UseVisualStyleBackColor = true;
+            this.grpNmButton.Click += new System.EventHandler(this.grpNmButton_Click);
+            // 
+            // grpNmIDTextBox
+            // 
+            this.grpNmIDTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpNmIDTextBox.ForeColor = System.Drawing.Color.Black;
+            this.grpNmIDTextBox.Location = new System.Drawing.Point(346, 149);
+            this.grpNmIDTextBox.Name = "grpNmIDTextBox";
+            this.grpNmIDTextBox.ReadOnly = true;
+            this.grpNmIDTextBox.Size = new System.Drawing.Size(82, 21);
+            this.grpNmIDTextBox.TabIndex = 160;
+            this.grpNmIDTextBox.TabStop = false;
+            this.grpNmIDTextBox.Text = "-1";
+            // 
             // invAccbutton
             // 
-            this.invAccbutton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invAccbutton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invAccbutton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.invAccbutton.Location = new System.Drawing.Point(427, 129);
+            this.invAccbutton.Location = new System.Drawing.Point(427, 106);
             this.invAccbutton.Name = "invAccbutton";
             this.invAccbutton.Size = new System.Drawing.Size(28, 23);
             this.invAccbutton.TabIndex = 4;
@@ -510,28 +645,30 @@ namespace StoresAndInventoryManager.Forms
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label32.Location = new System.Drawing.Point(47, 133);
+            this.label32.Location = new System.Drawing.Point(66, 110);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(53, 15);
+            this.label32.Size = new System.Drawing.Size(46, 13);
             this.label32.TabIndex = 72;
             this.label32.Text = "Account";
             // 
             // invAcctextBox
             // 
-            this.invAcctextBox.Location = new System.Drawing.Point(107, 130);
+            this.invAcctextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invAcctextBox.Location = new System.Drawing.Point(118, 107);
             this.invAcctextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.invAcctextBox.Name = "invAcctextBox";
             this.invAcctextBox.ReadOnly = true;
-            this.invAcctextBox.Size = new System.Drawing.Size(346, 21);
+            this.invAcctextBox.Size = new System.Drawing.Size(335, 21);
             this.invAcctextBox.TabIndex = 3;
             this.invAcctextBox.TextChanged += new System.EventHandler(this.invAcctextBox_TextChanged);
             this.invAcctextBox.Leave += new System.EventHandler(this.invAcctextBox_Leave);
             // 
             // invAccIDtextBox
             // 
-            this.invAccIDtextBox.Location = new System.Drawing.Point(298, 130);
+            this.invAccIDtextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invAccIDtextBox.Location = new System.Drawing.Point(298, 107);
             this.invAccIDtextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.invAccIDtextBox.Name = "invAccIDtextBox";
             this.invAccIDtextBox.Size = new System.Drawing.Size(43, 21);
@@ -540,10 +677,10 @@ namespace StoresAndInventoryManager.Forms
             // isStoreEnabledcheckBox
             // 
             this.isStoreEnabledcheckBox.AutoSize = true;
-            this.isStoreEnabledcheckBox.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.isStoreEnabledcheckBox.Location = new System.Drawing.Point(333, 155);
+            this.isStoreEnabledcheckBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.isStoreEnabledcheckBox.Location = new System.Drawing.Point(333, 132);
             this.isStoreEnabledcheckBox.Name = "isStoreEnabledcheckBox";
-            this.isStoreEnabledcheckBox.Size = new System.Drawing.Size(116, 19);
+            this.isStoreEnabledcheckBox.Size = new System.Drawing.Size(110, 17);
             this.isStoreEnabledcheckBox.TabIndex = 6;
             this.isStoreEnabledcheckBox.Text = "Is Store Enabled?";
             this.isStoreEnabledcheckBox.UseVisualStyleBackColor = true;
@@ -551,10 +688,10 @@ namespace StoresAndInventoryManager.Forms
             // allowSalescheckBox
             // 
             this.allowSalescheckBox.AutoSize = true;
-            this.allowSalescheckBox.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.allowSalescheckBox.Location = new System.Drawing.Point(106, 155);
+            this.allowSalescheckBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allowSalescheckBox.Location = new System.Drawing.Point(118, 132);
             this.allowSalescheckBox.Name = "allowSalescheckBox";
-            this.allowSalescheckBox.Size = new System.Drawing.Size(93, 19);
+            this.allowSalescheckBox.Size = new System.Drawing.Size(84, 17);
             this.allowSalescheckBox.TabIndex = 5;
             this.allowSalescheckBox.Text = "Allow Sales?";
             this.allowSalescheckBox.UseVisualStyleBackColor = true;
@@ -576,10 +713,10 @@ namespace StoresAndInventoryManager.Forms
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(180)))));
             this.tabPage1.Controls.Add(this.groupBox4);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(455, 229);
+            this.tabPage1.Size = new System.Drawing.Size(455, 231);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Manage Users";
             // 
@@ -821,18 +958,19 @@ namespace StoresAndInventoryManager.Forms
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(180)))));
             this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(455, 229);
+            this.tabPage2.Size = new System.Drawing.Size(455, 231);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Shelves";
+            this.tabPage2.Text = "Shelves/Cages";
             // 
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(180)))));
+            this.groupBox5.Controls.Add(this.editShelfButton);
             this.groupBox5.Controls.Add(this.deleteShelfbutton);
             this.groupBox5.Controls.Add(this.addShelfbutton);
             this.groupBox5.Controls.Add(this.shelflistView);
@@ -840,10 +978,22 @@ namespace StoresAndInventoryManager.Forms
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(445, 223);
+            this.groupBox5.Size = new System.Drawing.Size(445, 225);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "ADD SHELVES";
+            // 
+            // editShelfButton
+            // 
+            this.editShelfButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editShelfButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.editShelfButton.Location = new System.Drawing.Point(127, 20);
+            this.editShelfButton.Name = "editShelfButton";
+            this.editShelfButton.Size = new System.Drawing.Size(55, 25);
+            this.editShelfButton.TabIndex = 3;
+            this.editShelfButton.Text = "Edit";
+            this.editShelfButton.UseVisualStyleBackColor = true;
+            this.editShelfButton.Click += new System.EventHandler(this.editShelfButton_Click);
             // 
             // deleteShelfbutton
             // 
@@ -877,13 +1027,27 @@ namespace StoresAndInventoryManager.Forms
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader9,
-            this.columnHeader10});
+            this.columnHeader10,
+            this.columnHeader23,
+            this.columnHeader24,
+            this.columnHeader25,
+            this.columnHeader26,
+            this.columnHeader27,
+            this.columnHeader28,
+            this.columnHeader29,
+            this.columnHeader30,
+            this.columnHeader31,
+            this.columnHeader32,
+            this.columnHeader33,
+            this.columnHeader34,
+            this.columnHeader35});
             this.shelflistView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shelflistView.FullRowSelect = true;
             this.shelflistView.GridLines = true;
+            this.shelflistView.HideSelection = false;
             this.shelflistView.Location = new System.Drawing.Point(6, 51);
             this.shelflistView.Name = "shelflistView";
-            this.shelflistView.Size = new System.Drawing.Size(433, 166);
+            this.shelflistView.Size = new System.Drawing.Size(433, 168);
             this.shelflistView.TabIndex = 2;
             this.shelflistView.UseCompatibleStateImageBehavior = false;
             this.shelflistView.View = System.Windows.Forms.View.Details;
@@ -909,12 +1073,78 @@ namespace StoresAndInventoryManager.Forms
             this.columnHeader10.Text = "Shelf ID";
             this.columnHeader10.Width = 0;
             // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "LineID";
+            this.columnHeader23.Width = 0;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "lnkdCstmrID";
+            this.columnHeader24.Width = 0;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "lnkdCstmrNm";
+            this.columnHeader25.Width = 0;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "GrpType";
+            this.columnHeader26.Width = 0;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "GrpID";
+            this.columnHeader27.Width = 0;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Enbld?";
+            this.columnHeader28.Width = 0;
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "InvAstAcntID";
+            this.columnHeader29.Width = 0;
+            // 
+            // columnHeader30
+            // 
+            this.columnHeader30.Text = "MngrID";
+            this.columnHeader30.Width = 0;
+            // 
+            // columnHeader31
+            // 
+            this.columnHeader31.Text = "MngrNm";
+            this.columnHeader31.Width = 0;
+            // 
+            // columnHeader32
+            // 
+            this.columnHeader32.Text = "dfltItmState";
+            this.columnHeader32.Width = 0;
+            // 
+            // columnHeader33
+            // 
+            this.columnHeader33.Text = "MngrsWithdrawalLmt";
+            this.columnHeader33.Width = 0;
+            // 
+            // columnHeader34
+            // 
+            this.columnHeader34.Text = "MngrsDepoLimit";
+            this.columnHeader34.Width = 0;
+            // 
+            // columnHeader35
+            // 
+            this.columnHeader35.Text = "dlftItmType";
+            this.columnHeader35.Width = 0;
+            // 
             // storeHseMgrgroupBox
             // 
             this.storeHseMgrgroupBox.Controls.Add(this.addStoreHseMgrbutton);
             this.storeHseMgrgroupBox.Controls.Add(this.label3);
             this.storeHseMgrgroupBox.Controls.Add(this.storeHseMgrtextBox);
             this.storeHseMgrgroupBox.Controls.Add(this.storeHseMgrIDtextBox);
+            this.storeHseMgrgroupBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.storeHseMgrgroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.storeHseMgrgroupBox.Location = new System.Drawing.Point(6, 170);
             this.storeHseMgrgroupBox.Name = "storeHseMgrgroupBox";
@@ -927,7 +1157,7 @@ namespace StoresAndInventoryManager.Forms
             // 
             this.addStoreHseMgrbutton.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addStoreHseMgrbutton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.addStoreHseMgrbutton.Location = new System.Drawing.Point(415, 16);
+            this.addStoreHseMgrbutton.Location = new System.Drawing.Point(422, 16);
             this.addStoreHseMgrbutton.Name = "addStoreHseMgrbutton";
             this.addStoreHseMgrbutton.Size = new System.Drawing.Size(28, 23);
             this.addStoreHseMgrbutton.TabIndex = 51;
@@ -969,75 +1199,87 @@ namespace StoresAndInventoryManager.Forms
             // 
             // storeAddresstextBox
             // 
-            this.storeAddresstextBox.Location = new System.Drawing.Point(107, 84);
+            this.storeAddresstextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.storeAddresstextBox.Location = new System.Drawing.Point(298, 38);
             this.storeAddresstextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeAddresstextBox.Multiline = true;
             this.storeAddresstextBox.Name = "storeAddresstextBox";
             this.storeAddresstextBox.ReadOnly = true;
             this.storeAddresstextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.storeAddresstextBox.Size = new System.Drawing.Size(346, 44);
+            this.storeAddresstextBox.Size = new System.Drawing.Size(155, 44);
             this.storeAddresstextBox.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(50, 84);
+            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(245, 41);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label2.Size = new System.Drawing.Size(50, 15);
+            this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 47;
             this.label2.Text = "Address";
             // 
             // storeDesctextBox
             // 
-            this.storeDesctextBox.Location = new System.Drawing.Point(107, 38);
+            this.storeDesctextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.storeDesctextBox.Location = new System.Drawing.Point(118, 38);
             this.storeDesctextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeDesctextBox.Multiline = true;
             this.storeDesctextBox.Name = "storeDesctextBox";
             this.storeDesctextBox.ReadOnly = true;
             this.storeDesctextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.storeDesctextBox.Size = new System.Drawing.Size(346, 44);
+            this.storeDesctextBox.Size = new System.Drawing.Size(121, 44);
             this.storeDesctextBox.TabIndex = 1;
             this.storeDesctextBox.Text = " ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(32, 38);
+            this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(52, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 15);
+            this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 45;
             this.label1.Text = "Description";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(61, 18);
+            this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(78, 18);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 15);
+            this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 43;
             this.label6.Text = "Name";
             // 
-            // storeNametextBox
-            // 
-            this.storeNametextBox.Location = new System.Drawing.Point(107, 15);
-            this.storeNametextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.storeNametextBox.Name = "storeNametextBox";
-            this.storeNametextBox.ReadOnly = true;
-            this.storeNametextBox.Size = new System.Drawing.Size(346, 21);
-            this.storeNametextBox.TabIndex = 0;
-            this.storeNametextBox.Text = "   ";
-            // 
             // storeIDtextBox
             // 
+            this.storeIDtextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.storeIDtextBox.Location = new System.Drawing.Point(356, 15);
             this.storeIDtextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeIDtextBox.Name = "storeIDtextBox";
             this.storeIDtextBox.Size = new System.Drawing.Size(43, 21);
             this.storeIDtextBox.TabIndex = 61;
+            // 
+            // lnkdSiteTextBox
+            // 
+            this.lnkdSiteTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkdSiteTextBox.Location = new System.Drawing.Point(118, 84);
+            this.lnkdSiteTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lnkdSiteTextBox.Name = "lnkdSiteTextBox";
+            this.lnkdSiteTextBox.ReadOnly = true;
+            this.lnkdSiteTextBox.Size = new System.Drawing.Size(335, 21);
+            this.lnkdSiteTextBox.TabIndex = 162;
+            // 
+            // lnkdSiteIDTextBox
+            // 
+            this.lnkdSiteIDTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkdSiteIDTextBox.Location = new System.Drawing.Point(298, 84);
+            this.lnkdSiteIDTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lnkdSiteIDTextBox.Name = "lnkdSiteIDTextBox";
+            this.lnkdSiteIDTextBox.Size = new System.Drawing.Size(43, 21);
+            this.lnkdSiteIDTextBox.TabIndex = 165;
             // 
             // groupBox1
             // 
@@ -1064,14 +1306,18 @@ namespace StoresAndInventoryManager.Forms
             this.columnHeader15,
             this.columnHeader16,
             this.columnHeader17,
-            this.columnHeader18});
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader22});
             this.storeHouselistView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.storeHouselistView.FullRowSelect = true;
             this.storeHouselistView.GridLines = true;
             this.storeHouselistView.HideSelection = false;
-            this.storeHouselistView.Location = new System.Drawing.Point(3, 17);
+            this.storeHouselistView.Location = new System.Drawing.Point(3, 15);
             this.storeHouselistView.Name = "storeHouselistView";
-            this.storeHouselistView.Size = new System.Drawing.Size(618, 506);
+            this.storeHouselistView.Size = new System.Drawing.Size(618, 508);
             this.storeHouselistView.TabIndex = 0;
             this.storeHouselistView.UseCompatibleStateImageBehavior = false;
             this.storeHouselistView.View = System.Windows.Forms.View.Details;
@@ -1120,6 +1366,26 @@ namespace StoresAndInventoryManager.Forms
             // columnHeader18
             // 
             this.columnHeader18.Text = "Account ID";
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "SiteID";
+            this.columnHeader19.Width = 0;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "SiteName";
+            this.columnHeader20.Width = 0;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "GrpType";
+            this.columnHeader21.Width = 0;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "GrpVal";
+            this.columnHeader22.Width = 0;
             // 
             // imageList1
             // 
@@ -1270,5 +1536,32 @@ namespace StoresAndInventoryManager.Forms
         private System.Windows.Forms.TextBox invAcctextBox;
         private System.Windows.Forms.TextBox invAccIDtextBox;
         private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.Button lnkdSiteButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox lnkdSiteTextBox;
+        private System.Windows.Forms.TextBox lnkdSiteIDTextBox;
+        public System.Windows.Forms.TextBox grpNmTextBox;
+        private System.Windows.Forms.ComboBox grpComboBox;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Button grpNmButton;
+        public System.Windows.Forms.TextBox grpNmIDTextBox;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.Button editShelfButton;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
+        private System.Windows.Forms.ColumnHeader columnHeader29;
+        private System.Windows.Forms.ColumnHeader columnHeader30;
+        private System.Windows.Forms.ColumnHeader columnHeader31;
+        private System.Windows.Forms.ColumnHeader columnHeader32;
+        private System.Windows.Forms.ColumnHeader columnHeader33;
+        private System.Windows.Forms.ColumnHeader columnHeader34;
+        private System.Windows.Forms.ColumnHeader columnHeader35;
     }
 }

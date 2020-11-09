@@ -217,10 +217,10 @@ namespace StoresAndInventoryManager.Forms
             this.detNewSellnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detNewPrftAmnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detNewSllnPriceChkbx = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.detPrcsRunOutputID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument2 = new System.Drawing.Printing.PrintDocument();
-            this.detPrcsRunOutputID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1923,6 +1923,7 @@ namespace StoresAndInventoryManager.Forms
             this.dataGridViewRcptDetails.Size = new System.Drawing.Size(863, 373);
             this.dataGridViewRcptDetails.TabIndex = 152;
             this.dataGridViewRcptDetails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRcptDetails_CellClick);
+            this.dataGridViewRcptDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRcptDetails_CellContentClick);
             this.dataGridViewRcptDetails.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRcptDetails_CellEnter);
             this.dataGridViewRcptDetails.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRcptDetails_CellLeave);
             this.dataGridViewRcptDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRcptDetails_CellValueChanged);
@@ -2178,6 +2179,13 @@ namespace StoresAndInventoryManager.Forms
             this.detNewSllnPriceChkbx.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.detNewSllnPriceChkbx.Width = 60;
             // 
+            // detPrcsRunOutputID
+            // 
+            this.detPrcsRunOutputID.HeaderText = "detPrcsRunOutputID";
+            this.detPrcsRunOutputID.Name = "detPrcsRunOutputID";
+            this.detPrcsRunOutputID.ReadOnly = true;
+            this.detPrcsRunOutputID.Visible = false;
+            // 
             // printPreviewDialog1
             // 
             this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -2195,13 +2203,6 @@ namespace StoresAndInventoryManager.Forms
             // printDocument2
             // 
             this.printDocument2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument2_PrintPage);
-            // 
-            // detPrcsRunOutputID
-            // 
-            this.detPrcsRunOutputID.HeaderText = "detPrcsRunOutputID";
-            this.detPrcsRunOutputID.Name = "detPrcsRunOutputID";
-            this.detPrcsRunOutputID.ReadOnly = true;
-            this.detPrcsRunOutputID.Visible = false;
             // 
             // consgmtRcpt
             // 

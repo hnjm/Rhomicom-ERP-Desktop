@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using StoresAndInventoryManager.Classes;
 using StoresAndInventoryManager.Forms;
+using StoresAndInventoryManager.Dialogs;
 
 namespace StoresAndInventoryManager.Forms
 {
@@ -48,6 +49,22 @@ namespace StoresAndInventoryManager.Forms
             this.storeDesctextBox.ReadOnly = false;
             this.storeAddresstextBox.Clear();
             this.storeAddresstextBox.ReadOnly = false;
+            this.lnkdSiteTextBox.Clear();
+            this.lnkdSiteIDTextBox.Text = "-1";
+            this.lnkdSiteTextBox.ReadOnly = true;
+            this.grpComboBox.Items.Clear();
+            this.grpNmTextBox.Clear();
+            this.grpNmIDTextBox.Clear();
+            this.grpNmTextBox.ReadOnly = true;
+            this.grpComboBox.Items.Clear();
+            this.grpComboBox.Items.Add("Everyone");
+            this.grpComboBox.Items.Add("Divisions/Groups");
+            this.grpComboBox.Items.Add("Grade");
+            this.grpComboBox.Items.Add("Job");
+            this.grpComboBox.Items.Add("Position");
+            this.grpComboBox.Items.Add("Site/Location");
+            this.grpComboBox.Items.Add("Person Type");
+            this.grpComboBox.Items.Add("Single Person");
             this.allowSalescheckBox.Enabled = true;
             this.allowSalescheckBox.AutoCheck = true;
             this.allowSalescheckBox.Checked = false;
@@ -61,7 +78,7 @@ namespace StoresAndInventoryManager.Forms
             this.editUpdatetoolStripButton.Image = imageList1.Images[2];
             this.invAcctextBox.Clear();
             this.invAcctextBox.ReadOnly = false;
-            this.invAccIDtextBox.Clear();
+            this.invAccIDtextBox.Text = "-1";
 
             //store manager region
             this.storeHseMgrtextBox.Clear();
@@ -103,13 +120,17 @@ namespace StoresAndInventoryManager.Forms
         private void saveStore()
         {
             string qrySaveStore = "INSERT INTO inv.inv_itm_subinventories(subinv_name, subinv_desc, creation_date, created_by, " +
-            "last_update_date, last_update_by, org_id, inv_asset_acct_id, address, allow_sales, enabled_flag ) VALUES('" + this.storeNametextBox.Text.Replace("'", "''") +
+            "last_update_date, last_update_by, org_id, inv_asset_acct_id, address, allow_sales, enabled_flag, lnkd_site_id, allwd_group_type, allwd_group_value) VALUES('" + this.storeNametextBox.Text.Replace("'", "''") +
             "','" + this.storeDesctextBox.Text.Replace("'", "''") + "','" + dateStr + "',"
             + Global.myInv.user_id + ",'" + dateStr + "',"
             + Global.myInv.user_id + "," + Global.mnFrm.cmCde.Org_id + "," + this.invAccIDtextBox.Text +
             ",'" + this.storeAddresstextBox.Text.Replace("'", "''") +
             "','" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.allowSalescheckBox.Checked) +
-            "','" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.isStoreEnabledcheckBox.Checked) + "')";
+            "','" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.isStoreEnabledcheckBox.Checked) +
+            "'," + this.lnkdSiteIDTextBox.Text +
+            ",'" + this.grpComboBox.Text.Replace("'", "''") +
+            "','" + this.grpNmIDTextBox.Text.Replace("'", "''") +
+            "')";
 
             Global.mnFrm.cmCde.insertDataNoParams(qrySaveStore);
 
@@ -171,6 +192,17 @@ namespace StoresAndInventoryManager.Forms
             this.storeNametextBox.ReadOnly = false;
             this.storeDesctextBox.ReadOnly = false;
             this.storeAddresstextBox.ReadOnly = false;
+            string orgItm = this.grpComboBox.Text;
+            this.grpComboBox.Items.Clear();
+            this.grpComboBox.Items.Add("Everyone");
+            this.grpComboBox.Items.Add("Divisions/Groups");
+            this.grpComboBox.Items.Add("Grade");
+            this.grpComboBox.Items.Add("Job");
+            this.grpComboBox.Items.Add("Position");
+            this.grpComboBox.Items.Add("Site/Location");
+            this.grpComboBox.Items.Add("Person Type");
+            this.grpComboBox.Items.Add("Single Person");
+            this.grpComboBox.SelectedItem = orgItm;
             this.editUpdatetoolStripButton.Text = "UPDATE";
             this.editUpdatetoolStripButton.Image = imageList1.Images[0];
             this.editUpdatetoolStripButton.Enabled = true;
@@ -215,7 +247,10 @@ namespace StoresAndInventoryManager.Forms
                     "', enabled_flag = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.isStoreEnabledcheckBox.Checked) +
                     "', subinv_manager = " + Global.mnFrm.cmCde.getUserID(parStoreManager) +
                     ", inv_asset_acct_id = " + int.Parse(this.invAccIDtextBox.Text) +
-                    " WHERE subinv_id = " + int.Parse(this.storeIDtextBox.Text.Trim());
+                    ", lnkd_site_id = " + int.Parse(this.lnkdSiteIDTextBox.Text) +
+                    ", allwd_group_type = '" + this.grpComboBox.Text.Replace("'", "''") +
+                    "', allwd_group_value = '" + this.grpNmIDTextBox.Text.Replace("'", "''") +
+                    "' WHERE subinv_id = " + int.Parse(this.storeIDtextBox.Text.Trim());
             }
             else
             {
@@ -226,7 +261,10 @@ namespace StoresAndInventoryManager.Forms
                     + "', allow_sales = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.allowSalescheckBox.Checked) +
                     "', enabled_flag = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.isStoreEnabledcheckBox.Checked) +
                     "', subinv_manager = 0, inv_asset_acct_id = " + int.Parse(this.invAccIDtextBox.Text) +
-                    " WHERE subinv_id = " + int.Parse(this.storeIDtextBox.Text.Trim());
+                    ", lnkd_site_id = " + int.Parse(this.lnkdSiteIDTextBox.Text) +
+                    ", allwd_group_type = '" + this.grpComboBox.Text.Replace("'", "''") +
+                    "', allwd_group_value = '" + this.grpNmIDTextBox.Text.Replace("'", "''") +
+                    "' WHERE subinv_id = " + int.Parse(this.storeIDtextBox.Text.Trim());
             }
 
             Global.mnFrm.cmCde.updateDataNoParams(qryUpdateStore);
@@ -278,6 +316,15 @@ namespace StoresAndInventoryManager.Forms
             this.storeDesctextBox.ReadOnly = true;
             this.storeAddresstextBox.Clear();
             this.storeAddresstextBox.ReadOnly = true;
+
+            this.lnkdSiteTextBox.Clear();
+            this.lnkdSiteIDTextBox.Text = "-1";
+            this.lnkdSiteTextBox.ReadOnly = true;
+            this.grpComboBox.Items.Clear();
+            this.grpNmTextBox.Clear();
+            this.grpNmIDTextBox.Clear();
+            this.grpNmTextBox.ReadOnly = true;
+
             this.allowSalescheckBox.AutoCheck = false;
             this.allowSalescheckBox.Checked = false;
             this.isStoreEnabledcheckBox.AutoCheck = false;
@@ -290,7 +337,7 @@ namespace StoresAndInventoryManager.Forms
             this.editUpdatetoolStripButton.Enabled = true;
             this.storeHouselistView.Refresh();
             this.invAcctextBox.Clear();
-            this.invAccIDtextBox.Clear();
+            this.invAccIDtextBox.Text = "-1";
 
             //store manager region
             this.storeHseMgrtextBox.Clear();
@@ -556,7 +603,7 @@ namespace StoresAndInventoryManager.Forms
             this.storeHouselistView.Items.Clear();
 
             string qryMain;
-            string qrySelect = "select subinv_name, subinv_desc, subinv_manager, address, allow_sales, enabled_flag, subinv_id, inv_asset_acct_id from inv.inv_itm_subinventories ";
+            string qrySelect = "select subinv_name, subinv_desc, subinv_manager, address, allow_sales, enabled_flag, subinv_id, inv_asset_acct_id, lnkd_site_id, org.get_site_code_desc(lnkd_site_id) site_name, allwd_group_type, allwd_group_value from inv.inv_itm_subinventories ";
             string qryWhere = parWhereClause;
             string qryLmtOffst = " limit " + parLimit + " offset 0 ";
             string orderBy = " order by 1 asc";
@@ -588,7 +635,8 @@ namespace StoresAndInventoryManager.Forms
                     //read data into array
                     string[] colArray = { newDs.Tables[0].Rows[i][1].ToString(),  Global.mnFrm.cmCde.get_user_name(int.Parse(newDs.Tables[0].Rows[i][2].ToString())),
                             newDs.Tables[0].Rows[i][3].ToString(),newDs.Tables[0].Rows[i][2].ToString(), newDs.Tables[0].Rows[i][4].ToString(),
-                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()};
+                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()
+                    , newDs.Tables[0].Rows[i][8].ToString(), newDs.Tables[0].Rows[i][9].ToString(), newDs.Tables[0].Rows[i][10].ToString(), newDs.Tables[0].Rows[i][11].ToString()};
 
                     //add data to listview
                     this.storeHouselistView.Items.Add(newDs.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -597,7 +645,8 @@ namespace StoresAndInventoryManager.Forms
                 {
                     string[] colArray = { newDs.Tables[0].Rows[i][1].ToString(),  "",
                             newDs.Tables[0].Rows[i][3].ToString(),"",newDs.Tables[0].Rows[i][4].ToString(),
-                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()};
+                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()
+                    , newDs.Tables[0].Rows[i][8].ToString(), newDs.Tables[0].Rows[i][9].ToString(), newDs.Tables[0].Rows[i][10].ToString(), newDs.Tables[0].Rows[i][11].ToString()};
 
                     //add data to listview
                     this.storeHouselistView.Items.Add(newDs.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -638,7 +687,7 @@ namespace StoresAndInventoryManager.Forms
             this.storeHouselistView.Items.Clear();
 
             string qryMain;
-            string qrySelect = "select subinv_name, subinv_desc, subinv_manager, address, allow_sales, enabled_flag, subinv_id, inv_asset_acct_id from inv.inv_itm_subinventories ";
+            string qrySelect = "select subinv_name, subinv_desc, subinv_manager, address, allow_sales, enabled_flag, subinv_id, inv_asset_acct_id, lnkd_site_id, org.get_site_name(lnkd_site_id) site_name, allwd_group_type, allwd_group_value from inv.inv_itm_subinventories ";
             string qryWhere = parWhereClause;
             string qryLmtOffst = " limit " + parLimit + " offset " + Math.Abs(parLimit * parOffset) + " ";
             string orderBy = " order by 1 asc";
@@ -667,7 +716,8 @@ namespace StoresAndInventoryManager.Forms
                     //read data into array
                     string[] colArray = { newDs.Tables[0].Rows[i][1].ToString(),  Global.mnFrm.cmCde.get_user_name(int.Parse(newDs.Tables[0].Rows[i][2].ToString())),
                             newDs.Tables[0].Rows[i][3].ToString(), newDs.Tables[0].Rows[i][2].ToString(), newDs.Tables[0].Rows[i][4].ToString(),
-                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()};
+                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()
+                    , newDs.Tables[0].Rows[i][8].ToString(), newDs.Tables[0].Rows[i][9].ToString(), newDs.Tables[0].Rows[i][10].ToString(), newDs.Tables[0].Rows[i][11].ToString()};
 
                     //add data to listview
                     this.storeHouselistView.Items.Add(newDs.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -676,7 +726,8 @@ namespace StoresAndInventoryManager.Forms
                 {
                     string[] colArray = { newDs.Tables[0].Rows[i][1].ToString(),"",
                             newDs.Tables[0].Rows[i][3].ToString(), "", newDs.Tables[0].Rows[i][4].ToString(),
-                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()};
+                            newDs.Tables[0].Rows[i][5].ToString(), newDs.Tables[0].Rows[i][6].ToString(), newDs.Tables[0].Rows[i][7].ToString()
+                    , newDs.Tables[0].Rows[i][8].ToString(), newDs.Tables[0].Rows[i][9].ToString(), newDs.Tables[0].Rows[i][10].ToString(), newDs.Tables[0].Rows[i][11].ToString()};
 
                     //add data to listview
                     this.storeHouselistView.Items.Add(newDs.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -713,7 +764,6 @@ namespace StoresAndInventoryManager.Forms
         {
             //clear listview
             this.userslistView.Items.Clear();
-
             string qrySelectStoreUsers = @"SELECT row_number() over(order by user_id) as row , user_id, 
           to_char(to_timestamp(start_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS'), 
 CASE WHEN end_date='' THEN end_date ELSE to_char(to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') END 
@@ -723,20 +773,15 @@ FROM inv.inv_user_subinventories " +
                 + Global.mnFrm.cmCde.Org_id + " order by 1 ";
 
             DataSet Ds = new DataSet();
-
             Ds.Reset();
-
             //fill dataset
             Ds = Global.fillDataSetFxn(qrySelectStoreUsers);
-
             int varMaxRows = Ds.Tables[0].Rows.Count;
-
             for (int i = 0; i < varMaxRows; i++)
             {
                 //read data into array
                 string[] colArray = {Global.mnFrm.cmCde.get_user_name(int.Parse(Ds.Tables[0].Rows[i][1].ToString())),  Ds.Tables[0].Rows[i][2].ToString(),
                             Ds.Tables[0].Rows[i][3].ToString(), Ds.Tables[0].Rows[i][1].ToString()};
-
                 //add data to listview
                 this.userslistView.Items.Add(Ds.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
             }
@@ -747,10 +792,15 @@ FROM inv.inv_user_subinventories " +
             //clear listview
             this.shelflistView.Items.Clear();
 
-            string qrySelectStoreShelves = "SELECT row_number() over(order by shelf_id) as row, shelf_id FROM inv.inv_shelf " +
+            string qrySelectStoreShelves = @"SELECT row_number() over(order by shelf_id) as row, shelf_id, line_id, 
+                   lnkd_cstmr_id, scm.get_cstmr_splr_name(lnkd_cstmr_id), allwd_group_type, allwd_group_value, 
+                    enabled_flag,  inv_asset_acct_id, cage_shelve_mngr_id, prs.get_prsn_name(cage_shelve_mngr_id), 
+                dflt_item_state, managers_wthdrwl_limit, managers_deposit_limit, dflt_item_type, 
+                CASE WHEN shelve_name='' THEN gst.get_pssbl_val(shelf_id) ELSE shelve_name END, 
+                CASE WHEN shelve_desc='' THEN gst.get_pssbl_val_desc(shelf_id) ELSE shelve_desc END                    
+                    FROM inv.inv_shelf " +
                 " WHERE store_id = (select subinv_id from inv.inv_itm_subinventories where subinv_name = '" + parStoreName.Replace("'", "''")
-                + "' AND org_id = " + Global.mnFrm.cmCde.Org_id + ") AND org_id = "
-                + Global.mnFrm.cmCde.Org_id + " order by 1 ";
+                + "' AND org_id = " + Global.mnFrm.cmCde.Org_id + ") AND org_id = " + Global.mnFrm.cmCde.Org_id + " order by 1 ";
 
             DataSet Ds = new DataSet();
 
@@ -764,8 +814,22 @@ FROM inv.inv_user_subinventories " +
             for (int i = 0; i < varMaxRows; i++)
             {
                 //read data into array
-                string[] colArray = {Global.mnFrm.cmCde.getPssblValNm(int.Parse(Ds.Tables[0].Rows[i][1].ToString())), Global.mnFrm.cmCde.getPssblValDesc(int.Parse(Ds.Tables[0].Rows[i][1].ToString())),
-                            Ds.Tables[0].Rows[i][1].ToString()};
+                string[] colArray = {Ds.Tables[0].Rows[i][15].ToString(),
+                     Ds.Tables[0].Rows[i][16].ToString(),
+                            Ds.Tables[0].Rows[i][1].ToString(),
+                            Ds.Tables[0].Rows[i][2].ToString(),
+                            Ds.Tables[0].Rows[i][3].ToString(),
+                            Ds.Tables[0].Rows[i][4].ToString(),
+                            Ds.Tables[0].Rows[i][5].ToString(),
+                            Ds.Tables[0].Rows[i][6].ToString(),
+                            Ds.Tables[0].Rows[i][7].ToString(),
+                            Ds.Tables[0].Rows[i][8].ToString(),
+                            Ds.Tables[0].Rows[i][9].ToString(),
+                            Ds.Tables[0].Rows[i][10].ToString(),
+                            Ds.Tables[0].Rows[i][11].ToString(),
+                            Ds.Tables[0].Rows[i][12].ToString(),
+                            Ds.Tables[0].Rows[i][13].ToString(),
+                            Ds.Tables[0].Rows[i][14].ToString()};
 
                 //add data to listview
                 this.shelflistView.Items.Add(Ds.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -1334,8 +1398,64 @@ FROM inv.inv_user_subinventories " +
                         this.invAcctextBox.Text = Global.mnFrm.cmCde.getAccntName(int.Parse(e.Item.SubItems[8].Text));
                         this.invAccIDtextBox.Text = e.Item.SubItems[8].Text;
                     }
-                    else { this.invAcctextBox.Clear(); this.invAccIDtextBox.Clear(); }
+                    else
+                    {
+                        this.invAcctextBox.Clear();
+                        this.invAccIDtextBox.Text = "-1";
+                    }
 
+                    this.lnkdSiteIDTextBox.Text = e.Item.SubItems[9].Text;
+                    this.lnkdSiteTextBox.Text = e.Item.SubItems[10].Text;
+
+                    this.grpComboBox.Items.Clear();
+                    this.grpComboBox.Items.Add("Everyone");
+                    this.grpComboBox.Items.Add("Divisions/Groups");
+                    this.grpComboBox.Items.Add("Grade");
+                    this.grpComboBox.Items.Add("Job");
+                    this.grpComboBox.Items.Add("Position");
+                    this.grpComboBox.Items.Add("Site/Location");
+                    this.grpComboBox.Items.Add("Person Type");
+                    this.grpComboBox.Items.Add("Single Person");
+                    //this.grpComboBox.Items.Add(e.Item.SubItems[11].Text);
+                    this.grpComboBox.SelectedItem = e.Item.SubItems[11].Text;
+                    this.grpNmIDTextBox.Text = e.Item.SubItems[12].Text;
+
+                    if (this.grpComboBox.Text == "Divisions/Groups")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getDivName(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Grade")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGrdName(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Job")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getJobName(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Position")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPosName(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Site/Location")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getSiteNameDesc(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Person Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Working Hour Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getWkhName(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Gathering Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGathName(int.Parse(this.grpNmIDTextBox.Text));
+                    }
+                    else if (this.grpComboBox.Text == "Single Person")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPrsnName(long.Parse(this.grpNmIDTextBox.Text));
+                    }
                     loadStoreUsersListView(this.storeNametextBox.Text);
                     loadStoreShelvesListView(this.storeNametextBox.Text);
                     e.Item.Font = new Font("Tahoma", 8.25f, FontStyle.Bold);
@@ -1800,7 +1920,7 @@ FROM inv.inv_user_subinventories " +
             }
             catch (Exception ex)
             {
-                Global.mnFrm.cmCde.showMsg(ex.Message, 0);
+                Global.mnFrm.cmCde.showMsg(ex.Message + "\r\n" + ex.InnerException + "\r\n" + ex.StackTrace, 0);
                 return;
             }
         }
@@ -2015,5 +2135,234 @@ DELETE FROM inv.inv_itm_subinventories WHERE subinv_id={:itmID};";
             Global.mnFrm.cmCde.deleteDataNoParams(strSQL);
             this.goFindtoolStripButton_Click(this.goFindtoolStripButton, e);
         }
+
+        private void grpComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.grpNmIDTextBox.Text = "-1";
+            this.grpNmTextBox.Text = "";
+            if (this.grpComboBox.Text == "Everyone")
+            {
+                this.grpNmTextBox.BackColor = Color.WhiteSmoke;
+                this.grpNmTextBox.Enabled = false;
+                this.grpNmButton.Enabled = false;
+            }
+            else
+            {
+                this.grpNmTextBox.BackColor = Color.FromArgb(255, 255, 118);
+                this.grpNmTextBox.Enabled = true;
+                this.grpNmButton.Enabled = true;
+            }
+        }
+
+        private void grpNmButton_Click(object sender, EventArgs e)
+        {
+            if (this.editUpdatetoolStripButton.Text == "EDIT")
+            {
+                this.editUpdatetoolStripButton.PerformClick();
+            }
+            if (this.editUpdatetoolStripButton.Text == "EDIT" && this.editUpdatetoolStripButton.Enabled == true)
+            {
+                Global.mnFrm.cmCde.showMsg("Must be in EDIT Mode", 0);
+                return;
+            }
+            if (this.grpComboBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please select a Group Type!", 0);
+                return;
+            }
+            string[] selVals = new string[1];
+            selVals[0] = this.grpNmIDTextBox.Text;
+            string grpCmbo = "";
+            if (this.grpComboBox.Text == "Divisions/Groups")
+            {
+                grpCmbo = "Divisions/Groups";
+            }
+            else if (this.grpComboBox.Text == "Grade")
+            {
+                grpCmbo = "Grades";
+            }
+            else if (this.grpComboBox.Text == "Job")
+            {
+                grpCmbo = "Jobs";
+            }
+            else if (this.grpComboBox.Text == "Position")
+            {
+                grpCmbo = "Positions";
+            }
+            else if (this.grpComboBox.Text == "Site/Location")
+            {
+                grpCmbo = "Sites/Locations";
+            }
+            else if (this.grpComboBox.Text == "Person Type")
+            {
+                grpCmbo = "Person Types";
+            }
+            else if (this.grpComboBox.Text == "Working Hour Type")
+            {
+                grpCmbo = "Working Hours";
+            }
+            else if (this.grpComboBox.Text == "Gathering Type")
+            {
+                grpCmbo = "Gathering Types";
+            }
+            else if (this.grpComboBox.Text == "Single Person")
+            {
+                grpCmbo = "Active Persons";
+            }
+            int[] selVal1s = new int[1];
+
+            DialogResult dgRes;
+            if (this.grpComboBox.Text != "Person Type")
+            {
+                dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                Global.mnFrm.cmCde.getLovID(grpCmbo), ref selVals, true, true, Global.mnFrm.cmCde.Org_id,
+               this.srchWrd, "Both", true);
+            }
+            else
+            {
+                dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                Global.mnFrm.cmCde.getLovID("Person Types"), ref selVal1s, true, true,
+               this.srchWrd, "Both", true);
+            }
+            int slctn = 0;
+            if (this.grpComboBox.Text != "Person Type")
+            {
+                slctn = selVals.Length;
+            }
+            else
+            {
+                slctn = selVal1s.Length;
+            }
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < slctn; i++)
+                {
+                    this.grpNmIDTextBox.Text = selVals[i];
+                    if (this.grpComboBox.Text == "Divisions/Groups")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getDivName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Grade")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGrdName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Job")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getJobName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Position")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPosName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Site/Location")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getSiteNameDesc(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Person Type")
+                    {
+                        this.grpNmIDTextBox.Text = selVal1s[i].ToString();
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(selVal1s[i]);
+                    }
+                    else if (this.grpComboBox.Text == "Working Hour Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getWkhName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Gathering Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGathName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Single Person")
+                    {
+                        this.grpNmIDTextBox.Text = Global.mnFrm.cmCde.getPrsnID(selVals[i]).ToString();
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPrsnName(selVals[i]);
+                    }
+                }
+            }
+        }
+
+        private void editShelfButton_Click(object sender, EventArgs e)
+        {
+            if (this.editUpdatetoolStripButton.Text == "EDIT")
+            {
+                this.editUpdatetoolStripButton.PerformClick();
+            }
+
+            if (this.editUpdatetoolStripButton.Text == "EDIT")
+            {
+                Global.mnFrm.cmCde.showMsg("Must be in EDIT Mode", 0);
+                return;
+            }
+
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[20]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                    " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            if (this.shelflistView.SelectedItems.Count > 0)
+            {
+                shelCageDiag nwDiag = new shelCageDiag();
+                nwDiag.storeName = this.storeNametextBox.Text;
+                nwDiag.storeIDTextBox.Text = this.storeIDtextBox.Text;
+                nwDiag.shelveNameTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[1].Text;
+                nwDiag.shelveDesctextBox.Text = this.shelflistView.SelectedItems[0].SubItems[2].Text;
+                nwDiag.shelveIDtextBox.Text = this.shelflistView.SelectedItems[0].SubItems[3].Text;
+                nwDiag.lineIDTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[4].Text;
+                nwDiag.lnkdCstmrIDTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[5].Text;
+                nwDiag.lnkdCstmrTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[6].Text;
+                nwDiag.grpComboBox.SelectedItem = this.shelflistView.SelectedItems[0].SubItems[7].Text;
+                nwDiag.grpNmIDTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[8].Text;
+                nwDiag.isShelfEnabledcheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(this.shelflistView.SelectedItems[0].SubItems[9].Text);
+                nwDiag.invAccIDtextBox.Text = this.shelflistView.SelectedItems[0].SubItems[10].Text;
+                nwDiag.invAcctextBox.Text = Global.mnFrm.cmCde.getAccntName(int.Parse(this.shelflistView.SelectedItems[0].SubItems[10].Text));
+                nwDiag.shelveMngrIDTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[11].Text;
+                nwDiag.shelveMngrTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[12].Text;
+                nwDiag.dfltItmStateTextBox.Text = this.shelflistView.SelectedItems[0].SubItems[13].Text;
+                nwDiag.wthdrwLmtNumUpDown.Value = decimal.Parse(this.shelflistView.SelectedItems[0].SubItems[14].Text);
+                nwDiag.depLmtNumUpDwn.Value = decimal.Parse(this.shelflistView.SelectedItems[0].SubItems[15].Text);
+                nwDiag.itemTypecomboBox.SelectedItem = this.shelflistView.SelectedItems[0].SubItems[16].Text;
+                if (nwDiag.ShowDialog() == DialogResult.OK)
+                {
+                    loadStoreShelvesListView(this.storeNametextBox.Text);
+                }
+            }
+        }
+
+        private void lnkdSiteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.editUpdatetoolStripButton.Text == "EDIT")
+                {
+                    this.editUpdatetoolStripButton.PerformClick();
+                }
+                if (this.editUpdatetoolStripButton.Text == "EDIT" && this.editUpdatetoolStripButton.Enabled == true)
+                {
+                    Global.mnFrm.cmCde.showMsg("Must be in EDIT Mode", 0);
+                    return;
+                }
+
+                string[] selVals = new string[1];
+                selVals[0] = this.lnkdSiteIDTextBox.Text;
+                DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                    Global.mnFrm.cmCde.getLovID("Sites/Locations"), ref selVals,
+                    true, false, Global.mnFrm.cmCde.Org_id,
+               this.srchWrd, "Both", true);
+                if (dgRes == DialogResult.OK)
+                {
+                    for (int i = 0; i < selVals.Length; i++)
+                    {
+                        this.lnkdSiteIDTextBox.Text = selVals[i];
+                        this.lnkdSiteTextBox.Text = Global.mnFrm.cmCde.getSiteName(int.Parse(selVals[i]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.mnFrm.cmCde.showMsg(ex.Message + "\r\n" + ex.InnerException + "\r\n" + ex.StackTrace, 0);
+                return;
+            }
+        }
+        
     }
 }

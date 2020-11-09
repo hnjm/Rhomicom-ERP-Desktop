@@ -87,10 +87,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Npgsql, Version=2.0.11.92, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Organisation_Management_System\bin\Debug\Npgsql.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Npgsql">
+      <HintPath>..\Enterprise_Management_System\bin\Debug\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -121,6 +119,30 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="segmentValuesDiag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="segmentValuesDiag.Designer.cs">
+      <DependentUpon>segmentValuesDiag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sgmtValClsfctnsDiag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sgmtValClsfctnsDiag.Designer.cs">
+      <DependentUpon>sgmtValClsfctnsDiag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="acntClsfctnsDiag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acntClsfctnsDiag.Designer.cs">
+      <DependentUpon>acntClsfctnsDiag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="acntSegmntsDiag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acntSegmntsDiag.Designer.cs">
+      <DependentUpon>acntSegmntsDiag.cs</DependentUpon>
+    </Compile>
     <Compile Include="activateDiag.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +172,12 @@
     </Compile>
     <Compile Include="calendarDiag.Designer.cs">
       <DependentUpon>calendarDiag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="chartOfAcntsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chartOfAcntsForm.Designer.cs">
+      <DependentUpon>chartOfAcntsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CommonCode.cs" />
     <Compile Include="Core\DialogBox.cs" />
@@ -275,6 +303,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="segmentValuesDiag.resx">
+      <DependentUpon>segmentValuesDiag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sgmtValClsfctnsDiag.resx">
+      <DependentUpon>sgmtValClsfctnsDiag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acntClsfctnsDiag.resx">
+      <DependentUpon>acntClsfctnsDiag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acntSegmntsDiag.resx">
+      <DependentUpon>acntSegmntsDiag.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="activateDiag.resx">
       <SubType>Designer</SubType>
       <DependentUpon>activateDiag.cs</DependentUpon>
@@ -294,6 +334,9 @@
     <EmbeddedResource Include="calendarDiag.resx">
       <SubType>Designer</SubType>
       <DependentUpon>calendarDiag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="chartOfAcntsForm.resx">
+      <DependentUpon>chartOfAcntsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gnrtRptProgressDiag.resx">
       <DependentUpon>gnrtRptProgressDiag.cs</DependentUpon>
@@ -479,6 +522,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\staffs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add1-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

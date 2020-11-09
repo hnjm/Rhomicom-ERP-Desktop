@@ -30,12 +30,12 @@
     {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(pettyCashDocsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ptycshDocListView = new System.Windows.Forms.ListView();
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -98,13 +98,11 @@
             this.spplrSiteTextBox = new System.Windows.Forms.TextBox();
             this.docCommentsTextBox = new System.Windows.Forms.TextBox();
             this.lnkdEventComboBox = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.rgstrNumTextBox = new System.Windows.Forms.TextBox();
             this.rgstrButton = new System.Windows.Forms.Button();
             this.costCtgrButton = new System.Windows.Forms.Button();
             this.rgstrIDTextBox = new System.Windows.Forms.TextBox();
             this.costCtgrTextBox = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.invcCurrButton = new System.Windows.Forms.Button();
             this.invcCurrTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -139,6 +137,7 @@
             this.docTypeComboBox = new System.Windows.Forms.ComboBox();
             this.docIDPrfxComboBox = new System.Windows.Forms.ComboBox();
             this.docIDNumTextBox = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.cashAccntButton = new System.Windows.Forms.Button();
             this.cashAccntTextBox = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -238,7 +237,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.waitLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.showUnpaidCheckBox = new System.Windows.Forms.CheckBox();
+            this.showUnpostedCheckBox = new System.Windows.Forms.CheckBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
@@ -768,13 +767,11 @@
             this.groupBox10.Controls.Add(this.spplrSiteTextBox);
             this.groupBox10.Controls.Add(this.docCommentsTextBox);
             this.groupBox10.Controls.Add(this.lnkdEventComboBox);
-            this.groupBox10.Controls.Add(this.label22);
             this.groupBox10.Controls.Add(this.rgstrNumTextBox);
             this.groupBox10.Controls.Add(this.rgstrButton);
             this.groupBox10.Controls.Add(this.costCtgrButton);
             this.groupBox10.Controls.Add(this.rgstrIDTextBox);
             this.groupBox10.Controls.Add(this.costCtgrTextBox);
-            this.groupBox10.Controls.Add(this.label21);
             this.groupBox10.Controls.Add(this.invcCurrButton);
             this.groupBox10.Controls.Add(this.invcCurrTextBox);
             this.groupBox10.Controls.Add(this.label3);
@@ -809,6 +806,7 @@
             this.groupBox10.Controls.Add(this.docTypeComboBox);
             this.groupBox10.Controls.Add(this.docIDPrfxComboBox);
             this.groupBox10.Controls.Add(this.docIDNumTextBox);
+            this.groupBox10.Controls.Add(this.label22);
             this.groupBox10.ForeColor = System.Drawing.Color.White;
             this.groupBox10.Location = new System.Drawing.Point(170, 36);
             this.groupBox10.Name = "groupBox10";
@@ -878,21 +876,13 @@
             this.lnkdEventComboBox.FormattingEnabled = true;
             this.lnkdEventComboBox.Items.AddRange(new object[] {
             "Attendance Register",
-            "Production Process Run"});
+            "Production Process Run",
+            "Customer File Number"});
             this.lnkdEventComboBox.Location = new System.Drawing.Point(77, 152);
             this.lnkdEventComboBox.Name = "lnkdEventComboBox";
-            this.lnkdEventComboBox.Size = new System.Drawing.Size(241, 21);
+            this.lnkdEventComboBox.Size = new System.Drawing.Size(131, 21);
             this.lnkdEventComboBox.TabIndex = 10;
             this.lnkdEventComboBox.SelectedIndexChanged += new System.EventHandler(this.lnkdEventComboBox_SelectedIndexChanged);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(1, 156);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(72, 13);
-            this.label22.TabIndex = 244;
-            this.label22.Text = "Linked Event:";
             // 
             // rgstrNumTextBox
             // 
@@ -900,14 +890,14 @@
             this.rgstrNumTextBox.MaxLength = 200;
             this.rgstrNumTextBox.Name = "rgstrNumTextBox";
             this.rgstrNumTextBox.ReadOnly = true;
-            this.rgstrNumTextBox.Size = new System.Drawing.Size(104, 21);
+            this.rgstrNumTextBox.Size = new System.Drawing.Size(214, 21);
             this.rgstrNumTextBox.TabIndex = 11;
             // 
             // rgstrButton
             // 
             this.rgstrButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rgstrButton.ForeColor = System.Drawing.Color.Black;
-            this.rgstrButton.Location = new System.Drawing.Point(181, 174);
+            this.rgstrButton.Location = new System.Drawing.Point(292, 174);
             this.rgstrButton.Name = "rgstrButton";
             this.rgstrButton.Size = new System.Drawing.Size(27, 23);
             this.rgstrButton.TabIndex = 12;
@@ -919,7 +909,7 @@
             // 
             this.costCtgrButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.costCtgrButton.ForeColor = System.Drawing.Color.Black;
-            this.costCtgrButton.Location = new System.Drawing.Point(291, 174);
+            this.costCtgrButton.Location = new System.Drawing.Point(291, 151);
             this.costCtgrButton.Name = "costCtgrButton";
             this.costCtgrButton.Size = new System.Drawing.Size(28, 23);
             this.costCtgrButton.TabIndex = 14;
@@ -939,21 +929,12 @@
             // 
             // costCtgrTextBox
             // 
-            this.costCtgrTextBox.Location = new System.Drawing.Point(208, 175);
+            this.costCtgrTextBox.Location = new System.Drawing.Point(208, 152);
             this.costCtgrTextBox.MaxLength = 200;
             this.costCtgrTextBox.Name = "costCtgrTextBox";
             this.costCtgrTextBox.ReadOnly = true;
             this.costCtgrTextBox.Size = new System.Drawing.Size(83, 21);
             this.costCtgrTextBox.TabIndex = 13;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1, 179);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(72, 13);
-            this.label21.TabIndex = 240;
-            this.label21.Text = "Linked Event:";
             // 
             // invcCurrButton
             // 
@@ -1324,6 +1305,15 @@
             this.docIDNumTextBox.Name = "docIDNumTextBox";
             this.docIDNumTextBox.Size = new System.Drawing.Size(148, 21);
             this.docIDNumTextBox.TabIndex = 2;
+            // 
+            // label22
+            // 
+            this.label22.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(2, 160);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(86, 32);
+            this.label22.TabIndex = 244;
+            this.label22.Text = "Linked Document:";
             // 
             // cashAccntButton
             // 
@@ -1801,7 +1791,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(172, 18);
             this.toolStrip3.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(532, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(478, 25);
             this.toolStrip3.Stretch = true;
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.TabStop = true;
@@ -2075,14 +2065,14 @@
             this.Column25,
             this.Column26,
             this.Column15});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.smmryDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.smmryDataGridView.DefaultCellStyle = dataGridViewCellStyle12;
             this.smmryDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.smmryDataGridView.Location = new System.Drawing.Point(3, 45);
             this.smmryDataGridView.Name = "smmryDataGridView";
@@ -2117,11 +2107,11 @@
             // 
             // dataGridViewTextBoxColumn1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn1.Frozen = true;
             this.dataGridViewTextBoxColumn1.HeaderText = "Item Description";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -2131,13 +2121,13 @@
             // 
             // dataGridViewTextBoxColumn6
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = "0";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = "0";
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn6.DividerWidth = 3;
             this.dataGridViewTextBoxColumn6.Frozen = true;
             this.dataGridViewTextBoxColumn6.HeaderText = "Entered Amount";
@@ -2182,11 +2172,11 @@
             // 
             // Column13
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.NullValue = false;
-            this.Column13.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.NullValue = false;
+            this.Column13.DefaultCellStyle = dataGridViewCellStyle9;
             this.Column13.HeaderText = "Auto Calc";
             this.Column13.Name = "Column13";
             this.Column13.ReadOnly = true;
@@ -2310,13 +2300,13 @@
             // 
             // Column21
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = "0";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column21.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = "0";
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column21.DefaultCellStyle = dataGridViewCellStyle10;
             this.Column21.HeaderText = "Func. Curr. Amount";
             this.Column21.Name = "Column21";
             this.Column21.ReadOnly = true;
@@ -2339,13 +2329,13 @@
             // 
             // Column22
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = "0";
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column22.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = "0";
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column22.DefaultCellStyle = dataGridViewCellStyle11;
             this.Column22.HeaderText = "Charge Accnt Curr. Amount";
             this.Column22.Name = "Column22";
             this.Column22.ReadOnly = true;
@@ -2404,18 +2394,18 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Rhomicom Hint!";
             // 
-            // showUnpaidCheckBox
+            // showUnpostedCheckBox
             // 
-            this.showUnpaidCheckBox.AutoSize = true;
-            this.showUnpaidCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.showUnpaidCheckBox.ForeColor = System.Drawing.Color.White;
-            this.showUnpaidCheckBox.Location = new System.Drawing.Point(3, 34);
-            this.showUnpaidCheckBox.Name = "showUnpaidCheckBox";
-            this.showUnpaidCheckBox.Size = new System.Drawing.Size(144, 17);
-            this.showUnpaidCheckBox.TabIndex = 0;
-            this.showUnpaidCheckBox.Text = "Show Unpaid Documents";
-            this.showUnpaidCheckBox.UseVisualStyleBackColor = false;
-            this.showUnpaidCheckBox.CheckedChanged += new System.EventHandler(this.showUnapprvdCheckBox_CheckedChanged);
+            this.showUnpostedCheckBox.AutoSize = true;
+            this.showUnpostedCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.showUnpostedCheckBox.ForeColor = System.Drawing.Color.White;
+            this.showUnpostedCheckBox.Location = new System.Drawing.Point(3, 34);
+            this.showUnpostedCheckBox.Name = "showUnpostedCheckBox";
+            this.showUnpostedCheckBox.Size = new System.Drawing.Size(157, 17);
+            this.showUnpostedCheckBox.TabIndex = 0;
+            this.showUnpostedCheckBox.Text = "Show Unposted Documents";
+            this.showUnpostedCheckBox.UseVisualStyleBackColor = false;
+            this.showUnpostedCheckBox.CheckedChanged += new System.EventHandler(this.showUnapprvdCheckBox_CheckedChanged);
             // 
             // printDocument1
             // 
@@ -2512,7 +2502,7 @@
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.showUnpaidCheckBox);
+            this.Controls.Add(this.showUnpostedCheckBox);
             this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
@@ -2684,7 +2674,7 @@
     private System.Windows.Forms.Button pymntHstryButton;
     private System.Windows.Forms.ToolTip toolTip1;
     private System.Windows.Forms.ToolStripButton resetTrnsButton;
-    private System.Windows.Forms.CheckBox showUnpaidCheckBox;
+    private System.Windows.Forms.CheckBox showUnpostedCheckBox;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     private System.Windows.Forms.Button docsUsngThisButton;
     private System.Windows.Forms.TextBox rgstrNumTextBox;
@@ -2692,7 +2682,6 @@
     private System.Windows.Forms.Button costCtgrButton;
     private System.Windows.Forms.TextBox rgstrIDTextBox;
     private System.Windows.Forms.TextBox costCtgrTextBox;
-    private System.Windows.Forms.Label label21;
     private System.Windows.Forms.ContextMenuStrip balShtsMenuStrip;
     private System.Windows.Forms.ToolStripMenuItem exptExclBlsMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator70;

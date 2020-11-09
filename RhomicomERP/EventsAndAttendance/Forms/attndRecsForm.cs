@@ -512,12 +512,19 @@ namespace EventsAndAttendance.Forms
 
             this.obey_evnts = false;
             this.rgstrDetDataGridView.DefaultCellStyle.ForeColor = Color.Black;
-            if (long.Parse(this.tmTblDetIDTextBox.Text) > 0)
+            string evntID = Global.mnFrm.cmCde.getGnrlRecNm(
+                  "attn.attn_time_table_details", "time_table_det_id",
+                  "event_id", long.Parse(this.tmTblDetIDTextBox.Text));
+            int eventID = -1;
+            int.TryParse(evntID, out eventID);
+            long evntPrcsCnt = Global.get_One_EvntTtlPrices(eventID);
+            if (long.Parse(this.tmTblDetIDTextBox.Text) > 0 && evntPrcsCnt > 0)
             {
                 this.rgstrDetDataGridView.Columns[9].Visible = false;
                 this.rgstrDetDataGridView.Columns[10].Visible = true;
                 this.rgstrDetDataGridView.Columns[11].Visible = false;
                 this.rgstrDetDataGridView.Columns[12].Visible = false;
+                this.rgstrDetDataGridView.Columns[17].Visible = true;
                 this.rgstrDetDataGridView.Columns[19].Visible = true;
                 this.rgstrDetDataGridView.Columns[21].Visible = true;
                 this.rgstrDetDataGridView.Columns[22].Visible = true;
@@ -530,7 +537,7 @@ namespace EventsAndAttendance.Forms
                 this.rgstrDetDataGridView.Columns[10].Visible = true;
                 this.rgstrDetDataGridView.Columns[11].Visible = true;
                 this.rgstrDetDataGridView.Columns[12].Visible = true;
-                this.rgstrDetDataGridView.Columns[17].Visible = true;
+                this.rgstrDetDataGridView.Columns[17].Visible = false;
                 this.rgstrDetDataGridView.Columns[19].Visible = false;
                 this.rgstrDetDataGridView.Columns[21].Visible = false;
                 this.rgstrDetDataGridView.Columns[22].Visible = false;
@@ -1250,7 +1257,7 @@ namespace EventsAndAttendance.Forms
         Global.getNewRgstrID().ToString().PadLeft(4, '0');
             this.evntStrtDateTextBox.Text = Global.mnFrm.cmCde.getFrmtdDB_Date_time().Substring(0, 11) + " 00:00:00";
             this.evntEndDateTextBox.Text = Global.mnFrm.cmCde.getFrmtdDB_Date_time().Substring(0, 11) + " 23:59:59";
-            this.saveButton_Click(this.saveButton, e);
+            //this.saveButton_Click(this.saveButton, e);
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -3414,14 +3421,21 @@ namespace EventsAndAttendance.Forms
                     Global.mnFrm.cmCde.showMsg("Accounting Created Already!", 0);
                     return false;
                 }
+                string costCtgry = this.costingDataGridView.Rows[rwIdx].Cells[0].Value.ToString();
+                string evntIDStr = Global.mnFrm.cmCde.getGnrlRecNm(
+                   "attn.attn_time_table_details", "time_table_det_id",
+                   "event_id", long.Parse(this.tmTblDetIDTextBox.Text));
                 addTrnsTmpltDiag nwDiag = new addTrnsTmpltDiag();
-                nwDiag.incrsDcrs1ComboBox.SelectedItem = this.costingDataGridView.Rows[rwIdx].Cells[16].Value.ToString();
-                nwDiag.accntID1TextBox.Text = this.costingDataGridView.Rows[rwIdx].Cells[17].Value.ToString();
+                int evntID = -1;
+                int.TryParse(evntIDStr, out evntID);
+                string[] evntCstAccnts = Global.get_CostAcntInfo(costCtgry, evntID);
+                nwDiag.incrsDcrs1ComboBox.SelectedItem = evntCstAccnts[0];
+                nwDiag.accntID1TextBox.Text = evntCstAccnts[1];
                 nwDiag.accntName1TextBox.Text = Global.mnFrm.cmCde.getAccntName(int.Parse(nwDiag.accntID1TextBox.Text));
                 nwDiag.accntNum1TextBox.Text = Global.mnFrm.cmCde.getAccntNum(int.Parse(nwDiag.accntID1TextBox.Text));
 
-                nwDiag.incrsDcrs2ComboBox.SelectedItem = this.costingDataGridView.Rows[rwIdx].Cells[18].Value.ToString();
-                nwDiag.accntID2TextBox.Text = this.costingDataGridView.Rows[rwIdx].Cells[19].Value.ToString();
+                nwDiag.incrsDcrs2ComboBox.SelectedItem = evntCstAccnts[3];
+                nwDiag.accntID2TextBox.Text = evntCstAccnts[4];
                 nwDiag.accntName2TextBox.Text = Global.mnFrm.cmCde.getAccntName(int.Parse(nwDiag.accntID2TextBox.Text));
                 nwDiag.accntNum2TextBox.Text = Global.mnFrm.cmCde.getAccntNum(int.Parse(nwDiag.accntID2TextBox.Text));
 
@@ -3455,7 +3469,7 @@ namespace EventsAndAttendance.Forms
                   "batch_name", "batch_id", glBatchName, Global.mnFrm.cmCde.Org_id);
                 int blncngAccntID = -1;
                 string lnDte = this.evntStrtDateTextBox.Text;
-                this.dfltFill(rwIdx);
+                this.dfltFill1(rwIdx);
                 string lineTypeNm = this.costingDataGridView.Rows[rwIdx].Cells[0].Value.ToString();
 
                 string incrDcrs1 = nwDiag.incrsDcrs1ComboBox.Text.Substring(0, 1);
@@ -3599,7 +3613,7 @@ namespace EventsAndAttendance.Forms
             }
             catch (Exception ex)
             {
-                Global.mnFrm.cmCde.showMsg("Create Accounting Failed!\r\n" + ex.Message, 0);
+                Global.mnFrm.cmCde.showMsg("Create Accounting Failed!\r\n" + ex.Message+"\r\n"+ex.StackTrace, 0);
                 return false;
             }
         }

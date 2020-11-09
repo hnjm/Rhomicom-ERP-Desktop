@@ -4075,7 +4075,7 @@ round(scm.get_prcs_ttl_cost({:process_run_id})/COALESCE(NULLIF(round(scm.get_prc
             this.saveLabel.Visible = true;
             Cursor.Current = Cursors.WaitCursor;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -4083,7 +4083,7 @@ round(scm.get_prcs_ttl_cost({:process_run_id})/COALESCE(NULLIF(round(scm.get_prc
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = this.rvrsApprval(dateStr, freeInvoiceID);
             if (sccs)

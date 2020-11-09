@@ -30,15 +30,15 @@ namespace InternalPayments.Forms
     {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeVWContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.hideTreevwMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1253,24 +1253,25 @@ namespace InternalPayments.Forms
             // 
             // treeVWContextMenuStrip
             // 
+            this.treeVWContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.treeVWContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hideTreevwMenuItem,
             this.toolStripSeparator123});
             this.treeVWContextMenuStrip.Name = "usersContextMenuStrip";
-            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(153, 32);
+            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(157, 36);
             // 
             // hideTreevwMenuItem
             // 
             this.hideTreevwMenuItem.Image = global::InternalPayments.Properties.Resources.download__26_;
             this.hideTreevwMenuItem.Name = "hideTreevwMenuItem";
-            this.hideTreevwMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hideTreevwMenuItem.Size = new System.Drawing.Size(156, 26);
             this.hideTreevwMenuItem.Text = "Hide Tree View";
             this.hideTreevwMenuItem.Click += new System.EventHandler(this.hideTreevwMenuItem_Click);
             // 
             // toolStripSeparator123
             // 
             this.toolStripSeparator123.Name = "toolStripSeparator123";
-            this.toolStripSeparator123.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator123.Size = new System.Drawing.Size(153, 6);
             // 
             // panel2
             // 
@@ -1836,6 +1837,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip3.AutoSize = false;
             this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstItmButtonNew,
             this.toolStripSeparator37,
@@ -1865,7 +1867,7 @@ namespace InternalPayments.Forms
             this.moveFirstItmButtonNew.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstItmButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstItmButtonNew.Name = "moveFirstItmButtonNew";
-            this.moveFirstItmButtonNew.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstItmButtonNew.Size = new System.Drawing.Size(24, 22);
             this.moveFirstItmButtonNew.Text = "Move First";
             this.moveFirstItmButtonNew.Click += new System.EventHandler(this.ItmPnlNavButtons1);
             // 
@@ -1880,7 +1882,7 @@ namespace InternalPayments.Forms
             this.movePreviousItmButtonNw.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousItmButtonNw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousItmButtonNw.Name = "movePreviousItmButtonNw";
-            this.movePreviousItmButtonNw.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousItmButtonNw.Size = new System.Drawing.Size(24, 22);
             this.movePreviousItmButtonNw.Text = "Move Previous";
             this.movePreviousItmButtonNw.Click += new System.EventHandler(this.ItmPnlNavButtons1);
             // 
@@ -1928,7 +1930,7 @@ namespace InternalPayments.Forms
             this.moveNextItmButtonNw.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextItmButtonNw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextItmButtonNw.Name = "moveNextItmButtonNw";
-            this.moveNextItmButtonNw.Size = new System.Drawing.Size(23, 22);
+            this.moveNextItmButtonNw.Size = new System.Drawing.Size(24, 22);
             this.moveNextItmButtonNw.Text = "Move Next";
             this.moveNextItmButtonNw.Click += new System.EventHandler(this.ItmPnlNavButtons1);
             // 
@@ -1943,7 +1945,7 @@ namespace InternalPayments.Forms
             this.moveLastItmButtonNw.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastItmButtonNw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastItmButtonNw.Name = "moveLastItmButtonNw";
-            this.moveLastItmButtonNw.Size = new System.Drawing.Size(23, 22);
+            this.moveLastItmButtonNw.Size = new System.Drawing.Size(24, 22);
             this.moveLastItmButtonNw.Text = "Move Last";
             this.moveLastItmButtonNw.Click += new System.EventHandler(this.ItmPnlNavButtons1);
             // 
@@ -1966,7 +1968,7 @@ namespace InternalPayments.Forms
             "50",
             "100"});
             this.dsplySizeItmComboBoxNw.Name = "dsplySizeItmComboBoxNw";
-            this.dsplySizeItmComboBoxNw.Size = new System.Drawing.Size(35, 23);
+            this.dsplySizeItmComboBoxNw.Size = new System.Drawing.Size(35, 28);
             this.dsplySizeItmComboBoxNw.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForItmTextBox_KeyDown1);
             // 
             // panel8
@@ -2063,6 +2065,7 @@ namespace InternalPayments.Forms
             // 
             // payItmsContextMenuStrip1
             // 
+            this.payItmsContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.payItmsContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator13,
             this.exptPayMenuItem,
@@ -2070,18 +2073,18 @@ namespace InternalPayments.Forms
             this.vwSQLPayMenuItem,
             this.rcHstryPayMenuItem});
             this.payItmsContextMenuStrip1.Name = "pstPayContextMenuStrip";
-            this.payItmsContextMenuStrip1.Size = new System.Drawing.Size(153, 98);
+            this.payItmsContextMenuStrip1.Size = new System.Drawing.Size(157, 114);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(153, 6);
             // 
             // exptPayMenuItem
             // 
             this.exptPayMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptPayMenuItem.Name = "exptPayMenuItem";
-            this.exptPayMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptPayMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptPayMenuItem.Text = "Export to Excel";
             this.exptPayMenuItem.Click += new System.EventHandler(this.exptPayMenuItem_Click);
             // 
@@ -2089,7 +2092,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshPayMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshPayMenuItem.Name = "rfrshPayMenuItem";
-            this.rfrshPayMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshPayMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshPayMenuItem.Text = "Refresh";
             this.rfrshPayMenuItem.Click += new System.EventHandler(this.rfrshPayMenuItem_Click);
             // 
@@ -2097,7 +2100,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLPayMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPayMenuItem.Name = "vwSQLPayMenuItem";
-            this.vwSQLPayMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLPayMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLPayMenuItem.Text = "View SQL";
             this.vwSQLPayMenuItem.Click += new System.EventHandler(this.vwSQLPayMenuItem_Click);
             // 
@@ -2105,7 +2108,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryPayMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryPayMenuItem.Name = "rcHstryPayMenuItem";
-            this.rcHstryPayMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryPayMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryPayMenuItem.Text = "Record History";
             this.rcHstryPayMenuItem.Click += new System.EventHandler(this.rcHstryPayMenuItem_Click);
             // 
@@ -2178,7 +2181,7 @@ namespace InternalPayments.Forms
             this.resetButton.ForeColor = System.Drawing.Color.Black;
             this.resetButton.ImageKey = "undo_256.png";
             this.resetButton.ImageList = this.imageList2;
-            this.resetButton.Location = new System.Drawing.Point(294, 59);
+            this.resetButton.Location = new System.Drawing.Point(295, 60);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(32, 26);
             this.resetButton.TabIndex = 150;
@@ -2345,7 +2348,7 @@ namespace InternalPayments.Forms
             this.imptPymtsTmpButton.Image = ((System.Drawing.Image)(resources.GetObject("imptPymtsTmpButton.Image")));
             this.imptPymtsTmpButton.Location = new System.Drawing.Point(144, 78);
             this.imptPymtsTmpButton.Name = "imptPymtsTmpButton";
-            this.imptPymtsTmpButton.Size = new System.Drawing.Size(127, 23);
+            this.imptPymtsTmpButton.Size = new System.Drawing.Size(154, 27);
             this.imptPymtsTmpButton.TabIndex = 9;
             this.imptPymtsTmpButton.Text = "IMPORT PAYMENTS";
             this.imptPymtsTmpButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -2372,6 +2375,7 @@ namespace InternalPayments.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toolStrip5.AutoSize = false;
             this.toolStrip5.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstPstButton,
             this.toolStripSeparator42,
@@ -2405,7 +2409,7 @@ namespace InternalPayments.Forms
             this.moveFirstPstButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPstButton.Name = "moveFirstPstButton";
-            this.moveFirstPstButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPstButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstPstButton.Text = "Move First";
             this.moveFirstPstButton.Click += new System.EventHandler(this.PstPnlNavButtons);
             // 
@@ -2421,7 +2425,7 @@ namespace InternalPayments.Forms
             this.movePreviousPstButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPstButton.Name = "movePreviousPstButton";
-            this.movePreviousPstButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPstButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousPstButton.Text = "Move Previous";
             this.movePreviousPstButton.Click += new System.EventHandler(this.PstPnlNavButtons);
             // 
@@ -2473,7 +2477,7 @@ namespace InternalPayments.Forms
             this.moveNextPstButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPstButton.Name = "moveNextPstButton";
-            this.moveNextPstButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPstButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextPstButton.Text = "Move Next";
             this.moveNextPstButton.Click += new System.EventHandler(this.PstPnlNavButtons);
             // 
@@ -2489,7 +2493,7 @@ namespace InternalPayments.Forms
             this.moveLastPstButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPstButton.Name = "moveLastPstButton";
-            this.moveLastPstButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPstButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastPstButton.Text = "Move Last";
             this.moveLastPstButton.Click += new System.EventHandler(this.PstPnlNavButtons);
             // 
@@ -2523,7 +2527,7 @@ namespace InternalPayments.Forms
             this.printPrvwRcptButton.Image = global::InternalPayments.Properties.Resources.actions_document_preview;
             this.printPrvwRcptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPrvwRcptButton.Name = "printPrvwRcptButton";
-            this.printPrvwRcptButton.Size = new System.Drawing.Size(23, 22);
+            this.printPrvwRcptButton.Size = new System.Drawing.Size(24, 22);
             this.printPrvwRcptButton.Text = "Print Preview";
             this.printPrvwRcptButton.Click += new System.EventHandler(this.printPrvwRcptButton_Click);
             // 
@@ -2533,7 +2537,7 @@ namespace InternalPayments.Forms
             this.printRcptButton.Image = global::InternalPayments.Properties.Resources.print_64;
             this.printRcptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printRcptButton.Name = "printRcptButton";
-            this.printRcptButton.Size = new System.Drawing.Size(23, 22);
+            this.printRcptButton.Size = new System.Drawing.Size(24, 22);
             this.printRcptButton.Text = "Print";
             this.printRcptButton.Click += new System.EventHandler(this.printRcptButton_Click);
             // 
@@ -2543,7 +2547,7 @@ namespace InternalPayments.Forms
             this.printRcptButton1.Image = global::InternalPayments.Properties.Resources.print_64;
             this.printRcptButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printRcptButton1.Name = "printRcptButton1";
-            this.printRcptButton1.Size = new System.Drawing.Size(23, 22);
+            this.printRcptButton1.Size = new System.Drawing.Size(24, 22);
             this.printRcptButton1.Text = "Print";
             this.printRcptButton1.Visible = false;
             this.printRcptButton1.Click += new System.EventHandler(this.printRcptButton1_Click);
@@ -2573,7 +2577,7 @@ namespace InternalPayments.Forms
             this.pstPayListView.Location = new System.Drawing.Point(6, 104);
             this.pstPayListView.MinimumSize = new System.Drawing.Size(310, 111);
             this.pstPayListView.Name = "pstPayListView";
-            this.pstPayListView.Size = new System.Drawing.Size(445, 286);
+            this.pstPayListView.Size = new System.Drawing.Size(446, 286);
             this.pstPayListView.TabIndex = 2;
             this.pstPayListView.UseCompatibleStateImageBehavior = false;
             this.pstPayListView.View = System.Windows.Forms.View.Details;
@@ -2638,6 +2642,7 @@ namespace InternalPayments.Forms
             // 
             // pstPayContextMenuStrip
             // 
+            this.pstPayContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.pstPayContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reversePaymentMenuItem,
             this.deletePayMenuItem,
@@ -2651,13 +2656,13 @@ namespace InternalPayments.Forms
             this.viewSQLPstMenuItem,
             this.recHstryPstMenuItem});
             this.pstPayContextMenuStrip.Name = "pstPayContextMenuStrip";
-            this.pstPayContextMenuStrip.Size = new System.Drawing.Size(213, 230);
+            this.pstPayContextMenuStrip.Size = new System.Drawing.Size(217, 270);
             // 
             // reversePaymentMenuItem
             // 
             this.reversePaymentMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("reversePaymentMenuItem.Image")));
             this.reversePaymentMenuItem.Name = "reversePaymentMenuItem";
-            this.reversePaymentMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.reversePaymentMenuItem.Size = new System.Drawing.Size(216, 26);
             this.reversePaymentMenuItem.Text = "Reverse Payment";
             this.reversePaymentMenuItem.Click += new System.EventHandler(this.reversePaymentMenuItem_Click);
             // 
@@ -2665,7 +2670,7 @@ namespace InternalPayments.Forms
             // 
             this.deletePayMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.deletePayMenuItem.Name = "deletePayMenuItem";
-            this.deletePayMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.deletePayMenuItem.Size = new System.Drawing.Size(216, 26);
             this.deletePayMenuItem.Text = "Delete Reversed Payment";
             this.deletePayMenuItem.Click += new System.EventHandler(this.deletePayMenuItem_Click);
             // 
@@ -2673,7 +2678,7 @@ namespace InternalPayments.Forms
             // 
             this.sendMnlPyToGLMenuItem.Image = global::InternalPayments.Properties.Resources.GeneralLedgerIcon1;
             this.sendMnlPyToGLMenuItem.Name = "sendMnlPyToGLMenuItem";
-            this.sendMnlPyToGLMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.sendMnlPyToGLMenuItem.Size = new System.Drawing.Size(216, 26);
             this.sendMnlPyToGLMenuItem.Text = "Send To GL";
             this.sendMnlPyToGLMenuItem.Click += new System.EventHandler(this.sendMnlPyToGLMenuItem_Click);
             // 
@@ -2681,7 +2686,7 @@ namespace InternalPayments.Forms
             // 
             this.printPprPstMenuItem.Image = global::InternalPayments.Properties.Resources.print_64;
             this.printPprPstMenuItem.Name = "printPprPstMenuItem";
-            this.printPprPstMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.printPprPstMenuItem.Size = new System.Drawing.Size(216, 26);
             this.printPprPstMenuItem.Text = "Print Receipt";
             this.printPprPstMenuItem.Click += new System.EventHandler(this.printPprPstMenuItem_Click);
             // 
@@ -2689,14 +2694,14 @@ namespace InternalPayments.Forms
             // 
             this.printPstPyMenuItem.Image = global::InternalPayments.Properties.Resources.print_64;
             this.printPstPyMenuItem.Name = "printPstPyMenuItem";
-            this.printPstPyMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.printPstPyMenuItem.Size = new System.Drawing.Size(216, 26);
             this.printPstPyMenuItem.Text = "Preview Receipt";
             this.printPstPyMenuItem.Click += new System.EventHandler(this.printPstPyMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(209, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(213, 6);
             // 
             // pymntsExclMenuItem
             // 
@@ -2705,7 +2710,7 @@ namespace InternalPayments.Forms
             this.imprtPymntsExclMenuItem});
             this.pymntsExclMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.pymntsExclMenuItem.Name = "pymntsExclMenuItem";
-            this.pymntsExclMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.pymntsExclMenuItem.Size = new System.Drawing.Size(216, 26);
             this.pymntsExclMenuItem.Text = "Payments Excel Templates";
             // 
             // exprtPymntsMenuItem
@@ -2728,7 +2733,7 @@ namespace InternalPayments.Forms
             // 
             this.exptPstMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptPstMenuItem.Name = "exptPstMenuItem";
-            this.exptPstMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.exptPstMenuItem.Size = new System.Drawing.Size(216, 26);
             this.exptPstMenuItem.Text = "Export to Excel";
             this.exptPstMenuItem.Click += new System.EventHandler(this.exptPstMenuItem_Click);
             // 
@@ -2736,7 +2741,7 @@ namespace InternalPayments.Forms
             // 
             this.refreshPstMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.refreshPstMenuItem.Name = "refreshPstMenuItem";
-            this.refreshPstMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.refreshPstMenuItem.Size = new System.Drawing.Size(216, 26);
             this.refreshPstMenuItem.Text = "Refresh";
             this.refreshPstMenuItem.Click += new System.EventHandler(this.refreshPstMenuItem_Click);
             // 
@@ -2744,7 +2749,7 @@ namespace InternalPayments.Forms
             // 
             this.viewSQLPstMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.viewSQLPstMenuItem.Name = "viewSQLPstMenuItem";
-            this.viewSQLPstMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.viewSQLPstMenuItem.Size = new System.Drawing.Size(216, 26);
             this.viewSQLPstMenuItem.Text = "View SQL";
             this.viewSQLPstMenuItem.Click += new System.EventHandler(this.viewSQLPstMenuItem_Click);
             // 
@@ -2752,7 +2757,7 @@ namespace InternalPayments.Forms
             // 
             this.recHstryPstMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryPstMenuItem.Name = "recHstryPstMenuItem";
-            this.recHstryPstMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.recHstryPstMenuItem.Size = new System.Drawing.Size(216, 26);
             this.recHstryPstMenuItem.Text = "Record History";
             this.recHstryPstMenuItem.Click += new System.EventHandler(this.recHstryPstMenuItem_Click);
             // 
@@ -2850,7 +2855,7 @@ namespace InternalPayments.Forms
             this.asgdPyItmsTabPage.Location = new System.Drawing.Point(4, 29);
             this.asgdPyItmsTabPage.Name = "asgdPyItmsTabPage";
             this.asgdPyItmsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.asgdPyItmsTabPage.Size = new System.Drawing.Size(815, 496);
+            this.asgdPyItmsTabPage.Size = new System.Drawing.Size(815, 468);
             this.asgdPyItmsTabPage.TabIndex = 1;
             this.asgdPyItmsTabPage.Text = "PERSON\'S ASSIGNED PAY ITEMS";
             this.asgdPyItmsTabPage.UseVisualStyleBackColor = true;
@@ -2864,7 +2869,7 @@ namespace InternalPayments.Forms
             this.moneyAsgnmntsPanel.Location = new System.Drawing.Point(3, 3);
             this.moneyAsgnmntsPanel.Name = "moneyAsgnmntsPanel";
             this.moneyAsgnmntsPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.moneyAsgnmntsPanel.Size = new System.Drawing.Size(805, 486);
+            this.moneyAsgnmntsPanel.Size = new System.Drawing.Size(805, 458);
             this.moneyAsgnmntsPanel.TabIndex = 112;
             // 
             // groupBox26
@@ -2883,7 +2888,7 @@ namespace InternalPayments.Forms
             this.groupBox26.ForeColor = System.Drawing.Color.White;
             this.groupBox26.Location = new System.Drawing.Point(3, 0);
             this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Size = new System.Drawing.Size(799, 483);
+            this.groupBox26.Size = new System.Drawing.Size(799, 455);
             this.groupBox26.TabIndex = 0;
             this.groupBox26.TabStop = false;
             this.groupBox26.Text = "ASSIGNED PAY ITEMS";
@@ -2893,6 +2898,7 @@ namespace InternalPayments.Forms
             this.toolStrip17.AutoSize = false;
             this.toolStrip17.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip17.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip17.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip17.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstPyItmButtonPrs,
             this.toolStripSeparator144,
@@ -2924,7 +2930,7 @@ namespace InternalPayments.Forms
             this.moveFirstPyItmButtonPrs.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPyItmButtonPrs.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPyItmButtonPrs.Name = "moveFirstPyItmButtonPrs";
-            this.moveFirstPyItmButtonPrs.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPyItmButtonPrs.Size = new System.Drawing.Size(24, 22);
             this.moveFirstPyItmButtonPrs.Text = "Move First";
             this.moveFirstPyItmButtonPrs.Click += new System.EventHandler(this.PyItmPnlNavButtonsPrs);
             // 
@@ -2940,7 +2946,7 @@ namespace InternalPayments.Forms
             this.movePreviousPyItmButtonPrs.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPyItmButtonPrs.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPyItmButtonPrs.Name = "movePreviousPyItmButtonPrs";
-            this.movePreviousPyItmButtonPrs.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPyItmButtonPrs.Size = new System.Drawing.Size(24, 22);
             this.movePreviousPyItmButtonPrs.Text = "Move Previous";
             this.movePreviousPyItmButtonPrs.Click += new System.EventHandler(this.PyItmPnlNavButtonsPrs);
             // 
@@ -2992,7 +2998,7 @@ namespace InternalPayments.Forms
             this.moveNextPyItmButtonPrs.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPyItmButtonPrs.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPyItmButtonPrs.Name = "moveNextPyItmButtonPrs";
-            this.moveNextPyItmButtonPrs.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPyItmButtonPrs.Size = new System.Drawing.Size(24, 22);
             this.moveNextPyItmButtonPrs.Text = "Move Next";
             this.moveNextPyItmButtonPrs.Click += new System.EventHandler(this.PyItmPnlNavButtonsPrs);
             // 
@@ -3008,7 +3014,7 @@ namespace InternalPayments.Forms
             this.moveLastPyItmButtonPrs.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPyItmButtonPrs.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPyItmButtonPrs.Name = "moveLastPyItmButtonPrs";
-            this.moveLastPyItmButtonPrs.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPyItmButtonPrs.Size = new System.Drawing.Size(24, 22);
             this.moveLastPyItmButtonPrs.Text = "Move Last";
             this.moveLastPyItmButtonPrs.Click += new System.EventHandler(this.PyItmPnlNavButtonsPrs);
             // 
@@ -3052,7 +3058,7 @@ namespace InternalPayments.Forms
             this.grpAsgnmntsButtonPrs.Image = ((System.Drawing.Image)(resources.GetObject("grpAsgnmntsButtonPrs.Image")));
             this.grpAsgnmntsButtonPrs.Location = new System.Drawing.Point(86, 44);
             this.grpAsgnmntsButtonPrs.Name = "grpAsgnmntsButtonPrs";
-            this.grpAsgnmntsButtonPrs.Size = new System.Drawing.Size(166, 23);
+            this.grpAsgnmntsButtonPrs.Size = new System.Drawing.Size(185, 27);
             this.grpAsgnmntsButtonPrs.TabIndex = 6;
             this.grpAsgnmntsButtonPrs.Text = "PAY ITEM ASSIGNMENTS";
             this.grpAsgnmntsButtonPrs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -3165,21 +3171,21 @@ namespace InternalPayments.Forms
             this.Column30,
             this.Column31});
             this.itmPrsPyValDataGridView.ContextMenuStrip = this.payItmsContextMenuStripPrs;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itmPrsPyValDataGridView.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itmPrsPyValDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.itmPrsPyValDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.itmPrsPyValDataGridView.Location = new System.Drawing.Point(5, 70);
             this.itmPrsPyValDataGridView.Name = "itmPrsPyValDataGridView";
             this.itmPrsPyValDataGridView.ReadOnly = true;
             this.itmPrsPyValDataGridView.RowHeadersWidth = 20;
             this.itmPrsPyValDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.itmPrsPyValDataGridView.Size = new System.Drawing.Size(788, 407);
+            this.itmPrsPyValDataGridView.Size = new System.Drawing.Size(788, 379);
             this.itmPrsPyValDataGridView.TabIndex = 8;
             this.itmPrsPyValDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itmPrsPyValDataGridView_KeyDown);
             // 
@@ -3205,13 +3211,13 @@ namespace InternalPayments.Forms
             // 
             // Column21
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = "0";
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column21.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = "0";
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column21.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column21.HeaderText = "Expected Amount / Latest Balance";
             this.Column21.MinimumWidth = 55;
             this.Column21.Name = "Column21";
@@ -3272,6 +3278,7 @@ namespace InternalPayments.Forms
             // 
             // payItmsContextMenuStripPrs
             // 
+            this.payItmsContextMenuStripPrs.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.payItmsContextMenuStripPrs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
             this.toolStripMenuItem3,
@@ -3282,13 +3289,13 @@ namespace InternalPayments.Forms
             this.toolStripMenuItem7,
             this.toolStripMenuItem8});
             this.payItmsContextMenuStripPrs.Name = "contextMenuStrip1";
-            this.payItmsContextMenuStripPrs.Size = new System.Drawing.Size(157, 164);
+            this.payItmsContextMenuStripPrs.Size = new System.Drawing.Size(161, 192);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem2.Text = "Add Pay Item";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.addItmMenuItem_ClickPrs);
             // 
@@ -3296,7 +3303,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStripMenuItem3.Image = global::InternalPayments.Properties.Resources.edit32;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem3.Text = "Edit Pay Item";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.editItmMenuItem_ClickPrs);
             // 
@@ -3304,20 +3311,20 @@ namespace InternalPayments.Forms
             // 
             this.toolStripMenuItem4.Image = global::InternalPayments.Properties.Resources.delete;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem4.Text = "Delete Pay Item";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.delItmMenuItem_ClickPrs);
             // 
             // toolStripSeparator143
             // 
             this.toolStripSeparator143.Name = "toolStripSeparator143";
-            this.toolStripSeparator143.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator143.Size = new System.Drawing.Size(157, 6);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Image = global::InternalPayments.Properties.Resources.image007;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem5.Text = "Export to Excel";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.exptItmMenuItem_ClickPrs);
             // 
@@ -3325,7 +3332,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStripMenuItem6.Image = global::InternalPayments.Properties.Resources.refresh;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem6.Text = "&Refresh";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.rfrshItmMenuItem_ClickPrs);
             // 
@@ -3333,7 +3340,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStripMenuItem7.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem7.Text = "Record &History";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.rcHstryItmMenuItem_ClickPrs);
             // 
@@ -3341,7 +3348,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStripMenuItem8.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem8.Text = "&View SQL";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.vwSQLItmMenuItem_ClickPrs);
             // 
@@ -3377,7 +3384,7 @@ namespace InternalPayments.Forms
             this.prsBanksTabPage.Controls.Add(this.bankDetailsPanel);
             this.prsBanksTabPage.Location = new System.Drawing.Point(4, 29);
             this.prsBanksTabPage.Name = "prsBanksTabPage";
-            this.prsBanksTabPage.Size = new System.Drawing.Size(815, 496);
+            this.prsBanksTabPage.Size = new System.Drawing.Size(815, 468);
             this.prsBanksTabPage.TabIndex = 2;
             this.prsBanksTabPage.Text = "PERSON\'S BANKS";
             this.prsBanksTabPage.UseVisualStyleBackColor = true;
@@ -3391,7 +3398,7 @@ namespace InternalPayments.Forms
             this.bankDetailsPanel.Location = new System.Drawing.Point(0, 0);
             this.bankDetailsPanel.Name = "bankDetailsPanel";
             this.bankDetailsPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.bankDetailsPanel.Size = new System.Drawing.Size(811, 492);
+            this.bankDetailsPanel.Size = new System.Drawing.Size(811, 464);
             this.bankDetailsPanel.TabIndex = 113;
             // 
             // groupBox20
@@ -3410,7 +3417,7 @@ namespace InternalPayments.Forms
             this.groupBox20.ForeColor = System.Drawing.Color.White;
             this.groupBox20.Location = new System.Drawing.Point(3, 2);
             this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(805, 487);
+            this.groupBox20.Size = new System.Drawing.Size(805, 459);
             this.groupBox20.TabIndex = 0;
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "BANK ACCOUNT DETAILS";
@@ -3538,25 +3545,25 @@ namespace InternalPayments.Forms
             this.Column36,
             this.dataGridViewTextBoxColumn75});
             this.bankDataGridView.ContextMenuStrip = this.banksContextMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.bankDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.bankDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.bankDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.bankDataGridView.Location = new System.Drawing.Point(5, 44);
             this.bankDataGridView.Name = "bankDataGridView";
             this.bankDataGridView.ReadOnly = true;
             this.bankDataGridView.RowHeadersWidth = 20;
             this.bankDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.bankDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle12;
-            this.bankDataGridView.Size = new System.Drawing.Size(794, 437);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.bankDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.bankDataGridView.Size = new System.Drawing.Size(794, 409);
             this.bankDataGridView.TabIndex = 8;
             this.bankDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.bankDataGridView_CellBeginEdit);
             this.bankDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bankDataGridView_KeyDown);
@@ -3642,6 +3649,7 @@ namespace InternalPayments.Forms
             // 
             // banksContextMenuStrip
             // 
+            this.banksContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.banksContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBankMenuItem,
             this.editBankMenuItem,
@@ -3652,13 +3660,13 @@ namespace InternalPayments.Forms
             this.recHstryBankMenuItem,
             this.vvwSQLBankMenuItem});
             this.banksContextMenuStrip.Name = "contextMenuStrip1";
-            this.banksContextMenuStrip.Size = new System.Drawing.Size(185, 164);
+            this.banksContextMenuStrip.Size = new System.Drawing.Size(189, 192);
             // 
             // addBankMenuItem
             // 
             this.addBankMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addBankMenuItem.Name = "addBankMenuItem";
-            this.addBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.addBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.addBankMenuItem.Text = "Add Bank Account";
             this.addBankMenuItem.Click += new System.EventHandler(this.addBankMenuItem_Click);
             // 
@@ -3666,7 +3674,7 @@ namespace InternalPayments.Forms
             // 
             this.editBankMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editBankMenuItem.Name = "editBankMenuItem";
-            this.editBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.editBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.editBankMenuItem.Text = "Edit Bank Account";
             this.editBankMenuItem.Click += new System.EventHandler(this.editBankMenuItem_Click);
             // 
@@ -3674,20 +3682,20 @@ namespace InternalPayments.Forms
             // 
             this.delBankMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delBankMenuItem.Name = "delBankMenuItem";
-            this.delBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.delBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.delBankMenuItem.Text = "Delete Bank Account";
             this.delBankMenuItem.Click += new System.EventHandler(this.delBankMenuItem_Click);
             // 
             // toolStripSeparator150
             // 
             this.toolStripSeparator150.Name = "toolStripSeparator150";
-            this.toolStripSeparator150.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator150.Size = new System.Drawing.Size(185, 6);
             // 
             // exptBankMenuItem
             // 
             this.exptBankMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptBankMenuItem.Name = "exptBankMenuItem";
-            this.exptBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exptBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.exptBankMenuItem.Text = "Export to Excel";
             this.exptBankMenuItem.Click += new System.EventHandler(this.exptBankMenuItem_Click);
             // 
@@ -3695,7 +3703,7 @@ namespace InternalPayments.Forms
             // 
             this.refreshBankMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.refreshBankMenuItem.Name = "refreshBankMenuItem";
-            this.refreshBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.refreshBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.refreshBankMenuItem.Text = "&Refresh";
             this.refreshBankMenuItem.Click += new System.EventHandler(this.refreshBankMenuItem_Click);
             // 
@@ -3703,7 +3711,7 @@ namespace InternalPayments.Forms
             // 
             this.recHstryBankMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryBankMenuItem.Name = "recHstryBankMenuItem";
-            this.recHstryBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.recHstryBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.recHstryBankMenuItem.Text = "Record &History";
             this.recHstryBankMenuItem.Click += new System.EventHandler(this.recHstryBankMenuItem_Click);
             // 
@@ -3711,7 +3719,7 @@ namespace InternalPayments.Forms
             // 
             this.vvwSQLBankMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vvwSQLBankMenuItem.Name = "vvwSQLBankMenuItem";
-            this.vvwSQLBankMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.vvwSQLBankMenuItem.Size = new System.Drawing.Size(188, 26);
             this.vvwSQLBankMenuItem.Text = "&View SQL";
             this.vvwSQLBankMenuItem.Click += new System.EventHandler(this.vvwSQLBankMenuItem_Click);
             // 
@@ -3832,6 +3840,7 @@ namespace InternalPayments.Forms
             // 
             // prsnContextMenuStrip
             // 
+            this.prsnContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.prsnContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.quickPayMenuItem,
             this.toolStripSeparator12,
@@ -3840,26 +3849,26 @@ namespace InternalPayments.Forms
             this.vwSQLPrsnMenuItem,
             this.rcHstryPrsnMenuItem});
             this.prsnContextMenuStrip.Name = "pstPayContextMenuStrip";
-            this.prsnContextMenuStrip.Size = new System.Drawing.Size(189, 120);
+            this.prsnContextMenuStrip.Size = new System.Drawing.Size(193, 140);
             // 
             // quickPayMenuItem
             // 
             this.quickPayMenuItem.Image = global::InternalPayments.Properties.Resources.images;
             this.quickPayMenuItem.Name = "quickPayMenuItem";
-            this.quickPayMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.quickPayMenuItem.Size = new System.Drawing.Size(192, 26);
             this.quickPayMenuItem.Text = "Run Selected Item Set";
             this.quickPayMenuItem.Click += new System.EventHandler(this.quickPayMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(189, 6);
             // 
             // exptPrsnMenuItem
             // 
             this.exptPrsnMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptPrsnMenuItem.Name = "exptPrsnMenuItem";
-            this.exptPrsnMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.exptPrsnMenuItem.Size = new System.Drawing.Size(192, 26);
             this.exptPrsnMenuItem.Text = "Export to Excel";
             this.exptPrsnMenuItem.Click += new System.EventHandler(this.exptPrsnMenuItem_Click);
             // 
@@ -3867,7 +3876,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshPrsnMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshPrsnMenuItem.Name = "rfrshPrsnMenuItem";
-            this.rfrshPrsnMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.rfrshPrsnMenuItem.Size = new System.Drawing.Size(192, 26);
             this.rfrshPrsnMenuItem.Text = "Refresh";
             this.rfrshPrsnMenuItem.Click += new System.EventHandler(this.rfrshPrsnMenuItem_Click);
             // 
@@ -3875,7 +3884,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLPrsnMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPrsnMenuItem.Name = "vwSQLPrsnMenuItem";
-            this.vwSQLPrsnMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.vwSQLPrsnMenuItem.Size = new System.Drawing.Size(192, 26);
             this.vwSQLPrsnMenuItem.Text = "View SQL";
             this.vwSQLPrsnMenuItem.Click += new System.EventHandler(this.vwSQLPrsnMenuItem_Click);
             // 
@@ -3883,7 +3892,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryPrsnMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryPrsnMenuItem.Name = "rcHstryPrsnMenuItem";
-            this.rcHstryPrsnMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.rcHstryPrsnMenuItem.Size = new System.Drawing.Size(192, 26);
             this.rcHstryPrsnMenuItem.Text = "Record History";
             this.rcHstryPrsnMenuItem.Click += new System.EventHandler(this.rcHstryPrsnMenuItem_Click);
             // 
@@ -3902,6 +3911,7 @@ namespace InternalPayments.Forms
             // 
             this.navToolStrip.AutoSize = false;
             this.navToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.navToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.navToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstPrsButton,
             this.toolStripSeparator32,
@@ -3931,7 +3941,7 @@ namespace InternalPayments.Forms
             this.moveFirstPrsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPrsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPrsButton.Name = "moveFirstPrsButton";
-            this.moveFirstPrsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPrsButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstPrsButton.Text = "Move First";
             this.moveFirstPrsButton.Click += new System.EventHandler(this.prsPnlNavButtons);
             // 
@@ -3946,7 +3956,7 @@ namespace InternalPayments.Forms
             this.movePreviousPrsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPrsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPrsButton.Name = "movePreviousPrsButton";
-            this.movePreviousPrsButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPrsButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousPrsButton.Text = "Move Previous";
             this.movePreviousPrsButton.Click += new System.EventHandler(this.prsPnlNavButtons);
             // 
@@ -3994,7 +4004,7 @@ namespace InternalPayments.Forms
             this.moveNextPrsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPrsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPrsButton.Name = "moveNextPrsButton";
-            this.moveNextPrsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPrsButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextPrsButton.Text = "Move Next";
             this.moveNextPrsButton.Click += new System.EventHandler(this.prsPnlNavButtons);
             // 
@@ -4009,7 +4019,7 @@ namespace InternalPayments.Forms
             this.moveLastPrsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPrsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPrsButton.Name = "moveLastPrsButton";
-            this.moveLastPrsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPrsButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastPrsButton.Text = "Move Last";
             this.moveLastPrsButton.Click += new System.EventHandler(this.prsPnlNavButtons);
             // 
@@ -4272,6 +4282,7 @@ namespace InternalPayments.Forms
             // 
             // rolesContextMenuStrip
             // 
+            this.rolesContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.rolesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRolesMenuItem,
             this.delRolesMenuItem,
@@ -4279,13 +4290,13 @@ namespace InternalPayments.Forms
             this.exptRolesMenuItem,
             this.rcHstryRolesMenuItem});
             this.rolesContextMenuStrip.Name = "vlNmContextMenuStrip";
-            this.rolesContextMenuStrip.Size = new System.Drawing.Size(153, 98);
+            this.rolesContextMenuStrip.Size = new System.Drawing.Size(157, 114);
             // 
             // addRolesMenuItem
             // 
             this.addRolesMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addRolesMenuItem.Name = "addRolesMenuItem";
-            this.addRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.addRolesMenuItem.Text = "Add Role Set";
             this.addRolesMenuItem.Click += new System.EventHandler(this.addRolesMenuItem_Click);
             // 
@@ -4293,20 +4304,20 @@ namespace InternalPayments.Forms
             // 
             this.delRolesMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delRolesMenuItem.Name = "delRolesMenuItem";
-            this.delRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.delRolesMenuItem.Text = "Delete Role Set";
             this.delRolesMenuItem.Click += new System.EventHandler(this.delRolesMenuItem_Click);
             // 
             // toolStripSeparator151
             // 
             this.toolStripSeparator151.Name = "toolStripSeparator151";
-            this.toolStripSeparator151.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator151.Size = new System.Drawing.Size(153, 6);
             // 
             // exptRolesMenuItem
             // 
             this.exptRolesMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptRolesMenuItem.Name = "exptRolesMenuItem";
-            this.exptRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptRolesMenuItem.Text = "Export to Excel";
             this.exptRolesMenuItem.Click += new System.EventHandler(this.exptRolesMenuItem_Click);
             // 
@@ -4314,7 +4325,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryRolesMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryRolesMenuItem.Name = "rcHstryRolesMenuItem";
-            this.rcHstryRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryRolesMenuItem.Text = "Record History";
             this.rcHstryRolesMenuItem.Click += new System.EventHandler(this.rcHstryRolesMenuItem_Click);
             // 
@@ -4476,6 +4487,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip11.AutoSize = false;
             this.toolStrip11.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip11.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip11.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItmStDtButton,
             this.delItmStDtButton});
@@ -4492,7 +4504,7 @@ namespace InternalPayments.Forms
             this.addItmStDtButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addItmStDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addItmStDtButton.Name = "addItmStDtButton";
-            this.addItmStDtButton.Size = new System.Drawing.Size(51, 22);
+            this.addItmStDtButton.Size = new System.Drawing.Size(55, 22);
             this.addItmStDtButton.Text = "ADD";
             this.addItmStDtButton.Click += new System.EventHandler(this.addItmStDtButton_Click);
             // 
@@ -4502,7 +4514,7 @@ namespace InternalPayments.Forms
             this.delItmStDtButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.delItmStDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delItmStDtButton.Name = "delItmStDtButton";
-            this.delItmStDtButton.Size = new System.Drawing.Size(73, 22);
+            this.delItmStDtButton.Size = new System.Drawing.Size(77, 22);
             this.delItmStDtButton.Text = "REMOVE";
             this.delItmStDtButton.Click += new System.EventHandler(this.delItmStDtButton_Click);
             // 
@@ -4520,6 +4532,7 @@ namespace InternalPayments.Forms
             // toolStrip7
             // 
             this.toolStrip7.AutoSize = false;
+            this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstItmsDetButton,
             this.toolStripSeparator93,
@@ -4551,7 +4564,7 @@ namespace InternalPayments.Forms
             this.moveFirstItmsDetButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstItmsDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstItmsDetButton.Name = "moveFirstItmsDetButton";
-            this.moveFirstItmsDetButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstItmsDetButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstItmsDetButton.Text = "Move First";
             this.moveFirstItmsDetButton.Click += new System.EventHandler(this.IdetPnlNavButtons);
             // 
@@ -4567,7 +4580,7 @@ namespace InternalPayments.Forms
             this.movePreviousItmsDetButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousItmsDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousItmsDetButton.Name = "movePreviousItmsDetButton";
-            this.movePreviousItmsDetButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousItmsDetButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousItmsDetButton.Text = "Move Previous";
             this.movePreviousItmsDetButton.Click += new System.EventHandler(this.IdetPnlNavButtons);
             // 
@@ -4619,7 +4632,7 @@ namespace InternalPayments.Forms
             this.moveNextItmsDetButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextItmsDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextItmsDetButton.Name = "moveNextItmsDetButton";
-            this.moveNextItmsDetButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextItmsDetButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextItmsDetButton.Text = "Move Next";
             this.moveNextItmsDetButton.Click += new System.EventHandler(this.IdetPnlNavButtons);
             // 
@@ -4635,7 +4648,7 @@ namespace InternalPayments.Forms
             this.moveLastItmsDetButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastItmsDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastItmsDetButton.Name = "moveLastItmsDetButton";
-            this.moveLastItmsDetButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastItmsDetButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastItmsDetButton.Text = "Move Last";
             this.moveLastItmsDetButton.Click += new System.EventHandler(this.IdetPnlNavButtons);
             // 
@@ -4717,6 +4730,7 @@ namespace InternalPayments.Forms
             // 
             // itmStDetContextMenuStrip
             // 
+            this.itmStDetContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.itmStDetContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItmMenuItem,
             this.rmvPayItmMenuItem,
@@ -4726,13 +4740,13 @@ namespace InternalPayments.Forms
             this.vwSQLItmStDtMenuItem,
             this.recHstryItmStDtMenuItem});
             this.itmStDetContextMenuStrip.Name = "usersContextMenuStrip";
-            this.itmStDetContextMenuStrip.Size = new System.Drawing.Size(167, 142);
+            this.itmStDetContextMenuStrip.Size = new System.Drawing.Size(171, 166);
             // 
             // addItmMenuItem
             // 
             this.addItmMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addItmMenuItem.Name = "addItmMenuItem";
-            this.addItmMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.addItmMenuItem.Size = new System.Drawing.Size(170, 26);
             this.addItmMenuItem.Text = "Add Pay Item";
             this.addItmMenuItem.Click += new System.EventHandler(this.addItmSt1MenuItem_Click);
             // 
@@ -4740,20 +4754,20 @@ namespace InternalPayments.Forms
             // 
             this.rmvPayItmMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.rmvPayItmMenuItem.Name = "rmvPayItmMenuItem";
-            this.rmvPayItmMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.rmvPayItmMenuItem.Size = new System.Drawing.Size(170, 26);
             this.rmvPayItmMenuItem.Text = "Remove Pay Item";
             this.rmvPayItmMenuItem.Click += new System.EventHandler(this.rmvPayItmMenuItem_Click);
             // 
             // toolStripSeparator92
             // 
             this.toolStripSeparator92.Name = "toolStripSeparator92";
-            this.toolStripSeparator92.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator92.Size = new System.Drawing.Size(167, 6);
             // 
             // exptItmStDtMenuItem
             // 
             this.exptItmStDtMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptItmStDtMenuItem.Name = "exptItmStDtMenuItem";
-            this.exptItmStDtMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.exptItmStDtMenuItem.Size = new System.Drawing.Size(170, 26);
             this.exptItmStDtMenuItem.Text = "Export to Excel";
             this.exptItmStDtMenuItem.Click += new System.EventHandler(this.exptItmStDtMenuItem_Click);
             // 
@@ -4761,7 +4775,7 @@ namespace InternalPayments.Forms
             // 
             this.refreshItmStDtMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.refreshItmStDtMenuItem.Name = "refreshItmStDtMenuItem";
-            this.refreshItmStDtMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.refreshItmStDtMenuItem.Size = new System.Drawing.Size(170, 26);
             this.refreshItmStDtMenuItem.Text = "&Refresh";
             this.refreshItmStDtMenuItem.Click += new System.EventHandler(this.refreshItmStDtMenuItem_Click);
             // 
@@ -4769,7 +4783,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLItmStDtMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLItmStDtMenuItem.Name = "vwSQLItmStDtMenuItem";
-            this.vwSQLItmStDtMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.vwSQLItmStDtMenuItem.Size = new System.Drawing.Size(170, 26);
             this.vwSQLItmStDtMenuItem.Text = "&View SQL";
             this.vwSQLItmStDtMenuItem.Click += new System.EventHandler(this.vwSQLItmStDtMenuItem_Click);
             // 
@@ -4777,7 +4791,7 @@ namespace InternalPayments.Forms
             // 
             this.recHstryItmStDtMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryItmStDtMenuItem.Name = "recHstryItmStDtMenuItem";
-            this.recHstryItmStDtMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.recHstryItmStDtMenuItem.Size = new System.Drawing.Size(170, 26);
             this.recHstryItmStDtMenuItem.Text = "Record History";
             this.recHstryItmStDtMenuItem.Click += new System.EventHandler(this.recHstryItmStDtMenuItem_Click);
             // 
@@ -4850,6 +4864,7 @@ namespace InternalPayments.Forms
             // 
             // itmSetContextMenuStrip
             // 
+            this.itmSetContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.itmSetContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItmStMenuItem,
             this.editItmStMenuItem,
@@ -4860,13 +4875,13 @@ namespace InternalPayments.Forms
             this.vwSQLItmStMenuItem,
             this.rcHstryItmStMenuItem});
             this.itmSetContextMenuStrip.Name = "usersContextMenuStrip";
-            this.itmSetContextMenuStrip.Size = new System.Drawing.Size(154, 164);
+            this.itmSetContextMenuStrip.Size = new System.Drawing.Size(158, 192);
             // 
             // addItmStMenuItem
             // 
             this.addItmStMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addItmStMenuItem.Name = "addItmStMenuItem";
-            this.addItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.addItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.addItmStMenuItem.Text = "Add Item Set";
             this.addItmStMenuItem.Click += new System.EventHandler(this.addItmStMenuItem_Click);
             // 
@@ -4874,7 +4889,7 @@ namespace InternalPayments.Forms
             // 
             this.editItmStMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editItmStMenuItem.Name = "editItmStMenuItem";
-            this.editItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.editItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.editItmStMenuItem.Text = "Edit Item Set";
             this.editItmStMenuItem.Click += new System.EventHandler(this.editItmStMenuItem_Click);
             // 
@@ -4882,20 +4897,20 @@ namespace InternalPayments.Forms
             // 
             this.delItmStMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delItmStMenuItem.Name = "delItmStMenuItem";
-            this.delItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.delItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.delItmStMenuItem.Text = "Delete Item Set";
             this.delItmStMenuItem.Click += new System.EventHandler(this.delItmStMenuItem_Click);
             // 
             // toolStripSeparator89
             // 
             this.toolStripSeparator89.Name = "toolStripSeparator89";
-            this.toolStripSeparator89.Size = new System.Drawing.Size(150, 6);
+            this.toolStripSeparator89.Size = new System.Drawing.Size(154, 6);
             // 
             // exptItmStMenuItem
             // 
             this.exptItmStMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptItmStMenuItem.Name = "exptItmStMenuItem";
-            this.exptItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.exptItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.exptItmStMenuItem.Text = "Export to Excel";
             this.exptItmStMenuItem.Click += new System.EventHandler(this.exptItmStMenuItem_Click);
             // 
@@ -4903,7 +4918,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshItmStMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshItmStMenuItem.Name = "rfrshItmStMenuItem";
-            this.rfrshItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.rfrshItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.rfrshItmStMenuItem.Text = "&Refresh";
             this.rfrshItmStMenuItem.Click += new System.EventHandler(this.rfrshItmStMenuItem_Click);
             // 
@@ -4911,7 +4926,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLItmStMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLItmStMenuItem.Name = "vwSQLItmStMenuItem";
-            this.vwSQLItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.vwSQLItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.vwSQLItmStMenuItem.Text = "&View SQL";
             this.vwSQLItmStMenuItem.Click += new System.EventHandler(this.vwSQLItmStMenuItem_Click);
             // 
@@ -4919,7 +4934,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryItmStMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryItmStMenuItem.Name = "rcHstryItmStMenuItem";
-            this.rcHstryItmStMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.rcHstryItmStMenuItem.Size = new System.Drawing.Size(157, 26);
             this.rcHstryItmStMenuItem.Text = "Record History";
             this.rcHstryItmStMenuItem.Click += new System.EventHandler(this.rcHstryItmStMenuItem_Click);
             // 
@@ -4937,6 +4952,7 @@ namespace InternalPayments.Forms
             // toolStrip8
             // 
             this.toolStrip8.AutoSize = false;
+            this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItmStButton,
             this.toolStripSeparator117,
@@ -4990,7 +5006,7 @@ namespace InternalPayments.Forms
             this.addItmStButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addItmStButton.Name = "addItmStButton";
-            this.addItmStButton.Size = new System.Drawing.Size(51, 22);
+            this.addItmStButton.Size = new System.Drawing.Size(55, 22);
             this.addItmStButton.Text = "ADD";
             this.addItmStButton.Click += new System.EventHandler(this.addItmStButton_Click);
             // 
@@ -5004,7 +5020,7 @@ namespace InternalPayments.Forms
             this.editItmStButton.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editItmStButton.Name = "editItmStButton";
-            this.editItmStButton.Size = new System.Drawing.Size(51, 22);
+            this.editItmStButton.Size = new System.Drawing.Size(55, 22);
             this.editItmStButton.Text = "EDIT";
             this.editItmStButton.Click += new System.EventHandler(this.editItmStButton_Click);
             // 
@@ -5018,7 +5034,7 @@ namespace InternalPayments.Forms
             this.saveItmStButton.Image = global::InternalPayments.Properties.Resources.FloppyDisk;
             this.saveItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveItmStButton.Name = "saveItmStButton";
-            this.saveItmStButton.Size = new System.Drawing.Size(53, 22);
+            this.saveItmStButton.Size = new System.Drawing.Size(57, 22);
             this.saveItmStButton.Text = "SAVE";
             this.saveItmStButton.Click += new System.EventHandler(this.saveItmStButton_Click);
             // 
@@ -5033,7 +5049,7 @@ namespace InternalPayments.Forms
             this.deleteItmStButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.deleteItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteItmStButton.Name = "deleteItmStButton";
-            this.deleteItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.deleteItmStButton.Size = new System.Drawing.Size(24, 22);
             this.deleteItmStButton.Text = "DELETE";
             this.deleteItmStButton.Click += new System.EventHandler(this.deleteItmStButton_Click);
             // 
@@ -5048,7 +5064,7 @@ namespace InternalPayments.Forms
             this.goItmStButton.Image = global::InternalPayments.Properties.Resources.refresh;
             this.goItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goItmStButton.Name = "goItmStButton";
-            this.goItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.goItmStButton.Size = new System.Drawing.Size(24, 22);
             this.goItmStButton.Text = "Refresh";
             this.goItmStButton.Click += new System.EventHandler(this.goItmStButton_Click);
             // 
@@ -5063,7 +5079,7 @@ namespace InternalPayments.Forms
             this.recHstryItmStButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryItmStButton.Name = "recHstryItmStButton";
-            this.recHstryItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryItmStButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryItmStButton.Text = "Record History";
             this.recHstryItmStButton.Click += new System.EventHandler(this.recHstryItmStButton_Click);
             // 
@@ -5078,7 +5094,7 @@ namespace InternalPayments.Forms
             this.vwSQLItmStButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLItmStButton.Name = "vwSQLItmStButton";
-            this.vwSQLItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLItmStButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLItmStButton.Text = "View SQL";
             this.vwSQLItmStButton.Click += new System.EventHandler(this.vwSQLItmStButton_Click);
             // 
@@ -5093,7 +5109,7 @@ namespace InternalPayments.Forms
             this.moveFirstItmStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstItmStButton.Name = "moveFirstItmStButton";
-            this.moveFirstItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstItmStButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstItmStButton.Text = "Move First";
             this.moveFirstItmStButton.Click += new System.EventHandler(this.ItmStPnlNavButtons);
             // 
@@ -5108,7 +5124,7 @@ namespace InternalPayments.Forms
             this.movePreviousItmStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousItmStButton.Name = "movePreviousItmStButton";
-            this.movePreviousItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousItmStButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousItmStButton.Text = "Move Previous";
             this.movePreviousItmStButton.Click += new System.EventHandler(this.ItmStPnlNavButtons);
             // 
@@ -5156,7 +5172,7 @@ namespace InternalPayments.Forms
             this.moveNextItmStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextItmStButton.Name = "moveNextItmStButton";
-            this.moveNextItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextItmStButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextItmStButton.Text = "Move Next";
             this.moveNextItmStButton.Click += new System.EventHandler(this.ItmStPnlNavButtons);
             // 
@@ -5171,7 +5187,7 @@ namespace InternalPayments.Forms
             this.moveLastItmStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastItmStButton.Name = "moveLastItmStButton";
-            this.moveLastItmStButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastItmStButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastItmStButton.Text = "Move Last";
             this.moveLastItmStButton.Click += new System.EventHandler(this.ItmStPnlNavButtons);
             // 
@@ -5261,7 +5277,7 @@ namespace InternalPayments.Forms
             this.resetItmStButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetItmStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetItmStButton.Name = "resetItmStButton";
-            this.resetItmStButton.Size = new System.Drawing.Size(59, 22);
+            this.resetItmStButton.Size = new System.Drawing.Size(63, 22);
             this.resetItmStButton.Text = "RESET";
             this.resetItmStButton.Click += new System.EventHandler(this.resetItmStButton_Click);
             // 
@@ -5584,6 +5600,7 @@ namespace InternalPayments.Forms
             // 
             // prsnStContextMenuStrip
             // 
+            this.prsnStContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.prsnStContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPrsStMenuItem,
             this.editPrsStMenuItem,
@@ -5594,13 +5611,13 @@ namespace InternalPayments.Forms
             this.vwSQLPrsStMenuItem,
             this.rcHstryPrsStMenuItem});
             this.prsnStContextMenuStrip.Name = "usersContextMenuStrip";
-            this.prsnStContextMenuStrip.Size = new System.Drawing.Size(166, 164);
+            this.prsnStContextMenuStrip.Size = new System.Drawing.Size(170, 192);
             // 
             // addPrsStMenuItem
             // 
             this.addPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addPrsStMenuItem.Name = "addPrsStMenuItem";
-            this.addPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.addPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.addPrsStMenuItem.Text = "Add Person Set";
             this.addPrsStMenuItem.Click += new System.EventHandler(this.addPrsStMenuItem_Click);
             // 
@@ -5608,7 +5625,7 @@ namespace InternalPayments.Forms
             // 
             this.editPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editPrsStMenuItem.Name = "editPrsStMenuItem";
-            this.editPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.editPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.editPrsStMenuItem.Text = "Edit Person Set";
             this.editPrsStMenuItem.Click += new System.EventHandler(this.editPrsStMenuItem_Click);
             // 
@@ -5616,20 +5633,20 @@ namespace InternalPayments.Forms
             // 
             this.delPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delPrsStMenuItem.Name = "delPrsStMenuItem";
-            this.delPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.delPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.delPrsStMenuItem.Text = "Delete Person Set";
             this.delPrsStMenuItem.Click += new System.EventHandler(this.delPrsStMenuItem_Click);
             // 
             // toolStripSeparator90
             // 
             this.toolStripSeparator90.Name = "toolStripSeparator90";
-            this.toolStripSeparator90.Size = new System.Drawing.Size(162, 6);
+            this.toolStripSeparator90.Size = new System.Drawing.Size(166, 6);
             // 
             // exptPrsStMenuItem
             // 
             this.exptPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptPrsStMenuItem.Name = "exptPrsStMenuItem";
-            this.exptPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.exptPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.exptPrsStMenuItem.Text = "Export to Excel";
             this.exptPrsStMenuItem.Click += new System.EventHandler(this.exptPrsStMenuItem_Click);
             // 
@@ -5637,7 +5654,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshPrsStMenuItem.Name = "rfrshPrsStMenuItem";
-            this.rfrshPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.rfrshPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.rfrshPrsStMenuItem.Text = "&Refresh";
             this.rfrshPrsStMenuItem.Click += new System.EventHandler(this.rfrshPrsStMenuItem_Click);
             // 
@@ -5645,7 +5662,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPrsStMenuItem.Name = "vwSQLPrsStMenuItem";
-            this.vwSQLPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.vwSQLPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.vwSQLPrsStMenuItem.Text = "&View SQL";
             this.vwSQLPrsStMenuItem.Click += new System.EventHandler(this.vwSQLPrsStMenuItem_Click);
             // 
@@ -5653,7 +5670,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryPrsStMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryPrsStMenuItem.Name = "rcHstryPrsStMenuItem";
-            this.rcHstryPrsStMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.rcHstryPrsStMenuItem.Size = new System.Drawing.Size(169, 26);
             this.rcHstryPrsStMenuItem.Text = "Record History";
             this.rcHstryPrsStMenuItem.Click += new System.EventHandler(this.rcHstryPrsStMenuItem_Click);
             // 
@@ -5671,6 +5688,7 @@ namespace InternalPayments.Forms
             // toolStrip4
             // 
             this.toolStrip4.AutoSize = false;
+            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPrsStButton,
             this.toolStripSeparator52,
@@ -5724,7 +5742,7 @@ namespace InternalPayments.Forms
             this.addPrsStButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addPrsStButton.Name = "addPrsStButton";
-            this.addPrsStButton.Size = new System.Drawing.Size(51, 22);
+            this.addPrsStButton.Size = new System.Drawing.Size(55, 22);
             this.addPrsStButton.Text = "ADD";
             this.addPrsStButton.Click += new System.EventHandler(this.addPrsStButton_Click);
             // 
@@ -5738,7 +5756,7 @@ namespace InternalPayments.Forms
             this.editPrsStButton.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editPrsStButton.Name = "editPrsStButton";
-            this.editPrsStButton.Size = new System.Drawing.Size(51, 22);
+            this.editPrsStButton.Size = new System.Drawing.Size(55, 22);
             this.editPrsStButton.Text = "EDIT";
             this.editPrsStButton.Click += new System.EventHandler(this.editPrsStButton_Click);
             // 
@@ -5752,7 +5770,7 @@ namespace InternalPayments.Forms
             this.savePrsStButton.Image = global::InternalPayments.Properties.Resources.FloppyDisk;
             this.savePrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.savePrsStButton.Name = "savePrsStButton";
-            this.savePrsStButton.Size = new System.Drawing.Size(53, 22);
+            this.savePrsStButton.Size = new System.Drawing.Size(57, 22);
             this.savePrsStButton.Text = "SAVE";
             this.savePrsStButton.Click += new System.EventHandler(this.savePrsStButton_Click);
             // 
@@ -5767,7 +5785,7 @@ namespace InternalPayments.Forms
             this.delPrsStButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.delPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delPrsStButton.Name = "delPrsStButton";
-            this.delPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.delPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.delPrsStButton.Text = "DELETE";
             this.delPrsStButton.Click += new System.EventHandler(this.delPrsStButton_Click);
             // 
@@ -5782,7 +5800,7 @@ namespace InternalPayments.Forms
             this.goPrsStButton.Image = global::InternalPayments.Properties.Resources.refresh;
             this.goPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goPrsStButton.Name = "goPrsStButton";
-            this.goPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.goPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.goPrsStButton.Text = "Refresh";
             this.goPrsStButton.Click += new System.EventHandler(this.goPrsStButton_Click);
             // 
@@ -5797,7 +5815,7 @@ namespace InternalPayments.Forms
             this.rcHstryPrsStButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstryPrsStButton.Name = "rcHstryPrsStButton";
-            this.rcHstryPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.rcHstryPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.rcHstryPrsStButton.Text = "Record History";
             this.rcHstryPrsStButton.Click += new System.EventHandler(this.rcHstryPrsStButton_Click);
             // 
@@ -5812,7 +5830,7 @@ namespace InternalPayments.Forms
             this.vwSQLPrsStButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLPrsStButton.Name = "vwSQLPrsStButton";
-            this.vwSQLPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLPrsStButton.Text = "View SQL";
             this.vwSQLPrsStButton.Click += new System.EventHandler(this.vwSQLPrsStButton_Click);
             // 
@@ -5827,7 +5845,7 @@ namespace InternalPayments.Forms
             this.moveFirstPrsStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPrsStButton.Name = "moveFirstPrsStButton";
-            this.moveFirstPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstPrsStButton.Text = "Move First";
             this.moveFirstPrsStButton.Click += new System.EventHandler(this.PrsStPnlNavButtons);
             // 
@@ -5842,7 +5860,7 @@ namespace InternalPayments.Forms
             this.movePreviousPrsStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPrsStButton.Name = "movePreviousPrsStButton";
-            this.movePreviousPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousPrsStButton.Text = "Move Previous";
             this.movePreviousPrsStButton.Click += new System.EventHandler(this.PrsStPnlNavButtons);
             // 
@@ -5890,7 +5908,7 @@ namespace InternalPayments.Forms
             this.moveNextPrsStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPrsStButton.Name = "moveNextPrsStButton";
-            this.moveNextPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextPrsStButton.Text = "Move Next";
             this.moveNextPrsStButton.Click += new System.EventHandler(this.PrsStPnlNavButtons);
             // 
@@ -5905,7 +5923,7 @@ namespace InternalPayments.Forms
             this.moveLastPrsStButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPrsStButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPrsStButton.Name = "moveLastPrsStButton";
-            this.moveLastPrsStButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPrsStButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastPrsStButton.Text = "Move Last";
             this.moveLastPrsStButton.Click += new System.EventHandler(this.PrsStPnlNavButtons);
             // 
@@ -5995,7 +6013,7 @@ namespace InternalPayments.Forms
             this.resetPrsSetButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetPrsSetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetPrsSetButton.Name = "resetPrsSetButton";
-            this.resetPrsSetButton.Size = new System.Drawing.Size(59, 22);
+            this.resetPrsSetButton.Size = new System.Drawing.Size(63, 22);
             this.resetPrsSetButton.Text = "RESET";
             this.resetPrsSetButton.Click += new System.EventHandler(this.resetPrsSetButton_Click);
             // 
@@ -6019,6 +6037,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip12.AutoSize = false;
             this.toolStrip12.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip12.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip12.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPrsButton,
             this.removePrsButton});
@@ -6035,7 +6054,7 @@ namespace InternalPayments.Forms
             this.addPrsButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addPrsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addPrsButton.Name = "addPrsButton";
-            this.addPrsButton.Size = new System.Drawing.Size(51, 22);
+            this.addPrsButton.Size = new System.Drawing.Size(55, 22);
             this.addPrsButton.Text = "ADD";
             this.addPrsButton.Click += new System.EventHandler(this.addPrsButton_Click);
             // 
@@ -6045,7 +6064,7 @@ namespace InternalPayments.Forms
             this.removePrsButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.removePrsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.removePrsButton.Name = "removePrsButton";
-            this.removePrsButton.Size = new System.Drawing.Size(73, 22);
+            this.removePrsButton.Size = new System.Drawing.Size(77, 22);
             this.removePrsButton.Text = "REMOVE";
             this.removePrsButton.Click += new System.EventHandler(this.removePrsButton_Click);
             // 
@@ -6063,6 +6082,7 @@ namespace InternalPayments.Forms
             // toolStrip2
             // 
             this.toolStrip2.AutoSize = false;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstPrsStDtButton,
             this.toolStripSeparator17,
@@ -6094,7 +6114,7 @@ namespace InternalPayments.Forms
             this.moveFirstPrsStDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPrsStDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPrsStDtButton.Name = "moveFirstPrsStDtButton";
-            this.moveFirstPrsStDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPrsStDtButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstPrsStDtButton.Text = "Move First";
             this.moveFirstPrsStDtButton.Click += new System.EventHandler(this.PrsdetPnlNavButtons);
             // 
@@ -6110,7 +6130,7 @@ namespace InternalPayments.Forms
             this.movePreviousPrsStDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPrsStDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPrsStDtButton.Name = "movePreviousPrsStDtButton";
-            this.movePreviousPrsStDtButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPrsStDtButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousPrsStDtButton.Text = "Move Previous";
             this.movePreviousPrsStDtButton.Click += new System.EventHandler(this.PrsdetPnlNavButtons);
             // 
@@ -6162,7 +6182,7 @@ namespace InternalPayments.Forms
             this.moveNextPrsStDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPrsStDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPrsStDtButton.Name = "moveNextPrsStDtButton";
-            this.moveNextPrsStDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPrsStDtButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextPrsStDtButton.Text = "Move Next";
             this.moveNextPrsStDtButton.Click += new System.EventHandler(this.PrsdetPnlNavButtons);
             // 
@@ -6178,7 +6198,7 @@ namespace InternalPayments.Forms
             this.moveLastPrsStDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPrsStDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPrsStDtButton.Name = "moveLastPrsStDtButton";
-            this.moveLastPrsStDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPrsStDtButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastPrsStDtButton.Text = "Move Last";
             this.moveLastPrsStDtButton.Click += new System.EventHandler(this.PrsdetPnlNavButtons);
             // 
@@ -6254,23 +6274,24 @@ namespace InternalPayments.Forms
             // 
             // prsStDetContextMenuStrip
             // 
+            this.prsStDetContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.prsStDetContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator91,
             this.exptPrsStDetMenuItem,
             this.rfrshPrsStDetMenuItem});
             this.prsStDetContextMenuStrip.Name = "pstPayContextMenuStrip";
-            this.prsStDetContextMenuStrip.Size = new System.Drawing.Size(151, 54);
+            this.prsStDetContextMenuStrip.Size = new System.Drawing.Size(155, 62);
             // 
             // toolStripSeparator91
             // 
             this.toolStripSeparator91.Name = "toolStripSeparator91";
-            this.toolStripSeparator91.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator91.Size = new System.Drawing.Size(151, 6);
             // 
             // exptPrsStDetMenuItem
             // 
             this.exptPrsStDetMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptPrsStDetMenuItem.Name = "exptPrsStDetMenuItem";
-            this.exptPrsStDetMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptPrsStDetMenuItem.Size = new System.Drawing.Size(154, 26);
             this.exptPrsStDetMenuItem.Text = "Export to Excel";
             this.exptPrsStDetMenuItem.Click += new System.EventHandler(this.exptPrsStDetMenuItem_Click);
             // 
@@ -6278,7 +6299,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshPrsStDetMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshPrsStDetMenuItem.Name = "rfrshPrsStDetMenuItem";
-            this.rfrshPrsStDetMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.rfrshPrsStDetMenuItem.Size = new System.Drawing.Size(154, 26);
             this.rfrshPrsStDetMenuItem.Text = "Refresh";
             this.rfrshPrsStDetMenuItem.Click += new System.EventHandler(this.rfrshPrsStDetMenuItem_Click);
             // 
@@ -6335,6 +6356,7 @@ namespace InternalPayments.Forms
             // toolStrip9
             // 
             this.toolStrip9.AutoSize = false;
+            this.toolStrip9.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addMsPyButton,
@@ -6388,7 +6410,7 @@ namespace InternalPayments.Forms
             this.addMsPyButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addMsPyButton.Name = "addMsPyButton";
-            this.addMsPyButton.Size = new System.Drawing.Size(51, 22);
+            this.addMsPyButton.Size = new System.Drawing.Size(55, 22);
             this.addMsPyButton.Text = "ADD";
             this.addMsPyButton.Click += new System.EventHandler(this.addMsPyButton_Click);
             // 
@@ -6397,7 +6419,7 @@ namespace InternalPayments.Forms
             this.editMsPyButton.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editMsPyButton.Name = "editMsPyButton";
-            this.editMsPyButton.Size = new System.Drawing.Size(51, 22);
+            this.editMsPyButton.Size = new System.Drawing.Size(55, 22);
             this.editMsPyButton.Text = "EDIT";
             this.editMsPyButton.Click += new System.EventHandler(this.editMsPyButton_Click);
             // 
@@ -6406,7 +6428,7 @@ namespace InternalPayments.Forms
             this.saveMsPyButton.Image = global::InternalPayments.Properties.Resources.FloppyDisk;
             this.saveMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveMsPyButton.Name = "saveMsPyButton";
-            this.saveMsPyButton.Size = new System.Drawing.Size(53, 22);
+            this.saveMsPyButton.Size = new System.Drawing.Size(57, 22);
             this.saveMsPyButton.Text = "SAVE";
             this.saveMsPyButton.Click += new System.EventHandler(this.saveMsPyButton_Click);
             // 
@@ -6416,7 +6438,7 @@ namespace InternalPayments.Forms
             this.delMsPyButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.delMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delMsPyButton.Name = "delMsPyButton";
-            this.delMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.delMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.delMsPyButton.Text = "DELETE";
             this.delMsPyButton.Click += new System.EventHandler(this.delMsPyButton_Click);
             // 
@@ -6430,7 +6452,7 @@ namespace InternalPayments.Forms
             this.quickPayButton.Image = global::InternalPayments.Properties.Resources._98;
             this.quickPayButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quickPayButton.Name = "quickPayButton";
-            this.quickPayButton.Size = new System.Drawing.Size(80, 22);
+            this.quickPayButton.Size = new System.Drawing.Size(84, 22);
             this.quickPayButton.Text = "Quick Pay";
             this.quickPayButton.Click += new System.EventHandler(this.quickPayButton_Click);
             // 
@@ -6445,7 +6467,7 @@ namespace InternalPayments.Forms
             this.vwLogMsgButton.Image = global::InternalPayments.Properties.Resources._15;
             this.vwLogMsgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwLogMsgButton.Name = "vwLogMsgButton";
-            this.vwLogMsgButton.Size = new System.Drawing.Size(23, 22);
+            this.vwLogMsgButton.Size = new System.Drawing.Size(24, 22);
             this.vwLogMsgButton.Text = "View Log Messages";
             this.vwLogMsgButton.Click += new System.EventHandler(this.vwLogMsgButton_Click);
             // 
@@ -6455,7 +6477,7 @@ namespace InternalPayments.Forms
             this.vwSQLMsPyButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLMsPyButton.Name = "vwSQLMsPyButton";
-            this.vwSQLMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLMsPyButton.Text = "View SQL";
             this.vwSQLMsPyButton.Click += new System.EventHandler(this.vwSQLMsPyButton_Click);
             // 
@@ -6465,7 +6487,7 @@ namespace InternalPayments.Forms
             this.recHstryMsPyButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryMsPyButton.Name = "recHstryMsPyButton";
-            this.recHstryMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryMsPyButton.Text = "Record History";
             this.recHstryMsPyButton.Click += new System.EventHandler(this.recHstryMsPyButton_Click);
             // 
@@ -6480,7 +6502,7 @@ namespace InternalPayments.Forms
             this.moveFirstMsPyButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstMsPyButton.Name = "moveFirstMsPyButton";
-            this.moveFirstMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstMsPyButton.Text = "Move First";
             this.moveFirstMsPyButton.Click += new System.EventHandler(this.MsPyPnlNavButtons);
             // 
@@ -6495,7 +6517,7 @@ namespace InternalPayments.Forms
             this.movePreviousMsPyButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousMsPyButton.Name = "movePreviousMsPyButton";
-            this.movePreviousMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousMsPyButton.Text = "Move Previous";
             this.movePreviousMsPyButton.Click += new System.EventHandler(this.MsPyPnlNavButtons);
             // 
@@ -6544,7 +6566,7 @@ namespace InternalPayments.Forms
             this.moveNextMsPyButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextMsPyButton.Name = "moveNextMsPyButton";
-            this.moveNextMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextMsPyButton.Text = "Move Next";
             this.moveNextMsPyButton.Click += new System.EventHandler(this.MsPyPnlNavButtons);
             // 
@@ -6559,7 +6581,7 @@ namespace InternalPayments.Forms
             this.moveLastMsPyButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastMsPyButton.Name = "moveLastMsPyButton";
-            this.moveLastMsPyButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastMsPyButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastMsPyButton.Text = "Move Last";
             this.moveLastMsPyButton.Click += new System.EventHandler(this.MsPyPnlNavButtons);
             // 
@@ -6649,7 +6671,7 @@ namespace InternalPayments.Forms
             this.goMsPyButton.Image = global::InternalPayments.Properties.Resources.action_go;
             this.goMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goMsPyButton.Name = "goMsPyButton";
-            this.goMsPyButton.Size = new System.Drawing.Size(42, 22);
+            this.goMsPyButton.Size = new System.Drawing.Size(46, 22);
             this.goMsPyButton.Text = "Go";
             this.goMsPyButton.Click += new System.EventHandler(this.goMsPyButton_Click);
             // 
@@ -6664,7 +6686,7 @@ namespace InternalPayments.Forms
             this.resetMsPyButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetMsPyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetMsPyButton.Name = "resetMsPyButton";
-            this.resetMsPyButton.Size = new System.Drawing.Size(59, 22);
+            this.resetMsPyButton.Size = new System.Drawing.Size(63, 22);
             this.resetMsPyButton.Text = "RESET";
             this.resetMsPyButton.Click += new System.EventHandler(this.resetMsPyButton_Click);
             // 
@@ -6705,6 +6727,7 @@ namespace InternalPayments.Forms
             this.groupBox13.TabIndex = 2;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "MASS PAY HEADER INFORMATION";
+            this.groupBox13.Enter += new System.EventHandler(this.groupBox13_Enter);
             // 
             // attchedValsButton
             // 
@@ -7039,6 +7062,7 @@ namespace InternalPayments.Forms
             // toolStrip6
             // 
             this.toolStrip6.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstMsPyDtButton,
             this.toolStripSeparator54,
@@ -7057,7 +7081,7 @@ namespace InternalPayments.Forms
             this.toolStrip6.Location = new System.Drawing.Point(6, 14);
             this.toolStrip6.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.Size = new System.Drawing.Size(340, 25);
+            this.toolStrip6.Size = new System.Drawing.Size(344, 27);
             this.toolStrip6.Stretch = true;
             this.toolStrip6.TabIndex = 0;
             this.toolStrip6.TabStop = true;
@@ -7070,14 +7094,14 @@ namespace InternalPayments.Forms
             this.moveFirstMsPyDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstMsPyDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstMsPyDtButton.Name = "moveFirstMsPyDtButton";
-            this.moveFirstMsPyDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstMsPyDtButton.Size = new System.Drawing.Size(24, 24);
             this.moveFirstMsPyDtButton.Text = "Move First";
             this.moveFirstMsPyDtButton.Click += new System.EventHandler(this.MsPyDtPnlNavButtons);
             // 
             // toolStripSeparator54
             // 
             this.toolStripSeparator54.Name = "toolStripSeparator54";
-            this.toolStripSeparator54.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator54.Size = new System.Drawing.Size(6, 27);
             // 
             // movePreviousMsPyDtButton
             // 
@@ -7086,14 +7110,14 @@ namespace InternalPayments.Forms
             this.movePreviousMsPyDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousMsPyDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousMsPyDtButton.Name = "movePreviousMsPyDtButton";
-            this.movePreviousMsPyDtButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousMsPyDtButton.Size = new System.Drawing.Size(24, 24);
             this.movePreviousMsPyDtButton.Text = "Move Previous";
             this.movePreviousMsPyDtButton.Click += new System.EventHandler(this.MsPyDtPnlNavButtons);
             // 
             // toolStripSeparator55
             // 
             this.toolStripSeparator55.Name = "toolStripSeparator55";
-            this.toolStripSeparator55.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator55.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel13
             // 
@@ -7101,7 +7125,7 @@ namespace InternalPayments.Forms
             this.toolStripLabel13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel13.ForeColor = System.Drawing.Color.Black;
             this.toolStripLabel13.Name = "toolStripLabel13";
-            this.toolStripLabel13.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel13.Size = new System.Drawing.Size(47, 24);
             this.toolStripLabel13.Text = "Record";
             // 
             // positionMsPyDtTextBox
@@ -7113,7 +7137,7 @@ namespace InternalPayments.Forms
             this.positionMsPyDtTextBox.ForeColor = System.Drawing.Color.Black;
             this.positionMsPyDtTextBox.Name = "positionMsPyDtTextBox";
             this.positionMsPyDtTextBox.ReadOnly = true;
-            this.positionMsPyDtTextBox.Size = new System.Drawing.Size(70, 25);
+            this.positionMsPyDtTextBox.Size = new System.Drawing.Size(70, 27);
             this.positionMsPyDtTextBox.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.positionMsPyDtTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.positionMsPyDtTextBox_KeyDown);
             // 
@@ -7123,13 +7147,13 @@ namespace InternalPayments.Forms
             this.totalRecsMsPyDtLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecsMsPyDtLabel.ForeColor = System.Drawing.Color.Black;
             this.totalRecsMsPyDtLabel.Name = "totalRecsMsPyDtLabel";
-            this.totalRecsMsPyDtLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecsMsPyDtLabel.Size = new System.Drawing.Size(50, 24);
             this.totalRecsMsPyDtLabel.Text = "of Total";
             // 
             // toolStripSeparator56
             // 
             this.toolStripSeparator56.Name = "toolStripSeparator56";
-            this.toolStripSeparator56.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator56.Size = new System.Drawing.Size(6, 27);
             // 
             // moveNextMsPyDtButton
             // 
@@ -7138,14 +7162,14 @@ namespace InternalPayments.Forms
             this.moveNextMsPyDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextMsPyDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextMsPyDtButton.Name = "moveNextMsPyDtButton";
-            this.moveNextMsPyDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextMsPyDtButton.Size = new System.Drawing.Size(24, 24);
             this.moveNextMsPyDtButton.Text = "Move Next";
             this.moveNextMsPyDtButton.Click += new System.EventHandler(this.MsPyDtPnlNavButtons);
             // 
             // toolStripSeparator57
             // 
             this.toolStripSeparator57.Name = "toolStripSeparator57";
-            this.toolStripSeparator57.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator57.Size = new System.Drawing.Size(6, 27);
             // 
             // moveLastMsPyDtButton
             // 
@@ -7154,14 +7178,14 @@ namespace InternalPayments.Forms
             this.moveLastMsPyDtButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastMsPyDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastMsPyDtButton.Name = "moveLastMsPyDtButton";
-            this.moveLastMsPyDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastMsPyDtButton.Size = new System.Drawing.Size(24, 24);
             this.moveLastMsPyDtButton.Text = "Move Last";
             this.moveLastMsPyDtButton.Click += new System.EventHandler(this.MsPyDtPnlNavButtons);
             // 
             // toolStripSeparator58
             // 
             this.toolStripSeparator58.Name = "toolStripSeparator58";
-            this.toolStripSeparator58.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator58.Size = new System.Drawing.Size(6, 27);
             // 
             // dsplySizeMsPyDtComboBox
             // 
@@ -7268,6 +7292,7 @@ namespace InternalPayments.Forms
             // msPyDtContextMenuStrip
             // 
             this.msPyDtContextMenuStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.Document;
+            this.msPyDtContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.msPyDtContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator109,
             this.exptMsPyDtMenuItem,
@@ -7275,18 +7300,18 @@ namespace InternalPayments.Forms
             this.vwSQLMsPyDtMenuItem,
             this.rcHstryMsPyDtMenuItem});
             this.msPyDtContextMenuStrip.Name = "pstPayContextMenuStrip";
-            this.msPyDtContextMenuStrip.Size = new System.Drawing.Size(153, 98);
+            this.msPyDtContextMenuStrip.Size = new System.Drawing.Size(157, 114);
             // 
             // toolStripSeparator109
             // 
             this.toolStripSeparator109.Name = "toolStripSeparator109";
-            this.toolStripSeparator109.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator109.Size = new System.Drawing.Size(153, 6);
             // 
             // exptMsPyDtMenuItem
             // 
             this.exptMsPyDtMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptMsPyDtMenuItem.Name = "exptMsPyDtMenuItem";
-            this.exptMsPyDtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptMsPyDtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptMsPyDtMenuItem.Text = "Export to Excel";
             this.exptMsPyDtMenuItem.Click += new System.EventHandler(this.exptMsPyDtMenuItem_Click);
             // 
@@ -7294,7 +7319,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshMsPyDtMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshMsPyDtMenuItem.Name = "rfrshMsPyDtMenuItem";
-            this.rfrshMsPyDtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshMsPyDtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshMsPyDtMenuItem.Text = "Refresh";
             this.rfrshMsPyDtMenuItem.Click += new System.EventHandler(this.rfrshMsPyDtMenuItem_Click);
             // 
@@ -7302,7 +7327,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLMsPyDtMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLMsPyDtMenuItem.Name = "vwSQLMsPyDtMenuItem";
-            this.vwSQLMsPyDtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLMsPyDtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLMsPyDtMenuItem.Text = "View SQL";
             this.vwSQLMsPyDtMenuItem.Click += new System.EventHandler(this.vwSQLMsPyDtMenuItem_Click);
             // 
@@ -7310,7 +7335,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryMsPyDtMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryMsPyDtMenuItem.Name = "rcHstryMsPyDtMenuItem";
-            this.rcHstryMsPyDtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryMsPyDtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryMsPyDtMenuItem.Text = "Record History";
             this.rcHstryMsPyDtMenuItem.Click += new System.EventHandler(this.rcHstryMsPyDtMenuItem_Click);
             // 
@@ -7395,6 +7420,7 @@ namespace InternalPayments.Forms
             // 
             // msPyContextMenuStrip
             // 
+            this.msPyContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.msPyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addMsPyMenuItem,
             this.runQuickPayMenuItem,
@@ -7414,13 +7440,13 @@ namespace InternalPayments.Forms
             this.vwSQLMsPyMenuItem,
             this.rcHstryMsPyMenuItem});
             this.msPyContextMenuStrip.Name = "usersContextMenuStrip";
-            this.msPyContextMenuStrip.Size = new System.Drawing.Size(247, 330);
+            this.msPyContextMenuStrip.Size = new System.Drawing.Size(251, 386);
             // 
             // addMsPyMenuItem
             // 
             this.addMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addMsPyMenuItem.Name = "addMsPyMenuItem";
-            this.addMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.addMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.addMsPyMenuItem.Text = "Add Mass Pay";
             this.addMsPyMenuItem.Click += new System.EventHandler(this.addMsPyMenuItem_Click);
             // 
@@ -7428,7 +7454,7 @@ namespace InternalPayments.Forms
             // 
             this.runQuickPayMenuItem.Image = global::InternalPayments.Properties.Resources.images;
             this.runQuickPayMenuItem.Name = "runQuickPayMenuItem";
-            this.runQuickPayMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.runQuickPayMenuItem.Size = new System.Drawing.Size(250, 26);
             this.runQuickPayMenuItem.Text = "Run Quick Pay of Items";
             this.runQuickPayMenuItem.Click += new System.EventHandler(this.runQuickPayMenuItem_Click);
             // 
@@ -7436,7 +7462,7 @@ namespace InternalPayments.Forms
             // 
             this.editMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editMsPyMenuItem.Name = "editMsPyMenuItem";
-            this.editMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.editMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.editMsPyMenuItem.Text = "Edit Mass Pay";
             this.editMsPyMenuItem.Click += new System.EventHandler(this.editMsPyMenuItem_Click);
             // 
@@ -7444,20 +7470,20 @@ namespace InternalPayments.Forms
             // 
             this.delMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delMsPyMenuItem.Name = "delMsPyMenuItem";
-            this.delMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.delMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.delMsPyMenuItem.Text = "Delete Mass Pay";
             this.delMsPyMenuItem.Click += new System.EventHandler(this.delMsPyMenuItem_Click);
             // 
             // toolStripSeparator119
             // 
             this.toolStripSeparator119.Name = "toolStripSeparator119";
-            this.toolStripSeparator119.Size = new System.Drawing.Size(243, 6);
+            this.toolStripSeparator119.Size = new System.Drawing.Size(247, 6);
             // 
             // prntActPySlpMenuItem
             // 
             this.prntActPySlpMenuItem.Image = global::InternalPayments.Properties.Resources.print_64;
             this.prntActPySlpMenuItem.Name = "prntActPySlpMenuItem";
-            this.prntActPySlpMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.prntActPySlpMenuItem.Size = new System.Drawing.Size(250, 26);
             this.prntActPySlpMenuItem.Text = "Print Individual Run Results";
             this.prntActPySlpMenuItem.Visible = false;
             this.prntActPySlpMenuItem.Click += new System.EventHandler(this.prntActPySlpMenuItem_Click);
@@ -7466,7 +7492,7 @@ namespace InternalPayments.Forms
             // 
             this.jasperPaySlipMenuItem.Image = global::InternalPayments.Properties.Resources.pdf;
             this.jasperPaySlipMenuItem.Name = "jasperPaySlipMenuItem";
-            this.jasperPaySlipMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.jasperPaySlipMenuItem.Size = new System.Drawing.Size(250, 26);
             this.jasperPaySlipMenuItem.Text = "Customized Pay Slip";
             this.jasperPaySlipMenuItem.Click += new System.EventHandler(this.jasperPaySlipMenuItem_Click);
             // 
@@ -7474,20 +7500,20 @@ namespace InternalPayments.Forms
             // 
             this.prntPySlipMenuItem.Image = global::InternalPayments.Properties.Resources.print_64;
             this.prntPySlipMenuItem.Name = "prntPySlipMenuItem";
-            this.prntPySlipMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.prntPySlipMenuItem.Size = new System.Drawing.Size(250, 26);
             this.prntPySlipMenuItem.Text = "Preview Individual Run Results";
             this.prntPySlipMenuItem.Click += new System.EventHandler(this.prntPySlipMenuItem_Click);
             // 
             // toolStripSeparator108
             // 
             this.toolStripSeparator108.Name = "toolStripSeparator108";
-            this.toolStripSeparator108.Size = new System.Drawing.Size(243, 6);
+            this.toolStripSeparator108.Size = new System.Drawing.Size(247, 6);
             // 
             // payRunRsltsPDFMenuItem
             // 
             this.payRunRsltsPDFMenuItem.Image = global::InternalPayments.Properties.Resources.pdf;
             this.payRunRsltsPDFMenuItem.Name = "payRunRsltsPDFMenuItem";
-            this.payRunRsltsPDFMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.payRunRsltsPDFMenuItem.Size = new System.Drawing.Size(250, 26);
             this.payRunRsltsPDFMenuItem.Text = "Individual Bills or Pay Slip Report";
             this.payRunRsltsPDFMenuItem.Click += new System.EventHandler(this.payRunRsltsPDFMenuItem_Click);
             // 
@@ -7495,7 +7521,7 @@ namespace InternalPayments.Forms
             // 
             this.prntAdvcMenuItem.Image = global::InternalPayments.Properties.Resources.pdf;
             this.prntAdvcMenuItem.Name = "prntAdvcMenuItem";
-            this.prntAdvcMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.prntAdvcMenuItem.Size = new System.Drawing.Size(250, 26);
             this.prntAdvcMenuItem.Text = "Pay Run Summary Report";
             this.prntAdvcMenuItem.Click += new System.EventHandler(this.payRunSmmryPdfButton_Click);
             // 
@@ -7503,7 +7529,7 @@ namespace InternalPayments.Forms
             // 
             this.prntActAdvcMenuItem.Image = global::InternalPayments.Properties.Resources.pdf;
             this.prntActAdvcMenuItem.Name = "prntActAdvcMenuItem";
-            this.prntActAdvcMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.prntActAdvcMenuItem.Size = new System.Drawing.Size(250, 26);
             this.prntActAdvcMenuItem.Text = "Bank Advice Report";
             this.prntActAdvcMenuItem.Visible = false;
             this.prntActAdvcMenuItem.Click += new System.EventHandler(this.bankAdvicePdfButton_Click);
@@ -7511,13 +7537,13 @@ namespace InternalPayments.Forms
             // toolStripSeparator111
             // 
             this.toolStripSeparator111.Name = "toolStripSeparator111";
-            this.toolStripSeparator111.Size = new System.Drawing.Size(243, 6);
+            this.toolStripSeparator111.Size = new System.Drawing.Size(247, 6);
             // 
             // exptMsPyMenuItem
             // 
             this.exptMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptMsPyMenuItem.Name = "exptMsPyMenuItem";
-            this.exptMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.exptMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.exptMsPyMenuItem.Text = "Export to Excel";
             this.exptMsPyMenuItem.Click += new System.EventHandler(this.exptMsPyMenuItem_Click);
             // 
@@ -7525,7 +7551,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshMsPyMenuItem.Name = "rfrshMsPyMenuItem";
-            this.rfrshMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.rfrshMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.rfrshMsPyMenuItem.Text = "&Refresh";
             this.rfrshMsPyMenuItem.Click += new System.EventHandler(this.rfrshMsPyMenuItem_Click);
             // 
@@ -7533,7 +7559,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLMsPyMenuItem.Name = "vwSQLMsPyMenuItem";
-            this.vwSQLMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.vwSQLMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.vwSQLMsPyMenuItem.Text = "&View SQL";
             this.vwSQLMsPyMenuItem.Click += new System.EventHandler(this.vwSQLMsPyMenuItem_Click);
             // 
@@ -7541,7 +7567,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryMsPyMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryMsPyMenuItem.Name = "rcHstryMsPyMenuItem";
-            this.rcHstryMsPyMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.rcHstryMsPyMenuItem.Size = new System.Drawing.Size(250, 26);
             this.rcHstryMsPyMenuItem.Text = "Record History";
             this.rcHstryMsPyMenuItem.Click += new System.EventHandler(this.rcHstryMsPyMenuItem_Click);
             // 
@@ -7621,6 +7647,7 @@ namespace InternalPayments.Forms
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator11,
             this.vwSQLTrnsButton,
@@ -7673,7 +7700,7 @@ namespace InternalPayments.Forms
             this.vwSQLTrnsButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLTrnsButton.Name = "vwSQLTrnsButton";
-            this.vwSQLTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLTrnsButton.Text = "View SQL";
             this.vwSQLTrnsButton.Click += new System.EventHandler(this.vwSQLTrnsButton_Click);
             // 
@@ -7688,7 +7715,7 @@ namespace InternalPayments.Forms
             this.recHstryTrnsButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryTrnsButton.Name = "recHstryTrnsButton";
-            this.recHstryTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryTrnsButton.Text = "Record History";
             this.recHstryTrnsButton.Click += new System.EventHandler(this.recHstryTrnsButton_Click);
             // 
@@ -7702,7 +7729,7 @@ namespace InternalPayments.Forms
             this.goTrnsButton.Image = global::InternalPayments.Properties.Resources.refresh;
             this.goTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goTrnsButton.Name = "goTrnsButton";
-            this.goTrnsButton.Size = new System.Drawing.Size(66, 22);
+            this.goTrnsButton.Size = new System.Drawing.Size(70, 22);
             this.goTrnsButton.Text = "Refresh";
             this.goTrnsButton.Click += new System.EventHandler(this.goTrnsButton_Click);
             // 
@@ -7717,7 +7744,7 @@ namespace InternalPayments.Forms
             this.moveFirstTrnsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstTrnsButton.Name = "moveFirstTrnsButton";
-            this.moveFirstTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstTrnsButton.Text = "Move First";
             this.moveFirstTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -7732,7 +7759,7 @@ namespace InternalPayments.Forms
             this.movePreviousTrnsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousTrnsButton.Name = "movePreviousTrnsButton";
-            this.movePreviousTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousTrnsButton.Text = "Move Previous";
             this.movePreviousTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -7780,7 +7807,7 @@ namespace InternalPayments.Forms
             this.moveNextTrnsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextTrnsButton.Name = "moveNextTrnsButton";
-            this.moveNextTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextTrnsButton.Text = "Move Next";
             this.moveNextTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -7795,7 +7822,7 @@ namespace InternalPayments.Forms
             this.moveLastTrnsButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastTrnsButton.Name = "moveLastTrnsButton";
-            this.moveLastTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastTrnsButton.Text = "Move Last";
             this.moveLastTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -7886,7 +7913,7 @@ namespace InternalPayments.Forms
             this.resetTrnsSrchButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetTrnsSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetTrnsSrchButton.Name = "resetTrnsSrchButton";
-            this.resetTrnsSrchButton.Size = new System.Drawing.Size(59, 22);
+            this.resetTrnsSrchButton.Size = new System.Drawing.Size(63, 22);
             this.resetTrnsSrchButton.Text = "RESET";
             this.resetTrnsSrchButton.Click += new System.EventHandler(this.reetTrnsButton_Click);
             // 
@@ -8095,6 +8122,7 @@ namespace InternalPayments.Forms
             // 
             // pymntSrchContextMenuStrip
             // 
+            this.pymntSrchContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.pymntSrchContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator14,
             this.exptPySrchMenuItem,
@@ -8102,18 +8130,18 @@ namespace InternalPayments.Forms
             this.vwSQLPySrchMenuItem,
             this.rcHstryPySrchMenuItem});
             this.pymntSrchContextMenuStrip.Name = "pstPayContextMenuStrip";
-            this.pymntSrchContextMenuStrip.Size = new System.Drawing.Size(153, 98);
+            this.pymntSrchContextMenuStrip.Size = new System.Drawing.Size(157, 114);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(153, 6);
             // 
             // exptPySrchMenuItem
             // 
             this.exptPySrchMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptPySrchMenuItem.Name = "exptPySrchMenuItem";
-            this.exptPySrchMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptPySrchMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptPySrchMenuItem.Text = "Export to Excel";
             this.exptPySrchMenuItem.Click += new System.EventHandler(this.exptPySrchMenuItem_Click);
             // 
@@ -8121,7 +8149,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshPySrchMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshPySrchMenuItem.Name = "rfrshPySrchMenuItem";
-            this.rfrshPySrchMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshPySrchMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshPySrchMenuItem.Text = "Refresh";
             this.rfrshPySrchMenuItem.Click += new System.EventHandler(this.rfrshPySrchMenuItem_Click);
             // 
@@ -8129,7 +8157,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLPySrchMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPySrchMenuItem.Name = "vwSQLPySrchMenuItem";
-            this.vwSQLPySrchMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLPySrchMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLPySrchMenuItem.Text = "View SQL";
             this.vwSQLPySrchMenuItem.Click += new System.EventHandler(this.vwSQLPySrchMenuItem_Click);
             // 
@@ -8137,7 +8165,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryPySrchMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryPySrchMenuItem.Name = "rcHstryPySrchMenuItem";
-            this.rcHstryPySrchMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryPySrchMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryPySrchMenuItem.Text = "Record History";
             this.rcHstryPySrchMenuItem.Click += new System.EventHandler(this.rcHstryPySrchMenuItem_Click);
             // 
@@ -8217,6 +8245,7 @@ namespace InternalPayments.Forms
             // toolStrip10
             // 
             this.toolStrip10.AutoSize = false;
+            this.toolStrip10.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip10.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstInfcButton,
             this.toolStripSeparator76,
@@ -8263,7 +8292,7 @@ namespace InternalPayments.Forms
             this.moveFirstInfcButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstInfcButton.Name = "moveFirstInfcButton";
-            this.moveFirstInfcButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstInfcButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstInfcButton.Text = "Move First";
             this.moveFirstInfcButton.Click += new System.EventHandler(this.InfcPnlNavButtons);
             // 
@@ -8278,7 +8307,7 @@ namespace InternalPayments.Forms
             this.movePreviousInfcButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousInfcButton.Name = "movePreviousInfcButton";
-            this.movePreviousInfcButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousInfcButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousInfcButton.Text = "Move Previous";
             this.movePreviousInfcButton.Click += new System.EventHandler(this.InfcPnlNavButtons);
             // 
@@ -8326,7 +8355,7 @@ namespace InternalPayments.Forms
             this.moveNextInfcButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextInfcButton.Name = "moveNextInfcButton";
-            this.moveNextInfcButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextInfcButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextInfcButton.Text = "Move Next";
             this.moveNextInfcButton.Click += new System.EventHandler(this.InfcPnlNavButtons);
             // 
@@ -8341,7 +8370,7 @@ namespace InternalPayments.Forms
             this.moveLastInfcButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastInfcButton.Name = "moveLastInfcButton";
-            this.moveLastInfcButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastInfcButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastInfcButton.Text = "Move Last";
             this.moveLastInfcButton.Click += new System.EventHandler(this.InfcPnlNavButtons);
             // 
@@ -8431,7 +8460,7 @@ namespace InternalPayments.Forms
             this.goInfcButton.Image = global::InternalPayments.Properties.Resources.action_go;
             this.goInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goInfcButton.Name = "goInfcButton";
-            this.goInfcButton.Size = new System.Drawing.Size(42, 22);
+            this.goInfcButton.Size = new System.Drawing.Size(46, 22);
             this.goInfcButton.Text = "Go";
             this.goInfcButton.Click += new System.EventHandler(this.goInfcButton_Click);
             // 
@@ -8446,7 +8475,7 @@ namespace InternalPayments.Forms
             this.vwSQLInfcButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLInfcButton.Name = "vwSQLInfcButton";
-            this.vwSQLInfcButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLInfcButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLInfcButton.Text = "View SQL";
             this.vwSQLInfcButton.Click += new System.EventHandler(this.vwSQLInfcButton_Click);
             // 
@@ -8461,7 +8490,7 @@ namespace InternalPayments.Forms
             this.recHstryInfcButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryInfcButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryInfcButton.Name = "recHstryInfcButton";
-            this.recHstryInfcButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryInfcButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryInfcButton.Text = "Record History";
             this.recHstryInfcButton.Click += new System.EventHandler(this.recHstryInfcButton_Click);
             // 
@@ -8475,7 +8504,7 @@ namespace InternalPayments.Forms
             this.resetTrnsButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetTrnsButton.Name = "resetTrnsButton";
-            this.resetTrnsButton.Size = new System.Drawing.Size(59, 22);
+            this.resetTrnsButton.Size = new System.Drawing.Size(63, 22);
             this.resetTrnsButton.Text = "RESET";
             this.resetTrnsButton.Click += new System.EventHandler(this.resetTrnsButton_Click);
             // 
@@ -8889,6 +8918,7 @@ namespace InternalPayments.Forms
             // 
             // glIntfcContextMenuStrip
             // 
+            this.glIntfcContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.glIntfcContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator110,
             this.exptGlIntfcMenuItem,
@@ -8896,18 +8926,18 @@ namespace InternalPayments.Forms
             this.vwSQLIntFcMenuItem,
             this.rcHstryGlIntfcMenuItem});
             this.glIntfcContextMenuStrip.Name = "pstPayContextMenuStrip";
-            this.glIntfcContextMenuStrip.Size = new System.Drawing.Size(153, 98);
+            this.glIntfcContextMenuStrip.Size = new System.Drawing.Size(157, 114);
             // 
             // toolStripSeparator110
             // 
             this.toolStripSeparator110.Name = "toolStripSeparator110";
-            this.toolStripSeparator110.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator110.Size = new System.Drawing.Size(153, 6);
             // 
             // exptGlIntfcMenuItem
             // 
             this.exptGlIntfcMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptGlIntfcMenuItem.Name = "exptGlIntfcMenuItem";
-            this.exptGlIntfcMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptGlIntfcMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptGlIntfcMenuItem.Text = "Export to Excel";
             this.exptGlIntfcMenuItem.Click += new System.EventHandler(this.exptGlIntfcMenuItem_Click);
             // 
@@ -8915,7 +8945,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshGlIntFcMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshGlIntFcMenuItem.Name = "rfrshGlIntFcMenuItem";
-            this.rfrshGlIntFcMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshGlIntFcMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshGlIntFcMenuItem.Text = "Refresh";
             this.rfrshGlIntFcMenuItem.Click += new System.EventHandler(this.rfrshGlIntFcMenuItem_Click);
             // 
@@ -8923,7 +8953,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLIntFcMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLIntFcMenuItem.Name = "vwSQLIntFcMenuItem";
-            this.vwSQLIntFcMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLIntFcMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLIntFcMenuItem.Text = "View SQL";
             this.vwSQLIntFcMenuItem.Click += new System.EventHandler(this.vwSQLIntFcMenuItem_Click);
             // 
@@ -8931,7 +8961,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryGlIntfcMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryGlIntfcMenuItem.Name = "rcHstryGlIntfcMenuItem";
-            this.rcHstryGlIntfcMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryGlIntfcMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryGlIntfcMenuItem.Text = "Record History";
             this.rcHstryGlIntfcMenuItem.Click += new System.EventHandler(this.rcHstryGlIntfcMenuItem_Click);
             // 
@@ -9041,6 +9071,7 @@ namespace InternalPayments.Forms
             // 
             // pyItmsContextMenuStrip
             // 
+            this.pyItmsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.pyItmsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.editItmMenuItem,
@@ -9051,13 +9082,13 @@ namespace InternalPayments.Forms
             this.rcHstryItmMenuItem,
             this.vwSQLItmMenuItem});
             this.pyItmsContextMenuStrip.Name = "contextMenuStrip1";
-            this.pyItmsContextMenuStrip.Size = new System.Drawing.Size(157, 164);
+            this.pyItmsContextMenuStrip.Size = new System.Drawing.Size(161, 192);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(160, 26);
             this.toolStripMenuItem1.Text = "Add Pay Item";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.addItmMenuItem_Click);
             // 
@@ -9065,7 +9096,7 @@ namespace InternalPayments.Forms
             // 
             this.editItmMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editItmMenuItem.Name = "editItmMenuItem";
-            this.editItmMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.editItmMenuItem.Size = new System.Drawing.Size(160, 26);
             this.editItmMenuItem.Text = "Edit Pay Item";
             this.editItmMenuItem.Click += new System.EventHandler(this.editItmMenuItem_Click);
             // 
@@ -9073,20 +9104,20 @@ namespace InternalPayments.Forms
             // 
             this.delItmMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delItmMenuItem.Name = "delItmMenuItem";
-            this.delItmMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.delItmMenuItem.Size = new System.Drawing.Size(160, 26);
             this.delItmMenuItem.Text = "Delete Pay Item";
             this.delItmMenuItem.Click += new System.EventHandler(this.delItmMenuItem_Click);
             // 
             // toolStripSeparator179
             // 
             this.toolStripSeparator179.Name = "toolStripSeparator179";
-            this.toolStripSeparator179.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator179.Size = new System.Drawing.Size(157, 6);
             // 
             // exptItmMenuItem
             // 
             this.exptItmMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptItmMenuItem.Name = "exptItmMenuItem";
-            this.exptItmMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.exptItmMenuItem.Size = new System.Drawing.Size(160, 26);
             this.exptItmMenuItem.Text = "Export to Excel";
             this.exptItmMenuItem.Click += new System.EventHandler(this.exptItmMenuItem_Click);
             // 
@@ -9094,7 +9125,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshItmMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshItmMenuItem.Name = "rfrshItmMenuItem";
-            this.rfrshItmMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.rfrshItmMenuItem.Size = new System.Drawing.Size(160, 26);
             this.rfrshItmMenuItem.Text = "&Refresh";
             this.rfrshItmMenuItem.Click += new System.EventHandler(this.rfrshItmMenuItem_Click);
             // 
@@ -9102,7 +9133,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryItmMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryItmMenuItem.Name = "rcHstryItmMenuItem";
-            this.rcHstryItmMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.rcHstryItmMenuItem.Size = new System.Drawing.Size(160, 26);
             this.rcHstryItmMenuItem.Text = "Record &History";
             this.rcHstryItmMenuItem.Click += new System.EventHandler(this.rcHstryItmMenuItem_Click);
             // 
@@ -9110,7 +9141,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLItmMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLItmMenuItem.Name = "vwSQLItmMenuItem";
-            this.vwSQLItmMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.vwSQLItmMenuItem.Size = new System.Drawing.Size(160, 26);
             this.vwSQLItmMenuItem.Text = "&View SQL";
             this.vwSQLItmMenuItem.Click += new System.EventHandler(this.vwSQLItmMenuItem_Click);
             // 
@@ -9673,6 +9704,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip13.AutoSize = false;
             this.toolStrip13.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip13.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip13.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addFeedButton,
             this.editFeedButton,
@@ -9690,7 +9722,7 @@ namespace InternalPayments.Forms
             this.addFeedButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addFeedButton.Name = "addFeedButton";
-            this.addFeedButton.Size = new System.Drawing.Size(51, 22);
+            this.addFeedButton.Size = new System.Drawing.Size(55, 22);
             this.addFeedButton.Text = "ADD";
             this.addFeedButton.Click += new System.EventHandler(this.addFeedButton_Click);
             // 
@@ -9700,7 +9732,7 @@ namespace InternalPayments.Forms
             this.editFeedButton.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editFeedButton.Name = "editFeedButton";
-            this.editFeedButton.Size = new System.Drawing.Size(51, 22);
+            this.editFeedButton.Size = new System.Drawing.Size(55, 22);
             this.editFeedButton.Text = "EDIT";
             this.editFeedButton.Click += new System.EventHandler(this.editFeedButton_Click);
             // 
@@ -9710,7 +9742,7 @@ namespace InternalPayments.Forms
             this.deleteFeedButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.deleteFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteFeedButton.Name = "deleteFeedButton";
-            this.deleteFeedButton.Size = new System.Drawing.Size(66, 22);
+            this.deleteFeedButton.Size = new System.Drawing.Size(70, 22);
             this.deleteFeedButton.Text = "DELETE";
             this.deleteFeedButton.Click += new System.EventHandler(this.deleteFeedButton_Click);
             // 
@@ -9719,6 +9751,7 @@ namespace InternalPayments.Forms
             this.toolStrip14.AutoSize = false;
             this.toolStrip14.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip14.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip14.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstFeedButton,
             this.toolStripSeparator73,
@@ -9750,7 +9783,7 @@ namespace InternalPayments.Forms
             this.moveFirstFeedButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstFeedButton.Name = "moveFirstFeedButton";
-            this.moveFirstFeedButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstFeedButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstFeedButton.Text = "Move First";
             this.moveFirstFeedButton.Click += new System.EventHandler(this.FeedPnlNavButtons);
             // 
@@ -9766,7 +9799,7 @@ namespace InternalPayments.Forms
             this.movePreviousFeedButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousFeedButton.Name = "movePreviousFeedButton";
-            this.movePreviousFeedButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousFeedButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousFeedButton.Text = "Move Previous";
             this.movePreviousFeedButton.Click += new System.EventHandler(this.FeedPnlNavButtons);
             // 
@@ -9818,7 +9851,7 @@ namespace InternalPayments.Forms
             this.moveNextFeedButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextFeedButton.Name = "moveNextFeedButton";
-            this.moveNextFeedButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextFeedButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextFeedButton.Text = "Move Next";
             this.moveNextFeedButton.Click += new System.EventHandler(this.FeedPnlNavButtons);
             // 
@@ -9834,7 +9867,7 @@ namespace InternalPayments.Forms
             this.moveLastFeedButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastFeedButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastFeedButton.Name = "moveLastFeedButton";
-            this.moveLastFeedButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastFeedButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastFeedButton.Text = "Move Last";
             this.moveLastFeedButton.Click += new System.EventHandler(this.FeedPnlNavButtons);
             // 
@@ -9918,6 +9951,7 @@ namespace InternalPayments.Forms
             // 
             // feedItmsContextMenuStrip
             // 
+            this.feedItmsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.feedItmsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addFeedMenuItem,
             this.editFeedMenuItem,
@@ -9928,13 +9962,13 @@ namespace InternalPayments.Forms
             this.rcHstryFeedItmsMenuItem,
             this.vwSQLFeedItmsMenuItem});
             this.feedItmsContextMenuStrip.Name = "contextMenuStrip1";
-            this.feedItmsContextMenuStrip.Size = new System.Drawing.Size(153, 164);
+            this.feedItmsContextMenuStrip.Size = new System.Drawing.Size(157, 192);
             // 
             // addFeedMenuItem
             // 
             this.addFeedMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addFeedMenuItem.Name = "addFeedMenuItem";
-            this.addFeedMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addFeedMenuItem.Size = new System.Drawing.Size(156, 26);
             this.addFeedMenuItem.Text = "Add Item";
             this.addFeedMenuItem.Click += new System.EventHandler(this.addFeedMenuItem_Click);
             // 
@@ -9942,7 +9976,7 @@ namespace InternalPayments.Forms
             // 
             this.editFeedMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editFeedMenuItem.Name = "editFeedMenuItem";
-            this.editFeedMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editFeedMenuItem.Size = new System.Drawing.Size(156, 26);
             this.editFeedMenuItem.Text = "Edit Item";
             this.editFeedMenuItem.Click += new System.EventHandler(this.editFeedMenuItem_Click);
             // 
@@ -9950,20 +9984,20 @@ namespace InternalPayments.Forms
             // 
             this.delFeedMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delFeedMenuItem.Name = "delFeedMenuItem";
-            this.delFeedMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delFeedMenuItem.Size = new System.Drawing.Size(156, 26);
             this.delFeedMenuItem.Text = "Delete Item";
             this.delFeedMenuItem.Click += new System.EventHandler(this.delFeedMenuItem_Click);
             // 
             // toolStripSeparator145
             // 
             this.toolStripSeparator145.Name = "toolStripSeparator145";
-            this.toolStripSeparator145.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator145.Size = new System.Drawing.Size(153, 6);
             // 
             // exprtFeedItmsMenuItem
             // 
             this.exprtFeedItmsMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exprtFeedItmsMenuItem.Name = "exprtFeedItmsMenuItem";
-            this.exprtFeedItmsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exprtFeedItmsMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exprtFeedItmsMenuItem.Text = "Export to Excel";
             this.exprtFeedItmsMenuItem.Click += new System.EventHandler(this.exprtFeedItmsMenuItem_Click);
             // 
@@ -9971,7 +10005,7 @@ namespace InternalPayments.Forms
             // 
             this.rfrshFeedItmMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.rfrshFeedItmMenuItem.Name = "rfrshFeedItmMenuItem";
-            this.rfrshFeedItmMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshFeedItmMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshFeedItmMenuItem.Text = "&Refresh";
             this.rfrshFeedItmMenuItem.Click += new System.EventHandler(this.rfrshFeedItmMenuItem_Click);
             // 
@@ -9979,7 +10013,7 @@ namespace InternalPayments.Forms
             // 
             this.rcHstryFeedItmsMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryFeedItmsMenuItem.Name = "rcHstryFeedItmsMenuItem";
-            this.rcHstryFeedItmsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryFeedItmsMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryFeedItmsMenuItem.Text = "Record &History";
             this.rcHstryFeedItmsMenuItem.Click += new System.EventHandler(this.rcHstryFeedItmsMenuItem_Click);
             // 
@@ -9987,7 +10021,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLFeedItmsMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLFeedItmsMenuItem.Name = "vwSQLFeedItmsMenuItem";
-            this.vwSQLFeedItmsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLFeedItmsMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLFeedItmsMenuItem.Text = "&View SQL";
             this.vwSQLFeedItmsMenuItem.Click += new System.EventHandler(this.vwSQLFeedItmsMenuItem_Click);
             // 
@@ -10109,24 +10143,24 @@ namespace InternalPayments.Forms
             this.dataGridViewTextBoxColumn26,
             this.Column13});
             this.itmPssblValDataGridView.ContextMenuStrip = this.valsContextMenuStrip;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itmPssblValDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itmPssblValDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.itmPssblValDataGridView.Location = new System.Drawing.Point(2, 63);
             this.itmPssblValDataGridView.MinimumSize = new System.Drawing.Size(365, 435);
             this.itmPssblValDataGridView.Name = "itmPssblValDataGridView";
             this.itmPssblValDataGridView.ReadOnly = true;
             this.itmPssblValDataGridView.RowHeadersWidth = 20;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itmPssblValDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle13;
-            this.itmPssblValDataGridView.Size = new System.Drawing.Size(365, 435);
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itmPssblValDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.itmPssblValDataGridView.Size = new System.Drawing.Size(365, 463);
             this.itmPssblValDataGridView.TabIndex = 5;
             this.itmPssblValDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itmPssblValDataGridView_KeyDown);
             // 
@@ -10141,10 +10175,10 @@ namespace InternalPayments.Forms
             // 
             // Column11
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column11.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column11.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column11.FillWeight = 150F;
             this.Column11.HeaderText = "Item Possible Value Amount / SQL Formula";
             this.Column11.MinimumWidth = 60;
@@ -10173,6 +10207,7 @@ namespace InternalPayments.Forms
             // 
             // valsContextMenuStrip
             // 
+            this.valsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.valsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addValMenuItem,
             this.editValMenuItem,
@@ -10184,13 +10219,13 @@ namespace InternalPayments.Forms
             this.recHstryPValsMenuItem,
             this.vwSQLPValsMenuItem});
             this.valsContextMenuStrip.Name = "contextMenuStrip1";
-            this.valsContextMenuStrip.Size = new System.Drawing.Size(182, 186);
+            this.valsContextMenuStrip.Size = new System.Drawing.Size(186, 218);
             // 
             // addValMenuItem
             // 
             this.addValMenuItem.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addValMenuItem.Name = "addValMenuItem";
-            this.addValMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addValMenuItem.Size = new System.Drawing.Size(185, 26);
             this.addValMenuItem.Text = "Add Value";
             this.addValMenuItem.Click += new System.EventHandler(this.addValMenuItem_Click);
             // 
@@ -10198,7 +10233,7 @@ namespace InternalPayments.Forms
             // 
             this.editValMenuItem.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editValMenuItem.Name = "editValMenuItem";
-            this.editValMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.editValMenuItem.Size = new System.Drawing.Size(185, 26);
             this.editValMenuItem.Text = "Edit Value";
             this.editValMenuItem.Click += new System.EventHandler(this.editValMenuItem_Click);
             // 
@@ -10206,14 +10241,14 @@ namespace InternalPayments.Forms
             // 
             this.delValMenuItem.Image = global::InternalPayments.Properties.Resources.delete;
             this.delValMenuItem.Name = "delValMenuItem";
-            this.delValMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.delValMenuItem.Size = new System.Drawing.Size(185, 26);
             this.delValMenuItem.Text = "Delete Value";
             this.delValMenuItem.Click += new System.EventHandler(this.delValMenuItem_Click);
             // 
             // toolStripSeparator176
             // 
             this.toolStripSeparator176.Name = "toolStripSeparator176";
-            this.toolStripSeparator176.Size = new System.Drawing.Size(178, 6);
+            this.toolStripSeparator176.Size = new System.Drawing.Size(182, 6);
             // 
             // itemTmpMenuItem
             // 
@@ -10222,7 +10257,7 @@ namespace InternalPayments.Forms
             this.imptValExclTmpltMenuItem});
             this.itemTmpMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.itemTmpMenuItem.Name = "itemTmpMenuItem";
-            this.itemTmpMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.itemTmpMenuItem.Size = new System.Drawing.Size(185, 26);
             this.itemTmpMenuItem.Text = "Pay Value Templates";
             // 
             // exptValExclTmpMenuItem
@@ -10245,7 +10280,7 @@ namespace InternalPayments.Forms
             // 
             this.exptExclPValsMenuItem.Image = global::InternalPayments.Properties.Resources.image007;
             this.exptExclPValsMenuItem.Name = "exptExclPValsMenuItem";
-            this.exptExclPValsMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.exptExclPValsMenuItem.Size = new System.Drawing.Size(185, 26);
             this.exptExclPValsMenuItem.Text = "Export to Excel";
             this.exptExclPValsMenuItem.Click += new System.EventHandler(this.exptExclPValsMenuItem_Click);
             // 
@@ -10253,7 +10288,7 @@ namespace InternalPayments.Forms
             // 
             this.refreshPValsMenuItem.Image = global::InternalPayments.Properties.Resources.refresh;
             this.refreshPValsMenuItem.Name = "refreshPValsMenuItem";
-            this.refreshPValsMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.refreshPValsMenuItem.Size = new System.Drawing.Size(185, 26);
             this.refreshPValsMenuItem.Text = "&Refresh";
             this.refreshPValsMenuItem.Click += new System.EventHandler(this.refreshPValsMenuItem_Click);
             // 
@@ -10261,7 +10296,7 @@ namespace InternalPayments.Forms
             // 
             this.recHstryPValsMenuItem.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryPValsMenuItem.Name = "recHstryPValsMenuItem";
-            this.recHstryPValsMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.recHstryPValsMenuItem.Size = new System.Drawing.Size(185, 26);
             this.recHstryPValsMenuItem.Text = "Record &History";
             this.recHstryPValsMenuItem.Click += new System.EventHandler(this.recHstryPValsMenuItem_Click);
             // 
@@ -10269,7 +10304,7 @@ namespace InternalPayments.Forms
             // 
             this.vwSQLPValsMenuItem.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPValsMenuItem.Name = "vwSQLPValsMenuItem";
-            this.vwSQLPValsMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.vwSQLPValsMenuItem.Size = new System.Drawing.Size(185, 26);
             this.vwSQLPValsMenuItem.Text = "&View SQL";
             this.vwSQLPValsMenuItem.Click += new System.EventHandler(this.vwSQLPValsMenuItem_Click);
             // 
@@ -10277,6 +10312,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip15.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip15.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip15.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip15.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstPsblButton,
             this.toolStripSeparator124,
@@ -10295,7 +10331,7 @@ namespace InternalPayments.Forms
             this.toolStrip15.Location = new System.Drawing.Point(5, 5);
             this.toolStrip15.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip15.Name = "toolStrip15";
-            this.toolStrip15.Size = new System.Drawing.Size(330, 25);
+            this.toolStrip15.Size = new System.Drawing.Size(334, 27);
             this.toolStrip15.Stretch = true;
             this.toolStrip15.TabIndex = 0;
             this.toolStrip15.TabStop = true;
@@ -10307,14 +10343,14 @@ namespace InternalPayments.Forms
             this.moveFirstPsblButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPsblButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPsblButton.Name = "moveFirstPsblButton";
-            this.moveFirstPsblButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPsblButton.Size = new System.Drawing.Size(24, 24);
             this.moveFirstPsblButton.Text = "Move First";
             this.moveFirstPsblButton.Click += new System.EventHandler(this.PyItmPnlNavButtons);
             // 
             // toolStripSeparator124
             // 
             this.toolStripSeparator124.Name = "toolStripSeparator124";
-            this.toolStripSeparator124.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator124.Size = new System.Drawing.Size(6, 27);
             // 
             // movePreviousPsblButton
             // 
@@ -10322,21 +10358,21 @@ namespace InternalPayments.Forms
             this.movePreviousPsblButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPsblButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPsblButton.Name = "movePreviousPsblButton";
-            this.movePreviousPsblButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPsblButton.Size = new System.Drawing.Size(24, 24);
             this.movePreviousPsblButton.Text = "Move Previous";
             this.movePreviousPsblButton.Click += new System.EventHandler(this.PyItmPnlNavButtons);
             // 
             // toolStripSeparator125
             // 
             this.toolStripSeparator125.Name = "toolStripSeparator125";
-            this.toolStripSeparator125.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator125.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel19
             // 
             this.toolStripLabel19.AutoToolTip = true;
             this.toolStripLabel19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel19.Name = "toolStripLabel19";
-            this.toolStripLabel19.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel19.Size = new System.Drawing.Size(47, 24);
             this.toolStripLabel19.Text = "Record";
             // 
             // positionPsblTextBox
@@ -10364,7 +10400,7 @@ namespace InternalPayments.Forms
             // toolStripSeparator126
             // 
             this.toolStripSeparator126.Name = "toolStripSeparator126";
-            this.toolStripSeparator126.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator126.Size = new System.Drawing.Size(6, 27);
             // 
             // moveNextPsblButton
             // 
@@ -10372,14 +10408,14 @@ namespace InternalPayments.Forms
             this.moveNextPsblButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPsblButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPsblButton.Name = "moveNextPsblButton";
-            this.moveNextPsblButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPsblButton.Size = new System.Drawing.Size(24, 24);
             this.moveNextPsblButton.Text = "Move Next";
             this.moveNextPsblButton.Click += new System.EventHandler(this.PyItmPnlNavButtons);
             // 
             // toolStripSeparator127
             // 
             this.toolStripSeparator127.Name = "toolStripSeparator127";
-            this.toolStripSeparator127.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator127.Size = new System.Drawing.Size(6, 27);
             // 
             // moveLastPsblButton
             // 
@@ -10387,14 +10423,14 @@ namespace InternalPayments.Forms
             this.moveLastPsblButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPsblButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPsblButton.Name = "moveLastPsblButton";
-            this.moveLastPsblButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPsblButton.Size = new System.Drawing.Size(24, 24);
             this.moveLastPsblButton.Text = "Move Last";
             this.moveLastPsblButton.Click += new System.EventHandler(this.PyItmPnlNavButtons);
             // 
             // toolStripSeparator183
             // 
             this.toolStripSeparator183.Name = "toolStripSeparator183";
-            this.toolStripSeparator183.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator183.Size = new System.Drawing.Size(6, 27);
             // 
             // dsplySizePsblComboBox
             // 
@@ -10494,6 +10530,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip16.AutoSize = false;
             this.toolStrip16.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip16.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip16.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItmButton,
             this.toolStripSeparator128,
@@ -10545,7 +10582,7 @@ namespace InternalPayments.Forms
             this.addItmButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addItmButton.Name = "addItmButton";
-            this.addItmButton.Size = new System.Drawing.Size(51, 22);
+            this.addItmButton.Size = new System.Drawing.Size(55, 22);
             this.addItmButton.Text = "ADD";
             this.addItmButton.Click += new System.EventHandler(this.addItmButton_Click);
             // 
@@ -10559,7 +10596,7 @@ namespace InternalPayments.Forms
             this.editItmButton.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editItmButton.Name = "editItmButton";
-            this.editItmButton.Size = new System.Drawing.Size(51, 22);
+            this.editItmButton.Size = new System.Drawing.Size(55, 22);
             this.editItmButton.Text = "EDIT";
             this.editItmButton.Click += new System.EventHandler(this.editItmButton_Click);
             // 
@@ -10573,7 +10610,7 @@ namespace InternalPayments.Forms
             this.saveItmButton.Image = global::InternalPayments.Properties.Resources.FloppyDisk;
             this.saveItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveItmButton.Name = "saveItmButton";
-            this.saveItmButton.Size = new System.Drawing.Size(53, 22);
+            this.saveItmButton.Size = new System.Drawing.Size(57, 22);
             this.saveItmButton.Text = "SAVE";
             this.saveItmButton.Click += new System.EventHandler(this.saveItmButton_Click);
             // 
@@ -10588,7 +10625,7 @@ namespace InternalPayments.Forms
             this.delItmButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.delItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delItmButton.Name = "delItmButton";
-            this.delItmButton.Size = new System.Drawing.Size(23, 22);
+            this.delItmButton.Size = new System.Drawing.Size(24, 22);
             this.delItmButton.Text = "DELETE";
             this.delItmButton.Click += new System.EventHandler(this.delItmButton_Click);
             // 
@@ -10603,7 +10640,7 @@ namespace InternalPayments.Forms
             this.goItmButton.Image = global::InternalPayments.Properties.Resources.refresh;
             this.goItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goItmButton.Name = "goItmButton";
-            this.goItmButton.Size = new System.Drawing.Size(23, 22);
+            this.goItmButton.Size = new System.Drawing.Size(24, 22);
             this.goItmButton.Text = "Refresh";
             this.goItmButton.Click += new System.EventHandler(this.goItmButton_Click);
             // 
@@ -10618,7 +10655,7 @@ namespace InternalPayments.Forms
             this.recHstryItmButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.recHstryItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryItmButton.Name = "recHstryItmButton";
-            this.recHstryItmButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryItmButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryItmButton.Text = "Record History";
             this.recHstryItmButton.Click += new System.EventHandler(this.recHstryItmButton_Click);
             // 
@@ -10633,7 +10670,7 @@ namespace InternalPayments.Forms
             this.vwSQLItmButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLItmButton.Name = "vwSQLItmButton";
-            this.vwSQLItmButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLItmButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLItmButton.Text = "View SQL";
             this.vwSQLItmButton.Click += new System.EventHandler(this.vwSQLItmButton_Click);
             // 
@@ -10648,7 +10685,7 @@ namespace InternalPayments.Forms
             this.moveFirstItmButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstItmButton.Name = "moveFirstItmButton";
-            this.moveFirstItmButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstItmButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstItmButton.Text = "Move First";
             this.moveFirstItmButton.Click += new System.EventHandler(this.ItmPnlNavButtons);
             // 
@@ -10663,7 +10700,7 @@ namespace InternalPayments.Forms
             this.movePreviousItmButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousItmButton.Name = "movePreviousItmButton";
-            this.movePreviousItmButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousItmButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousItmButton.Text = "Move Previous";
             this.movePreviousItmButton.Click += new System.EventHandler(this.ItmPnlNavButtons);
             // 
@@ -10711,7 +10748,7 @@ namespace InternalPayments.Forms
             this.moveNextItmButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextItmButton.Name = "moveNextItmButton";
-            this.moveNextItmButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextItmButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextItmButton.Text = "Move Next";
             this.moveNextItmButton.Click += new System.EventHandler(this.ItmPnlNavButtons);
             // 
@@ -10726,7 +10763,7 @@ namespace InternalPayments.Forms
             this.moveLastItmButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastItmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastItmButton.Name = "moveLastItmButton";
-            this.moveLastItmButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastItmButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastItmButton.Text = "Move Last";
             this.moveLastItmButton.Click += new System.EventHandler(this.ItmPnlNavButtons);
             // 
@@ -10805,7 +10842,7 @@ namespace InternalPayments.Forms
             this.resetPayItemsButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetPayItemsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetPayItemsButton.Name = "resetPayItemsButton";
-            this.resetPayItemsButton.Size = new System.Drawing.Size(59, 22);
+            this.resetPayItemsButton.Size = new System.Drawing.Size(63, 22);
             this.resetPayItemsButton.Text = "RESET";
             this.resetPayItemsButton.Click += new System.EventHandler(this.resetPayItemsButton_Click);
             // 
@@ -11071,6 +11108,7 @@ namespace InternalPayments.Forms
             this.toolStrip20.AutoSize = false;
             this.toolStrip20.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip20.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip20.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addGBVDTButton,
             this.delGBVDTButton,
@@ -11108,7 +11146,7 @@ namespace InternalPayments.Forms
             this.addGBVDTButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addGBVDTButton.Name = "addGBVDTButton";
-            this.addGBVDTButton.Size = new System.Drawing.Size(51, 28);
+            this.addGBVDTButton.Size = new System.Drawing.Size(55, 28);
             this.addGBVDTButton.Text = "ADD";
             this.addGBVDTButton.Click += new System.EventHandler(this.addGBVDTButton_Click);
             // 
@@ -11118,7 +11156,7 @@ namespace InternalPayments.Forms
             this.delGBVDTButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.delGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delGBVDTButton.Name = "delGBVDTButton";
-            this.delGBVDTButton.Size = new System.Drawing.Size(66, 28);
+            this.delGBVDTButton.Size = new System.Drawing.Size(70, 28);
             this.delGBVDTButton.Text = "DELETE";
             this.delGBVDTButton.Click += new System.EventHandler(this.delGBVDTButton_Click);
             // 
@@ -11128,7 +11166,7 @@ namespace InternalPayments.Forms
             this.refreshGBVDTButton.Image = global::InternalPayments.Properties.Resources.refresh;
             this.refreshGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshGBVDTButton.Name = "refreshGBVDTButton";
-            this.refreshGBVDTButton.Size = new System.Drawing.Size(23, 28);
+            this.refreshGBVDTButton.Size = new System.Drawing.Size(24, 28);
             this.refreshGBVDTButton.Text = "Refresh";
             this.refreshGBVDTButton.Click += new System.EventHandler(this.refreshGBVDTButton_Click);
             // 
@@ -11138,7 +11176,7 @@ namespace InternalPayments.Forms
             this.rcHstryDTButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstryDTButton.Name = "rcHstryDTButton";
-            this.rcHstryDTButton.Size = new System.Drawing.Size(23, 28);
+            this.rcHstryDTButton.Size = new System.Drawing.Size(24, 28);
             this.rcHstryDTButton.Text = "Record History";
             this.rcHstryDTButton.Click += new System.EventHandler(this.rcHstryGBVDTButton_Click);
             // 
@@ -11148,7 +11186,7 @@ namespace InternalPayments.Forms
             this.vwSQLDTButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLDTButton.Name = "vwSQLDTButton";
-            this.vwSQLDTButton.Size = new System.Drawing.Size(23, 28);
+            this.vwSQLDTButton.Size = new System.Drawing.Size(24, 28);
             this.vwSQLDTButton.Text = "View SQL";
             this.vwSQLDTButton.Click += new System.EventHandler(this.vwSQLGBVDTButton_Click);
             // 
@@ -11158,7 +11196,7 @@ namespace InternalPayments.Forms
             this.moveFirstGBVDTButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstGBVDTButton.Name = "moveFirstGBVDTButton";
-            this.moveFirstGBVDTButton.Size = new System.Drawing.Size(23, 28);
+            this.moveFirstGBVDTButton.Size = new System.Drawing.Size(24, 28);
             this.moveFirstGBVDTButton.Text = "Move First";
             this.moveFirstGBVDTButton.Click += new System.EventHandler(this.GBVDTPnlNavButtons);
             // 
@@ -11173,7 +11211,7 @@ namespace InternalPayments.Forms
             this.movePreviousGBVDTButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousGBVDTButton.Name = "movePreviousGBVDTButton";
-            this.movePreviousGBVDTButton.Size = new System.Drawing.Size(23, 28);
+            this.movePreviousGBVDTButton.Size = new System.Drawing.Size(24, 28);
             this.movePreviousGBVDTButton.Text = "Move Previous";
             this.movePreviousGBVDTButton.Click += new System.EventHandler(this.GBVDTPnlNavButtons);
             // 
@@ -11221,7 +11259,7 @@ namespace InternalPayments.Forms
             this.moveNextGBVDTButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextGBVDTButton.Name = "moveNextGBVDTButton";
-            this.moveNextGBVDTButton.Size = new System.Drawing.Size(23, 28);
+            this.moveNextGBVDTButton.Size = new System.Drawing.Size(24, 28);
             this.moveNextGBVDTButton.Text = "Move Next";
             this.moveNextGBVDTButton.Click += new System.EventHandler(this.GBVDTPnlNavButtons);
             // 
@@ -11236,7 +11274,7 @@ namespace InternalPayments.Forms
             this.moveLastGBVDTButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastGBVDTButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastGBVDTButton.Name = "moveLastGBVDTButton";
-            this.moveLastGBVDTButton.Size = new System.Drawing.Size(23, 28);
+            this.moveLastGBVDTButton.Size = new System.Drawing.Size(24, 28);
             this.moveLastGBVDTButton.Text = "Move Last";
             this.moveLastGBVDTButton.Click += new System.EventHandler(this.GBVDTPnlNavButtons);
             // 
@@ -11267,7 +11305,7 @@ namespace InternalPayments.Forms
             this.exportGBVButton.Image = global::InternalPayments.Properties.Resources.image007;
             this.exportGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exportGBVButton.Name = "exportGBVButton";
-            this.exportGBVButton.Size = new System.Drawing.Size(112, 28);
+            this.exportGBVButton.Size = new System.Drawing.Size(116, 28);
             this.exportGBVButton.Text = "EXPORT VALUES";
             this.exportGBVButton.Click += new System.EventHandler(this.exportGBVButton_Click);
             // 
@@ -11276,7 +11314,7 @@ namespace InternalPayments.Forms
             this.importGBVButton.Image = global::InternalPayments.Properties.Resources.image007;
             this.importGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.importGBVButton.Name = "importGBVButton";
-            this.importGBVButton.Size = new System.Drawing.Size(113, 28);
+            this.importGBVButton.Size = new System.Drawing.Size(117, 28);
             this.importGBVButton.Text = "IMPORT VALUES";
             this.importGBVButton.Click += new System.EventHandler(this.importGBVButton_Click);
             // 
@@ -11303,25 +11341,25 @@ namespace InternalPayments.Forms
             this.Column6,
             this.dataGridViewTextBoxColumn4});
             this.gbvDataGridView.ContextMenuStrip = this.valsContextMenuStrip;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gbvDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gbvDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
             this.gbvDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gbvDataGridView.Location = new System.Drawing.Point(3, 99);
             this.gbvDataGridView.MinimumSize = new System.Drawing.Size(286, 96);
             this.gbvDataGridView.Name = "gbvDataGridView";
             this.gbvDataGridView.ReadOnly = true;
             this.gbvDataGridView.RowHeadersWidth = 20;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gbvDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.gbvDataGridView.Size = new System.Drawing.Size(820, 403);
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gbvDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.gbvDataGridView.Size = new System.Drawing.Size(799, 425);
             this.gbvDataGridView.TabIndex = 5;
             this.gbvDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gbvDataGridView_CellContentClick);
             this.gbvDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gbvDataGridView_CellValueChanged);
@@ -11443,6 +11481,7 @@ namespace InternalPayments.Forms
             // 
             this.toolStrip21.AutoSize = false;
             this.toolStrip21.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip21.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip21.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addGBVButton,
             this.toolStripSeparator161,
@@ -11494,7 +11533,7 @@ namespace InternalPayments.Forms
             this.addGBVButton.Image = global::InternalPayments.Properties.Resources.plus_32;
             this.addGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addGBVButton.Name = "addGBVButton";
-            this.addGBVButton.Size = new System.Drawing.Size(51, 22);
+            this.addGBVButton.Size = new System.Drawing.Size(55, 22);
             this.addGBVButton.Text = "ADD";
             this.addGBVButton.Click += new System.EventHandler(this.addGBVButton_Click);
             // 
@@ -11508,7 +11547,7 @@ namespace InternalPayments.Forms
             this.editGBVButton.Image = global::InternalPayments.Properties.Resources.edit32;
             this.editGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editGBVButton.Name = "editGBVButton";
-            this.editGBVButton.Size = new System.Drawing.Size(51, 22);
+            this.editGBVButton.Size = new System.Drawing.Size(55, 22);
             this.editGBVButton.Text = "EDIT";
             this.editGBVButton.Click += new System.EventHandler(this.editGBVButton_Click);
             // 
@@ -11522,7 +11561,7 @@ namespace InternalPayments.Forms
             this.saveGBVButton.Image = global::InternalPayments.Properties.Resources.FloppyDisk;
             this.saveGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveGBVButton.Name = "saveGBVButton";
-            this.saveGBVButton.Size = new System.Drawing.Size(53, 22);
+            this.saveGBVButton.Size = new System.Drawing.Size(57, 22);
             this.saveGBVButton.Text = "SAVE";
             this.saveGBVButton.Click += new System.EventHandler(this.saveGBVButton_Click);
             // 
@@ -11537,7 +11576,7 @@ namespace InternalPayments.Forms
             this.delGBVButton.Image = global::InternalPayments.Properties.Resources.delete;
             this.delGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delGBVButton.Name = "delGBVButton";
-            this.delGBVButton.Size = new System.Drawing.Size(23, 22);
+            this.delGBVButton.Size = new System.Drawing.Size(24, 22);
             this.delGBVButton.Text = "DELETE";
             this.delGBVButton.Click += new System.EventHandler(this.delGBVButton_Click);
             // 
@@ -11552,7 +11591,7 @@ namespace InternalPayments.Forms
             this.refreshGBVButton.Image = global::InternalPayments.Properties.Resources.refresh;
             this.refreshGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshGBVButton.Name = "refreshGBVButton";
-            this.refreshGBVButton.Size = new System.Drawing.Size(23, 22);
+            this.refreshGBVButton.Size = new System.Drawing.Size(24, 22);
             this.refreshGBVButton.Text = "Refresh";
             this.refreshGBVButton.Click += new System.EventHandler(this.refreshGBVButton_Click);
             // 
@@ -11567,7 +11606,7 @@ namespace InternalPayments.Forms
             this.rcHstryButton.Image = global::InternalPayments.Properties.Resources.statistics_32;
             this.rcHstryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstryButton.Name = "rcHstryButton";
-            this.rcHstryButton.Size = new System.Drawing.Size(23, 22);
+            this.rcHstryButton.Size = new System.Drawing.Size(24, 22);
             this.rcHstryButton.Text = "Record History";
             this.rcHstryButton.Click += new System.EventHandler(this.rcHstryGBVButton_Click);
             // 
@@ -11582,7 +11621,7 @@ namespace InternalPayments.Forms
             this.vwSQLButton.Image = global::InternalPayments.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLButton.Name = "vwSQLButton";
-            this.vwSQLButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLButton.Text = "View SQL";
             this.vwSQLButton.Click += new System.EventHandler(this.vwSQLGBVButton_Click);
             // 
@@ -11597,7 +11636,7 @@ namespace InternalPayments.Forms
             this.moveFirstGBVButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstGBVButton.Name = "moveFirstGBVButton";
-            this.moveFirstGBVButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstGBVButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstGBVButton.Text = "Move First";
             this.moveFirstGBVButton.Click += new System.EventHandler(this.GBVPnlNavButtons);
             // 
@@ -11612,7 +11651,7 @@ namespace InternalPayments.Forms
             this.movePreviousGBVButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousGBVButton.Name = "movePreviousGBVButton";
-            this.movePreviousGBVButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousGBVButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousGBVButton.Text = "Move Previous";
             this.movePreviousGBVButton.Click += new System.EventHandler(this.GBVPnlNavButtons);
             // 
@@ -11660,7 +11699,7 @@ namespace InternalPayments.Forms
             this.moveNextGBVButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextGBVButton.Name = "moveNextGBVButton";
-            this.moveNextGBVButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextGBVButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextGBVButton.Text = "Move Next";
             this.moveNextGBVButton.Click += new System.EventHandler(this.GBVPnlNavButtons);
             // 
@@ -11675,7 +11714,7 @@ namespace InternalPayments.Forms
             this.moveLastGBVButton.Image = global::InternalPayments.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastGBVButton.Name = "moveLastGBVButton";
-            this.moveLastGBVButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastGBVButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastGBVButton.Text = "Move Last";
             this.moveLastGBVButton.Click += new System.EventHandler(this.GBVPnlNavButtons);
             // 
@@ -11752,7 +11791,7 @@ namespace InternalPayments.Forms
             this.resetGBVButton.Image = global::InternalPayments.Properties.Resources.undo_256;
             this.resetGBVButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetGBVButton.Name = "resetGBVButton";
-            this.resetGBVButton.Size = new System.Drawing.Size(59, 22);
+            this.resetGBVButton.Size = new System.Drawing.Size(63, 22);
             this.resetGBVButton.Text = "RESET";
             this.resetGBVButton.Click += new System.EventHandler(this.resetGBVButton_Click);
             // 

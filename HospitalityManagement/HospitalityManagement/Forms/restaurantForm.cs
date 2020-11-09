@@ -3245,12 +3245,6 @@ namespace HospitalityManagement.Forms
                         bool isPrevdlvrd = Global.mnFrm.cmCde.cnvrtBitStrToBool(
                           Global.mnFrm.cmCde.getGnrlRecNm("scm.scm_sales_invc_det", "invc_det_ln_id", "is_itm_delivered", lineid));
 
-                        Global.updateSalesDocLn(lineid,
-                  itmID, qty, price, storeID, crncyID, srclnID,
-                  taxID, dscntID, chrgeID,
-                  this.itemsDataGridView.Rows[i].Cells[26].Value.ToString()
-                  , this.itemsDataGridView.Rows[i].Cells[10].Value.ToString(),
-                  orgnlSllngPrce, othrMdlID, othrMdlType, extrDesc, 1, "");
                         bool isrvrsd = true;
                         if (isPrevdlvrd && stckID > 0)
                         {
@@ -3264,6 +3258,13 @@ namespace HospitalityManagement.Forms
                             }
                             isrvrsd = this.rvrsQtyPostngs(lineid, cnsgmntIDs, dateStr, stckID, srcDocType);
                         }
+
+                        Global.updateSalesDocLn(lineid,
+                  itmID, qty, price, storeID, crncyID, srclnID,
+                  taxID, dscntID, chrgeID,
+                  this.itemsDataGridView.Rows[i].Cells[26].Value.ToString()
+                  , this.itemsDataGridView.Rows[i].Cells[10].Value.ToString(),
+                  orgnlSllngPrce, othrMdlID, othrMdlType, extrDesc, 1, "");
 
                         if (itmID > 0 && storeID > 0 && isdlvrd == true && isrvrsd == true)
                         {
@@ -3725,7 +3726,7 @@ namespace HospitalityManagement.Forms
                   0, int.Parse(this.sponsorIDTextBox.Text),
                   int.Parse(this.sponsorSiteIDTextBox.Text), -1,
                   -1, "", "", this.otherInfoTextBox.Text, "Restaurant Table", this.docStatusTextBox.Text,
-                  long.Parse(this.chckInIDTextBox.Text), "Check-In", false);
+                  long.Parse(this.chckInIDTextBox.Text), "Check-In", "1");
 
                 this.docIDTextBox.Text = Global.mnFrm.cmCde.getGnrlRecID(
           "hotl.checkins_hdr",
@@ -3797,7 +3798,7 @@ namespace HospitalityManagement.Forms
                   0, int.Parse(this.sponsorIDTextBox.Text),
                   int.Parse(this.sponsorSiteIDTextBox.Text), -1,
                   -1, "", "", this.otherInfoTextBox.Text, "Restaurant Table", this.docStatusTextBox.Text,
-                  long.Parse(this.chckInIDTextBox.Text), "Check-In", false);
+                  long.Parse(this.chckInIDTextBox.Text), "Check-In", "1");
 
                 long othMdlID = long.Parse(this.chckInIDTextBox.Text);
                 string othrMdlType = "Check-In";
@@ -3904,10 +3905,10 @@ namespace HospitalityManagement.Forms
             string rcvblDoctype = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_rcvbls_invc_hdr",
               "rcvbls_invc_hdr_id", "rcvbls_invc_type", rcvblHdrID);
 
-            if (docStatus == "Approved" && Global.mnFrm.cmCde.doesDteTmeExceedIntrvl(Global.getRcvblsDocLastUpdate(rcvblHdrID, rcvblDoctype), "1 day"))
-            {
-                return;
-            }
+            /* if (docStatus == "Approved" && Global.mnFrm.cmCde.doesDteTmeExceedIntrvl(Global.getRcvblsDocLastUpdate(rcvblHdrID, rcvblDoctype), "1 day"))
+             {
+                 return;
+             }*/
             DataSet dtst = Global.get_One_SalesDcLines(srcDocID);
             double grndAmnt = Global.getSalesDocGrndAmnt(srcDocID);
             // Grand Total
@@ -4038,11 +4039,12 @@ namespace HospitalityManagement.Forms
                         {
                             Global.updateSmmryItmAddOn(smmryID, "3Discount", dscntAmnts1, true, tmp);
                         }
+                        //MessageBox.Show(dscntAmnts1.ToString());
                         codeCntr++;
                     }
                     //codeCntr++;
                 }
-
+                //MessageBox.Show(dscntAmnts.ToString());
                 if (txID > 0)
                 {
                     string isParnt = Global.mnFrm.cmCde.getGnrlRecNm("scm.scm_tax_codes", "code_id", "is_parent", txID);
@@ -4077,11 +4079,9 @@ namespace HospitalityManagement.Forms
                     {
                         txAmnts1 = Global.getSalesDocCodesAmnt(txID, unitAmnt - snglDscnt, qnty);
                         txAmnts += txAmnts1;
-                        tmp = Global.mnFrm.cmCde.getGnrlRecNm(
-                    "scm.scm_tax_codes", "code_id", "code_name", txID);
+                        tmp = Global.mnFrm.cmCde.getGnrlRecNm("scm.scm_tax_codes", "code_id", "code_name", txID);
 
-                        smmryID = Global.getSalesSmmryItmID("2Tax", txID,
-                       srcDocID, srcDocType);
+                        smmryID = Global.getSalesSmmryItmID("2Tax", txID, srcDocID, srcDocType);
                         if (smmryID <= 0 && txAmnts1 > 0)
                         {
                             Global.createSmmryItm("2Tax", tmp, txAmnts1, txID,
@@ -4312,11 +4312,11 @@ namespace HospitalityManagement.Forms
                     {
                         if (int.Parse(codeIDs[j]) > 0)
                         {
-                            txAmnts1 = Global.getSalesDocCodesAmnt(int.Parse(codeIDs[j]), 1, 1);
-                            txAmnts1 = orgnlDscnt / (1.0 + txAmnts1);
-                            txAmnts += txAmnts1;
+                            txAmnts1 += Global.getSalesDocCodesAmnt(int.Parse(codeIDs[j]), 1, 1);
                         }
                     }
+                    txAmnts1 = orgnlDscnt / (1.0 + txAmnts1);
+                    txAmnts += txAmnts1;
                 }
                 else
                 {
@@ -4331,12 +4331,13 @@ namespace HospitalityManagement.Forms
             }
             return txAmnts;
         }
+
         private void autoBals(string srcDocType)
         {
+            return;
             //DataSet dtst = Global.get_DocSmryLns(docHdrID, docTyp);
             //for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             //{
-
             //}
             long srcDocID = long.Parse(this.salesDocIDTextBox.Text);
             /*,
@@ -4375,7 +4376,7 @@ namespace HospitalityManagement.Forms
                 double dscntAmnts = -1 * Global.getSalesSmmryItmAmnt("3Discount", -1, srcDocID, srcDocType);
                 double pymntsAmnt = Global.getSalesSmmryItmAmnt("6Total Payments Received", -1, srcDocID, srcDocType); ;
                 if (mscChrgID > 0)
-                {
+                  {
                     msChrgAmnts = Math.Round(Global.getSalesDocTtlAmnt(srcDocID), 2) - dscntAmnts - Math.Round(grndAmnt, 2);
                     string chrgSmmryNm = Global.mnFrm.cmCde.getGnrlRecNm(
             "scm.scm_tax_codes", "code_id", "code_name", mscChrgID);
@@ -5311,7 +5312,24 @@ namespace HospitalityManagement.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::HospitalityManagement.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -8862,7 +8880,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
         private void rejectDoc()
         {
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -8870,7 +8888,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             //Global.updtActnPrcss(7);//Invetory Import Process
 
@@ -8952,7 +8970,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
 
             this.cancelButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -8960,7 +8978,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = this.rvrsApprval(dateStr);
@@ -9334,7 +9352,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
 
             this.badDebtButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -9342,7 +9360,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = true;// this.rvrsApprval(dateStr);

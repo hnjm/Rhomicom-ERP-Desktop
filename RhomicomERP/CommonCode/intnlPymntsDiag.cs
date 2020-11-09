@@ -4134,7 +4134,7 @@ this.payItmID, this.paymntDateTextBox.Text) == false)
 
         this.processPayButton.Enabled = false;
         System.Windows.Forms.Application.DoEvents();
-        bool isAnyRnng = true;
+        /*bool isAnyRnng = true;
         int witcntr = 0;
         do
         {
@@ -4142,7 +4142,7 @@ this.payItmID, this.paymntDateTextBox.Text) == false)
           isAnyRnng = this.isThereANActvActnPrcss("8", "10 second");//Payments Import Process
           System.Windows.Forms.Application.DoEvents();
         }
-        while (isAnyRnng == true);
+        while (isAnyRnng == true);*/
 
         this.processPayButton.Enabled = true;
         System.Windows.Forms.Application.DoEvents();

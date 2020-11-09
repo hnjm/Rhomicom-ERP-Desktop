@@ -67,6 +67,7 @@ namespace StoresAndInventoryManager.Forms
       double cnvrtdQty = 0;
       double rngSum = 0;
       double ttlPrce = 0;
+
       if (parMode == "Read")
       {
         submitCnvrtdQtybutton.Enabled = false;
@@ -78,10 +79,8 @@ namespace StoresAndInventoryManager.Forms
         dataGridViewUomConversion.Columns[dataGridViewUomConversion.Columns.IndexOf(detQty)].ReadOnly = false;
       }
 
-
       ttlQty = double.Parse(varTtlQty);
       rmndPrtVal = ttlQty;
-
 
       //clear datagridview
       dataGridViewUomConversion.AutoGenerateColumns = false;

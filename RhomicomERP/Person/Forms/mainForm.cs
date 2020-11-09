@@ -63,6 +63,7 @@ namespace BasicPersonData.Forms
         bool vwPrs = false;
         bool vwCV = false;
         bool vwBscs = false;
+        bool vwLeave = false;
 
         public string tmplt_SQL = "";
         public string tmpltDet_SQL = "";
@@ -152,6 +153,10 @@ namespace BasicPersonData.Forms
             this.basicAsgnmntsPanel.BackColor = clrs[0];
             this.othrInfoPanel.BackColor = clrs[0];
             this.extraDataTabPage.BackColor = clrs[0];
+            this.tabPage1.BackColor = clrs[0];
+            this.tabPage2.BackColor = clrs[0];
+            this.tabPage3.BackColor = clrs[0];
+            this.tabPage4.BackColor = clrs[0];
 
             //this.glsLabel1.TopFill = clrs[0];
             //this.glsLabel1.BackColor = clrs[0];
@@ -694,6 +699,7 @@ namespace BasicPersonData.Forms
             this.vwPrs = Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[1]);
             this.vwCV = Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[2]);
             this.vwBscs = Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[3]);
+            this.vwLeave = Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[22]);
             this.vwPyItmsPrs = false;//Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[4]);
             this.vwBanks = false;//Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[16]);
 
@@ -720,6 +726,10 @@ namespace BasicPersonData.Forms
             if (this.vwPrs == true)
             {
                 this.prsnTabControl.Controls.Add(this.otherInfoTabPage);
+            }
+            if (this.vwLeave == true)
+            {
+                this.prsnTabControl.Controls.Add(this.absenceTabPage);
             }
             if (this.vwPyItmsPrs == true)
             {
@@ -4683,7 +4693,7 @@ DELETE FROM prs.prsn_names_nos WHERE person_id={:prsnID};";
             {
                 this.sitesDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString();
                 Object[] cellDesc = new Object[7];
-                cellDesc[0] = Global.mnFrm.cmCde.getSiteName(int.Parse(dtst.Tables[0].Rows[i][0].ToString()));
+                cellDesc[0] = dtst.Tables[0].Rows[i][4].ToString();
                 cellDesc[1] = "...";
                 cellDesc[2] = dtst.Tables[0].Rows[i][1].ToString();
 
@@ -8312,7 +8322,7 @@ DELETE FROM prs.prsn_names_nos WHERE person_id={:prsnID};";
                 for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
                 {
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 1]).Value2 = a + 1;
-                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = dtst.Tables[0].Rows[a][1].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = "'" + dtst.Tables[0].Rows[a][1].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 3]).Value2 = dtst.Tables[0].Rows[a][2].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 4]).Value2 = dtst.Tables[0].Rows[a][3].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 5]).Value2 = dtst.Tables[0].Rows[a][4].ToString();
@@ -8372,7 +8382,7 @@ DELETE FROM prs.prsn_names_nos WHERE person_id={:prsnID};";
                 for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
                 {
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 1]).Value2 = a + 1;
-                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = dtst.Tables[0].Rows[a][1].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = "'" + dtst.Tables[0].Rows[a][1].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 3]).Value2 = dtst.Tables[0].Rows[a][2].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 4]).Value2 = dtst.Tables[0].Rows[a][3].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 5]).Value2 = dtst.Tables[0].Rows[a][4].ToString();
@@ -8484,6 +8494,7 @@ DELETE FROM prs.prsn_names_nos WHERE person_id={:prsnID};";
             string[] hdngs = new string[52];
             string[] hdngs1 = { "Person's ID No.**", "Full Name" };
             int fldcnt = colsDtSt.Tables[0].Rows.Count;
+            char[] w = { '\'' };
             for (int a = 0; a < hdngs.Length; a++)
             {
                 if (a < 2)
@@ -8563,7 +8574,7 @@ DELETE FROM prs.prsn_names_nos WHERE person_id={:prsnID};";
             {
                 try
                 {
-                    prsnLocIDNo = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 2]).Value2.ToString();
+                    prsnLocIDNo = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 2]).Value2.ToString().Trim(w);
                 }
                 catch (Exception ex)
                 {
@@ -10645,6 +10656,11 @@ DELETE FROM prs.prsn_names_nos WHERE person_id={:prsnID};";
             {
                 //Job
                 dtst = Global.mnFrm.cmCde.selectDataNoParams("Select job_code_name from org.org_jobs where org_id=" + Global.mnFrm.cmCde.Org_id);
+            }
+            else if (this.fltrByComboBox.SelectedIndex == 5)
+            {
+                //Job
+                dtst = Global.mnFrm.cmCde.selectDataNoParams("select REPLACE(location_code_name || '.' || site_desc, '.' || location_code_name,'') site_desc  from org.org_sites_locations where org_id=" + Global.mnFrm.cmCde.Org_id);
             }
             else
             {

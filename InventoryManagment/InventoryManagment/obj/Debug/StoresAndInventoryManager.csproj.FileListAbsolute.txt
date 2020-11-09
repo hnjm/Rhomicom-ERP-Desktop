@@ -732,66 +732,210 @@ C:\1_DESIGNS\MYAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\De
 C:\1_DESIGNS\MYAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.dll
 C:\1_DESIGNS\MYAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.pdb
 C:\1_DESIGNS\MYAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.changeAccountsDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csprojResolveAssemblyReference.cache
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.ResolveComReference.cache
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addAttchmntDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addGLIntfcTrnsDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentPrompt.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentSourceDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.attchmntsDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.balUomConvDetails.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.sQLFormulaDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.QuickReceipt.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.rptParamsDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.calendar.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.excelImport.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.extraInfoDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemSearch.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmSearchDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.payables.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.uomConversion.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addPymntDiag.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRcpt.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRecReturns.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.glIntrfcForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invAdjstmnt.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invoiceForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemListForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemTypeTmplts.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmBals.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm1.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm2.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm3.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftMenuForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.mainForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prchseOrdrForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prdtCategories.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.productionForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.pyblsDocsForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHouses.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHseTransfers.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.unitOfMeasures.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnGLIntfcForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnInvoiceForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmBalsForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmLstForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmTmpltsForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnMiscAdjstForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrchOrdrForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrdtCatForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcpRtrnForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcptsForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStckTrnsfrsForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStrsWhseForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnUomForm.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Properties.Resources.resources
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.GenerateResource.Cache
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.dll
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.pdb
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.dll
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.pdb
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.dll
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\Interop.Microsoft.Office.Interop.Word.dll
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\RicherTextBox.dll
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\MarkupConverter.dll
-C:\1_DESIGNS\MYAPPS\GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\Interop.Microsoft.Office.Interop.Word.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\RicherTextBox.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\MarkupConverter.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\PdfSharp.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\PdfSharp.xml
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csprojResolveAssemblyReference.cache
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.ResolveComReference.cache
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addAttchmntDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addGLIntfcTrnsDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentPrompt.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentSourceDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.attchmntsDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.balUomConvDetails.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.changeAccountsDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.sQLFormulaDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.QuickReceipt.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.rptParamsDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.calendar.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.excelImport.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.extraInfoDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemSearch.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmSearchDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.payables.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.uomConversion.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addPymntDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRcpt.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRecReturns.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.glIntrfcForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invAdjstmnt.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invoiceForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemListForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemTypeTmplts.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmBals.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm1.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm2.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm3.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftMenuForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.mainForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prchseOrdrForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prdtCategories.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.productionForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.pyblsDocsForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHouses.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHseTransfers.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.unitOfMeasures.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnGLIntfcForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnInvoiceForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmBalsForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmLstForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmTmpltsForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnMiscAdjstForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrchOrdrForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrdtCatForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcpRtrnForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcptsForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStckTrnsfrsForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStrsWhseForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnUomForm.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Properties.Resources.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.GenerateResource.Cache
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.shelCageDiag.resources
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.CoreCompileInputs.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.pdb
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\Interop.Microsoft.Office.Interop.Word.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\RicherTextBox.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\MarkupConverter.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.pdb
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\PdfSharp.pdb
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\PdfSharp.xml
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\de\PdfSharp.resources.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csprojResolveAssemblyReference.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.ResolveComReference.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addAttchmntDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addGLIntfcTrnsDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentPrompt.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentSourceDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.attchmntsDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.balUomConvDetails.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.changeAccountsDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.shelCageDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.sQLFormulaDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.QuickReceipt.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.rptParamsDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.calendar.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.excelImport.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.extraInfoDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemSearch.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmSearchDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.payables.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.uomConversion.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addPymntDiag.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRcpt.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRecReturns.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.glIntrfcForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invAdjstmnt.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invoiceForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemListForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemTypeTmplts.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmBals.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm1.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm2.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm3.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftMenuForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.mainForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prchseOrdrForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prdtCategories.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.productionForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.pyblsDocsForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHouses.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHseTransfers.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.unitOfMeasures.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnGLIntfcForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnInvoiceForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmBalsForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmLstForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmTmpltsForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnMiscAdjstForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrchOrdrForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrdtCatForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcpRtrnForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcptsForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStckTrnsfrsForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStrsWhseForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnUomForm.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Properties.Resources.resources
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.GenerateResource.Cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.CoreCompileInputs.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\StoresAndInventoryManager.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\Interop.Microsoft.Office.Interop.Word.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\RicherTextBox.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\MarkupConverter.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\CommonCode.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\PdfSharp.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\PdfSharp.xml
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\bin\Debug\de\PdfSharp.resources.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csprojResolveAssemblyReference.cache
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.ResolveComReference.cache
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addAttchmntDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addGLIntfcTrnsDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentPrompt.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.adjustmentSourceDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.attchmntsDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.balUomConvDetails.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.changeAccountsDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Dialogs.shelCageDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.sQLFormulaDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.QuickReceipt.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.rptParamsDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.calendar.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.excelImport.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.extraInfoDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemSearch.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmSearchDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.payables.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.uomConversion.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.addPymntDiag.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRcpt.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.consgmtRecReturns.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.glIntrfcForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invAdjstmnt.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.invoiceForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemListForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itemTypeTmplts.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.itmBals.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm1.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm2.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftHelpForm3.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.leftMenuForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.mainForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prchseOrdrForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.prdtCategories.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.productionForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.pyblsDocsForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHouses.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.storeHseTransfers.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.unitOfMeasures.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnGLIntfcForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnInvoiceForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmBalsForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmLstForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnItmTmpltsForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnMiscAdjstForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrchOrdrForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnPrdtCatForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcpRtrnForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnRcptsForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStckTrnsfrsForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnStrsWhseForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Forms.wfnUomForm.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.Properties.Resources.resources
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.GenerateResource.Cache
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.csproj.CoreCompileInputs.cache
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\InventoryManagment\InventoryManagment\obj\Debug\StoresAndInventoryManager.pdb

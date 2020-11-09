@@ -165,12 +165,12 @@ namespace ReportsAndProcesses.Forms
                 Global.createRpt("Period Close Process", "Period Close Process",
                   "Accounting", "System Process",
                   "select accb.close_period('{:closing_dte}', {:usrID}, to_char(now(),'YYYY-MM-DD HH24:MI:SS'), {:orgID}, {:msgID})",
-                  true, "", "", "", "", "", "None", "None", "Standard Process Runner", "None", "None", "", "");
+                  true, "", "", "", "", "", "None", "None", "Standard Process Runner", "None", "None", "", "", "", "");
                 oldRptID = Global.mnFrm.cmCde.getRptID("Period Close Process");
                 Global.createParam(oldRptID, "Period End Date to Close", "{:closing_dte}", "31-Dec-2012",
-                  true, "-1", "DATE", "dd-MMM-yyyy", "");
+                  true, "-1", "DATE", "dd-MMM-yyyy", "", true);
                 Global.createParam(oldRptID, "Organisation", "{:orgID}", "-1", true,
-                  Global.mnFrm.cmCde.getLovID("Organisations").ToString(), "NUMBER", "", "Organisations");
+                  Global.mnFrm.cmCde.getLovID("Organisations").ToString(), "NUMBER", "", "Organisations", true);
             }
             oldRptID = Global.mnFrm.cmCde.getRptID("Deletion of Unposted Period Close Process");
             if (oldRptID <= 0)
@@ -178,11 +178,11 @@ namespace ReportsAndProcesses.Forms
                 Global.createRpt("Deletion of Unposted Period Close Process", "Deletion of Unposted Period Close Process",
                   "Accounting", "System Process",
                   "select accb.rvrs_period_close('{:closing_dte}', {:usrID}, to_char(now(),'YYYY-MM-DD HH24:MI:SS'), {:orgID}, {:msgID})",
-                  true, "", "", "", "", "", "None", "Portrait", "Standard Process Runner", "None", "None", "", "");
+                  true, "", "", "", "", "", "None", "Portrait", "Standard Process Runner", "None", "None", "", "", "", "");
                 oldRptID = Global.mnFrm.cmCde.getRptID("Deletion of Unposted Period Close Process");
                 //Global.createParam(oldRptID, "Period End Date to Close", "{:closing_dte}", "31-Dec-2012", true, "-1");
                 Global.createParam(oldRptID, "Organisation", "{:orgID}", "-1", true,
-                  Global.mnFrm.cmCde.getLovID("Organisations").ToString(), "NUMBER", "", "Organisations");
+                  Global.mnFrm.cmCde.getLovID("Organisations").ToString(), "NUMBER", "", "Organisations", true);
             }
 
             oldRptID = Global.mnFrm.cmCde.getRptID("Reversal of Posted Period Close Process");
@@ -192,15 +192,18 @@ namespace ReportsAndProcesses.Forms
                   "Reversal of Posted Period Close Process",
                   "Accounting", "System Process",
                   "select accb.rvrs_pstd_period_close('{:closing_dte}', {:usrID}, to_char(now(),'YYYY-MM-DD HH24:MI:SS'), {:orgID}, {:msgID})",
-                  true, "", "", "", "", "", "None", "Portrait", "Standard Process Runner", "None", "None", "", "");
+                  true, "", "", "", "", "", "None", "Portrait", "Standard Process Runner", "None", "None", "", "", "", "");
                 oldRptID = Global.mnFrm.cmCde.getRptID("Reversal of Posted Period Close Process");
                 //Global.createParam(oldRptID, "Period End Date to Close", "{:closing_dte}", "31-Dec-2012", true, "-1");
                 Global.createParam(oldRptID, "Period End Date to Re-Open", "{:closing_dte}",
-                  "31-Dec-2012", true, "-1", "DATE", "dd-MMM-yyyy", "");
+                  "31-Dec-2012", true, "-1", "DATE", "dd-MMM-yyyy", "", true);
                 Global.createParam(oldRptID, "Organisation", "{:orgID}", "-1", true,
-                  Global.mnFrm.cmCde.getLovID("Organisations").ToString(), "NUMBER", "", "Organisations");
+                  Global.mnFrm.cmCde.getLovID("Organisations").ToString(), "NUMBER", "", "Organisations", true);
                 this.refreshLOVIDs();
             }
+            Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE rpt.rpt_reports
+   SET rpt_or_sys_prcs = 'Command Line Script-Windows'
+ WHERE rpt_or_sys_prcs = 'Command Line Script'");
         }
 
         private void disableFormButtons()
@@ -609,7 +612,7 @@ namespace ReportsAndProcesses.Forms
             }
             if (this.searchInRptComboBox.SelectedIndex < 0)
             {
-                this.searchInRptComboBox.SelectedIndex = 2;
+                this.searchInRptComboBox.SelectedIndex = 3;
                 this.orderByComboBox.SelectedIndex = 0;
             }
             if (this.searchForRptTextBox.Text.Contains("%") == false)
@@ -718,7 +721,9 @@ namespace ReportsAndProcesses.Forms
           dtst.Tables[0].Rows[i][15].ToString(),
           dtst.Tables[0].Rows[i][16].ToString(),
           dtst.Tables[0].Rows[i][17].ToString(),
-          dtst.Tables[0].Rows[i][18].ToString() });
+          dtst.Tables[0].Rows[i][18].ToString(),
+          dtst.Tables[0].Rows[i][19].ToString(),
+          dtst.Tables[0].Rows[i][20].ToString() });
                 this.rptListView.Items.Add(nwItm);
             }
             this.correctRptNavLbls(dtst);
@@ -811,7 +816,10 @@ namespace ReportsAndProcesses.Forms
           dtst.Tables[0].Rows[i][4].ToString()).ToString(),
           dtst.Tables[0].Rows[i][4].ToString(),
           dtst.Tables[0].Rows[i][6].ToString(),
-          dtst.Tables[0].Rows[i][7].ToString() });
+          dtst.Tables[0].Rows[i][7].ToString(),
+          Global.mnFrm.cmCde.cnvrtBitStrToBool(
+          dtst.Tables[0].Rows[i][8].ToString()).ToString(),
+          dtst.Tables[0].Rows[i][8].ToString() });
                 this.paramsListView.Items.Add(nwItm);
             }
             if (this.paramsListView.Items.Count > 0)
@@ -914,6 +922,8 @@ namespace ReportsAndProcesses.Forms
             this.rptDescTextBox.Text = "";
             this.rptIDTextBox.Text = "-1";
             this.rptSQLTextBox.Text = "";
+            this.preRptSQLTextBox.Text = "";
+            this.postRptSQLTextBox.Text = "";
             this.ownrMdlTextBox.Text = "";
             this.prcssRnnrTextBox.Text = "";
             this.colsToAvrgTextBox.Text = "";
@@ -952,6 +962,10 @@ namespace ReportsAndProcesses.Forms
 
             this.rptSQLTextBox.ReadOnly = false;
             this.rptSQLTextBox.BackColor = Color.FromArgb(255, 255, 128);
+            this.preRptSQLTextBox.ReadOnly = false;
+            this.preRptSQLTextBox.BackColor = Color.White;
+            this.postRptSQLTextBox.ReadOnly = false;
+            this.postRptSQLTextBox.BackColor = Color.White;
             string orgItm = "";
             if (this.editRpt)
             {
@@ -960,10 +974,9 @@ namespace ReportsAndProcesses.Forms
             this.rptPrcsTypComboBox.Items.Clear();
             this.rptPrcsTypComboBox.Items.Add("SQL Report");
             this.rptPrcsTypComboBox.Items.Add("Database Function");
-            this.rptPrcsTypComboBox.Items.Add("Command Line Script");
-            //this.rptPrcsTypComboBox.Items.Add("Alert(SQL Mail List)");
-            //this.rptPrcsTypComboBox.Items.Add("Alert(SQL Message)");
-            //this.rptPrcsTypComboBox.Items.Add("Alert(SQL Mail List & Message)");
+            this.rptPrcsTypComboBox.Items.Add("Command Line Script-Windows");
+            this.rptPrcsTypComboBox.Items.Add("Command Line Script-Linux");
+            this.rptPrcsTypComboBox.Items.Add("System Process");
             this.rptPrcsTypComboBox.Items.Add("Posting of GL Trns. Batches");
             this.rptPrcsTypComboBox.Items.Add("Journal Import");
             this.rptPrcsTypComboBox.Items.Add("Import/Overwrite Data from Excel");
@@ -1033,6 +1046,7 @@ namespace ReportsAndProcesses.Forms
             }
             this.delimiterComboBox.Items.Clear();
             this.delimiterComboBox.Items.Add("None");
+            this.delimiterComboBox.Items.Add("Comma (,)");
             this.delimiterComboBox.Items.Add("Semi-Colon(;)");
             this.delimiterComboBox.Items.Add("Pipe(|)");
             this.delimiterComboBox.Items.Add("Tab");
@@ -1085,6 +1099,10 @@ namespace ReportsAndProcesses.Forms
 
             this.rptSQLTextBox.ReadOnly = true;
             this.rptSQLTextBox.BackColor = Color.WhiteSmoke;
+            this.preRptSQLTextBox.ReadOnly = true;
+            this.preRptSQLTextBox.BackColor = Color.WhiteSmoke;
+            this.postRptSQLTextBox.ReadOnly = true;
+            this.postRptSQLTextBox.BackColor = Color.WhiteSmoke;
             this.rptPrcsTypComboBox.BackColor = Color.WhiteSmoke;
             this.outPutTypComboBox.BackColor = Color.WhiteSmoke;
             this.orntnComboBox.BackColor = Color.WhiteSmoke;
@@ -1198,11 +1216,6 @@ namespace ReportsAndProcesses.Forms
                 Global.mnFrm.cmCde.showMsg("No record to Edit!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-             {
-                 Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                 return;
-             }*/
             this.addRpt = false;
             this.editRpt = true;
             this.prpareForRptEdit();
@@ -1285,11 +1298,6 @@ namespace ReportsAndProcesses.Forms
                     return;
                 }
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot create a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             long oldRptID = Global.mnFrm.cmCde.getRptID(this.rptNmTextBox.Text);
             if (oldRptID > 0
              && this.addRpt == true)
@@ -1305,7 +1313,7 @@ namespace ReportsAndProcesses.Forms
                 Global.mnFrm.cmCde.showMsg("New Process/Report Name is already in use!", 0);
                 return;
             }
-
+            this.saveRptButton.Enabled = false;
             if (this.addRpt == true)
             {
                 Global.createRpt(this.rptNmTextBox.Text, this.rptDescTextBox.Text,
@@ -1314,7 +1322,9 @@ namespace ReportsAndProcesses.Forms
                   this.colsToCountTextBox.Text, this.colsToSumTextBox.Text, this.colsToAvrgTextBox.Text,
                   this.colsToFrmtNumTextBox.Text, this.outPutTypComboBox.Text, this.orntnComboBox.Text,
                   this.prcssRnnrTextBox.Text, this.rptLytComboBox.Text, this.delimiterComboBox.Text,
-                  this.imgColNosTextBox.Text, "");
+                  this.imgColNosTextBox.Text, "",
+          this.preRptSQLTextBox.Text,
+          this.postRptSQLTextBox.Text);
 
                 System.Windows.Forms.Application.DoEvents();
                 this.rptIDTextBox.Text = Global.mnFrm.cmCde.getRptID(this.rptNmTextBox.Text).ToString();
@@ -1328,6 +1338,7 @@ namespace ReportsAndProcesses.Forms
                         {
                             Global.updateRptJrxml(rptID, rptID.ToString() + extnsn);
                         }
+                        System.Threading.Thread.Sleep(5000);
                     }
                 }
                 ListViewItem nwItm = new ListViewItem(new string[] {
@@ -1345,7 +1356,9 @@ namespace ReportsAndProcesses.Forms
           this.orntnComboBox.Text,
           this.prcssRnnrTextBox.Text, this.rptLytComboBox.Text,
           this.imgColNosTextBox.Text,
-          this.delimiterComboBox.Text, this.jrxmlTextBox.Text });
+          this.delimiterComboBox.Text, this.jrxmlTextBox.Text,
+          this.preRptSQLTextBox.Text,
+          this.postRptSQLTextBox.Text });
 
                 this.rptListView.Items.Insert(0, nwItm);
                 //this.saveRptButton.Enabled = false;
@@ -1384,6 +1397,7 @@ namespace ReportsAndProcesses.Forms
                         {
                             this.jrxmlTextBox.Text = rptID.ToString() + extnsn;
                         }
+                        System.Threading.Thread.Sleep(5000);
                     }
                 }
 
@@ -1394,23 +1408,26 @@ namespace ReportsAndProcesses.Forms
                   this.colsToCountTextBox.Text, this.colsToSumTextBox.Text, this.colsToAvrgTextBox.Text,
                   this.colsToFrmtNumTextBox.Text, this.outPutTypComboBox.Text, this.orntnComboBox.Text,
                   this.prcssRnnrTextBox.Text, this.rptLytComboBox.Text, this.delimiterComboBox.Text,
-                  this.imgColNosTextBox.Text, this.jrxmlTextBox.Text);
+                  this.imgColNosTextBox.Text, this.jrxmlTextBox.Text,
+          this.preRptSQLTextBox.Text,
+          this.postRptSQLTextBox.Text);
                 if (this.jrxmlTextBox.Text != "")
                 {
                     string dirNam = Global.mnFrm.cmCde.getRptDrctry() + "\\jrxmls\\";
                     this.jrxmlTextBox.Text = dirNam + this.jrxmlTextBox.Text;
                 }
-                this.saveRptButton.Enabled = false;
+                //this.saveRptButton.Enabled = false;
                 this.editRpt = false;
                 this.editRptButton.Enabled = this.editRpts;
-                this.addRptButton.Enabled = this.addRpts;
-                this.delRptButton.Enabled = this.delRpts;
+                //this.addRptButton.Enabled = this.addRpts;
+                //this.delRptButton.Enabled = this.delRpts;
                 this.updtEdit();
                 //this.prpareForRptEdit();
                 //Global.mnFrm.cmCde.showMsg("Record Saved!", 3);
                 this.disableRptEdit();
+                //this.populateRptDet();
                 this.populateParamLstVw();
-                //this.loadRptPanel();
+                this.editRptButton.PerformClick();
             }
         }
 
@@ -1443,6 +1460,8 @@ namespace ReportsAndProcesses.Forms
                 this.rptListView.SelectedItems[0].SubItems[16].Text = this.rptLytComboBox.Text;
                 this.rptListView.SelectedItems[0].SubItems[18].Text = this.delimiterComboBox.Text;
                 this.rptListView.SelectedItems[0].SubItems[17].Text = this.imgColNosTextBox.Text;
+                this.rptListView.SelectedItems[0].SubItems[20].Text = this.preRptSQLTextBox.Text;
+                this.rptListView.SelectedItems[0].SubItems[21].Text = this.postRptSQLTextBox.Text;
             }
 
             string prmNm = "";
@@ -1466,7 +1485,7 @@ namespace ReportsAndProcesses.Forms
                     Global.createParam(long.Parse(this.rptIDTextBox.Text),
           prmNm, sqlrp,
           dflt, rqrd,
-          lovID.ToString(), datatype, dateFrmt, "Alert Types");
+          lovID.ToString(), datatype, dateFrmt, "Alert Types", true);
                 }
             }
             if (this.rptPrcsTypComboBox.Text == "Alert(SQL Mail List)")
@@ -1482,7 +1501,7 @@ namespace ReportsAndProcesses.Forms
                     Global.createParam(long.Parse(this.rptIDTextBox.Text),
                       prmNm, sqlrp,
                       dflt, rqrd,
-                      lovID.ToString(), datatype, dateFrmt, "");
+                      lovID.ToString(), datatype, dateFrmt, "", true);
                 }
             }
             else if (this.rptPrcsTypComboBox.Text == "Alert(SQL Message)")
@@ -1498,7 +1517,7 @@ namespace ReportsAndProcesses.Forms
                     Global.createParam(long.Parse(this.rptIDTextBox.Text),
                       prmNm, sqlrp,
                       dflt, rqrd,
-                      lovID.ToString(), datatype, dateFrmt, "");
+                      lovID.ToString(), datatype, dateFrmt, "", true);
                 }
             }
             else if (this.rptPrcsTypComboBox.Text == "Journal Import")
@@ -1515,7 +1534,7 @@ namespace ReportsAndProcesses.Forms
                     Global.createParam(long.Parse(this.rptIDTextBox.Text),
                      prmNm, sqlrp,
                      dflt, rqrd,
-                     lovID.ToString(), datatype, dateFrmt, "");
+                     lovID.ToString(), datatype, dateFrmt, "", true);
                 }
 
                 prmNm = "Batch Name";
@@ -1530,7 +1549,7 @@ namespace ReportsAndProcesses.Forms
                     Global.createParam(long.Parse(this.rptIDTextBox.Text),
                      prmNm, sqlrp,
                      dflt, rqrd,
-                     lovID.ToString(), datatype, dateFrmt, "");
+                     lovID.ToString(), datatype, dateFrmt, "", true);
                 }
             }
             //
@@ -1594,6 +1613,51 @@ namespace ReportsAndProcesses.Forms
             this.roleStListView.Items.Clear();
 
             this.obey_rpt_evnts = false;
+            /*if (this.editRpt)
+            {
+                if (this.rptListView.SelectedItems.Count > 0)
+                {
+                    DataSet dtst;
+                    if (this.editRpts == false && this.delRpts == false)
+                    {
+                        dtst = Global.get_Basic_Rpt(this.rptListView.SelectedItems[0].SubItems[2].Text,
+                          "Report ID", this.rpt_cur_indx,
+                          int.Parse(this.dsplySizeRptComboBox.Text),
+                          this.orderByComboBox.Text.ToUpper());
+                    }
+                    else
+                    {
+                        dtst = Global.get_Basic_Rpt1(this.rptListView.SelectedItems[0].SubItems[2].Text,
+                          "Report ID", this.rpt_cur_indx,
+                          int.Parse(this.dsplySizeRptComboBox.Text),
+                          this.orderByComboBox.Text.ToUpper());
+                    }
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                    {
+                        this.rptListView.SelectedItems[0].SubItems[1].Text = dtst.Tables[0].Rows[i][1].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[2].Text = dtst.Tables[0].Rows[i][0].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[3].Text = dtst.Tables[0].Rows[i][2].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[4].Text = dtst.Tables[0].Rows[i][3].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[5].Text = dtst.Tables[0].Rows[i][4].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[6].Text = dtst.Tables[0].Rows[i][5].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[7].Text = dtst.Tables[0].Rows[i][6].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[8].Text = dtst.Tables[0].Rows[i][7].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[9].Text = dtst.Tables[0].Rows[i][8].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[10].Text = dtst.Tables[0].Rows[i][9].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[11].Text = dtst.Tables[0].Rows[i][10].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[12].Text = dtst.Tables[0].Rows[i][11].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[13].Text = dtst.Tables[0].Rows[i][12].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[14].Text = dtst.Tables[0].Rows[i][13].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[15].Text = dtst.Tables[0].Rows[i][14].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[16].Text = dtst.Tables[0].Rows[i][15].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[17].Text = dtst.Tables[0].Rows[i][16].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[18].Text = dtst.Tables[0].Rows[i][17].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[19].Text = dtst.Tables[0].Rows[i][18].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[20].Text = dtst.Tables[0].Rows[i][19].ToString();
+                        this.rptListView.SelectedItems[0].SubItems[21].Text = dtst.Tables[0].Rows[i][20].ToString();
+                    }
+                }
+            }*/
             if (this.rptListView.SelectedItems.Count > 0)
             {
                 this.rptIDTextBox.Text = this.rptListView.SelectedItems[0].SubItems[2].Text;
@@ -1617,6 +1681,8 @@ namespace ReportsAndProcesses.Forms
                 this.orntnComboBox.SelectedItem = this.rptListView.SelectedItems[0].SubItems[14].Text;
 
                 this.rptSQLTextBox.Text = this.rptListView.SelectedItems[0].SubItems[4].Text;
+                this.preRptSQLTextBox.Text = this.rptListView.SelectedItems[0].SubItems[20].Text;
+                this.postRptSQLTextBox.Text = this.rptListView.SelectedItems[0].SubItems[21].Text;
 
                 this.colsToGrpTextBox.Text = this.rptListView.SelectedItems[0].SubItems[8].Text;
                 this.colsToCountTextBox.Text = this.rptListView.SelectedItems[0].SubItems[9].Text;
@@ -1641,6 +1707,10 @@ namespace ReportsAndProcesses.Forms
                     string dirNam = Global.mnFrm.cmCde.getRptDrctry() + "\\jrxmls\\";
                     this.jrxmlTextBox.Text = dirNam + this.rptListView.SelectedItems[0].SubItems[19].Text;
                 }
+                if (this.editRpt)
+                {
+                    this.prpareForRptEdit();
+                }
             }
             this.obey_rpt_evnts = true;
         }
@@ -1658,11 +1728,6 @@ namespace ReportsAndProcesses.Forms
                 Global.mnFrm.cmCde.showMsg("Please select the Process/Report to DELETE!", 0);
                 return;
             }
-            /* if (this.rptPrcsTypComboBox.Text == "System Process")
-             {
-                 Global.mnFrm.cmCde.showMsg("Application Users cannot Delete a System Process\r\nContact the Software Vendor!", 0);
-                 return;
-             }*/
             if (Global.isRptInUse(long.Parse(this.rptIDTextBox.Text)) == true)
             {
                 Global.mnFrm.cmCde.showMsg("This Process/Report is in Use hence cannot be DELETED!", 0);
@@ -1702,11 +1767,6 @@ namespace ReportsAndProcesses.Forms
                 Global.mnFrm.cmCde.showMsg("Please select a Report/Process First!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             addParamsDiag nwDiag = new addParamsDiag();
             DialogResult dgRes = nwDiag.ShowDialog();
             if (dgRes == DialogResult.OK)
@@ -1718,7 +1778,7 @@ namespace ReportsAndProcesses.Forms
              nwDiag.paramNameTextBox.Text, nwDiag.sqlRepTextBox.Text,
              nwDiag.defaultValTextBox.Text, nwDiag.isReqrdCheckBox.Checked,
              nwDiag.lovIDTextBox.Text, nwDiag.dataTypeComboBox.Text, nwDiag.dateFrmtComboBox.Text,
-                              nwDiag.lovNmTextBox.Text);
+                              nwDiag.lovNmTextBox.Text, nwDiag.isDsplydCheckBox.Checked);
                 }
                 else
                 {
@@ -1737,11 +1797,6 @@ namespace ReportsAndProcesses.Forms
                  " this action!\nContact your System Administrator!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             if (this.paramsListView.SelectedItems.Count <= 0)
             {
                 Global.mnFrm.cmCde.showMsg("Please select a Parameter First!", 0);
@@ -1754,6 +1809,8 @@ namespace ReportsAndProcesses.Forms
             nwDiag.defaultValTextBox.Text = this.paramsListView.SelectedItems[0].SubItems[3].Text;
             nwDiag.isReqrdCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(
               this.paramsListView.SelectedItems[0].SubItems[8].Text);
+            nwDiag.isDsplydCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(
+              this.paramsListView.SelectedItems[0].SubItems[12].Text);
             nwDiag.lovIDTextBox.Text = this.paramsListView.SelectedItems[0].SubItems[6].Text;
             nwDiag.lovNmTextBox.Text = this.paramsListView.SelectedItems[0].SubItems[5].Text;
             nwDiag.dataTypeComboBox.SelectedItem = this.paramsListView.SelectedItems[0].SubItems[9].Text;
@@ -1770,7 +1827,7 @@ namespace ReportsAndProcesses.Forms
                               nwDiag.paramNameTextBox.Text, nwDiag.sqlRepTextBox.Text,
                               nwDiag.defaultValTextBox.Text, nwDiag.isReqrdCheckBox.Checked,
                               nwDiag.lovIDTextBox.Text, nwDiag.dataTypeComboBox.Text, nwDiag.dateFrmtComboBox.Text,
-                              nwDiag.lovNmTextBox.Text);
+                              nwDiag.lovNmTextBox.Text, nwDiag.isDsplydCheckBox.Checked);
                 }
                 else
                 {
@@ -1930,11 +1987,6 @@ namespace ReportsAndProcesses.Forms
                  " this action!\nContact your System Administrator!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             if (this.paramsListView.SelectedItems.Count <= 0)
             {
                 Global.mnFrm.cmCde.showMsg("Please select the Parameter(s) to Delete", 0);
@@ -2529,11 +2581,8 @@ namespace ReportsAndProcesses.Forms
                     rpt_SQL = rpt_SQL.Replace(nwDiag.dataGridView1.Rows[a].Cells[2].Value.ToString(),
                       nwDiag.dataGridView1.Rows[a].Cells[1].Value.ToString());
                 }
-                if (this.rptListView.SelectedItems[0].SubItems[6].Text == "System Process")
-                {
-                    rpt_SQL = rpt_SQL.Replace("{:usrID}", Global.mnFrm.cmCde.User_id.ToString());
-                    rpt_SQL = rpt_SQL.Replace("{:msgID}", msg_id.ToString());
-                }
+                rpt_SQL = rpt_SQL.Replace("{:usrID}", Global.mnFrm.cmCde.User_id.ToString());
+                rpt_SQL = rpt_SQL.Replace("{:msgID}", msg_id.ToString());
                 rpTitle = nwDiag.dataGridView1.Rows[nwDiag.dataGridView1.RowCount - 8].Cells[1].Value.ToString();
                 colsToGrp = nwDiag.dataGridView1.Rows[nwDiag.dataGridView1.RowCount - 7].Cells[1].Value.ToString().Split(seps);
                 colsToCnt = nwDiag.dataGridView1.Rows[nwDiag.dataGridView1.RowCount - 6].Cells[1].Value.ToString().Split(seps);
@@ -2603,13 +2652,11 @@ namespace ReportsAndProcesses.Forms
                 System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                startInfo.FileName = CommonCode.CommonCodes.JavaPath + "\\java.exe";
+                startInfo.Arguments = "-jar -Xms1024m -Xmx1024m \"" +
                   Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args);
                 jarPrcs.StartInfo = startInfo;
                 jarPrcs.Start();
-                //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " +
-                //  Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
             }
             else
             {
@@ -2940,11 +2987,6 @@ namespace ReportsAndProcesses.Forms
                  " this action!\nContact your System Administrator!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Copy/Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             long oldRptID = Global.mnFrm.cmCde.getRptID("(Duplicate) " + this.rptNmTextBox.Text);
             if (oldRptID > 0)
             {
@@ -2960,7 +3002,7 @@ namespace ReportsAndProcesses.Forms
                 this.colsToCountTextBox.Text, this.colsToSumTextBox.Text, this.colsToAvrgTextBox.Text,
                 this.colsToFrmtNumTextBox.Text, this.outPutTypComboBox.Text, this.orntnComboBox.Text,
                   this.prcssRnnrTextBox.Text, this.rptLytComboBox.Text, this.delimiterComboBox.Text,
-                  this.imgColNosTextBox.Text, "");
+                  this.imgColNosTextBox.Text, "", this.preRptSQLTextBox.Text, this.postRptSQLTextBox.Text);
 
                 oldRptID = Global.mnFrm.cmCde.getRptID("(Duplicate) " + this.rptNmTextBox.Text);
                 for (int i = 0; i < this.paramsListView.Items.Count; i++)
@@ -2973,7 +3015,19 @@ namespace ReportsAndProcesses.Forms
                       this.paramsListView.Items[i].SubItems[6].Text,
                       this.paramsListView.Items[i].SubItems[9].Text,
                       this.paramsListView.Items[i].SubItems[10].Text,
-                      this.paramsListView.Items[i].SubItems[5].Text);
+                      this.paramsListView.Items[i].SubItems[5].Text,
+                      Global.mnFrm.cmCde.cnvrtBitStrToBool(
+                      this.paramsListView.Items[i].SubItems[12].Text));
+                }
+                for (int i = 0; i < this.roleStListView.Items.Count; i++)
+                {
+                    Global.createRptRole(oldRptID,
+                      int.Parse(this.roleStListView.Items[i].SubItems[2].Text));
+                }
+                for (int i = 0; i < this.prgrmsListView.Items.Count; i++)
+                {
+                    Global.createPrgmUnts(oldRptID,
+                      int.Parse(this.prgrmsListView.Items[i].SubItems[2].Text));
                 }
             }
             //this.searchForRptTextBox.Text = "%(Duplicate) " + this.rptNmTextBox.Text + "%";
@@ -3004,11 +3058,6 @@ namespace ReportsAndProcesses.Forms
                 Global.mnFrm.cmCde.showMsg("Please select a Saved Report First!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             addGrpDiag nwdiag = new addGrpDiag();
             nwdiag.rptID = long.Parse(this.rptIDTextBox.Text);
 
@@ -3054,11 +3103,6 @@ namespace ReportsAndProcesses.Forms
 
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             addGrpDiag nwdiag = new addGrpDiag();
             nwdiag.rptID = long.Parse(this.rptIDTextBox.Text);
             nwdiag.grpID = long.Parse(this.grpListView.SelectedItems[0].SubItems[3].Text);
@@ -3112,17 +3156,11 @@ namespace ReportsAndProcesses.Forms
                 Global.mnFrm.cmCde.showMsg("Please select a Report/Process First!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             string[] selVals = new string[this.prgrmsListView.Items.Count];
             for (int i = 0; i < this.prgrmsListView.Items.Count; i++)
             {
                 selVals[i] = this.prgrmsListView.Items[i].SubItems[2].Text;
             }
-
             DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
              Global.mnFrm.cmCde.getLovID("Reports and Processes"), ref selVals, false, false);
             if (dgRes == DialogResult.OK)
@@ -3167,6 +3205,7 @@ namespace ReportsAndProcesses.Forms
             try
             {
                 string outFileNm = "";
+                string outptUSED = this.rptRunListView.SelectedItems[0].SubItems[8].Text;
                 if (this.rptRunListView.SelectedItems.Count > 0)
                 {
                     if (this.rptRunListView.SelectedItems[0].SubItems[8].Text == "MICROSOFT EXCEL")
@@ -3254,7 +3293,7 @@ namespace ReportsAndProcesses.Forms
                     System.IO.FileInfo file = new System.IO.FileInfo(outFileNm);
                     if (file.Length > 0)
                     {
-                        System.Threading.Thread thread = new System.Threading.Thread(() => openFile(this.rptRunListView.SelectedItems[0].SubItems[8].Text, outFileNm));
+                        System.Threading.Thread thread = new System.Threading.Thread(() => openFile(outptUSED, outFileNm));
                         thread.Start();
                     }
                     else
@@ -3399,11 +3438,6 @@ namespace ReportsAndProcesses.Forms
                  " this action!\nContact your System Administrator!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             if (this.prgrmsListView.SelectedItems.Count <= 0)
             {
                 Global.mnFrm.cmCde.showMsg("Please select the Program Units to Delete", 0);
@@ -3432,11 +3466,6 @@ namespace ReportsAndProcesses.Forms
                  " this action!\nContact your System Administrator!", 0);
                 return;
             }
-            /*if (this.rptPrcsTypComboBox.Text == "System Process")
-            {
-                Global.mnFrm.cmCde.showMsg("Application Users cannot Edit a System Process\r\nContact the Software Vendor!", 0);
-                return;
-            }*/
             if (this.grpListView.SelectedItems.Count <= 0)
             {
                 Global.mnFrm.cmCde.showMsg("Please select the Groups to Delete", 0);
@@ -3493,19 +3522,16 @@ namespace ReportsAndProcesses.Forms
                           "\""+ Application.StartupPath + "\\bin\"",
                           "DESKTOP",
                           "\""+ Application.StartupPath + "\\Images\\"+CommonCode.CommonCodes.DatabaseNm+"\""};
-                    //Global.mnFrm.cmCde.showMsg(String.Join(" ", args), 0);
                     if (rptRnnrNm.Contains("Jasper"))
                     {
-                        //Global.mnFrm.cmCde.showSQLNoPermsn("C:\\Windows\\System32\\cmd.exe /C java -jar " + Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                         System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                         System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                         startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                        startInfo.FileName = "cmd.exe";
-                        startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                        startInfo.FileName = CommonCode.CommonCodes.JavaPath + "\\java.exe";
+                        startInfo.Arguments = "-jar -Xms1024m -Xmx1024m \"" +
                           Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args);
                         jarPrcs.StartInfo = startInfo;
                         jarPrcs.Start();
-                        //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " + Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                     }
                     else
                     {
@@ -3737,7 +3763,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
         private void resetButton_Click(object sender, EventArgs e)
         {
             Global.mnFrm.cmCde.minimizeMemory();
-            this.searchInRptComboBox.SelectedIndex = 2;
+            this.searchInRptComboBox.SelectedIndex = 3;
             this.searchInRptRnComboBox.SelectedIndex = 2;
             this.orderByComboBox.SelectedIndex = 0;
             this.searchForRptTextBox.Text = "%";
@@ -4180,20 +4206,17 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                 System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                startInfo.FileName = CommonCode.CommonCodes.JavaPath + "\\java.exe";
+                startInfo.Arguments = "-jar -Xms1024m -Xmx1024m \"" +
                   Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args);
                 jarPrcs.StartInfo = startInfo;
                 jarPrcs.Start();
-                //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " +
-                //  Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
             }
             else
             {
                 System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile,
                   String.Join(" ", args));
             }
-            //System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile, String.Join(" ", args));
             Global.updateRptRnActvTime(rptRunID);
 
             //Launch Auto-Refresh
@@ -4391,7 +4414,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                 "Cols Nos To Group or Width & Height (Px) for Charts","Cols Nos To Count or Use in Charts",
             "Cols Nos To Format Numerically","Cols Nos To Sum","Cols Nos To Average",
             "Output Type**","Orientation","Layout","Delimiter",
-            "Detail Report Images Col Nos","Is Enabled?"};
+            "Detail Report Images Col Nos","Pre-Process Query","Post-Process Query","Is Enabled?"};
 
             for (int a = 0; a < hdngs.Length; a++)
             {
@@ -4435,7 +4458,9 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 16]).Value2 = dtst.Tables[0].Rows[a][15].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 17]).Value2 = dtst.Tables[0].Rows[a][17].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 18]).Value2 = dtst.Tables[0].Rows[a][16].ToString();
-                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 19]).Value2 = enabled;
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 19]).Value2 = dtst.Tables[0].Rows[a][19].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 20]).Value2 = dtst.Tables[0].Rows[a][20].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 21]).Value2 = enabled;
                 }
             }
             else if (exprtTyp >= 3)
@@ -4472,7 +4497,9 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 16]).Value2 = dtst.Tables[0].Rows[a][15].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 17]).Value2 = dtst.Tables[0].Rows[a][17].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 18]).Value2 = dtst.Tables[0].Rows[a][16].ToString();
-                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 19]).Value2 = enabled;
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 19]).Value2 = dtst.Tables[0].Rows[a][19].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 20]).Value2 = dtst.Tables[0].Rows[a][20].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 21]).Value2 = enabled;
                 }
             }
             else
@@ -4531,6 +4558,8 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
             string processName = "";
             string processDesc = "";
             string processQuery = "";
+            string preProcessQuery = "";
+            string postProcessQuery = "";
             string ownerModule = "Generic Module";
             string processType = "SQL Report";
             string processRunner = "Standard Process Runner";
@@ -4687,7 +4716,23 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                 }
                 try
                 {
-                    isEnabled = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 19]).Value2.ToString();
+                    preProcessQuery = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 19]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    preProcessQuery = "";
+                }
+                try
+                {
+                    postProcessQuery = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 20]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    postProcessQuery = "";
+                }
+                try
+                {
+                    isEnabled = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 21]).Value2.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -4700,7 +4745,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                 "Cols Nos To Group or Width & Height (Px) for Charts","Cols Nos To Count or Use in Charts",
             "Cols Nos To Format Numerically","Cols Nos To Sum","Cols Nos To Average",
             "Output Type**","Orientation","Layout","Delimiter",
-            "Detail Report Images Col Nos","Is Enabled?"};
+            "Detail Report Images Col Nos","Pre-Process Query","Post-Process Query","Is Enabled?"};
 
                     if (processName != hdngs[0].ToUpper()
                        || processDesc != hdngs[1].ToUpper()
@@ -4719,7 +4764,9 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                        || lyout != hdngs[14].ToUpper()
                        || dlmter != hdngs[15].ToUpper()
                        || imageCols != hdngs[16].ToUpper()
-                       || isEnabled != hdngs[17].ToUpper())
+                       || preProcessQuery != hdngs[17].ToUpper()
+                       || postProcessQuery != hdngs[18].ToUpper()
+                       || isEnabled != hdngs[19].ToUpper())
                     {
                         Global.mnFrm.cmCde.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
                         return;
@@ -4739,14 +4786,14 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     {
                         Global.createRpt(processName, processDesc, ownerModule, processType, processQuery,
                             isEnbd, colsToGroup, colsToCount, colsToSum, colsToAverage, colsToFormat, outputType,
-                            ornTaTion, processRunner, lyout, dlmter, imageCols, jrxmlFileLoc);
+                            ornTaTion, processRunner, lyout, dlmter, imageCols, jrxmlFileLoc, preProcessQuery, postProcessQuery);
                         Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":S" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 255, 0));
                     }
                     else if (reportID > 0)
                     {
                         Global.updateRpt(reportID, processName, processDesc, ownerModule, processType, processQuery,
                             isEnbd, colsToGroup, colsToCount, colsToSum, colsToAverage, colsToFormat, outputType,
-                            ornTaTion, processRunner, lyout, dlmter, imageCols, jrxmlFileLoc);
+                            ornTaTion, processRunner, lyout, dlmter, imageCols, jrxmlFileLoc, preProcessQuery, postProcessQuery);
                         Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":S" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
                     }
                     else
@@ -4836,7 +4883,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
             ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, 1]).Font.Bold = true;
             ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, 1]).Value2 = "No.";
             string[] hdngs = { "Process Name**", "Parameter Name/Prompt**", "SQL Representation**",
-                             "Default Value","LOV Name","Is Required?","Data Type","Date Format"};
+                             "Default Value", "LOV Name", "Is Required?", "Data Type", "Date Format", "Is Displayed?"};
 
             for (int a = 0; a < hdngs.Length; a++)
             {
@@ -4860,6 +4907,15 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     {
                         isRequired = "NO";
                     }
+                    string isDisplayed = dtst.Tables[0].Rows[a][10].ToString();
+                    if (isDisplayed == "1")
+                    {
+                        isDisplayed = "YES";
+                    }
+                    else
+                    {
+                        isDisplayed = "NO";
+                    }
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 1]).Value2 = a + 1;
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = dtst.Tables[0].Rows[a][8].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 3]).Value2 = dtst.Tables[0].Rows[a][1].ToString();
@@ -4870,6 +4926,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 7]).Value2 = isRequired;
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 8]).Value2 = dtst.Tables[0].Rows[a][6].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 9]).Value2 = dtst.Tables[0].Rows[a][7].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 10]).Value2 = isDisplayed;
                 }
             }
             else if (exprtTyp >= 3)
@@ -4886,6 +4943,15 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     {
                         isRequired = "NO";
                     }
+                    string isDisplayed = dtst.Tables[0].Rows[a][10].ToString();
+                    if (isDisplayed == "1")
+                    {
+                        isDisplayed = "YES";
+                    }
+                    else
+                    {
+                        isDisplayed = "NO";
+                    }
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 1]).Value2 = a + 1;
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = dtst.Tables[0].Rows[a][8].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 3]).Value2 = dtst.Tables[0].Rows[a][1].ToString();
@@ -4896,6 +4962,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 7]).Value2 = isRequired;
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 8]).Value2 = dtst.Tables[0].Rows[a][6].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 9]).Value2 = dtst.Tables[0].Rows[a][7].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 10]).Value2 = isDisplayed;
                 }
             }
             else
@@ -4948,6 +5015,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
             string dfltVal = "";
             string lovName = "";
             string isRequired = "NO";
+            string isDisplayed = "YES";
             string datatyp = "";
             string dateFormat = "";
             int rownum = 5;
@@ -5009,6 +5077,7 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                 {
                     datatyp = "";
                 }
+
                 try
                 {
                     dateFormat = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 9]).Value2.ToString();
@@ -5017,10 +5086,18 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                 {
                     dateFormat = "";
                 }
+                try
+                {
+                    isDisplayed = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 10]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    isDisplayed = "";
+                }
                 if (rownum == 5)
                 {
                     string[] hdngs = { "Process Name**", "Parameter Name/Prompt**", "SQL Representation**",
-                             "Default Value","LOV Name","Is Required?","Data Type","Date Format"};
+                             "Default Value", "LOV Name", "Is Required?", "Data Type", "Date Format", "Is Displayed?"};
                     if (processName != hdngs[0].ToUpper()
                        || parameterName != hdngs[1].ToUpper()
                        || sqlRep != hdngs[2].ToUpper()
@@ -5028,7 +5105,8 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                        || lovName != hdngs[4].ToUpper()
                        || isRequired != hdngs[5].ToUpper()
                        || datatyp != hdngs[6].ToUpper()
-                       || dateFormat != hdngs[7].ToUpper())
+                       || dateFormat != hdngs[7].ToUpper()
+                       || isDisplayed != hdngs[8].ToUpper())
                     {
                         Global.mnFrm.cmCde.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
                         return;
@@ -5036,7 +5114,6 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     rownum++;
                     continue;
                 }
-
                 if (processName != "" && parameterName != "" && datatyp != "" && sqlRep != "")
                 {
                     bool isRqrd = false;
@@ -5044,16 +5121,21 @@ to_char(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                     {
                         isRqrd = true;
                     }
+                    bool isDsplyd = false;
+                    if (isDisplayed == "YES")
+                    {
+                        isDsplyd = true;
+                    }
                     long reportID = Global.mnFrm.cmCde.getRptID(processName);
                     long paramID = Global.getParamNmID(reportID, parameterName);
                     if (reportID > 0 && paramID <= 0)
                     {
-                        Global.createParam(reportID, parameterName, sqlRep, dfltVal, isRqrd, Global.mnFrm.cmCde.getLovID(lovName).ToString(), datatyp, dateFormat, lovName);
+                        Global.createParam(reportID, parameterName, sqlRep, dfltVal, isRqrd, Global.mnFrm.cmCde.getLovID(lovName).ToString(), datatyp, dateFormat, lovName, isDsplyd);
                         Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":S" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 255, 0));
                     }
                     else if (reportID > 0 && paramID > 0)
                     {
-                        Global.updateParam(paramID, parameterName, sqlRep, dfltVal, isRqrd, Global.mnFrm.cmCde.getLovID(lovName).ToString(), datatyp, dateFormat, lovName);
+                        Global.updateParam(paramID, parameterName, sqlRep, dfltVal, isRqrd, Global.mnFrm.cmCde.getLovID(lovName).ToString(), datatyp, dateFormat, lovName, isDsplyd);
                         Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":S" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
                     }
                     else

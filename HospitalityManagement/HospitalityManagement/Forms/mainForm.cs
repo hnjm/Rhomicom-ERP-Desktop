@@ -19,7 +19,8 @@ namespace HospitalityManagement.Forms
 
     //public NpgsqlConnection gnrlSQLConn = new NpgsqlConnection();
     public Int64 usr_id = -1;
-    public int[] role_st_id = new int[0];
+        public Int64 prsn_id = -1;
+        public int[] role_st_id = new int[0];
     public Int64 lgn_num = -1;
     public int Og_id = -1;
 
@@ -45,8 +46,8 @@ namespace HospitalityManagement.Forms
       Global.mnFrm.cmCde.Role_Set_IDs = this.role_st_id;
       Global.mnFrm.cmCde.User_id = this.usr_id;
       Global.mnFrm.cmCde.Org_id = this.Og_id;
-
-      this.clrs = Global.mnFrm.cmCde.getColors();
+            this.prsn_id = Global.mnFrm.cmCde.getUserPrsnID(this.usr_id);
+            this.clrs = Global.mnFrm.cmCde.getColors();
       Global.refreshRqrdVrbls();
       Global.myHosp.loadMyRolesNMsgtyps();
       chngBackClr();

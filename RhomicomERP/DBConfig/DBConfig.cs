@@ -59,6 +59,7 @@ namespace DBConfig
                     this.unameTextBox.Text = cmnCde.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
                     this.restoreDBNmTextBox.Text = cmnCde.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
                     this.portTextBox.Text = cmnCde.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.pgDirTextBox.Text = cmnCde.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
                     fileReader.Close();
                     fileReader = null;
                 }

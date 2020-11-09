@@ -352,6 +352,14 @@ namespace CommonCode
             {
                 this.exprtDtStSaved();
             }
+            else if (this.data_source_id == 73)
+            {
+                this.exprtCmbntnsTmp(this.chrtTyp);
+            }
+            else if (this.data_source_id == 74)
+            {
+                this.autoLoadBdgtTmp(this.strtDte, this.endDate, this.prdTyps);
+            }
             //this.clearPrvExclFiles();
         }
         #endregion
@@ -610,15 +618,15 @@ namespace CommonCode
             if (this.rptTitle != "")
             {
                 //this.trgtSheets[0].get_Range("B4:E4", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).MergeCells = true;
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).Value2 = this.rptTitle.ToUpper();
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).MergeCells = true;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).Value2 = this.rptTitle.ToUpper();
                 //this.trgtSheets[0].get_Range("C3:Q3", Type.Missing).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).Font.Bold = true;
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).Font.Size = 12;
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).WrapText = true;
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
-                this.trgtSheets[0].get_Range("A4:D4", Type.Missing).RowHeight = 20;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).Font.Bold = true;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).Font.Size = 12;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).WrapText = true;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).VerticalAlignment = Excel.XlVAlign.xlVAlignBottom;
+                this.trgtSheets[0].get_Range("A4:G4", Type.Missing).RowHeight = 20;
                 //this.trgtSheets[0].get_Range("B4:E4", Type.Missing).AutoFit();
             }
             this.trgtSheets[0].Shapes.AddPicture(cmnCde.getOrgImgsDrctry() + @"\" + this.orgID + ".png",
@@ -631,7 +639,7 @@ namespace CommonCode
                 {
                     continue;
                 }
-              ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (colidx + 1)]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (colidx + 1)]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
                 ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (colidx + 1)]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
                 ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (colidx + 1)]).Font.Bold = true;
                 ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (colidx + 1)]).Value2 = this.lstvw.Columns[a].Text.ToUpper();
@@ -640,19 +648,15 @@ namespace CommonCode
             }
 
             //Margins for printing 
-
             try
             {
-
                 this.trgtSheets[0].PageSetup.CenterVertically = false;
                 this.trgtSheets[0].PageSetup.CenterHorizontally = true;
                 this.trgtSheets[0].PageSetup.TopMargin = this.exclApp.CentimetersToPoints(0.70);
                 this.trgtSheets[0].PageSetup.LeftMargin = this.exclApp.CentimetersToPoints(0.20);
                 this.trgtSheets[0].PageSetup.RightMargin = this.exclApp.CentimetersToPoints(0.20);
                 this.trgtSheets[0].PageSetup.BottomMargin = this.exclApp.CentimetersToPoints(0.20);
-
                 //Footer and Header Margins
-
                 this.trgtSheets[0].PageSetup.HeaderMargin = this.exclApp.CentimetersToPoints(0.05);
                 this.trgtSheets[0].PageSetup.FooterMargin = this.exclApp.CentimetersToPoints(0.05);
                 if (colidx > 4)
@@ -695,8 +699,7 @@ namespace CommonCode
                     {
                         continue;
                     }
-                    if (double.TryParse(this.lstvw.Items[i].SubItems[a].Text, out tstVal)
-                      && a > 1)
+                    if (double.TryParse(this.lstvw.Items[i].SubItems[a].Text, out tstVal) && a > 1)
                     {
                         ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (colidx + 1)]).NumberFormat = "#,##0.00_);[Red](#,##0.00)";
                     }
@@ -704,7 +707,7 @@ namespace CommonCode
                     {
                         prfx = "'";
                     }
-                  ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (colidx + 1)]).Font.Bold = this.lstvw.Items[i].Font.Bold;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (colidx + 1)]).Font.Bold = this.lstvw.Items[i].Font.Bold;
                     ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (colidx + 1)]).WrapText = true;
                     ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (colidx + 1)]).Value2 = prfx + this.lstvw.Items[i].SubItems[a].Text.Trim();
                     if (this.lstvw.Items[i].SubItems[a].Text.StartsWith("           "))
@@ -727,6 +730,7 @@ namespace CommonCode
                     colidx++;
                 }
             }
+
             if (this.rptTitle == "")
             {
                 this.trgtSheets[0].get_Range("A6:Z65535", Type.Missing).WrapText = true;
@@ -737,7 +741,7 @@ namespace CommonCode
             {
                 this.trgtSheets[0].get_Range("A1:Z5", Type.Missing).WrapText = true;
                 //this.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Columns.AutoFit();
-                this.trgtSheets[0].get_Range("B5:Z65535", Type.Missing).Rows.AutoFit();
+                this.trgtSheets[0].get_Range("B4:Z65535", Type.Missing).Rows.AutoFit();
             }
             this.trgtSheets[0].get_Range("A1:A65535", Type.Missing).ColumnWidth = 9;
             this.cancelButton.Text = "Finish";
@@ -914,6 +918,95 @@ namespace CommonCode
         #endregion
 
         #region "BUDGETS..."
+        private void autoLoadBdgtTmp(string startDte, string endDte, string periodTyp)
+        {
+            try
+            {
+                System.Windows.Forms.Application.DoEvents();
+                this.cancelButton.Text = "Cancel";
+                this.dtst = this.get_Bdgt_ChrtDet("%", "Account Details",
+               0, 1000000000, cmnCde.Org_id, -1);
+
+                Decimal totl = (Decimal)this.dtst.Tables[0].Rows.Count;
+                List<string> dteArray1 = this.getBdgtDates(startDte, endDte, periodTyp);
+                for (int i = 0; i < totl; i++)
+                {
+                    this.progressLabel.Text = "Auto-Loading Budget Accounts ---...." + (int)(((Decimal)(i + 1) / (Decimal)totl) * 100) + "% Complete";
+                    this.progressBar1.Value = (int)(((Decimal)(i + 1) / (Decimal)totl) * 100);
+                    System.Windows.Forms.Application.DoEvents();
+                    if (this.stop == true)
+                    {
+                        MessageBox.Show("Operation Cancelled!", "Rhomicom Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    int accnt_IDRd = int.Parse(dtst.Tables[0].Rows[i][0].ToString());
+                    string accntType = dtst.Tables[0].Rows[i][3].ToString();
+                    bool isprnt = (dtst.Tables[0].Rows[i][4].ToString() == "1");
+                    bool iscntrl = (cmnCde.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "has_sub_ledgers", accnt_IDRd) == "1");
+                    bool isPrmtd = true;
+                    string bdgtStrtDate = "";
+                    string bdgtEndDate = "";
+
+                    for (int a = 0; a < dteArray1.Count - 1; a++)
+                    {
+                        int rem = 0;
+                        Math.DivRem(a, 2, out rem);
+                        if (rem == 0)
+                        {
+                            bdgtStrtDate = dteArray1[a];
+                            bdgtEndDate = dteArray1[a + 1];
+                            long bdgtlnid = this.get_BdgtLnID(this.bdgtID, accnt_IDRd, bdgtStrtDate, bdgtEndDate);
+
+                            long oldBdgtDtID1 = this.doesBdgtDteOvrlap(this.bdgtID, accnt_IDRd, bdgtStrtDate);
+                            long oldBdgtDtID2 = this.doesBdgtDteOvrlap(this.bdgtID, accnt_IDRd, bdgtEndDate);
+                            bool isDteOK = true;
+                            if (bdgtlnid <= 0 && oldBdgtDtID1 > 0)
+                            {
+                                isDteOK = false;
+                            }
+                            if (bdgtlnid <= 0 && oldBdgtDtID2 > 0)
+                            {
+                                isDteOK = false;
+                            }
+                            if (bdgtlnid > 0 && oldBdgtDtID1 > 0 && bdgtlnid != oldBdgtDtID1)
+                            {
+                                isDteOK = false;
+                            }
+                            if (bdgtlnid > 0 && oldBdgtDtID2 > 0 && bdgtlnid != oldBdgtDtID2)
+                            {
+                                isDteOK = false;
+                            }
+                            //cmnCde.showSQLNoPermsn("accnt_IDRd:"+ accnt_IDRd + ":bdgtlnid:" + bdgtlnid + ":oldBdgtDtID1:" + oldBdgtDtID1 + ":oldBdgtDtID2:" 
+                            //    + oldBdgtDtID2 + ":bdgtStrtDate:" + bdgtStrtDate + ":bdgtEndDate:" + bdgtEndDate);
+                            if (bdgtlnid > 0 && isDteOK == true && isPrmtd == true)
+                            {
+                                //this.updateBdgtLn(bdgtlnid, amntRd);
+                                //((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rowno, i + 4]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 0));
+                            }
+                            else if (isprnt == false && iscntrl == false && isDteOK == true && isPrmtd == true && bdgtlnid <= 0 && oldBdgtDtID1 <= 0 && oldBdgtDtID2 <= 0)
+                            {
+                                if (accntType == "EX")
+                                {
+                                    this.createBdgtLn(this.bdgtID, accnt_IDRd, 0, bdgtStrtDate, bdgtEndDate, "Warn");
+                                    //((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rowno, i + 4]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                                }
+                                else
+                                {
+                                    this.createBdgtLn(this.bdgtID, accnt_IDRd, 0, bdgtStrtDate, bdgtEndDate, "Do Nothing");
+                                    //((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rowno, i + 4]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                cmnCde.showSQLNoPermsn(ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.InnerException);
+            }
+        }
+
         private void exprtBdgtTmp(string startDte, string endDte, string periodTyp)
         {
             System.Windows.Forms.Application.DoEvents();
@@ -929,12 +1022,13 @@ namespace CommonCode
             this.trgtSheets = new Excel.Worksheet[1];
 
             this.trgtSheets[0] = (Excel.Worksheet)this.nwWrkBk.Worksheets[1];
-            string strSql = "SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.accnt_type, is_prnt_accnt " +
+            /*string strSql = "SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.accnt_type, is_prnt_accnt " +
                 "FROM accb.accb_chart_of_accnts a " +
                 "WHERE ((a.org_id = " + this.orgID + ") and org.does_prsn_hv_accnt_id(" + cmnCde.getUserPrsnID(cmnCde.User_id) + ",accnt_id)>0) ORDER BY a.accnt_typ_id, a.accnt_num ";
-            /* and (a.accnt_type = 'R' or a.accnt_type = 'EX')*/
-            this.dtst = cmnCde.selectDataNoParams(strSql);
+            this.dtst = cmnCde.selectDataNoParams(strSql);*/
 
+            this.dtst = this.get_Bdgt_ChrtDet("%", "Account Details",
+           0, 1000000000, cmnCde.Org_id, -1);
             int lastrow = 0;
             int lastcol = 0;
 
@@ -1034,9 +1128,17 @@ namespace CommonCode
                         expseEnd = i + 6;
                     }
                 }
-                for (int a = 0; a < 3; a++)
+                for (int a = 0; a < 6; a++)
                 {
-                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (a + 1)]).Value2 = dtst.Tables[0].Rows[i][a].ToString();
+                    if (a == 5)
+                    {
+                        this.trgtSheets[0].get_Range("B" + (i + 6).ToString() + ":C" + (i + 6).ToString(), Type.Missing).MergeCells = true;
+                        this.trgtSheets[0].get_Range("B" + (i + 6).ToString() + ":C" + (i + 6).ToString(), Type.Missing).Value2 = dtst.Tables[0].Rows[i][a].ToString();
+                    }
+                    else if (a == 0)
+                    {
+                        ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), (a + 1)]).Value2 = dtst.Tables[0].Rows[i][a].ToString();
+                    }
                 }
 
                 int colNo1 = 4;
@@ -1076,6 +1178,8 @@ namespace CommonCode
 
             this.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Columns.AutoFit();
             this.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Rows.AutoFit();
+            //this.trgtSheets[0].get_Range("B6:C65535", Type.Missing).Columns.AutoFit();
+            this.trgtSheets[0].get_Range("B1:B65535", Type.Missing).ColumnWidth = 45;
         }
 
         public List<string> getBdgtDates(
@@ -1479,13 +1583,90 @@ namespace CommonCode
          "WHERE(a.budget_id = " + bdgtID + " and a.accnt_id = " + actID +
          " and start_date = '" + dte1 + "' and end_date = '" + dte2 +
          "')";
-
+            //cmnCde.showSQLNoPermsn(strSql);
             DataSet dtst = cmnCde.selectDataNoParams(strSql);
             if (dtst.Tables[0].Rows.Count > 0)
             {
                 return long.Parse(dtst.Tables[0].Rows[0][0].ToString());
             }
             return -1;
+        }
+
+        public DataSet get_Bdgt_ChrtDet(string searchWord, string searchIn,
+          Int64 offset, int limit_size, int orgID, int lovID)
+        {
+            /*string strSql = "SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.accnt_type, is_prnt_accnt " +
+                "FROM accb.accb_chart_of_accnts a " +
+                "WHERE ((a.org_id = " + this.orgID + ") and org.does_prsn_hv_accnt_id(" + cmnCde.getUserPrsnID(cmnCde.User_id) + ",accnt_id)>0) ORDER BY a.accnt_typ_id, a.accnt_num ";
+             this.dtst = cmnCde.selectDataNoParams(strSql);*/
+            searchWord = searchWord.Replace(".", "%");
+            string lovQry = "";
+            if (lovID > 0)
+            {
+                lovQry = cmnCde.getGnrlRecNm("gst.gen_stp_lov_names", "value_list_id", "sqlquery_if_dyn", lovID);
+                lovQry = "(" + lovQry.Replace("{:prsn_id}", cmnCde.Prsn_id.ToString()) + ") xxtbl1 ";
+            }
+            string strSql = "";
+            string whereCls = " and (accnt_num ilike '" + searchWord.Replace("'", "''") +
+           "' or accnt_name ilike '" + searchWord.Replace("'", "''") +
+           "' or accnt_num||'%.%'||accnt_name ilike '" + searchWord.Replace("'", "''") +
+           "')";
+            if (lovQry != "")
+            {
+                whereCls = whereCls + " and accnt_id IN (select xxtbl1.a::integer from " + lovQry + ")";
+            }
+            else
+            {
+                whereCls = whereCls + " and org.does_prsn_hv_accnt_id(" + cmnCde.getUserPrsnID(cmnCde.User_id) + ",accnt_id)>0";
+            }
+            string subSql = @"SELECT accnt_id,accnt_num,accnt_name, accnt_type, is_prnt_accnt,space||accnt_num||'.'||accnt_name account_number_name,accnt_typ_id, prnt_accnt_id, control_account_id, depth, path, cycle 
+      FROM suborg WHERE 1=1 " + whereCls + @"  
+      ORDER BY accnt_typ_id, path";
+
+            if (searchIn != "Parent Account Details"
+              || searchWord.Length <= 3)
+            {
+                strSql = @"WITH RECURSIVE suborg(accnt_id, accnt_num, accnt_name, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_accnt_id, control_account_id, depth, path, cycle, space) AS 
+      ( 
+      SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_accnt_id, a.control_account_id, 1, ARRAY[a.accnt_num||'']::character varying[], false, '' opad 
+      FROM accb.accb_chart_of_accnts a 
+        WHERE ((CASE WHEN a.prnt_accnt_id<=0 THEN a.control_account_id ELSE a.prnt_accnt_id END)=-1 AND (a.org_id = " + orgID + @")) 
+      UNION ALL        
+      SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_accnt_id, a.control_account_id, sd.depth + 1, 
+      path || a.accnt_num, 
+      a.accnt_num = ANY(path), space || '      '
+      FROM 
+      accb.accb_chart_of_accnts a, suborg AS sd 
+      WHERE (((CASE WHEN a.prnt_accnt_id<=0 THEN a.control_account_id ELSE a.prnt_accnt_id END)=sd.accnt_id AND NOT cycle) 
+       AND (a.org_id = " + orgID + @"))) 
+       " + subSql + " LIMIT " + limit_size +
+                    " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
+            }
+            else
+            {
+                subSql = @"SELECT accnt_id,accnt_num,accnt_name,space||accnt_num||'.'||accnt_name account_number_name, is_prnt_accnt, accnt_type,accnt_typ_id, prnt_accnt_id, control_account_id, depth, path, cycle 
+      FROM suborg WHERE 1=1 ORDER BY accnt_typ_id, path";
+
+                strSql = @"WITH RECURSIVE suborg(accnt_id, accnt_num, accnt_name, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_accnt_id, control_account_id, depth, path, cycle, space) AS 
+      ( 
+      SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_accnt_id, a.control_account_id, 1, ARRAY[a.accnt_num||'']::character varying[], false, '' opad 
+      FROM accb.accb_chart_of_accnts a 
+        WHERE ((a.accnt_name ilike '" + searchWord.Replace("'", "''") +
+             @"' or a.accnt_num ilike '" + searchWord.Replace("'", "''") +
+             @"') AND (a.org_id = " + orgID + @")) 
+      UNION ALL        
+      SELECT a.accnt_id, a.accnt_num, a.accnt_name, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_accnt_id, a.control_account_id, sd.depth + 1, 
+      path || a.accnt_num, 
+      a.accnt_num = ANY(path), space || '      '
+      FROM 
+      accb.accb_chart_of_accnts a, suborg AS sd 
+      WHERE (((CASE WHEN a.prnt_accnt_id<=0 THEN a.control_account_id ELSE a.prnt_accnt_id END)=sd.accnt_id AND NOT cycle) 
+       AND (a.org_id = " + orgID + @"))) 
+       " + subSql + " LIMIT " + limit_size +
+                  " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
+            }
+            DataSet dtst = cmnCde.selectDataNoParams(strSql);
+            return dtst;
         }
         #endregion
 
@@ -1898,6 +2079,934 @@ namespace CommonCode
             return "NO";
         }
 
+        private DataSet get_One_SegmentDet(int segNum, int orgid)
+        {
+            string strSql = "";
+            strSql = @"SELECT segment_id, segment_name_prompt, system_clsfctn 
+        FROM org.org_acnt_sgmnts a  WHERE(a.org_id = " + orgid + " and a.segment_number = " + segNum + ") ORDER BY a.segment_number";
+            /*strSql = @"SELECT * FROM (SELECT segment_id, segment_name_prompt, system_clsfctn, 
+            REPLACE(system_clsfctn,'Natural','0000') nwsysclsfctcn, 
+            row_number() OVER (ORDER BY REPLACE(system_clsfctn,'Natural','0000')) AS numer 
+        FROM org.org_acnt_sgmnts a  WHERE(a.org_id = " + orgid + ") ORDER BY  REPLACE(system_clsfctn,'Natural','0000')) tbl1 WHERE  tbl1.numer = " + segNum + "";*/
+            //Global.mnFrm.orgDet_SQL = strSql;
+            DataSet dtst = this.cmnCde.selectDataNoParams(strSql);
+            return dtst;
+        }
+
+        private DataSet get_OneSgmntVals(int segmentValID)
+        {
+            string strSql = @"SELECT a.segment_value_id, a.segment_value, a.segment_description, a.segment_value||'.'||a.segment_description account_number_name, 
+                                                a.prnt_segment_value_id, a.is_contra, a.accnt_type, a.is_prnt_accnt, a.is_retained_earnings, 
+                                                a.is_net_income, a.accnt_typ_id, a.report_line_no, a.has_sub_ledgers, a.control_account_id, 
+                                                a.crncy_id, a.is_suspens_accnt, a.account_clsfctn, a.mapped_grp_accnt_id,a.org_id, 
+                                                org.get_sgmnt_val_desc(a.prnt_segment_value_id) prnt_name, org.get_sgmnt_val_desc(a.control_account_id) cntrl_name,  
+                                                gst.get_pssbl_val(a.crncy_id) crncy_name, a.enable_cmbntns
+                          FROM org.org_segment_values a 
+                          WHERE(a.segment_value_id = " + segmentValID + ")";
+            //cmnCde.showSQLNoPermsn(strSql);
+            DataSet dtst = this.cmnCde.selectDataNoParams(strSql);
+            return dtst;
+        }
+        private int getSgmntsChsnDpndntValID(int dpndntSgmntNum, string[] sgmtValIDs)
+        {
+            int cntr = sgmtValIDs.Length;
+            for (int i = 0; i < cntr; i++)
+            {
+                int segVID = -1;
+                bool isPrs = int.TryParse(sgmtValIDs[i], out segVID);
+                if (i == dpndntSgmntNum && isPrs == true)
+                {
+                    return segVID;
+                }
+            }
+            return -1;
+        }
+        private DataSet get_SgmntVals(string searchWord, int segmentID, string extrWhere)
+        {
+            string strSql = "";
+            if (extrWhere == "")
+            {
+                extrWhere = " ORDER BY accnt_typ_id, path";
+            }
+            string whrcls = " AND (a.segment_value ilike '" + searchWord.Replace("'", "''") +
+                "' or a.segment_description ilike '" + searchWord.Replace("'", "''") + "')";
+            string subSql = @"SELECT segment_value_id,segment_value,segment_description, space||segment_value||'.'||segment_description account_number_name,
+                                prnt_segment_value_id, is_contra, accnt_type, is_prnt_accnt, is_retained_earnings, 
+                                is_net_income, accnt_typ_id, report_line_no, has_sub_ledgers, control_account_id, 
+                                 crncy_id, is_suspens_accnt, account_clsfctn, mapped_grp_accnt_id,org_id, 
+                                                prnt_name, cntrl_name, crncy_name, enable_cmbntns, dpn_seg_num, dpn_seg_id, dpndnt_sgmnt_val_id,
+                                depth, path, cycle 
+                            FROM suborg WHERE 1=1" + extrWhere;
+
+            strSql = @"WITH RECURSIVE suborg(segment_value_id, segment_value, segment_description, 
+                                                prnt_segment_value_id, is_contra, accnt_type, is_prnt_accnt, is_retained_earnings, 
+                                                is_net_income, accnt_typ_id, report_line_no, has_sub_ledgers, control_account_id, 
+                                                crncy_id, is_suspens_accnt, account_clsfctn, mapped_grp_accnt_id,org_id, 
+                                                prnt_name, cntrl_name, crncy_name, enable_cmbntns, dpn_seg_num, dpn_seg_id, dpndnt_sgmnt_val_id
+                                                , depth, path, cycle, space) AS 
+      ( 
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, 
+                                                a.prnt_segment_value_id, a.is_contra, a.accnt_type, a.is_prnt_accnt, a.is_retained_earnings, 
+                                                a.is_net_income, a.accnt_typ_id, a.report_line_no, a.has_sub_ledgers, a.control_account_id, 
+                                                a.crncy_id, a.is_suspens_accnt, a.account_clsfctn, a.mapped_grp_accnt_id,a.org_id, 
+                                                org.get_sgmnt_val_desc(a.prnt_segment_value_id) prnt_name, org.get_sgmnt_val_desc(a.control_account_id) cntrl_name,  
+                                                gst.get_pssbl_val(a.crncy_id) crncy_name, enable_cmbntns, org.get_dpndnt_sgmnt_number(segment_id) dpn_seg_num, 
+                                                org.get_dpndnt_sgmnt_id(segment_id) dpn_seg_id, dpndnt_sgmnt_val_id, 1, ARRAY[a.segment_value||'']::character varying[], false, '' opad 
+      FROM org.org_segment_values a 
+        WHERE ((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=-1 AND (a.is_enabled='1') AND (a.segment_id = " + segmentID + ")" + whrcls + @") 
+      UNION ALL        
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, 
+                                                a.prnt_segment_value_id, a.is_contra, a.accnt_type, a.is_prnt_accnt, a.is_retained_earnings, 
+                                                a.is_net_income, a.accnt_typ_id, a.report_line_no, a.has_sub_ledgers, a.control_account_id, 
+                                                a.crncy_id, a.is_suspens_accnt, a.account_clsfctn, a.mapped_grp_accnt_id,a.org_id, 
+                                                org.get_sgmnt_val_desc(a.prnt_segment_value_id) prnt_name, org.get_sgmnt_val_desc(a.control_account_id) cntrl_name,  
+                                                gst.get_pssbl_val(a.crncy_id) crncy_name, a.enable_cmbntns, org.get_dpndnt_sgmnt_number(a.segment_id) dpn_seg_num, 
+                                                org.get_dpndnt_sgmnt_id(segment_id) dpn_seg_id, a.dpndnt_sgmnt_val_id, sd.depth + 1, 
+      path || a.segment_value, 
+      a.segment_value = ANY(path), space || '      '
+      FROM org.org_segment_values a, suborg AS sd 
+      WHERE (((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=sd.segment_value_id  AND (a.is_enabled='1') AND NOT cycle) 
+       AND (a.segment_id = " + segmentID + @"))) 
+       " + subSql;
+            DataSet dtst = this.cmnCde.selectDataNoParams(strSql);
+            return dtst;
+        }
+
+        private long get_Ttl_SgmntVals(string searchWord, int segmentID)
+        {
+            string strSql = "";
+
+            string whrcls = " AND (a.segment_value ilike '" + searchWord.Replace("'", "''") +
+               "' or a.segment_description ilike '" + searchWord.Replace("'", "''") +
+               "')";
+            string subSql = @"SELECT count(segment_value_id) 
+      FROM suborg";
+
+            strSql = @"WITH RECURSIVE suborg(segment_value_id, segment_value, segment_description, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_segment_value_id, control_account_id, depth, path, cycle, space) AS 
+      ( 
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id, 1, ARRAY[a.segment_value||'']::character varying[], false, '' opad 
+      FROM org.org_segment_values a 
+        WHERE ((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=-1 AND (a.segment_id = " + segmentID + ")" + whrcls + @") 
+      UNION ALL        
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id, sd.depth + 1, 
+      path || a.segment_value, 
+      a.segment_value = ANY(path), space || '      '
+      FROM org.org_segment_values a, suborg AS sd 
+      WHERE (((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=sd.segment_value_id AND NOT cycle) 
+       AND (a.segment_id = " + segmentID + @"))) 
+       " + subSql;
+
+            DataSet dtst = this.cmnCde.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return long.Parse(dtst.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private DataSet get_One_SgmntValDet(int segmentValID)
+        {
+            string strSql = @"SELECT a.segment_value_id, a.segment_id, a.segment_value, a.segment_description, 
+       a.allwd_group_type, a.allwd_group_value, a.is_enabled, a.prnt_segment_value_id, 
+       a.created_by, a.creation_date, a.last_update_by, a.last_update_date, 
+       a.org_id, a.is_contra, a.accnt_type, a.is_prnt_accnt, a.is_retained_earnings, 
+       a.is_net_income, a.accnt_typ_id, a.report_line_no, a.has_sub_ledgers, 
+       a.control_account_id, a.crncy_id, a.is_suspens_accnt, a.account_clsfctn, 
+       a.mapped_grp_accnt_id, b.segment_number
+  FROM org.org_segment_values a, org.org_acnt_sgmnts b " +
+             "WHERE(a.segment_id = b.segment_id and a.segment_value_id = " + segmentValID + ")";
+
+            DataSet dtst = this.cmnCde.selectDataNoParams(strSql);
+            return dtst;
+        }
+
+        private void exprtCmbntnsTmp(int chrtTyp)
+        {
+            try
+            {
+                System.Windows.Forms.Application.DoEvents();
+                this.cancelButton.Text = "Cancel";
+                this.clearPrvExclFiles();
+                this.exclApp = new Microsoft.Office.Interop.Excel.Application();
+                this.exclApp.WindowState = Excel.XlWindowState.xlNormal;
+                this.exclApp.Visible = true;
+                CommonCodes.SetWindowPos((IntPtr)this.exclApp.Hwnd, CommonCodes.HWND_TOP, 0, 0, 0, 0, CommonCodes.SWP_NOMOVE | CommonCodes.SWP_NOSIZE | CommonCodes.SWP_SHOWWINDOW);
+
+                this.nwWrkBk = this.exclApp.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+                this.nwWrkBk.Worksheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                this.trgtSheets = new Excel.Worksheet[1];
+
+                this.trgtSheets[0] = (Excel.Worksheet)this.nwWrkBk.Worksheets[1];
+
+                this.trgtSheets[0].get_Range("B1:E1", Type.Missing).MergeCells = true;
+                this.trgtSheets[0].get_Range("B1:E1", Type.Missing).Value2 = cmnCde.getOrgName(this.orgID);
+                this.trgtSheets[0].get_Range("B1:E1", Type.Missing).Font.Bold = true;
+                this.trgtSheets[0].get_Range("B1:E1", Type.Missing).Font.Size = 13;
+                //Global.trgtSheets[0].get_Range("B1:E1", Type.Missing).HorizontalAlignment
+                this.trgtSheets[0].get_Range("B1:E1", Type.Missing).WrapText = true;
+
+                this.trgtSheets[0].get_Range("B2:E2", Type.Missing).MergeCells = true;
+                this.trgtSheets[0].get_Range("B2:E2", Type.Missing).Value2 = cmnCde.getOrgPstlAddrs(this.orgID).ToUpper().Replace("\r\n", " ");
+                this.trgtSheets[0].get_Range("B2:E2", Type.Missing).Font.Bold = true;
+                this.trgtSheets[0].get_Range("B2:E2", Type.Missing).Font.Size = 13;
+                this.trgtSheets[0].get_Range("B2:E2", Type.Missing).WrapText = true;
+
+                this.trgtSheets[0].get_Range("B3:F3", Type.Missing).MergeCells = true;
+                this.trgtSheets[0].get_Range("B3:F3", Type.Missing).Value2 = cmnCde.getOrgContactNos(this.orgID).ToUpper().Replace("\r\n", " ");
+                this.trgtSheets[0].get_Range("B3:F3", Type.Missing).Font.Bold = true;
+                this.trgtSheets[0].get_Range("B3:F3", Type.Missing).Font.Size = 13;
+                this.trgtSheets[0].get_Range("B3:F3", Type.Missing).WrapText = true;
+
+                this.trgtSheets[0].Shapes.AddPicture(cmnCde.getOrgImgsDrctry() + @"\" + this.orgID + ".png",
+                    Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 1, 1, 50, 50);
+
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, 1]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, 1]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, 1]).Font.Bold = true;
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, 1]).Value2 = "No.";
+                string[] hdngs ={"Account Number**","Account Name**","Account Description","Account Type**","Parent Account Name",
+            "Is Parent?(YES/NO)","Is Retained Earnings?(YES/NO)","Is Net Income Account?(YES/NO)","Is Contra Account?(YES/NO)",
+      "Reporting Line No.","Has SubLedgers?(YES/NO)", "Control Account Name", "Account Currency Code**",
+      "Is Suspense Account?(YES/NO)", "Account Classification", "Segment 1 Value", "Segment 2 Value", "Segment 3 Value", "Segment 4 Value"
+            , "Segment 5 Value", "Segment 6 Value", "Segment 7 Value", "Segment 8 Value", "Segment 9 Value", "Segment 10 Value","Mapped Group Org Account No."};
+
+                int funCurID = cmnCde.getOrgFuncCurID(this.orgID);
+                string funcCurCode = cmnCde.getPssblValNm(funCurID);
+
+                for (int a = 0; a < hdngs.Length; a++)
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (a + 2)]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (a + 2)]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (a + 2)]).Font.Bold = true;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[5, (a + 2)]).Value2 = hdngs[a].ToUpper();
+                }
+                string[] sgmntClsfctns = new string[10];
+                string[] sgmntExtrSQL = new string[10];
+                int[] sgmntIDs = new int[10];
+                int[] sgmntValTtls = new int[10];
+                int ttlSgmnts = int.Parse(cmnCde.getGnrlRecNm("org.org_details", "org_id", "no_of_accnt_sgmnts", this.orgID));
+                for (int i = 0; i < 10; i++)
+                {
+                    DataSet dtst0 = this.get_One_SegmentDet((i + 1), this.orgID);
+                    if (dtst0.Tables[0].Rows.Count > 0)
+                    {
+                        sgmntClsfctns[i] = dtst0.Tables[0].Rows[0][2].ToString();
+                        sgmntIDs[i] = int.Parse(dtst0.Tables[0].Rows[0][0].ToString());
+                        sgmntExtrSQL[i] = "";
+                        if (sgmntClsfctns[i] == "NaturalAccount")
+                        {
+                            if (chrtTyp == 1)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (1,2,3)";
+                            }
+                            else if (chrtTyp == 2)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (1,2)";
+                            }
+                            else if (chrtTyp == 3)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (4,5)";
+                            }
+                            else if (chrtTyp == 4)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (4)";
+                            }
+                            else if (chrtTyp == 5)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (5)";
+                            }
+                            else if (chrtTyp == 6)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (1)";
+                            }
+                            else if (chrtTyp == 7)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (2)";
+                            }
+                            else if (chrtTyp == 8)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (3)";
+                            }
+                            else if (chrtTyp == 9)
+                            {
+                                sgmntExtrSQL[i] = " and accnt_typ_id IN (1,2,3,4,5)";
+                            }
+                        }
+                        else
+                        {
+                            sgmntExtrSQL[i] = " and enable_cmbntns = '1'";
+                        }
+                        if (sgmntClsfctns[i] == "BusinessGroup")
+                        {
+                            sgmntExtrSQL[i] += " and org_id=" + this.orgID + " ORDER BY accnt_typ_id, path LIMIT 1 OFFSET 0";
+                        }
+                        else if (sgmntClsfctns[i] == "Currency")
+                        {
+                            sgmntExtrSQL[i] += " and crncy_id=" + cmnCde.getOrgFuncCurID(this.orgID) + " ORDER BY accnt_typ_id, path LIMIT 1 OFFSET 0";
+                        }
+                        else if (sgmntClsfctns[i] == "NaturalAccount" && chrtTyp >= 7)
+                        {
+                            sgmntExtrSQL[i] += " ORDER BY accnt_typ_id, path LIMIT " + chrtTyp + " OFFSET 0";
+                        }
+                        else
+                        {
+                            sgmntExtrSQL[i] += " ORDER BY accnt_typ_id, path";
+                        }
+                    }
+                    else
+                    {
+                        sgmntClsfctns[i] = "NotUsed";
+                        sgmntIDs[i] = -1;
+                    }
+                }
+
+                DataSet[] dtsts = new DataSet[10];
+                DataSet dtst1 = this.get_SgmntVals("%", sgmntIDs[0], sgmntExtrSQL[0]);
+                sgmntValTtls[0] = dtst1.Tables[0].Rows.Count;
+                dtsts[0] = dtst1;
+                DataSet dtst2 = this.get_SgmntVals("%", sgmntIDs[1], sgmntExtrSQL[1]);
+                sgmntValTtls[1] = dtst2.Tables[0].Rows.Count;
+                dtsts[1] = dtst2;
+                DataSet dtst3 = this.get_SgmntVals("%", sgmntIDs[2], sgmntExtrSQL[2]);
+                sgmntValTtls[2] = dtst3.Tables[0].Rows.Count;
+                dtsts[2] = dtst3;
+                DataSet dtst4 = this.get_SgmntVals("%", sgmntIDs[3], sgmntExtrSQL[3]);
+                sgmntValTtls[3] = dtst4.Tables[0].Rows.Count;
+                dtsts[3] = dtst4;
+                DataSet dtst5 = this.get_SgmntVals("%", sgmntIDs[4], sgmntExtrSQL[4]);
+                sgmntValTtls[4] = dtst5.Tables[0].Rows.Count;
+                dtsts[4] = dtst5;
+                DataSet dtst6 = this.get_SgmntVals("%", sgmntIDs[5], sgmntExtrSQL[5]);
+                sgmntValTtls[5] = dtst6.Tables[0].Rows.Count;
+                dtsts[5] = dtst6;
+                DataSet dtst7 = this.get_SgmntVals("%", sgmntIDs[6], sgmntExtrSQL[6]);
+                sgmntValTtls[6] = dtst7.Tables[0].Rows.Count;
+                dtsts[6] = dtst7;
+                DataSet dtst8 = this.get_SgmntVals("%", sgmntIDs[7], sgmntExtrSQL[7]);
+                sgmntValTtls[7] = dtst8.Tables[0].Rows.Count;
+                dtsts[7] = dtst8;
+                DataSet dtst9 = this.get_SgmntVals("%", sgmntIDs[8], sgmntExtrSQL[8]);
+                sgmntValTtls[8] = dtst9.Tables[0].Rows.Count;
+                dtsts[8] = dtst9;
+                DataSet dtst10 = this.get_SgmntVals("%", sgmntIDs[9], sgmntExtrSQL[9]);
+                sgmntValTtls[9] = dtst10.Tables[0].Rows.Count;
+                dtsts[9] = dtst10;
+                Dictionary<int, string> sgmntValIDCmbntns = new Dictionary<int, string>();
+                Dictionary<int, string> sgmntValsCmbntns = new Dictionary<int, string>();
+                Dictionary<int, string> sgmntValDescCmbntns = new Dictionary<int, string>();
+                Dictionary<int, string> ntrlAccntValsCmbntns = new Dictionary<int, string>();
+                string[] sgmtValIDs = new string[10];
+                string[] sgmtVals = new string[10];
+                string[] sgmtValsDesc = new string[10];
+                int cmbntnsCntr = 1;
+                Dictionary<string, string> oneTimeSgmntVals = new Dictionary<string, string>();
+                /* 
+                 * For all Natural Accounts create as parent account  and use just the name of the Natural Account
+                For Parent Values, NetIcome, RetEarnings, Control Accounts allow only one Combination and use just the name of the Natural Account
+                For Currency Segment Use only Functional Currency
+                For Business Group Segment Generate for Only First Org and don't Add Org Name to Account Name
+                */
+                int sgmntCntr = 0;
+                conCatSgmntVals(ttlSgmnts, sgmntCntr, sgmntValTtls, dtsts, sgmntClsfctns, ref cmbntnsCntr,
+                ref sgmtValIDs, ref sgmtVals, ref sgmtValsDesc, ref sgmntValIDCmbntns,
+                ref sgmntValsCmbntns, ref sgmntValDescCmbntns, ref oneTimeSgmntVals, ref ntrlAccntValsCmbntns);
+
+                string accntNums = "";
+                string accntNames = "";
+                string accntTypes = "";
+                string parntAccnts = "";
+                string isParent = "";
+                string isNetIncome = "NO";
+                string isRetEarn = "NO";
+                string isContra = "";
+                string isSuspense = "NO";
+                string hasSubledgers = "";
+                string contrlAccounts = "";
+                string accntClsfctns = "";
+                int mappedAccntID = -1;
+                string sgmntDlmtr1 = cmnCde.getGnrlRecNm("org.org_details", "org_id", "segment_delimiter", this.orgID);
+                string sgmntDlmtr = "";
+                string sgmntDescDlmtr = " ";
+
+                foreach (KeyValuePair<int, string> entry in sgmntValIDCmbntns)
+                {
+                    // do something with entry.Value or entry.Key
+                    int i = entry.Key - 1;
+                    char[] w = { '|' };
+                    //string[] sgmntValIDs = entry.Value.Split(w, StringSplitOptions.RemoveEmptyEntries);
+                    string[] sgmntValues = sgmntValsCmbntns[i + 1].Split(w, StringSplitOptions.None);
+                    accntNums = sgmntValsCmbntns[i + 1].Replace("|", sgmntDlmtr);
+                    accntNames = sgmntValDescCmbntns[i + 1].Replace("|", sgmntDescDlmtr);
+                    string[] ntrlAccntVals = ntrlAccntValsCmbntns[i + 1].Split(w, StringSplitOptions.None);
+                    for (int t = 0; t < ntrlAccntVals.Length; t++)
+                    {
+                        switch (t)
+                        {
+                            case 0:
+                                parntAccnts = ntrlAccntVals[t];
+                                break;
+                            case 1:
+                                contrlAccounts = ntrlAccntVals[t];
+                                break;
+                            case 2:
+                                funcCurCode = ntrlAccntVals[t];
+                                break;
+                            case 3:
+                                isContra = this.cnvrtBitStrToYN(ntrlAccntVals[t]);
+                                break;
+                            case 4:
+                                accntTypes = this.getFullAcntType(ntrlAccntVals[t]);
+                                break;
+                            case 5:
+                                isParent = this.cnvrtBitStrToYN(ntrlAccntVals[t]);
+                                break;
+                            case 6:
+                                isRetEarn = this.cnvrtBitStrToYN(ntrlAccntVals[t]);
+                                break;
+                            case 7:
+                                isNetIncome = this.cnvrtBitStrToYN(ntrlAccntVals[t]);
+                                break;
+                            case 8:
+                                hasSubledgers = this.cnvrtBitStrToYN(ntrlAccntVals[t]);
+                                break;
+                            case 9:
+                                isSuspense = this.cnvrtBitStrToYN(ntrlAccntVals[t]);
+                                break;
+                            case 10:
+                                accntClsfctns = ntrlAccntVals[t];
+                                break;
+                            case 11:
+                                int.TryParse(ntrlAccntVals[t], out mappedAccntID);
+                                break;
+                        }
+                    }
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 1]).Value2 = i + 1;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 2]).Value2 = "'" + accntNums.Replace("-None-", "");
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 3]).Value2 = accntNames;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 4]).Value2 = accntNames;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 5]).Value2 = accntTypes;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 6]).Value2 = parntAccnts;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 7]).Value2 = isParent;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 8]).Value2 = isRetEarn;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 9]).Value2 = isNetIncome;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 10]).Value2 = isContra;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 11]).Value2 = "100";
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 12]).Value2 = hasSubledgers;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 13]).Value2 = contrlAccounts;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 14]).Value2 = funcCurCode;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 15]).Value2 = isSuspense;
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 16]).Value2 = accntClsfctns;
+                    for (int t = 0; t < sgmntValues.Length; t++)
+                    {
+                        ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 17 + t]).Value2 = "'" + sgmntValues[t].Replace("-None-", "");
+                    }
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(i + 6), 27]).Value2 = "'" + cmnCde.getAccntNum(mappedAccntID);
+                }
+
+                this.trgtSheets[0].get_Range("A1:A65535", Type.Missing).ColumnWidth = 10;
+                this.trgtSheets[0].get_Range("A1:A65535", Type.Missing).WrapText = true;
+
+                this.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Columns.AutoFit();
+                this.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Rows.AutoFit();
+                this.progressBar1.Value = 100;
+                this.progressLabel.Text = "Finished Exporting Chart of Accounts Template! 100%";
+                this.cancelButton.Text = "FINISH";
+            }
+            catch (Exception ex)
+            {
+                cmnCde.showSQLNoPermsn(ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.InnerException);
+            }
+        }
+
+        int crntNtrlAcntSgmntValID = -1;
+        int oldNtrlAcntSgmntValID = -12;
+        DataSet dtstsNtrl = new DataSet();
+        private void conCatSgmntVals(int ttlSgmnts, int sgmntCntr, int[] sgmntValTtls, DataSet[] dtsts, string[] sgmntClsfctns, ref int cmbntnsCntr,
+            ref string[] sgmtValIDs, ref string[] sgmtVals, ref string[] sgmtValsDesc, ref Dictionary<int, string> sgmntValIDCmbntns,
+            ref Dictionary<int, string> sgmntValsCmbntns, ref Dictionary<int, string> sgmntValDescCmbntns, ref Dictionary<string, string> oneTimeSgmntVals,
+            ref Dictionary<int, string> ntrlAccntValsCmbntns)
+        {
+            try
+            {
+                int tmesInOneTmeSgVals = 0;
+                string storedPrntDets = "";
+                string ntrlAccntSgmntDesc = "";
+                //MessageBox.Show("Totals:" + sgmntValTtls[sgmntCntr].ToString());
+                for (int o = 0; o < sgmntValTtls[sgmntCntr]; o++)
+                {
+                    int dpndntSegNum = int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][23].ToString());
+                    int dpnSgValID = this.getSgmntsChsnDpndntValID(dpndntSegNum - 1, sgmtValIDs);
+                    if (int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][25].ToString()) > 0 && dpnSgValID != int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][25].ToString()))
+                    {
+                        continue;
+                    }
+                    sgmtValIDs[sgmntCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][0].ToString();
+                    sgmtVals[sgmntCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][1].ToString();
+                    sgmtValsDesc[sgmntCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][2].ToString();
+                    //MessageBox.Show("Totals:" + sgmntValTtls[sgmntCntr].ToString());
+                    //MessageBox.Show("sgmntCntr:" + sgmntCntr + ":val:" + dtsts[sgmntCntr].Tables[0].Rows[o][2].ToString() + "|o:" + o.ToString());
+                    if (sgmntClsfctns[sgmntCntr] == "NaturalAccount"/*
+                    && (dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString() == "1"
+                    || dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString() == "1"
+                    || dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString() == "1"
+                    || dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString() == "1"
+                    || dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString() == "1")*/)
+                    {
+                        storedPrntDets = "";
+                        if (oneTimeSgmntVals.TryGetValue(sgmtVals[sgmntCntr], out storedPrntDets))
+                        {
+                            ntrlAccntValsCmbntns[cmbntnsCntr] = "";
+                            int cntr2 = 0;
+                            int.TryParse(storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[0], out cntr2);
+                            oneTimeSgmntVals[sgmtVals[sgmntCntr]] = (cntr2 + 1).ToString() + "#" + storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                        }
+                        else
+                        {
+                            oneTimeSgmntVals[sgmtVals[sgmntCntr]] = "1#NewAccountNum";
+                        }
+                    }
+                    string prntAcntNm = "";
+                    if (sgmntCntr == (ttlSgmnts - 1))
+                    {
+                        bool shdLoop = true;
+                        if (sgmntClsfctns[sgmntCntr] == "NaturalAccount")
+                        {
+                            ntrlAccntSgmntDesc = sgmtValsDesc[sgmntCntr];
+                            prntAcntNm = sgmtValsDesc[sgmntCntr];
+                            crntNtrlAcntSgmntValID = int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][0].ToString());
+                            string cmbtnsAllwd = "-1";
+                            //MessageBox.Show("cmbtnsAllwd:" + cmbtnsAllwd + ":y:" + y.ToString() + "|o:" + o.ToString());
+                            cmbtnsAllwd = dtsts[sgmntCntr].Tables[0].Rows[o][22].ToString();//Depends on whether child Cmbntns Allowed
+                            if (cmbtnsAllwd == "1" && dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString() == "0" && int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][13].ToString()) <= 0)
+                            {
+                                ntrlAccntValsCmbntns[cmbntnsCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][19].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                    + "|" + "0"
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                    + "|" + "1"
+                                    + "|" + "0"
+                                    + "|" + "0"
+                                    + "|" + "0"
+                                    + "|" + "0"
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                            }
+                            else
+                            {
+                                ntrlAccntValsCmbntns[cmbntnsCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][19].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][5].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                            }
+
+                            for (int y = 0; y <= sgmntCntr; y++)
+                            {
+                                if (sgmntClsfctns[y] == "NaturalAccount")
+                                {
+                                    tmesInOneTmeSgVals = 0;
+                                    storedPrntDets = "";
+                                    if (oneTimeSgmntVals.TryGetValue(sgmtVals[sgmntCntr], out storedPrntDets))
+                                    {
+                                        int.TryParse(storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[0], out tmesInOneTmeSgVals);
+                                    }
+                                    if (tmesInOneTmeSgVals > 1)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = "";
+                                        sgmntValsCmbntns[cmbntnsCntr] = "";
+                                        sgmntValDescCmbntns[cmbntnsCntr] = "";
+                                        ntrlAccntValsCmbntns[cmbntnsCntr] = "";
+                                        break;
+                                    }
+                                    if (!sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = sgmtValIDs[sgmntCntr];
+                                        sgmntValsCmbntns[cmbntnsCntr] = "" + sgmtVals[sgmntCntr];
+                                        sgmntValDescCmbntns[cmbntnsCntr] = sgmtValsDesc[sgmntCntr];
+                                    }
+                                    else
+                                    {
+                                        //MessageBox.Show("sgmntCntr:" + sgmntCntr+ ":cmbntnsCntr:" + cmbntnsCntr);
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + sgmtValIDs[sgmntCntr];
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + sgmtVals[sgmntCntr];
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "|" + sgmtValsDesc[sgmntCntr];
+                                        }
+                                    }
+                                    storedPrntDets = "";
+                                    if (oneTimeSgmntVals.TryGetValue(sgmtVals[sgmntCntr], out storedPrntDets))
+                                    {
+                                        oneTimeSgmntVals[sgmtVals[sgmntCntr]] = storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[0] + "#" + sgmntValsCmbntns[cmbntnsCntr];
+                                    }
+                                    if (tmesInOneTmeSgVals <= 1)
+                                    {
+                                        if (tmesInOneTmeSgVals == 1)
+                                        {
+                                            sgmntValDescCmbntns[cmbntnsCntr] = ntrlAccntSgmntDesc;
+                                        }
+                                        cmbntnsCntr++;
+                                    }
+                                }
+                                else
+                                {
+                                    if (y == 0)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = "-1";
+                                        sgmntValsCmbntns[cmbntnsCntr] = "-None-";
+                                        sgmntValDescCmbntns[cmbntnsCntr] = "-None-";
+                                    }
+                                    else
+                                    {
+                                        //MessageBox.Show("sgmntCntr:" + sgmntCntr+ ":cmbntnsCntr:" + cmbntnsCntr);
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + "-1";
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + "-None-";
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "|" + "-None-";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        tmesInOneTmeSgVals = 0;
+                        shdLoop = true;
+                        if (sgmntClsfctns[sgmntCntr] == "NaturalAccount")
+                        {
+                            if (dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString() == "1"
+                             || dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString() == "1"
+                             || dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString() == "1"
+                             || dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString() == "1"
+                             || dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString() == "1"
+                             || dtsts[sgmntCntr].Tables[0].Rows[o][22].ToString() == "0"
+                             || int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][13].ToString()) > 0)
+                            {
+                                sgmntValIDCmbntns[cmbntnsCntr] = "";
+                                sgmntValsCmbntns[cmbntnsCntr] = "";
+                                sgmntValDescCmbntns[cmbntnsCntr] = "";
+                                ntrlAccntValsCmbntns[cmbntnsCntr] = "";
+                                tmesInOneTmeSgVals = 0;
+                                storedPrntDets = "";
+                                if (oneTimeSgmntVals.TryGetValue(sgmtVals[sgmntCntr], out storedPrntDets))
+                                {
+                                    int.TryParse(storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[0], out tmesInOneTmeSgVals);
+                                }
+                                if (tmesInOneTmeSgVals == 1)
+                                {
+                                    cmbntnsCntr--;
+                                }
+                                //break;
+                                shdLoop = false;
+                            }
+                            ntrlAccntSgmntDesc = sgmtValsDesc[sgmntCntr];
+                            ntrlAccntValsCmbntns[cmbntnsCntr] = prntAcntNm
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][5].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                        }
+                        if (shdLoop == true)
+                        {
+                            for (int y = 0; y <= sgmntCntr; y++)
+                            {
+                                if (sgmntClsfctns[y] == "NaturalAccount")
+                                {
+                                    if (y == 0)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = sgmtValIDs[y];
+                                        sgmntValsCmbntns[cmbntnsCntr] = "" + sgmtVals[y];
+                                        sgmntValDescCmbntns[cmbntnsCntr] = sgmtValsDesc[y];
+                                    }
+                                    else
+                                    {
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + sgmtValIDs[y];
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + sgmtVals[y];
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "|" + sgmtValsDesc[y];
+                                        }
+                                    }
+
+                                    if (y == sgmntCntr)
+                                    {
+                                        storedPrntDets = "";
+                                        if (oneTimeSgmntVals.TryGetValue(sgmtVals[sgmntCntr], out storedPrntDets))
+                                        {
+                                            oneTimeSgmntVals[sgmtVals[sgmntCntr]] = storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[0] + "#" + sgmntValsCmbntns[cmbntnsCntr];
+                                        }
+                                    }
+                                }
+                                else if (sgmntClsfctns[y] == "Currency"
+                                   || sgmntClsfctns[y] == "BusinessGroup")
+                                {
+                                    if (y == 0)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = sgmtValIDs[y];
+                                        sgmntValsCmbntns[cmbntnsCntr] = "" + sgmtVals[y];
+                                        sgmntValDescCmbntns[cmbntnsCntr] = "";
+                                    }
+                                    else
+                                    {
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + sgmtValIDs[y];
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + sgmtVals[y];
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (y == 0)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = sgmtValIDs[y];
+                                        sgmntValsCmbntns[cmbntnsCntr] = "" + sgmtVals[y];
+                                        sgmntValDescCmbntns[cmbntnsCntr] = sgmtValsDesc[y];
+                                    }
+                                    else
+                                    {
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + sgmtValIDs[y];
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + sgmtVals[y];
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "|" + sgmtValsDesc[y];
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (tmesInOneTmeSgVals <= 1)
+                            {
+                                if (!ntrlAccntValsCmbntns.ContainsKey(cmbntnsCntr))
+                                {
+                                    if (oldNtrlAcntSgmntValID != crntNtrlAcntSgmntValID)
+                                    {
+                                        oldNtrlAcntSgmntValID = crntNtrlAcntSgmntValID;
+                                        dtstsNtrl = this.get_OneSgmntVals(crntNtrlAcntSgmntValID);
+                                        if (dtstsNtrl.Tables[0].Rows.Count > 0)
+                                        {
+                                            ntrlAccntValsCmbntns[cmbntnsCntr] = dtstsNtrl.Tables[0].Rows[0][2].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][20].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][21].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][5].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][6].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][7].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][8].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][9].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][12].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][15].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][16].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][17].ToString();
+                                        }
+                                        else
+                                        {
+                                            ntrlAccntValsCmbntns[cmbntnsCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][19].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][5].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (dtstsNtrl.Tables[0].Rows.Count > 0)
+                                        {
+                                            ntrlAccntValsCmbntns[cmbntnsCntr] = dtstsNtrl.Tables[0].Rows[0][2].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][20].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][21].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][5].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][6].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][7].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][8].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][9].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][12].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][15].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][16].ToString()
+                                            + "|" + dtstsNtrl.Tables[0].Rows[0][17].ToString();
+                                        }
+                                        else
+                                        {
+                                            ntrlAccntValsCmbntns[cmbntnsCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][19].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][5].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                        + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                                        }
+                                    }
+                                }
+                                cmbntnsCntr++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (sgmntClsfctns[sgmntCntr] == "NaturalAccount")
+                        {
+                            ntrlAccntSgmntDesc = sgmtValsDesc[sgmntCntr];
+                            prntAcntNm = sgmtValsDesc[sgmntCntr];
+                            crntNtrlAcntSgmntValID = int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][0].ToString());
+                            string cmbtnsAllwd = dtsts[sgmntCntr].Tables[0].Rows[o][22].ToString();//Depends on whether child Cmbntns Allowed
+                            if (cmbtnsAllwd == "1" && dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString() == "0" && int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][13].ToString()) <= 0)
+                            {
+                                ntrlAccntValsCmbntns[cmbntnsCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][19].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                + "|" + "0"
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                + "|" + "1"
+                                + "|" + "0"
+                                + "|" + "0"
+                                + "|" + "0"
+                                + "|" + "0"
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                            }
+                            else
+                            {
+                                ntrlAccntValsCmbntns[cmbntnsCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][19].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][5].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                            }
+                            tmesInOneTmeSgVals = 0;
+                            for (int y = 0; y <= sgmntCntr; y++)
+                            {
+                                if (sgmntClsfctns[y] == "NaturalAccount")
+                                {
+                                    if (y == 0)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = sgmtValIDs[y];
+                                        sgmntValsCmbntns[cmbntnsCntr] = "" + sgmtVals[y];
+                                        sgmntValDescCmbntns[cmbntnsCntr] = sgmtValsDesc[y];
+                                    }
+                                    else
+                                    {
+                                        //MessageBox.Show("sgmntCntr:" + sgmntCntr+ ":cmbntnsCntr:" + cmbntnsCntr);
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + sgmtValIDs[y];
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + sgmtVals[y];
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "|" + sgmtValsDesc[y];
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (y == 0)
+                                    {
+                                        sgmntValIDCmbntns[cmbntnsCntr] = "-1";
+                                        sgmntValsCmbntns[cmbntnsCntr] = "-None-";
+                                        sgmntValDescCmbntns[cmbntnsCntr] = "-None-";
+                                    }
+                                    else
+                                    {
+                                        //MessageBox.Show("sgmntCntr:" + sgmntCntr+ ":cmbntnsCntr:" + cmbntnsCntr);
+                                        if (sgmntValIDCmbntns.ContainsKey(cmbntnsCntr))
+                                        {
+                                            sgmntValIDCmbntns[cmbntnsCntr] += "|" + "-1";
+                                            sgmntValsCmbntns[cmbntnsCntr] += "|" + "-None-";
+                                            sgmntValDescCmbntns[cmbntnsCntr] += "|" + "-None-";
+                                        }
+                                    }
+                                }
+                            }
+                            storedPrntDets = "";
+                            if (oneTimeSgmntVals.TryGetValue(sgmtVals[sgmntCntr], out storedPrntDets))
+                            {
+                                oneTimeSgmntVals[sgmtVals[sgmntCntr]] = storedPrntDets.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries)[0] + "#" + sgmntValsCmbntns[cmbntnsCntr];
+                            }
+                            if (tmesInOneTmeSgVals <= 1)
+                            {
+                                if (tmesInOneTmeSgVals == 1)
+                                {
+                                    sgmntValDescCmbntns[cmbntnsCntr] = ntrlAccntSgmntDesc;
+                                }
+                                cmbntnsCntr++;
+                                if (dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString() != "1"
+                                 && dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString() != "1"
+                                 && dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString() != "1"
+                                 && dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString() != "1"
+                                 && dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString() != "1"
+                                 && dtsts[sgmntCntr].Tables[0].Rows[o][22].ToString() != "0"
+                                 && int.Parse(dtsts[sgmntCntr].Tables[0].Rows[o][13].ToString()) <= 0)
+                                {
+                                    sgmtValIDs[sgmntCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][0].ToString();
+                                    sgmtVals[sgmntCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][1].ToString();
+                                    sgmtValsDesc[sgmntCntr] = dtsts[sgmntCntr].Tables[0].Rows[o][2].ToString();
+                                    //ntrlAccntValsCmbntns[cmbntnsCntr] = "";
+                                    ntrlAccntValsCmbntns[cmbntnsCntr] = prntAcntNm
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][20].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][21].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][5].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][6].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][7].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][8].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][9].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][12].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][15].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][16].ToString()
+                                    + "|" + dtsts[sgmntCntr].Tables[0].Rows[o][17].ToString();
+                                    conCatSgmntVals(ttlSgmnts, sgmntCntr + 1, sgmntValTtls, dtsts, sgmntClsfctns, ref cmbntnsCntr,
+                                                    ref sgmtValIDs, ref sgmtVals, ref sgmtValsDesc, ref sgmntValIDCmbntns,
+                                                    ref sgmntValsCmbntns, ref sgmntValDescCmbntns, ref oneTimeSgmntVals, ref ntrlAccntValsCmbntns);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            conCatSgmntVals(ttlSgmnts, sgmntCntr + 1, sgmntValTtls, dtsts, sgmntClsfctns, ref cmbntnsCntr,
+                ref sgmtValIDs, ref sgmtVals, ref sgmtValsDesc, ref sgmntValIDCmbntns,
+                ref sgmntValsCmbntns, ref sgmntValDescCmbntns, ref oneTimeSgmntVals, ref ntrlAccntValsCmbntns);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                cmnCde.showSQLNoPermsn(ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.InnerException);
+            }
+        }
+
         private void exprtChrtTmp(int chrtTyp)
         {
             System.Windows.Forms.Application.DoEvents();
@@ -1943,7 +3052,9 @@ namespace CommonCode
             string[] hdngs ={"Account Number**","Account Name**","Account Description","Account Type**","Parent Account Name",
             "Is Parent?(YES/NO)","Is Retained Earnings?(YES/NO)","Is Net Income Account?(YES/NO)","Is Contra Account?(YES/NO)",
       "Reporting Line No.","Has SubLedgers?(YES/NO)", "Control Account Name", "Account Currency Code**",
-      "Is Suspense Account?(YES/NO)", "Account Classification" };
+      "Is Suspense Account?(YES/NO)", "Account Classification", "Segment 1 Value", "Segment 2 Value", "Segment 3 Value", "Segment 4 Value"
+            , "Segment 5 Value", "Segment 6 Value", "Segment 7 Value", "Segment 8 Value", "Segment 9 Value", "Segment 10 Value",
+                "Mapped Group Org Account No." };
 
             int funCurID = cmnCde.getOrgFuncCurID(this.orgID);
             string funcCurCode = cmnCde.getPssblValNm(funCurID);
@@ -1961,7 +3072,10 @@ namespace CommonCode
                   "a.accnt_desc, a.accnt_type, a.prnt_accnt_id, " +
                   "a.is_prnt_accnt, a.is_retained_earnings, a.is_net_income, a.is_contra, " +
                   "a.report_line_no, a.has_sub_ledgers, accb.get_accnt_name(a.control_account_id), " +
-                  "gst.get_pssbl_val(a.crncy_id), a.is_suspens_accnt, a.account_clsfctn " +
+                  @"gst.get_pssbl_val(a.crncy_id), a.is_suspens_accnt, a.account_clsfctn, org.get_sgmnt_val(a.accnt_seg1_val_id), 
+       org.get_sgmnt_val(a.accnt_seg2_val_id), org.get_sgmnt_val(a.accnt_seg3_val_id), org.get_sgmnt_val(a.accnt_seg4_val_id), org.get_sgmnt_val(a.accnt_seg5_val_id),
+       org.get_sgmnt_val(a.accnt_seg6_val_id), org.get_sgmnt_val(a.accnt_seg7_val_id), org.get_sgmnt_val(a.accnt_seg8_val_id), org.get_sgmnt_val(a.accnt_seg9_val_id),
+       org.get_sgmnt_val(a.accnt_seg10_val_id), accb.get_accnt_num(mapped_grp_accnt_id) " +
                   "FROM accb.accb_chart_of_accnts a WHERE a.org_id = " + this.orgID + " " +
                   "ORDER BY a.accnt_typ_id, a.report_line_no, a.accnt_num");
                 for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
@@ -1982,6 +3096,17 @@ namespace CommonCode
                     ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 14]).Value2 = dtst.Tables[0].Rows[a][12].ToString();
                     ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 15]).Value2 = this.cnvrtBitStrToYN(dtst.Tables[0].Rows[a][13].ToString());
                     ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 16]).Value2 = dtst.Tables[0].Rows[a][14].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 17]).Value2 = dtst.Tables[0].Rows[a][15].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 18]).Value2 = dtst.Tables[0].Rows[a][16].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 19]).Value2 = dtst.Tables[0].Rows[a][17].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 20]).Value2 = dtst.Tables[0].Rows[a][18].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 21]).Value2 = dtst.Tables[0].Rows[a][19].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 22]).Value2 = dtst.Tables[0].Rows[a][20].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 23]).Value2 = dtst.Tables[0].Rows[a][21].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 24]).Value2 = dtst.Tables[0].Rows[a][22].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 25]).Value2 = dtst.Tables[0].Rows[a][23].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 26]).Value2 = dtst.Tables[0].Rows[a][24].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 27]).Value2 = dtst.Tables[0].Rows[a][25].ToString();
                 }
             }
             else
@@ -2293,7 +3418,19 @@ namespace CommonCode
             string currCode = "";
             string isSuspense = "";
             string accClsfctn = "";
+            string sgmnt1Val = "";
+            string sgmnt2Val = "";
+            string sgmnt3Val = "";
+            string sgmnt4Val = "";
+            string sgmnt5Val = "";
+            string sgmnt6Val = "";
+            string sgmnt7Val = "";
+            string sgmnt8Val = "";
+            string sgmnt9Val = "";
+            string sgmnt10Val = "";
+            string mappedOrgAcntNum = "";
 
+            int grpOrgID = cmnCde.getGrpOrgID();
             int rownum = 5;
             do
             {
@@ -2418,17 +3555,102 @@ namespace CommonCode
                 {
                     accClsfctn = "";
                 }
+                try
+                {
+                    sgmnt1Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 17]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt1Val = "";
+                }
+                try
+                {
+                    sgmnt2Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 18]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt2Val = "";
+                }
+                try
+                {
+                    sgmnt3Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 19]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt3Val = "";
+                }
+                try
+                {
+                    sgmnt4Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 20]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt4Val = "";
+                }
+                try
+                {
+                    sgmnt5Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 21]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt5Val = "";
+                }
+                try
+                {
+                    sgmnt6Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 22]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt6Val = "";
+                }
+                try
+                {
+                    sgmnt7Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 23]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt7Val = "";
+                }
+                try
+                {
+                    sgmnt8Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 24]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt8Val = "";
+                }
+                try
+                {
+                    sgmnt9Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 25]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt9Val = "";
+                }
+                try
+                {
+                    sgmnt10Val = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 26]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    sgmnt10Val = "";
+                }
+                try
+                {
+                    mappedOrgAcntNum = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 27]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    mappedOrgAcntNum = "";
+                }
                 if (rownum == 5)
                 {
                     string[] hdngs ={"Account Number**","Account Name**","Account Description","Account Type**","Parent Account Name",
             "Is Parent?(YES/NO)","Is Retained Earnings?(YES/NO)","Is Net Income Account?(YES/NO)","Is Contra Account?(YES/NO)",
       "Reporting Line No.","Has SubLedgers?(YES/NO)", "Control Account Name", "Account Currency Code**",
-      "Is Suspense Account?(YES/NO)", "Account Classification" };
-
-                    //  string[] hdngs ={"Account Number**","Account Name**","Account Description","Account Type**","Parent Account Name",
-                    //"Is Parent?(YES/NO)","Is Retained Earnings?(YES/NO)","Is Net Income Account?(YES/NO)","Is Contra Account?(YES/NO)",
-                    //"Reporting Line No.","Has SubLedgers?(YES/NO)", "Control Account Name", "Account Currency Code**",
-                    //"Is Suspense Account?(YES/NO)", "Account Classification" };
+      "Is Suspense Account?(YES/NO)", "Account Classification", "Segment 1 Value", "Segment 2 Value", "Segment 3 Value", "Segment 4 Value"
+            , "Segment 5 Value", "Segment 6 Value", "Segment 7 Value", "Segment 8 Value", "Segment 9 Value", "Segment 10 Value",
+                "Mapped Group Org Account No." };
 
                     if (accntNo != hdngs[0].ToUpper()
                       || accntNm != hdngs[1].ToUpper()
@@ -2449,9 +3671,28 @@ namespace CommonCode
                         cmnCde.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
                         return;
                     }
+                    if (sgmnt1Val != "")
+                    {
+                        if (sgmnt1Val != hdngs[15].ToUpper()
+                          || sgmnt2Val != hdngs[16].ToUpper()
+                          || sgmnt3Val != hdngs[17].ToUpper()
+                          || sgmnt4Val != hdngs[18].ToUpper()
+                          || sgmnt5Val != hdngs[19].ToUpper()
+                          || sgmnt6Val != hdngs[20].ToUpper()
+                          || sgmnt7Val != hdngs[21].ToUpper()
+                          || sgmnt8Val != hdngs[22].ToUpper()
+                          || sgmnt9Val != hdngs[23].ToUpper()
+                          || sgmnt10Val != hdngs[24].ToUpper()
+                          || mappedOrgAcntNum != hdngs[25].ToUpper())
+                        {
+                            cmnCde.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
+                            return;
+                        }
+                    }
                     rownum++;
                     continue;
                 }
+
                 if (accntDesc == "")
                 {
                     accntDesc = accntNm;
@@ -2492,13 +3733,37 @@ namespace CommonCode
                     int accntid1 = cmnCde.getAccntID(accntNo, this.orgID);
                     int accntid2 = cmnCde.getAccntID(prntAccnt, this.orgID);
                     int accntid3 = cmnCde.getAccntID(cntrlAccnt, this.orgID);
+                    int mppdAccntID = cmnCde.getAccntID(mappedOrgAcntNum, grpOrgID);
                     int cur_ID = cmnCde.getPssblValID(currCode, cmnCde.getLovID("Currencies"));
                     string errMsg = "";
                     bool isRecVld = true;
+                    int sgmntValID1 = cmnCde.getSgmntValID(sgmnt1Val, cmnCde.getSegmentID(1, this.orgID));
+                    int sgmntValID2 = cmnCde.getSgmntValID(sgmnt2Val, cmnCde.getSegmentID(2, this.orgID));
+                    int sgmntValID3 = cmnCde.getSgmntValID(sgmnt3Val, cmnCde.getSegmentID(3, this.orgID));
+                    int sgmntValID4 = cmnCde.getSgmntValID(sgmnt4Val, cmnCde.getSegmentID(4, this.orgID));
+                    int sgmntValID5 = cmnCde.getSgmntValID(sgmnt5Val, cmnCde.getSegmentID(5, this.orgID));
+                    int sgmntValID6 = cmnCde.getSgmntValID(sgmnt6Val, cmnCde.getSegmentID(6, this.orgID));
+                    int sgmntValID7 = cmnCde.getSgmntValID(sgmnt7Val, cmnCde.getSegmentID(7, this.orgID));
+                    int sgmntValID8 = cmnCde.getSgmntValID(sgmnt8Val, cmnCde.getSegmentID(8, this.orgID));
+                    int sgmntValID9 = cmnCde.getSgmntValID(sgmnt9Val, cmnCde.getSegmentID(9, this.orgID));
+                    int sgmntValID10 = cmnCde.getSgmntValID(sgmnt10Val, cmnCde.getSegmentID(10, this.orgID));
+                    /*,
+                 cmnCde.getSgmntValID(sgmnt1Val, cmnCde.getSegmentID(1, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt2Val, cmnCde.getSegmentID(2, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt3Val, cmnCde.getSegmentID(3, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt4Val, cmnCde.getSegmentID(4, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt5Val, cmnCde.getSegmentID(5, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt6Val, cmnCde.getSegmentID(6, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt7Val, cmnCde.getSegmentID(7, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt8Val, cmnCde.getSegmentID(8, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt9Val, cmnCde.getSegmentID(9, this.orgID)),
+                 cmnCde.getSgmntValID(sgmnt10Val, cmnCde.getSegmentID(10, this.orgID))*/
                     this.verifyChrtRec(this.orgID, accntNo, accntNm, accntDesc,
                            this.cnvrtYNToBool(isContra), accntid2, accntType.Substring(0, 2).Trim(),
                            this.cnvrtYNToBool(isPrnt), true, this.cnvrtYNToBool(isRetErn),
-                           this.cnvrtYNToBool(isNet), rptLnNo, this.cnvrtYNToBool(hsSbLdgr), accntid3, ref errMsg);
+                           this.cnvrtYNToBool(isNet), rptLnNo, this.cnvrtYNToBool(hsSbLdgr), accntid3,
+                           sgmntValID1, sgmntValID2, sgmntValID3, sgmntValID4, sgmntValID5,
+                       sgmntValID6, sgmntValID7, sgmntValID8, sgmntValID9, sgmntValID10, mppdAccntID, ref errMsg);
                     if (accntid1 <= 0 && isRecVld == true)
                     {
                         this.createChrt(this.orgID, accntNo, accntNm, accntDesc,
@@ -2506,18 +3771,21 @@ namespace CommonCode
                             this.cnvrtYNToBool(isPrnt), true, this.cnvrtYNToBool(isRetErn),
                             this.cnvrtYNToBool(isNet), rptLnNo, this.cnvrtYNToBool(hsSbLdgr), accntid3, cur_ID,
                             this.cnvrtYNToBool(isSuspense),
-                       accClsfctn);
-                        this.trgtSheets[0].get_Range("A" + rownum + ":N" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                       accClsfctn, sgmntValID1, sgmntValID2, sgmntValID3, sgmntValID4, sgmntValID5,
+                       sgmntValID6, sgmntValID7, sgmntValID8, sgmntValID9, sgmntValID10,
+                 cmnCde.getAccntID(mappedOrgAcntNum, grpOrgID));
+                        this.trgtSheets[0].get_Range("A" + rownum + ":AA" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
                     }
                     else if (accntid1 > 0)
                     {
-                        this.updateChrt(accntid1, accntNo, accntNm, accntDesc, accntid2, rptLnNo, accClsfctn);
-                        this.trgtSheets[0].get_Range("A" + rownum + ":N" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(120, 163, 248));
+                        this.updateChrt(accntid1, accntNo, accntNm, accntDesc, accntid2, rptLnNo, accClsfctn,
+                 cmnCde.getAccntID(mappedOrgAcntNum, grpOrgID), this.cnvrtYNToBool(isPrnt));
+                        this.trgtSheets[0].get_Range("A" + rownum + ":AA" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(120, 163, 248));
                     }
                     else
                     {
-                        this.trgtSheets[0].get_Range("A" + rownum + ":M" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 0, 0));
-                        this.trgtSheets[0].get_Range("O" + rownum + ":O" + rownum + "", Type.Missing).Value2 = errMsg;
+                        this.trgtSheets[0].get_Range("A" + rownum + ":AA" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 0, 0));
+                        this.trgtSheets[0].get_Range("AA" + rownum + ":AB" + rownum + "", Type.Missing).Value2 = errMsg;
                     }
                 }
                 rownum++;
@@ -2536,7 +3804,6 @@ namespace CommonCode
             this.progressBar1.Value = 100;
             System.Windows.Forms.Application.DoEvents();
             this.cancelButton.Text = "Finish";
-
         }
 
         public bool cnvrtYNToBool(string yesno)
@@ -2568,9 +3835,12 @@ namespace CommonCode
         }
 
         public bool verifyChrtRec(int orgid, string accntnum, string accntname,
-      string accntdesc, bool isContra, int prntAccntID, string accntTyp,
-      bool isparent, bool isenbld, bool isretearngs, bool isnetincome,
-          int rpt_ln, bool hsSbLdgr, int contrlAccntID, ref string errorMsg)
+        string accntdesc, bool isContra, int prntAccntID, string accntTyp,
+        bool isparent, bool isenbld, bool isretearngs, bool isnetincome,
+          int rpt_ln, bool hsSbLdgr, int contrlAccntID, int sgmntValID1,
+          int sgmntValID2, int sgmntValID3, int sgmntValID4, int sgmntValID5,
+                       int sgmntValID6, int sgmntValID7, int sgmntValID8,
+                       int sgmntValID9, int sgmntValID10, int mppdAcntID, ref string errorMsg)
         {
             if (accntname == "")
             {
@@ -2672,6 +3942,15 @@ namespace CommonCode
                     return false;
                 }
             }
+            if (mppdAcntID > 0)
+            {
+                if (cmnCde.getAccntType(mppdAcntID) !=
+                 accntTyp)
+                {
+                    errorMsg += "Account Type does not match that of the Mapped Account";
+                    return false;
+                }
+            }
             int oldAccntNosID = cmnCde.getAccntID(accntnum, orgid);
             if (oldAccntNosID > 0)
             {
@@ -2685,14 +3964,33 @@ namespace CommonCode
                 errorMsg += "Account Name is already in use in this Organization!";
                 return false;
             }
+            int oldCmbntnID = cmnCde.getAccountCmbntnID(this.orgID,
+                 sgmntValID1,
+                 sgmntValID2,
+                 sgmntValID3,
+                 sgmntValID4,
+                 sgmntValID5,
+                 sgmntValID6,
+                 sgmntValID7,
+                 sgmntValID8,
+                 sgmntValID9,
+                 sgmntValID10);
+            if (oldCmbntnID > 0 && oldCmbntnID != oldAccntNosID)
+            {
+                errorMsg += "This combination of Segment Values is already present in this Organization!";
+                return false;
+            }
             return true;
         }
 
         public void createChrt(int orgid, string accntnum, string accntname,
-      string accntdesc, bool isContra, int prntAccntID, string accntTyp,
-      bool isparent, bool isenbld, bool isretearngs, bool isnetincome,
+        string accntdesc, bool isContra, int prntAccntID, string accntTyp,
+        bool isparent, bool isenbld, bool isretearngs, bool isnetincome,
           int rpt_ln, bool hsSbLdgr, int contrlAccntID, int currID,
-          bool isSuspns, string accClsftcn)
+          bool isSuspns, string accClsftcn,
+          int accntSegmnt1, int accntSegmnt2, int accntSegmnt3, int accntSegmnt4, int accntSegmnt5,
+          int accntSegmnt6, int accntSegmnt7, int accntSegmnt8, int accntSegmnt9, int accntSegmnt10,
+          int mappedAcntID)
         {
             if (accntnum.Length > 25)
             {
@@ -2721,33 +4019,39 @@ namespace CommonCode
             {
                 this.clearChrtNetIncome(orgid);
             }
+
             string insSQL = "INSERT INTO accb.accb_chart_of_accnts(" +
-                            "accnt_num, accnt_name, accnt_desc, is_contra, " +
-                            "prnt_accnt_id, balance_date, created_by, creation_date, last_update_by, " +
-                            "last_update_date, org_id, accnt_type, is_prnt_accnt, debit_balance, " +
-                            "credit_balance, is_enabled, net_balance, is_retained_earnings, " +
-                            "is_net_income, accnt_typ_id, report_line_no, has_sub_ledgers, " +
-                            "control_account_id, crncy_id, is_suspens_accnt, account_clsfctn) " +
-                "VALUES ('" + accntnum.Replace("'", "''") + "', '" + accntname.Replace("'", "''") +
-                "', '" + accntdesc.Replace("'", "''") + "', '" + cmnCde.cnvrtBoolToBitStr(isContra) +
-                "', " + prntAccntID + ", '" + dateStr + "', " + cmnCde.User_id + ", '" + dateStr +
-                                                "', " + cmnCde.User_id + ", '" + dateStr + "', " +
-                                                orgid + ", '" + accntTyp.Replace("'", "''") +
-                "', '" + cmnCde.cnvrtBoolToBitStr(isparent) + "', 0, 0, '" +
-                cmnCde.cnvrtBoolToBitStr(isenbld) + "', 0, '" +
-                cmnCde.cnvrtBoolToBitStr(isretearngs) + "', '" +
-                cmnCde.cnvrtBoolToBitStr(isnetincome) + "', " + cmnCde.getAcctTypID(accntTyp) +
-                ", " + rpt_ln + ", '" +
-                cmnCde.cnvrtBoolToBitStr(hsSbLdgr) + "', " + contrlAccntID +
-                ", " + currID + ", '" +
-                cmnCde.cnvrtBoolToBitStr(isSuspns) +
-                "', '" + accClsftcn.Replace("'", "''") + "')";
+                     "accnt_num, accnt_name, accnt_desc, is_contra, " +
+                     "prnt_accnt_id, balance_date, created_by, creation_date, last_update_by, " +
+                     "last_update_date, org_id, accnt_type, is_prnt_accnt, debit_balance, " +
+                     "credit_balance, is_enabled, net_balance, is_retained_earnings, " +
+                     "is_net_income, accnt_typ_id, report_line_no, has_sub_ledgers, " +
+                     @"control_account_id, crncy_id, is_suspens_accnt,account_clsfctn, accnt_seg1_val_id, 
+       accnt_seg2_val_id, accnt_seg3_val_id, accnt_seg4_val_id, accnt_seg5_val_id, 
+       accnt_seg6_val_id, accnt_seg7_val_id, accnt_seg8_val_id, accnt_seg9_val_id, 
+       accnt_seg10_val_id, mapped_grp_accnt_id)" +
+             "VALUES ('" + accntnum.Replace("'", "''") + "', '" + accntname.Replace("'", "''") +
+             "', '" + accntdesc.Replace("'", "''") + "', '" + cmnCde.cnvrtBoolToBitStr(isContra) +
+             "', " + prntAccntID + ", '" + dateStr + "', " + cmnCde.User_id + ", '" + dateStr +
+                     "', " + cmnCde.User_id + ", '" + dateStr + "', " +
+                     orgid + ", '" + accntTyp.Replace("'", "''") +
+             "', '" + cmnCde.cnvrtBoolToBitStr(isparent) + "', 0, 0, '" +
+             cmnCde.cnvrtBoolToBitStr(isenbld) + "', 0, '" +
+             cmnCde.cnvrtBoolToBitStr(isretearngs) + "', '" +
+             cmnCde.cnvrtBoolToBitStr(isnetincome) + "', " +
+             cmnCde.getAcctTypID(accntTyp) +
+             ", " + rpt_ln + ", '" + cmnCde.cnvrtBoolToBitStr(hsSbLdgr) +
+             "', " + contrlAccntID + ", " + currID + ", '" + cmnCde.cnvrtBoolToBitStr(isSuspns) +
+             "','" + accClsftcn.Replace("'", "''") + "', " + accntSegmnt1 + ", " + accntSegmnt2 + ", " + accntSegmnt3 +
+             ", " + accntSegmnt4 + ", " + accntSegmnt5 + ", " + accntSegmnt6 + ", " + accntSegmnt7 + ", " + accntSegmnt8 +
+             ", " + accntSegmnt9 + ", " + accntSegmnt10 + ", " + mappedAcntID + ")";
+            //cmnCde.showSQLNoPermsn(insSQL);
             cmnCde.insertDataNoParams(insSQL);
         }
 
         public void updateChrt(int accntID, string accntnum, string accntname,
-      string accntdesc, int prntAccntID,
-          int rpt_ln, string accClsftcn)
+        string accntdesc, int prntAccntID,
+          int rpt_ln, string accClsftcn, int mappedAcntID, bool isparent)
         {
             if (accntnum.Length > 25)
             {
@@ -2770,11 +4074,16 @@ namespace CommonCode
             string dateStr = cmnCde.getDB_Date_time();
 
             string updateSQL = "UPDATE accb.accb_chart_of_accnts SET " +
-                            "accnt_num='" + accntnum.Replace("'", "''") + "', accnt_name='" + accntname.Replace("'", "''") +
-                "', accnt_desc='" + accntdesc.Replace("'", "''") + "', prnt_accnt_id=" + prntAccntID +
-                ", last_update_by=" + cmnCde.User_id + ", " +
-                            "last_update_date='" + dateStr + "', report_line_no=" + rpt_ln +
-                ", account_clsfctn='" + accClsftcn.Replace("'", "''") + "' Where accnt_id = " + accntID;
+                            "accnt_num='" + accntnum.Replace("'", "''") +
+                            "', accnt_name='" + accntname.Replace("'", "''") +
+                            "', accnt_desc='" + accntdesc.Replace("'", "''") +
+                            "', prnt_accnt_id=" + prntAccntID +
+                            ", last_update_by=" + cmnCde.User_id + ", " +
+                            "last_update_date='" + dateStr +
+                            "', report_line_no=" + rpt_ln +
+                            ", account_clsfctn='" + accClsftcn.Replace("'", "''") +
+                            "', mapped_grp_accnt_id=" + mappedAcntID +
+                            ", is_prnt_accnt='" + cmnCde.cnvrtBoolToBitStr(isparent) + "' Where accnt_id = " + accntID;
             cmnCde.updateDataNoParams(updateSQL);
         }
         #endregion
@@ -3190,7 +4499,7 @@ namespace CommonCode
         }
 
         public void createTmpltTrns(int accntid, string trnsDesc,
-      long tmpltid, string incrsDcrs)
+        long tmpltid, string incrsDcrs)
         {
             if (trnsDesc.Length > 200)
             {
@@ -3208,7 +4517,7 @@ namespace CommonCode
         }
 
         public void updateTmpltTrns(long detID, int accntid, string trnsDesc,
-      long tmpltid, string incrsDcrs)
+        long tmpltid, string incrsDcrs)
         {
             if (trnsDesc.Length > 200)
             {
@@ -5821,7 +7130,7 @@ namespace CommonCode
         }
 
         public void updateItmVal(long pssblvalid, long itmid, double amnt, string sqlFormula,
-      string valNm)
+        string valNm)
         {
             if (valNm.Length > 200)
             {
@@ -6048,7 +7357,7 @@ namespace CommonCode
         }
 
         public void updateWkhrDet(int row_id, int wkhid,
-      string weekday, string strtTm, string endTm)
+        string weekday, string strtTm, string endTm)
         {
             cmnCde.Extra_Adt_Trl_Info = "";
             string dateStr = cmnCde.getDB_Date_time();
@@ -6488,7 +7797,7 @@ namespace CommonCode
         }
 
         public void createMsPy(int orgid, string mspyname,
-       string mspydesc, string trnsdte, int prstid, int itmstid, string glDate)
+        string mspydesc, string trnsdte, int prstid, int itmstid, string glDate)
         {
             trnsdte = DateTime.ParseExact(
          trnsdte, "dd-MMM-yyyy HH:mm:ss",
@@ -6539,8 +7848,8 @@ namespace CommonCode
             long mspID = -1;
             long msg_id = -1;
             string dateStr = DateTime.ParseExact(
-      cmnCde.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
-      System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
+        cmnCde.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
+        System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
 
             int rownum = 5;
             do
@@ -6873,9 +8182,9 @@ namespace CommonCode
         }
 
         public bool sendToGLInterfaceMnl(
-      long prsn_id, long itm_id, string itm_uom, double pay_amnt,
-      string trns_date, string trns_desc,
-      int crncy_id, string dateStr, string trns_src, string glDate)
+        long prsn_id, long itm_id, string itm_uom, double pay_amnt,
+        string trns_date, string trns_desc,
+        int crncy_id, string dateStr, string trns_src, string glDate)
         {
             try
             {
@@ -6985,7 +8294,7 @@ namespace CommonCode
         }
 
         public void createPymntGLIntFcLn(int accntid, string trnsdesc, double dbtamnt,
-      string trnsdte, int crncyid, double crdtamnt, double netamnt, long srcid, string dateStr)
+        string trnsdte, int crncyid, double crdtamnt, double netamnt, long srcid, string dateStr)
         {
             if (accntid <= 0)
             {
@@ -7036,7 +8345,7 @@ namespace CommonCode
         }
 
         public void updtItmDailyBalsCum(string balsDate, long blsItmID,
-      long prsn_id, double netAmnt, long py_trns_id)
+        long prsn_id, double netAmnt, long py_trns_id)
         {
             balsDate = DateTime.ParseExact(
          balsDate, "dd-MMM-yyyy HH:mm:ss",
@@ -7055,7 +8364,7 @@ namespace CommonCode
         }
 
         public void updtItmDailyBalsNonCum(string balsDate, long blsItmID,
-      long prsn_id, double netAmnt, long py_trns_id)
+        long prsn_id, double netAmnt, long py_trns_id)
         {
             balsDate = DateTime.ParseExact(
          balsDate, "dd-MMM-yyyy HH:mm:ss",
@@ -7180,7 +8489,7 @@ namespace CommonCode
         }
 
         public bool shldTrnsBePaid(string itmUOM, string itmMaj,
-      string itmMin, long itmID, double amnt, string date1, long prsnIDIn, string date2,
+        string itmMin, long itmID, double amnt, string date1, long prsnIDIn, string date2,
           ref string errMsg)
         {
             long prsnItmRwID = this.doesPrsnHvItmPrs(prsnIDIn,
@@ -7197,7 +8506,7 @@ namespace CommonCode
                 }
             }
             else if (this.doesPrsnHvItm(prsnIDIn,
-      itmID, date1) == false)
+        itmID, date1) == false)
             {
                 errMsg = "The selected person does not have the \r\nselected Item as at the Payment Date Specified!";
                 return false;
@@ -7619,7 +8928,7 @@ namespace CommonCode
         }
 
         private bool isPayTrnsValid(string itmUOM, string itmMaj,
-      string itmMin, long itmID, double amnt, string date1)
+        string itmMin, long itmID, double amnt, string date1)
         {
             if (itmUOM != "Number"
               && itmMaj != "Balance Item"
@@ -7949,7 +9258,7 @@ namespace CommonCode
         "Gender**","Marital Status**","Date of Birth**","Place of Birth","Home Town","Religion",
         "Residential Address", "Postal Address","Email","Tel.","Mobile","Fax", "Nationality**", "Image File Name",
         "Person Type**", "Person Type Reason**",
-       "Person Type Futher Details","From","To"};
+       "Person Type Futher Details","From","To","Linked Firm /Workplace","Site/Branch"};
 
             for (int a = 0; a < hdngs.Length; a++)
             {
@@ -7973,7 +9282,9 @@ namespace CommonCode
                "a.gender, a.marital_status, to_char(to_timestamp(a.date_of_birth,'YYYY-MM-DD'),'DD-Mon-YYYY'), a.place_of_birth, a.religion, " +
                "a.res_address, a.pstl_addrs, a.email, '''' || a.cntct_no_tel, '''' || a.cntct_no_mobl, " +
                "'''' || a.cntct_no_fax, b.prsn_type, b.prn_typ_asgnmnt_rsn, " +
-                "b.further_details, b.valid_start_date, b.valid_end_date, a.hometown, a.nationality, a.img_location " +
+               @"b.further_details, b.valid_start_date, b.valid_end_date, a.hometown, a.nationality, a.img_location, 
+                 scm.get_cstmr_splr_name(lnkd_firm_org_id), 
+                 scm.get_cstmr_splr_site_name(lnkd_firm_site_id) " +
                "FROM prs.prsn_names_nos a LEFT OUTER JOIN pasn.prsn_prsntyps b " +
                "ON (a.person_id = b.person_id and now() between to_timestamp(b.valid_start_date,'YYYY-MM-DD') and to_timestamp(b.valid_end_date,'YYYY-MM-DD')) where ((a.org_id = " + this.orgID +
                ")) ORDER BY a.local_id_no";
@@ -7985,7 +9296,9 @@ namespace CommonCode
                "a.gender, a.marital_status, a.date_of_birth, a.place_of_birth, a.religion, " +
                "a.res_address, a.pstl_addrs, a.email, '''' || a.cntct_no_tel, '''' || a.cntct_no_mobl, " +
                "'''' || a.cntct_no_fax, b.prsn_type, b.prn_typ_asgnmnt_rsn, " +
-                "b.further_details, b.valid_start_date, b.valid_end_date, a.hometown, a.nationality, a.img_location " +
+                @"b.further_details, b.valid_start_date, b.valid_end_date, a.hometown, a.nationality, a.img_location, 
+                 scm.get_cstmr_splr_name(lnkd_firm_org_id), 
+                 scm.get_cstmr_splr_site_name(lnkd_firm_site_id) " +
                "FROM prs.prsn_names_nos a LEFT OUTER JOIN pasn.prsn_prsntyps b " +
                "ON (a.person_id = b.person_id and now() between to_timestamp(b.valid_start_date,'YYYY-MM-DD') and to_timestamp(b.valid_end_date,'YYYY-MM-DD')) where ((a.org_id = " + this.orgID +
                ")) ORDER BY a.local_id_no LIMIT " + this.recsNo +
@@ -8027,6 +9340,8 @@ namespace CommonCode
                 ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 23]).Value2 = dtst.Tables[0].Rows[a][18].ToString();
                 ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 24]).Value2 = dtst.Tables[0].Rows[a][19].ToString();
                 ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 25]).Value2 = dtst.Tables[0].Rows[a][20].ToString();
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 26]).Value2 = dtst.Tables[0].Rows[a][24].ToString();
+                ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[(a + 6), 27]).Value2 = dtst.Tables[0].Rows[a][25].ToString();
             }
             this.trgtSheets[0].get_Range("A1:A65535", Type.Missing).ColumnWidth = 10;
             this.trgtSheets[0].get_Range("A1:A65535", Type.Missing).WrapText = true;
@@ -8078,6 +9393,8 @@ namespace CommonCode
             string toDte = "";
             string ntnlty = "";
             string imgLoc = "";
+            string firmNm = "";
+            string firmBranch = "";
             int rownum = 5;
             string dateStr = DateTime.ParseExact(
               cmnCde.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
@@ -8278,6 +9595,22 @@ namespace CommonCode
                 {
                     toDte = "";
                 }
+                try
+                {
+                    firmNm = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 26]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    firmNm = "";
+                }
+                try
+                {
+                    firmBranch = ((Microsoft.Office.Interop.Excel.Range)this.trgtSheets[0].Cells[rownum, 27]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    firmBranch = "";
+                }
 
                 if (rownum == 5)
                 {
@@ -8285,7 +9618,7 @@ namespace CommonCode
         "Gender**","Marital Status**","Date of Birth**","Place of Birth","Home Town","Religion",
         "Residential Address", "Postal Address","Email","Tel.","Mobile","Fax", "Nationality**", "Image File Name",
         "Person Type**", "Person Type Reason**",
-       "Person Type Futher Details","From","To"};
+       "Person Type Futher Details","From","To","Linked Firm /Workplace","Site/Branch"};
 
                     if (locIDNo != hdngs[0].ToUpper() || title != hdngs[1].ToUpper()
                       || frstNm != hdngs[2].ToUpper() || surNm != hdngs[3].ToUpper()
@@ -8298,7 +9631,8 @@ namespace CommonCode
                       || ntnlty != hdngs[17].ToUpper() || imgLoc != hdngs[18].ToUpper()
                       || prsntyp != hdngs[19].ToUpper() || prsntyprsn != hdngs[20].ToUpper()
                       || futhDet != hdngs[21].ToUpper() || fromDte != hdngs[22].ToUpper()
-                      || toDte != hdngs[23].ToUpper())
+                      || toDte != hdngs[23].ToUpper() || firmNm != hdngs[24].ToUpper()
+                      || firmBranch != hdngs[25].ToUpper())
                     {
                         cmnCde.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
                         return;
@@ -8342,22 +9676,43 @@ namespace CommonCode
                         toDte = "31-Dec-4000";
                         DteTo = DateTime.Parse(toDte);
                     }
+                    long lnkdFirmID = -1;
+                    long lnkdFirmSiteID = -1;
+                    lnkdFirmID = cmnCde.getCstmrSpplrID(firmNm.Trim());
+                    if (lnkdFirmID <= 0 && firmNm.Trim() != "")
+                    {
+                        cmnCde.createQckCstmrSpplr(firmNm.Trim());
+                        lnkdFirmID = cmnCde.getCstmrSpplrID(firmNm.Trim());
+                        if (lnkdFirmID > 0 && firmBranch.Trim() != "")
+                        {
+                            lnkdFirmSiteID = cmnCde.getCstmrSpplrSiteID(firmBranch.Trim(), lnkdFirmID);
+                            if (lnkdFirmSiteID <= 0)
+                            {
+                                cmnCde.createQckCstmrSpplrSite(firmBranch.Trim(), lnkdFirmID, firmNm.Trim());
+                                lnkdFirmSiteID = cmnCde.getCstmrSpplrSiteID(firmBranch.Trim(), lnkdFirmID);
+                            }
+                        }
+                    }
+                    else if (lnkdFirmID > 0 && firmBranch.Trim() != "")
+                    {
+                        lnkdFirmSiteID = cmnCde.getCstmrSpplrSiteID(firmBranch.Trim(), lnkdFirmID);
+                    }
                     if (prsn_id_in < 0)
                     {
                         this.createPrsnBasic(frstNm, surNm, othNm, title, locIDNo, this.orgID,
                           gender, mrtlStatus, dtDOB.ToString("dd-MMM-yyyy"), pob, rlgn, resAddrs,
-                          pstlAddrs, email, tel, mobl, fax, homtwn, ntnlty, imgLoc);
+                          pstlAddrs, email, tel, mobl, fax, homtwn, ntnlty, imgLoc, lnkdFirmID, lnkdFirmSiteID);
                         prsn_id_in = cmnCde.getPrsnID(locIDNo);
                         this.createPrsnsType(prsn_id_in, prsntyprsn, DteFrm.ToString("dd-MMM-yyyy"),
                    DteTo.ToString("dd-MMM-yyyy"), futhDet, prsntyp);
-                        this.trgtSheets[0].get_Range("U" + rownum + ":Y" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                        this.trgtSheets[0].get_Range("U" + rownum + ":AA" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
                         this.trgtSheets[0].get_Range("A" + rownum + ":T" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
                     }
                     else if (prsn_id_in > 0)
                     {
                         this.updatePrsnBasic(prsn_id_in, frstNm, surNm, othNm, title, locIDNo, this.orgID,
                           gender, mrtlStatus, dtDOB.ToString("dd-MMM-yyyy"), pob, rlgn, resAddrs,
-                          pstlAddrs, email, tel, mobl, fax, homtwn, ntnlty, imgLoc);
+                          pstlAddrs, email, tel, mobl, fax, homtwn, ntnlty, imgLoc, lnkdFirmID, lnkdFirmSiteID);
                         long prsntypRowID = -1;
                         if (this.checkPrsnType(prsn_id_in,
                             prsntyp, DteFrm.ToString("dd-MMM-yyyy"), ref prsntypRowID) == false)
@@ -8365,14 +9720,14 @@ namespace CommonCode
                             this.endOldPrsnTypes(prsn_id_in, DteFrm.ToString("dd-MMM-yyyy"));
                             this.createPrsnsType(prsn_id_in, prsntyprsn, DteFrm.ToString("dd-MMM-yyyy"),
                               DteTo.ToString("dd-MMM-yyyy"), futhDet, prsntyp);
-                            this.trgtSheets[0].get_Range("U" + rownum + ":Y" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                            this.trgtSheets[0].get_Range("U" + rownum + ":AA" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
                         }
                         else if (prsntypRowID > 0)
                         {
                             this.updtPrsnsType(prsntypRowID, prsn_id_in,
                        prsntyprsn, DteFrm.ToString("dd-MMM-yyyy"),
                        DteTo.ToString("dd-MMM-yyyy"), futhDet, prsntyp);
-                            this.trgtSheets[0].get_Range("U" + rownum + ":Y" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 125, 0));
+                            this.trgtSheets[0].get_Range("U" + rownum + ":AA" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 125, 0));
                         }
                         this.trgtSheets[0].get_Range("A" + rownum + ":T" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
                     }
@@ -8474,7 +9829,7 @@ namespace CommonCode
         }
 
         public void updtPrsnsType(long rowid, long prsnid, string rsn, string date1, string date2,
-       string futhDet, string prsntyp)
+        string futhDet, string prsntyp)
         {
             if (prsntyp.Length > 100)
             {
@@ -8510,8 +9865,9 @@ namespace CommonCode
         }
 
         public void createPrsnBasic(string frstnm, string surname, string othnm, string title
-      , string loc_id, int orgid, string gender, string marsts, string dob, string pob, string rlgn,
-        string resaddrs, string pstladrs, string email, string tel, string mobl, string fax, string hometwn, string ntnlty, string imgLoc)
+        , string loc_id, int orgid, string gender, string marsts, string dob, string pob, string rlgn,
+        string resaddrs, string pstladrs, string email, string tel, string mobl, string fax,
+        string hometwn, string ntnlty, string imgLoc, long lnkdFirmID, long lnkdSiteID)
         {
             dob = DateTime.ParseExact(
          dob, "dd-MMM-yyyy",
@@ -8598,7 +9954,7 @@ namespace CommonCode
                    "first_name, sur_name, other_names, title, local_id_no, org_id, " +
                    "gender, marital_status, date_of_birth, place_of_birth, religion, " +
                    "res_address, pstl_addrs, email, cntct_no_tel, cntct_no_mobl, " +
-                   "cntct_no_fax, hometown, nationality, img_location)" +
+                   "cntct_no_fax, hometown, nationality, img_location, lnkd_firm_org_id, lnkd_firm_site_id)" +
            "VALUES (" + cmnCde.User_id + ", '" + dateStr + "', " +
            cmnCde.User_id + ", '" + dateStr + "', '" + frstnm.Replace("'", "''") + "', " +
                    "'" + surname.Replace("'", "''") + "', '" + othnm.Replace("'", "''") +
@@ -8610,14 +9966,15 @@ namespace CommonCode
                    "'" + pstladrs.Replace("'", "''") + "', '" + email.Replace("'", "''") +
                    "', '" + tel.Replace("'", "''") + "', '" + mobl.Replace("'", "''") +
                    "', '" + fax.Replace("'", "''") + "', '" + hometwn.Replace("'", "''") +
-                   "', '" + ntnlty.Replace("'", "''") + "', '" + imgLoc.Replace("'", "''") + "')";
+                   "', '" + ntnlty.Replace("'", "''") + "', '" + imgLoc.Replace("'", "''") +
+                   "', " + lnkdFirmID + ", " + lnkdSiteID + ")";
             cmnCde.insertDataNoParams(insSQL);
         }
 
         public void updatePrsnBasic(long prsnid, string frstnm, string surname, string othnm, string title
-      , string loc_id, int orgid, string gender, string marsts, string dob, string pob, string rlgn,
+        , string loc_id, int orgid, string gender, string marsts, string dob, string pob, string rlgn,
         string resaddrs, string pstladrs, string email, string tel, string mobl, string fax,
-          string hometwn, string ntnlty, string imgLoc)
+          string hometwn, string ntnlty, string imgLoc, long lnkdFirmID, long lnkdSiteID)
         {
             dob = DateTime.ParseExact(
          dob, "dd-MMM-yyyy",
@@ -8714,7 +10071,8 @@ namespace CommonCode
                 "pstl_addrs='" + pstladrs.Replace("'", "''") + "', email='" + email.Replace("'", "''") +
                    "', cntct_no_tel='" + tel.Replace("'", "''") + "', cntct_no_mobl='" + mobl.Replace("'", "''") +
                    "', cntct_no_fax='" + fax.Replace("'", "''") + "', hometown='" + hometwn.Replace("'", "''") +
-                   "', nationality='" + ntnlty.Replace("'", "''") + "', img_location='" + imgLoc.Replace("'", "''") + "' " +
+                   "', nationality='" + ntnlty.Replace("'", "''") + "', img_location='" + imgLoc.Replace("'", "''") +
+                   "', lnkd_firm_org_id=" + lnkdFirmID + ", lnkd_firm_site_id=" + lnkdSiteID + " " +
                 "WHERE person_id=" + prsnid;
             cmnCde.updateDataNoParams(updtSQL);
         }
@@ -11172,6 +12530,12 @@ to_char(to_timestamp(h.valid_end_date,'YYYY-MM-DD'),'DD-Mon-YYYY') " +
         public void createLoc(long prsnid, int locid,
         string strtdte, string enddte)
         {
+            strtdte = DateTime.ParseExact(
+         strtdte, "dd-MMM-yyyy",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            enddte = DateTime.ParseExact(
+         enddte, "dd-MMM-yyyy",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             string dateStr = cmnCde.getDB_Date_time();
             string insSQL = "INSERT INTO pasn.prsn_locations(" +
                      "person_id, location_id, valid_start_date, valid_end_date, created_by, " +
@@ -11374,7 +12738,7 @@ to_char(to_timestamp(h.valid_end_date,'YYYY-MM-DD'),'DD-Mon-YYYY') " +
         }
 
         public void createBnftsPrs(long prsnid, long itmid, long itm_val_id,
-    string strtdte, string enddte)
+        string strtdte, string enddte)
         {
             string dateStr = cmnCde.getDB_Date_time();
             strtdte = DateTime.ParseExact(
@@ -13389,7 +14753,7 @@ to_char(to_timestamp(b.valid_end_date,'YYYY-MM-DD'),'DD-Mon-YYYY') " +
         }
 
         public void createLovNm(string lovNm, string lovDesc, bool isDyn
-      , string sqlQry, string dfndBy, bool isEnbld, string dateStr)
+        , string sqlQry, string dfndBy, bool isEnbld, string dateStr)
         {
             dateStr = DateTime.ParseExact(
          dateStr, "dd-MMM-yyyy HH:mm:ss",
@@ -13683,7 +15047,7 @@ to_char(to_timestamp(b.valid_end_date,'YYYY-MM-DD'),'DD-Mon-YYYY') " +
         }
 
         public void createUser(string username, long ownrID,
-      string in_strDte, string in_endDte, string pwd)
+        string in_strDte, string in_endDte, string pwd)
         {
             in_strDte = DateTime.ParseExact(
          in_strDte, "dd-MMM-yyyy HH:mm:ss",
@@ -13716,7 +15080,7 @@ to_char(to_timestamp(b.valid_end_date,'YYYY-MM-DD'),'DD-Mon-YYYY') " +
         }
 
         public void asgnRoleSetToUser(long usrID, int roleID,
-      string in_strDte, string in_endDte)
+        string in_strDte, string in_endDte)
         {
             in_strDte = DateTime.ParseExact(
          in_strDte, "dd-MMM-yyyy HH:mm:ss",

@@ -124,13 +124,13 @@ namespace StoresAndInventoryManager.Forms
 
     private void updtValTotals()
     {
-      this.myNav.FindNavigationIndices(int.Parse(this.dsplySizeComboBox.Text),
-      this.totl_vals);
+      this.myNav.FindNavigationIndices(int.Parse(this.dsplySizeComboBox.Text), this.totl_vals);
 
       if (this.cur_vals_idx >= this.myNav.totalGroups)
       {
         this.cur_vals_idx = this.myNav.totalGroups - 1;
       }
+
       if (this.cur_vals_idx < 0)
       {
         this.cur_vals_idx = 0;
@@ -145,8 +145,7 @@ namespace StoresAndInventoryManager.Forms
       this.moveNextButton.Enabled = this.myNav.moveNextBtnStatus();
       this.moveLastButton.Enabled = this.myNav.moveLastBtnStatus();
       this.positionTextBox.Text = this.myNav.displayedRecordsNumbers();
-      if (this.is_last_val == true ||
-        this.totl_vals != Global.mnFrm.cmCde.Big_Val)
+      if (this.is_last_val == true || this.totl_vals != Global.mnFrm.cmCde.Big_Val)
       {
         this.totalRecLabel.Text = this.myNav.totalRecordsLabel();
       }

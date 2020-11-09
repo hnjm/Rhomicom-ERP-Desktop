@@ -501,7 +501,7 @@ namespace CommonCode
           }
           else if (this.grpComboBox.Text == "Site/Location")
           {
-            this.grpNmTextBox.Text = cmnCde.getSiteName(int.Parse(selVals[i]));
+            this.grpNmTextBox.Text = cmnCde.getSiteNameDesc(int.Parse(selVals[i]));
           }
           else if (this.grpComboBox.Text == "Person Type")
           {

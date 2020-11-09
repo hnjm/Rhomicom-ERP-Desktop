@@ -75,6 +75,8 @@ namespace ReportsAndProcesses.Forms
             this.columnHeader57 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader58 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader75 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader76 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader77 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.rptContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addRptMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editRptMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -158,6 +160,7 @@ namespace ReportsAndProcesses.Forms
             this.rfrshRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recHstryRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vwSQLRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runIDLabel = new System.Windows.Forms.Label();
             this.rerunButton = new System.Windows.Forms.Button();
             this.runParamsListView = new System.Windows.Forms.ListView();
             this.columnHeader51 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -169,7 +172,6 @@ namespace ReportsAndProcesses.Forms
             this.label27 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.runIDLabel = new System.Windows.Forms.Label();
             this.rptRnStatusLbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.rptCreatorTabPage = new System.Windows.Forms.TabPage();
@@ -191,6 +193,8 @@ namespace ReportsAndProcesses.Forms
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader67 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader68 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader78 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader79 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.paramsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addParamMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editParamMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -288,6 +292,10 @@ namespace ReportsAndProcesses.Forms
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.rptSQLTextBox = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.preRptSQLTextBox = new System.Windows.Forms.TextBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.postRptSQLTextBox = new System.Windows.Forms.TextBox();
             this.stpPrcsRnnrsButton = new System.Windows.Forms.Button();
             this.duplicateButton = new System.Windows.Forms.Button();
             this.saveRptButton = new System.Windows.Forms.Button();
@@ -425,6 +433,8 @@ namespace ReportsAndProcesses.Forms
             this.toolStrip3.SuspendLayout();
             this.toolStrip11.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.alertsTabPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.repeatIntervalNupDwn)).BeginInit();
@@ -529,7 +539,7 @@ namespace ReportsAndProcesses.Forms
             this.runRptButton.ImageList = this.imageList1;
             this.runRptButton.Location = new System.Drawing.Point(124, 182);
             this.runRptButton.Name = "runRptButton";
-            this.runRptButton.Size = new System.Drawing.Size(132, 29);
+            this.runRptButton.Size = new System.Drawing.Size(134, 29);
             this.runRptButton.TabIndex = 103;
             this.runRptButton.Text = "RUN PROGRAM";
             this.runRptButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -555,13 +565,14 @@ namespace ReportsAndProcesses.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.orderByComboBox,
             this.refreshButton});
             this.toolStrip1.Location = new System.Drawing.Point(6, 155);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(251, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(252, 25);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 83;
             this.toolStrip1.Text = "toolStrip1";
@@ -590,7 +601,7 @@ namespace ReportsAndProcesses.Forms
             this.refreshButton.Image = global::ReportsAndProcesses.Properties.Resources.search_32;
             this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(23, 22);
+            this.refreshButton.Size = new System.Drawing.Size(24, 22);
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
@@ -601,6 +612,7 @@ namespace ReportsAndProcesses.Forms
             this.navToolStrip.AutoSize = false;
             this.navToolStrip.BackColor = System.Drawing.Color.WhiteSmoke;
             this.navToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.navToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.navToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstRptButton,
             this.toolStripSeparator9,
@@ -616,7 +628,7 @@ namespace ReportsAndProcesses.Forms
             this.navToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.navToolStrip.Location = new System.Drawing.Point(5, 41);
             this.navToolStrip.Name = "navToolStrip";
-            this.navToolStrip.Size = new System.Drawing.Size(248, 25);
+            this.navToolStrip.Size = new System.Drawing.Size(253, 25);
             this.navToolStrip.Stretch = true;
             this.navToolStrip.TabIndex = 0;
             this.navToolStrip.TabStop = true;
@@ -628,7 +640,7 @@ namespace ReportsAndProcesses.Forms
             this.moveFirstRptButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstRptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstRptButton.Name = "moveFirstRptButton";
-            this.moveFirstRptButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstRptButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstRptButton.Text = "Move First";
             this.moveFirstRptButton.Click += new System.EventHandler(this.RptPnlNavButtons);
             // 
@@ -643,7 +655,7 @@ namespace ReportsAndProcesses.Forms
             this.movePreviousRptButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousRptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousRptButton.Name = "movePreviousRptButton";
-            this.movePreviousRptButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousRptButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousRptButton.Text = "Move Previous";
             this.movePreviousRptButton.Click += new System.EventHandler(this.RptPnlNavButtons);
             // 
@@ -683,7 +695,7 @@ namespace ReportsAndProcesses.Forms
             this.moveNextRptButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextRptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextRptButton.Name = "moveNextRptButton";
-            this.moveNextRptButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextRptButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextRptButton.Text = "Move Next";
             this.moveNextRptButton.Click += new System.EventHandler(this.RptPnlNavButtons);
             // 
@@ -698,7 +710,7 @@ namespace ReportsAndProcesses.Forms
             this.moveLastRptButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastRptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastRptButton.Name = "moveLastRptButton";
-            this.moveLastRptButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastRptButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastRptButton.Text = "Move Last";
             this.moveLastRptButton.Click += new System.EventHandler(this.RptPnlNavButtons);
             // 
@@ -756,7 +768,9 @@ namespace ReportsAndProcesses.Forms
             this.columnHeader56,
             this.columnHeader57,
             this.columnHeader58,
-            this.columnHeader75});
+            this.columnHeader75,
+            this.columnHeader76,
+            this.columnHeader77});
             this.rptListView.ContextMenuStrip = this.rptContextMenuStrip;
             this.rptListView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rptListView.FullRowSelect = true;
@@ -765,7 +779,7 @@ namespace ReportsAndProcesses.Forms
             this.rptListView.Location = new System.Drawing.Point(5, 213);
             this.rptListView.MinimumSize = new System.Drawing.Size(210, 211);
             this.rptListView.Name = "rptListView";
-            this.rptListView.Size = new System.Drawing.Size(251, 361);
+            this.rptListView.Size = new System.Drawing.Size(253, 361);
             this.rptListView.TabIndex = 2;
             this.rptListView.UseCompatibleStateImageBehavior = false;
             this.rptListView.View = System.Windows.Forms.View.Details;
@@ -872,8 +886,19 @@ namespace ReportsAndProcesses.Forms
             this.columnHeader75.Text = "jrxml";
             this.columnHeader75.Width = 0;
             // 
+            // columnHeader76
+            // 
+            this.columnHeader76.Text = "preSQL";
+            this.columnHeader76.Width = 0;
+            // 
+            // columnHeader77
+            // 
+            this.columnHeader77.Text = "PostSQL";
+            this.columnHeader77.Width = 0;
+            // 
             // rptContextMenuStrip
             // 
+            this.rptContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.rptContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRptMenuItem,
             this.editRptMenuItem,
@@ -887,13 +912,13 @@ namespace ReportsAndProcesses.Forms
             this.rcHstryRptMenuItem,
             this.vwSQLRptMenuItem});
             this.rptContextMenuStrip.Name = "vlNmContextMenuStrip";
-            this.rptContextMenuStrip.Size = new System.Drawing.Size(214, 214);
+            this.rptContextMenuStrip.Size = new System.Drawing.Size(218, 250);
             // 
             // addRptMenuItem
             // 
             this.addRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.plus_32;
             this.addRptMenuItem.Name = "addRptMenuItem";
-            this.addRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.addRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.addRptMenuItem.Text = "Add Report";
             this.addRptMenuItem.Click += new System.EventHandler(this.addRptMenuItem_Click);
             // 
@@ -901,7 +926,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.editRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.edit32;
             this.editRptMenuItem.Name = "editRptMenuItem";
-            this.editRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.editRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.editRptMenuItem.Text = "Edit Report";
             this.editRptMenuItem.Click += new System.EventHandler(this.editRptMenuItem_Click);
             // 
@@ -909,20 +934,20 @@ namespace ReportsAndProcesses.Forms
             // 
             this.delRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.delRptMenuItem.Name = "delRptMenuItem";
-            this.delRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.delRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.delRptMenuItem.Text = "Delete Report";
             this.delRptMenuItem.Click += new System.EventHandler(this.delRptMenuItem_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(214, 6);
             // 
             // runRpt1MenuItem
             // 
             this.runRpt1MenuItem.Image = global::ReportsAndProcesses.Properties.Resources.go_98;
             this.runRpt1MenuItem.Name = "runRpt1MenuItem";
-            this.runRpt1MenuItem.Size = new System.Drawing.Size(213, 22);
+            this.runRpt1MenuItem.Size = new System.Drawing.Size(217, 26);
             this.runRpt1MenuItem.Text = "Run Report/Process (New)";
             this.runRpt1MenuItem.Click += new System.EventHandler(this.runRpt1MenuItem_Click);
             // 
@@ -930,7 +955,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.runToExcel1MenuItem.Image = global::ReportsAndProcesses.Properties.Resources.go_98;
             this.runToExcel1MenuItem.Name = "runToExcel1MenuItem";
-            this.runToExcel1MenuItem.Size = new System.Drawing.Size(213, 22);
+            this.runToExcel1MenuItem.Size = new System.Drawing.Size(217, 26);
             this.runToExcel1MenuItem.Text = "Run to Excel";
             this.runToExcel1MenuItem.Visible = false;
             this.runToExcel1MenuItem.Click += new System.EventHandler(this.runToExcel1MenuItem_Click);
@@ -938,13 +963,13 @@ namespace ReportsAndProcesses.Forms
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(214, 6);
             // 
             // exptRptExclMenuItem
             // 
             this.exptRptExclMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.image007;
             this.exptRptExclMenuItem.Name = "exptRptExclMenuItem";
-            this.exptRptExclMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.exptRptExclMenuItem.Size = new System.Drawing.Size(217, 26);
             this.exptRptExclMenuItem.Text = "Export to Excel";
             this.exptRptExclMenuItem.Click += new System.EventHandler(this.exptRptExclMenuItem_Click);
             // 
@@ -952,7 +977,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rfrshRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.refresh;
             this.rfrshRptMenuItem.Name = "rfrshRptMenuItem";
-            this.rfrshRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.rfrshRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.rfrshRptMenuItem.Text = "Refresh";
             this.rfrshRptMenuItem.Click += new System.EventHandler(this.rfrshRptMenuItem_Click);
             // 
@@ -960,7 +985,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rcHstryRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.statistics_32;
             this.rcHstryRptMenuItem.Name = "rcHstryRptMenuItem";
-            this.rcHstryRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.rcHstryRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.rcHstryRptMenuItem.Text = "Record History";
             this.rcHstryRptMenuItem.Click += new System.EventHandler(this.rcHstryRptMenuItem_Click);
             // 
@@ -968,7 +993,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.vwSQLRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.sql_icon;
             this.vwSQLRptMenuItem.Name = "vwSQLRptMenuItem";
-            this.vwSQLRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.vwSQLRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.vwSQLRptMenuItem.Text = "View SQL";
             this.vwSQLRptMenuItem.Click += new System.EventHandler(this.vwSQLRptMenuItem_Click);
             // 
@@ -1045,6 +1070,7 @@ namespace ReportsAndProcesses.Forms
             this.searchInRptComboBox.Items.AddRange(new object[] {
             "Owner Module",
             "Report Description",
+            "Report ID",
             "Report Name"});
             this.searchInRptComboBox.Location = new System.Drawing.Point(79, 62);
             this.searchInRptComboBox.Name = "searchInRptComboBox";
@@ -1140,6 +1166,7 @@ namespace ReportsAndProcesses.Forms
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.goRptRnButton,
             this.toolStripSeparator67,
@@ -1184,7 +1211,7 @@ namespace ReportsAndProcesses.Forms
             this.goRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.refresh;
             this.goRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goRptRnButton.Name = "goRptRnButton";
-            this.goRptRnButton.Size = new System.Drawing.Size(66, 22);
+            this.goRptRnButton.Size = new System.Drawing.Size(70, 22);
             this.goRptRnButton.Text = "Refresh";
             this.goRptRnButton.Click += new System.EventHandler(this.goRptRnButton_Click);
             // 
@@ -1200,7 +1227,7 @@ namespace ReportsAndProcesses.Forms
             this.moveFirstRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstRptRnButton.Name = "moveFirstRptRnButton";
-            this.moveFirstRptRnButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstRptRnButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstRptRnButton.Text = "Move First";
             this.moveFirstRptRnButton.Click += new System.EventHandler(this.RptRnPnlNavButtons);
             // 
@@ -1216,7 +1243,7 @@ namespace ReportsAndProcesses.Forms
             this.movePreviousRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousRptRnButton.Name = "movePreviousRptRnButton";
-            this.movePreviousRptRnButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousRptRnButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousRptRnButton.Text = "Move Previous";
             this.movePreviousRptRnButton.Click += new System.EventHandler(this.RptRnPnlNavButtons);
             // 
@@ -1268,7 +1295,7 @@ namespace ReportsAndProcesses.Forms
             this.moveNextRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextRptRnButton.Name = "moveNextRptRnButton";
-            this.moveNextRptRnButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextRptRnButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextRptRnButton.Text = "Move Next";
             this.moveNextRptRnButton.Click += new System.EventHandler(this.RptRnPnlNavButtons);
             // 
@@ -1284,7 +1311,7 @@ namespace ReportsAndProcesses.Forms
             this.moveLastRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastRptRnButton.Name = "moveLastRptRnButton";
-            this.moveLastRptRnButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastRptRnButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastRptRnButton.Text = "Move Last";
             this.moveLastRptRnButton.Click += new System.EventHandler(this.RptRnPnlNavButtons);
             // 
@@ -1369,7 +1396,7 @@ namespace ReportsAndProcesses.Forms
             this.cancelRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.void_90;
             this.cancelRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cancelRptRnButton.Name = "cancelRptRnButton";
-            this.cancelRptRnButton.Size = new System.Drawing.Size(63, 22);
+            this.cancelRptRnButton.Size = new System.Drawing.Size(67, 22);
             this.cancelRptRnButton.Text = "Cancel";
             this.cancelRptRnButton.ToolTipText = "Cancel Report Run";
             this.cancelRptRnButton.Click += new System.EventHandler(this.cancelRptRnButton_Click);
@@ -1385,7 +1412,7 @@ namespace ReportsAndProcesses.Forms
             this.vwLogMsgButton.Image = global::ReportsAndProcesses.Properties.Resources.log_15;
             this.vwLogMsgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwLogMsgButton.Name = "vwLogMsgButton";
-            this.vwLogMsgButton.Size = new System.Drawing.Size(23, 22);
+            this.vwLogMsgButton.Size = new System.Drawing.Size(24, 22);
             this.vwLogMsgButton.Text = "View Log Messages";
             this.vwLogMsgButton.Click += new System.EventHandler(this.vwLogMsgButton_Click);
             // 
@@ -1395,7 +1422,7 @@ namespace ReportsAndProcesses.Forms
             this.vwSQLRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.sql_icon;
             this.vwSQLRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLRptRnButton.Name = "vwSQLRptRnButton";
-            this.vwSQLRptRnButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLRptRnButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLRptRnButton.Text = "View SQL";
             this.vwSQLRptRnButton.Click += new System.EventHandler(this.vwSQLRptRnButton_Click);
             // 
@@ -1405,7 +1432,7 @@ namespace ReportsAndProcesses.Forms
             this.recHstryRptRnButton.Image = global::ReportsAndProcesses.Properties.Resources.statistics_32;
             this.recHstryRptRnButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryRptRnButton.Name = "recHstryRptRnButton";
-            this.recHstryRptRnButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryRptRnButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryRptRnButton.Text = "Record History";
             this.recHstryRptRnButton.Click += new System.EventHandler(this.recHstryRptRnButton_Click);
             // 
@@ -1425,6 +1452,7 @@ namespace ReportsAndProcesses.Forms
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.runIDLabel);
             this.splitContainer2.Panel2.Controls.Add(this.rerunButton);
             this.splitContainer2.Panel2.Controls.Add(this.runParamsListView);
             this.splitContainer2.Panel2.Controls.Add(this.autoRfrshButton);
@@ -1432,7 +1460,6 @@ namespace ReportsAndProcesses.Forms
             this.splitContainer2.Panel2.Controls.Add(this.label27);
             this.splitContainer2.Panel2.Controls.Add(this.label19);
             this.splitContainer2.Panel2.Controls.Add(this.progressBar1);
-            this.splitContainer2.Panel2.Controls.Add(this.runIDLabel);
             this.splitContainer2.Panel2.Controls.Add(this.rptRnStatusLbl);
             this.splitContainer2.Panel2.Controls.Add(this.label4);
             this.splitContainer2.Size = new System.Drawing.Size(979, 491);
@@ -1591,6 +1618,7 @@ namespace ReportsAndProcesses.Forms
             // 
             // rptRnContextMenuStrip
             // 
+            this.rptRnContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.rptRnContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.runRptMenuItem,
             this.runToExcelMenuItem,
@@ -1602,13 +1630,13 @@ namespace ReportsAndProcesses.Forms
             this.recHstryRunMenuItem,
             this.vwSQLRunMenuItem});
             this.rptRnContextMenuStrip.Name = "vlNmContextMenuStrip";
-            this.rptRnContextMenuStrip.Size = new System.Drawing.Size(214, 186);
+            this.rptRnContextMenuStrip.Size = new System.Drawing.Size(218, 218);
             // 
             // runRptMenuItem
             // 
             this.runRptMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.go_98;
             this.runRptMenuItem.Name = "runRptMenuItem";
-            this.runRptMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.runRptMenuItem.Size = new System.Drawing.Size(217, 26);
             this.runRptMenuItem.Text = "Run Report/Process (New)";
             this.runRptMenuItem.Visible = false;
             this.runRptMenuItem.Click += new System.EventHandler(this.runRptMenuItem_Click);
@@ -1617,7 +1645,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.runToExcelMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.go_98;
             this.runToExcelMenuItem.Name = "runToExcelMenuItem";
-            this.runToExcelMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.runToExcelMenuItem.Size = new System.Drawing.Size(217, 26);
             this.runToExcelMenuItem.Text = "Run to Excel";
             this.runToExcelMenuItem.Visible = false;
             this.runToExcelMenuItem.Click += new System.EventHandler(this.runToExcelMenuItem_Click);
@@ -1626,7 +1654,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.cancelRunMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.void_90;
             this.cancelRunMenuItem.Name = "cancelRunMenuItem";
-            this.cancelRunMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.cancelRunMenuItem.Size = new System.Drawing.Size(217, 26);
             this.cancelRunMenuItem.Text = "Cancel Run";
             this.cancelRunMenuItem.Visible = false;
             this.cancelRunMenuItem.Click += new System.EventHandler(this.cancelRunMenuItem_Click);
@@ -1635,20 +1663,20 @@ namespace ReportsAndProcesses.Forms
             // 
             this.delRunMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.delRunMenuItem.Name = "delRunMenuItem";
-            this.delRunMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.delRunMenuItem.Size = new System.Drawing.Size(217, 26);
             this.delRunMenuItem.Text = "Delete Run";
             this.delRunMenuItem.Click += new System.EventHandler(this.delRunMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(214, 6);
             // 
             // exptRnExclMenuItem
             // 
             this.exptRnExclMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.image007;
             this.exptRnExclMenuItem.Name = "exptRnExclMenuItem";
-            this.exptRnExclMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.exptRnExclMenuItem.Size = new System.Drawing.Size(217, 26);
             this.exptRnExclMenuItem.Text = "Export to Excel";
             this.exptRnExclMenuItem.Click += new System.EventHandler(this.exptRnExclMenuItem_Click);
             // 
@@ -1656,7 +1684,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rfrshRunMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.refresh;
             this.rfrshRunMenuItem.Name = "rfrshRunMenuItem";
-            this.rfrshRunMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.rfrshRunMenuItem.Size = new System.Drawing.Size(217, 26);
             this.rfrshRunMenuItem.Text = "Refresh";
             this.rfrshRunMenuItem.Click += new System.EventHandler(this.rfrshRunMenuItem_Click);
             // 
@@ -1664,7 +1692,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.recHstryRunMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.statistics_32;
             this.recHstryRunMenuItem.Name = "recHstryRunMenuItem";
-            this.recHstryRunMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.recHstryRunMenuItem.Size = new System.Drawing.Size(217, 26);
             this.recHstryRunMenuItem.Text = "Record History";
             this.recHstryRunMenuItem.Click += new System.EventHandler(this.recHstryRunMenuItem_Click);
             // 
@@ -1672,9 +1700,23 @@ namespace ReportsAndProcesses.Forms
             // 
             this.vwSQLRunMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.sql_icon;
             this.vwSQLRunMenuItem.Name = "vwSQLRunMenuItem";
-            this.vwSQLRunMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.vwSQLRunMenuItem.Size = new System.Drawing.Size(217, 26);
             this.vwSQLRunMenuItem.Text = "View SQL";
             this.vwSQLRunMenuItem.Click += new System.EventHandler(this.vwSQLRunMenuItem_Click);
+            // 
+            // runIDLabel
+            // 
+            this.runIDLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.runIDLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.runIDLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.runIDLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.runIDLabel.Location = new System.Drawing.Point(54, 44);
+            this.runIDLabel.Name = "runIDLabel";
+            this.runIDLabel.Size = new System.Drawing.Size(161, 24);
+            this.runIDLabel.TabIndex = 144;
+            this.runIDLabel.Text = "-1";
+            this.runIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // rerunButton
             // 
@@ -1789,20 +1831,6 @@ namespace ReportsAndProcesses.Forms
             this.progressBar1.Size = new System.Drawing.Size(211, 26);
             this.progressBar1.TabIndex = 138;
             // 
-            // runIDLabel
-            // 
-            this.runIDLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.runIDLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.runIDLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.runIDLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.runIDLabel.Location = new System.Drawing.Point(54, 44);
-            this.runIDLabel.Name = "runIDLabel";
-            this.runIDLabel.Size = new System.Drawing.Size(161, 24);
-            this.runIDLabel.TabIndex = 144;
-            this.runIDLabel.Text = "-1";
-            this.runIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // rptRnStatusLbl
             // 
             this.rptRnStatusLbl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1893,6 +1921,8 @@ namespace ReportsAndProcesses.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Location = new System.Drawing.Point(4, 35);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1941,7 +1971,9 @@ namespace ReportsAndProcesses.Forms
             this.columnHeader13,
             this.columnHeader26,
             this.columnHeader67,
-            this.columnHeader68});
+            this.columnHeader68,
+            this.columnHeader78,
+            this.columnHeader79});
             this.paramsListView.ContextMenuStrip = this.paramsContextMenuStrip;
             this.paramsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paramsListView.FullRowSelect = true;
@@ -2007,8 +2039,18 @@ namespace ReportsAndProcesses.Forms
             // 
             this.columnHeader68.Text = "Date Format";
             // 
+            // columnHeader78
+            // 
+            this.columnHeader78.Text = "Displayed?";
+            // 
+            // columnHeader79
+            // 
+            this.columnHeader79.Text = "dsplyd_bit";
+            this.columnHeader79.Width = 0;
+            // 
             // paramsContextMenuStrip
             // 
+            this.paramsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.paramsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addParamMenuItem,
             this.editParamMenuItem,
@@ -2021,13 +2063,13 @@ namespace ReportsAndProcesses.Forms
             this.rcHstryParamMenuItem,
             this.vwSQLParamMenuItem});
             this.paramsContextMenuStrip.Name = "vlNmContextMenuStrip";
-            this.paramsContextMenuStrip.Size = new System.Drawing.Size(215, 192);
+            this.paramsContextMenuStrip.Size = new System.Drawing.Size(219, 224);
             // 
             // addParamMenuItem
             // 
             this.addParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.plus_32;
             this.addParamMenuItem.Name = "addParamMenuItem";
-            this.addParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.addParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.addParamMenuItem.Text = "Add Parameter";
             this.addParamMenuItem.Click += new System.EventHandler(this.addParamMenuItem_Click);
             // 
@@ -2035,7 +2077,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.editParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.edit32;
             this.editParamMenuItem.Name = "editParamMenuItem";
-            this.editParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.editParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.editParamMenuItem.Text = "Edit Parameter";
             this.editParamMenuItem.Click += new System.EventHandler(this.editParamMenuItem_Click);
             // 
@@ -2043,14 +2085,14 @@ namespace ReportsAndProcesses.Forms
             // 
             this.delParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.delParamMenuItem.Name = "delParamMenuItem";
-            this.delParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.delParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.delParamMenuItem.Text = "Delete Parameter";
             this.delParamMenuItem.Click += new System.EventHandler(this.delParamMenuItem_Click);
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(215, 6);
             // 
             // paramsTmpMenuItem
             // 
@@ -2059,7 +2101,7 @@ namespace ReportsAndProcesses.Forms
             this.imptParamsTmpltMenuItem});
             this.paramsTmpMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.image007;
             this.paramsTmpMenuItem.Name = "paramsTmpMenuItem";
-            this.paramsTmpMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.paramsTmpMenuItem.Size = new System.Drawing.Size(218, 26);
             this.paramsTmpMenuItem.Text = "Parameter Excel Templates";
             // 
             // exptParamsMenuItem
@@ -2081,13 +2123,13 @@ namespace ReportsAndProcesses.Forms
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(215, 6);
             // 
             // exptParamMenuItem
             // 
             this.exptParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.image007;
             this.exptParamMenuItem.Name = "exptParamMenuItem";
-            this.exptParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.exptParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.exptParamMenuItem.Text = "Export to Excel";
             this.exptParamMenuItem.Click += new System.EventHandler(this.exptParamMenuItem_Click);
             // 
@@ -2095,7 +2137,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rfrshParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.refresh;
             this.rfrshParamMenuItem.Name = "rfrshParamMenuItem";
-            this.rfrshParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.rfrshParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.rfrshParamMenuItem.Text = "Refresh";
             this.rfrshParamMenuItem.Click += new System.EventHandler(this.rfrshParamMenuItem_Click);
             // 
@@ -2103,7 +2145,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rcHstryParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.statistics_32;
             this.rcHstryParamMenuItem.Name = "rcHstryParamMenuItem";
-            this.rcHstryParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.rcHstryParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.rcHstryParamMenuItem.Text = "Record History";
             this.rcHstryParamMenuItem.Click += new System.EventHandler(this.rcHstryParamMenuItem_Click);
             // 
@@ -2111,7 +2153,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.vwSQLParamMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.sql_icon;
             this.vwSQLParamMenuItem.Name = "vwSQLParamMenuItem";
-            this.vwSQLParamMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.vwSQLParamMenuItem.Size = new System.Drawing.Size(218, 26);
             this.vwSQLParamMenuItem.Text = "View SQL";
             this.vwSQLParamMenuItem.Click += new System.EventHandler(this.vwSQLParamMenuItem_Click);
             // 
@@ -2171,6 +2213,7 @@ namespace ReportsAndProcesses.Forms
             // 
             // rolesContextMenuStrip
             // 
+            this.rolesContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.rolesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRolesMenuItem,
             this.delRolesMenuItem,
@@ -2180,13 +2223,13 @@ namespace ReportsAndProcesses.Forms
             this.rcHstryRolesMenuItem,
             this.vwSQLRolesMenuItem});
             this.rolesContextMenuStrip.Name = "vlNmContextMenuStrip";
-            this.rolesContextMenuStrip.Size = new System.Drawing.Size(153, 142);
+            this.rolesContextMenuStrip.Size = new System.Drawing.Size(157, 166);
             // 
             // addRolesMenuItem
             // 
             this.addRolesMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.plus_32;
             this.addRolesMenuItem.Name = "addRolesMenuItem";
-            this.addRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.addRolesMenuItem.Text = "Add Role Set";
             this.addRolesMenuItem.Click += new System.EventHandler(this.addRolesMenuItem_Click);
             // 
@@ -2194,20 +2237,20 @@ namespace ReportsAndProcesses.Forms
             // 
             this.delRolesMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.delRolesMenuItem.Name = "delRolesMenuItem";
-            this.delRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.delRolesMenuItem.Text = "Delete Role Set";
             this.delRolesMenuItem.Click += new System.EventHandler(this.delRolesMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(153, 6);
             // 
             // exptRolesMenuItem
             // 
             this.exptRolesMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.image007;
             this.exptRolesMenuItem.Name = "exptRolesMenuItem";
-            this.exptRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptRolesMenuItem.Text = "Export to Excel";
             this.exptRolesMenuItem.Click += new System.EventHandler(this.exptRolesMenuItem_Click);
             // 
@@ -2215,7 +2258,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rfrshRolesMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.refresh;
             this.rfrshRolesMenuItem.Name = "rfrshRolesMenuItem";
-            this.rfrshRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshRolesMenuItem.Text = "Refresh";
             this.rfrshRolesMenuItem.Click += new System.EventHandler(this.rfrshRolesMenuItem_Click);
             // 
@@ -2223,7 +2266,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.rcHstryRolesMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.statistics_32;
             this.rcHstryRolesMenuItem.Name = "rcHstryRolesMenuItem";
-            this.rcHstryRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryRolesMenuItem.Text = "Record History";
             this.rcHstryRolesMenuItem.Click += new System.EventHandler(this.rcHstryRolesMenuItem_Click);
             // 
@@ -2231,7 +2274,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.vwSQLRolesMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.sql_icon;
             this.vwSQLRolesMenuItem.Name = "vwSQLRolesMenuItem";
-            this.vwSQLRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLRolesMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLRolesMenuItem.Text = "View SQL";
             this.vwSQLRolesMenuItem.Click += new System.EventHandler(this.vwSQLRolesMenuItem_Click);
             // 
@@ -2497,13 +2540,14 @@ namespace ReportsAndProcesses.Forms
             // toolStrip3
             // 
             this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addGrpButton,
             this.edtGrpButton,
             this.rmvGrpButton});
             this.toolStrip3.Location = new System.Drawing.Point(7, 263);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(187, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(199, 27);
             this.toolStrip3.TabIndex = 19;
             this.toolStrip3.TabStop = true;
             this.toolStrip3.Text = "toolStrip3";
@@ -2514,7 +2558,7 @@ namespace ReportsAndProcesses.Forms
             this.addGrpButton.Image = global::ReportsAndProcesses.Properties.Resources.plus_32;
             this.addGrpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addGrpButton.Name = "addGrpButton";
-            this.addGrpButton.Size = new System.Drawing.Size(51, 22);
+            this.addGrpButton.Size = new System.Drawing.Size(55, 24);
             this.addGrpButton.Text = "ADD";
             this.addGrpButton.Click += new System.EventHandler(this.addGrpButton_Click);
             // 
@@ -2524,7 +2568,7 @@ namespace ReportsAndProcesses.Forms
             this.edtGrpButton.Image = global::ReportsAndProcesses.Properties.Resources.edit32;
             this.edtGrpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.edtGrpButton.Name = "edtGrpButton";
-            this.edtGrpButton.Size = new System.Drawing.Size(51, 22);
+            this.edtGrpButton.Size = new System.Drawing.Size(55, 24);
             this.edtGrpButton.Text = "EDIT";
             this.edtGrpButton.Click += new System.EventHandler(this.edtGrpButton_Click);
             // 
@@ -2534,7 +2578,7 @@ namespace ReportsAndProcesses.Forms
             this.rmvGrpButton.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.rmvGrpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rmvGrpButton.Name = "rmvGrpButton";
-            this.rmvGrpButton.Size = new System.Drawing.Size(73, 22);
+            this.rmvGrpButton.Size = new System.Drawing.Size(77, 24);
             this.rmvGrpButton.Text = "REMOVE";
             this.rmvGrpButton.Click += new System.EventHandler(this.rmvGrpButton_Click);
             // 
@@ -2553,6 +2597,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.toolStrip11.AutoSize = false;
             this.toolStrip11.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip11.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip11.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPrgrmButton,
             this.rmvPrgrmButton});
@@ -2569,7 +2614,7 @@ namespace ReportsAndProcesses.Forms
             this.addPrgrmButton.Image = global::ReportsAndProcesses.Properties.Resources.plus_32;
             this.addPrgrmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addPrgrmButton.Name = "addPrgrmButton";
-            this.addPrgrmButton.Size = new System.Drawing.Size(51, 22);
+            this.addPrgrmButton.Size = new System.Drawing.Size(55, 22);
             this.addPrgrmButton.Text = "ADD";
             this.addPrgrmButton.Click += new System.EventHandler(this.addPrgrmButton_Click);
             // 
@@ -2579,7 +2624,7 @@ namespace ReportsAndProcesses.Forms
             this.rmvPrgrmButton.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.rmvPrgrmButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rmvPrgrmButton.Name = "rmvPrgrmButton";
-            this.rmvPrgrmButton.Size = new System.Drawing.Size(73, 22);
+            this.rmvPrgrmButton.Size = new System.Drawing.Size(77, 22);
             this.rmvPrgrmButton.Text = "REMOVE";
             this.rmvPrgrmButton.Click += new System.EventHandler(this.rmvPrgrmButton_Click);
             // 
@@ -2930,7 +2975,7 @@ namespace ReportsAndProcesses.Forms
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(964, 461);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "SQL STATEMENT BEHIND REPORT/PROCESS";
+            this.tabPage2.Text = "MAIN QUERY BEHIND REPORT/PROCESS";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // rptSQLTextBox
@@ -2945,6 +2990,54 @@ namespace ReportsAndProcesses.Forms
             this.rptSQLTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.rptSQLTextBox.Size = new System.Drawing.Size(958, 455);
             this.rptSQLTextBox.TabIndex = 163;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.preRptSQLTextBox);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(964, 461);
+            this.tabPage4.TabIndex = 2;
+            this.tabPage4.Text = "PRE-REPORT/PROCESS QUERY";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // preRptSQLTextBox
+            // 
+            this.preRptSQLTextBox.AcceptsReturn = true;
+            this.preRptSQLTextBox.AcceptsTab = true;
+            this.preRptSQLTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.preRptSQLTextBox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.preRptSQLTextBox.Location = new System.Drawing.Point(3, 3);
+            this.preRptSQLTextBox.Multiline = true;
+            this.preRptSQLTextBox.Name = "preRptSQLTextBox";
+            this.preRptSQLTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.preRptSQLTextBox.Size = new System.Drawing.Size(958, 455);
+            this.preRptSQLTextBox.TabIndex = 164;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.postRptSQLTextBox);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(964, 461);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "POST-REPORT/PROCESS QUERY";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // postRptSQLTextBox
+            // 
+            this.postRptSQLTextBox.AcceptsReturn = true;
+            this.postRptSQLTextBox.AcceptsTab = true;
+            this.postRptSQLTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.postRptSQLTextBox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.postRptSQLTextBox.Location = new System.Drawing.Point(3, 3);
+            this.postRptSQLTextBox.Multiline = true;
+            this.postRptSQLTextBox.Name = "postRptSQLTextBox";
+            this.postRptSQLTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.postRptSQLTextBox.Size = new System.Drawing.Size(958, 455);
+            this.postRptSQLTextBox.TabIndex = 164;
             // 
             // stpPrcsRnnrsButton
             // 
@@ -3244,6 +3337,7 @@ namespace ReportsAndProcesses.Forms
             // 
             // alertMenuStrip
             // 
+            this.alertMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.alertMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
@@ -3257,80 +3351,80 @@ namespace ReportsAndProcesses.Forms
             this.toolStripMenuItem8,
             this.vwSQLAlertMenuItem});
             this.alertMenuStrip.Name = "vlNmContextMenuStrip";
-            this.alertMenuStrip.Size = new System.Drawing.Size(214, 214);
+            this.alertMenuStrip.Size = new System.Drawing.Size(218, 250);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Image = global::ReportsAndProcesses.Properties.Resources.plus_32;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem1.Text = "Add Report";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Image = global::ReportsAndProcesses.Properties.Resources.edit32;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem2.Text = "Edit Report";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Image = global::ReportsAndProcesses.Properties.Resources.delete;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem3.Text = "Delete Report";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Image = global::ReportsAndProcesses.Properties.Resources.go_98;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem4.Text = "Run Report/Process (New)";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Image = global::ReportsAndProcesses.Properties.Resources.go_98;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem5.Text = "Run to Excel";
             this.toolStripMenuItem5.Visible = false;
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(214, 6);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Image = global::ReportsAndProcesses.Properties.Resources.image007;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem6.Text = "Export to Excel";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Image = global::ReportsAndProcesses.Properties.Resources.refresh;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem7.Text = "Refresh";
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Image = global::ReportsAndProcesses.Properties.Resources.statistics_32;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(217, 26);
             this.toolStripMenuItem8.Text = "Record History";
             // 
             // vwSQLAlertMenuItem
             // 
             this.vwSQLAlertMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.sql_icon;
             this.vwSQLAlertMenuItem.Name = "vwSQLAlertMenuItem";
-            this.vwSQLAlertMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.vwSQLAlertMenuItem.Size = new System.Drawing.Size(217, 26);
             this.vwSQLAlertMenuItem.Text = "View SQL";
             this.vwSQLAlertMenuItem.Click += new System.EventHandler(this.vwSQLAlertMenuItem_Click);
             // 
@@ -3865,6 +3959,7 @@ namespace ReportsAndProcesses.Forms
             // 
             // richTxtContextMenuStrip
             // 
+            this.richTxtContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.richTxtContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fontMenuItem,
             this.toolStripSeparator1,
@@ -3875,7 +3970,7 @@ namespace ReportsAndProcesses.Forms
             this.prvwRptPrtMenuItem,
             this.prvwRptLdscpMenuItem});
             this.richTxtContextMenuStrip.Name = "vlNmContextMenuStrip";
-            this.richTxtContextMenuStrip.Size = new System.Drawing.Size(215, 164);
+            this.richTxtContextMenuStrip.Size = new System.Drawing.Size(219, 192);
             // 
             // fontMenuItem
             // 
@@ -3884,7 +3979,7 @@ namespace ReportsAndProcesses.Forms
             this.courierToolStripMenuItem,
             this.lucidaConsoleToolStripMenuItem});
             this.fontMenuItem.Name = "fontMenuItem";
-            this.fontMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.fontMenuItem.Size = new System.Drawing.Size(218, 26);
             this.fontMenuItem.Text = "Font";
             // 
             // courierNewToolStripMenuItem
@@ -3908,25 +4003,25 @@ namespace ReportsAndProcesses.Forms
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(215, 6);
             // 
             // exportWordMenuItem
             // 
             this.exportWordMenuItem.Name = "exportWordMenuItem";
-            this.exportWordMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.exportWordMenuItem.Size = new System.Drawing.Size(218, 26);
             this.exportWordMenuItem.Text = "Export Word";
             // 
             // exprtTxtMenuItem
             // 
             this.exprtTxtMenuItem.Name = "exprtTxtMenuItem";
-            this.exprtTxtMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.exprtTxtMenuItem.Size = new System.Drawing.Size(218, 26);
             this.exprtTxtMenuItem.Text = "Export Text";
             // 
             // printRptPrtMenuItem
             // 
             this.printRptPrtMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.Printer;
             this.printRptPrtMenuItem.Name = "printRptPrtMenuItem";
-            this.printRptPrtMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.printRptPrtMenuItem.Size = new System.Drawing.Size(218, 26);
             this.printRptPrtMenuItem.Text = "Print Report-Portrait";
             this.printRptPrtMenuItem.Visible = false;
             // 
@@ -3934,7 +4029,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.prntRptLndscpMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.Printer;
             this.prntRptLndscpMenuItem.Name = "prntRptLndscpMenuItem";
-            this.prntRptLndscpMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.prntRptLndscpMenuItem.Size = new System.Drawing.Size(218, 26);
             this.prntRptLndscpMenuItem.Text = "Print Report-Landscape";
             this.prntRptLndscpMenuItem.Visible = false;
             // 
@@ -3942,7 +4037,7 @@ namespace ReportsAndProcesses.Forms
             // 
             this.prvwRptPrtMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.Printer;
             this.prvwRptPrtMenuItem.Name = "prvwRptPrtMenuItem";
-            this.prvwRptPrtMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.prvwRptPrtMenuItem.Size = new System.Drawing.Size(218, 26);
             this.prvwRptPrtMenuItem.Text = "Preview Report-Portrait";
             this.prvwRptPrtMenuItem.Visible = false;
             // 
@@ -3950,30 +4045,31 @@ namespace ReportsAndProcesses.Forms
             // 
             this.prvwRptLdscpMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.Printer;
             this.prvwRptLdscpMenuItem.Name = "prvwRptLdscpMenuItem";
-            this.prvwRptLdscpMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.prvwRptLdscpMenuItem.Size = new System.Drawing.Size(218, 26);
             this.prvwRptLdscpMenuItem.Text = "Preview Report-Landscape";
             this.prvwRptLdscpMenuItem.Visible = false;
             // 
             // treeVWContextMenuStrip
             // 
+            this.treeVWContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.treeVWContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hideTreevwMenuItem,
             this.toolStripSeparator123});
             this.treeVWContextMenuStrip.Name = "usersContextMenuStrip";
-            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(149, 32);
+            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(153, 36);
             // 
             // hideTreevwMenuItem
             // 
             this.hideTreevwMenuItem.Image = global::ReportsAndProcesses.Properties.Resources.search_32;
             this.hideTreevwMenuItem.Name = "hideTreevwMenuItem";
-            this.hideTreevwMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.hideTreevwMenuItem.Size = new System.Drawing.Size(152, 26);
             this.hideTreevwMenuItem.Text = "Hide List View";
             this.hideTreevwMenuItem.Click += new System.EventHandler(this.hideTreevwMenuItem_Click);
             // 
             // toolStripSeparator123
             // 
             this.toolStripSeparator123.Name = "toolStripSeparator123";
-            this.toolStripSeparator123.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator123.Size = new System.Drawing.Size(149, 6);
             // 
             // backgroundWorker1
             // 
@@ -4077,6 +4173,10 @@ namespace ReportsAndProcesses.Forms
             this.toolStrip11.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.alertsTabPage.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -4463,5 +4563,13 @@ namespace ReportsAndProcesses.Forms
         private System.Windows.Forms.ToolStripMenuItem paramsTmpMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exptParamsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imptParamsTmpltMenuItem;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox preRptSQLTextBox;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TextBox postRptSQLTextBox;
+        private System.Windows.Forms.ColumnHeader columnHeader76;
+        private System.Windows.Forms.ColumnHeader columnHeader77;
+        private System.Windows.Forms.ColumnHeader columnHeader78;
+        private System.Windows.Forms.ColumnHeader columnHeader79;
     }
 }

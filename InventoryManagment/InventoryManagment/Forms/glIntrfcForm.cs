@@ -43,7 +43,6 @@ namespace StoresAndInventoryManager.Forms
             {
                 this.dsplySizeInfcComboBox.Text = Global.mnFrm.cmCde.get_CurPlcy_Mx_Dsply_Recs().ToString();
             }
-
             if (this.searchForInfcTextBox.Text == "")
             {
                 this.searchForInfcTextBox.Text = "%";
@@ -248,7 +247,7 @@ namespace StoresAndInventoryManager.Forms
         {
             try
             {
-                bool isAnyRnng = true;
+                /*bool isAnyRnng = true;
                 int witcntr = 0;
                 do
                 {
@@ -256,7 +255,7 @@ namespace StoresAndInventoryManager.Forms
                     isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                     System.Windows.Forms.Application.DoEvents();
                 }
-                while (isAnyRnng == true);
+                while (isAnyRnng == true);*/
 
                 Global.updtActnPrcss(7);//Invetory Import Process
                                         //Get Todays GL Batch Name
@@ -702,12 +701,14 @@ namespace StoresAndInventoryManager.Forms
                 Global.mnFrm.cmCde.showMsg("Please select at least one of the Unbalanced Trns.", 0);
                 return;
             }
+
             int suspns_accnt = Global.get_Suspns_Accnt(Global.mnFrm.cmCde.Org_id);
             if (suspns_accnt <= -1)
             {
                 Global.mnFrm.cmCde.showMsg("Please define a suspense Account First!", 0);
                 return;
             }
+
             double dfrnce = 0;
             Global.isGLIntrfcBlcdOrg(Global.mnFrm.cmCde.Org_id, ref dfrnce);
             dfrnce = Math.Round(dfrnce, 2);

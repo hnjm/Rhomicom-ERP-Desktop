@@ -50,6 +50,9 @@ namespace SystemAdministration.Dialogs
             this.asgndCstmrButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.asgndCstmrIDTextBox = new System.Windows.Forms.TextBox();
+            this.usrTrnsCodeTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.usrIDTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -174,7 +177,7 @@ namespace SystemAdministration.Dialogs
             // cancelButton
             // 
             this.cancelButton.ForeColor = System.Drawing.Color.Black;
-            this.cancelButton.Location = new System.Drawing.Point(224, 144);
+            this.cancelButton.Location = new System.Drawing.Point(224, 175);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 11;
@@ -185,7 +188,7 @@ namespace SystemAdministration.Dialogs
             // saveButton
             // 
             this.saveButton.ForeColor = System.Drawing.Color.Black;
-            this.saveButton.Location = new System.Drawing.Point(149, 144);
+            this.saveButton.Location = new System.Drawing.Point(149, 175);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 10;
@@ -201,6 +204,7 @@ namespace SystemAdministration.Dialogs
             this.prsnIDTextBox.Size = new System.Drawing.Size(128, 21);
             this.prsnIDTextBox.TabIndex = 210;
             this.prsnIDTextBox.TabStop = false;
+            this.prsnIDTextBox.Text = "-1";
             // 
             // label3
             // 
@@ -249,6 +253,8 @@ namespace SystemAdministration.Dialogs
             "Accounting with Payroll Only",
             "Person Records + Hospitality Only",
             "Person Records + Events Only",
+            "Accounting + Payroll + Person Records + Events Only",
+            "Accounting + Payroll + Person Records + Projects Only",
             "Basic Modules Only",
             "Basic Modules + Hospitality Only",
             "Basic Modules + Events Only",
@@ -311,27 +317,59 @@ namespace SystemAdministration.Dialogs
             this.asgndCstmrIDTextBox.Size = new System.Drawing.Size(128, 21);
             this.asgndCstmrIDTextBox.TabIndex = 218;
             this.asgndCstmrIDTextBox.TabStop = false;
+            this.asgndCstmrIDTextBox.Text = "-1";
+            // 
+            // usrTrnsCodeTextBox
+            // 
+            this.usrTrnsCodeTextBox.BackColor = System.Drawing.Color.White;
+            this.usrTrnsCodeTextBox.Location = new System.Drawing.Point(149, 145);
+            this.usrTrnsCodeTextBox.MaxLength = 5;
+            this.usrTrnsCodeTextBox.Name = "usrTrnsCodeTextBox";
+            this.usrTrnsCodeTextBox.Size = new System.Drawing.Size(230, 21);
+            this.usrTrnsCodeTextBox.TabIndex = 219;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(6, 149);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(139, 13);
+            this.label7.TabIndex = 220;
+            this.label7.Text = "User Code for Trns:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // usrIDTextBox
+            // 
+            this.usrIDTextBox.Location = new System.Drawing.Point(224, 7);
+            this.usrIDTextBox.Name = "usrIDTextBox";
+            this.usrIDTextBox.ReadOnly = true;
+            this.usrIDTextBox.Size = new System.Drawing.Size(128, 21);
+            this.usrIDTextBox.TabIndex = 221;
+            this.usrIDTextBox.TabStop = false;
+            this.usrIDTextBox.Text = "-1";
             // 
             // addUserDiag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
-            this.ClientSize = new System.Drawing.Size(421, 171);
+            this.ClientSize = new System.Drawing.Size(421, 202);
             this.Controls.Add(this.asgndCstmrTextBox);
+            this.Controls.Add(this.ownerTextBox);
+            this.Controls.Add(this.uNameTextBox);
+            this.Controls.Add(this.usrIDTextBox);
+            this.Controls.Add(this.usrTrnsCodeTextBox);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.asgndCstmrButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.asgndCstmrIDTextBox);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.modulesBaughtComboBox);
-            this.Controls.Add(this.ownerTextBox);
             this.Controls.Add(this.ownerTypComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.getPersonButton);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.uNameTextBox);
             this.Controls.Add(this.usrDte2Button);
             this.Controls.Add(this.usrDte1Button);
             this.Controls.Add(this.usrVldEndDteTextBox);
@@ -379,5 +417,8 @@ namespace SystemAdministration.Dialogs
         private System.Windows.Forms.Button asgndCstmrButton;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox asgndCstmrIDTextBox;
+        public System.Windows.Forms.TextBox usrTrnsCodeTextBox;
+        private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox usrIDTextBox;
     }
 	}

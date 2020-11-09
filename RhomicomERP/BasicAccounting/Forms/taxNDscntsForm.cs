@@ -1189,7 +1189,7 @@ namespace Accounting.Forms
       string[] selVals = new string[1];
       selVals[0] = this.taxExpnsAccntIDTextBox.Text;
       DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
-          Global.mnFrm.cmCde.getLovID("All Accounts"), ref selVals,
+          Global.mnFrm.cmCde.getLovID("Transaction Accounts"), ref selVals,
           true, false, Global.mnFrm.cmCde.Org_id,
        this.srchWrd, "Both", true);
       if (dgRes == DialogResult.OK)

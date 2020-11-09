@@ -23,6 +23,7 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Net.Mime;
 using CommonCode;
+using System.Net.Sockets;
 
 namespace CommonCode
 {
@@ -65,9 +66,21 @@ namespace CommonCode
         static extern int EmptyWorkingSet(IntPtr hwProc);
 
         static string appName = "Rhomicom ERP";
-        static string appVrsn = "V1 P24";
-        static string appVersion = "V1.2.4 (Community Edition)";
+        static string appVrsn = "V1 P41";
+        static string appVersion = "V1.4.1 (Full Edition)";
         static string modulesNeeded = "Person Records Only";
+        static string javaPath = "";
+        static string pgDirPath = "";
+        public static string PgDirPath
+        {
+            get { return CommonCodes.pgDirPath; }
+            set { CommonCodes.pgDirPath = value; }
+        }
+        public static string JavaPath
+        {
+            get { return CommonCodes.javaPath; }
+            set { CommonCodes.javaPath = value; }
+        }
         public static string ModulesNeeded
         {
             get { return CommonCodes.modulesNeeded; }
@@ -78,16 +91,14 @@ namespace CommonCode
             get { return CommonCodes.appVersion; }
             //set { CommonCodes.appVersion = value; }
         }
-        static string appKey = "eRRTRhbnsdGeneral Key for Rhomi|com Systems "
-            + "Tech. !Ltd Enterpise/Organization @763542orbjkasdbhi68103weuikfjnsdf";
+        static string appKey = "poirhtgn,dmnrH0!MICOMvsjhSystems @Te chk;KAJSDdLTD.gufaldjf;o.skPROSJNA;D AptouJKAHDASDioupso;fks. fsdkngfpihouptkok/ dg;kfjhbsukyge1tfHGCSDAo7uqj";
 
         public static string AppKey
         {
             get { return CommonCodes.appKey; }
             set { CommonCodes.appKey = value; }
         }
-        static string orgnlAppKey = "eRRTRhbnsdGeneral Key for Rhomi|com Systems "
-            + "Tech. !Ltd Enterpise/Organization @763542orbjkasdbhi68103weuikfjnsdf";
+        static string orgnlAppKey = "poirhtgn,dmnrH0!MICOMvsjhSystems @Te chk;KAJSDdLTD.gufaldjf;o.skPROSJNA;D AptouJKAHDASDioupso;fks. fsdkngfpihouptkok/ dg;kfjhbsukyge1tfHGCSDAo7uqj";
 
         public static string OrgnlAppKey
         {
@@ -134,6 +145,7 @@ namespace CommonCode
         private string mdlDesc;
         private string adtTbl;
         private long usr_id;
+        public long prsn_id;
         private long lgn_num;
         private static string[] localDataPool;
 
@@ -378,6 +390,11 @@ namespace CommonCode
             set { usr_id = value; }
         }
 
+        public long Prsn_id
+        {
+            get { return prsn_id; }
+            set { prsn_id = value; }
+        }
         public long Login_number
         {
             get { return lgn_num; }
@@ -401,12 +418,6 @@ namespace CommonCode
             get { return adtTbl; }
             set { adtTbl = value; }
         }
-
-        //public NpgsqlConnection pgSqlConn
-        //{
-        //  get { return sqlConn; }
-        //  set { sqlConn = value; }
-        //}
         #endregion
 
         #region "GENERAL SQL FUNCTIONS..."
@@ -454,6 +465,7 @@ namespace CommonCode
                  * closed to free up resources on the server*/
                 NpgsqlConnection mycon = new NpgsqlConnection();
                 mycon.ConnectionString = CommonCodes.ConnStr;
+                //this.showSQLNoPermsn(CommonCodes.ConnStr);
                 mycon.Open();
                 if (this.hsSessionExpired(mycon))
                 {
@@ -486,7 +498,6 @@ namespace CommonCode
         {
             try
             {
-
                 if (this.Login_number > 0 && this.User_id > 0)
                 {
                     if (CommonCodes.LastActvDteTme == "")
@@ -506,13 +517,25 @@ namespace CommonCode
                           Microsoft.VisualBasic.DateInterval.Second, dte1, dte2,
                           Microsoft.VisualBasic.FirstDayOfWeek.Sunday,
                           Microsoft.VisualBasic.FirstWeekOfYear.FirstFullWeek));
-                        if (diff >= this.get_CurPlcy_SessnTime())
+                        int ssnTm = this.get_CurPlcy_SessnTime();
+                        if (diff >= ssnTm)
                         {
+                            //MessageBox.Show(ssnTm + ":1:" + diff);
+                            string lstActvty = this.getDB_Date_time();
+                            //MessageBox.Show(ssnTm + ":2:" + diff);
+                            this.updateDataNoParams1("UPDATE sec.sec_track_user_logins SET last_active_time='" + lstActvty + "', logout_time='" + lstActvty +
+                   "' WHERE login_number=" + this.Login_number);
+                            //MessageBox.Show(ssnTm + ":3:" + diff);
                             return true;
                         }
                         else
                         {
                             CommonCodes.LastActvDteTme = this.getDB_Date_time();
+                            if ((diff) >= 25)
+                            {
+                                this.updateDataNoParams1("UPDATE sec.sec_track_user_logins SET last_active_time='" + CommonCodes.LastActvDteTme + "', logout_time='' WHERE login_number=" + this.Login_number);
+                                //MessageBox.Show(ssnTm +"::"+diff);
+                            }
                             return false;
                         }
                     }
@@ -686,10 +709,6 @@ namespace CommonCode
                 updtCmd.ExecuteNonQuery();
                 updtCmd.Connection.Close();
                 mycon.Close();
-                if (this.ignorAdtTrail == false)
-                {
-                    this.storeAdtTrailInfo(updtSql, 0);
-                }
                 return;
             }
             catch (Exception ex)
@@ -797,6 +816,11 @@ namespace CommonCode
                      "creation_date, last_update_by, last_update_date) VALUES ('" + roleNm.Replace("'", "''") + "', '" +
                      dateStr + "', '4000-12-31 00:00:00', " + uID + ", '" + dateStr + "', " + uID + ", '" + dateStr + "')";
             this.insertDataNoParams(sqlStr);
+            if (this.doesUserHaveThisRole_Display(getUserID("admin"), roleNm) == false)
+            {
+                this.asgnRoleSetToUser(getUserID("admin"), getRoleID(roleNm),
+                "", "");
+            }
         }
 
         public void createPrvldg(string prvlg_nm)
@@ -804,6 +828,85 @@ namespace CommonCode
             string dateStr = this.getDB_Date_time();
             string sqlStr = "INSERT INTO sec.sec_prvldgs(prvldg_name, module_id) VALUES ('" +
              prvlg_nm.Replace("'", "''") + "', " + this.getModuleID(this.ModuleName) + ")";
+            this.insertDataNoParams(sqlStr);
+        }
+
+        public bool doesUserHaveThisRole(long userID, string rolename)
+        {
+            //Checks whether a given username 'admin' has a given user role
+            DataSet dtSt = new DataSet();
+            string sqlStr = "SELECT user_id FROM sec.sec_users_n_roles WHERE ((user_id = " +
+                    userID + ") AND (role_id = " + this.getRoleID(rolename) +
+                    ") AND (now() between to_timestamp(valid_start_date,'YYYY-MM-DD HH24:MI:SS') AND " +
+                    "to_timestamp(valid_end_date,'YYYY-MM-DD HH24:MI:SS')))";
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool doesUserHaveThisRole_Display(long userID, string rolename)
+        {
+            //Checks whether a given username 'admin' has a given user role
+            DataSet dtSt = new DataSet();
+            string sqlStr = "SELECT user_id FROM sec.sec_users_n_roles WHERE ((user_id = " +
+                    userID + ") AND (role_id = " + this.getRoleID(rolename) +
+                    "))";
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void asgnRoleSetToUser(long usrID, int roleID,
+      string in_strDte, string in_endDte)
+        {
+            long uID = -1;
+            if (this.User_id <= 0)
+            {
+                uID = this.getUserID("admin");
+            }
+            else
+            {
+                uID = this.User_id;
+            }
+            string dateStr = this.getDB_Date_time();
+            string endDate = "4000-12-31 23:59:59";
+            if (in_strDte.Length < 19)
+            {
+                in_strDte = dateStr;
+            }
+            else
+            {
+                in_strDte = DateTime.ParseExact(
+            in_strDte, "dd-MMM-yyyy HH:mm:ss",
+            System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            if (in_endDte.Length < 19)
+            {
+                in_endDte = endDate;
+            }
+            else
+            {
+                in_endDte = DateTime.ParseExact(
+            in_endDte, "dd-MMM-yyyy HH:mm:ss",
+            System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            string sqlStr = "INSERT INTO sec.sec_users_n_roles(" +
+                              "user_id, role_id, valid_start_date, valid_end_date, created_by, " +
+                              "creation_date, last_update_by, last_update_date) " +
+              "VALUES (" + usrID + ", " + roleID + ", '" + in_strDte + "', '" + in_endDte + "', " +
+              uID + ", '" + dateStr + "', " + uID + ", '" + dateStr + "')"; ;
             this.insertDataNoParams(sqlStr);
         }
 
@@ -1199,7 +1302,7 @@ namespace CommonCode
 
         public int get_DfltCashAcnt(int orgID)
         {
-            string strSql = "SELECT sales_cash_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + this.Prsn_id + ", sales_cash_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -1221,6 +1324,7 @@ namespace CommonCode
                 //Transaction date must be >= the latest prd start date
                 if (accntID <= 0 || trnsdate == "")
                 {
+                    this.showMsg("Account or Transaction Date cannot be empty!", 0);
                     return false;
                 }
                 DateTime trnsDte = DateTime.ParseExact(trnsdate, "dd-MMM-yyyy HH:mm:ss",
@@ -1840,6 +1944,72 @@ namespace CommonCode
             {
                 return "";
             }
+        }
+        public long getCstmrSpplrID(string cstSupNm)
+        {
+            DataSet dtSt = new DataSet();
+            string sqlStr = "select cust_sup_id from scm.scm_cstmr_suplr a where a.cust_sup_name ilike '" +
+             cstSupNm.Replace("'", "''") + "'";
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return long.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        public long getCstmrSpplrSiteID(string cstSupSiteNm, long cstSupID)
+        {
+            DataSet dtSt = new DataSet();
+            string sqlStr = "select cust_sup_site_id from scm.scm_cstmr_suplr_sites a where a.site_name ilike '" +
+             cstSupSiteNm.Replace("'", "''") + "' and cust_supplier_id=" + cstSupID;
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return long.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        public void createQckCstmrSpplr(string ctmrNm)
+        {
+            string dateStr = this.getDB_Date_time();
+            string insSQL = @"INSERT INTO scm.scm_cstmr_suplr(
+            cust_sup_name, created_by, creation_date, last_update_by, last_update_date, 
+            cust_sup_desc, cust_sup_clssfctn, cust_or_sup, org_id, 
+            dflt_pybl_accnt_id, dflt_rcvbl_accnt_id, lnkd_prsn_id, person_gender, 
+            dob_estblshmnt, is_enabled, firm_brand_name, type_of_organisation, 
+            company_reg_num, date_of_incorptn, type_of_incorporation, vat_number, 
+            tin_number, ssnit_reg_number, no_of_emplyees, description_of_services, 
+            list_of_services)" +
+                    "VALUES ('" + ctmrNm.Replace("'", "''") +
+                    "'," + this.User_id + ",'" + dateStr + "'," + this.User_id + ",'" + dateStr +
+                    "', '" + ctmrNm.Replace("'", "''") +
+                    "', 'Organisation','Customer'," + this.Org_id + ",-1,-1,-1,'Not Applicable','1970-01-01','1'," +
+                    "'','','','','','','','',0,'','')";
+            this.insertDataNoParams(insSQL);
+        }
+
+        public void createQckCstmrSpplrSite(string siteNm, long cstmrID, string ctmrNm)
+        {
+            string dateStr = this.getDB_Date_time();
+            string insSQL = @"INSERT INTO scm.scm_cstmr_suplr_sites(
+                    cust_supplier_id, contact_person_name, contact_nos, email, created_by, 
+            creation_date, last_update_by, last_update_date, site_name, site_desc, 
+            bank_name, bank_branch, bank_accnt_number, wth_tax_code_id, discount_code_id, 
+            billing_address, ship_to_address, swift_code, 
+            nationality, national_id_typ, id_number, date_issued, expiry_date, 
+            other_info, is_enabled, iban_number, accnt_cur_id)" +
+                    "VALUES (" + cstmrID + ", '" + ctmrNm.Replace("'", "''") +
+                    "','',''," + this.User_id + ",'" + dateStr + "'," + this.User_id + ",'" + dateStr +
+                    "', '" + siteNm.Replace("'", "''") +
+                    "', '" + siteNm.Replace("'", "''") +
+                    "','','','',-1,-1,'','','','','','','','','','1','',-1)";
+            this.insertDataNoParams(insSQL);
         }
 
         public string getCstmrSpplrEmails(long cstmrID)
@@ -2721,6 +2891,44 @@ namespace CommonCode
             }
         }
 
+        public int getAccountCmbntnID(int orgID,
+                  int accntSegmnt1, int accntSegmnt2, int accntSegmnt3, int accntSegmnt4, int accntSegmnt5,
+                  int accntSegmnt6, int accntSegmnt7, int accntSegmnt8, int accntSegmnt9, int accntSegmnt10)
+        {
+            DataSet dtSt = new DataSet();
+            string sqlStr = @"select x.accnt_id from accb.accb_chart_of_accnts x 
+                                where x.org_id = " + orgID +
+                                " and x.accnt_seg1_val_id = " + accntSegmnt1 +
+                                " and x.accnt_seg2_val_id= " + accntSegmnt2 +
+                                " and x.accnt_seg3_val_id= " + accntSegmnt3 +
+                                " and x.accnt_seg4_val_id= " + accntSegmnt4 +
+                                " and x.accnt_seg5_val_id= " + accntSegmnt5 +
+                                " and x.accnt_seg6_val_id= " + accntSegmnt6 +
+                                " and x.accnt_seg7_val_id= " + accntSegmnt7 +
+                                " and x.accnt_seg8_val_id= " + accntSegmnt8 +
+                                " and x.accnt_seg9_val_id= " + accntSegmnt9 +
+                                " and x.accnt_seg10_val_id= " + accntSegmnt10 +
+                                @" and (''||x.accnt_seg1_val_id
+                                        ||x.accnt_seg2_val_id
+                                        ||x.accnt_seg3_val_id
+                                        ||x.accnt_seg4_val_id
+                                        ||x.accnt_seg5_val_id
+                                        ||x.accnt_seg6_val_id
+                                        ||x.accnt_seg7_val_id
+                                        ||x.accnt_seg8_val_id
+                                        ||x.accnt_seg9_val_id
+                                        ||x.accnt_seg10_val_id) != ('-1-1-1-1-1-1-1-1-1-1')";
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public int getAccntID(string accntname, int orgid)
         {
             //Example username 'admin'
@@ -2790,6 +2998,87 @@ namespace CommonCode
             }
         }
 
+        public int getSgmntValID(string segmentVal, int segmentID)
+        {
+            DataSet dtSt = new DataSet();
+            string sqlStr = "select segment_value_id from org.org_segment_values where lower(segment_value) = '" +
+             segmentVal.Replace("'", "''").ToLower() + "' and segment_id = " + segmentID;
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+
+        public int getSegmentID(int segNum, int orgid)
+        {
+            string strSql = "";
+            strSql = @"SELECT a.segment_id, a.segment_name_prompt, a.system_clsfctn 
+        FROM org.org_acnt_sgmnts a WHERE((a.org_id = " + orgid + " and a.segment_number = " + segNum + "))";
+            DataSet dtSt = this.selectDataNoParams(strSql);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public int getSegmentNum(int segID, int orgid)
+        {
+            string strSql = "";
+            strSql = @"SELECT a.segment_number, a.segment_name_prompt, a.system_clsfctn 
+        FROM org.org_acnt_sgmnts a WHERE((a.org_id = " + orgid + " and a.segment_id = " + segID + "))";
+            DataSet dtSt = this.selectDataNoParams(strSql);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public string getSegmentClsfctn(int segID, int orgid)
+        {
+            string strSql = "";
+            strSql = @"SELECT a.segment_number, a.segment_name_prompt, a.system_clsfctn 
+        FROM org.org_acnt_sgmnts a WHERE((a.org_id = " + orgid + " and a.segment_id = " + segID + "))";
+            DataSet dtSt = this.selectDataNoParams(strSql);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return dtSt.Tables[0].Rows[0][2].ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public int getSegmentID(string sgnmntType, int orgid)
+        {
+            string strSql = "";
+            strSql = @"SELECT a.segment_id, a.segment_name_prompt, a.system_clsfctn 
+        FROM org.org_acnt_sgmnts a WHERE((a.org_id = " + orgid + " and lower(a.system_clsfctn) = '" + sgnmntType.Replace("'", "''").ToLower() + "'))";
+            DataSet dtSt = this.selectDataNoParams(strSql);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public string getSegmentVal(int segmentValID)
         {
             //Example username 'admin'
@@ -2804,6 +3093,23 @@ namespace CommonCode
             else
             {
                 return "";
+            }
+        }
+
+        public int getSegmentDpndntValID(int segmentValID)
+        {
+            //Example username 'admin'
+            DataSet dtSt = new DataSet();
+            string sqlStr = "select dpndnt_sgmnt_val_id from org.org_segment_values where segment_value_id = " +
+             segmentValID + "";
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
             }
         }
 
@@ -2889,7 +3195,22 @@ namespace CommonCode
                 return "";
             }
         }
-
+        public string getSiteNameDesc(int siteid)
+        {
+            //Example username 'admin'
+            DataSet dtSt = new DataSet();
+            string sqlStr = "select REPLACE(location_code_name || '.' || site_desc, '.' || location_code_name,'') from org.org_sites_locations where location_id = " +
+             siteid + "";
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return dtSt.Tables[0].Rows[0][0].ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
         public long getMdlGrpID(string sub_grp_name)
         {
             //Example priviledge 'View Security Module'
@@ -2948,7 +3269,7 @@ namespace CommonCode
             DataSet dtSt = new DataSet();
             string sqlStr = "SELECT value_list_id from gst.gen_stp_lov_names where (upper(value_list_name) = upper('" +
              lovName.Replace("'", "''") + "') and is_enabled='1')";
-            dtSt = this.selectDataNoParams(sqlStr);
+            dtSt = this.selectDataNoParams1(sqlStr);
             if (dtSt.Tables[0].Rows.Count > 0)
             {
                 return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
@@ -2966,7 +3287,7 @@ namespace CommonCode
              "where ((upper(pssbl_value) = upper('" +
              pssblVal.Replace("'", "''") + "')) AND (value_list_id = " + lovID +
              ") AND (is_enabled='1')) ORDER BY pssbl_value_id LIMIT 1";
-            dtSt = this.selectDataNoParams(sqlStr);
+            dtSt = this.selectDataNoParams1(sqlStr);
             //this.showSQLNoPermsn(sqlStr);
             if (dtSt.Tables[0].Rows.Count > 0)
             {
@@ -3075,7 +3396,7 @@ namespace CommonCode
             DataSet dtSt = new DataSet();
             string sqlStr = "SELECT pssbl_value_desc from gst.gen_stp_lov_values " +
              "where ((pssbl_value_id = " + pssblVlID + "))";
-            dtSt = this.selectDataNoParams(sqlStr);
+            dtSt = this.selectDataNoParams1(sqlStr);
             if (dtSt.Tables[0].Rows.Count > 0)
             {
                 return dtSt.Tables[0].Rows[0][0].ToString();
@@ -3083,6 +3404,25 @@ namespace CommonCode
             else
             {
                 return "";
+            }
+        }
+
+        public int getPrvldgID(string prvldg_name, string mdlNm)
+        {
+            //Example priviledge 'View Security Module'
+            DataSet dtSt = new DataSet();
+            string sqlStr = "SELECT prvldg_id from sec.sec_prvldgs where (prvldg_name = '" +
+             prvldg_name.Replace("'", "''") + "' AND module_id = " +
+             this.getModuleID(mdlNm) + ")";
+            //MessageBox.Show(this.ModuleName);
+            dtSt = this.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return -1;
             }
         }
 
@@ -4242,6 +4582,16 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                             this.myComputer.FileSystem.CreateDirectory(this.getPrdtImgsDrctry());
                         }
                     }
+                    else if (folderTyp == 18)
+                    {
+                        folderNm = this.getCstmrImgsDrctry();
+                        fileName = this.getCstmrImgsDrctry() + @"\" + id.ToString() + ".png";
+                        storeFileNm = id.ToString() + ".png";
+                        if (this.myComputer.FileSystem.DirectoryExists(this.getCstmrImgsDrctry()) == false)
+                        {
+                            this.myComputer.FileSystem.CreateDirectory(this.getCstmrImgsDrctry());
+                        }
+                    }
                     if (this.myComputer.FileSystem.FileExists(fileName))
                     {
                         this.myComputer.FileSystem.DeleteFile(fileName,
@@ -4405,14 +4755,6 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                     {
                         folderTyp = 9;
                     }
-                    else if (destfolderNm == this.getRptDrctry() + "\\jrxmls")
-                    {
-                        folderTyp = 15;
-                    }
-                    else if (destfolderNm == this.getRptDrctry() + "\\mail_attachments")
-                    {
-                        folderTyp = 17;
-                    }
                     else if (destfolderNm == this.getAttnDocsImgsDrctry())
                     {
                         folderTyp = 10;
@@ -4433,9 +4775,17 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                     {
                         folderTyp = 14;
                     }
+                    else if (destfolderNm == this.getRptDrctry() + "\\jrxmls")
+                    {
+                        folderTyp = 15;
+                    }
                     else if (destfolderNm == this.getPtycshImgsDrctry())
                     {
                         folderTyp = 16;
+                    }
+                    else if (destfolderNm == this.getRptDrctry() + "\\mail_attachments")
+                    {
+                        folderTyp = 17;
                     }
                     //this.dwnldImgsFTP(2, folderNm, storeFileNm);
                     this.upldImgsFTP(folderTyp, destfolderNm, id.ToString() + extnsn);
@@ -4599,9 +4949,21 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                 {
                     folderNm = this.getFirmsImgsDrctry();
                 }
+                else if (folderTyp == 15)
+                {
+                    folderNm = this.getRptDrctry() + "\\jrxmls";
+                }
                 else if (folderTyp == 16)
                 {
                     folderNm = this.getPtycshImgsDrctry();
+                }
+                else if (folderTyp == 17)
+                {
+                    folderNm = this.getRptDrctry() + "\\mail_attachments";
+                }
+                else if (folderTyp == 18)
+                {
+                    folderNm = this.getCstmrImgsDrctry();
                 }
 
                 this.isDwnldDone = false;
@@ -4689,9 +5051,21 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                 {
                     folderNm = this.getFirmsImgsDrctry();
                 }
+                else if (folderTyp == 15)
+                {
+                    folderNm = this.getRptDrctry() + "\\jrxmls";
+                }
                 else if (folderTyp == 16)
                 {
                     folderNm = this.getPtycshImgsDrctry();
+                }
+                else if (folderTyp == 17)
+                {
+                    folderNm = this.getRptDrctry() + "\\mail_attachments";
+                }
+                else if (folderTyp == 18)
+                {
+                    folderNm = this.getCstmrImgsDrctry();
                 }
 
                 this.isDwnldDone = false;
@@ -4886,9 +5260,21 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                 {
                     folderNm = this.getFirmsImgsDrctry();
                 }
+                else if (folderTyp == 15)
+                {
+                    folderNm = this.getRptDrctry() + "\\jrxmls";
+                }
                 else if (folderTyp == 16)
                 {
                     folderNm = this.getPtycshImgsDrctry();
+                }
+                else if (folderTyp == 17)
+                {
+                    folderNm = this.getRptDrctry() + "\\mail_attachments";
+                }
+                else if (folderTyp == 18)
+                {
+                    folderNm = this.getCstmrImgsDrctry();
                 }
                 //this.dwnldImgsFTP(2, folderNm, storeFileNm);
                 this.isDwnldDone = false;
@@ -4993,9 +5379,21 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                 {
                     folderTyp = 14;
                 }
+                else if (folderNm == this.getRptDrctry() + "\\jrxmls")
+                {
+                    folderTyp = 15;
+                }
                 else if (folderNm == this.getPtycshImgsDrctry())
                 {
                     folderTyp = 16;
+                }
+                else if (folderNm == this.getRptDrctry() + "\\mail_attachments")
+                {
+                    folderTyp = 17;
+                }
+                else if (folderNm == this.getCstmrImgsDrctry())
+                {
+                    folderTyp = 18;
                 }
                 //this.dwnldImgsFTP(2, folderNm, storeFileNm);
                 this.isDwnldDone = false;
@@ -5159,6 +5557,31 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
         {
             //\\172.25.10.96\bog_applsys project\RICHARD\Images\Org
             return Application.StartupPath + "\\Images\\" + CommonCodes.DatabaseNm + "\\Org";
+            //DataSet dtSt = new DataSet();
+            //string sqlStr = "select pssbl_value from gst.gen_stp_lov_values where ((value_list_id = " +
+            // this.getLovID("Organization Images Directory") + ") AND (is_enabled='1')) ORDER BY pssbl_value_id DESC LIMIT 1";
+            //dtSt = this.selectDataNoParams(sqlStr);
+            //if (dtSt.Tables[0].Rows.Count > 0)
+            //{
+            //  if (this.myComputer.FileSystem.DirectoryExists(dtSt.Tables[0].Rows[0][0].ToString()))
+            //  {
+            //    return dtSt.Tables[0].Rows[0][0].ToString();
+            //  }
+            //  else
+            //  {
+            //    return Application.StartupPath + @"\Images\Org";
+            //  }
+            //}
+            //else
+            //{
+            //  return Application.StartupPath + @"\Images\Org";
+            //}
+        }
+
+        public string getCstmrImgsDrctry()
+        {
+            //\\172.25.10.96\bog_applsys project\RICHARD\Images\Org
+            return Application.StartupPath + "\\Images\\" + CommonCodes.DatabaseNm + "\\Cstmr";
             //DataSet dtSt = new DataSet();
             //string sqlStr = "select pssbl_value from gst.gen_stp_lov_values where ((value_list_id = " +
             // this.getLovID("Organization Images Directory") + ") AND (is_enabled='1')) ORDER BY pssbl_value_id DESC LIMIT 1";
@@ -5435,10 +5858,6 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             {
                 subdir = @"/Rpts";
             }
-            else if (folderTyp == 15)
-            {
-                subdir = @"/Rpts/jrxmls";
-            }
             else if (folderTyp == 10)
             {
                 subdir = @"/AttnDocs";
@@ -5458,6 +5877,18 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             else if (folderTyp == 14)
             {
                 subdir = @"/FirmsDocs";
+            }
+            else if (folderTyp == 15)
+            {
+                subdir = @"/Rpts/jrxmls";
+            }
+            else if (folderTyp == 16)
+            {
+                subdir = @"/PtyCshDocs";
+            }
+            else if (folderTyp == 17)
+            {
+                subdir = "/Rpts/mail_attachments";
             }
 
             Thread thread = new Thread(() => startDownLoad(srvr[0] + srvr[1] + subdir + @"/" + locfileNm,
@@ -5520,14 +5951,6 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             {
                 subdir = @"/Rpts";
             }
-            else if (folderTyp == 15)
-            {
-                subdir = @"/Rpts/jrxmls";
-            }
-            else if (folderTyp == 17)
-            {
-                subdir = @"/Rpts/mail_attachments";
-            }
             else if (folderTyp == 10)
             {
                 subdir = @"/AttnDocs";
@@ -5547,6 +5970,18 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             else if (folderTyp == 14)
             {
                 subdir = @"/FirmsDocs";
+            }
+            else if (folderTyp == 15)
+            {
+                subdir = @"/Rpts/jrxmls";
+            }
+            else if (folderTyp == 16)
+            {
+                subdir = @"/PtyCshDocs";
+            }
+            else if (folderTyp == 17)
+            {
+                subdir = @"/Rpts/mail_attachments";
             }
 
             Thread thread = new Thread(() => startUpload(srvr[0] + srvr[1] + subdir + @"/" + locfileNm,
@@ -5674,7 +6109,7 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                 this.isDwnldDone = false;
                 //if (System.IO.File.Exists(fullLocFileUrl) == true)
                 //{
-                //  if (System.IO.File.GetCreationTime(fullLocFileUrl) >= DateTime.Now.AddHours(-1))
+                //  if (System.IO.File.GetCreationTime(fullLocFileUrl) >= DateTime.Now.AddHours(-24))
                 //  {
                 //    return "";
                 //  }
@@ -5891,6 +6326,16 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             return isEmailValid;
         }
 
+        public bool isAllUpper(string input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (Char.IsLetter(input[i]) && !Char.IsUpper(input[i]))
+                    return false;
+            }
+            return true;
+        }
+
         public void createSysLovsPssblVals1(string pssblVals, int lovID)
         {
             if (this.getPssblValID(pssblVals, lovID) <= 0)
@@ -5929,6 +6374,81 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             catch
             {
                 return false;
+            }
+        }
+
+        public bool CheckSrvrAvlblty(string serverIPAddress, int port)
+        {
+            IPHostEntry ipHostEntry = Dns.Resolve(serverIPAddress);
+            IPAddress ipAddress = ipHostEntry.AddressList[0];
+
+            var client = new TcpClient();
+            var result = client.BeginConnect(ipAddress, port, null, null);
+            System.Threading.WaitHandle wh = result.AsyncWaitHandle;
+            try
+            {
+                if (!result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(0.2), false))
+                {
+                    client.Close();
+                    throw new Exception("Failed to connect.");
+                }
+                // we have connected
+                client.EndConnect(result);
+                /*client.Connect(ipAddress, port);
+                client.Close(); */
+                return true;
+            }
+            catch
+            {
+                wh.Close();
+                return false;
+            }
+        }
+
+        public bool CheckSrvrAvlblty(string ipValue)
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply pingReply = ping.Send(ipValue);
+
+                if (pingReply.Status == IPStatus.Success)
+                {
+                    //Server is alive
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                //Console.WriteLine("Port closed");
+                return false;
+            }
+        }
+
+        public string GetJavaInstallationPath()
+        {
+            try
+            {
+                string environmentPath = Environment.GetEnvironmentVariable("JAVA_HOME");
+                if (!string.IsNullOrEmpty(environmentPath))
+                {
+                    return environmentPath;
+                }
+
+                string javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment\\";
+                using (Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(javaKey))
+                {
+                    string currentVersion = rk.GetValue("CurrentVersion").ToString();
+                    using (Microsoft.Win32.RegistryKey key = rk.OpenSubKey(currentVersion))
+                    {
+                        return key.GetValue("JavaHome").ToString();
+                    }
+                }
+            }
+            catch
+            {
+                return "";
             }
         }
 
@@ -6030,8 +6550,15 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                 }
                 for (i = 0; i < attchMnts.Length; i++)
                 {
-                    Attachment attch1 = new Attachment(attchMnts[i]);
-                    mail.Attachments.Add(attch1);
+                    if (System.IO.File.Exists(attchMnts[i]))
+                    {
+                        Int64 fileSizeInBytes = new FileInfo(attchMnts[i]).Length;
+                        if (fileSizeInBytes > 0)
+                        {
+                            Attachment attch1 = new Attachment(attchMnts[i]);
+                            mail.Attachments.Add(attch1);
+                        }
+                    }
                 }
                 List<LinkedResource> resources = new List<LinkedResource>();
                 string[] imgLocation = new string[20];
@@ -7578,37 +8105,111 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
                     slctdRoles = slctdRoles + ";";
                 }
             }
-            bool[] chkRslts = new bool[prldgs_to_test.Length];
-            for (int m = 0; m < chkRslts.Length; m++)
+            string mdlNm = this.ModuleName;
+            string selSQL = "Select sec.test_prmssns('" +
+              testdata.Replace("'", "''") + "', '" +
+             mdlNm.Replace("'", "''") + "','" +
+            slctdRoles.Replace("'", "''") + "')";
+            DataSet dtSt = this.selectDataNoParams(selSQL);
+            if (dtSt.Tables[0].Rows.Count > 0)
             {
-                chkRslts[m] = false;
-            }
-
-            for (int j = 0; j < prldgs_to_test.Length; j++)
-            {
-                if (this.doSlctdRolesHvThisPrvldg(
-                 this.getPrvldgID(prldgs_to_test[j]), slctdRoles) == true)
-                {
-                    chkRslts[j] = true;
-                }
-            }
-
-            for (int n = 0; n < chkRslts.Length; n++)
-            {
-                if (chkRslts[n] == false)
-                {
-                    return false;
-                }
-            }
-            return true;
-            /*if (this.doCurRolesHvThsPrvldgs(prldgs_to_test) == false)
-            {
-                return false;
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString()) == 1 ? true : false;
             }
             else
             {
-                return true;
-            }*/
+                return false;
+            }
+
+            /* bool[] chkRslts = new bool[prldgs_to_test.Length];
+             for (int m = 0; m < chkRslts.Length; m++)
+             {
+                 chkRslts[m] = false;
+             }
+
+             for (int j = 0; j < prldgs_to_test.Length; j++)
+             {
+                 if (this.doSlctdRolesHvThisPrvldg(
+                  this.getPrvldgID(prldgs_to_test[j]), slctdRoles) == true)
+                 {
+                     chkRslts[j] = true;
+                 }
+             }
+
+             for (int n = 0; n < chkRslts.Length; n++)
+             {
+                 if (chkRslts[n] == false)
+                 {
+                     return false;
+                 }
+             }
+             return true;
+             /*if (this.doCurRolesHvThsPrvldgs(prldgs_to_test) == false)
+             {
+                 return false;
+             }
+             else
+             {
+                 return true;
+             }*/
+        }
+
+        public bool test_prmssns(string testdata, string mdlNm)
+        {
+            char[] dlmtrs = { '~' };
+            string[] prldgs_to_test = testdata.Split(dlmtrs, StringSplitOptions.RemoveEmptyEntries);
+            string slctdRoles = "";
+            for (int i = 0; i < this.Role_Set_IDs.Length; i++)
+            {
+                slctdRoles = slctdRoles + this.Role_Set_IDs[i].ToString();
+                if (i < this.Role_Set_IDs.Length - 1)
+                {
+                    slctdRoles = slctdRoles + ";";
+                }
+            }
+            string selSQL = "Select sec.test_prmssns('" +
+             testdata.Replace("'", "''") + "', '" +
+            mdlNm.Replace("'", "''") + "','" +
+           slctdRoles.Replace("'", "''") + "')";
+            DataSet dtSt = this.selectDataNoParams(selSQL);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtSt.Tables[0].Rows[0][0].ToString()) == 1 ? true : false;
+            }
+            else
+            {
+                return false;
+            }
+            /*bool[] chkRslts = new bool[prldgs_to_test.Length];
+             for (int m = 0; m < chkRslts.Length; m++)
+             {
+                 chkRslts[m] = false;
+             }
+
+             for (int j = 0; j < prldgs_to_test.Length; j++)
+             {
+                 if (this.doSlctdRolesHvThisPrvldg(
+                  this.getPrvldgID(prldgs_to_test[j], mdlNm), slctdRoles) == true)
+                 {
+                     chkRslts[j] = true;
+                 }
+             }
+
+             for (int n = 0; n < chkRslts.Length; n++)
+             {
+                 if (chkRslts[n] == false)
+                 {
+                     return false;
+                 }
+             }
+             return true;
+             /*if (this.doCurRolesHvThsPrvldgs(prldgs_to_test) == false)
+             {
+                 return false;
+             }
+             else
+             {
+                 return true;
+             }*/
         }
 
         public bool doSlctdRolesHvThisPrvldg(int inp_prvldg_id, string inSlctdRl)
@@ -7651,11 +8252,31 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             return false;
         }
 
+        public string isThereANActvPrcss(string prcsIDs)
+        {
+            string strSql = "SELECT is_process_rnng FROM accb.accb_running_prcses WHERE which_process_is_rnng IN (" + prcsIDs +
+              ") and age(now(), to_timestamp(last_active_time,'YYYY-MM-DD HH24:MI:SS')) < interval '5 minutes'";
+
+            //Global.mnFrm.cmCde.showMsg(strSql, 0);
+            DataSet dtst = this.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return dtst.Tables[0].Rows[0][0].ToString();
+            }
+            return "0";
+        }
+
+        public void updateANActvPrcss(string prcsIDs, string status)
+        {
+            string strSql = "UPDATE accb.accb_running_prcses SET is_process_rnng='" + status.Replace("'", "''") +
+                "', last_active_time = to_char(now(), 'YYYY-MM-DD HH24:MI:SS') WHERE which_process_is_rnng IN (" + prcsIDs +
+              ")";
+            this.updateDataNoParams(strSql);
+        }
+
         public bool doesDteTmeExceedIntrvl(string in_date, string intrval)
         {
-            //
-            string sqlStr = "SELECT age(now(), to_timestamp('" +
-                             in_date + "', 'DD-Mon-YYYY HH24:MI:SS')) " +
+            string sqlStr = "SELECT age(now(), to_timestamp('" + in_date + "', 'DD-Mon-YYYY HH24:MI:SS')) " +
                             " > interval '" + intrval + "'";
             DataSet dtst = this.selectDataNoParams(sqlStr);
             if (dtst.Tables[0].Rows.Count > 0)
@@ -7673,8 +8294,55 @@ to_char(to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH
             return false;
         }
 
+        public long doesActiveLgnExist(long userid)
+        {
+            int isMltplAllwdID = this.getEnbldPssblValID("Allow Multiple Same User Logons", this.getEnbldLovID("All Other General Setups"));
+            string isMltplAllwd = this.getPssblValDesc(isMltplAllwdID);
+            if (isMltplAllwd.ToUpper() != "YES" && isMltplAllwdID > 0)
+            {
+                string sqlStr = "SELECT login_number FROM sec.sec_track_user_logins WHERE ((user_id = " +
+                       userid + " and was_lgn_atmpt_succsful='t') AND (now() between to_timestamp(login_time,'YYYY-MM-DD HH24:MI:SS') " +
+                       "and to_timestamp((CASE WHEN logout_time='' THEN '4000-12-31 23:59:59' ELSE logout_time END), 'YYYY-MM-DD HH24:MI:SS')))";
+                //echo $sqlStr;
+                DataSet dtst = this.selectDataNoParams1(sqlStr);
+                if (dtst.Tables[0].Rows.Count > 0)
+                {
+                    return long.Parse(dtst.Tables[0].Rows[0][0].ToString());
+                }
+                return -1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public void chckNUpdateStaleLgns(long userid)
+        {
+            string sqlStr = @"UPDATE sec.sec_track_user_logins SET  logout_time=last_active_time 
+            WHERE user_id = " + userid + " and  age(now(), to_timestamp((CASE WHEN last_active_time ='' THEN " +
+            "to_char(now(),'YYYY-MM-DD HH24:MI:SS') ELSE last_active_time END), 'YYYY-MM-DD HH24:MI:SS')) " +
+              ">= interval '" + this.get_CurPlcy_SessnTime() + " second' and  logout_time='' and last_active_time!='' and was_lgn_atmpt_succsful='t'";
+            this.updateDataNoParams(sqlStr);
+            sqlStr = @"UPDATE sec.sec_track_user_logins SET  logout_time=to_char(now(), 'YYYY-MM-DD HH24:MI:SS'),
+last_active_time=to_char(now(), 'YYYY-MM-DD HH24:MI:SS')
+            WHERE user_id = " + userid + " and logout_time='' and last_active_time ='' and was_lgn_atmpt_succsful='t'";
+            this.updateDataNoParams1(sqlStr);
+        }
+
+        public void adminForceLogoutLgns(long userid)
+        {
+            string sqlStr = @"UPDATE sec.sec_track_user_logins SET  logout_time=to_char(now(), 'YYYY-MM-DD HH24:MI:SS')
+            WHERE user_id = " + userid + " and logout_time = '' and was_lgn_atmpt_succsful = 't'";
+            this.updateDataNoParams1(sqlStr);
+        }
+
         public void checkNAssignReqrmnts()
         {
+            if (this.getEnbldPssblValID(this.ModuleName, this.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             if (this.getModuleID(this.ModuleName) == -1)
             {
                 this.registerThsModule();
@@ -9014,6 +9682,25 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
             }
         }
 
+        public void autoLoadBdgtTmp(string startDte, string endDte, string periodTyp, long bdgtid, long rcsNo)
+        {
+            exprtToExcelDiag nwDiag = new exprtToExcelDiag();
+            nwDiag.data_source_id = 74;
+            nwDiag.orgID = this.Org_id;
+            nwDiag.recsNo = rcsNo;
+            nwDiag.strtDte = startDte;
+            nwDiag.endDate = endDte;
+            nwDiag.bdgtID = bdgtid;
+            nwDiag.budget_id = bdgtid;
+            nwDiag.prdTyps = periodTyp;
+            nwDiag.cmnCde = this;
+            System.Windows.Forms.Application.DoEvents();
+            DialogResult dgRes = nwDiag.ShowDialog();
+            if (dgRes == DialogResult.OK)
+            {
+            }
+        }
+
         public void imprtBdgtTmp(long bdgtIDin, string filename)
         {
             exprtToExcelDiag nwDiag = new exprtToExcelDiag();
@@ -9182,6 +9869,20 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
         {
             exprtToExcelDiag nwDiag = new exprtToExcelDiag();
             nwDiag.data_source_id = 10;
+            nwDiag.orgID = this.Org_id;
+            nwDiag.chrtTyp = chrtTyp;
+            nwDiag.cmnCde = this;
+            System.Windows.Forms.Application.DoEvents();
+            DialogResult dgRes = nwDiag.ShowDialog();
+            if (dgRes == DialogResult.OK)
+            {
+            }
+        }
+
+        public void exprtCmbntnsTmp(int chrtTyp)
+        {
+            exprtToExcelDiag nwDiag = new exprtToExcelDiag();
+            nwDiag.data_source_id = 73;
             nwDiag.orgID = this.Org_id;
             nwDiag.chrtTyp = chrtTyp;
             nwDiag.cmnCde = this;
@@ -11243,6 +11944,291 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
             return dgres;
         }
 
+        public DialogResult showAcntsDiag(ref int accntID, bool shdSelOne,
+          bool mustSelctSth, string srchFor, string srchIn, bool autoLoadIfFnd, bool isReadOnly, CommonCodes cmnCde)
+        {
+            chartOfAcntsForm nwDiag = new chartOfAcntsForm();
+            nwDiag.cmnCde = cmnCde;
+            String myName = "Accounting";
+            string myDesc = "This module helps you to manage your organization's Accounting!";
+            string audit_tbl_name = "accb.accb_audit_trail_tbl";
+            String smplRoleName = "Accounting Administrator";
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+            nwDiag.accntID = accntID;
+            nwDiag.isReadOnly = isReadOnly;
+            nwDiag.searchForChrtTextBox.Text = srchFor;
+            nwDiag.searchInChrtComboBox.SelectedItem = srchIn;
+            nwDiag.autoLoad = autoLoadIfFnd;
+            //nwDiag.cmnCde.SubGrpNames = subGrpNames;
+            //nwDiag.cmnCde.MainTableNames = mainTableNames;
+            //nwDiag.cmnCde.KeyColumnNames = keyColumnNames;
+            //nwDiag.cmnCde.pgSqlConn = cmnCde.pgSqlConn;
+            nwDiag.cmnCde.Login_number = cmnCde.Login_number;
+            nwDiag.cmnCde.Role_Set_IDs = cmnCde.Role_Set_IDs;
+            nwDiag.cmnCde.User_id = cmnCde.User_id;
+            nwDiag.cmnCde.Org_id = cmnCde.Org_id;
+
+            nwDiag.cmnCde.ModuleAdtTbl = audit_tbl_name;
+            nwDiag.cmnCde.ModuleDesc = myDesc;
+            nwDiag.cmnCde.ModuleName = myName;
+            nwDiag.cmnCde.SampleRole = smplRoleName;
+            nwDiag.cmnCde.Extra_Adt_Trl_Info = "";
+            //nwDiag.brghtValLstID = valLstID;
+            //nwDiag.con = this.pgSqlConn;
+            //nwDiag.selectValIDs = selValIDs;
+            nwDiag.shdSelOne = shdSelOne;
+            nwDiag.mustSelctSth = mustSelctSth;
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+                accntID = int.Parse(nwDiag.accntIDTextBox.Text);
+            }
+            //  = nwDiag.selectValIDs;
+            return dgres;
+        }
+        public DialogResult showAcntsDiag(ref int accntID, bool shdSelOne,
+          bool mustSelctSth, string srchFor, string srchIn, bool autoLoadIfFnd, bool isReadOnly, string lovName, CommonCodes cmnCde)
+        {
+            chartOfAcntsForm nwDiag = new chartOfAcntsForm();
+            nwDiag.cmnCde = cmnCde;
+            nwDiag.lovName = lovName;
+            String myName = "Accounting";
+            string myDesc = "This module helps you to manage your organization's Accounting!";
+            string audit_tbl_name = "accb.accb_audit_trail_tbl";
+            String smplRoleName = "Accounting Administrator";
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+            nwDiag.accntID = accntID;
+            nwDiag.isReadOnly = isReadOnly;
+            nwDiag.searchForChrtTextBox.Text = srchFor;
+            nwDiag.searchInChrtComboBox.SelectedItem = srchIn;
+            nwDiag.autoLoad = autoLoadIfFnd;
+            //nwDiag.cmnCde.SubGrpNames = subGrpNames;
+            //nwDiag.cmnCde.MainTableNames = mainTableNames;
+            //nwDiag.cmnCde.KeyColumnNames = keyColumnNames;
+            //nwDiag.cmnCde.pgSqlConn = cmnCde.pgSqlConn;
+            nwDiag.cmnCde.Login_number = cmnCde.Login_number;
+            nwDiag.cmnCde.Role_Set_IDs = cmnCde.Role_Set_IDs;
+            nwDiag.cmnCde.User_id = cmnCde.User_id;
+            nwDiag.cmnCde.Org_id = cmnCde.Org_id;
+
+            nwDiag.cmnCde.ModuleAdtTbl = audit_tbl_name;
+            nwDiag.cmnCde.ModuleDesc = myDesc;
+            nwDiag.cmnCde.ModuleName = myName;
+            nwDiag.cmnCde.SampleRole = smplRoleName;
+            nwDiag.cmnCde.Extra_Adt_Trl_Info = "";
+            //nwDiag.brghtValLstID = valLstID;
+            //nwDiag.con = this.pgSqlConn;
+            //nwDiag.selectValIDs = selValIDs;
+            nwDiag.shdSelOne = shdSelOne;
+            nwDiag.mustSelctSth = mustSelctSth;
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+                accntID = int.Parse(nwDiag.accntIDTextBox.Text);
+            }
+            //  = nwDiag.selectValIDs;
+            return dgres;
+        }
+        public DialogResult showAcntClsfctnsDiag(ref long accntID, bool isReadOnly, CommonCodes cmnCde)
+        {
+            acntClsfctnsDiag nwDiag = new acntClsfctnsDiag();
+            nwDiag.cmnCde = cmnCde;
+            String myName = "Accounting";
+            string myDesc = "This module helps you to manage your organization's Accounting!";
+            string audit_tbl_name = "accb.accb_audit_trail_tbl";
+            String smplRoleName = "Accounting Administrator";
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+            nwDiag.accntID = accntID;
+            nwDiag.isReadOnly = isReadOnly;
+            //nwDiag.searchForTextBox.Text = srchFor;
+            //nwDiag.searchInComboBox.SelectedItem = srchIn;
+            //nwDiag.autoLoad = autoLoadIfFnd;
+            //nwDiag.cmnCde.SubGrpNames = subGrpNames;
+            //nwDiag.cmnCde.MainTableNames = mainTableNames;
+            //nwDiag.cmnCde.KeyColumnNames = keyColumnNames;
+            //nwDiag.cmnCde.pgSqlConn = cmnCde.pgSqlConn;
+            nwDiag.cmnCde.Login_number = cmnCde.Login_number;
+            nwDiag.cmnCde.Role_Set_IDs = cmnCde.Role_Set_IDs;
+            nwDiag.cmnCde.User_id = cmnCde.User_id;
+            nwDiag.cmnCde.Org_id = cmnCde.Org_id;
+
+            nwDiag.cmnCde.ModuleAdtTbl = audit_tbl_name;
+            nwDiag.cmnCde.ModuleDesc = myDesc;
+            nwDiag.cmnCde.ModuleName = myName;
+            nwDiag.cmnCde.SampleRole = smplRoleName;
+            nwDiag.cmnCde.Extra_Adt_Trl_Info = "";
+            //nwDiag.brghtValLstID = valLstID;
+            //nwDiag.con = this.pgSqlConn;
+            //nwDiag.selectValIDs = selValIDs;
+            //nwDiag.selOnlyOne = shdSelOne;
+            //nwDiag.mustSelOne = mustSelctSth;
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+                //accntID = long.Parse(nwDiag.idTextBox.Text);
+            }
+            //  = nwDiag.selectValIDs;
+            return dgres;
+        }
+
+        public DialogResult showAcntSegmentsDiag(ref string nwAcctNum, ref string nwAcctName, ref int ntrlAcntSgmtVal, ref bool allwNtrlAcntEdit,
+          ref int accntSgmnt1, ref int accntSgmnt2, ref int accntSgmnt3, ref int accntSgmnt4, ref int accntSgmnt5, ref int accntSgmnt6, ref int accntSgmnt7
+            , ref int accntSgmnt8, ref int accntSgmnt9, ref int accntSgmnt10, int accntID, bool canEdit, bool isForRpt, CommonCodes cmnCde)
+        {
+            acntSegmntsDiag nwDiag = new acntSegmntsDiag();
+            nwDiag.cmnCde = cmnCde;
+            String myName = "Accounting";
+            string myDesc = "This module helps you to manage your organization's Accounting!";
+            string audit_tbl_name = "accb.accb_audit_trail_tbl";
+            String smplRoleName = "Accounting Administrator";
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+
+            nwDiag.accountID = accntID;
+            nwDiag.canEdit = canEdit;
+            nwDiag.allwNtrlAcntEdit = allwNtrlAcntEdit;
+            nwDiag.accntSgmnt1 = accntSgmnt1;
+            nwDiag.accntSgmnt2 = accntSgmnt2;
+            nwDiag.accntSgmnt3 = accntSgmnt3;
+            nwDiag.accntSgmnt4 = accntSgmnt4;
+            nwDiag.accntSgmnt5 = accntSgmnt5;
+            nwDiag.accntSgmnt6 = accntSgmnt6;
+            nwDiag.accntSgmnt7 = accntSgmnt7;
+            nwDiag.accntSgmnt8 = accntSgmnt8;
+            nwDiag.accntSgmnt9 = accntSgmnt9;
+            nwDiag.accntSgmnt10 = accntSgmnt10;
+            //nwDiag.searchForTextBox.Text = srchFor;
+            //nwDiag.searchInComboBox.SelectedItem = srchIn;
+            //nwDiag.autoLoad = autoLoadIfFnd;
+            //nwDiag.cmnCde.SubGrpNames = subGrpNames;
+            //nwDiag.cmnCde.MainTableNames = mainTableNames;
+            //nwDiag.cmnCde.KeyColumnNames = keyColumnNames;
+            //nwDiag.cmnCde.pgSqlConn = cmnCde.pgSqlConn;
+            nwDiag.cmnCde.Login_number = cmnCde.Login_number;
+            nwDiag.cmnCde.Role_Set_IDs = cmnCde.Role_Set_IDs;
+            nwDiag.cmnCde.User_id = cmnCde.User_id;
+            nwDiag.cmnCde.Org_id = cmnCde.Org_id;
+
+            nwDiag.cmnCde.ModuleAdtTbl = audit_tbl_name;
+            nwDiag.cmnCde.ModuleDesc = myDesc;
+            nwDiag.cmnCde.ModuleName = myName;
+            nwDiag.cmnCde.SampleRole = smplRoleName;
+            nwDiag.cmnCde.Extra_Adt_Trl_Info = "";
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+
+                nwAcctNum = nwDiag.nwAcctNum;
+                nwAcctName = nwDiag.nwAcctName;
+                ntrlAcntSgmtVal = nwDiag.ntrlAcntSgmtVal;
+                allwNtrlAcntEdit = nwDiag.allwNtrlAcntEdit;
+
+                accntSgmnt1 = nwDiag.accntSgmnt1;
+                accntSgmnt2 = nwDiag.accntSgmnt2;
+                accntSgmnt3 = nwDiag.accntSgmnt3;
+                accntSgmnt4 = nwDiag.accntSgmnt4;
+                accntSgmnt5 = nwDiag.accntSgmnt5;
+                accntSgmnt6 = nwDiag.accntSgmnt6;
+                accntSgmnt7 = nwDiag.accntSgmnt7;
+                accntSgmnt8 = nwDiag.accntSgmnt8;
+                accntSgmnt9 = nwDiag.accntSgmnt9;
+                accntSgmnt10 = nwDiag.accntSgmnt10;
+            }
+            nwDiag.cmnCde = cmnCde;
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+            return dgres;
+        }
+
+        public DialogResult showSgmntClsfctnsDiag(ref long accntID, bool isReadOnly, CommonCodes cmnCde)
+        {
+            sgmtValClsfctnsDiag nwDiag = new sgmtValClsfctnsDiag();
+            nwDiag.cmnCde = cmnCde;
+            String myName = "Organization Setup";
+            string myDesc = "This module helps you to setup basic information " +
+            "about your organization!";
+            string audit_tbl_name = "org.org_audit_trail_tbl";
+            String smplRoleName = "Organization Setup Administrator";
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+            nwDiag.accntID = accntID;
+            nwDiag.isReadOnly = isReadOnly;
+            //nwDiag.searchForTextBox.Text = srchFor;
+            //nwDiag.searchInComboBox.SelectedItem = srchIn;
+            //nwDiag.autoLoad = autoLoadIfFnd;
+            //nwDiag.cmnCde.SubGrpNames = subGrpNames;
+            //nwDiag.cmnCde.MainTableNames = mainTableNames;
+            //nwDiag.cmnCde.KeyColumnNames = keyColumnNames;
+            //nwDiag.cmnCde.pgSqlConn = cmnCde.pgSqlConn;
+            nwDiag.cmnCde.Login_number = cmnCde.Login_number;
+            nwDiag.cmnCde.Role_Set_IDs = cmnCde.Role_Set_IDs;
+            nwDiag.cmnCde.User_id = cmnCde.User_id;
+            nwDiag.cmnCde.Org_id = cmnCde.Org_id;
+
+            nwDiag.cmnCde.ModuleAdtTbl = audit_tbl_name;
+            nwDiag.cmnCde.ModuleDesc = myDesc;
+            nwDiag.cmnCde.ModuleName = myName;
+            nwDiag.cmnCde.SampleRole = smplRoleName;
+            nwDiag.cmnCde.Extra_Adt_Trl_Info = "";
+            //nwDiag.brghtValLstID = valLstID;
+            //nwDiag.con = this.pgSqlConn;
+            //nwDiag.selectValIDs = selValIDs;
+            //nwDiag.selOnlyOne = shdSelOne;
+            //nwDiag.mustSelOne = mustSelctSth;
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+                //accntID = long.Parse(nwDiag.idTextBox.Text);
+            }
+            //  = nwDiag.selectValIDs;
+            return dgres;
+        }
+
+        public DialogResult showSgmntValuesDiag(ref int sgmntValID, int segmentID, int segmentNum, int dpndntSegmentID, string sysClsfctn,
+          int orgID, bool shdSelOne, bool mustSelctSth, string srchFor, string srchIn, bool autoLoadIfFnd, CommonCodes cmnCde)
+        {
+            segmentValuesDiag nwDiag = new segmentValuesDiag();
+            nwDiag.cmnCde = cmnCde;
+            String myName = "Organization Setup";
+            string myDesc = "This module helps you to setup basic information " +
+            "about your organization!";
+            string audit_tbl_name = "org.org_audit_trail_tbl";
+            String smplRoleName = "Organization Setup Administrator";
+            nwDiag.cmnCde.DefaultPrvldgs = cmnCde.DefaultPrvldgs;
+            nwDiag.segmentID = segmentID;
+            nwDiag.segmentNum = segmentNum;
+            nwDiag.dpndntSegmentID = dpndntSegmentID;
+            nwDiag.sysClsfctn = sysClsfctn;
+            nwDiag.sgmntValID = sgmntValID;
+            nwDiag.orgID = orgID;
+            nwDiag.searchForTextBox.Text = srchFor;
+            nwDiag.searchInComboBox.SelectedItem = srchIn;
+            nwDiag.autoLoad = autoLoadIfFnd;
+            //nwDiag.cmnCde.SubGrpNames = subGrpNames;
+            //nwDiag.cmnCde.MainTableNames = mainTableNames;
+            //nwDiag.cmnCde.KeyColumnNames = keyColumnNames;
+            //nwDiag.cmnCde.pgSqlConn = cmnCde.pgSqlConn;
+            nwDiag.cmnCde.Login_number = cmnCde.Login_number;
+            nwDiag.cmnCde.Role_Set_IDs = cmnCde.Role_Set_IDs;
+            nwDiag.cmnCde.User_id = cmnCde.User_id;
+            nwDiag.cmnCde.Org_id = cmnCde.Org_id;
+
+            nwDiag.cmnCde.ModuleAdtTbl = audit_tbl_name;
+            nwDiag.cmnCde.ModuleDesc = myDesc;
+            nwDiag.cmnCde.ModuleName = myName;
+            nwDiag.cmnCde.SampleRole = smplRoleName;
+            nwDiag.cmnCde.Extra_Adt_Trl_Info = "";
+            //nwDiag.brghtValLstID = valLstID;
+            //nwDiag.con = this.pgSqlConn;
+            //nwDiag.selectValIDs = selValIDs;
+            nwDiag.shdSelOne = shdSelOne;
+            nwDiag.shdSelOne = shdSelOne;
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+                sgmntValID = int.Parse(nwDiag.segmentValIDTextBox.Text);
+            }
+            //  = nwDiag.selectValIDs;
+            return dgres;
+        }
+
         public DialogResult showPymntDiag(bool createPrepay, bool dsablPayments, int X_Loc, int Y_Loc, double amntToPay, int entrdCurID, int PymntMthdID, string docTypes,
          long cstspplrID, long siteID, long srcDocID, string srcDocType, CommonCodes cmnCde)
         {
@@ -11308,7 +12294,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
         }
 
         public DialogResult showPymntDiag(bool createPrepay, bool dsablPayments, int X_Loc, int Y_Loc, double amntToPay, double amntGiven, int entrdCurID, int PymntMthdID, string docTypes,
-         long cstspplrID, long siteID, long srcDocID, string srcDocType, CommonCodes cmnCde)
+         long cstspplrID, long siteID, long srcDocID, string srcDocType, CommonCodes cmnCde, string chequeNum)
         {
             addPymntDiag nwdiag = new addPymntDiag();
             //nwDiag.cmnCde = cmnCde;
@@ -11324,6 +12310,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
             nwdiag.spplrID = cstspplrID;
             nwdiag.spplrSiteID = siteID;
             nwdiag.amntGiven = amntGiven;
+            nwdiag.chequeNum = chequeNum;
             if (dsablPayments)
             {
                 nwdiag.StartPosition = FormStartPosition.CenterParent;

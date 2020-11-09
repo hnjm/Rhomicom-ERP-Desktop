@@ -1,33 +1,33 @@
 namespace Enterprise_Management_System.Forms
 {
-  partial class mainForm
-  {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
-
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
+    partial class mainForm
     {
-      if (disposing && (components != null))
-      {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
-    }
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    #region Windows Form Designer generated code
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin1 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
             WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin1 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
@@ -78,11 +78,13 @@ namespace Enterprise_Management_System.Forms
             this.systemAdministrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organisationSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsAndProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wrkFlwMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alertsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.custmseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dBConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationalManualsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,7 +119,6 @@ namespace Enterprise_Management_System.Forms
             this.updtLabelsTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.reportsAndProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -413,7 +414,8 @@ namespace Enterprise_Management_System.Forms
             this.alertsMenuItem,
             this.toolStripSeparator6,
             this.refreshToolStripMenuItem,
-            this.custmseMenuItem});
+            this.custmseMenuItem,
+            this.dBConfigToolStripMenuItem});
             this.toolsToolStripMenuItem.Image = global::Enterprise_Management_System.Properties.Resources.BuildingManagement;
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
@@ -442,6 +444,14 @@ namespace Enterprise_Management_System.Forms
             this.organisationSetupToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.organisationSetupToolStripMenuItem.Text = "&Organisation Setup";
             this.organisationSetupToolStripMenuItem.Click += new System.EventHandler(this.organisationSetupToolStripMenuItem_Click);
+            // 
+            // reportsAndProcessesToolStripMenuItem
+            // 
+            this.reportsAndProcessesToolStripMenuItem.Image = global::Enterprise_Management_System.Properties.Resources.mi_scare_report;
+            this.reportsAndProcessesToolStripMenuItem.Name = "reportsAndProcessesToolStripMenuItem";
+            this.reportsAndProcessesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.reportsAndProcessesToolStripMenuItem.Text = "&Reports and Processes";
+            this.reportsAndProcessesToolStripMenuItem.Click += new System.EventHandler(this.reportsAndProcessesToolStripMenuItem_Click);
             // 
             // wrkFlwMenuItem
             // 
@@ -479,6 +489,13 @@ namespace Enterprise_Management_System.Forms
             this.custmseMenuItem.Size = new System.Drawing.Size(194, 22);
             this.custmseMenuItem.Text = "C&ustomize";
             this.custmseMenuItem.Click += new System.EventHandler(this.custmseMenuItem_Click);
+            // 
+            // dBConfigToolStripMenuItem
+            // 
+            this.dBConfigToolStripMenuItem.Name = "dBConfigToolStripMenuItem";
+            this.dBConfigToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.dBConfigToolStripMenuItem.Text = "DB Config";
+            this.dBConfigToolStripMenuItem.Click += new System.EventHandler(this.dBConfigToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -866,14 +883,6 @@ namespace Enterprise_Management_System.Forms
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // reportsAndProcessesToolStripMenuItem
-            // 
-            this.reportsAndProcessesToolStripMenuItem.Image = global::Enterprise_Management_System.Properties.Resources.mi_scare_report;
-            this.reportsAndProcessesToolStripMenuItem.Name = "reportsAndProcessesToolStripMenuItem";
-            this.reportsAndProcessesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.reportsAndProcessesToolStripMenuItem.Text = "&Reports and Processes";
-            this.reportsAndProcessesToolStripMenuItem.Click += new System.EventHandler(this.reportsAndProcessesToolStripMenuItem_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -904,82 +913,83 @@ namespace Enterprise_Management_System.Forms
             this.ResumeLayout(false);
             this.PerformLayout();
 
-    }
-    #endregion
+        }
+        #endregion
 
-    private System.Windows.Forms.MenuStrip menuStrip1;
-    private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-    private System.Windows.Forms.SplitContainer splitContainer1;
-    public WeifenLuo.WinFormsUI.Docking.DockPanel mainDockPanel;
-    private System.Windows.Forms.StatusStrip statusStrip2;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-    public System.Windows.Forms.ToolStripStatusLabel connectStatusLabel;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-    public System.Windows.Forms.ToolStripStatusLabel dbServerToolStripStatusLabel;
-    private glsLabel.glsLabel bannerGlsLabel;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-    public System.Windows.Forms.ToolStripStatusLabel dbNameToolStripStatusLabel;
-    private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem homePageToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
-    public System.Windows.Forms.ToolStripStatusLabel dbTimeToolStripStatusLabel;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-    private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-    public System.Windows.Forms.ToolStripMenuItem basicSetupToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem specializedModulesToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem customModulesToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem connectToDatabaseToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem changeMyPasswordToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem switchRoleSetToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem myInboxToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem contentToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem aboutRhomicomToolStripMenuItem;
-    private System.Windows.Forms.Timer updtLabelsTimer;
-    private System.Windows.Forms.ToolStripMenuItem custmseMenuItem;
-    public System.Windows.Forms.PictureBox statusLoadPictureBox;
-    public System.Windows.Forms.Label statusLoadLabel;
-    private System.ComponentModel.BackgroundWorker backgroundWorker1;
-    private System.Windows.Forms.ToolStripMenuItem others1ToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem viewSQLToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem createExcelDataImportTemplateToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem importDataFromExcelToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-    private System.Windows.Forms.ToolStripMenuItem exportDataToExcelToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem viewWordReportsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-    private System.Windows.Forms.ToolStripMenuItem iToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem alertsMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem wrkFlwMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem selfServiceMoMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem operationalManualsToolStripMenuItem;
-    public System.Windows.Forms.ToolStripStatusLabel appVersionStatusLabel;
-    public System.Windows.Forms.ToolStripMenuItem generalSetupToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem organisationSetupToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem systemAdministrationToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem accountingToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem basicPersonDataToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem internalPaymentsToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem storesInventoryToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem hospitalityMngmntMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem academicsMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem bnkMicroMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem clinicHospitalManagementToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem localStorageMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem visitsAndAppointmentsToolStripMenuItem;
-    public System.Windows.Forms.ToolStripMenuItem projectManagementToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        public WeifenLuo.WinFormsUI.Docking.DockPanel mainDockPanel;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        public System.Windows.Forms.ToolStripStatusLabel connectStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        public System.Windows.Forms.ToolStripStatusLabel dbServerToolStripStatusLabel;
+        private glsLabel.glsLabel bannerGlsLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        public System.Windows.Forms.ToolStripStatusLabel dbNameToolStripStatusLabel;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        public System.Windows.Forms.ToolStripStatusLabel dbTimeToolStripStatusLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        public System.Windows.Forms.ToolStripMenuItem basicSetupToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem specializedModulesToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem customModulesToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem connectToDatabaseToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem changeMyPasswordToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem switchRoleSetToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem myInboxToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem contentToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem aboutRhomicomToolStripMenuItem;
+        private System.Windows.Forms.Timer updtLabelsTimer;
+        private System.Windows.Forms.ToolStripMenuItem custmseMenuItem;
+        public System.Windows.Forms.PictureBox statusLoadPictureBox;
+        public System.Windows.Forms.Label statusLoadLabel;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripMenuItem others1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewSQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createExcelDataImportTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importDataFromExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem exportDataToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewWordReportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem iToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alertsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wrkFlwMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selfServiceMoMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem operationalManualsToolStripMenuItem;
+        public System.Windows.Forms.ToolStripStatusLabel appVersionStatusLabel;
+        public System.Windows.Forms.ToolStripMenuItem generalSetupToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem organisationSetupToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem systemAdministrationToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem accountingToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem basicPersonDataToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem internalPaymentsToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem storesInventoryToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem hospitalityMngmntMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem academicsMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem bnkMicroMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clinicHospitalManagementToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem localStorageMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem visitsAndAppointmentsToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem projectManagementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registerForSupportToolStripMenuItem;
         public System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.ToolStripMenuItem eventsMenuItem;
         public System.Windows.Forms.ToolStripMenuItem reportsAndProcessesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dBConfigToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem homePageToolStripMenuItem;
     }
 }
 

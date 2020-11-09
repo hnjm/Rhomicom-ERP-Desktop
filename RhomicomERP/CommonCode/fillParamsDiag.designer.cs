@@ -156,7 +156,7 @@ namespace CommonCode
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 15;
-            this.dataGridView1.Size = new System.Drawing.Size(601, 401);
+            this.dataGridView1.Size = new System.Drawing.Size(601, 397);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -295,7 +295,7 @@ namespace CommonCode
             // 
             this.textBox1.Location = new System.Drawing.Point(7, 100);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(81, 21);
+            this.textBox1.Size = new System.Drawing.Size(81, 24);
             this.textBox1.TabIndex = 9;
             // 
             // copyEpctdButton
@@ -379,7 +379,7 @@ namespace CommonCode
             this.label27.ForeColor = System.Drawing.Color.White;
             this.label27.Location = new System.Drawing.Point(5, 135);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(119, 13);
+            this.label27.Size = new System.Drawing.Size(150, 17);
             this.label27.TabIndex = 155;
             this.label27.Text = "Last Active  Date/Time:";
             // 
@@ -389,7 +389,7 @@ namespace CommonCode
             this.label19.ForeColor = System.Drawing.Color.White;
             this.label19.Location = new System.Drawing.Point(5, 65);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(44, 13);
+            this.label19.Size = new System.Drawing.Size(56, 17);
             this.label19.TabIndex = 153;
             this.label19.Text = "Run ID:";
             // 
@@ -430,7 +430,7 @@ namespace CommonCode
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(5, 92);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.Size = new System.Drawing.Size(52, 17);
             this.label4.TabIndex = 150;
             this.label4.Text = "Status:";
             // 
@@ -650,7 +650,7 @@ namespace CommonCode
             // 
             this.searchForRptTextBox.Location = new System.Drawing.Point(289, 8);
             this.searchForRptTextBox.Name = "searchForRptTextBox";
-            this.searchForRptTextBox.Size = new System.Drawing.Size(82, 21);
+            this.searchForRptTextBox.Size = new System.Drawing.Size(82, 24);
             this.searchForRptTextBox.TabIndex = 162;
             this.searchForRptTextBox.Click += new System.EventHandler(this.searchForRptTextBox_Click);
             this.searchForRptTextBox.Enter += new System.EventHandler(this.searchForRptTextBox_Enter);
@@ -666,7 +666,7 @@ namespace CommonCode
             "Report Name"});
             this.searchInRptComboBox.Location = new System.Drawing.Point(392, 8);
             this.searchInRptComboBox.Name = "searchInRptComboBox";
-            this.searchInRptComboBox.Size = new System.Drawing.Size(108, 21);
+            this.searchInRptComboBox.Size = new System.Drawing.Size(108, 25);
             this.searchInRptComboBox.Sorted = true;
             this.searchInRptComboBox.TabIndex = 163;
             this.searchInRptComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForRptTextBox_KeyDown);
@@ -677,7 +677,7 @@ namespace CommonCode
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(371, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
+            this.label3.Size = new System.Drawing.Size(25, 17);
             this.label3.TabIndex = 164;
             this.label3.Text = "In:";
             // 
@@ -687,7 +687,7 @@ namespace CommonCode
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(226, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.Size = new System.Drawing.Size(79, 17);
             this.label2.TabIndex = 161;
             this.label2.Text = "Search For:";
             // 
@@ -778,10 +778,10 @@ namespace CommonCode
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(607, 407);
+            this.tabPage1.Size = new System.Drawing.Size(607, 403);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "FILL REPORT PARAMETERS";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -789,10 +789,10 @@ namespace CommonCode
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.rptRunListView);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(607, 407);
+            this.tabPage2.Size = new System.Drawing.Size(607, 403);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LAST 15 PREVIOUS REPORT RUNS";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -821,7 +821,7 @@ namespace CommonCode
             this.rptRunListView.HideSelection = false;
             this.rptRunListView.Location = new System.Drawing.Point(3, 3);
             this.rptRunListView.Name = "rptRunListView";
-            this.rptRunListView.Size = new System.Drawing.Size(601, 401);
+            this.rptRunListView.Size = new System.Drawing.Size(601, 397);
             this.rptRunListView.TabIndex = 1;
             this.rptRunListView.UseCompatibleStateImageBehavior = false;
             this.rptRunListView.View = System.Windows.Forms.View.Details;
@@ -912,7 +912,7 @@ namespace CommonCode
             // 
             // fillParamsDiag
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(1051, 500);
@@ -938,7 +938,7 @@ namespace CommonCode
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fillParamsDiag";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fill Report/Process Parameters";
+            this.Text = "CD Fill Report/Process Parameters";
             this.Load += new System.EventHandler(this.fillParamsDiag_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);

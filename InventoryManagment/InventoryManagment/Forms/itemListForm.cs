@@ -73,6 +73,13 @@ namespace StoresAndInventoryManager.Forms
             this.itemTemplateIDtextBox.Clear();  //new
             this.isPlngEnbldcheckBox.Enabled = true;
             this.isPlngEnbldcheckBox.Checked = false;
+
+            this.autoLoadVMSCheckBox.Enabled = true;
+            this.autoLoadVMSCheckBox.Checked = false;
+            this.invcCurrTextBox.Clear();
+            this.invcCurrIDTextBox.Clear();
+            this.invcCurrTextBox.ReadOnly = true;
+
             this.taxCodetextBox.Clear();
             this.taxCodeIDtextBox.Clear();
             this.discnttextBox.Clear();
@@ -372,6 +379,9 @@ namespace StoresAndInventoryManager.Forms
             this.itemDesctextBox.ReadOnly = false;
             this.isItemEnabledcheckBox.AutoCheck = true;
             this.isPlngEnbldcheckBox.AutoCheck = true;
+            this.autoLoadVMSCheckBox.AutoCheck = true;
+            this.invcCurrTextBox.ReadOnly = true;
+
             this.minQtytextBox.ReadOnly = false;
             this.maxQtytextBox.ReadOnly = false;
             this.sellingPrcnumericUpDown.Increment = decimal.Parse("1.1");
@@ -530,7 +540,9 @@ namespace StoresAndInventoryManager.Forms
                     "', contraindications = '" + this.contraindctntextBox.Text.Replace("'", "''") +
                     "', food_interactions = '" + this.foodInterctnstextBox.Text.Replace("'", "''") +
                     "', orgnl_selling_price = " + Math.Round((double)this.orgnlSellingPriceNumUpDwn.Value, 4).ToString() +
-                    " WHERE item_id = " + int.Parse(this.itemIDtextBox.Text.Trim());
+                    ", value_price_crncy_id = '" + this.invcCurrIDTextBox.Text +
+                    "', auto_dflt_in_vms_trns = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.autoLoadVMSCheckBox.Checked) +
+                    "' WHERE item_id = " + int.Parse(this.itemIDtextBox.Text.Trim());
             if (this.listViewItems.SelectedItems.Count > 0)
             {
                 //this.listViewItems.SelectedItems[0].Text = "New";
@@ -566,6 +578,9 @@ namespace StoresAndInventoryManager.Forms
                 this.listViewItems.SelectedItems[0].SubItems[29].Text = this.contraindctntextBox.Text;
                 this.listViewItems.SelectedItems[0].SubItems[30].Text = this.foodInterctnstextBox.Text;
                 this.listViewItems.SelectedItems[0].SubItems[31].Text = Math.Round(this.orgnlSellingPriceNumUpDwn.Value, 4).ToString();
+                this.listViewItems.SelectedItems[0].SubItems[33].Text = this.invcCurrIDTextBox.Text;
+                this.listViewItems.SelectedItems[0].SubItems[34].Text = Global.mnFrm.cmCde.getPssblValNm(int.Parse(this.invcCurrIDTextBox.Text));
+                this.listViewItems.SelectedItems[0].SubItems[35].Text = Global.mnFrm.cmCde.cnvrtBoolToBitStr(this.autoLoadVMSCheckBox.Checked); ;
             }
             //"', image = '" + varImageName.Replace("'", "''") +
             //"', image = '" + cnsgmtRcp.getItemID(this.itemNametextBox.Text) + ".png" +
@@ -701,6 +716,10 @@ namespace StoresAndInventoryManager.Forms
             this.itemTemplateIDtextBox.Clear();  //new
             this.isPlngEnbldcheckBox.Checked = false;
             this.isPlngEnbldcheckBox.AutoCheck = false;
+            this.autoLoadVMSCheckBox.Checked = false;
+            this.autoLoadVMSCheckBox.AutoCheck = false;
+            this.invcCurrIDTextBox.Clear();
+            this.invcCurrTextBox.Clear();
             this.taxCodetextBox.Clear();
             this.taxCodeIDtextBox.Clear();
             this.discnttextBox.Clear();
@@ -972,7 +991,7 @@ namespace StoresAndInventoryManager.Forms
                 this.invAcctextBox.Select();
                 return 0;
             }
-            if (this.cogsAcctextBox.Text == "" && !(itemTypecomboBox.SelectedItem.ToString().Equals("Expense Item") ||
+            /*if (this.cogsAcctextBox.Text == "" && !(itemTypecomboBox.SelectedItem.ToString().Equals("Expense Item") ||
                 itemTypecomboBox.SelectedItem.ToString().Equals("Services")))
             {
                 Global.mnFrm.cmCde.showMsg("cost of Goods Sold Account cannot be Empty!", 0);
@@ -980,14 +999,15 @@ namespace StoresAndInventoryManager.Forms
                 this.cogsAcctextBox.Select();
                 return 0;
             }
-            else if (this.salesRevtextBox.Text == "")
+            else*/
+            if (this.salesRevtextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Sales Revenue Account cannot be Empty!", 0);
                 tabControlItem.SelectedTab = this.tabPageGLAccounts;
                 this.salesRevtextBox.Select();
                 return 0;
             }
-            else if (this.salesRettextBox.Text == "")
+            /*else if (this.salesRettextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Sales Return Account cannot be Empty!", 0);
                 tabControlItem.SelectedTab = this.tabPageGLAccounts;
@@ -1000,7 +1020,7 @@ namespace StoresAndInventoryManager.Forms
                 tabControlItem.SelectedTab = this.tabPageGLAccounts;
                 this.purcRettextBox.Select();
                 return 0;
-            }
+            }*/
             else if (this.expnstextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Expense Account cannot be Empty!", 0);
@@ -1475,7 +1495,9 @@ to_char(now(),'YYYY-MM-DD HH24:MI:SS') <= q.end_date) and q.subinv_id = " + Glob
                     "dscnt_code_id, extr_chrg_id, inv_asset_acct_id, cogs_acct_id, sales_rev_accnt_id, sales_ret_accnt_id, " +
                     " purch_ret_accnt_id, expense_accnt_id, enabled_flag, planning_enabled, min_level, max_level, " +
                     " selling_price, item_type, total_qty, extra_info, other_desc, image, (SELECT uom_name from inv.unit_of_measure WHERE uom_id = a.base_uom_id), " +
-                    " generic_name, trade_name, drug_usual_dsge, drug_max_dsge, contraindications, food_interactions, orgnl_selling_price, (select cat_name FROM inv.inv_product_categories WHERE cat_id = category_id) from inv.inv_itm_list a ";
+                    @" generic_name, trade_name, drug_usual_dsge, drug_max_dsge, contraindications, food_interactions, orgnl_selling_price, 
+                    (select cat_name FROM inv.inv_product_categories WHERE cat_id = category_id),
+                    value_price_crncy_id, gst.get_pssbl_val(value_price_crncy_id), auto_dflt_in_vms_trns from inv.inv_itm_list a ";
 
                 string qryWhere = parWhereClause;
                 string qryLmtOffst = " limit " + parLimit + " offset 0 ";
@@ -1524,8 +1546,10 @@ to_char(now(),'YYYY-MM-DD HH24:MI:SS') <= q.end_date) and q.subinv_id = " + Glob
                 newDs.Tables[0].Rows[i][17].ToString(), newDs.Tables[0].Rows[i][21].ToString(), newDs.Tables[0].Rows[i][22].ToString(), newDs.Tables[0].Rows[i][23].ToString(),
                 newDs.Tables[0].Rows[i][25].ToString(), newDs.Tables[0].Rows[i][26].ToString(), newDs.Tables[0].Rows[i][27].ToString(),
                 newDs.Tables[0].Rows[i][28].ToString(), newDs.Tables[0].Rows[i][29].ToString(), newDs.Tables[0].Rows[i][30].ToString(),
-                newDs.Tables[0].Rows[i][31].ToString(),
-                              itmBals.fetchItemExistnReservations(newDs.Tables[0].Rows[i][3].ToString()).ToString() };
+                newDs.Tables[0].Rows[i][31].ToString(), itmBals.fetchItemExistnReservations(newDs.Tables[0].Rows[i][3].ToString()).ToString(),
+                newDs.Tables[0].Rows[i][33].ToString(),
+                newDs.Tables[0].Rows[i][34].ToString(),
+                newDs.Tables[0].Rows[i][35].ToString() };
 
                     //add data to listview
                     this.listViewItems.Items.Add(newDs.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -1581,10 +1605,11 @@ to_char(now(),'YYYY-MM-DD HH24:MI:SS') <= q.end_date) and q.subinv_id = " + Glob
                     "dscnt_code_id, extr_chrg_id, inv_asset_acct_id, cogs_acct_id, sales_rev_accnt_id, sales_ret_accnt_id, " +
                     " purch_ret_accnt_id, expense_accnt_id, enabled_flag, planning_enabled, min_level, max_level, " +
                     @" selling_price, item_type, total_qty, extra_info, other_desc, image, 
-(SELECT uom_name from inv.unit_of_measure WHERE uom_id = a.base_uom_id), " +
+                    (SELECT uom_name from inv.unit_of_measure WHERE uom_id = a.base_uom_id), " +
                     @" generic_name, trade_name, drug_usual_dsge, drug_max_dsge, 
-contraindications, food_interactions, orgnl_selling_price, (select cat_name FROM inv.inv_product_categories WHERE cat_id = category_id) 
-from inv.inv_itm_list a  ";
+                    contraindications, food_interactions, orgnl_selling_price, (select cat_name FROM inv.inv_product_categories WHERE cat_id = category_id), 
+                    value_price_crncy_id, gst.get_pssbl_val(value_price_crncy_id), auto_dflt_in_vms_trns 
+                    from inv.inv_itm_list a ";
                 /*,scm.get_ltst_item_bals(item_id, '" + dtestr + "') */
                 string qryWhere = parWhereClause;
                 string qryLmtOffst = " limit " + parLimit + " offset " + Math.Abs(parLimit * parOffset) + " ";
@@ -1632,7 +1657,10 @@ from inv.inv_itm_list a  ";
                 newDs.Tables[0].Rows[i][25].ToString(), newDs.Tables[0].Rows[i][26].ToString(), newDs.Tables[0].Rows[i][27].ToString(),
                 newDs.Tables[0].Rows[i][28].ToString(), newDs.Tables[0].Rows[i][29].ToString(), newDs.Tables[0].Rows[i][30].ToString(),
                 newDs.Tables[0].Rows[i][31].ToString(),
-                              itmBals.fetchItemExistnReservations(newDs.Tables[0].Rows[i][3].ToString()).ToString()};
+                              itmBals.fetchItemExistnReservations(newDs.Tables[0].Rows[i][3].ToString()).ToString(),
+                newDs.Tables[0].Rows[i][33].ToString(),
+                newDs.Tables[0].Rows[i][34].ToString(),
+                newDs.Tables[0].Rows[i][35].ToString()};
 
                     //add data to listview
                     this.listViewItems.Items.Add(newDs.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
@@ -1666,7 +1694,7 @@ from inv.inv_itm_list a  ";
             }
             catch (Exception ex)
             {
-                Global.mnFrm.cmCde.showMsg(ex.Message, 0);
+                Global.mnFrm.cmCde.showMsg(ex.Message + "\r\n" + ex.InnerException + "\r\n" + ex.StackTrace, 0);
                 this.obey_evnts = true;
                 return;
             }
@@ -1747,27 +1775,21 @@ from inv.inv_itm_list a  ";
         {
             //clear listview
             this.drugIntrctnlistView.Items.Clear();
-
             string qrySelectDrugInteraction = @"SELECT row_number() over(order by b.item_code) as row , b.item_desc || '(' || b.item_code || ')', a.intrctn_effect,
           a.action, a.second_drug_id, a.drug_intrctn_id " +
                 " FROM inv.inv_drug_interactions a inner join inv.inv_itm_list b ON a.second_drug_id = b.item_id " +
                 " WHERE a.first_drug_id = " + int.Parse(parItemId) + " order by 1 ";
 
             DataSet Ds = new DataSet();
-
             Ds.Reset();
-
             //fill dataset
             Ds = Global.fillDataSetFxn(qrySelectDrugInteraction);
-
             int varMaxRows = Ds.Tables[0].Rows.Count;
-
             for (int i = 0; i < varMaxRows; i++)
             {
                 //read data into array
                 string[] colArray = {Ds.Tables[0].Rows[i][1].ToString(),  Ds.Tables[0].Rows[i][2].ToString(), Ds.Tables[0].Rows[i][3].ToString(),
                     Ds.Tables[0].Rows[i][4].ToString(), Ds.Tables[0].Rows[i][5].ToString()};
-
                 //add data to listview
                 this.drugIntrctnlistView.Items.Add(Ds.Tables[0].Rows[i][0].ToString().ToString()).SubItems.AddRange(colArray);
             }
@@ -2642,7 +2664,7 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
             }
             catch (Exception ex)
             {
-                Global.mnFrm.cmCde.showMsg(ex.Message, 0);
+                Global.mnFrm.cmCde.showMsg(ex.Message + "\r\n" + ex.InnerException + "\r\n" + ex.StackTrace, 0);
                 return;
             }
         }
@@ -3300,6 +3322,7 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
         }
         //bool obeyEvnts = false;
         string funcCurrCode = "";
+        public int funcCurrID = -1;
         private void itemListForm_Load(object sender, EventArgs e)
         {
             this.txtChngd = false;
@@ -3310,7 +3333,8 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
             this.itemNametextBox.Select();
             findIntoolStripComboBox.Text = "Name";
             filtertoolStripComboBox.Text = Global.mnFrm.cmCde.get_CurPlcy_Mx_Dsply_Recs().ToString();
-            this.funcCurrCode = Global.mnFrm.cmCde.getPssblValNm(Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id));
+            this.funcCurrID = Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id);
+            this.funcCurrCode = Global.mnFrm.cmCde.getPssblValNm(this.funcCurrID);
             this.groupBox4.Text = "Unit Selling Prices (".ToUpper() + this.funcCurrCode + ")";
             this.groupBox5.Text = "Charges (".ToUpper() + this.funcCurrCode + ")";
             this.listViewItems.Focus();
@@ -3425,7 +3449,7 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
                     this.nwProfitNumUpDwn.Increment = (decimal)0.00;
                     this.nwProfitAmntNumUpDwn.Increment = (decimal)0.00;
 
-                    this.costPriceNumUpDwn.Value = (decimal)Global.getHgstUnitCostPrice(int.Parse(this.itemIDtextBox.Text));
+                    this.costPriceNumUpDwn.Value = (decimal) Global.getHgstUnitCostPrice(int.Parse(this.itemIDtextBox.Text));
                     this.crntProfitAmntNumUpDwn.Value = this.orgnlSellingPriceNumUpDwn.Value
                       - decimal.Parse(this.dscntValLabel.Text)
                       - this.costPriceNumUpDwn.Value;
@@ -3491,6 +3515,11 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
 
                     if (e.Item.SubItems[19].Text == "1") { this.isPlngEnbldcheckBox.Checked = true; }
                     else { this.isPlngEnbldcheckBox.Checked = false; }
+                    if (e.Item.SubItems[35].Text == "1") { this.autoLoadVMSCheckBox.Checked = true; }
+                    else { this.autoLoadVMSCheckBox.Checked = false; }
+
+                    this.invcCurrTextBox.Text = e.Item.SubItems[34].Text;
+                    this.invcCurrIDTextBox.Text = e.Item.SubItems[33].Text;
 
                     this.minQtytextBox.Text = e.Item.SubItems[20].Text;
                     this.maxQtytextBox.Text = e.Item.SubItems[21].Text;
@@ -5730,6 +5759,11 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
                 Global.mnFrm.cmCde.showMsg("Please select a saved Item First!", 0);
                 return;
             }
+            if (this.itemTypecomboBox.Text.Contains("VaultItem"))
+            {
+                Global.mnFrm.cmCde.showMsg("Cannot Delete Vault Items From Here!", 0);
+                return;
+            }
             long ItemID = long.Parse(this.itemIDtextBox.Text);
             long rslts = 0;
             DataSet dtst = new DataSet();
@@ -5766,7 +5800,7 @@ CASE WHEN a.end_date='' THEN a.end_date ELSE to_char(to_timestamp(a.end_date,'YY
                 Global.mnFrm.cmCde.showMsg("Cannot Delete Items Received into Stores!", 0);
                 return;
             }
-
+            
             if (Global.mnFrm.cmCde.showMsg("Are you sure you want to DELETE the selected ITEM \r\nand ALL OTHER DATA related to this ITEM?" +
          "\r\nThis action CANNOT be UNDONE!", 1) == DialogResult.No)
             {
@@ -5991,7 +6025,7 @@ DELETE FROM inv.inv_itm_list WHERE item_id={:itmID};";
                 qckRcpt.sltdQtyLst += "0.00" + ",";
                 qckRcpt.sltdPriceLst += "0.00" + ",";
                 qckRcpt.sltdStoreLst += "-1" + ",";
-                qckRcpt.sltdLineIDLst += "-1"+ ",";
+                qckRcpt.sltdLineIDLst += "-1" + ",";
                 sltdItmsLstArray[i] = lsv.SubItems[1].Text;
                 i++;
             }
@@ -6654,5 +6688,49 @@ DELETE FROM inv.inv_itm_list WHERE item_id={:itmID};";
             this.filterChangeUpdate();
         }
 
+        private void invcCurrButton_Click(object sender, EventArgs e)
+        {
+            if (this.editUpdatetoolStripButton.Text == "EDIT")
+            {
+                this.editUpdatetoolStripButton_Click(this.editUpdatetoolStripButton, e);
+            }
+
+            if (this.editUpdatetoolStripButton.Text == "EDIT")
+            {
+                Global.mnFrm.cmCde.showMsg("Must be in EDIT Mode", 0);
+                return;
+            }
+            this.autoLoad = false;
+            this.crncyNmLOVSearch();
+        }
+
+        private void crncyNmLOVSearch()
+        {
+            this.txtChngd = false;
+            if (this.invcCurrTextBox.Text == "")
+            {
+                this.invcCurrIDTextBox.Text = this.funcCurrID.ToString();
+                this.invcCurrTextBox.Text = this.funcCurrCode;
+                this.txtChngd = false;
+                return;
+            }
+            //this.invcCurrTextBox.Text = "";
+            //this.invcCurrIDTextBox.Text = "-1";
+
+            int[] selVals = new int[1];
+            selVals[0] = int.Parse(this.invcCurrIDTextBox.Text);
+            DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+             Global.mnFrm.cmCde.getLovID("Currencies"), ref selVals,
+             true, true, this.srchWrd, "Both", this.autoLoad);
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < selVals.Length; i++)
+                {
+                    this.invcCurrIDTextBox.Text = selVals[i].ToString();
+                    this.invcCurrTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(selVals[i]);
+                }
+            }
+            this.txtChngd = false;
+        }
     }
 }

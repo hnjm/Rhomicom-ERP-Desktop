@@ -1892,8 +1892,42 @@ namespace Accounting.Forms
                     srchWrd = "%" + srchWrd + "%";
                     //this.trnsDataGridView.Rows[e.RowIndex].Cells[4].Value = "-1";
                 }
+                int lnAccntID = int.Parse(this.trnsDataGridView.Rows[e.RowIndex].Cells[7].Value.ToString());
+                bool isReadOnly = false;
+                DialogResult dgRes = Global.mnFrm.cmCde.showAcntsDiag(ref lnAccntID, true,
+              true, srchWrd, "Account Details", true, isReadOnly, Global.mnFrm.cmCde);
+                if (dgRes == DialogResult.OK)
+                {
+                    this.obey_evnts = false;
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[7].Value = lnAccntID.ToString();
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[6].Value = 
 
-                string[] selVals = new string[1];
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[6].Value = Global.mnFrm.cmCde.getAccntNum(lnAccntID) +
+              "." + Global.mnFrm.cmCde.getAccntName(lnAccntID);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
+                    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", lnAccntID));
+
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[3].Value = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[4].Value = accntCurrID;
+
+                    double funcRate = Math.Round(
+                        Global.get_LtstExchRate(accntCurrID, this.curid,
+                        this.trnsDataGridView.Rows[e.RowIndex].Cells[13].Value.ToString()), 15);
+                    if (funcRate == 0)
+                    {
+                        funcRate = 1;
+                    }
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[15].Value = funcRate;
+                    System.Windows.Forms.Application.DoEvents();
+
+                    double entrdAmnt = 0;
+                    double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(), out entrdAmnt);
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[16].Value = (funcRate * entrdAmnt).ToString("#,##0.00");
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                /*string[] selVals = new string[1];
                 selVals[0] = this.trnsDataGridView.Rows[e.RowIndex].Cells[7].Value.ToString();
                 DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                   Global.mnFrm.cmCde.getLovID("Transaction Accounts"),
@@ -1933,7 +1967,7 @@ namespace Accounting.Forms
                         System.Windows.Forms.Application.DoEvents();
 
                     }
-                }
+                }*/
                 //SendKeys.Send("{Tab}"); 
                 //SendKeys.Send("{Tab}"); 
                 this.trnsDataGridView.EndEdit();
@@ -1974,8 +2008,47 @@ namespace Accounting.Forms
                     srchWrd = "%" + srchWrd + "%";
                     //this.trnsDataGridView.Rows[e.RowIndex].Cells[4].Value = "-1";
                 }
+                int lnAccntID = int.Parse(this.trnsDataGridView.Rows[e.RowIndex].Cells[11].Value.ToString());
+                bool isReadOnly = false;
+                DialogResult dgRes = Global.mnFrm.cmCde.showAcntsDiag(ref lnAccntID, true,
+              true, srchWrd, "Account Details", true, isReadOnly, Global.mnFrm.cmCde);
+                if (dgRes == DialogResult.OK)
+                {
+                    this.obey_evnts = false;
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[11].Value = lnAccntID.ToString();
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[6].Value = 
 
-                string[] selVals = new string[1];
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[10].Value = Global.mnFrm.cmCde.getAccntNum(lnAccntID) +
+              "." + Global.mnFrm.cmCde.getAccntName(lnAccntID);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
+                    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", lnAccntID));
+
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[3].Value = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[4].Value = accntCurrID;
+
+                    //double funcRate = Math.Round(
+                    //    Global.get_LtstExchRate(accntCurrID, this.curid,
+                    //    this.trnsDataGridView.Rows[e.RowIndex].Cells[13].Value.ToString()), 15);
+                    //if (funcRate == 0)
+                    //{
+                    //  funcRate = 1;
+                    //}
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[15].Value = funcRate;
+                    //System.Windows.Forms.Application.DoEvents();
+
+                    //double funcCurrRate = 0;
+                    //double accntCurrRate = 0;
+                    //double entrdAmnt = 0;
+                    //double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(), out entrdAmnt);
+                    //double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[19].Value.ToString(), out funcCurrRate);
+                    //double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[20].Value.ToString(), out accntCurrRate);
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[21].Value = (funcCurrRate * entrdAmnt).ToString("#,##0.00");
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[24].Value = (accntCurrRate * entrdAmnt).ToString("#,##0.00");
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                /*string[] selVals = new string[1];
                 selVals[0] = this.trnsDataGridView.Rows[e.RowIndex].Cells[11].Value.ToString();
                 DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                   Global.mnFrm.cmCde.getLovID("Transaction Accounts"),
@@ -2020,14 +2093,13 @@ namespace Accounting.Forms
                         System.Windows.Forms.Application.DoEvents();
 
                     }
-                }
+                }*/
                 //SendKeys.Send("{Tab}"); 
                 //SendKeys.Send("{Tab}"); 
                 this.trnsDataGridView.EndEdit();
                 this.obey_evnts = true;
                 this.trnsDataGridView.CurrentCell = this.trnsDataGridView.Rows[e.RowIndex].Cells[1];
             }
-
             this.obey_evnts = true;
         }
 

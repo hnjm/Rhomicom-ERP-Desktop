@@ -19,6 +19,7 @@ namespace StoresAndInventoryManager.Forms
 
         //public NpgsqlConnection gnrlSQLConn = new NpgsqlConnection();
         public Int64 usr_id = -1;
+        public Int64 prsn_id = -1;
         public int[] role_st_id = new int[0];
         public Int64 lgn_num = -1;
         public int Og_id = -1;
@@ -45,28 +46,11 @@ namespace StoresAndInventoryManager.Forms
             Global.mnFrm.cmCde.Role_Set_IDs = this.role_st_id;
             Global.mnFrm.cmCde.User_id = this.usr_id;
             Global.mnFrm.cmCde.Org_id = this.Og_id;
-
+            this.prsn_id = Global.mnFrm.cmCde.getUserPrsnID(this.usr_id);
             this.clrs = Global.mnFrm.cmCde.getColors();
             Global.refreshRqrdVrbls();
             Global.myInv.loadMyRolesNMsgtyps();
             chngBackClr();
-            //Global.createRqrdLOVs();
-
-            /*long rowid = Global.mnFrm.cmCde.getGnrlRecID("scm.scm_dflt_accnts", "rho_name",
-      "row_id", "Default Accounts", Global.mnFrm.cmCde.Org_id);
-            if (rowid <= 0)
-            {
-              Global.createDfltAcnts(Global.mnFrm.cmCde.Org_id);
-            }
-            long pymntID = Global.mnFrm.cmCde.getGnrlRecID("accb.accb_paymnt_mthds", "pymnt_mthd_name",
-      "paymnt_mthd_id", "Customer Cash", Global.mnFrm.cmCde.Org_id);
-
-            Global.updtOrgInvoiceCurrID(Global.mnFrm.cmCde.Org_id,
-              Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id),
-              pymntID);
-            Global.updateOrgnlSellingPrice();
-            Global.updateUOMPrices();
-             * */
             if (this.FindDockedFormExistence("Main Menu") == false)
             {
                 leftMenuForm nwFrm = new leftMenuForm();

@@ -85,6 +85,11 @@ namespace Accounting.Forms
             this.curCode = Global.mnFrm.cmCde.getPssblValNm(this.curid);
             //this.timer1.Interval = 100;
             //this.timer1.Enabled = true;
+            Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE accb.accb_rcvbl_amnt_smmrys
+                                                   SET line_qty=1 WHERE line_qty=0");
+            Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE accb.accb_rcvbl_amnt_smmrys
+                                                   SET unit_price=(rcvbl_smmry_amnt/line_qty)
+                                                 WHERE unit_price=0");
         }
 
         public void loadPrvldgs()
@@ -205,11 +210,23 @@ namespace Accounting.Forms
                 this.addDscntButton.Enabled = false;
                 this.addChrgButton.Enabled = false;
             }
+            else
+            {
+                this.addButton.Enabled = this.addRecsCSP || this.addRecsCAP || this.addRecsCCMIT || this.addRecsCDMIR || this.addRecsDRTC || this.addRecsDTFC;
+                this.editButton.Enabled = this.editRecsCSP || this.editRecsCAP || this.editRecsCCMIT || this.editRecsCDMIR || this.editRecsDRTC || this.editRecsDTFC;
+                this.delButton.Enabled = this.delRecsCSP || this.delRecsCAP || this.delRecsCCMIT || this.delRecsCDMIR || this.delRecsDRTC || this.delRecsDTFC;
+                this.addLineButton.Enabled = this.addButton.Enabled;
+                this.delLineButton.Enabled = this.editButton.Enabled;
+                this.addTaxButton.Enabled = false;
+                this.addDscntButton.Enabled = false;
+                this.addChrgButton.Enabled = false;
+                this.applyPrpymntButton.Enabled = false;
+            }
         }
 
         #endregion
 
-        #region "PAYABLES DOCUMENTS..."
+        #region "RECEIVABLES DOCUMENTS..."
         public void loadPanel()
         {
             //this.saveLabel.Visible = false;
@@ -331,13 +348,6 @@ namespace Accounting.Forms
         {
             this.clearDetInfo();
             this.disableDetEdit();
-            //if (this.editRec == false)
-            //{
-            //}
-            //else
-            //{
-            //  this.prpareForDetEdit();
-            //}
             this.obey_evnts = false;
             DataSet dtst = Global.get_One_RcvblsDocHdr(docHdrID);
             double invAmnt = 0;
@@ -548,6 +558,8 @@ namespace Accounting.Forms
                 this.smmryDataGridView.Rows[rowIdx].Cells[25].Value = dtst.Tables[0].Rows[i][16].ToString();
                 this.smmryDataGridView.Rows[rowIdx].Cells[26].Value = dtst.Tables[0].Rows[i][15].ToString();
                 this.smmryDataGridView.Rows[rowIdx].Cells[27].Value = dtst.Tables[0].Rows[i][21].ToString();
+                this.smmryDataGridView.Rows[rowIdx].Cells[28].Value = dtst.Tables[0].Rows[i][23].ToString();
+                this.smmryDataGridView.Rows[rowIdx].Cells[29].Value = double.Parse(dtst.Tables[0].Rows[i][24].ToString()).ToString("#,##0.00");
             }
             this.obey_evnts = true;
         }
@@ -675,7 +687,7 @@ namespace Accounting.Forms
             this.docIDNumTextBox.ReadOnly = false;
             this.docIDNumTextBox.BackColor = Color.FromArgb(255, 255, 128);
             this.docCommentsTextBox.ReadOnly = false;
-            this.docCommentsTextBox.BackColor = Color.White;
+            this.docCommentsTextBox.BackColor = Color.FromArgb(255, 255, 128);
 
             this.pymntTermsTextBox.ReadOnly = false;
             this.pymntTermsTextBox.BackColor = Color.White;
@@ -695,7 +707,7 @@ namespace Accounting.Forms
             this.docClsfctnTextBox.BackColor = Color.White;
 
             this.cstmrDocNumTextBox.ReadOnly = false;
-            this.cstmrDocNumTextBox.BackColor = Color.White;
+            this.cstmrDocNumTextBox.BackColor = Color.FromArgb(255, 255, 128);
 
             this.cstmrNmTextBox.ReadOnly = false;
             this.cstmrNmTextBox.BackColor = Color.FromArgb(255, 255, 128);
@@ -866,6 +878,10 @@ namespace Accounting.Forms
             this.smmryDataGridView.Columns[24].DefaultCellStyle.BackColor = Color.WhiteSmoke;
             this.smmryDataGridView.Columns[25].ReadOnly = true;
             this.smmryDataGridView.Columns[25].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.smmryDataGridView.Columns[28].ReadOnly = false;
+            this.smmryDataGridView.Columns[28].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 128);
+            this.smmryDataGridView.Columns[29].ReadOnly = false;
+            this.smmryDataGridView.Columns[29].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 128);
         }
 
         private void disableLnsEdit()
@@ -905,6 +921,10 @@ namespace Accounting.Forms
             this.smmryDataGridView.Columns[24].DefaultCellStyle.BackColor = Color.WhiteSmoke;
             this.smmryDataGridView.Columns[25].ReadOnly = true;
             this.smmryDataGridView.Columns[25].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.smmryDataGridView.Columns[28].ReadOnly = true;
+            this.smmryDataGridView.Columns[28].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.smmryDataGridView.Columns[29].ReadOnly = true;
+            this.smmryDataGridView.Columns[29].DefaultCellStyle.BackColor = Color.WhiteSmoke;
         }
 
         private void searchForTextBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -1974,11 +1994,14 @@ namespace Accounting.Forms
             }
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
 
-            double invcAmnt = 20000;
-            if (this.isPayTrnsValid(Global.get_DfltRcvblAcnt(Global.mnFrm.cmCde.Org_id), "I", invcAmnt, dateStr))
+            double invcAmnt = 1;
+            int smplAcntID = Global.get_DfltRcvblAcnt(Global.mnFrm.cmCde.Org_id);
+            if (smplAcntID <= 0)
             {
+                Global.mnFrm.cmCde.showMsg("Default Receivables Account has not been defined!", 0);
+                return;
             }
-            else
+            else if (!this.isPayTrnsValid(smplAcntID, "I", invcAmnt, dateStr))
             {
                 this.rfrshButton_Click(this.rfrshButton, e);
                 return;
@@ -2017,6 +2040,7 @@ namespace Accounting.Forms
             }
             return true;
         }
+
         private void editButton_Click(object sender, EventArgs e)
         {
             if ((this.editRecsCSP == false
@@ -2237,6 +2261,8 @@ namespace Accounting.Forms
                 {
                     this.smmryDataGridView.Rows[rowIdx].Cells[27].Value = "-1";
                 }
+                this.smmryDataGridView.Rows[rowIdx].Cells[28].Value = "1";
+                this.smmryDataGridView.Rows[rowIdx].Cells[29].Value = "0";
                 this.smmryDataGridView.EndEdit();
                 nwIdx = rowIdx;
             }
@@ -2362,6 +2388,14 @@ namespace Accounting.Forms
             if (this.smmryDataGridView.Rows[rwIdx].Cells[27].Value == null)
             {
                 this.smmryDataGridView.Rows[rwIdx].Cells[27].Value = "-1";
+            }
+            if (this.smmryDataGridView.Rows[rwIdx].Cells[28].Value == null)
+            {
+                this.smmryDataGridView.Rows[rwIdx].Cells[28].Value = "1";
+            }
+            if (this.smmryDataGridView.Rows[rwIdx].Cells[29].Value == null)
+            {
+                this.smmryDataGridView.Rows[rwIdx].Cells[29].Value = "0";
             }
         }
 
@@ -2583,7 +2617,46 @@ namespace Accounting.Forms
                     //this.smmryDataGridView.Rows[e.RowIndex].Cells[4].Value = "-1";
                 }
 
-                string[] selVals = new string[1];
+                int lnAccntID = int.Parse(this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString());
+                bool isReadOnly = false;
+                DialogResult dgRes = Global.mnFrm.cmCde.showAcntsDiag(ref lnAccntID, true,
+              true, srchWrd, "Account Details", this.autoLoad, isReadOnly, Global.mnFrm.cmCde);
+                this.autoLoad = false;
+                if (dgRes == DialogResult.OK)
+                {
+                    this.obey_evnts = false;
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value = lnAccntID.ToString();
+                    //this.smmryDataGridView.Rows[e.RowIndex].Cells[6].Value = 
+
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[9].Value = Global.mnFrm.cmCde.getAccntNum(lnAccntID) +
+              "." + Global.mnFrm.cmCde.getAccntName(lnAccntID);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
+                    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", lnAccntID));
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[25].Value = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[26].Value = accntCurrID;
+
+                    string slctdCurrID = this.smmryDataGridView.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[19].Value = Math.Round(
+                        Global.get_LtstExchRate(int.Parse(slctdCurrID), this.curid,
+                        this.docDteTextBox.Text + " 00:00:00"), 15);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[20].Value = Math.Round(
+                      Global.get_LtstExchRate(int.Parse(slctdCurrID), accntCurrID,
+                      this.docDteTextBox.Text + " 00:00:00"), 15);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    double funcCurrRate = 0;
+                    double accntCurrRate = 0;
+                    double entrdAmnt = 0;
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(), out entrdAmnt);
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[19].Value.ToString(), out funcCurrRate);
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[20].Value.ToString(), out accntCurrRate);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[21].Value = (funcCurrRate * entrdAmnt).ToString("#,##0.00");
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[24].Value = (accntCurrRate * entrdAmnt).ToString("#,##0.00");
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                /*string[] selVals = new string[1];
                 selVals[0] = this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString();
                 DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                   Global.mnFrm.cmCde.getLovID("Transaction Accounts"),
@@ -2627,7 +2700,7 @@ namespace Accounting.Forms
                         System.Windows.Forms.Application.DoEvents();
 
                     }
-                }
+                }*/
                 //SendKeys.Send("{Tab}"); 
                 //SendKeys.Send("{Tab}"); 
                 this.smmryDataGridView.EndEdit();
@@ -2959,10 +3032,12 @@ namespace Accounting.Forms
                                 double funcCurrAmnt = double.Parse(this.smmryDataGridView.Rows[i].Cells[21].Value.ToString());
                                 double accntCurrAmnt = double.Parse(this.smmryDataGridView.Rows[i].Cells[24].Value.ToString());
                                 long initAmntID = long.Parse(this.smmryDataGridView.Rows[i].Cells[27].Value.ToString());
+                                double lineQty = double.Parse(this.smmryDataGridView.Rows[i].Cells[28].Value.ToString());
+                                double unitPrice = double.Parse(this.smmryDataGridView.Rows[i].Cells[29].Value.ToString());
                                 Global.updtRcvblsDocDet(curLnID, long.Parse(this.docIDTextBox.Text), lineType,
                                   lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
                                   costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-                                  accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, initAmntID);
+                                  accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, initAmntID, lineQty, unitPrice);
 
                             }
                         }
@@ -3129,7 +3204,6 @@ namespace Accounting.Forms
                 this.rcvblsDocListView.Items[0].Font = new Font("Tahoma", 8.25f, FontStyle.Bold); this.rcvblsDocListView.Items[0].Selected = true;
 
                 this.saveGridView();
-
                 this.saveButton.Enabled = true;
                 this.editRec = true;
                 this.prpareForDetEdit();
@@ -3189,9 +3263,18 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("New Document Number is already in use in this Organisation!", 0);
                 return false;
             }
+            if (this.cstmrDocNumTextBox.Text == "")
+            {
+                this.cstmrDocNumTextBox.Text = this.docIDNumTextBox.Text;
+            }
             if (this.docTypeComboBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Document Type cannot be empty!", 0);
+                return false;
+            }
+            if (this.docCommentsTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Document Description cannot be empty!", 0);
                 return false;
             }
 
@@ -3340,6 +3423,8 @@ namespace Accounting.Forms
                     {
                         rndmNum = long.Parse(this.smmryDataGridView.Rows[i].Cells[27].Value.ToString());
                     }
+                    double lineQty = double.Parse(this.smmryDataGridView.Rows[i].Cells[28].Value.ToString());
+                    double unitPrice = double.Parse(this.smmryDataGridView.Rows[i].Cells[29].Value.ToString());
                     if (curlnID <= 0)
                     {
 
@@ -3349,7 +3434,7 @@ namespace Accounting.Forms
                             Global.createRcvblsDocDet(curlnID, long.Parse(this.docIDTextBox.Text), lineType,
                           lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
                           costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-                          accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, -1);
+                          accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, -1, lineQty, unitPrice);
                             this.smmryDataGridView.Rows[i].Cells[5].Value = curlnID;
                             this.smmryDataGridView.EndEdit();
                             if (rndmNum != -1)
@@ -3362,7 +3447,7 @@ namespace Accounting.Forms
                             Global.createRcvblsDocDet(curlnID, long.Parse(this.docIDTextBox.Text), lineType,
                                                       lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
                                                       costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-                                                      accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, rndmNum);
+                                                      accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, rndmNum, lineQty, unitPrice);
                             this.smmryDataGridView.Rows[i].Cells[5].Value = curlnID;
                             this.smmryDataGridView.EndEdit();
                         }
@@ -3374,14 +3459,14 @@ namespace Accounting.Forms
                             Global.updtRcvblsDocDet(curlnID, long.Parse(this.docIDTextBox.Text), lineType,
                           lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
                           costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-                          accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, -1);
+                          accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, -1, lineQty, unitPrice);
                         }
                         else
                         {
                             Global.updtRcvblsDocDet(curlnID, long.Parse(this.docIDTextBox.Text), lineType,
                           lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
                           costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-                          accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, rndmNum);
+                          accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, rndmNum, lineQty, unitPrice);
 
                         }
                     }
@@ -3390,7 +3475,11 @@ namespace Accounting.Forms
                     this.smmryDataGridView.EndEdit();
                 }
             }
-
+            Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE accb.accb_rcvbl_amnt_smmrys
+                                                   SET line_qty=1 WHERE line_qty=0");
+            Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE accb.accb_rcvbl_amnt_smmrys
+                                                   SET unit_price=(rcvbl_smmry_amnt/line_qty)
+                                                 WHERE unit_price=0");
             this.reCalcSmmrys(long.Parse(this.docIDTextBox.Text), this.docTypeComboBox.Text);
             //this.saveLabel.Visible = false;
             Global.mnFrm.cmCde.showMsg(svd + " Record(s) Saved!", 3);
@@ -3410,7 +3499,7 @@ namespace Accounting.Forms
                   smmryNm, grndAmnt, int.Parse(this.invcCurrIDTextBox.Text),
                   -1, srcDocType, true, "Increase",
                   -1, "Increase", -1, -1, "VALID", -1, -1,
-                  -1, 0, 0, 0, 0, -1);
+                  -1, 0, 0, 0, 0, -1,1,0);
             }
             else
             {
@@ -3418,7 +3507,7 @@ namespace Accounting.Forms
                   smmryNm, grndAmnt, int.Parse(this.invcCurrIDTextBox.Text),
                   -1, srcDocType, true, "Increase",
                   -1, "Increase", -1, -1, "VALID", -1, -1,
-                  -1, 0, 0, 0, 0, -1);
+                  -1, 0, 0, 0, 0, -1,1,0);
             }
 
             //7Total Payments Received
@@ -3434,7 +3523,7 @@ namespace Accounting.Forms
                   smmryNm, pymntsAmnt, int.Parse(this.invcCurrIDTextBox.Text),
                   -1, srcDocType, true, "Increase",
                   -1, "Increase", -1, -1, "VALID", -1, -1,
-                  -1, 0, 0, 0, 0, -1);
+                  -1, 0, 0, 0, 0, -1,1,0);
             }
             else
             {
@@ -3442,7 +3531,7 @@ namespace Accounting.Forms
                   smmryNm, pymntsAmnt, int.Parse(this.invcCurrIDTextBox.Text),
                   -1, srcDocType, true, "Increase",
                   -1, "Increase", -1, -1, "VALID", -1, -1,
-                  -1, 0, 0, 0, 0, -1);
+                  -1, 0, 0, 0, 0, -1,1,0);
             }
             //MessageBox.Show(pymntsAmnt.ToString("#,##0.00") +"|"+ this.amntPaidTextBox.Text);
             if (pymntsAmnt.ToString("#,##0.00") != this.amntPaidTextBox.Text)
@@ -3461,7 +3550,7 @@ namespace Accounting.Forms
                   smmryNm, outstndngAmnt, int.Parse(this.invcCurrIDTextBox.Text),
                   -1, srcDocType, true, "Increase",
                   -1, "Increase", -1, -1, "VALID", -1, -1,
-                  -1, 0, 0, 0, 0, -1);
+                  -1, 0, 0, 0, 0, -1,1,0);
             }
             else
             {
@@ -3469,7 +3558,7 @@ namespace Accounting.Forms
                   smmryNm, outstndngAmnt, int.Parse(this.invcCurrIDTextBox.Text),
                   -1, srcDocType, true, "Increase",
                   -1, "Increase", -1, -1, "VALID", -1, -1,
-                  -1, 0, 0, 0, 0, -1);
+                  -1, 0, 0, 0, 0, -1,1,0);
             }
             //if (long.Parse(this.srcDocIDTextBox.Text) > 0)
             //{
@@ -3987,7 +4076,7 @@ namespace Accounting.Forms
                 string rcvblDoctype = this.docTypeComboBox.Text;
                 double pymntsAmnt = Math.Round(Global.getRcvblsDocTtlPymnts(rcvblHdrID, rcvblDoctype), 2);
                 double amntAppldEslwhr = Global.get_RcvblPrepayDocAppldAmnt(rcvblHdrID);
-
+                long getPrpyDcUsgsCnt = Global.get_RcvblPrepayDocUsages(rcvblHdrID, rcvblDoctype);
                 //double amntAppldEslwhr = 0;//invc_amnt_appld_elswhr
                 if (pymntsAmnt != 0)
                 {
@@ -3995,13 +4084,11 @@ namespace Accounting.Forms
                      "\r\n(TOTAL AMOUNT PAID=" + pymntsAmnt.ToString("#,##0.00") + ")", 0);
                     return;
                 }
-
-                if (amntAppldEslwhr > 0)
+                if (getPrpyDcUsgsCnt > 0)
                 {
                     Global.mnFrm.cmCde.showMsg("Please Release this Document from all Other Documents it has been applied to First!", 0);
                     return;
                 }
-
                 if (Global.mnFrm.cmCde.showMsg("Are you sure you want to CANCEL the selected Document?" +
                 "\r\nThis action cannot be undone!", 1) == DialogResult.No)
                 {
@@ -4010,7 +4097,6 @@ namespace Accounting.Forms
                     Cursor.Current = Cursors.Default;
                     return;
                 }
-
                 //this.saveLabel.Text = "CANCELLING DOCUMENT....PLEASE WAIT....";
                 //this.saveLabel.Visible = true;
                 Cursor.Current = Cursors.WaitCursor;
@@ -4485,7 +4571,25 @@ namespace Accounting.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::Accounting.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
+
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -5301,6 +5405,31 @@ namespace Accounting.Forms
                 Global.mnFrm.shwMyBatchesCheckBox.Checked = false;
             }
             Global.mnFrm.rfrshTrnsButton.PerformClick();
+        }
+
+        private void docIDNumTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.cstmrDocNumTextBox.Text == "")
+            {
+                this.cstmrDocNumTextBox.Text = this.docIDNumTextBox.Text;
+            }
+        }
+
+        private void extraInfoButton_Click(object sender, EventArgs e)
+        {
+            if (this.docIDTextBox.Text == "" ||
+             this.docIDTextBox.Text == "-1")
+            {
+                Global.mnFrm.cmCde.showMsg("No record to View!", 0);
+                return;
+            }
+            bool canEdt = Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[12]);
+            DialogResult dgres = Global.mnFrm.cmCde.showRowsExtInfDiag(Global.mnFrm.cmCde.getMdlGrpID("Receivable Invoices"),
+             long.Parse(this.docIDTextBox.Text), "accb.accb_all_other_info_table", this.docIDNumTextBox.Text, canEdt, 10, 9,
+                "accb.accb_all_other_info_table_dflt_row_id_seq");
+            if (dgres == DialogResult.OK)
+            {
+            }
         }
     }
 }

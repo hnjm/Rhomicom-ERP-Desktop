@@ -234,7 +234,11 @@ namespace InternalPayments.Dialogs
 
             long advApplyItmValID = Global.getFirstItmValID(advApplyItmID);
             long advKeptItmValID = Global.getFirstItmValID(advKeptItmID);
-
+            string extrDesc = "";
+            if (this.cheqNumTextBox.Text != "")
+            {
+                extrDesc = " using Cheque#:" + this.cheqNumTextBox.Text;
+            }
             //decimal ttlBillsCharges = 0;
             List<Object[]> advncsToApply = new List<Object[]>();
             List<Object[]> advncsToBeKept = new List<Object[]>();
@@ -326,7 +330,7 @@ namespace InternalPayments.Dialogs
                     if (itmMin == "Earnings"
                 || itmMin == "Employer Charges")
                     {
-                        trnsDesc = "Payment of " + dtst.Tables[0].Rows[i][1].ToString() + " for " + prsnName;
+                        trnsDesc = "Payment of " + dtst.Tables[0].Rows[i][1].ToString() + " for " + prsnName + extrDesc;
                         ttlAmntLoaded -= payItmAmnt;
                     }
                     else if (itmMin == "Bills/Charges"
@@ -340,18 +344,36 @@ namespace InternalPayments.Dialogs
                             testArry[0] = "Advance Payments Amount Applied";
                             if (payItmAmnt > outstandgAdvcAmnt)
                             {
-                                testArry[1] = Math.Round(outstandgAdvcAmnt, 4).ToString();
-                                testArry[2] = Math.Round(outstandgAdvcAmnt, 4).ToString();
+                                testArry[1] = (-1 * Math.Round(outstandgAdvcAmnt, 4)).ToString();
+                                testArry[2] = (-1 * Math.Round(outstandgAdvcAmnt, 4)).ToString();
                                 advPymnt = Math.Round(outstandgAdvcAmnt, 4);
-                                ttlAmntLoaded -= Math.Round(outstandgAdvcAmnt, 4);
+
+                                if (itmMin == "Deductions")
+                                {
+                                    ttlAmntLoaded += Math.Round(outstandgAdvcAmnt, 4);
+                                    ttlAmntLoaded += (-1 * Math.Round(outstandgAdvcAmnt, 4));
+                                }
+                                else
+                                {
+                                    ttlAmntLoaded -= Math.Round(outstandgAdvcAmnt, 4);
+                                }
                                 outstandgAdvcAmnt = 0;
                             }
                             else
                             {
-                                testArry[1] = payItmAmnt.ToString();
-                                testArry[2] = payItmAmnt.ToString();
+                                testArry[1] = (-1 * payItmAmnt).ToString();
+                                testArry[2] = (-1 * payItmAmnt).ToString();
                                 advPymnt = payItmAmnt;
-                                ttlAmntLoaded -= payItmAmnt;
+
+                                if (itmMin == "Deductions")
+                                {
+                                    ttlAmntLoaded += payItmAmnt;
+                                    ttlAmntLoaded += (-1 * payItmAmnt);
+                                }
+                                else
+                                {
+                                    ttlAmntLoaded -= payItmAmnt;
+                                }
                                 outstandgAdvcAmnt -= payItmAmnt;
                             }
                             testArry[3] = "" + testArry[0] + " for " + prsnName + " in settlement of " + dtst.Tables[0].Rows[i][1].ToString();
@@ -373,8 +395,16 @@ namespace InternalPayments.Dialogs
                             testArry = new Object[17];
 
                             testArry[0] = dtst.Tables[0].Rows[i][1].ToString();
-                            testArry[1] = (-1 * advPymnt).ToString();
-                            testArry[2] = (-1 * advPymnt).ToString();
+                            if (itmMin == "Deductions")
+                            {
+                                testArry[1] = (1 * advPymnt).ToString();
+                                testArry[2] = (1 * advPymnt).ToString();
+                            }
+                            else
+                            {
+                                testArry[1] = (-1 * advPymnt).ToString();
+                                testArry[2] = (-1 * advPymnt).ToString();
+                            }
                             testArry[3] = "Advance Payments Amount Applied for " + prsnName + " in settlement of " + dtst.Tables[0].Rows[i][1].ToString();
                             testArry[4] = curcode;
                             testArry[5] = this.trnsDateTextBox.Text.Substring(0, 12) + this.trnsDateTextBox.Text.Substring(12, 3) + (i % 60).ToString().PadLeft(2, '0') + ":" + (i % 60).ToString().PadLeft(2, '0');
@@ -391,7 +421,7 @@ namespace InternalPayments.Dialogs
                             testArry[16] = dtst.Tables[0].Rows[i][8].ToString();
                             advncsToApply.Add(testArry);
                         }
-                        trnsDesc = "Payment of " + dtst.Tables[0].Rows[i][1].ToString() + " by " + prsnName;//;;
+                        trnsDesc = "Payment of " + dtst.Tables[0].Rows[i][1].ToString() + " by " + prsnName + extrDesc;//;;
                     }
                     else if (itmMin == "Purely Informational")
                     {
@@ -505,7 +535,8 @@ namespace InternalPayments.Dialogs
                 }
             }
             i = 0;
-            foreach (Object[] lstArr in advncsToBeKept)
+            foreach (Object[]
+    lstArr in advncsToBeKept)
             {
                 this.trnsDataGridView.RowCount += 1;
                 rwidx = this.trnsDataGridView.RowCount - 1;
@@ -765,11 +796,25 @@ namespace InternalPayments.Dialogs
             }
             string tstmspyNm = "Quick Pay Run for " +
                  runFor + " on (" + rnDte + ")";
+            string tstmspyDesc = "";
+
+            if (this.expctdTotalNumUpDown.Value > 0)
+            {
+                tstmspyDesc = "Payment by " +
+                 runFor + " on (" + rnDte + ")";
+            }
+            string extrDesc = "";
+            if (this.cheqNumTextBox.Text != "")
+            {
+                extrDesc = " using Cheque#:" + this.cheqNumTextBox.Text;
+                tstmspyDesc = "Payment by " +
+                 runFor + extrDesc;
+            }
             this.mspID = Global.mnFrm.cmCde.getMsPyID(tstmspyNm,
                 Global.mnFrm.cmCde.Org_id);
             if (this.mspID <= 0)
             {
-                Global.createMsPy(Global.mnFrm.cmCde.Org_id, tstmspyNm, tstmspyNm,
+                Global.createMsPy(Global.mnFrm.cmCde.Org_id, tstmspyNm, tstmspyDesc,
                this.trnsDateTextBox.Text, -1000010,
                int.Parse(this.msPyItmStIDTextBox.Text),
                this.glDateTextBox.Text);
@@ -951,6 +996,7 @@ namespace InternalPayments.Dialogs
             Global.mnFrm.cmCde.updateLogMsg(msg_id, errorMsgs, "pay.pay_mass_pay_run_msgs", dateStr);
             Global.mnFrm.cmCde.updateLogMsg(msg_id, "Payment Successfully Processed", "pay.pay_mass_pay_run_msgs", dateStr);
             Global.mnFrm.cmCde.showMsg("Payment Successfully Processed! \r\nMessages Logged:" + errorMsgs, 3);
+            this.populateMsPyListVw();
             this.saveLabel.Visible = false;
             //this.DialogResult = DialogResult.OK;
             //this.Close();
@@ -966,7 +1012,7 @@ namespace InternalPayments.Dialogs
             {
                 string[] accntinf = new string[4];
                 double netamnt = 0;
-                accntinf = Global.get_ItmAccntInfo(itmID);
+                accntinf = Global.get_ItmAccntInfo(itmID, Global.mnFrm.prsn_id);
 
                 netamnt = Global.mnFrm.cmCde.dbtOrCrdtAccntMultiplier(int.Parse(accntinf[1]),
                   accntinf[0].Substring(0, 1)) * amnt;
@@ -1343,6 +1389,7 @@ namespace InternalPayments.Dialogs
                   Global.mnFrm.cmCde.getUsername(long.Parse(Global.mnFrm.cmCde.getGnrlRecNm("pay.pay_itm_trnsctns", "mass_pay_id",
                   "created_by", this.mspID))).ToUpper(),
             font3, Brushes.Black, startX + ght, startY + offsetY + 2);
+
                 if (this.PrsnID > 0)
                 {
                     offsetY += font4Hght;
@@ -1362,6 +1409,24 @@ namespace InternalPayments.Dialogs
                         {
                             offsetY += font4Hght;
                         }
+                    }
+                    offsetY += font3Hght;
+                }
+
+                g.DrawString("Narration: ", font4, Brushes.Black, startX, startY + offsetY);
+                ght = g.MeasureString("Narration: ", font4).Width;
+
+                nwLn = Global.mnFrm.cmCde.breakTxtDown(
+            Global.mnFrm.cmCde.getGnrlRecNm("pay.pay_mass_pay_run_hdr", "mass_pay_id",
+                  "mass_pay_desc", this.mspID),
+            pageWidth - startX - ght - 5, font3, g);
+                for (int i = 0; i < nwLn.Length; i++)
+                {
+                    g.DrawString(nwLn[i]
+                    , font3, Brushes.Black, startX + ght, startY + offsetY + 2);
+                    if (i < nwLn.Length - 1)
+                    {
+                        offsetY += font4Hght;
                     }
                 }
                 offsetY += 3;

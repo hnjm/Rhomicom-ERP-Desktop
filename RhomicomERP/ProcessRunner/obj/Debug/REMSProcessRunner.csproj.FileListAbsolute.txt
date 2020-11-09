@@ -116,3 +116,57 @@ C:\1_DESIGNS\MYAPPS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Deb
 C:\1_DESIGNS\MYAPPS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
 C:\1_DESIGNS\MYAPPS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
 C:\1_DESIGNS\MYAPPS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe.config
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\stdole.dll
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csprojResolveAssemblyReference.cache
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+C:\Users\Richard\Google Drive\PROJECTS\NON-GITHUB\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.CoreCompileInputs.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe.config
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.pdb
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\stdole.dll
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csprojResolveAssemblyReference.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.CoreCompileInputs.cache
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
+C:\1_DESIGNS\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe.config
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.pdb
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\stdole.dll
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csprojResolveAssemblyReference.cache
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.CoreCompileInputs.cache
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
+\\VBOXSVR\Documents\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe.config
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.pdb
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\stdole.dll
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csprojResolveAssemblyReference.cache
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.CoreCompileInputs.cache
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
+E:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe.config
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.pdb
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\stdole.dll
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csprojResolveAssemblyReference.cache
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.CoreCompileInputs.cache
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
+C:\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe.config
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.exe
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\REMSProcessRunner.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\bin\Debug\stdole.dll
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.ResolveComReference.cache
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csproj.CoreCompileInputs.cache
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.exe
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.pdb
+C:\RICHARD\RHOAPPS\RHO_ERP_DESKTOP\RhomicomERP\ProcessRunner\obj\Debug\REMSProcessRunner.csprojResolveAssemblyReference.cache

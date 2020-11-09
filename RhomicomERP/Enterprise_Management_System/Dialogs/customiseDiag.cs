@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using Enterprise_Management_System.Classes;
 using Microsoft.VisualBasic.Devices;
+using System.IO;
+using Microsoft.Win32;
 
 namespace Enterprise_Management_System.Dialogs
 {
@@ -86,7 +88,7 @@ namespace Enterprise_Management_System.Dialogs
         private void customiseDiag_Load(object sender, EventArgs e)
         {
             this.loadThemeFiles();
-
+            this.loadConnFiles();
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -104,7 +106,7 @@ namespace Enterprise_Management_System.Dialogs
 
         private void saveCstmsFile(string flNm)
         {
-            if(this.modulesBaughtComboBox.Text=="")
+            if (this.modulesBaughtComboBox.Text == "")
             {
                 Global.myNwMainFrm.cmnCdMn.showMsg("Please select the Default Modules needed First!", 0);
                 return;
@@ -443,6 +445,280 @@ namespace Enterprise_Management_System.Dialogs
         private void button1_Click(object sender, EventArgs e)
         {
             this.loadThemeFiles();
+        }
+
+        private void loadConnFiles()
+        {
+            string[] smplFiles = Directory.GetFiles(Application.StartupPath + @"\DBInfo\", "*.rho", SearchOption.TopDirectoryOnly);
+            this.storedConnsComboBox.Items.Clear();
+            for (int i = 0; i < smplFiles.Length; i++)
+            {
+                if (!smplFiles[i].Contains("customize.rho"))
+                {
+                    this.storedConnsComboBox.Items.Add(smplFiles[i].Replace(Application.StartupPath + @"\DBInfo\", "").Replace(".rho", ""));
+                }
+            }
+            if (this.storedConnsComboBox.Items.Count > 0)
+            {
+                this.storedConnsComboBox.SelectedIndex = 0;
+            }
+        }
+        private void loadConnFiles(string fileNm)
+        {
+            string[] smplFiles = Directory.GetFiles(Application.StartupPath + @"\DBInfo\", "*.rho", SearchOption.TopDirectoryOnly);
+            this.storedConnsComboBox.Items.Clear();
+            int slctdIdx = 0;
+            for (int i = 0; i < smplFiles.Length; i++)
+            {
+                if (!smplFiles[i].Contains("customize.rho"))
+                {
+                    this.storedConnsComboBox.Items.Add(smplFiles[i].Replace(Application.StartupPath + @"\DBInfo\", "").Replace(".rho", ""));
+                }
+                if (smplFiles[i].Contains(fileNm))
+                {
+                    slctdIdx = i;
+                }
+            }
+            if (this.storedConnsComboBox.Items.Count > 0)
+            {
+                this.storedConnsComboBox.SelectedIndex = slctdIdx;
+            }
+        }
+        private void readConnFile()
+        {
+            StreamReader fileReader = null;
+            string fileLoc = "";
+            fileLoc = @"DBInfo\" + this.storedConnsComboBox.Text + ".rho";
+            if (Global.myNwMainFrm.cmnCdMn.myComputer.FileSystem.FileExists(fileLoc))
+            {
+                fileReader = Global.myNwMainFrm.cmnCdMn.myComputer.FileSystem.OpenTextFileReader(fileLoc);
+                try
+                {
+                    this.hostTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.pwdTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.unameTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.dbaseTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.portTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.pgDirTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    this.javaBinDirTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    if (this.javaBinDirTextBox.Text == "")
+                    {
+                        this.javaBinDirTextBox.Text = Global.myNwMainFrm.cmnCdMn.GetJavaInstallationPath();
+                        if (!this.javaBinDirTextBox.Text.Contains("\\bin"))
+                        {
+                            this.javaBinDirTextBox.Text = this.javaBinDirTextBox.Text + "\\bin";
+                        }
+                    }
+                    fileReader.Close();
+                    fileReader = null;
+                }
+                catch (Exception ex)
+                {
+                    fileReader.Close();
+                    fileReader = null;
+                }
+                finally
+                {
+                    fileReader = null;
+                    Global.myNwMainFrm.cmnCdMn.minimizeMemory();
+                    GC.Collect();
+                }
+            }
+
+            if (this.pgDirTextBox.Text == "")
+            {
+                if (CommonCode.CommonCodes.is64BitOperatingSystem == true)
+                {
+                    this.pgDirTextBox.Text = this.getRegistryVal("Base Directory", @"PostgreSQL\Installations\postgresql-x64-9.3");
+                    if (this.pgDirTextBox.Text == "")
+                    {
+                        this.pgDirTextBox.Text = this.get64RegistryVal("Base Directory", @"PostgreSQL\Installations\postgresql-9.3");
+                    }
+                }
+                else
+                {
+                    this.pgDirTextBox.Text = this.getRegistryVal("Base Directory", @"PostgreSQL\Installations\postgresql-9.3");
+                }
+                if (this.pgDirTextBox.Text != "")
+                {
+                    this.pgDirTextBox.Text += @"\bin\";
+                }
+            }
+            else if (!Global.myNwMainFrm.cmnCdMn.myComputer.FileSystem.DirectoryExists(this.pgDirTextBox.Text))
+            {
+                if (CommonCode.CommonCodes.is64BitOperatingSystem == true)
+                {
+                    this.pgDirTextBox.Text = this.getRegistryVal("Base Directory", @"PostgreSQL\Installations\postgresql-x64-9.3");
+                    if (this.pgDirTextBox.Text == "")
+                    {
+                        this.pgDirTextBox.Text = this.get64RegistryVal("Base Directory", @"PostgreSQL\Installations\postgresql-9.3");
+                    }
+                }
+                else
+                {
+                    this.pgDirTextBox.Text = this.getRegistryVal("Base Directory", @"PostgreSQL\Installations\postgresql-9.3");
+                }
+                if (this.pgDirTextBox.Text != "")
+                {
+                    this.pgDirTextBox.Text += @"\bin\";
+                }
+            }
+        }
+
+        private void saveConnFile(string flNm)
+        {
+            StreamWriter fileWriter = null;
+            string fileLoc = "";
+            if (flNm == "")
+            {
+                flNm = this.hostTextBox.Text.Replace("\"", "") + "_" +
+              this.dbaseTextBox.Text + ".rho";
+            }
+            fileLoc = @"DBInfo\" + flNm;
+            try
+            {
+                fileWriter = Global.myNwMainFrm.cmnCdMn.myComputer.FileSystem.OpenTextFileWriter(fileLoc, false);
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.hostTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.pwdTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.unameTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.dbaseTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.portTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.pgDirTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                if (this.javaBinDirTextBox.Text == "")
+                {
+                    this.javaBinDirTextBox.Text = Global.myNwMainFrm.cmnCdMn.GetJavaInstallationPath();
+                    if (!this.javaBinDirTextBox.Text.Contains("\\bin"))
+                    {
+                        this.javaBinDirTextBox.Text = this.javaBinDirTextBox.Text + "\\bin";
+                    }
+                }
+                fileWriter.WriteLine(Global.myNwMainFrm.cmnCdMn.encrypt1(this.javaBinDirTextBox.Text, CommonCode.CommonCodes.OrgnlAppKey));
+                fileWriter.Close();
+                fileWriter = null;
+            }
+            catch (Exception ex)
+            {
+                Global.myNwMainFrm.cmnCdMn.showMsg("Error saving file!\n" + ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.InnerException, 0);
+                fileWriter.Close();
+                fileWriter = null;
+            }
+            finally
+            {
+                fileWriter = null;
+                Global.myNwMainFrm.cmnCdMn.minimizeMemory();
+                GC.Collect();
+            }
+        }
+
+        private void delConnButton_Click(object sender, EventArgs e)
+        {
+            if (Global.myNwMainFrm.cmnCdMn.showMsg("Are you sure you want to " +
+         "delete the Selected Stored Connection?", 1) == DialogResult.No)
+            {
+                return;
+            }
+            string fileLoc = "";
+            fileLoc = @"DBInfo\" + this.storedConnsComboBox.Text + ".rho";
+            try
+            {
+                Global.myNwMainFrm.cmnCdMn.myComputer.FileSystem.DeleteFile(fileLoc,
+                  Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                  Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                this.loadConnFiles();
+            }
+            catch (Exception ex)
+            {
+                Global.myNwMainFrm.cmnCdMn.showMsg(ex.Message, 4);
+            }
+        }
+
+        private void saveConnctnButton_Click(object sender, EventArgs e)
+        {
+            if (this.hostTextBox.Text == "" || this.dbaseTextBox.Text == "")
+            {
+                Global.myNwMainFrm.cmnCdMn.showMsg("Kindly fill all Required Fields!", 0);
+            }
+            string fileNM = this.hostTextBox.Text.Replace("\"", "") + "_" +
+          this.dbaseTextBox.Text;
+
+            this.saveConnFile(fileNM + ".rho");
+            MessageBox.Show("Saving Successful!");
+            this.loadConnFiles(fileNM + ".rho");
+        }
+
+        private void storedConnsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.storedConnsComboBox.SelectedIndex >= 0)
+            {
+                this.readConnFile();
+            }
+        }
+
+        private void dfltConnButton_Click(object sender, EventArgs e)
+        {
+            this.saveConnFile("ActiveDB.rho");
+            this.loadConnFiles("ActiveDB.rho");
+            MessageBox.Show("Saving Successful!");
+            this.restartAppButton.PerformClick();
+        }
+
+        private void restartAppButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Global.myNwMainFrm.cmnCdMn.showMsg("Are you sure you want to Restart the application?", 1) == DialogResult.No)
+                {
+                    return;
+                }
+                System.Windows.Forms.Application.Restart();
+            }
+            catch (Exception ex)
+            {
+                //System.Windows.Forms.Application.Restart();
+            }
+        }
+        public string getRegistryVal(string keyname, string prdctNm)
+        {
+            RegistryKey rk = Registry.LocalMachine;
+            RegistryKey sk1 = rk.OpenSubKey(@"SOFTWARE\" + prdctNm);
+            if (sk1 == null)
+            {
+                return "";
+            }
+            else
+            {
+                try
+                {
+                    return (string)sk1.GetValue(keyname);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error!");
+                    return "";
+                }
+            }
+        }
+
+        public string get64RegistryVal(string keyname, string prdctNm)
+        {
+            RegistryKey rk = Registry.LocalMachine;
+            RegistryKey sk1 = rk.OpenSubKey(@"SOFTWARE\Wow6432Node\" + prdctNm);
+            if (sk1 == null)
+            {
+                return "";
+            }
+            else
+            {
+                try
+                {
+                    return (string)sk1.GetValue(keyname);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error!");
+                    return "";
+                }
+            }
         }
     }
 }

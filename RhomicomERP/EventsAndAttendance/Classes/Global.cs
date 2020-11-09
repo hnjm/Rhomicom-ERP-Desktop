@@ -552,10 +552,45 @@ namespace EventsAndAttendance.Classes
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
 
+        public static void createEvntCstAcnt(long costID, string ctgrName, string incrsDcrs1,
+    int costAcntID, string incrsDcrs2, int blcgAcntID, int evntID)
+        {
+            string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
+            string insSQL = @"INSERT INTO attn.attn_evnt_cost_accnts(
+            evnt_cost_acnt_id, event_id, cost_ctgry_nm, incrs_dcrs1, cost_account_id, 
+            incrs_dcrs2, blncng_account_id, created_by, creation_date, last_update_by, 
+            last_update_date) " +
+                  "VALUES (" + costID + ", " + evntID + ", '" + ctgrName.Replace("'", "''") +
+                  "', '" + incrsDcrs1.Replace("'", "''") +
+                  "', " + costAcntID + ", '" + incrsDcrs2.Replace("'", "''") +
+                  "', " + blcgAcntID + ", " + Global.myEvnt.user_id + ", '" + dateStr +
+                  "', " + Global.myEvnt.user_id + ", '" + dateStr +
+                  "')";
+            Global.mnFrm.cmCde.insertDataNoParams(insSQL);
+        }
+
+        public static void updateEvntCstAcnt(long costID, string ctgrName, string incrsDcrs1,
+    int costAcntID, string incrsDcrs2, int blcgAcntID, int evntID)
+        {
+            Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
+            string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
+            string updtSQL = "UPDATE attn.attn_evnt_cost_accnts SET " +
+                  "cost_ctgry_nm='" + ctgrName.Replace("'", "''") +
+                  "', incrs_dcrs1='" + incrsDcrs1.Replace("'", "''") +
+                  "',cost_account_id=" + costAcntID +
+                  ", incrs_dcrs2='" + incrsDcrs2.Replace("'", "''") +
+                  "',blncng_account_id=" + blcgAcntID +
+                  ",last_update_by = " + Global.myEvnt.user_id + ", " +
+                  "last_update_date = '" + dateStr +
+                  "' WHERE (evnt_cost_acnt_id =" + costID + ")";
+            Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
+        }
+
         public static void createEvent(int orgid, string evntname,
     string evntdesc, string evntTyp, bool isEnbld, long hostprsnid, string grpType,
           int grpID, int tmtblSessins, int hgstCntns, int slotprty,
-          string evntClsfctn, int prfrdvnuID, string grpnm, string mtrcLOV, string pointsLov)
+          string evntClsfctn, int prfrdvnuID, string grpnm, string mtrcLOV, string pointsLov,
+          long hostFirmID, long hostFirmSiteID)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = @"INSERT INTO attn.attn_attendance_events(
@@ -563,7 +598,7 @@ namespace EventsAndAttendance.Classes
             allwd_grp_id, ttl_tmtbl_sessn_mins, hghst_cntnuous_mins, slot_priority, 
             created_by, creation_date, last_update_by, last_update_date, 
             event_classification, org_id, preffrd_venue_id, is_enabled, 
-            allwd_group_nm, attnd_metric_lov_nm, attnd_points_lov_nm) " +
+            allwd_group_nm, attnd_metric_lov_nm, attnd_points_lov_nm, host_firm_id, host_firm_site_id) " +
                   "VALUES ('" + evntname.Replace("'", "''") +
                   "', '" + evntdesc.Replace("'", "''") +
                   "', '" + evntTyp.Replace("'", "''") +
@@ -576,14 +611,15 @@ namespace EventsAndAttendance.Classes
                   Global.mnFrm.cmCde.cnvrtBoolToBitStr(isEnbld) + "', '" + grpnm.Replace("'", "''") +
                   "', '" + mtrcLOV.Replace("'", "''") +
                   "', '" + pointsLov.Replace("'", "''") +
-                  "')";
+                  "', " + hostFirmID + ", " + hostFirmSiteID + ")";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
         public static void updateEvent(int evntid, string evntname,
     string evntdesc, string evntTyp, bool isEnbld, long hostprsnid, string grpType,
           int grpID, int tmtblSessins, int hgstCntns, int slotprty,
-          string evntClsfctn, int prfrdvnuID, string grpnm, string mtrcLOV, string pointsLov)
+          string evntClsfctn, int prfrdvnuID, string grpnm, string mtrcLOV, string pointsLov,
+          long hostFirmID, long hostFirmSiteID)
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
@@ -604,8 +640,9 @@ namespace EventsAndAttendance.Classes
                   "', preffrd_venue_id=" + prfrdvnuID + ", allwd_group_nm = '" + grpnm.Replace("'", "''") +
                   "', attnd_metric_lov_nm= '" + mtrcLOV.Replace("'", "''") +
                   "', attnd_points_lov_nm = '" + pointsLov.Replace("'", "''") +
-                  "' " +
-                  "WHERE (event_id =" + evntid + ")";
+                  "', host_firm_id=" + hostFirmID +
+                  ", host_firm_site_id=" + hostFirmSiteID +
+                  " WHERE (event_id =" + evntid + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
 
@@ -730,7 +767,8 @@ namespace EventsAndAttendance.Classes
             string strSql = @"SELECT a.event_id, a.event_name, a.event_desc, 
 CASE WHEN a.event_typ='R' THEN ' R:RECURRING' ELSE 'NR:NON-RECURRING' END, a.host_prsn_id, 
       a.allwd_grp_typ, a.allwd_grp_id, a.ttl_tmtbl_sessn_mins, a.hghst_cntnuous_mins, a.slot_priority, 
-      a.event_classification, a.preffrd_venue_id, a.is_enabled, a.attnd_metric_lov_nm, a.attnd_points_lov_nm " +
+      a.event_classification, a.preffrd_venue_id, a.is_enabled, a.attnd_metric_lov_nm, a.attnd_points_lov_nm, 
+a.host_firm_id, a.host_firm_site_id, scm.get_cstmr_splr_name(a.host_firm_id) " +
              "FROM attn.attn_attendance_events a " +
              "WHERE(a.event_id = " + evntid + ")";
 
@@ -757,6 +795,34 @@ CASE WHEN a.event_typ='R' THEN ' R:RECURRING' ELSE 'NR:NON-RECURRING' END, a.hos
 
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             Global.evntFrm.recPrc_SQL = strSql;
+            return dtst;
+        }
+
+        public static long get_One_EvntTtlPrices(int evntid)
+        {
+            string strSql = @"SELECT count(1) 
+       FROM attn.event_price_categories a WHERE(a.event_id = " + evntid + ") ORDER BY 1";
+            DataSet dtSt = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return long.Parse(dtSt.Tables[0].Rows[0][0].ToString());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static DataSet get_One_EvntCostAcnts(int evntid)
+        {
+            string strSql = @"SELECT evnt_cost_acnt_id, cost_ctgry_nm, incrs_dcrs1, 
+         cost_account_id, accb.get_accnt_num(a.cost_account_id) || '.' || accb.get_accnt_name(a.cost_account_id), 
+         incrs_dcrs2, blncng_account_id,  
+         accb.get_accnt_num(a.blncng_account_id) || '.' || accb.get_accnt_name(a.blncng_account_id) 
+        FROM attn.attn_evnt_cost_accnts a WHERE(a.event_id = " + evntid + ") ORDER BY 1";
+
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            Global.evntFrm.recCost_SQL = strSql;
             return dtst;
         }
 
@@ -792,7 +858,16 @@ CASE WHEN a.event_typ='R' THEN ' R:RECURRING' ELSE 'NR:NON-RECURRING' END, a.hos
             }
             return -1;
         }
-
+        public static long getNewCstAcntLnID()
+        {
+            string strSql = "select nextval('attn.attn_evnt_cost_accnts_evnt_cost_acnt_id_seq')";
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return long.Parse(dtst.Tables[0].Rows[0][0].ToString());
+            }
+            return -1;
+        }
         public static long getNewRsltLnID()
         {
             string strSql = "select nextval('attn.attn_attendance_events_rslts_evnt_rslt_id_seq')";
@@ -816,6 +891,14 @@ CASE WHEN a.event_typ='R' THEN ' R:RECURRING' ELSE 'NR:NON-RECURRING' END, a.hos
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             string delSQL = "DELETE FROM attn.event_price_categories WHERE price_ctgry_id = " +
+              lnID + "";
+            Global.mnFrm.cmCde.deleteDataNoParams(delSQL);
+        }
+
+        public static void deleteCostAcnt(long lnID)
+        {
+            Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
+            string delSQL = "DELETE FROM attn.attn_evnt_cost_accnts WHERE evnt_cost_acnt_id = " +
               lnID + "";
             Global.mnFrm.cmCde.deleteDataNoParams(delSQL);
         }
@@ -1187,6 +1270,42 @@ and a.recs_hdr_id=" + rgstrID + " and b.gender ilike '" + mrtcNm + "'";
             }
             //Global.taxFrm.rec_SQL = strSql;
             return -1;
+        }
+        public static int get_CostAcntCtgryID(string ctgryNm, int eventID)
+        {
+            string strSql = @"SELECT evnt_cost_acnt_id from attn.attn_evnt_cost_accnts where event_id=" + eventID +
+              " and cost_ctgry_nm='" + ctgryNm.Replace("'", "''") + "'";
+
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtst.Tables[0].Rows[0][0].ToString());
+            }
+            //Global.taxFrm.rec_SQL = strSql;
+            return -1;
+        }
+        public static string[] get_CostAcntInfo(string ctgryNm, int eventID)
+        {
+            string[] rslts = { "INCREASE", "-1", "", "INCREASE", "-1", "" };
+            string strSql = @"SELECT a.incrs_dcrs1, a.cost_account_id, accb.get_accnt_num(a.cost_account_id) || '.' || accb.get_accnt_name(a.cost_account_id), 
+                                a.incrs_dcrs2, a.blncng_account_id,  
+                                accb.get_accnt_num(a.blncng_account_id) || '.' || accb.get_accnt_name(a.blncng_account_id) 
+                            from attn.attn_evnt_cost_accnts a where a.event_id=" + eventID +
+                          " and a.cost_ctgry_nm='" + ctgryNm.Replace("'", "''") + "'";
+
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                rslts[0] = dtst.Tables[0].Rows[0][0].ToString().ToUpper();
+                rslts[1] = dtst.Tables[0].Rows[0][1].ToString();
+                rslts[2] = dtst.Tables[0].Rows[0][2].ToString();
+                rslts[3] = dtst.Tables[0].Rows[0][3].ToString().ToUpper();
+                rslts[4] = dtst.Tables[0].Rows[0][4].ToString();
+                rslts[5] = dtst.Tables[0].Rows[0][5].ToString();
+                return rslts;
+            }
+            //Global.taxFrm.rec_SQL = strSql;
+            return rslts;
         }
 
         public static DataSet get_One_TmeTblHdrDet(int tmetblid)
@@ -2529,12 +2648,12 @@ ORDER BY   7, 2, 5";
 
         public static long getNewRgstrID()
         {
-            //string strSql = "select nextval('accb.accb_trnsctn_batches_batch_id_seq'::regclass);";
-            string strSql = "select  last_value from attn.attn_attendance_recs_hdr_recs_hdr_id_seq";
+            string strSql = "select nextval('attn.attn_attendance_recs_hdr_recs_hdr_id_seq'::regclass);";
+            //string strSql = "select  last_value from attn.attn_attendance_recs_hdr_recs_hdr_id_seq";
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             if (dtst.Tables[0].Rows.Count > 0)
             {
-                return long.Parse(dtst.Tables[0].Rows[0][0].ToString()) + 1;
+                return long.Parse(dtst.Tables[0].Rows[0][0].ToString());
             }
             return -1;
         }
@@ -2860,7 +2979,7 @@ and a.prnt_doc_typ = k.doc_type ORDER BY 1 LIMIT 1 OFFSET 0) ilike '" + searchWo
                 whereClause = "(to_char(to_timestamp(a.start_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') ilike '" + searchWord.Replace("'", "''") +
             "')";
             }
-            strSql = @"SELECT DISTINCT a.check_in_id, a.doc_num, y.invc_number 
+            strSql = @"SELECT a.check_in_id, a.doc_num, y.invc_number 
 FROM hotl.checkins_hdr a 
 LEFT OUTER JOIN hotl.service_types d ON (a.service_type_id=d.service_type_id )
 LEFT OUTER JOIN hotl.rooms b ON (a.service_det_id = b.room_id)
@@ -3333,7 +3452,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
         #region "RECEIVABLES..."
         public static int get_DfltRcvblAcnt(int orgID)
         {
-            string strSql = "SELECT sales_rcvbl_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_rcvbl_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3347,7 +3466,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltBadDbtAcnt(int orgID)
         {
-            string strSql = "SELECT bad_debt_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", bad_debt_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3361,7 +3480,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltInvAcnt(int orgID)
         {
-            string strSql = "SELECT itm_inv_asst_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", itm_inv_asst_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3375,7 +3494,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltCSGAcnt(int orgID)
         {
-            string strSql = "SELECT cost_of_goods_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", cost_of_goods_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3389,7 +3508,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltExpnsAcnt(int orgID)
         {
-            string strSql = "SELECT expense_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", expense_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3403,7 +3522,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltRvnuAcnt(int orgID)
         {
-            string strSql = "SELECT rvnu_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rvnu_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3417,7 +3536,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltSRAcnt(int orgID)
         {
-            string strSql = "SELECT sales_rtrns_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_rtrns_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3431,7 +3550,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltCashAcnt(int orgID)
         {
-            string strSql = "SELECT sales_cash_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_cash_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3445,7 +3564,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltCheckAcnt(int orgID)
         {
-            string strSql = "SELECT sales_check_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_check_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3458,7 +3577,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
         }
         public static int get_DfltAdjstLbltyAcnt(int orgID)
         {
-            string strSql = "SELECT inv_adjstmnts_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", inv_adjstmnts_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3472,7 +3591,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltSalesLbltyAcnt(int orgID)
         {
-            string strSql = "SELECT sales_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3499,7 +3618,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltAccPyblAcnt(int orgID)
         {
-            string strSql = "SELECT rcpt_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rcpt_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -3513,7 +3632,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltPurchRtrnAcnt(int orgID)
         {
-            string strSql = "SELECT prchs_rtrns_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", prchs_rtrns_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -7867,7 +7986,7 @@ WHERE a.gl_batch_id = -1 and a.accnt_id = b.accnt_id and b.org_id=" + orgID +
             Global.mnFrm.cmCde.ignorAdtTrail = false;
         }
 
-        public static bool isThereANActvActnPrcss(string prcsIDs, string prcsIntrvl)
+        /*public static bool isThereANActvActnPrcss(string prcsIDs, string prcsIntrvl)
         {
             string strSql = @"SELECT age(now(), to_timestamp(last_active_time,'YYYY-MM-DD HH24:MI:SS')) <= interval '" + prcsIntrvl +
               "' FROM accb.accb_running_prcses WHERE which_process_is_rnng IN (" + prcsIDs + ")";
@@ -7879,7 +7998,7 @@ WHERE a.gl_batch_id = -1 and a.accnt_id = b.accnt_id and b.org_id=" + orgID +
                 return bool.Parse(dtst.Tables[0].Rows[0][0].ToString());
             }
             return false;
-        }
+        }*/
 
         public static DataSet getAllInGLIntrfcOrg(int orgID)
         {

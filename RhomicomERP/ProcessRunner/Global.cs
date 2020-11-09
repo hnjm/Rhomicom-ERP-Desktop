@@ -39,6 +39,7 @@ namespace REMSProcessRunner
         public static string Uname = "";
         public static string Pswd = "";
         public static string Dbase = "";
+        public static string JavaPath = "";
         public static int pid = -1;
         public static bool mustStop = false;
 
@@ -396,6 +397,31 @@ namespace REMSProcessRunner
             return "";
         }
 
+        public static string get_PreRpt_SQL(long rptID)
+        {
+            string strSql = "SELECT pre_rpt_sql_query " +
+       "FROM rpt.rpt_reports WHERE report_id = " + rptID;
+
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return dtst.Tables[0].Rows[0][0].ToString();
+            }
+            return "";
+        }
+
+        public static string get_PstRpt_SQL(long rptID)
+        {
+            string strSql = "SELECT pst_rpt_sql_query " +
+       "FROM rpt.rpt_reports WHERE report_id = " + rptID;
+
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return dtst.Tables[0].Rows[0][0].ToString();
+            }
+            return "";
+        }
         public static int getRptID(string rptNm)
         {
             string strSql = "SELECT report_id " +
@@ -3798,6 +3824,25 @@ rnnr_lst_actv_dtetme='" + lstActvTm.Replace("'", "''") +
             }
         }
 
+        public static string isThereANActvPrcss(string prcsIDs)
+        {
+            string strSql = "SELECT is_process_rnng FROM accb.accb_running_prcses WHERE which_process_is_rnng IN (" + prcsIDs +
+              ") and age(now(), to_timestamp(last_active_time,'YYYY-MM-DD HH24:MI:SS')) < interval '5 minutes'";
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return dtst.Tables[0].Rows[0][0].ToString();
+            }
+            return "0";
+        }
+
+        public static void updateANActvPrcss(string prcsIDs, string status)
+        {
+            string strSql = "UPDATE accb.accb_running_prcses SET is_process_rnng='" + status.Replace("'", "''") + "', last_active_time = to_char(now(), 'YYYY-MM-DD HH24:MI:SS') WHERE which_process_is_rnng IN (" + prcsIDs +
+              ")";
+            Global.updateDataNoParams(strSql);
+        }
+
         public static DataSet get_AllPrgmUnts(long rptID)
         {
             string strSql = @"SELECT program_unit_id, 
@@ -3845,8 +3890,8 @@ rpt.get_rpt_name(program_unit_id) prg_nm
         public static DataSet get_UsrRunsNtRnng()
         {
             string selSQL = @"SELECT MIN(a.rpt_run_id), a.report_id, a.run_by  
-        FROM rpt.rpt_report_runs a 
-        WHERE a.is_this_from_schdler = '0' and a.run_status_txt != 'Completed!'
+        FROM rpt.rpt_report_runs a, rpt.rpt_reports b  
+        WHERE a.report_id=b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.is_this_from_schdler = '0' and a.run_status_txt != 'Completed!'
         and a.run_status_txt != 'Error!' and a.shld_run_stop = '0' 
         and a.run_status_prct < 100 and a.last_actv_date_tme != ''
         and age(now(), to_timestamp(a.last_actv_date_tme, 'YYYY-MM-DD HH24:MI:SS'))
@@ -3868,7 +3913,7 @@ rpt.get_rpt_name(program_unit_id) prg_nm
         > interval '50 second' 
 and a.report_id IN (SELECT  a.report_id
        FROM rpt.rpt_run_schdules a, rpt.rpt_reports b 
-        WHERE a.report_id=b.report_id and a.repeat_every >0 and 
+        WHERE a.report_id=b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.repeat_every >0 and 
         (CASE WHEN run_at_spcfd_hour='0' and age(now(), to_timestamp(to_char(now(),'YYYY-MM-DD')|| ' ' || 
         to_char(to_timestamp(start_dte_tme, 'YYYY-MM-DD HH24:MI:SS'),'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS'))>= interval '1 second' THEN
         1 
@@ -3894,7 +3939,7 @@ and a.report_id IN (SELECT  a.report_id
         > interval '50 second' 
 and a.report_id IN (SELECT  a.report_id
        FROM alrt.alrt_alerts a, rpt.rpt_reports b 
-        WHERE a.report_id=b.report_id and a.repeat_every >0 and 
+        WHERE a.report_id=b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.repeat_every >0 and 
         (CASE WHEN run_at_spcfd_hour='0' and age(now(), to_timestamp(to_char(now(),'YYYY-MM-DD')|| ' ' || 
         to_char(to_timestamp(start_dte_tme, 'YYYY-MM-DD HH24:MI:SS'),'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS'))>= interval '1 second' THEN
         1 
@@ -3920,7 +3965,7 @@ and a.report_id IN (SELECT  a.report_id
         > interval '50 second' 
       and a.report_id NOT IN (SELECT  a.report_id
        FROM alrt.alrt_alerts a, rpt.rpt_reports b 
-        WHERE a.report_id=b.report_id and a.repeat_every >0 and 
+        WHERE a.report_id=b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.repeat_every >0 and 
         (CASE WHEN run_at_spcfd_hour='0' and age(now(), to_timestamp(to_char(now(),'YYYY-MM-DD')|| ' ' || 
         to_char(to_timestamp(start_dte_tme, 'YYYY-MM-DD HH24:MI:SS'),'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS'))>= interval '1 second' THEN
         1 
@@ -3940,7 +3985,7 @@ and a.report_id IN (SELECT  a.report_id
             string selSQL = @"SELECT a.schedule_id, a.report_id, b.report_name, a.start_dte_tme, 
         a.repeat_every, trim(lower(trim(both '(s)' from a.repeat_uom))) uom, a.created_by 
        FROM rpt.rpt_run_schdules a, rpt.rpt_reports b 
-        WHERE a.report_id=b.report_id and a.repeat_every >0 and 
+        WHERE a.report_id=b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.repeat_every >0 and 
         (CASE WHEN run_at_spcfd_hour='0' and age(now(), to_timestamp(to_char(now(),'YYYY-MM-DD')|| ' ' || 
         to_char(to_timestamp(start_dte_tme, 'YYYY-MM-DD HH24:MI:SS'),'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS'))>= interval '1 second' THEN
         1 
@@ -3961,7 +4006,7 @@ and a.report_id IN (SELECT  a.report_id
         a.to_mail_num_list_mnl, a.cc_mail_num_list_mnl, a.bcc_mail_num_list_mnl, 
         a.msg_sbjct_mnl, a.alert_msg_body_mnl, a.attchment_urls, a.alert_type, a.end_hour  
        FROM alrt.alrt_alerts a, rpt.rpt_reports b 
-        WHERE a.report_id = b.report_id and a.repeat_every >0 and 
+        WHERE a.report_id = b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.repeat_every >0 and 
         (CASE WHEN run_at_spcfd_hour='0' and age(now(), to_timestamp(to_char(now(),'YYYY-MM-DD')|| ' ' || 
         to_char(to_timestamp(start_dte_tme, 'YYYY-MM-DD HH24:MI:SS'),'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS'))>= interval '1 second' THEN
         1 
@@ -3982,7 +4027,7 @@ and a.report_id IN (SELECT  a.report_id
         a.to_mail_num_list_mnl, a.cc_mail_num_list_mnl, a.bcc_mail_num_list_mnl, 
         a.msg_sbjct_mnl, a.alert_msg_body_mnl, a.attchment_urls, a.alert_type, a.end_hour  
        FROM alrt.alrt_alerts a, rpt.rpt_reports b 
-        WHERE a.report_id = b.report_id and a.repeat_every >0 and 
+        WHERE a.report_id = b.report_id and rpt.get_rnnr_file_name(b.process_runner) not ilike '%.jar%' and a.repeat_every >0 and 
         (CASE WHEN run_at_spcfd_hour='0' and age(now(), to_timestamp(to_char(now(),'YYYY-MM-DD')|| ' ' || 
         to_char(to_timestamp(start_dte_tme, 'YYYY-MM-DD HH24:MI:SS'),'HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS'))>= interval '1 second' THEN
         1 
@@ -4137,7 +4182,7 @@ and a.report_id IN (SELECT  a.report_id
             string sqlStr = @"select age(now(), to_timestamp(CASE WHEN last_actv_date_tme='' 
         THEN '2013-01-01 00:00:00' ELSE last_actv_date_tme END, 'YYYY-MM-DD HH24:MI:SS'))
         >= interval '" + intrvl + "' from rpt.rpt_report_runs where report_id = " + rptID +
-            " and rpt_run_id != " + rn_ID + " and last_actv_date_tme !='' " +
+            " and rpt_run_id != " + rn_ID + " and last_actv_date_tme != '' " +
             "ORDER BY last_actv_date_tme DESC, rpt_run_id DESC LIMIT 1 OFFSET 0";
             //and is_this_from_schdler = '1' and is_this_from_schdler='1' 
             DataSet dtst = Global.selectDataNoParams(sqlStr);
@@ -4249,10 +4294,6 @@ and a.report_id IN (SELECT  a.report_id
             {
                 subdir = @"/Rpts";
             }
-            else if (folderTyp == 15)
-            {
-                subdir = "/Rpts/jrxmls";
-            }
             else if (folderTyp == 10)
             {
                 subdir = "/AttnDocs";
@@ -4272,6 +4313,18 @@ and a.report_id IN (SELECT  a.report_id
             else if (folderTyp == 14)
             {
                 subdir = "/FirmsDocs";
+            }
+            else if (folderTyp == 15)
+            {
+                subdir = "/Rpts/jrxmls";
+            }
+            else if (folderTyp == 16)
+            {
+                subdir = @"/PtyCshDocs";
+            }
+            else if (folderTyp == 17)
+            {
+                subdir = "/Rpts/mail_attachments";
             }
             string fullFtpFileFUrl = srvr[0] + srvr[1] + subdir + @"/" + locfileNm;
             string fullLocFileUrl = locfolderNm + @"/" + locfileNm;
@@ -4361,10 +4414,6 @@ and a.report_id IN (SELECT  a.report_id
             {
                 subdir = @"/Rpts";
             }
-            else if (folderTyp == 15)
-            {
-                subdir = "/Rpts/jrxmls";
-            }
             else if (folderTyp == 10)
             {
                 subdir = "/AttnDocs";
@@ -4385,9 +4434,18 @@ and a.report_id IN (SELECT  a.report_id
             {
                 subdir = "/FirmsDocs";
             }
-            //    Global.showMsg(srvr[0] + srvr[1] + subdir + @"/" + locfileNm +
-            //      locfolderNm + @"\" + locfileNm + srvr[2] +
-            //Global.decrypt(srvr[3]), 0);
+            else if (folderTyp == 15)
+            {
+                subdir = @"/Rpts/jrxmls";
+            }
+            else if (folderTyp == 16)
+            {
+                subdir = @"/PtyCshDocs";
+            }
+            else if (folderTyp == 17)
+            {
+                subdir = @"/Rpts/mail_attachments";
+            }
 
             string fullFtpFileFUrl = srvr[0] + srvr[1] + subdir + @"/" + locfileNm;
             string fullLocFileUrl = locfolderNm + @"/" + locfileNm;
@@ -4807,7 +4865,24 @@ and a.report_id IN (SELECT  a.report_id
                 return false;
             }
         }
+        public static string GetJavaInstallationPath()
+        {
+            string environmentPath = Environment.GetEnvironmentVariable("JAVA_HOME");
+            if (!string.IsNullOrEmpty(environmentPath))
+            {
+                return environmentPath;
+            }
 
+            string javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment\\";
+            using (Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(javaKey))
+            {
+                string currentVersion = rk.GetValue("CurrentVersion").ToString();
+                using (Microsoft.Win32.RegistryKey key = rk.OpenSubKey(currentVersion))
+                {
+                    return key.GetValue("JavaHome").ToString();
+                }
+            }
+        }
         public static bool isEmailValid(string emailString, int lovID)
         {
             bool isEmailValid = Regex.IsMatch(emailString, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
@@ -4942,9 +5017,17 @@ and a.report_id IN (SELECT  a.report_id
 
                 for (i = 0; i < attchMnts.Length; i++)
                 {
-                    Attachment attch1 = new Attachment(attchMnts[i]);
-                    mail.Attachments.Add(attch1);
+                    if (System.IO.File.Exists(attchMnts[i]))
+                    {
+                        Int64 fileSizeInBytes = new FileInfo(attchMnts[i]).Length;
+                        if (fileSizeInBytes > 0)
+                        {
+                            Attachment attch1 = new Attachment(attchMnts[i]);
+                            mail.Attachments.Add(attch1);
+                        }
+                    }
                 }
+
                 List<LinkedResource> resources = new List<LinkedResource>();
                 string[] imgLocation = new string[20];
                 int mtcIdx = 0;
@@ -5173,6 +5256,43 @@ and a.report_id IN (SELECT  a.report_id
             while (orgnlValColA != "");
         }
 
+        private void readConnFile()
+        {
+            StreamReader fileReader;
+
+            string fileLoc = "";
+            fileLoc = Global.appStatPath.Replace("/bin", "").Replace("\\bin", "") + @"\DBInfo\ActiveDB.rho";
+            if (System.IO.File.Exists(fileLoc))
+            {
+                fileReader = new StreamReader(fileLoc);
+                try
+                {
+                    string hostTextBox = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    string tst1 = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    string unameTextBox = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    string restoreDBNmTextBox = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    string portTextBox = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    string pgDirTextBox = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    Global.JavaPath = Global.decrypt(fileReader.ReadLine(), Global.AppKey);
+                    if (Global.JavaPath == "")
+                    {
+                        Global.JavaPath = Global.GetJavaInstallationPath();
+                        if (!Global.JavaPath.Contains("\\bin"))
+                        {
+                            Global.JavaPath = Global.JavaPath + "\\bin";
+                        }
+                    }
+                    fileReader.Close();
+                    fileReader = null;
+                }
+                catch
+                {
+                    fileReader.Close();
+                    fileReader = null;
+                }
+            }
+        }
+
         #region "POST TRANSACTIONS..."
         public static void createLogMsg(string logmsg, string logTblNm,
          string procstyp, long procsID, string dateStr)
@@ -5209,7 +5329,7 @@ and a.report_id IN (SELECT  a.report_id
             }
         }
 
-        public static bool isThereANActvActnPrcss(string prcsIDs, string prcsIntrvl)
+        /*public static bool isThereANActvActnPrcss(string prcsIDs, string prcsIntrvl)
         {
             string strSql = "SELECT age(now(), to_timestamp(last_active_time,'YYYY-MM-DD HH24:MI:SS')) <= interval '" + prcsIntrvl +
               "' FROM accb.accb_running_prcses WHERE which_process_is_rnng IN (" + prcsIDs +
@@ -5241,7 +5361,7 @@ and a.report_id IN (SELECT  a.report_id
             last_active_time='" + dtestr + "' " +
                   "WHERE which_process_is_rnng = " + prcsID + " ";
             Global.updateDataNoParams(strSql);
-        }
+        }*/
 
         public static DataSet get_All_Chrt_Det(int orgid)
         {
@@ -5849,6 +5969,63 @@ to_char(to_timestamp(a.balance_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:M
                      ", -1, '" + trnsSrc + "')";
             Global.insertDataNoParams(insSQL);
         }
+        public static void createBnkGLIntFcLn(int accntid, string trnsdesc, double dbtamnt,
+        string trnsdte, int crncyid, double crdtamnt, double netamnt, string srcDocTyp,
+        long srcDocID, long srcDocLnID, string dateStr, string trnsSrc)
+        {
+            if (accntid <= 0)
+            {
+                return;
+            }
+            trnsdte = DateTime.ParseExact(
+         trnsdte, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+
+            dateStr = DateTime.ParseExact(
+         dateStr, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+            string insSQL = "INSERT INTO mcf.mcf_gl_interface (" +
+                  "accnt_id, transaction_desc, dbt_amount, trnsctn_date, " +
+                  "func_cur_id, created_by, creation_date, crdt_amount, last_update_by, " +
+                  "last_update_date, net_amount, gl_batch_id, src_doc_typ, src_doc_id, " +
+                  "src_doc_line_id, trns_source) " +
+                     "VALUES (" + accntid + ", '" + trnsdesc.Replace("'", "''") + "', " + dbtamnt +
+                     ", '" + trnsdte.Replace("'", "''") + "', " + crncyid + ", " + Global.rnUser_ID +
+                     ", '" + dateStr + "', " + crdtamnt + ", " +
+                     Global.rnUser_ID + ", '" + dateStr + "', " + netamnt +
+                     ", -1, '" + srcDocTyp.Replace("'", "''") + "', " +
+                     srcDocID + ", " + srcDocLnID + ", '" + trnsSrc + "')";
+            Global.insertDataNoParams(insSQL);
+        }
+
+        public static void createVMSGLIntFcLn(int accntid, string trnsdesc, double dbtamnt,
+        string trnsdte, int crncyid, double crdtamnt, double netamnt, string srcDocTyp,
+        long srcDocID, long srcDocLnID, string dateStr, string trnsSrc)
+        {
+            if (accntid <= 0)
+            {
+                return;
+            }
+            trnsdte = DateTime.ParseExact(
+         trnsdte, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+
+            dateStr = DateTime.ParseExact(
+         dateStr, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+            string insSQL = "INSERT INTO vms.vms_gl_interface (" +
+                  "accnt_id, transaction_desc, dbt_amount, trnsctn_date, " +
+                  "func_cur_id, created_by, creation_date, crdt_amount, last_update_by, " +
+                  "last_update_date, net_amount, gl_batch_id, src_doc_typ, src_doc_id, " +
+                  "src_doc_line_id, trns_source) " +
+                     "VALUES (" + accntid + ", '" + trnsdesc.Replace("'", "''") + "', " + dbtamnt +
+                     ", '" + trnsdte.Replace("'", "''") + "', " + crncyid + ", " + Global.rnUser_ID +
+                     ", '" + dateStr + "', " + crdtamnt + ", " +
+                     Global.rnUser_ID + ", '" + dateStr + "', " + netamnt +
+                     ", -1, '" + srcDocTyp.Replace("'", "''") + "', " +
+                     srcDocID + ", " + srcDocLnID + ", '" + trnsSrc + "')";
+            Global.insertDataNoParams(insSQL);
+        }
 
         public static long getIntrfcTrnsID(string intrfcTblNm, int accntID, double netAmnt, string trnsDte)
         {
@@ -5970,105 +6147,6 @@ age(now(),to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS')) > interval '
                 double.TryParse(dtst.Tables[0].Rows[0][0].ToString(), out sumRes);
             }
             return sumRes;
-        }
-
-        //    public static DataSet get_WrongNetBalncs(int orgID)
-        //    {
-        //      string selSQL = @"select a.transctn_id, a.accnt_id, b.accnt_type, a.transaction_desc, a.trnsctn_date, 
-        //a.dbt_amount, a.crdt_amount, a.net_amount, CASE WHEN b.accnt_type='A' or b.accnt_type='EX'  
-        //   THEN (dbt_amount-crdt_amount)  
-        //   ELSE (crdt_amount-dbt_amount) END actual_net 
-        //   from accb.accb_trnsctn_details a, accb.accb_chart_of_accnts b
-        //where a.accnt_id=b.accnt_id and a.trns_status='1' and b.org_id=" + orgID + @"
-        //and CASE WHEN b.accnt_type='A' or b.accnt_type='EX'  
-        //   THEN (dbt_amount-crdt_amount)  
-        //   ELSE (crdt_amount-dbt_amount) END <> (net_amount)";
-        //      return Global.selectDataNoParams(selSQL);
-        //    }
-
-        //    public static DataSet get_WrongBalncs(int orgID)
-        //    {
-        //      string selSQL = @"SELECT * FROM (SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
-        //round(accb.get_accnt_trnsSum(a.accnt_id,'dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
-        //round(accb.get_accnt_trnsSum(a.accnt_id,'crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
-        //round(accb.get_accnt_trnsSum(a.accnt_id,'net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
-        //to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date
-        //FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
-        //  where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income!='1' and b.has_sub_ledgers!='1'  
-        //  and a.as_at_date=(SELECT MAX(as_at_date)
-        //  FROM accb.accb_accnt_daily_bals d
-        //  where d.accnt_id=a.accnt_id)) tbl1 WHERE tbl1.nw_dbbt_diff !=0 or tbl1.nw_crdt_diff !=0 or tbl1.nw_net_diff !=0";
-        //      //  and b.is_retained_earnings!='1'
-        //      return Global.selectDataNoParams(selSQL);
-        //    }
-
-        //    public static DataSet get_WrongNetIncmBalncs(int orgID)
-        //    {
-        //      string selSQL = @"SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
-        //round(accb.get_accnttype_trnsSum(" + orgID + @",'R','dbt_amount',as_at_date||' 23:59:59'),2)+round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
-        //round(accb.get_accnttype_trnsSum(" + orgID + @",'R','crdt_amount',as_at_date||' 23:59:59'),2)+round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
-        //round(accb.get_accnttype_trnsSum(" + orgID + @",'R','net_amount',as_at_date||' 23:59:59'),2)-round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
-        //to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date 
-        //FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
-        //  where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income='1' and b.has_sub_ledgers!='1'
-        //  and a.as_at_date=(SELECT MAX(as_at_date)
-        //  FROM accb.accb_accnt_daily_bals d
-        //  where d.accnt_id=a.accnt_id)";
-        //      //  and b.is_retained_earnings!='1'
-        //      return Global.selectDataNoParams(selSQL);
-        //    }
-
-        public static DataSet get_WrongNetBalncs(int orgID)
-        {
-            string updtSQL = @"UPDATE accb.accb_trnsctn_details 
-      SET dbt_amount=round(dbt_amount,2), crdt_amount=round(crdt_amount,2) 
-      WHERE dbt_amount!=round(dbt_amount,2) or crdt_amount!=round(crdt_amount,2)";
-            Global.updateDataNoParams(updtSQL);
-            System.Threading.Thread.Sleep(2000);
-            string selSQL = @"select a.transctn_id, a.accnt_id, b.accnt_type, a.transaction_desc, a.trnsctn_date, 
-a.dbt_amount, a.crdt_amount, a.net_amount, CASE WHEN b.accnt_type='A' or b.accnt_type='EX'  
-   THEN (dbt_amount-crdt_amount)  
-   ELSE (crdt_amount-dbt_amount) END actual_net 
-   from accb.accb_trnsctn_details a, accb.accb_chart_of_accnts b
-where a.accnt_id=b.accnt_id and a.trns_status='1' and b.org_id=" + orgID + @"
-and CASE WHEN b.accnt_type='A' or b.accnt_type='EX'  
-   THEN (dbt_amount-crdt_amount)  
-   ELSE (crdt_amount-dbt_amount) END <> (net_amount)";
-            return Global.selectDataNoParams(selSQL);
-        }
-
-        public static DataSet get_WrongBalncs(int orgID)
-        {
-            string selSQL = @"SELECT * FROM (SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
-round(accb.get_accnt_trnsSum(a.accnt_id,'dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
-round(accb.get_accnt_trnsSum(a.accnt_id,'crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
-round(accb.get_accnt_trnsSum(a.accnt_id,'net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
-to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date
-FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
-  where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income!='1' and b.has_sub_ledgers!='1'  
-  and a.as_at_date=(SELECT MAX(as_at_date)
-  FROM accb.accb_accnt_daily_bals d
-  where d.accnt_id=a.accnt_id)) tbl1 WHERE tbl1.nw_dbbt_diff !=0 or tbl1.nw_crdt_diff !=0 or tbl1.nw_net_diff !=0";
-            //  and b.is_retained_earnings!='1'
-            //Global.errorLog = "Wrong Balances SQL = " + selSQL;
-            //Global.writeToLog();
-            return Global.selectDataNoParams(selSQL);
-        }
-
-        public static DataSet get_WrongNetIncmBalncs(int orgID)
-        {
-            string selSQL = @"SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
-round(accb.get_accnttype_trnsSum(" + orgID + @",'R','dbt_amount',as_at_date||' 23:59:59'),2)+round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
-round(accb.get_accnttype_trnsSum(" + orgID + @",'R','crdt_amount',as_at_date||' 23:59:59'),2)+round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
-round(accb.get_accnttype_trnsSum(" + orgID + @",'R','net_amount',as_at_date||' 23:59:59'),2)-round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
-to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date 
-FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
-  where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income='1' and b.has_sub_ledgers!='1'
-  and a.as_at_date=(SELECT MAX(as_at_date)
-  FROM accb.accb_accnt_daily_bals d
-  where d.accnt_id=a.accnt_id)";
-            //  and b.is_retained_earnings!='1'
-            return Global.selectDataNoParams(selSQL);
         }
 
         public static bool hsTrnsUptdAcntCurrBls(long actrnsid,
@@ -6848,6 +6926,55 @@ to_char(to_timestamp(a.as_at_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:
             return dtst;
         }
 
+
+        public static double get_COA_dbtSum(int orgID)
+        {
+            string strSql = "";
+            strSql = "SELECT SUM(a.debit_balance) " +
+              "FROM accb.accb_chart_of_accnts a " +
+              "WHERE ((a.org_id = " + orgID + ") and (a.is_retained_earnings = '0') and (a.is_net_income = '0') and (a.control_account_id <=0))";
+
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            double sumRes = 0.00;
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                double.TryParse(dtst.Tables[0].Rows[0][0].ToString(), out sumRes);
+            }
+            return Math.Round(sumRes, 2);
+        }
+
+        public static double get_COA_crdtSum(int orgID)
+        {
+            string strSql = "";
+            strSql = "SELECT SUM(a.credit_balance) " +
+              "FROM accb.accb_chart_of_accnts a " +
+              "WHERE ((a.org_id = " + orgID + ") and (a.is_retained_earnings = '0') and (a.is_net_income = '0') and (a.control_account_id <=0) )";
+
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            double sumRes = 0.00;
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                double.TryParse(dtst.Tables[0].Rows[0][0].ToString(), out sumRes);
+            }
+            return Math.Round(sumRes, 2);
+        }
+
+        public static double get_COA_NetSum(int orgID)
+        {
+            string strSql = "";
+            strSql = "SELECT SUM(a.net_balance) " +
+              "FROM accb.accb_chart_of_accnts a " +
+              "WHERE ((a.org_id = " + orgID + ") and (a.is_retained_earnings = '0') and (a.is_net_income = '0') and (a.control_account_id <=0) )";
+
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            double sumRes = 0.00;
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                double.TryParse(dtst.Tables[0].Rows[0][0].ToString(), out sumRes);
+            }
+            return Math.Round(sumRes, 2);
+        }
+
         public static double get_COA_CRLSum(int orgID)
         {
             string strSql = "";
@@ -6866,15 +6993,15 @@ to_char(to_timestamp(a.as_at_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:
             return Math.Round(sumRes, 2);
         }
 
-        public static double get_COA_AESum(int orgID)
+        public static double get_COA_CLSum(int orgID)
         {
             string strSql = "";
             strSql = "SELECT SUM(a.net_balance) " +
               "FROM accb.accb_chart_of_accnts a " +
-              "WHERE ((a.org_id = " + orgID + ") and " +
-              "(a.is_net_income = '0') and (a.control_account_id <=0) " +
-              "and (a.accnt_type IN ('A','EX')))";
-            //(a.is_retained_earnings = '0') 
+              "WHERE ((a.org_id = " + orgID + ") and (a.control_account_id <=0) " +
+              "and (a.accnt_type IN ('EQ', 'L')))";
+            //(a.is_retained_earnings = '0') and and " +
+            // "(a.is_net_income = '0')  
             DataSet dtst = Global.selectDataNoParams(strSql);
             double sumRes = 0.00;
             if (dtst.Tables[0].Rows.Count > 0)
@@ -6883,6 +7010,129 @@ to_char(to_timestamp(a.as_at_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:
             }
             return Math.Round(sumRes, 2);
         }
+
+        public static double get_COA_AESum(int orgID)
+        {
+            string strSql = "";
+            strSql = "SELECT SUM(a.net_balance) " +
+              "FROM accb.accb_chart_of_accnts a " +
+              "WHERE ((a.org_id = " + orgID + ") and " +
+              "(a.is_net_income = '0') and (a.has_sub_ledgers !='1') " +
+              "and (a.accnt_type IN ('A','EX')))";
+
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            double sumRes = 0.00;
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                double.TryParse(dtst.Tables[0].Rows[0][0].ToString(), out sumRes);
+            }
+            return Math.Round(sumRes, 2);
+        }
+
+        public static double get_COA_ASum(int orgID)
+        {
+            string strSql = "";
+            strSql = "SELECT SUM(a.net_balance) " +
+              "FROM accb.accb_chart_of_accnts a " +
+              "WHERE ((a.org_id = " + orgID + ") and (a.has_sub_ledgers !='1') " +
+              "and (a.accnt_type IN ('A')))";
+            //(a.is_retained_earnings = '0') 
+            /*and " +
+              "(a.is_net_income = '0') */
+            DataSet dtst = Global.selectDataNoParams(strSql);
+            double sumRes = 0.00;
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                double.TryParse(dtst.Tables[0].Rows[0][0].ToString(), out sumRes);
+            }
+            return Math.Round(sumRes, 2);
+        }
+
+        public static string getMinUnpstdTrnsDte(int orgid)
+        {
+            DataSet dtSt = new DataSet();
+            string sqlStr = "select to_char(to_timestamp(min(a.trnsctn_date),'YYYY-MM-DD HH24:MI:SS')-interval '5 day','DD-Mon-YYYY 00:00:00') " +
+                "from accb.accb_trnsctn_details a, accb.accb_trnsctn_batches b " +
+                "where a.batch_id = b.batch_id and (b.creation_date >= to_char(now()-interval '5 day','YYYY-MM-DD HH24:MI:SS') or a.trns_status = '0') and b.org_id=" + orgid;
+            dtSt = Global.selectDataNoParams(sqlStr);
+            if (dtSt.Tables[0].Rows.Count > 0)
+            {
+                return dtSt.Tables[0].Rows[0][0].ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public static DataSet get_WrongNetBalncs(int orgID)
+        {
+            string selSQL = @"select a.transctn_id, a.accnt_id, b.accnt_type, 
+                a.transaction_desc, a.trnsctn_date, 
+                a.dbt_amount, a.crdt_amount, a.net_amount, CASE WHEN b.accnt_type='A' or b.accnt_type='EX'  
+               THEN (dbt_amount-crdt_amount)  
+               ELSE (crdt_amount-dbt_amount) END actual_net 
+               from accb.accb_trnsctn_details a, accb.accb_chart_of_accnts b
+            where a.accnt_id=b.accnt_id and a.trns_status='1' and b.org_id=" + orgID + @"
+            and CASE WHEN b.accnt_type='A' or b.accnt_type='EX'  
+               THEN (dbt_amount-crdt_amount)  
+               ELSE (crdt_amount-dbt_amount) END <> (net_amount)";
+            return Global.selectDataNoParams(selSQL);
+        }
+
+        public static DataSet get_WrongBalncs(int orgID, string trnsWthDateAfta)
+        {
+            string selSQL = @"SELECT * FROM (SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
+    round(accb.get_accnt_trnsSum(a.accnt_id,'dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
+    round(accb.get_accnt_trnsSum(a.accnt_id,'crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
+    round(accb.get_accnt_trnsSum(a.accnt_id,'net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
+    to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date
+    FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
+      where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income!='1' and b.has_sub_ledgers!='1'  
+      and a.as_at_date ='" + trnsWthDateAfta.Replace("'", "''") +
+      @"' ORDER BY a.as_at_date ASC) tbl1 WHERE tbl1.nw_dbbt_diff !=0 or tbl1.nw_crdt_diff !=0 or tbl1.nw_net_diff !=0";
+            //  and b.is_retained_earnings!='1'
+            /*a.as_at_date=(SELECT MAX(as_at_date)
+      FROM accb.accb_accnt_daily_bals d
+      where d.accnt_id=a.accnt_id)*/
+            return Global.selectDataNoParams(selSQL);
+        }
+
+        public static DataSet get_WrongHsSubLdgrBalncs(int orgID, string trnsWthDateAfta)
+        {
+            string selSQL = @"SELECT * FROM (SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
+    round(accb.get_accnt_trnsSum(a.accnt_id,'dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
+    round(accb.get_accnt_trnsSum(a.accnt_id,'crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
+    round(accb.get_accnt_trnsSum(a.accnt_id,'net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
+    to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date
+    FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
+      where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income!='1' and b.has_sub_ledgers ='1'  
+      and a.as_at_date=(SELECT MAX(as_at_date)
+      FROM accb.accb_accnt_daily_bals d
+      where d.accnt_id=a.accnt_id) ORDER BY a.as_at_date ASC) tbl1 WHERE tbl1.nw_dbbt_diff !=0 or tbl1.nw_crdt_diff !=0 or tbl1.nw_net_diff !=0";
+            //  and b.is_retained_earnings!='1'
+            /*and a.as_at_date >='" + trnsWthDateAfta.Replace("'", "''") +
+      @"'*/
+            return Global.selectDataNoParams(selSQL);
+        }
+
+        public static DataSet get_WrongNetIncmBalncs(int orgID, string trnsWthDateAfta)
+        {
+            string selSQL = @"SELECT a.daily_bals_id, a.accnt_id, b.accnt_name, b.accnt_type, 
+round(accb.get_accnttype_trnsSum(" + orgID + @",'R','dbt_amount',as_at_date||' 23:59:59'),2)+round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','dbt_amount',as_at_date||' 23:59:59'),2)-a.dbt_bal nw_dbbt_diff, 
+round(accb.get_accnttype_trnsSum(" + orgID + @",'R','crdt_amount',as_at_date||' 23:59:59'),2)+round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','crdt_amount',as_at_date||' 23:59:59'),2)-a.crdt_bal nw_crdt_diff,
+round(accb.get_accnttype_trnsSum(" + orgID + @",'R','net_amount',as_at_date||' 23:59:59'),2)-round(accb.get_accnttype_trnsSum(" + orgID + @",'EX','net_amount',as_at_date||' 23:59:59'),2)-a.net_balance nw_net_diff, 
+to_char(to_timestamp(a.as_at_date||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') trns_date 
+FROM accb.accb_accnt_daily_bals a, accb.accb_chart_of_accnts b 
+  where a.accnt_id=b.accnt_id and b.org_id=" + orgID + @" and b.is_net_income='1' and b.has_sub_ledgers!='1'
+  and a.as_at_date ='" + trnsWthDateAfta.Replace("'", "''") + @"' ORDER BY a.as_at_date ASC";
+            //  and b.is_retained_earnings!='1'
+            /*(SELECT MAX(as_at_date)
+  FROM accb.accb_accnt_daily_bals d
+  where d.accnt_id=a.accnt_id)*/
+            return Global.selectDataNoParams(selSQL);
+        }
+
 
         public static void chngeTrnsStatus(long trnsid, string status)
         {
@@ -7133,11 +7383,11 @@ to_char(to_timestamp(a.as_at_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:
             string dateStr = Global.getDB_Date_time();
             string insSQL = "INSERT INTO accb.accb_trnsctn_batches(" +
                               "batch_name, batch_description, created_by, creation_date, " +
-                              "org_id, batch_status, last_update_by, last_update_date, batch_source) " +
+                              "org_id, batch_status, last_update_by, last_update_date, batch_source, avlbl_for_postng) " +
               "VALUES ('" + batchnm.Replace("'", "''") + "', '" + batchdesc.Replace("'", "''") +
               "', " + Global.rnUser_ID + ", '" + dateStr + "', " + orgid + ", '0', " +
                               Global.rnUser_ID + ", '" + dateStr + "', '" +
-                              batchsource.Replace("'", "''") + "')";
+                              batchsource.Replace("'", "''") + "','0')";
             Global.insertDataNoParams(insSQL);
         }
 
@@ -7230,15 +7480,6 @@ to_char(to_timestamp(a.as_at_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:
             "where a.accnt_id = " + accntid + " and a.trnsctn_date = '" + trns_date +
             "' and a.func_cur_id = " + crncy_id + " and a.gl_batch_id = -1  " +
             "ORDER BY a.interface_id";
-            /*and " +
-            "NOT EXISTS(select f.transctn_id from accb.accb_trnsctn_details f " +
-            "where f.batch_id IN (select g.batch_id from accb.accb_trnsctn_batches g " +
-            "where g.batch_name ilike '%Internal Payments%' and " +
-            "to_timestamp(g.creation_date,'YYYY-MM-DD HH24:MI:SS') between " +
-            "(to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS') - interval '6 months') " +
-            "and (to_timestamp(a.trnsctn_date,'YYYY-MM-DD HH24:MI:SS') + interval '6 months')) " +
-            "and f.source_trns_ids like '%,' || a.interface_id || ',%' and " +
-            "f.trnsctn_date=a.trnsctn_date and f.accnt_id= a.accnt_id)*/
             DataSet dtst = Global.selectDataNoParams(strSql);
             string infc_ids = ",";
             for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
@@ -7423,7 +7664,7 @@ and '" + intrfcids + "' like '%,' || a.interface_id || ',%') ";
             //   rate_dte = DateTime.ParseExact(rate_dte, "dd-MMM-yyyy",
             //System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-            //Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
+            //Global.Extra_Adt_Trl_Info = "";
             string dateStr = Global.getDB_Date_time();
             string insSQL = @"UPDATE accb.accb_exchange_rates SET 
             conversion_date='" + rate_dte.Replace("'", "''") +

@@ -28,8 +28,10 @@
   /// </summary>
   private void InitializeComponent()
   {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cstSpplrDiag));
             this.searchInComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.docDtContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.docDtContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addDtMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editDtMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delDtMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,8 +98,15 @@
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.docContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.docContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator90 = new System.Windows.Forms.ToolStripSeparator();
+            this.exptExMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rfrshMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vwSQLMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rcHstryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cstSplrListView = new System.Windows.Forms.ListView();
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -125,15 +134,14 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.editButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.saveButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.delButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.vwSQLButton = new System.Windows.Forms.ToolStripButton();
             this.rcHstryButton = new System.Windows.Forms.ToolStripButton();
             this.moveFirstButton = new System.Windows.Forms.ToolStripButton();
@@ -142,14 +150,8 @@
             this.moveLastButton = new System.Windows.Forms.ToolStripButton();
             this.go1Button = new System.Windows.Forms.ToolStripButton();
             this.resetTrnsButton = new System.Windows.Forms.ToolStripButton();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
-            this.addMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.delMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exptExMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rfrshMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vwSQLMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rcHstryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.docDtContextMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -828,10 +830,66 @@
             this.docContextMenuStrip.Name = "usersContextMenuStrip";
             this.docContextMenuStrip.Size = new System.Drawing.Size(153, 164);
             // 
+            // addMenuItem
+            // 
+            this.addMenuItem.Image = global::CommonCode.Properties.Resources.plus_32;
+            this.addMenuItem.Name = "addMenuItem";
+            this.addMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addMenuItem.Text = "ADD";
+            this.addMenuItem.Click += new System.EventHandler(this.addMenuItem_Click);
+            // 
+            // editMenuItem
+            // 
+            this.editMenuItem.Image = global::CommonCode.Properties.Resources.edit32;
+            this.editMenuItem.Name = "editMenuItem";
+            this.editMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editMenuItem.Text = "EDIT";
+            this.editMenuItem.Click += new System.EventHandler(this.editMenuItem_Click);
+            // 
+            // delMenuItem
+            // 
+            this.delMenuItem.Image = global::CommonCode.Properties.Resources.delete;
+            this.delMenuItem.Name = "delMenuItem";
+            this.delMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delMenuItem.Text = "DELETE";
+            this.delMenuItem.Click += new System.EventHandler(this.delMenuItem_Click);
+            // 
             // toolStripSeparator90
             // 
             this.toolStripSeparator90.Name = "toolStripSeparator90";
             this.toolStripSeparator90.Size = new System.Drawing.Size(149, 6);
+            // 
+            // exptExMenuItem
+            // 
+            this.exptExMenuItem.Image = global::CommonCode.Properties.Resources.image007;
+            this.exptExMenuItem.Name = "exptExMenuItem";
+            this.exptExMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptExMenuItem.Text = "Export to Excel";
+            this.exptExMenuItem.Click += new System.EventHandler(this.exptExMenuItem_Click);
+            // 
+            // rfrshMenuItem
+            // 
+            this.rfrshMenuItem.Image = global::CommonCode.Properties.Resources.refresh;
+            this.rfrshMenuItem.Name = "rfrshMenuItem";
+            this.rfrshMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshMenuItem.Text = "&Refresh";
+            this.rfrshMenuItem.Click += new System.EventHandler(this.rfrshMenuItem_Click);
+            // 
+            // vwSQLMenuItem
+            // 
+            this.vwSQLMenuItem.Image = global::CommonCode.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
+            this.vwSQLMenuItem.Name = "vwSQLMenuItem";
+            this.vwSQLMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLMenuItem.Text = "&View SQL";
+            this.vwSQLMenuItem.Click += new System.EventHandler(this.vwSQLMenuItem_Click);
+            // 
+            // rcHstryMenuItem
+            // 
+            this.rcHstryMenuItem.Image = global::CommonCode.Properties.Resources.statistics_32;
+            this.rcHstryMenuItem.Name = "rcHstryMenuItem";
+            this.rcHstryMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryMenuItem.Text = "Record History";
+            this.rcHstryMenuItem.Click += new System.EventHandler(this.rcHstryMenuItem_Click);
             // 
             // cstSplrListView
             // 
@@ -1170,37 +1228,6 @@
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "ToolStrip2";
             // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.ForeColor = System.Drawing.Color.Black;
-            this.cancelButton.Location = new System.Drawing.Point(523, 435);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 118;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
             // addButton
             // 
             this.addButton.Image = global::CommonCode.Properties.Resources.plus_32;
@@ -1209,6 +1236,11 @@
             this.addButton.Size = new System.Drawing.Size(53, 22);
             this.addButton.Text = "NEW";
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // editButton
             // 
@@ -1220,6 +1252,11 @@
             this.editButton.Text = "EDIT";
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
+            // 
             // saveButton
             // 
             this.saveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1230,6 +1267,11 @@
             this.saveButton.Text = "SAVE";
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            // 
             // delButton
             // 
             this.delButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1239,6 +1281,11 @@
             this.delButton.Size = new System.Drawing.Size(23, 22);
             this.delButton.Text = "DELETE";
             this.delButton.Click += new System.EventHandler(this.delButton_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
             // vwSQLButton
             // 
@@ -1320,6 +1367,17 @@
             this.resetTrnsButton.Text = "RESET";
             this.resetTrnsButton.Click += new System.EventHandler(this.resetTrnsButton_Click);
             // 
+            // cancelButton
+            // 
+            this.cancelButton.ForeColor = System.Drawing.Color.Black;
+            this.cancelButton.Location = new System.Drawing.Point(523, 435);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 118;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // okButton
             // 
             this.okButton.ForeColor = System.Drawing.Color.Black;
@@ -1330,62 +1388,6 @@
             this.okButton.Text = "APPLY SELECTED RECORD";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // addMenuItem
-            // 
-            this.addMenuItem.Image = global::CommonCode.Properties.Resources.plus_32;
-            this.addMenuItem.Name = "addMenuItem";
-            this.addMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.addMenuItem.Text = "ADD";
-            this.addMenuItem.Click += new System.EventHandler(this.addMenuItem_Click);
-            // 
-            // editMenuItem
-            // 
-            this.editMenuItem.Image = global::CommonCode.Properties.Resources.edit32;
-            this.editMenuItem.Name = "editMenuItem";
-            this.editMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editMenuItem.Text = "EDIT";
-            this.editMenuItem.Click += new System.EventHandler(this.editMenuItem_Click);
-            // 
-            // delMenuItem
-            // 
-            this.delMenuItem.Image = global::CommonCode.Properties.Resources.delete;
-            this.delMenuItem.Name = "delMenuItem";
-            this.delMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.delMenuItem.Text = "DELETE";
-            this.delMenuItem.Click += new System.EventHandler(this.delMenuItem_Click);
-            // 
-            // exptExMenuItem
-            // 
-            this.exptExMenuItem.Image = global::CommonCode.Properties.Resources.image007;
-            this.exptExMenuItem.Name = "exptExMenuItem";
-            this.exptExMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exptExMenuItem.Text = "Export to Excel";
-            this.exptExMenuItem.Click += new System.EventHandler(this.exptExMenuItem_Click);
-            // 
-            // rfrshMenuItem
-            // 
-            this.rfrshMenuItem.Image = global::CommonCode.Properties.Resources.refresh;
-            this.rfrshMenuItem.Name = "rfrshMenuItem";
-            this.rfrshMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rfrshMenuItem.Text = "&Refresh";
-            this.rfrshMenuItem.Click += new System.EventHandler(this.rfrshMenuItem_Click);
-            // 
-            // vwSQLMenuItem
-            // 
-            this.vwSQLMenuItem.Image = global::CommonCode.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
-            this.vwSQLMenuItem.Name = "vwSQLMenuItem";
-            this.vwSQLMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.vwSQLMenuItem.Text = "&View SQL";
-            this.vwSQLMenuItem.Click += new System.EventHandler(this.vwSQLMenuItem_Click);
-            // 
-            // rcHstryMenuItem
-            // 
-            this.rcHstryMenuItem.Image = global::CommonCode.Properties.Resources.statistics_32;
-            this.rcHstryMenuItem.Name = "rcHstryMenuItem";
-            this.rcHstryMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rcHstryMenuItem.Text = "Record History";
-            this.rcHstryMenuItem.Click += new System.EventHandler(this.rcHstryMenuItem_Click);
             // 
             // cstSpplrDiag
             // 
@@ -1402,6 +1404,7 @@
             this.Controls.Add(this.label8);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "cstSpplrDiag";

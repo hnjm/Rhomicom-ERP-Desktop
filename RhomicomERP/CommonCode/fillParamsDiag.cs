@@ -1199,27 +1199,22 @@ CASE WHEN alert_id>0 THEN 'ALERT' WHEN is_this_from_schdler='1' THEN 'SCHEDULER'
                           "\""+ Application.StartupPath + "\\bin\"",
                           "DESKTOP",
                           "\""+ Application.StartupPath + "\\Images\\"+CommonCodes.DatabaseNm+"\""};
-                //cmnCde.showMsg(String.Join(" ", args), 0);
                 if (rptRnnrNm.Contains("Jasper"))
                 {
-                    //cmnCde.showSQLNoPermsn(Application.StartupPath + rnnrPrcsFile);
                     System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                    startInfo.FileName = CommonCode.CommonCodes.JavaPath + "\\java.exe";
+                    startInfo.Arguments = "-jar -Xms1024m -Xmx1024m \"" +
                       Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args);
                     jarPrcs.StartInfo = startInfo;
                     jarPrcs.Start();
-                    //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " +
-                    //  Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                 }
                 else
                 {
                     System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile,
                       String.Join(" ", args));
                 }
-                //System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile, String.Join(" ", args));
                 this.updateRptRnActvTime(rptRunID);
                 this.waitLabel.Visible = false;
                 System.Windows.Forms.Application.DoEvents();
@@ -1822,26 +1817,22 @@ CASE WHEN alert_id>0 THEN 'ALERT' WHEN is_this_from_schdler='1' THEN 'SCHEDULER'
                           "\""+ Application.StartupPath + "\\bin\"",
                           "DESKTOP",
                           "\""+ Application.StartupPath + "\\Images\\"+CommonCodes.DatabaseNm+"\""};
-                //cmnCde.showMsg(String.Join(" ", args), 0);
                 if (rptRnnrNm.Contains("Jasper"))
                 {
                     System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                    startInfo.FileName = CommonCode.CommonCodes.JavaPath + "\\java.exe";
+                    startInfo.Arguments = "-jar -Xms1024m -Xmx1024m \"" +
                       Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args);
                     jarPrcs.StartInfo = startInfo;
                     jarPrcs.Start();
-                    //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " +
-                    //  Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                 }
                 else
                 {
                     System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile,
                       String.Join(" ", args));
                 }
-                //System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile, String.Join(" ", args));
                 this.updateRptRnActvTime(rptRunID);
                 this.waitLabel.Visible = false;
                 System.Windows.Forms.Application.DoEvents();
@@ -1926,7 +1917,26 @@ CASE WHEN alert_id>0 THEN 'ALERT' WHEN is_this_from_schdler='1' THEN 'SCHEDULER'
                           "DESKTOP",
                           "\""+ Application.StartupPath + "\\Images\\"+CommonCodes.DatabaseNm+"\""};
                 //cmnCde.showMsg(String.Join(" ", args), 0);
-                System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile, String.Join(" ", args));
+                if (rptRnnrNm.Contains("Jasper"))
+                {
+                    System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    startInfo.FileName = CommonCode.CommonCodes.JavaPath + "\\java.exe";
+                    startInfo.Arguments = "-jar -Xms1024m -Xmx1024m \"" +
+                      Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args);
+                    jarPrcs.StartInfo = startInfo;
+                    jarPrcs.Start();
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile,
+                      String.Join(" ", args));
+                }
+                /*MessageBox.Show(CommonCode.CommonCodes.JavaPath);
+                cmnCde.showSQLNoPermsn("cmd.exe" + "/C \"" + CommonCode.CommonCodes.JavaPath + "\\javaw.exe\" -jar -Xms1024m -Xmx1024m \"" +
+              Application.StartupPath + rnnrPrcsFile + "\" " + String.Join(" ", args));*/
+                //System.Diagnostics.Process.Start(Application.StartupPath + rnnrPrcsFile, String.Join(" ", args));
                 //Launch Auto-Refresh
                 if (this.autoRfrshButton.Text.Contains("START"))
                 {

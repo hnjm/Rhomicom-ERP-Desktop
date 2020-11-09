@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(attndRecsForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,8 +56,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel7 = new System.Windows.Forms.Panel();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.addButton = new System.Windows.Forms.ToolStripButton();
@@ -97,7 +97,6 @@
             this.toolStripSeparator47 = new System.Windows.Forms.ToolStripSeparator();
             this.resetButton = new System.Windows.Forms.ToolStripButton();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.evntDescTextBox = new System.Windows.Forms.TextBox();
             this.duplicateRgstrButton = new System.Windows.Forms.Button();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.vwAttchmntsButton = new System.Windows.Forms.Button();
@@ -121,6 +120,7 @@
             this.rgstrIDTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.evntDescTextBox = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.attnRgstrListView = new System.Windows.Forms.ListView();
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -155,6 +155,31 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.loadRgstrPrsnsButton = new System.Windows.Forms.ToolStripButton();
             this.rgstrDetDataGridView = new System.Windows.Forms.DataGridView();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column42 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column46 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column28 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column30 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column32 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column39 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column40 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column49 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column58 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column59 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column61 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exportCostsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -278,31 +303,6 @@
             this.Column54 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column55 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column42 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column46 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column28 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column30 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column32 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column39 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column40 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column49 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column58 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column59 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column61 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel7.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -416,7 +416,7 @@
             this.saveButton.Image = global::EventsAndAttendance.Properties.Resources.FloppyDisk;
             this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(54, 22);
+            this.saveButton.Size = new System.Drawing.Size(53, 22);
             this.saveButton.Text = "SAVE";
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -712,21 +712,6 @@
             this.groupBox10.TabIndex = 95;
             this.groupBox10.TabStop = false;
             // 
-            // evntDescTextBox
-            // 
-            this.evntDescTextBox.Location = new System.Drawing.Point(73, 57);
-            this.evntDescTextBox.MaxLength = 30000;
-            this.evntDescTextBox.Multiline = true;
-            this.evntDescTextBox.Name = "evntDescTextBox";
-            this.evntDescTextBox.ReadOnly = true;
-            this.evntDescTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.evntDescTextBox.Size = new System.Drawing.Size(290, 51);
-            this.evntDescTextBox.TabIndex = 178;
-            this.evntDescTextBox.Click += new System.EventHandler(this.tmTblNmTextBox_Click);
-            this.evntDescTextBox.TextChanged += new System.EventHandler(this.tmTblNmTextBox_TextChanged);
-            this.evntDescTextBox.Enter += new System.EventHandler(this.tmTblNmTextBox_Click);
-            this.evntDescTextBox.Leave += new System.EventHandler(this.tmTblNmTextBox_Leave);
-            // 
             // duplicateRgstrButton
             // 
             this.duplicateRgstrButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -991,6 +976,21 @@
             this.label4.TabIndex = 174;
             this.label4.Text = "Register No.:";
             // 
+            // evntDescTextBox
+            // 
+            this.evntDescTextBox.Location = new System.Drawing.Point(73, 57);
+            this.evntDescTextBox.MaxLength = 30000;
+            this.evntDescTextBox.Multiline = true;
+            this.evntDescTextBox.Name = "evntDescTextBox";
+            this.evntDescTextBox.ReadOnly = true;
+            this.evntDescTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.evntDescTextBox.Size = new System.Drawing.Size(290, 51);
+            this.evntDescTextBox.TabIndex = 178;
+            this.evntDescTextBox.Click += new System.EventHandler(this.tmTblNmTextBox_Click);
+            this.evntDescTextBox.TextChanged += new System.EventHandler(this.tmTblNmTextBox_TextChanged);
+            this.evntDescTextBox.Enter += new System.EventHandler(this.tmTblNmTextBox_Click);
+            this.evntDescTextBox.Leave += new System.EventHandler(this.tmTblNmTextBox_Leave);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -1088,7 +1088,7 @@
             this.addVisitorButton.Image = global::EventsAndAttendance.Properties.Resources.plus_32;
             this.addVisitorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addVisitorButton.Name = "addVisitorButton";
-            this.addVisitorButton.Size = new System.Drawing.Size(131, 22);
+            this.addVisitorButton.Size = new System.Drawing.Size(129, 22);
             this.addVisitorButton.Text = "VISITOR/ATTENDEE";
             this.addVisitorButton.Click += new System.EventHandler(this.addVisitorButton_Click);
             // 
@@ -1321,7 +1321,7 @@
             this.loadRgstrPrsnsButton.Image = global::EventsAndAttendance.Properties.Resources._98;
             this.loadRgstrPrsnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.loadRgstrPrsnsButton.Name = "loadRgstrPrsnsButton";
-            this.loadRgstrPrsnsButton.Size = new System.Drawing.Size(111, 20);
+            this.loadRgstrPrsnsButton.Size = new System.Drawing.Size(111, 22);
             this.loadRgstrPrsnsButton.Text = "LOAD PERSONS";
             this.loadRgstrPrsnsButton.Click += new System.EventHandler(this.loadRgstrPrsnsButton_Click);
             // 
@@ -1380,6 +1380,213 @@
             this.rgstrDetDataGridView.TabIndex = 6;
             this.rgstrDetDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.rgstrDetDataGridView_CellContentClick);
             this.rgstrDetDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.rgstrDetDataGridView_CellValueChanged);
+            // 
+            // Column10
+            // 
+            this.Column10.FillWeight = 1F;
+            this.Column10.Frozen = true;
+            this.Column10.HeaderText = "ID No.";
+            this.Column10.MinimumWidth = 2;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column10.Width = 2;
+            // 
+            // Column41
+            // 
+            this.Column41.Frozen = true;
+            this.Column41.HeaderText = "Type";
+            this.Column41.Name = "Column41";
+            this.Column41.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column41.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column41.Width = 50;
+            // 
+            // Column42
+            // 
+            this.Column42.Frozen = true;
+            this.Column42.HeaderText = "...";
+            this.Column42.Name = "Column42";
+            this.Column42.Width = 25;
+            // 
+            // Column34
+            // 
+            this.Column34.HeaderText = "Person_ID";
+            this.Column34.Name = "Column34";
+            this.Column34.ReadOnly = true;
+            this.Column34.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column34.Visible = false;
+            // 
+            // Column27
+            // 
+            this.Column27.Frozen = true;
+            this.Column27.HeaderText = "Name/Description of Attendee / Visitor";
+            this.Column27.Name = "Column27";
+            this.Column27.ReadOnly = true;
+            this.Column27.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column27.Width = 130;
+            // 
+            // Column46
+            // 
+            this.Column46.Frozen = true;
+            this.Column46.HeaderText = "...";
+            this.Column46.Name = "Column46";
+            this.Column46.Width = 25;
+            // 
+            // Column28
+            // 
+            this.Column28.Frozen = true;
+            this.Column28.HeaderText = "Present?";
+            this.Column28.Name = "Column28";
+            this.Column28.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column28.Width = 55;
+            // 
+            // Column29
+            // 
+            this.Column29.Frozen = true;
+            this.Column29.HeaderText = "Date/Time In";
+            this.Column29.Name = "Column29";
+            this.Column29.ReadOnly = true;
+            this.Column29.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column29.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column29.Visible = false;
+            this.Column29.Width = 70;
+            // 
+            // Column30
+            // 
+            this.Column30.Frozen = true;
+            this.Column30.HeaderText = "...";
+            this.Column30.Name = "Column30";
+            this.Column30.Visible = false;
+            this.Column30.Width = 25;
+            // 
+            // Column31
+            // 
+            this.Column31.Frozen = true;
+            this.Column31.HeaderText = "Date/Time Out";
+            this.Column31.Name = "Column31";
+            this.Column31.ReadOnly = true;
+            this.Column31.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column31.Visible = false;
+            this.Column31.Width = 70;
+            // 
+            // Column32
+            // 
+            this.Column32.DividerWidth = 2;
+            this.Column32.Frozen = true;
+            this.Column32.HeaderText = "Attendance Time Details";
+            this.Column32.Name = "Column32";
+            // 
+            // Column33
+            // 
+            this.Column33.HeaderText = "Comments, Remarks, Visit Purpose";
+            this.Column33.Name = "Column33";
+            this.Column33.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column33.Width = 110;
+            // 
+            // Column44
+            // 
+            this.Column44.HeaderText = "No. of Persons";
+            this.Column44.Name = "Column44";
+            this.Column44.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column44.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column44.Width = 50;
+            // 
+            // Column45
+            // 
+            this.Column45.HeaderText = "No. of Chldn..";
+            this.Column45.Name = "Column45";
+            this.Column45.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column45.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column45.Visible = false;
+            this.Column45.Width = 45;
+            // 
+            // Column35
+            // 
+            this.Column35.HeaderText = "rgstr_hdr_id";
+            this.Column35.Name = "Column35";
+            this.Column35.ReadOnly = true;
+            this.Column35.Visible = false;
+            // 
+            // Column36
+            // 
+            this.Column36.HeaderText = "row_id";
+            this.Column36.Name = "Column36";
+            this.Column36.ReadOnly = true;
+            this.Column36.Visible = false;
+            // 
+            // Column43
+            // 
+            this.Column43.HeaderText = "cstmr_id";
+            this.Column43.Name = "Column43";
+            this.Column43.ReadOnly = true;
+            this.Column43.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column43.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column43.Visible = false;
+            // 
+            // Column39
+            // 
+            this.Column39.HeaderText = "Points Scored";
+            this.Column39.Name = "Column39";
+            this.Column39.Width = 50;
+            // 
+            // Column40
+            // 
+            this.Column40.HeaderText = "Attach Docs.";
+            this.Column40.Name = "Column40";
+            this.Column40.Width = 50;
+            // 
+            // Column49
+            // 
+            this.Column49.HeaderText = "Invoices";
+            this.Column49.Name = "Column49";
+            this.Column49.Width = 52;
+            // 
+            // Column57
+            // 
+            this.Column57.HeaderText = "SponsorID";
+            this.Column57.Name = "Column57";
+            this.Column57.ReadOnly = true;
+            this.Column57.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column57.Visible = false;
+            // 
+            // Column58
+            // 
+            this.Column58.HeaderText = "Linked Firm / Sponsor";
+            this.Column58.Name = "Column58";
+            this.Column58.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column58.Width = 120;
+            // 
+            // Column59
+            // 
+            this.Column59.HeaderText = "...";
+            this.Column59.Name = "Column59";
+            this.Column59.Width = 25;
+            // 
+            // Column61
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = "0";
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column61.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column61.HeaderText = "Amount Billed";
+            this.Column61.Name = "Column61";
+            this.Column61.ReadOnly = true;
+            this.Column61.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Column60
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = "0";
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column60.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column60.HeaderText = "Amount Paid";
+            this.Column60.Name = "Column60";
+            this.Column60.ReadOnly = true;
+            this.Column60.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // contextMenuStrip1
             // 
@@ -1964,7 +2171,7 @@
             this.autoCalcMtrcValsButton.Image = global::EventsAndAttendance.Properties.Resources.plus_32;
             this.autoCalcMtrcValsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.autoCalcMtrcValsButton.Name = "autoCalcMtrcValsButton";
-            this.autoCalcMtrcValsButton.Size = new System.Drawing.Size(183, 22);
+            this.autoCalcMtrcValsButton.Size = new System.Drawing.Size(181, 22);
             this.autoCalcMtrcValsButton.Text = "AUTO-CALC METRIC VALUES";
             this.autoCalcMtrcValsButton.Click += new System.EventHandler(this.autoCalcMtrcValsButton_Click);
             // 
@@ -1974,7 +2181,7 @@
             this.saveMtrcsButton.Image = global::EventsAndAttendance.Properties.Resources.FloppyDisk;
             this.saveMtrcsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveMtrcsButton.Name = "saveMtrcsButton";
-            this.saveMtrcsButton.Size = new System.Drawing.Size(54, 22);
+            this.saveMtrcsButton.Size = new System.Drawing.Size(53, 22);
             this.saveMtrcsButton.Text = "SAVE";
             this.saveMtrcsButton.Click += new System.EventHandler(this.saveMtrcsButton_Click);
             // 
@@ -2187,7 +2394,7 @@
             this.autoLoadCostButton.Image = global::EventsAndAttendance.Properties.Resources._98;
             this.autoLoadCostButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.autoLoadCostButton.Name = "autoLoadCostButton";
-            this.autoLoadCostButton.Size = new System.Drawing.Size(132, 22);
+            this.autoLoadCostButton.Size = new System.Drawing.Size(131, 22);
             this.autoLoadCostButton.Text = "AUTO LOAD COSTS";
             this.autoLoadCostButton.Click += new System.EventHandler(this.autoLoadCostButton_Click);
             // 
@@ -2623,213 +2830,6 @@
             this.Column56.ReadOnly = true;
             this.Column56.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.Column56.Visible = false;
-            // 
-            // Column10
-            // 
-            this.Column10.FillWeight = 1F;
-            this.Column10.Frozen = true;
-            this.Column10.HeaderText = "ID No.";
-            this.Column10.MinimumWidth = 2;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column10.Width = 2;
-            // 
-            // Column41
-            // 
-            this.Column41.Frozen = true;
-            this.Column41.HeaderText = "Type";
-            this.Column41.Name = "Column41";
-            this.Column41.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column41.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column41.Width = 50;
-            // 
-            // Column42
-            // 
-            this.Column42.Frozen = true;
-            this.Column42.HeaderText = "...";
-            this.Column42.Name = "Column42";
-            this.Column42.Width = 25;
-            // 
-            // Column34
-            // 
-            this.Column34.HeaderText = "Person_ID";
-            this.Column34.Name = "Column34";
-            this.Column34.ReadOnly = true;
-            this.Column34.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column34.Visible = false;
-            // 
-            // Column27
-            // 
-            this.Column27.Frozen = true;
-            this.Column27.HeaderText = "Name/Description of Attendee / Visitor";
-            this.Column27.Name = "Column27";
-            this.Column27.ReadOnly = true;
-            this.Column27.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column27.Width = 130;
-            // 
-            // Column46
-            // 
-            this.Column46.Frozen = true;
-            this.Column46.HeaderText = "...";
-            this.Column46.Name = "Column46";
-            this.Column46.Width = 25;
-            // 
-            // Column28
-            // 
-            this.Column28.Frozen = true;
-            this.Column28.HeaderText = "Present?";
-            this.Column28.Name = "Column28";
-            this.Column28.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column28.Width = 55;
-            // 
-            // Column29
-            // 
-            this.Column29.Frozen = true;
-            this.Column29.HeaderText = "Date/Time In";
-            this.Column29.Name = "Column29";
-            this.Column29.ReadOnly = true;
-            this.Column29.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column29.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column29.Visible = false;
-            this.Column29.Width = 70;
-            // 
-            // Column30
-            // 
-            this.Column30.Frozen = true;
-            this.Column30.HeaderText = "...";
-            this.Column30.Name = "Column30";
-            this.Column30.Visible = false;
-            this.Column30.Width = 25;
-            // 
-            // Column31
-            // 
-            this.Column31.Frozen = true;
-            this.Column31.HeaderText = "Date/Time Out";
-            this.Column31.Name = "Column31";
-            this.Column31.ReadOnly = true;
-            this.Column31.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column31.Visible = false;
-            this.Column31.Width = 70;
-            // 
-            // Column32
-            // 
-            this.Column32.DividerWidth = 2;
-            this.Column32.Frozen = true;
-            this.Column32.HeaderText = "Attendance Time Details";
-            this.Column32.Name = "Column32";
-            // 
-            // Column33
-            // 
-            this.Column33.HeaderText = "Comments, Remarks, Visit Purpose";
-            this.Column33.Name = "Column33";
-            this.Column33.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column33.Width = 110;
-            // 
-            // Column44
-            // 
-            this.Column44.HeaderText = "No. of Persons";
-            this.Column44.Name = "Column44";
-            this.Column44.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column44.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column44.Width = 50;
-            // 
-            // Column45
-            // 
-            this.Column45.HeaderText = "No. of Chldn..";
-            this.Column45.Name = "Column45";
-            this.Column45.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column45.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column45.Visible = false;
-            this.Column45.Width = 45;
-            // 
-            // Column35
-            // 
-            this.Column35.HeaderText = "rgstr_hdr_id";
-            this.Column35.Name = "Column35";
-            this.Column35.ReadOnly = true;
-            this.Column35.Visible = false;
-            // 
-            // Column36
-            // 
-            this.Column36.HeaderText = "row_id";
-            this.Column36.Name = "Column36";
-            this.Column36.ReadOnly = true;
-            this.Column36.Visible = false;
-            // 
-            // Column43
-            // 
-            this.Column43.HeaderText = "cstmr_id";
-            this.Column43.Name = "Column43";
-            this.Column43.ReadOnly = true;
-            this.Column43.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column43.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column43.Visible = false;
-            // 
-            // Column39
-            // 
-            this.Column39.HeaderText = "Points Scored";
-            this.Column39.Name = "Column39";
-            this.Column39.Width = 50;
-            // 
-            // Column40
-            // 
-            this.Column40.HeaderText = "Attach Docs.";
-            this.Column40.Name = "Column40";
-            this.Column40.Width = 50;
-            // 
-            // Column49
-            // 
-            this.Column49.HeaderText = "Invoices";
-            this.Column49.Name = "Column49";
-            this.Column49.Width = 52;
-            // 
-            // Column57
-            // 
-            this.Column57.HeaderText = "SponsorID";
-            this.Column57.Name = "Column57";
-            this.Column57.ReadOnly = true;
-            this.Column57.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column57.Visible = false;
-            // 
-            // Column58
-            // 
-            this.Column58.HeaderText = "Linked Firm / Sponsor";
-            this.Column58.Name = "Column58";
-            this.Column58.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Column58.Width = 120;
-            // 
-            // Column59
-            // 
-            this.Column59.HeaderText = "...";
-            this.Column59.Name = "Column59";
-            this.Column59.Width = 25;
-            // 
-            // Column61
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = "0";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column61.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column61.HeaderText = "Amount Billed";
-            this.Column61.Name = "Column61";
-            this.Column61.ReadOnly = true;
-            this.Column61.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Column60
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = "0";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column60.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column60.HeaderText = "Amount Paid";
-            this.Column60.Name = "Column60";
-            this.Column60.ReadOnly = true;
-            this.Column60.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // attndRecsForm
             // 

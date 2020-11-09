@@ -73,7 +73,6 @@ namespace Accounting.Forms
 
             this.vwSQLDetButton.Enabled = vwSQL;
             this.rcHstryDetButton.Enabled = rcHstry;
-
         }
 
         #endregion
@@ -1051,17 +1050,8 @@ namespace Accounting.Forms
                 if (Global.mnFrm.cmCde.showMsg("Are you sure you want to CLOSE the selected Period?" +
         "\r\nThis action cannot be undone!", 1) == DialogResult.No)
                 {
-                    //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
                     return;
                 }
-                bool isAnyRnng = true;
-                int witcntr = 0;
-                do
-                {
-                    witcntr++;
-                    isAnyRnng = Global.isThereANActvActnPrcss("5,6", "10 second");
-                }
-                while (isAnyRnng == true);
 
                 string reportName = "Period Close Process";
                 long rptID = -1;
@@ -1090,82 +1080,6 @@ namespace Accounting.Forms
                 }
                 Global.mnFrm.rfrshTrnsButton.PerformClick();
                 this.rfrshDetButton.PerformClick();
-                //string paramIDs = ""; sdfs
-                //string paramVals = "";
-                //string outputUsd = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "output_type", rptID);
-                //string orntn = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "portrait_lndscp", rptID);
-
-                //DataSet dtstPrm = Global.get_AllParams(rptID);
-                //for (int y = 0; y < dtstPrm.Tables[0].Rows.Count; y++)
-                //{
-                //  paramIDs += dtstPrm.Tables[0].Rows[y][0].ToString() + "|";
-                //  if (dtstPrm.Tables[0].Rows[y][2].ToString() == "{:orgID}")
-                //  {
-                //    paramVals += Global.mnFrm.cmCde.Org_id.ToString() + "|";
-                //  }
-                //  else if (dtstPrm.Tables[0].Rows[y][2].ToString() == "{:closing_dte}")
-                //  {
-                //    paramVals += prdEndDte.Substring(0, 10) + "|";
-                //  }
-                //  else
-                //  {
-                //    paramVals += dtstPrm.Tables[0].Rows[y][3].ToString() + "|";
-                //  }
-                //}
-                //string colsToGrp = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_group", rptID);
-                //string colsToCnt = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_count", rptID);
-                //string colsToSu = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_sum", rptID);
-                //string colsToAvrg = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_average", rptID);
-                //string colsToFrmt = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_no_frmt", rptID);
-                //string rpTitle = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "report_name", rptID);
-
-                ////Report Title
-                //paramVals += rpTitle + "|";
-                //paramIDs += Global.sysParaIDs[0] + "|";
-                ////Cols To Group
-                //paramVals += colsToGrp + "|";
-                //paramIDs += Global.sysParaIDs[1] + "|";
-                ////Cols To Count
-                //paramVals += colsToCnt + "|";
-                //paramIDs += Global.sysParaIDs[2] + "|";
-                ////Cols To Sum
-                //paramVals += colsToSu + "|";
-                //paramIDs += Global.sysParaIDs[3] + "|";
-                ////colsToAvrg
-                //paramVals += colsToAvrg + "|";
-                //paramIDs += Global.sysParaIDs[4] + "|";
-                ////colsToFrmt
-                //paramVals += colsToFrmt + "|";
-                //paramIDs += Global.sysParaIDs[5] + "|";
-
-                ////outputUsd
-                //paramVals += outputUsd + "|";
-                //paramIDs += Global.sysParaIDs[6] + "|";
-
-                ////orntnUsd
-                //paramVals += orntn + "|";
-                //paramIDs += Global.sysParaIDs[7] + "|";
-
-                //Global.createRptRn(Global.myBscActn.user_id, datestr, rptID, paramIDs, paramVals, outputUsd, orntn);
-                //Global.updtActnPrcss(6);
-
-                //long rptRunID = Global.getRptRnID(rptID, Global.myBscActn.user_id, datestr);
-                //long msg_id = Global.mnFrm.cmCde.getLogMsgID("rpt.rpt_run_msgs", "Process Run", rptRunID);
-                //if (msg_id <= 0)
-                //{
-                //  Global.mnFrm.cmCde.createLogMsg(datestr +
-                //          " .... Report/Process Run is about to Start...(Being run by " +
-                //          Global.mnFrm.cmCde.getUsername(Global.myBscActn.user_id) + ")", "rpt.rpt_run_msgs", "Process Run", rptRunID, datestr);
-                //}
-                //msg_id = Global.mnFrm.cmCde.getLogMsgID("rpt.rpt_run_msgs", "Process Run", rptRunID);
-
-
-                //Global.mnFrm.cmCde.updateLogMsg(msg_id, "\r\n\r\n" + paramIDs + "\r\n" + paramVals +
-                //        "\r\n\r\nOUTPUT FORMAT: " + outputUsd + "\r\nORIENTATION: " + orntn, "rpt.rpt_run_msgs", datestr);
-
-                //Global.mnFrm.cmCde.showMsg("Successfully created the Background Process that will Complete this Action!\r\n" +
-                //"Please visit Reports/Processes to view its status: \r\nRun ID: " + rptRunID + " and Process Name: Period Close Process", 3);
-
             }
             else if (curStatus == "Closed")
             {
@@ -1177,7 +1091,7 @@ namespace Accounting.Forms
                 string rptName = "";
                 string prdStrDte = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_periods_det", "period_det_id", "period_start_date", prddetID);
                 string prdEndDte = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_periods_det", "period_det_id", "period_end_date", prddetID);
-                string isprdEndDtePstd = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_period_close_dates", "period_close_date", "is_posted", prdEndDte);
+                string isprdEndDtePstd = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_period_close_dates", "period_close_date", "accb.is_gl_batch_pstd(gl_batch_id)", prdEndDte);
                 if (DateTime.ParseExact(prdEndDte, "yyyy-MM-dd HH:mm:ss",
               System.Globalization.CultureInfo.InvariantCulture) ==
               DateTime.ParseExact(Global.mnFrm.cmCde.getLastPrdClseDate(), "dd-MMM-yyyy HH:mm:ss",
@@ -1191,8 +1105,6 @@ namespace Accounting.Forms
                     else
                     {
                         rptName = "Reversal of Posted Period Close Process";
-                        //Global.mnFrm.cmCde.showMsg("Only the Last Closed Period can be Reversed!", 0);
-                        //return;
                     }
                 }
                 else
@@ -1213,19 +1125,8 @@ namespace Accounting.Forms
                   + "\r\nAre you sure you want to RE-OPEN the selected Period?" +
         "\r\nThis action cannot be undone!", 1) == DialogResult.No)
                 {
-                    //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
                     return;
                 }
-
-                bool isAnyRnng = true;
-                int witcntr = 0;
-                do
-                {
-                    witcntr++;
-                    isAnyRnng = Global.isThereANActvActnPrcss("5,6", "10 second");
-                }
-                while (isAnyRnng == true);
-
                 string reportTitle = rptName.ToUpper();
                 string paramRepsNVals = "{:orgID}~" + Global.mnFrm.cmCde.Org_id.ToString() + "|{:closing_dte}~" + prdEndDte;
                 //Global.mnFrm.cmCde.showSQLNoPermsn(reportName + "\r\n" + paramRepsNVals);
@@ -1242,85 +1143,7 @@ namespace Accounting.Forms
                 }
                 Global.mnFrm.rfrshTrnsButton.PerformClick();
                 this.rfrshDetButton.PerformClick();
-
-                //string datestr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
-                //string paramIDs = "";
-                //string paramVals = "";
-                //string outputUsd = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "output_type", rptID);
-                //string orntn = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "portrait_lndscp", rptID);
-
-                //DataSet dtstPrm = Global.get_AllParams(rptID);
-                //for (int y = 0; y < dtstPrm.Tables[0].Rows.Count; y++)
-                //{
-                //    paramIDs += dtstPrm.Tables[0].Rows[y][0].ToString() + "|";
-                //    if (dtstPrm.Tables[0].Rows[y][2].ToString() == "{:orgID}")
-                //    {
-                //        paramVals += Global.mnFrm.cmCde.Org_id.ToString() + "|";
-                //    }
-                //    else if (dtstPrm.Tables[0].Rows[y][2].ToString() == "{:closing_dte}")
-                //    {
-                //        paramVals += prdEndDte.Substring(0, 10) + "|";
-                //    }
-                //    else
-                //    {
-                //        paramVals += dtstPrm.Tables[0].Rows[y][3].ToString() + "|";
-                //    }
-                //}
-                //string colsToGrp = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_group", rptID);
-                //string colsToCnt = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_count", rptID);
-                //string colsToSu = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_sum", rptID);
-                //string colsToAvrg = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_average", rptID);
-                //string colsToFrmt = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "cols_to_no_frmt", rptID);
-                //string rpTitle = Global.mnFrm.cmCde.getGnrlRecNm("rpt.rpt_reports", "report_id", "report_name", rptID);
-
-                ////Report Title
-                //paramVals += rpTitle + "|";
-                //paramIDs += Global.sysParaIDs[0] + "|";
-                ////Cols To Group
-                //paramVals += colsToGrp + "|";
-                //paramIDs += Global.sysParaIDs[1] + "|";
-                ////Cols To Count
-                //paramVals += colsToCnt + "|";
-                //paramIDs += Global.sysParaIDs[2] + "|";
-                ////Cols To Sum
-                //paramVals += colsToSu + "|";
-                //paramIDs += Global.sysParaIDs[3] + "|";
-                ////colsToAvrg
-                //paramVals += colsToAvrg + "|";
-                //paramIDs += Global.sysParaIDs[4] + "|";
-                ////colsToFrmt
-                //paramVals += colsToFrmt + "|";
-                //paramIDs += Global.sysParaIDs[5] + "|";
-
-                ////outputUsd
-                //paramVals += outputUsd + "|";
-                //paramIDs += Global.sysParaIDs[6] + "|";
-
-                ////orntnUsd
-                //paramVals += orntn + "|";
-                //paramIDs += Global.sysParaIDs[7] + "|";
-
-                //Global.createRptRn(Global.myBscActn.user_id, datestr, rptID, paramIDs, paramVals, outputUsd, orntn);
-                //Global.updtActnPrcss(6);
-
-                //long rptRunID = Global.getRptRnID(rptID, Global.myBscActn.user_id, datestr);
-                //long msg_id = Global.mnFrm.cmCde.getLogMsgID("rpt.rpt_run_msgs", "Process Run", rptRunID);
-                //if (msg_id <= 0)
-                //{
-                //    Global.mnFrm.cmCde.createLogMsg(datestr +
-                //            " .... Report/Process Run is about to Start...(Being run by " +
-                //            Global.mnFrm.cmCde.getUsername(Global.myBscActn.user_id) + ")", "rpt.rpt_run_msgs", "Process Run", rptRunID, datestr);
-                //}
-                //msg_id = Global.mnFrm.cmCde.getLogMsgID("rpt.rpt_run_msgs", "Process Run", rptRunID);
-
-
-                //Global.mnFrm.cmCde.updateLogMsg(msg_id, "\r\n\r\n" + paramIDs + "\r\n" + paramVals +
-                //        "\r\n\r\nOUTPUT FORMAT: " + outputUsd + "\r\nORIENTATION: " + orntn, "rpt.rpt_run_msgs", datestr);
-
-                //Global.mnFrm.cmCde.showMsg("Successfully created the Background Process that will Complete this Action!\r\n" +
-                //"Please visit Reports/Processes to view its status: \r\nRun ID: " + rptRunID + " and Process Name: " + rptName, 3);
-
-            }
+             }
             else
             {
                 Global.mnFrm.cmCde.showMsg("Invalid Current Status!", 4);

@@ -279,7 +279,8 @@ run_at_spcfd_hour) " +
           string ownrMdl, string rptPrcs, string rptSQL, bool isenbld,
           string colsGrp, string colsCnt, string colsSum, string colsAvrg
           , string colsNoFrmt, string outptTyp, string orntn,
-          string prcRnnr, string rptLyout, string dlmtr, string img_cols, string jxrmlFileNm)
+          string prcRnnr, string rptLyout, string dlmtr, string img_cols,
+          string jxrmlFileNm, string preRptSQL, string pstRptSQL)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = "INSERT INTO rpt.rpt_reports(" +
@@ -287,7 +288,7 @@ run_at_spcfd_hour) " +
                   "created_by, creation_date, last_update_by, last_update_date, " +
                   "rpt_or_sys_prcs, is_enabled, cols_to_group, cols_to_count, " +
             @"cols_to_sum, cols_to_average, cols_to_no_frmt, output_type, portrait_lndscp, 
-            rpt_layout, imgs_col_nos, csv_delimiter, process_runner, jrxml_file_name) " +
+            rpt_layout, imgs_col_nos, csv_delimiter, process_runner, jrxml_file_name, pre_rpt_sql_query, pst_rpt_sql_query) " +
                   "VALUES ('" + rptNm.Replace("'", "''") + "', '" + rptDesc.Replace("'", "''") +
                   "', '" + rptSQL.Replace("'", "''") + "', '" + ownrMdl.Replace("'", "''") + "', " +
                      Global.myRpt.user_id + ", '" + dateStr +
@@ -305,6 +306,8 @@ run_at_spcfd_hour) " +
                      "', '" + dlmtr.Replace("'", "''") +
                      "', '" + prcRnnr.Replace("'", "''") +
                      "', '" + jxrmlFileNm.Replace("'", "''") +
+                     "', '" + preRptSQL.Replace("'", "''") +
+                     "', '" + pstRptSQL.Replace("'", "''") +
                      "')";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
@@ -382,13 +385,13 @@ run_at_spcfd_hour) " +
 
         public static void createParam(long rptID, string paramNm,
       string qryRep, string dfltVal, bool isrqrd, string lov_name
-          , string dataType, string datefrmt, string lovNm)
+          , string dataType, string datefrmt, string lovNm, bool isdsplyd)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = "INSERT INTO rpt.rpt_report_parameters(" +
                   "report_id, parameter_name, paramtr_rprstn_nm_in_query, " +
                   "created_by, creation_date, last_update_by, last_update_date, " +
-                  "default_value, is_required, lov_name_id, param_data_type, date_format, lov_name) " +
+                  "default_value, is_required, lov_name_id, param_data_type, date_format, lov_name, shd_be_dsplyd) " +
                   "VALUES (" + rptID + ", '" + paramNm.Replace("'", "''") +
                   "', '" + qryRep.Replace("'", "''") + "', " +
                      Global.myRpt.user_id + ", '" + dateStr +
@@ -396,7 +399,9 @@ run_at_spcfd_hour) " +
                      ", '" + dateStr + "', '" + dfltVal.Replace("'", "''") + "', '" +
                      Global.mnFrm.cmCde.cnvrtBoolToBitStr(isrqrd) +
                      "', '" + lov_name.Replace("'", "''") + "', '" + dataType.Replace("'", "''") +
-                     "', '" + datefrmt.Replace("'", "''") + "', '" + lovNm.Replace("'", "''") + "')";
+                     "', '" + datefrmt.Replace("'", "''") + "', '" + lovNm.Replace("'", "''") + "', '" +
+                     Global.mnFrm.cmCde.cnvrtBoolToBitStr(isdsplyd) +
+                     "')";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
@@ -487,7 +492,8 @@ run_at_spcfd_hour) " +
           string ownrMdl, string rptPrcs, string rptSQL, bool isenbld,
           string colsGrp, string colsCnt, string colsSum, string colsAvrg,
           string colsNoFrmt, string outptTyp, string orntn,
-          string prcRnnr, string rptLyout, string dlmtr, string img_cols, string jxrmlFileNm)
+          string prcRnnr, string rptLyout, string dlmtr, string img_cols
+            , string jxrmlFileNm, string preRptSQL, string pstRptSQL)
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
@@ -512,6 +518,8 @@ run_at_spcfd_hour) " +
                      "', csv_delimiter='" + dlmtr.Replace("'", "''") +
                      "', process_runner='" + prcRnnr.Replace("'", "''") +
                      "', jrxml_file_name='" + jxrmlFileNm.Replace("'", "''") +
+                     "', pre_rpt_sql_query='" + preRptSQL.Replace("'", "''") +
+                     "', pst_rpt_sql_query='" + pstRptSQL.Replace("'", "''") +
                      "' " +
         "WHERE (report_id = " + rptid + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
@@ -519,7 +527,7 @@ run_at_spcfd_hour) " +
 
         public static void updateParam(long paramid, string paramNm,
       string qryRep, string dfltVal, bool isrqrd, string lov_name,
-    string dataType, string datefrmt, string lovNm)
+    string dataType, string datefrmt, string lovNm, bool isdsplyd)
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
@@ -533,7 +541,9 @@ run_at_spcfd_hour) " +
                      "', lov_name_id = '" + lov_name.Replace("'", "''") +
                      "', param_data_type = '" + dataType.Replace("'", "''") +
                      "', date_format = '" + datefrmt.Replace("'", "''") +
-                     "', lov_name = '" + lovNm.Replace("'", "''") + "' " +
+                     "', lov_name = '" + lovNm.Replace("'", "''") + 
+                     "', shd_be_dsplyd='" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(isdsplyd) +
+                     "' " +
           "WHERE (parameter_id = " + paramid + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
@@ -634,7 +644,7 @@ run_at_spcfd_hour) " +
         {
             string selSQL = @"SELECT age(now(), 
 to_timestamp(CASE WHEN rnnr_lst_actv_dtetme='' THEN '2013-01-01 00:00:00' ELSE rnnr_lst_actv_dtetme END, 'YYYY-MM-DD HH24:MI:SS')) " +
-              @"<= interval '50 second' 
+              @"<= interval '70 second' 
        FROM rpt.rpt_prcss_rnnrs WHERE rnnr_name='" + rnnrNm.Replace("'", "''") +
               "'";
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(selSQL);
@@ -796,7 +806,7 @@ to_timestamp(CASE WHEN rnnr_lst_actv_dtetme='' THEN '2013-01-01 00:00:00' ELSE r
         public static DataSet get_AllParams(long rptID)
         {
             string strSql = "SELECT parameter_id, parameter_name, paramtr_rprstn_nm_in_query, default_value, " +
-       "is_required, lov_name_id, param_data_type, date_format FROM rpt.rpt_report_parameters WHERE report_id = " + rptID + " ORDER BY parameter_name";
+       "is_required, lov_name_id, param_data_type, date_format, shd_be_dsplyd FROM rpt.rpt_report_parameters WHERE report_id = " + rptID + " ORDER BY parameter_name";
             Global.mnFrm.params_SQL = strSql;
 
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
@@ -806,7 +816,7 @@ to_timestamp(CASE WHEN rnnr_lst_actv_dtetme='' THEN '2013-01-01 00:00:00' ELSE r
         public static DataSet get_AllParams(Int64 offset, int limit_size)
         {
             string strSql = "SELECT parameter_id, parameter_name, paramtr_rprstn_nm_in_query, default_value, " +
-       "is_required, lov_name_id, param_data_type, date_format, rpt.get_rpt_name(report_id), lov_name FROM rpt.rpt_report_parameters ORDER BY report_id, parameter_name  LIMIT " + limit_size +
+       "is_required, lov_name_id, param_data_type, date_format, rpt.get_rpt_name(report_id), lov_name, shd_be_dsplyd FROM rpt.rpt_report_parameters ORDER BY report_id, parameter_name  LIMIT " + limit_size +
         " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
             Global.mnFrm.params_SQL = strSql;
 
@@ -997,7 +1007,7 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT distinct a.report_id, a.report_name, a.report_desc, a.rpt_sql_query, " +
               "a.owner_module, a.rpt_or_sys_prcs, a.is_enabled, a.cols_to_group, a.cols_to_count, " +
               @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
-      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
       FROM rpt.rpt_reports a, " +
               "rpt.rpt_reports_allwd_roles b  " +
           "WHERE ((a.report_id = b.report_id) and (a.report_name ilike '" + searchWord.Replace("'", "''") +
@@ -1009,7 +1019,7 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT distinct a.report_id, a.report_name, a.report_desc, a.rpt_sql_query, " +
               "a.owner_module, a.rpt_or_sys_prcs, a.is_enabled, a.cols_to_group, a.cols_to_count, " +
               @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
-      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
       FROM rpt.rpt_reports a, " +
               "rpt.rpt_reports_allwd_roles b  " +
         "WHERE ((a.report_id = b.report_id) and (a.report_desc ilike '" + searchWord.Replace("'", "''") +
@@ -1021,12 +1031,24 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT distinct a.report_id, a.report_name, a.report_desc, a.rpt_sql_query, " +
               "a.owner_module, a.rpt_or_sys_prcs, a.is_enabled, a.cols_to_group, a.cols_to_count, " +
               @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
-      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
       FROM rpt.rpt_reports a, " +
               "rpt.rpt_reports_allwd_roles b  " +
         "WHERE ((a.report_id = b.report_id) and (a.owner_module ilike '" + searchWord.Replace("'", "''") +
         "') and (b.user_role_id IN (" + Global.concatCurRoleIDs() + "))) " + orderBy + " LIMIT " + limit_size +
         " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
+            }
+            else if (searchIn == "Report ID")
+            {
+                strSql = "SELECT distinct a.report_id, a.report_name, a.report_desc, a.rpt_sql_query, " +
+                "a.owner_module, a.rpt_or_sys_prcs, a.is_enabled, a.cols_to_group, a.cols_to_count, " +
+                @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
+      FROM rpt.rpt_reports a, " +
+                "rpt.rpt_reports_allwd_roles b  " +
+          "WHERE ((a.report_id = b.report_id) and (''||a.report_id ilike '" + searchWord.Replace("'", "''") +
+          "') and (b.user_role_id IN (" + Global.concatCurRoleIDs() + "))) " + orderBy + " LIMIT " + limit_size +
+          " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
             }
 
             Global.mnFrm.rpt_SQL = strSql;
@@ -1057,6 +1079,13 @@ rpt.get_rpt_name(program_unit_id) prg_nm
               "rpt.rpt_reports_allwd_roles b  " +
         "WHERE ((a.report_id = b.report_id) and (a.owner_module ilike '" + searchWord.Replace("'", "''") +
         "') and (b.user_role_id IN (" + Global.concatCurRoleIDs() + ")))";
+            }
+            else if (searchIn == "Report ID")
+            {
+                strSql = "SELECT count(distinct a.report_id) FROM rpt.rpt_reports a, " +
+                "rpt.rpt_reports_allwd_roles b  " +
+          "WHERE ((a.report_id = b.report_id) and (''||a.report_id ilike '" + searchWord.Replace("'", "''") +
+          "') and (b.user_role_id IN (" + Global.concatCurRoleIDs() + ")))";
             }
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             if (dtst.Tables[0].Rows.Count > 0)
@@ -1105,7 +1134,7 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT report_id, report_name, report_desc, rpt_sql_query, " +
               "owner_module, rpt_or_sys_prcs, is_enabled, cols_to_group, cols_to_count, " +
               @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
-      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
       FROM rpt.rpt_reports a " +
           "WHERE ((report_name ilike '" + searchWord.Replace("'", "''") +
           "')) " + orderBy + " LIMIT " + limit_size +
@@ -1116,7 +1145,7 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT report_id, report_name, report_desc, rpt_sql_query, " +
          "owner_module, rpt_or_sys_prcs, is_enabled, cols_to_group, cols_to_count, " +
               @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
-      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
       FROM rpt.rpt_reports a " +
         "WHERE ((report_desc ilike '" + searchWord.Replace("'", "''") +
         "')) " + orderBy + " LIMIT " + limit_size +
@@ -1127,9 +1156,20 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT report_id, report_name, report_desc, rpt_sql_query, " +
          "owner_module, rpt_or_sys_prcs, is_enabled, cols_to_group, cols_to_count, " +
               @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
-      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
       FROM rpt.rpt_reports a " +
         "WHERE ((owner_module ilike '" + searchWord.Replace("'", "''") +
+        "')) " + orderBy + " LIMIT " + limit_size +
+        " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
+            }
+            else if (searchIn == "Report ID")
+            {
+                strSql = "SELECT report_id, report_name, report_desc, rpt_sql_query, " +
+         "owner_module, rpt_or_sys_prcs, is_enabled, cols_to_group, cols_to_count, " +
+              @"a.cols_to_sum, a.cols_to_average, a.cols_to_no_frmt, a.output_type, a.portrait_lndscp
+      ,a.process_runner , a.rpt_layout, a.imgs_col_nos, a.csv_delimiter, a.jrxml_file_name, a.pre_rpt_sql_query, a.pst_rpt_sql_query
+      FROM rpt.rpt_reports a " +
+        "WHERE ((''||report_id ilike '" + searchWord.Replace("'", "''") +
         "')) " + orderBy + " LIMIT " + limit_size +
         " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
             }
@@ -1159,6 +1199,13 @@ rpt.get_rpt_name(program_unit_id) prg_nm
                 strSql = "SELECT count(1) FROM rpt.rpt_reports " +
         "WHERE ((owner_module ilike '" + searchWord.Replace("'", "''") +
         "'))";
+            }
+            else if (searchIn == "Report ID")
+            {
+                strSql = "SELECT count(1) " +
+      "FROM rpt.rpt_reports a " +
+        "WHERE ((''||report_id ilike '" + searchWord.Replace("'", "''") +
+        "')) ";
             }
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             if (dtst.Tables[0].Rows.Count > 0)

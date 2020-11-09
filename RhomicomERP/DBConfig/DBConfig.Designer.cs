@@ -131,7 +131,6 @@ namespace DBConfig
             this.pgDirTextBox.Location = new System.Drawing.Point(9, 32);
             this.pgDirTextBox.MaxLength = 200;
             this.pgDirTextBox.Name = "pgDirTextBox";
-            this.pgDirTextBox.ReadOnly = true;
             this.pgDirTextBox.Size = new System.Drawing.Size(295, 21);
             this.pgDirTextBox.TabIndex = 1;
             // 
@@ -596,6 +595,8 @@ namespace DBConfig
             "Accounting with Payroll Only",
             "Person Records + Hospitality Only",
             "Person Records + Events Only",
+            "Accounting + Payroll + Person Records + Events Only",
+            "Accounting + Payroll + Person Records + Projects Only",
             "Basic Modules Only",
             "Basic Modules + Hospitality Only",
             "Basic Modules + Events Only",

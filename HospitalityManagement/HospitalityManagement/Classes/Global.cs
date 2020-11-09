@@ -438,7 +438,7 @@ AND to_timestamp(a.end_date,'YYYY-MM-DD HH24:MI:SS')))";
             return -1;
         }
 
-        public static double getTrnsDatePrice(long hdrid, string trnsDte)
+        public static double getTrnsDatePrice(long hdrid, string trnsDte, string calcMthd)
         {
             if (trnsDte.Length > 20)
             {
@@ -454,17 +454,23 @@ AND to_timestamp(a.end_date,'YYYY-MM-DD HH24:MI:SS')))";
             {
                 trnsDte = Global.mnFrm.cmCde.getDB_Date_time();
             }
-
+            string trnsDte1 = trnsDte.Substring(0, 10);
+            string whrcls = " and (to_timestamp('" + trnsDte + @"','YYYY-MM-DD HH24:MI:SS') between 
+to_timestamp(a.start_date,'YYYY-MM-DD HH24:MI:SS') 
+AND to_timestamp(a.end_date,'YYYY-MM-DD HH24:MI:SS'))";
+            if (calcMthd == "Hours")
+            {
+                whrcls = " and (to_timestamp('" + trnsDte + "','YYYY-MM-DD HH24:MI:SS') between to_timestamp('" + trnsDte1 + "' || substring(a.start_date, 11), 'YYYY-MM-DD HH24:MI:SS') "
+                   + "AND to_timestamp('" + trnsDte1 + "' ||substring(a.end_date,11),'YYYY-MM-DD HH24:MI:SS'))";
+            }
             string strSql = "SELECT a.selling_price " +
              "FROM hotl.service_type_prices a " +
              "WHERE(a.service_type_id = " + hdrid +
-             " and (to_timestamp('" + trnsDte + @"','YYYY-MM-DD HH24:MI:SS') between 
-to_timestamp(a.start_date,'YYYY-MM-DD HH24:MI:SS') 
-AND to_timestamp(a.end_date,'YYYY-MM-DD HH24:MI:SS')))";
+             whrcls + ")";
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             if (dtst.Tables[0].Rows.Count > 0)
             {
-                return int.Parse(dtst.Tables[0].Rows[0][0].ToString());
+                return double.Parse(dtst.Tables[0].Rows[0][0].ToString());
             }
             return -1;
         }
@@ -1231,7 +1237,7 @@ and a.prnt_doc_typ = k.doc_type ORDER BY 1 LIMIT 1 OFFSET 0) ilike '" + searchWo
                 whereClause = "(to_char(to_timestamp(a.start_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') ilike '" + searchWord.Replace("'", "''") +
             "')";
             }
-            strSql = @"SELECT DISTINCT a.check_in_id, a.doc_num, y.invc_number 
+            strSql = @"SELECT a.check_in_id, a.doc_num, y.invc_number 
 FROM hotl.checkins_hdr a 
 LEFT OUTER JOIN hotl.service_types d ON (a.service_type_id=d.service_type_id )
 LEFT OUTER JOIN hotl.rooms b ON (a.service_det_id = b.room_id)
@@ -1416,7 +1422,7 @@ and k.prnt_doc_typ = a.doc_type ORDER BY 1 LIMIT 1 OFFSET 0) IS NULL)";
                 whereClause = "(to_char(to_timestamp(a.start_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') ilike '" + searchWord.Replace("'", "''") +
             "')";
             }
-            strSql = @"SELECT DISTINCT a.check_in_id, a.doc_num, y.invc_number 
+            strSql = @"SELECT a.check_in_id, a.doc_num, y.invc_number 
 FROM hotl.checkins_hdr a 
 LEFT OUTER JOIN scm.scm_sales_invc_hdr y ON ((a.check_in_id = y.other_mdls_doc_id or (a.prnt_chck_in_id=y.other_mdls_doc_id and y.other_mdls_doc_id>0))
 and (a.doc_type=y.other_mdls_doc_type or (a.prnt_doc_typ=y.other_mdls_doc_type and a.prnt_doc_typ != ''))) " +
@@ -1811,8 +1817,32 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
       string docType, string strtDte, string endDte, int srvsTypID,
          int srvsDteID, int noAdlts, int NoChldrn, int spnsID, int spnsSiteID,
          int cstmrID, int cstmrSiteID, string srcPlace, string destPlace, string otherInfo,
-         string fcltyType, string docStatus, long prntChckIn, string prntDocType, bool useNights)
+         string fcltyType, string docStatus, long prntChckIn, string prntDocType, string useNights)
         {
+            if (useNights == "Nights")
+            {
+                useNights = "0";
+            }
+            else if (useNights == "Days")
+            {
+                useNights = "1";
+            }
+            else if (useNights == "Hours")
+            {
+                useNights = "2";
+            }
+            else if (useNights == "Months")
+            {
+                useNights = "3";
+            }
+            else if (useNights == "Years")
+            {
+                useNights = "4";
+            }
+            else if (useNights == "Term")
+            {
+                useNights = "5";
+            }
             strtDte = DateTime.ParseExact(
          strtDte, "dd-MMM-yyyy HH:mm:ss",
          System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
@@ -1847,7 +1877,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
                   "', '" + fcltyType.Replace("'", "''") +
                   "', '" + docStatus.Replace("'", "''") +
                   "', " + prntChckIn + ", '" + prntDocType.Replace("'", "''") +
-                  "', '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(useNights) + "')";
+                  "', '" + useNights + "')";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
@@ -1855,8 +1885,32 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
       string docType, string strtDte, string endDte, int srvsTypID,
          int srvsDteID, int noAdlts, int NoChldrn, int spnsID, int spnsSiteID,
          int cstmrID, int cstmrSiteID, string srcPlace, string destPlace, string otherInfo,
-         string fcltyType, string docStatus, long prntChckIn, string prntDocType, bool useNights)
+         string fcltyType, string docStatus, long prntChckIn, string prntDocType, string useNights)
         {
+            if (useNights == "Nights")
+            {
+                useNights = "0";
+            }
+            else if (useNights == "Days")
+            {
+                useNights = "1";
+            }
+            else if (useNights == "Hours")
+            {
+                useNights = "2";
+            }
+            else if (useNights == "Months")
+            {
+                useNights = "3";
+            }
+            else if (useNights == "Years")
+            {
+                useNights = "4";
+            }
+            else if (useNights == "Term")
+            {
+                useNights = "5";
+            }
             strtDte = DateTime.ParseExact(
          strtDte, "dd-MMM-yyyy HH:mm:ss",
          System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
@@ -1892,7 +1946,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
                   "', doc_status='" + docStatus.Replace("'", "''") +
                   "', prnt_chck_in_id = " + prntChckIn +
                   ", prnt_doc_typ='" + prntDocType.Replace("'", "''") +
-                  "', use_nights = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(useNights) + "' WHERE (check_in_id =" + chckInID + ")";
+                  "', use_nights = '" + useNights + "' WHERE (check_in_id =" + chckInID + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
 
@@ -1973,7 +2027,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
         #region "RECEIVABLES..."
         public static int get_DfltRcvblAcnt(int orgID)
         {
-            string strSql = "SELECT sales_rcvbl_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_rcvbl_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -1987,7 +2041,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltBadDbtAcnt(int orgID)
         {
-            string strSql = "SELECT bad_debt_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", bad_debt_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2001,7 +2055,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltInvAcnt(int orgID)
         {
-            string strSql = "SELECT itm_inv_asst_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", itm_inv_asst_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2015,7 +2069,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltCSGAcnt(int orgID)
         {
-            string strSql = "SELECT cost_of_goods_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", cost_of_goods_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2029,7 +2083,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltExpnsAcnt(int orgID)
         {
-            string strSql = "SELECT expense_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", expense_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2043,7 +2097,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltRvnuAcnt(int orgID)
         {
-            string strSql = "SELECT rvnu_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rvnu_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2057,7 +2111,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltSRAcnt(int orgID)
         {
-            string strSql = "SELECT sales_rtrns_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_rtrns_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2071,7 +2125,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltCashAcnt(int orgID)
         {
-            string strSql = "SELECT sales_cash_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_cash_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2085,7 +2139,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltCheckAcnt(int orgID)
         {
-            string strSql = "SELECT sales_check_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_check_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2098,7 +2152,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
         }
         public static int get_DfltAdjstLbltyAcnt(int orgID)
         {
-            string strSql = "SELECT inv_adjstmnts_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", inv_adjstmnts_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2112,7 +2166,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltAccPyblAcnt(int orgID)
         {
-            string strSql = "SELECT rcpt_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rcpt_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2126,7 +2180,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
 
         public static int get_DfltPurchRtrnAcnt(int orgID)
         {
-            string strSql = "SELECT prchs_rtrns_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", prchs_rtrns_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -2137,6 +2191,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:
             }
             return -1;
         }
+
         public static long getNewRcvblsLnID()
         {
             //string strSql = "select nextval('accb.accb_trnsctn_batches_batch_id_seq'::regclass);";

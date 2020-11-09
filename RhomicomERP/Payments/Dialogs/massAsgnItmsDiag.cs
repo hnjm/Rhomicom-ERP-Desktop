@@ -204,7 +204,7 @@ namespace InternalPayments.Dialogs
           }
           else if (this.grpComboBox.Text == "Site/Location")
           {
-            this.grpNmTextBox.Text = Global.mnFrm.cmCde.getSiteName(int.Parse(selVals[i]));
+            this.grpNmTextBox.Text = Global.mnFrm.cmCde.getSiteNameDesc(int.Parse(selVals[i]));
           }
           else if (this.grpComboBox.Text == "Person Type")
           {

@@ -368,7 +368,7 @@ namespace StoresAndInventoryManager.Forms
                 this.invAcctextBox.Select();
                 return 0;
             }
-            if (this.cogsAcctextBox.Text == "" && !(itemTypecomboBox.SelectedItem.ToString().Equals("Expense Item") ||
+            /*if (this.cogsAcctextBox.Text == "" && !(itemTypecomboBox.SelectedItem.ToString().Equals("Expense Item") ||
                 itemTypecomboBox.SelectedItem.ToString().Equals("Services")))
             {
                 Global.mnFrm.cmCde.showMsg("cost of Goods Sold Account cannot be Empty!", 0);
@@ -376,14 +376,15 @@ namespace StoresAndInventoryManager.Forms
                 this.cogsAcctextBox.Select();
                 return 0;
             }
-            else if (this.salesRevtextBox.Text == "")
+            else*/
+            if (this.salesRevtextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Sales Revenue Account cannot be Empty!", 0);
                 tabControlTemplate.SelectedTab = this.tabPageGLAccounts;
                 this.salesRevtextBox.Select();
                 return 0;
             }
-            else if (this.salesRettextBox.Text == "")
+            /*else if (this.salesRettextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Sales Return Account cannot be Empty!", 0);
                 tabControlTemplate.SelectedTab = this.tabPageGLAccounts;
@@ -396,7 +397,7 @@ namespace StoresAndInventoryManager.Forms
                 tabControlTemplate.SelectedTab = this.tabPageGLAccounts;
                 this.purcRettextBox.Select();
                 return 0;
-            }
+            }*/
             else if (this.expnstextBox.Text == "")
             {
                 Global.mnFrm.cmCde.showMsg("Expense Account cannot be Empty!", 0);
@@ -424,7 +425,6 @@ namespace StoresAndInventoryManager.Forms
             {
                 return 1;
             }
-
         }
 
         private int checkForRequiredTemplateStoreFields()

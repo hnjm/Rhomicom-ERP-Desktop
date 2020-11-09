@@ -2145,5 +2145,5 @@ UNION
       Global.mnFrm.cmCde.minimizeMemory();
 
     }
-  }
+    }
 }

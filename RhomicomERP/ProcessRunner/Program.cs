@@ -47,7 +47,6 @@ namespace REMSProcessRunner
             try
             {
                 Global.pid = System.Diagnostics.Process.GetCurrentProcess().Id;
-
                 if (args.Length >= 8)
                 {
                     Global.rnnrsBasDir = args[7].Trim('"');
@@ -243,11 +242,13 @@ namespace REMSProcessRunner
                     pwd = Global.decrypt(pwd.Replace("(E)", ""), Global.AppKey);
                 }
                 Global.connStr = String.Format("Server={0};Port={1};" +
-                "User Id={2};Password={3};Database={4};Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout={5};CommandTimeout={6};",
-                hostnm, prtnum, uname,
-                pwd, dbase, "60", "1200");
+                "User Id={2};Password={3};Database={4};Pooling=true;MinPoolSize=0;MaxPoolSize=1000;Timeout={5};CommandTimeout={6};",
+                hostnm, prtnum, uname, pwd, dbase, "60", "1200");
 
+                Global.globalSQLConn = new NpgsqlConnection();
                 Global.globalSQLConn.ConnectionString = Global.connStr;
+                //Global.errorLog = Global.connStr;
+                //Global.writeToLog();
                 Global.globalSQLConn.Open();
                 Global.Hostnme = hostnm;
                 Global.Portnum = prtnum;
@@ -271,7 +272,7 @@ namespace REMSProcessRunner
             }
             catch (Exception ex)
             {
-                Global.errorLog += ex.Message + "\r\n\r\n" + ex.StackTrace + "\r\n\r\n" + ex.InnerException + "\r\n\r\n";
+                Global.errorLog = ex.Message + "\r\n\r\n" + ex.StackTrace + "\r\n\r\n" + ex.InnerException + "\r\n\r\n";
                 Global.writeToLog();
                 killThreads();
             }
@@ -296,15 +297,12 @@ namespace REMSProcessRunner
                 Global.updateRptRn(Global.runID, "Cancelled!", 100);
                 killThreads();
             }
-
         }
 
         static void updatePrgrm(long prgmID)
         {
             Global.minimizeMemory();
-
             string shdRnnrStop = Global.getGnrlRecNm("rpt.rpt_prcss_rnnrs", "rnnr_name", "shld_rnnr_stop", runnerName);
-
             string shdRnIDStop = "0";
             int rnnrStatusPcnt = 0;
             if (Global.runID > 0)
@@ -353,7 +351,8 @@ namespace REMSProcessRunner
             try
             {
                 long prgmID = Global.getGnrlRecID("rpt.rpt_prcss_rnnrs", "rnnr_name", "prcss_rnnr_id", runnerName);
-                Global.errorLog = "Successfully Started Thread Five\r\nProgram ID:" + prgmID + ": Program Name: " + runnerName + "\r\n";
+                string rnnrPrcsFile = Global.getGnrlRecNm("rpt.rpt_prcss_rnnrs", "rnnr_name", "executbl_file_nm", runnerName);
+                Global.errorLog = "Successfully Started Thread Five\r\nProgram ID:" + prgmID + ": Program Name: " + runnerName + ": Program Runner File: " + rnnrPrcsFile + "\r\n";
                 string[] macDet = Global.getMachDetails();
                 Global.errorLog += "\r\n" + "PID: " + Global.pid + " Running on: " + macDet[0] + " / " + macDet[1] + " / " + macDet[2];
                 Global.writeToLog();
@@ -377,6 +376,18 @@ namespace REMSProcessRunner
 
                 if (Global.runID > 0)
                 {
+                    if (rnnrPrcsFile.Contains(".jar"))
+                    {
+                        Global.errorLog += "Cannot run Jar Executables from this Process Runner" + "\r\n\r\n";
+                        Global.writeToLog();
+                        Global.updateRptRn(Global.runID, "Error!", 100);
+
+                        long msg_id1 = Global.getGnrlRecID("rpt.rpt_run_msgs", "process_typ", "process_id", "msg_id", "Process Run", Global.runID);
+                        Global.updateLogMsg(msg_id1,
+                                "\r\n\r\n\r\nThe Program has Errored Out ==>\r\n\r\n" + Global.errorLog,
+                                log_tbl, dateStr, Global.rnUser_ID);
+                        Program.killThreads();
+                    }
                     DataSet runDtSt = Global.get_RptRun_Det(Global.runID);
                     long locRptID = long.Parse(runDtSt.Tables[0].Rows[0][5].ToString());
                     DataSet rptDtSt = Global.get_RptDet(locRptID);
@@ -477,6 +488,8 @@ namespace REMSProcessRunner
                         }
 
                         String rpt_SQL = "";
+                        String preRpt_SQL = "";
+                        String pstRpt_SQL = "";
                         if (alertID > 0 && msgSentID <= 0)
                         {
                             rpt_SQL = Global.get_Alert_SQL(alertID);
@@ -484,6 +497,8 @@ namespace REMSProcessRunner
                         else
                         {
                             rpt_SQL = Global.get_Rpt_SQL(rpt_id);
+                            preRpt_SQL = Global.get_PreRpt_SQL(rpt_id);
+                            pstRpt_SQL = Global.get_PstRpt_SQL(rpt_id);
                         }
                         //Program.updatePrgrm(prgmID);
                         for (int i = 0; i < arry1.Length; i++)
@@ -545,8 +560,9 @@ namespace REMSProcessRunner
                             {
                                 string paramSqlRep = Global.getGnrlRecNm("rpt.rpt_report_parameters",
                                   "parameter_id", "paramtr_rprstn_nm_in_query", pID);
-                                rpt_SQL = rpt_SQL.Replace(paramSqlRep,
-                        arry2[i]);
+                                rpt_SQL = rpt_SQL.Replace(paramSqlRep, arry2[i]);
+                                preRpt_SQL = preRpt_SQL.Replace(paramSqlRep, arry2[i]);
+                                pstRpt_SQL = pstRpt_SQL.Replace(paramSqlRep, arry2[i]);
                                 if (paramSqlRep == "{:alert_type}" && rptType.Contains("Alert"))
                                 {
                                     //alertType = arry2[i];
@@ -584,31 +600,59 @@ namespace REMSProcessRunner
                         rpt_SQL = rpt_SQL.Replace("{:usrID}", Global.rnUser_ID.ToString());
                         rpt_SQL = rpt_SQL.Replace("{:msgID}", msg_id.ToString());
                         rpt_SQL = rpt_SQL.Replace("{:orgID}", Global.UsrsOrg_ID.ToString());
+                        rpt_SQL = rpt_SQL.Replace("{:rptRunID}", Global.runID.ToString());
 
-                        if (rptType == "Command Line Script")
+
+                        preRpt_SQL = preRpt_SQL.Replace("{:usrID}", Global.rnUser_ID.ToString());
+                        preRpt_SQL = preRpt_SQL.Replace("{:msgID}", msg_id.ToString());
+                        preRpt_SQL = preRpt_SQL.Replace("{:orgID}", Global.UsrsOrg_ID.ToString());
+                        preRpt_SQL = preRpt_SQL.Replace("{:rptRunID}", Global.runID.ToString());
+
+
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:usrID}", Global.rnUser_ID.ToString());
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:msgID}", msg_id.ToString());
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:orgID}", Global.UsrsOrg_ID.ToString());
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:rptRunID}", Global.runID.ToString());
+
+                        if (rptType == "Command Line Script-Windows")
                         {
                             rpt_SQL = rpt_SQL.Replace("{:host_name}", Global.Hostnme);
                             rpt_SQL = rpt_SQL.Replace("{:portnum}", Global.Portnum);
+
+                            preRpt_SQL = preRpt_SQL.Replace("{:host_name}", Global.Hostnme);
+                            preRpt_SQL = preRpt_SQL.Replace("{:portnum}", Global.Portnum);
+
+                            pstRpt_SQL = pstRpt_SQL.Replace("{:host_name}", Global.Hostnme);
+                            pstRpt_SQL = pstRpt_SQL.Replace("{:portnum}", Global.Portnum);
                         }
 
                         //NB. Be updating all report run statuses and percentages in the table
                         Global.updateLogMsg(msg_id,
+                "\r\n\r\n\r\nPre-Report/Process SQL being executed is ==>\r\n\r\n" + preRpt_SQL,
+                log_tbl, dateStr, Global.rnUser_ID);
+                        Global.updateLogMsg(msg_id,
                 "\r\n\r\n\r\nReport/Process SQL being executed is ==>\r\n\r\n" + rpt_SQL,
+                log_tbl, dateStr, Global.rnUser_ID);
+                        Global.updateLogMsg(msg_id,
+                "\r\n\r\n\r\nPost-Report/Process SQL being executed is ==>\r\n\r\n" + pstRpt_SQL,
                 log_tbl, dateStr, Global.rnUser_ID);
 
                         //1. Execute SQL to get a dataset
                         Global.updateRptRn(rpt_run_id, "Running SQL...", 40);
                         //Program.updatePrgrm(prgmID);
-
+                        if (preRpt_SQL.Trim() != "")
+                        {
+                            Global.executeGnrlSQL(preRpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
+                        }
                         //worker.ReportProgress(40);
                         DataSet dtst = null;
                         if (rptType == "Database Function")
                         {
                             Global.executeGnrlSQL(rpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
                         }
-                        else if (rptType == "Command Line Script")
+                        else if (rptType == "Command Line Script-Windows")
                         {
-                            rpt_SQL = rpt_SQL.Replace("{:db_password}", Global.Pswd);
+                            rpt_SQL = rpt_SQL.Replace("{:db_password}", Global.Pswd.Replace("%", "%%").Replace("^", "^^").Replace("&", "^&").Replace("<", "^<").Replace(">", "^>").Replace("|", "^|"));
 
                             string batchFilnm = Global.appStatPath + "/" + "REM_DBBackup" + rpt_run_id.ToString() + ".bat";
                             System.IO.StreamWriter sw = new System.IO.StreamWriter(batchFilnm);
@@ -648,13 +692,13 @@ namespace REMSProcessRunner
                             if (processDB.ExitCode != 0)
                             {
                                 Global.updateLogMsg(msg_id,
-                  "\r\n\r\nCommand Line Script Successfully Run!\r\n\r\n",
+                  "\r\n\r\nCommand Line Script-Windows Successfully Run!\r\n\r\n",
                   log_tbl, dateStr, Global.rnUser_ID);
                             }
                             else
                             {
                                 Global.updateLogMsg(msg_id,
-                  "\r\n\r\nCommand Line Script Successfully Run!\r\n\r\n",
+                  "\r\n\r\nCommand Line Script-Windows Successfully Run!\r\n\r\n",
                   log_tbl, dateStr, Global.rnUser_ID);
                             }
                             //System.Diagnostics.Process processDB = System.Diagnostics.Process.Start(@"REM_DBBackup.bat");
@@ -783,7 +827,7 @@ namespace REMSProcessRunner
                                     if (alertType == "Email")
                                     {
                                         if (Global.sendEmail(toMails.Replace(";", ",").Trim(seps1), ccMails.Replace(",", ";").Trim(seps1),
-                                          bccMails.Replace(",", ";").Trim(seps1), attchMns.Replace(",", ";").Trim(seps1), sbjct, msgBdy, nwMsgSntID.ToString()+"Alrt", ref errMsg) == false)
+                                          bccMails.Replace(",", ";").Trim(seps1), attchMns.Replace(",", ";").Trim(seps1), sbjct, msgBdy, nwMsgSntID.ToString() + "Alrt", ref errMsg) == false)
                                         {
                                             Global.updateAlertMsgSent(nwMsgSntID, dateStr, "0", errMsg);
                                         }
@@ -830,50 +874,52 @@ namespace REMSProcessRunner
                         }
                         else if (rptType == "Posting of GL Trns. Batches")
                         {
-                            //NB sql col0=batch_id, col1=batch_name, col2=batch_source, col3=batch_status, col4=batch_status_meaning
-                            //i.e SQL Must Contain accb.accb_trnsctn_batches and all the colnames above
-                            //
-                            DataSet wrngDtst = Global.get_WrongBalncs(Global.UsrsOrg_ID);
-                            if (wrngDtst.Tables[0].Rows.Count > 0)
+                            if (Global.isThereANActvPrcss("5") == "1")
                             {
                                 Global.updateLogMsg(msg_id,
-                    "\r\n\r\nCannot Post this Batch Since Some Accounts have wrong Balances!" +
-                    "\r\nPlease correct the Imbalance First!!\r\nUser Org ID=" + Global.UsrsOrg_ID +
-                    "\r\nNumber of Records Involved=" + wrngDtst.Tables[0].Rows.Count + "\r\n\r\n",
-                    log_tbl, dateStr, Global.rnUser_ID);
-
-                                Program.correctImblns();
-
-                                Global.updateRptRnStopCmd(Global.runID, "1");
-                                Program.checkNClosePrgrm();
-                                return;
+                                     "\r\n\r\nSorry an Account Posting Process is already on-going!\r\nKindly try again in a few minutes!\r\n", log_tbl, dateStr, Global.rnUser_ID);
                             }
                             else
                             {
-                                //Check if no other accounting process is running
-                                bool isAnyRnng = true;
-                                int witcntr = 0;
-                                do
+                                if (rpt_id == Global.getRptID("Auto-Correct Gl Imbalances")
+                            || rpt_id == Global.getRptID("Post GL Transaction Batches-Web"))
                                 {
-                                    witcntr++;
-                                    isAnyRnng = Global.isThereANActvActnPrcss("1,2,3,4,5,6", "10 second");
-                                    if (witcntr > 8)
+                                    Global.updateLogMsg(msg_id,
+                                            "\r\nIn-Database Posting Process!\r\n", log_tbl, dateStr, Global.rnUser_ID);
+                                }
+                                else
+                                {
+                                    Global.updateANActvPrcss("5", "1");
+                                    double aesum = Global.get_COA_AESum(Global.UsrsOrg_ID);
+                                    double crlsum = Global.get_COA_CRLSum(Global.UsrsOrg_ID);
+                                    if (aesum != crlsum)
                                     {
-                                        Global.updateRptRnStopCmd(Global.runID, "1");
+                                        string asAtDate = Global.getMinUnpstdTrnsDte(Global.UsrsOrg_ID);
+                                        if (asAtDate != "")
+                                        {
+                                            Program.correctImblnsButton(asAtDate);
+                                        }
                                     }
-                                    Program.checkNClosePrgrm();
-                                    Thread.Sleep(5000);
+                                    for (int rh = 0; rh < dtst.Tables[0].Rows.Count; rh++)
+                                    {
+                                        //Global.updtActnPrcss(5);
+                                        Program.validateBatchNPost(long.Parse(dtst.Tables[0].Rows[rh][0].ToString()),
+                                          dtst.Tables[0].Rows[rh][3].ToString(), dtst.Tables[0].Rows[rh][2].ToString(),
+                                          msg_id, log_tbl, dateStr);
+                                        //Thread.Sleep(200);
+                                    }
+                                    aesum = Global.get_COA_AESum(Global.UsrsOrg_ID);
+                                    crlsum = Global.get_COA_CRLSum(Global.UsrsOrg_ID);
+                                    if (aesum != crlsum)
+                                    {
+                                        string asAtDate = Global.getMinUnpstdTrnsDte(Global.UsrsOrg_ID);
+                                        if (asAtDate != "")
+                                        {
+                                            Program.correctImblnsButton(asAtDate);
+                                        }
+                                    }
                                 }
-                                while (isAnyRnng == true);
-
-                                for (int rh = 0; rh < dtst.Tables[0].Rows.Count; rh++)
-                                {
-                                    Global.updtActnPrcss(5);
-                                    Program.validateBatchNPost(long.Parse(dtst.Tables[0].Rows[rh][0].ToString()),
-                                      dtst.Tables[0].Rows[rh][3].ToString(), dtst.Tables[0].Rows[rh][2].ToString(),
-                                      msg_id, log_tbl, dateStr);
-                                    Thread.Sleep(200);
-                                }
+                                Global.updateANActvPrcss("5", "0");
                             }
                         }
                         else if (rptType == "Journal Import")
@@ -889,24 +935,14 @@ namespace REMSProcessRunner
                             {
                                 prcID = 7;
                             }
-                            bool isAnyRnng = true;
-                            int witcntr = 0;
-                            do
+                            else if (rqrdParamVal == "mcf.mcf_gl_interface")
                             {
-                                witcntr++;
-                                isAnyRnng = Global.isThereANActvActnPrcss(prcID.ToString(), "10 second");
-                                if (witcntr > 8)
-                                {
-                                    Global.updateRptRnStopCmd(Global.runID, "1");
-                                    Program.killThreads();
-                                }
-                                Program.updatePrgrm(prgmID);
-                                Thread.Sleep(5000);
+                                prcID = 9;
                             }
-                            while (isAnyRnng == true);
-
-                            Global.updtActnPrcss(prcID);
-
+                            else if (rqrdParamVal == "vms.vms_gl_interface")
+                            {
+                                prcID = 10;
+                            }
                             if (Program.sendJournalsToGL(dtst, rqrdParamVal, prcID, ref errmsg))
                             {
                                 Global.updateLogMsg(msg_id,
@@ -947,23 +983,38 @@ namespace REMSProcessRunner
                                             string fullLocFileUrl = Global.getRptDrctry() + @"\mail_attachments\" + atchs[q1];
                                             if (System.IO.File.Exists(fullLocFileUrl) == true)
                                             {
-                                                if (System.IO.File.GetCreationTime(fullLocFileUrl) >= DateTime.Now.AddHours(-1))
+                                                if (v == 0)
                                                 {
-                                                    Global.updateLogMsg(msg_id, "\r\n\r\nFile: " + (fullLocFileUrl).Replace(";", ",") + " Exists hence won't be downloaded again!\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                                                    Global.dwnldImgsFTP(17, Global.getRptDrctry() + @"\mail_attachments\", atchs[q1]);
+                                                    Global.updateLogMsg(msg_id, "\r\n\r\nFile: " + (fullLocFileUrl).Replace(";", ",") + " exists but will be downloaded for First Time Use!\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                                                    Thread.Sleep(35);
                                                 }
-                                                else
+                                                Global.updateLogMsg(msg_id, "\r\n\r\nFile: " + (fullLocFileUrl).Replace(";", ",") + " exists hence won't be downloaded again!\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                                                /*
+                                               else
                                                 {
-                                                    Global.dwnldImgsFTP(9, Global.getRptDrctry() + @"\mail_attachments\", atchs[q1]);
+                                                    if (System.IO.File.GetCreationTime(fullLocFileUrl) >= DateTime.Now.AddHours(-24))
+                                                    {
+                                                        Global.updateLogMsg(msg_id, "\r\n\r\nFile: " + (fullLocFileUrl).Replace(";", ",") + " exists hence won't be downloaded again!\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                                                    }
+                                                    else
+                                                    {
+                                                        Global.dwnldImgsFTP(17, Global.getRptDrctry() + @"\mail_attachments\", atchs[q1]);
+                                                    }
                                                 }
+                                                */
                                             }
                                             else
                                             {
-                                                Global.dwnldImgsFTP(9, Global.getRptDrctry() + @"\mail_attachments\", atchs[q1]);
+                                                Global.dwnldImgsFTP(17, Global.getRptDrctry() + @"\mail_attachments\", atchs[q1]);
+                                                Global.updateLogMsg(msg_id, "\r\n\r\nFile: " + (fullLocFileUrl).Replace(";", ",") + " doesn't exists hence will be downloaded!\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                                                Thread.Sleep(35);
                                             }
                                             atchs[q1] = Global.getRptDrctry() + @"\mail_attachments\" + atchs[q1];
                                         }
                                         attchMns = string.Join(";", atchs);
                                     }
+
                                     string msgTyp = dtst.Tables[0].Rows[v][13].ToString();
                                     toMails = dtst.Tables[0].Rows[v][2].ToString();
                                     ccMails = dtst.Tables[0].Rows[v][3].ToString();
@@ -982,8 +1033,7 @@ namespace REMSProcessRunner
                                         else
                                         {
                                             Global.updateBulkMsgSent(nwMsgSntID, dateStr, "1", "");
-                                            Global.updateLogMsg(msg_id,
-                                                    "\r\n\r\nMessage to " + (toMails + ";" + ccMails + ";" + bccMails).Replace(";", ",") + " Successfully Sent!\r\n", log_tbl, dateStr, Global.rnUser_ID);
+                                            Global.updateLogMsg(msg_id, "\r\n\r\nMessage to " + (toMails + ";" + ccMails + ";" + bccMails).Replace(";", ",") + " Successfully Sent!\r\n", log_tbl, dateStr, Global.rnUser_ID);
                                         }
                                     }
                                     else if (msgTyp == "SMS")
@@ -1015,8 +1065,7 @@ namespace REMSProcessRunner
                                 Thread.Sleep(5000);
                                 tmeUp = Global.doesDteTmExcdIntvl("30 second", lastTimeChckd);
                             } while (tmeUp == false);
-                            Global.updateLogMsg(msg_id,
-                                    "\r\n\r\nFinished Sending all Messages!\r\n", log_tbl, dateStr, Global.rnUser_ID);
+                            Global.updateLogMsg(msg_id, "\r\n\r\nFinished Sending all Messages!\r\n", log_tbl, dateStr, Global.rnUser_ID);
                         }
                         int totl = 0;
                         if (dtst != null)
@@ -1230,6 +1279,10 @@ namespace REMSProcessRunner
                                 }
                                 Thread.Sleep(1500);
                             }
+                            if (pstRpt_SQL.Trim() != "")
+                            {
+                                Global.executeGnrlSQL(pstRpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
+                            }
                             Global.updateLogMsg(msg_id,
                   "\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
                             Global.updateRptRn(rpt_run_id, "Completed!", 100);
@@ -1243,6 +1296,10 @@ namespace REMSProcessRunner
                         }
                         else
                         {
+                            if (pstRpt_SQL.Trim() != "")
+                            {
+                                Global.executeGnrlSQL(pstRpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
+                            }
                             Global.updateLogMsg(msg_id,
                   "\r\n\r\nSQL Statement yielded no Results!", log_tbl, dateStr, Global.rnUser_ID);
                             Global.updateLogMsg(msg_id,
@@ -1442,26 +1499,21 @@ namespace REMSProcessRunner
                           "\""+ System.IO.Path.GetDirectoryName(Global.appStatPath + "/" +rnnrPrcsFile) + "\"",
                           "DESKTOP",
                           "\""+ Global.dataBasDir + "\""};
-                            //Global.showMsg(String.Join(" ", args), 0);
-                            //Replace("/bin", "").Replace("\\bin", "")
                             if (rptRnnrNm.Contains("Jasper"))
                             {
-                                //Global.mnFrm.cmCde.showSQLNoPermsn("C:\\Windows\\System32\\cmd.exe /C java -jar " + Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                                 System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
-                                startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                                startInfo.Arguments = "/C \"" + Global.JavaPath + "\\javaw.exe\" -jar -Xms1024m -Xmx1024m \"" +
                                   Global.appStatPath + "/" + rnnrPrcsFile + "\" " + String.Join(" ", args);
                                 jarPrcs.StartInfo = startInfo;
                                 jarPrcs.Start();
-                                //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " + Global.appStatPath + "/" + rnnrPrcsFile + " " + String.Join(" ", args));
                             }
                             else
                             {
                                 System.Diagnostics.Process.Start(Global.appStatPath + "/" + rnnrPrcsFile, String.Join(" ", args));
                             }
-                            //System.Diagnostics.Process.Start(Global.appStatPath + "/" + rnnrPrcsFile, String.Join(" ", args));
                         }
                         long mxConns = 0;
                         long curCons = 0;
@@ -1479,7 +1531,6 @@ namespace REMSProcessRunner
                     Thread.Sleep(30000);
                     long prgmID = Global.getGnrlRecID("rpt.rpt_prcss_rnnrs", "rnnr_name", "prcss_rnnr_id", runnerName);
                     Program.updatePrgrm(prgmID);
-
                 }
                 while (true);
             }
@@ -1544,26 +1595,21 @@ namespace REMSProcessRunner
                           "\""+ System.IO.Path.GetDirectoryName(Global.appStatPath + "/" +rnnrPrcsFile) + "\"",
                           "DESKTOP",
                           "\""+ Global.dataBasDir + "\""};
-                            //Global.showMsg(String.Join(" ", args), 0);
-                            //Replace("/bin", "").Replace("\\bin", "")
                             if (rptRnnrNm.Contains("Jasper"))
                             {
-                                //Global.mnFrm.cmCde.showSQLNoPermsn("C:\\Windows\\System32\\cmd.exe /C java -jar " + Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                                 System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
-                                startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                                startInfo.Arguments = "/C \"" + Global.JavaPath + "\\javaw.exe\" -jar -Xms1024m -Xmx1024m \"" +
                                   Global.appStatPath + "/" + rnnrPrcsFile + "\" " + String.Join(" ", args);
                                 jarPrcs.StartInfo = startInfo;
                                 jarPrcs.Start();
-                                //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " + Global.appStatPath + "/" + rnnrPrcsFile + " " + String.Join(" ", args));
                             }
                             else
                             {
                                 System.Diagnostics.Process.Start(Global.appStatPath + "/" + rnnrPrcsFile, String.Join(" ", args));
                             }
-                            //System.Diagnostics.Process.Start(Global.appStatPath + "/" + rnnrPrcsFile, String.Join(" ", args));
                         }
                         long mxConns = 0;
                         long curCons = 0;
@@ -1652,16 +1698,14 @@ namespace REMSProcessRunner
                             //Replace("/bin", "").Replace("\\bin", "")
                             if (rptRnnrNm.Contains("Jasper"))
                             {
-                                //Global.mnFrm.cmCde.showSQLNoPermsn("C:\\Windows\\System32\\cmd.exe /C java -jar " + Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                                 System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
-                                startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                                startInfo.Arguments = "/C \"" + Global.JavaPath + "\\javaw.exe\" -jar -Xms1024m -Xmx1024m \"" +
                                   Global.appStatPath + "/" + rnnrPrcsFile + "\" " + String.Join(" ", args);
                                 jarPrcs.StartInfo = startInfo;
                                 jarPrcs.Start();
-                                //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " + Global.appStatPath + "/" + rnnrPrcsFile + " " + String.Join(" ", args));
                             }
                             else
                             {
@@ -1753,26 +1797,21 @@ namespace REMSProcessRunner
                           "\""+ System.IO.Path.GetDirectoryName(Global.appStatPath + "/" +rnnrPrcsFile) + "\"",
                           "DESKTOP",
                           "\""+ Global.dataBasDir + "\""};
-                            //Global.showMsg(String.Join(" ", args), 0);
-                            //Replace("/bin", "").Replace("\\bin", "")]
                             if (rptRnnrNm.Contains("Jasper"))
                             {
-                                //Global.mnFrm.cmCde.showSQLNoPermsn("C:\\Windows\\System32\\cmd.exe /C java -jar " + Application.StartupPath + rnnrPrcsFile + " " + String.Join(" ", args));
                                 System.Diagnostics.Process jarPrcs = new System.Diagnostics.Process();
                                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
-                                startInfo.Arguments = "/C javaw -jar -Xms1024m -Xmx1024m \"" +
+                                startInfo.Arguments = "/C \"" + Global.JavaPath + "\\javaw.exe\" -jar -Xms1024m -Xmx1024m \"" +
                                   Global.appStatPath + "/" + rnnrPrcsFile + "\" " + String.Join(" ", args);
                                 jarPrcs.StartInfo = startInfo;
                                 jarPrcs.Start();
-                                //System.Diagnostics.Process.Start("javaw", "-jar -Xms1024m -Xmx1024m " + Global.appStatPath + "/" + rnnrPrcsFile + " " + String.Join(" ", args));
                             }
                             else
                             {
                                 System.Diagnostics.Process.Start(Global.appStatPath + "/" + rnnrPrcsFile, String.Join(" ", args));
                             }
-                            //System.Diagnostics.Process.Start(Global.appStatPath + "/" + rnnrPrcsFile, String.Join(" ", args));
                         }
                         do
                         {
@@ -2577,7 +2616,7 @@ namespace REMSProcessRunner
           string batchSource,
           long msg_id, string log_tbl, string dateStr)
         {
-            Global.updtActnPrcss(5);
+            //Global.updtActnPrcss(5);
             batchStatus = Global.getGnrlRecNm("accb.accb_trnsctn_batches",
               "batch_id", "batch_status", glBatchID);
             if (batchStatus == "1")
@@ -2617,12 +2656,6 @@ namespace REMSProcessRunner
                    incrsDcrs) * (double)imbalAmnt;
                         string dateStr1 = DateTime.ParseExact(dteDtSt.Tables[0].Rows[i][0].ToString(), "yyyy-MM-dd",
             System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy") + " 00:00:00";
-                        //if (!Global.mnFrm.cmCde.isTransPrmttd(suspns_accnt,
-                        //      dateStr, netAmnt))
-                        //{
-                        //  return; ;
-                        //}
-
                         if (Global.dbtOrCrdtAccnt(suspns_accnt, incrsDcrs) == "Debit")
                         {
                             Global.createTransaction(suspns_accnt,
@@ -2652,17 +2685,11 @@ namespace REMSProcessRunner
                         (double)1, "C");
                         }
                     }
-
-                    //msg1 = msg1 + dteDtSt.Tables[0].Rows[i][0].ToString() + "\t DR=" + 
-                    //dteDtSt.Tables[0].Rows[i][1].ToString() + "\t CR=" + 
-                    //dteDtSt.Tables[0].Rows[i][2].ToString() + "\r\n";
                 }
-                //Global.mnFrm.cmCde.showMsg(msg1, 4);
-                //return;
             }
             else
             {
-                //Global.mnFrm.cmCde.showMsg("There's no Imbalance to correct!", 0);
+                //Global.showMsg("There's no Imbalance to correct!", 0);
                 //return;
             }
 
@@ -2674,7 +2701,7 @@ namespace REMSProcessRunner
                 return;
             }
 
-            Global.updtActnPrcss(5);
+            //Global.updtActnPrcss(5);
             DataSet dtst = Global.get_Batch_Trns_NoStatus(glBatchID);
             long ttltrns = dtst.Tables[0].Rows.Count;
             if (ttltrns <= 0 && batchSource != "Period Close Process")
@@ -2700,7 +2727,7 @@ namespace REMSProcessRunner
         log_tbl, dateStr, Global.rnUser_ID);
                 return;
             }
-            Global.updtActnPrcss(5);
+            //Global.updtActnPrcss(5);
 
             DataSet dteDtSt1 = Global.get_Batch_dateSums(glBatchID);
             if (dteDtSt1.Tables[0].Rows.Count > 0)
@@ -2720,104 +2747,11 @@ namespace REMSProcessRunner
             }
             int funCurID = -1;
             funCurID = Global.getOrgFuncCurID(Global.UsrsOrg_ID);
-            Global.updtActnPrcss(5);
+            //Global.updtActnPrcss(5);
             Program.postGLBatch(glBatchID,
              batchSource,
              msg_id, log_tbl, dateStr, net_accnt, funCurID);
         }
-
-        //  private static bool postIntoSuspnsAccnt(decimal aeVal, decimal crlVal, int orgID, ref string errmsg)
-        //  {
-        //    return false;
-        //    try
-        //    {
-        //      int suspns_accnt = Global.get_Suspns_Accnt(orgID);
-        //      int net_accnt = Global.get_Net_Income_Accnt(orgID);
-
-        //      if (suspns_accnt == -1)
-        //      {
-        //        errmsg += "Please define a suspense Account First before imbalance can be Auto-Corrected!";
-        //        return false;
-        //      }
-        //      long suspns_batch_id = -999999991;
-        //      int funcCurrID = Global.getOrgFuncCurID(orgID);
-        //      decimal dffrnc = Math.Round(aeVal - crlVal, 2);
-        //      string incrsDcrs = "D";
-        //      if (dffrnc < 0)
-        //      {
-        //        incrsDcrs = "I";
-        //      }
-        //      decimal imbalAmnt = Math.Abs(dffrnc);
-        //      double netAmnt = (double)Global.dbtOrCrdtAccntMultiplier(suspns_accnt,
-        //incrsDcrs) * (double)imbalAmnt;
-        //      string dateStr = Global.getFrmtdDB_Date_time();
-
-        //      //if (!Global.isTransPrmttd(suspns_accnt,
-        //      //      dateStr, netAmnt))
-        //      //{
-        //      //  return false;
-        //      //}
-
-        //      if (Global.dbtOrCrdtAccnt(suspns_accnt, incrsDcrs) == "Debit")
-        //      {
-        //        Global.createTransaction(suspns_accnt,
-        //            "Correction of Imbalance as at " + dateStr, (double)imbalAmnt,
-        //            dateStr
-        //            , funcCurrID, suspns_batch_id, 0.00, netAmnt,
-        //          (double)imbalAmnt,
-        //          funcCurrID,
-        //          (double)imbalAmnt,
-        //          funcCurrID,
-        //          (double)1,
-        //          (double)1, "D");
-        //      }
-        //      else
-        //      {
-        //        Global.createTransaction(suspns_accnt,
-        //        "Correction of Imbalance as at " + dateStr, 0.00,
-        //        dateStr, funcCurrID,
-        //        suspns_batch_id, (double)imbalAmnt, netAmnt,
-        //    (double)imbalAmnt,
-        //    funcCurrID,
-        //    (double)imbalAmnt,
-        //    funcCurrID,
-        //    (double)1,
-        //    (double)1, "C");
-        //      }
-
-        //      DataSet dtst = Global.get_Batch_Trns(suspns_batch_id);
-
-        //      for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
-        //      {
-        //        bool hsBnUpdt = Global.hsTrnsUptdAcntBls(
-        //              long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-        //            dtst.Tables[0].Rows[i][6].ToString(),
-        //              int.Parse(dtst.Tables[0].Rows[i][9].ToString()));
-        //        if (hsBnUpdt == false)
-        //        {
-        //          double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-        //          double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-        //          double net1 = double.Parse(dtst.Tables[0].Rows[i][10].ToString());
-
-        //          Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][9].ToString()),
-        //           dbt1,
-        //           crdt1,
-        //           net1,
-        //           dtst.Tables[0].Rows[i][6].ToString(),
-        //           long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-        //          Global.chngeTrnsStatus(long.Parse(dtst.Tables[0].Rows[i][0].ToString()), "1");
-        //        }
-        //      }
-        //      Program.reloadAcntChrtBals(suspns_batch_id, net_accnt);
-
-        //      return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //      errmsg += ex.Message + "\r\n\r\n" + ex.InnerException.ToString();
-        //      return false;
-        //    }
-        //  }
 
         private static bool postIntoSuspnsAccnt(decimal aeVal, decimal crlVal, int orgID, bool isspcl, ref string errmsg)
         {
@@ -2948,40 +2882,18 @@ namespace REMSProcessRunner
         "\r\n\r\n ....Automatic Posting Batch of Transactions is about to Start...!\r\n",
         log_tbl, dateStr, Global.rnUser_ID);
 
-                double aesum = Global.get_COA_AESum(Global.UsrsOrg_ID);
-                double crlsum = Global.get_COA_CRLSum(Global.UsrsOrg_ID);
-                if (aesum
-                 != crlsum)
-                {
-                    Global.updateLogMsg(msg_id1,
-           "\r\nCannot Post this Batch Since Current GL is not Balanced!Please correct the Imbalance First!\r\n",
-           log_tbl1, dateStr, Global.rnUser_ID);
-
-                    Global.updateLogMsg(msg_id,
-           "\r\nCannot Post this Batch Since Current GL is not Balanced!Please correct the Imbalance First!\r\n",
-          log_tbl, dateStr, Global.rnUser_ID);
-
-                    Program.correctImblns();
-
-                    Global.updateRptRnStopCmd(Global.runID, "1");
-                    Program.checkNClosePrgrm();
-
-                    return;
-                }
-                Global.updtActnPrcss(5);
+                //Global.updtActnPrcss(5);
 
                 DataSet dtst = Global.get_Batch_Trns(glBatchID);
                 long ttltrns = dtst.Tables[0].Rows.Count;
-                //string btchSrc = Global.getGnrlRecNm(
-                //  "accb.accb_trnsctn_batches", "batch_id", "batch_source", glBatchID);
-                Global.updtActnPrcss(5);
+                //Global.updtActnPrcss(5);
 
                 //Validating Entries
                 if (btchSrc != "Period Close Process")
                 {
                     for (int i = 0; i < ttltrns; i++)
                     {
-                        Global.updtActnPrcss(5);
+                        //Global.updtActnPrcss(5);
                         int accntid = int.Parse(dtst.Tables[0].Rows[i][9].ToString());
                         double netAmnt = double.Parse(dtst.Tables[0].Rows[i][10].ToString());
                         string lnDte = dtst.Tables[0].Rows[i][6].ToString();
@@ -3008,7 +2920,7 @@ namespace REMSProcessRunner
 
                 for (int i = 0; i < ttltrns; i++)
                 {
-                    Global.updtActnPrcss(5);
+                    //Global.updtActnPrcss(5);
                     //Update the corresponding account balance and 
                     //update net income balance as well if type is R or EX
                     //update control account if any
@@ -3129,136 +3041,15 @@ namespace REMSProcessRunner
         "\r\nSuccessfully Reloaded Chart of Account Balances!"
         , log_tbl1, dateStr, Global.rnUser_ID);
 
-                aesum = Global.get_COA_AESum(Global.UsrsOrg_ID);
-                crlsum = Global.get_COA_CRLSum(Global.UsrsOrg_ID);
+                double aesum = 0;
+                double crlsum = 0;
                 if (aesum
                  != crlsum)
                 {
                     Global.updateLogMsg(msg_id,
               "\r\nBatch of Transactions caused an " +
                       "IMBALANCE in the Accounting! A+E=" + aesum +
-                      "\r\nC+R+L=" + crlsum + "\r\nDiff=" + (aesum - crlsum) + " will be pushed to suspense Account", log_tbl, dateStr, Global.rnUser_ID);
-                    Program.correctImblns();
-                    Program.correctImblns();
-
-                    /*string errmsg = "";
-                    //if (Program.postIntoSuspnsAccnt((decimal)aesum, (decimal)crlsum, Global.UsrsOrg_ID, ref errmsg) == false)
-                    //{
-                    Global.updateLogMsg(msg_id,
-            "\r\n" + errmsg + "\r\nProcess to undo the posted transactions " +
-              "is about to start...!", log_tbl, dateStr, Global.rnUser_ID);
-                    ////  "IMBALANCE in the Accounting !", 0);
-                    for (int i = 0; i < ttltrns; i++)
-                    {
-                      Global.updtActnPrcss(5);
-                      int accntCurrID = int.Parse(dtst.Tables[0].Rows[i][17].ToString());
-                      int funcCurr = int.Parse(dtst.Tables[0].Rows[i][7].ToString());
-                      double accntCurrAmnt = double.Parse(dtst.Tables[0].Rows[i][15].ToString());
-                      string acctyp = Global.getAccntType(
-                       int.Parse(dtst.Tables[0].Rows[i][9].ToString()));
-                      bool hsBnUpdt = Global.hsTrnsUptdAcntBls(
-                        long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-                      dtst.Tables[0].Rows[i][6].ToString(),
-                        int.Parse(dtst.Tables[0].Rows[i][9].ToString()));
-
-                      if (hsBnUpdt == true)
-                      {
-                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                        double net1 = double.Parse(dtst.Tables[0].Rows[i][10].ToString());
-
-                        if (funCurID != accntCurrID)
-                        {
-                          Global.undoPostAccntCurrTransaction(int.Parse(dtst.Tables[0].Rows[i][9].ToString()),
-                           Global.getSign(dbt1) * accntCurrAmnt,
-                           Global.getSign(crdt1) * accntCurrAmnt,
-                           Global.getSign(net1) * accntCurrAmnt,
-                           dtst.Tables[0].Rows[i][6].ToString(),
-                           long.Parse(dtst.Tables[0].Rows[i][0].ToString()), accntCurrID);
-                        }
-                        Global.undoPostTransaction(int.Parse(dtst.Tables[0].Rows[i][9].ToString()),
-                         double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                         double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                         double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                        dtst.Tables[0].Rows[i][6].ToString(),
-                            long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                      }
-                      hsBnUpdt = Global.hsTrnsUptdAcntBls(
-                      long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-                    dtst.Tables[0].Rows[i][6].ToString(),
-                      net_accnt);
-                      if (hsBnUpdt == true)
-                      {
-                        if (acctyp == "R")
-                        {
-                          Global.undoPostTransaction(net_accnt,
-                      double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                      double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                      double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                         dtst.Tables[0].Rows[i][6].ToString(),
-                             long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                        }
-                        else if (acctyp == "EX")
-                        {
-                          Global.undoPostTransaction(net_accnt,
-                      double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                      double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                      (double)(-1) * double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                         dtst.Tables[0].Rows[i][6].ToString(),
-                             long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                        }
-                      }
-
-                      //get control accnt id
-                      int cntrlAcntID = int.Parse(Global.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "control_account_id", int.Parse(dtst.Tables[0].Rows[i][9].ToString())));
-                      if (cntrlAcntID > 0)
-                      {
-                        hsBnUpdt = Global.hsTrnsUptdAcntBls(
-                          long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-                        dtst.Tables[0].Rows[i][6].ToString(),
-                          cntrlAcntID);
-
-                        if (hsBnUpdt == true)
-                        {
-                          int cntrlAcntCurrID = int.Parse(Global.getGnrlRecNm(
-                "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", cntrlAcntID));
-
-                          double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                          double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                          double net1 = double.Parse(dtst.Tables[0].Rows[i][10].ToString());
-
-                          if (funCurID != cntrlAcntCurrID && cntrlAcntCurrID == accntCurrID)
-                          {
-                            Global.undoPostAccntCurrTransaction(cntrlAcntID,
-                             Global.getSign(dbt1) * accntCurrAmnt,
-                             Global.getSign(crdt1) * accntCurrAmnt,
-                             Global.getSign(net1) * accntCurrAmnt,
-                             dtst.Tables[0].Rows[i][6].ToString(),
-                             long.Parse(dtst.Tables[0].Rows[i][0].ToString()), accntCurrID);
-                          }
-                          Global.undoPostTransaction(cntrlAcntID,
-                           double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                           double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                           double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                          dtst.Tables[0].Rows[i][6].ToString(),
-                              long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                        }
-                      }
-                      Global.chngeTrnsStatus(long.Parse(dtst.Tables[0].Rows[i][0].ToString()), "0");
-                      Global.updateLogMsg(msg_id,
-            "\r\nSuccessfully unposted transaction ID= " + dtst.Tables[0].Rows[i][0].ToString()
-            , log_tbl, dateStr, Global.rnUser_ID);
-                    }
-                    //}
-                    //Call Accnts Chart Bals Update
-                    Program.reloadAcntChrtBals(glBatchID, net_accnt);
-                    Global.updateLogMsg(msg_id,
-            "\r\nSuccessfully Reloaded Original Chart of Account Balances!"
-            , log_tbl, dateStr, Global.rnUser_ID);
-                    Program.correctImblns();
-
-                    Global.updateRptRnStopCmd(Global.runID, "1");
-                    Program.checkNClosePrgrm();*/
+                      "\r\nC+R+L=" + crlsum + "\r\nDiff=" + (aesum - crlsum) + " should be pushed to suspense Account", log_tbl, dateStr, Global.rnUser_ID);
                 }
                 else
                 {
@@ -3275,58 +3066,6 @@ namespace REMSProcessRunner
         , log_tbl, dateStr, Global.rnUser_ID);
                 Global.errorLog = "\r\nError!" + ex.Message + "\r\n\r\n" + ex.InnerException + "\r\n\r\n" + ex.StackTrace;
                 Global.writeToLog();
-            }
-        }
-
-        private static void reloadAcntChrtBals(int netaccntid)
-        {
-            string dateStr = DateTime.ParseExact(
-      Global.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
-      System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
-            DataSet dtst = Global.get_All_Chrt_Det(Global.UsrsOrg_ID);
-            //DataSet dtst = Global.get_Batch_Accnts(btchid);
-            //if (dateStr.Length > 10)
-            //{
-            //  dateStr = dateStr.Substring(0, 10);
-            //}
-            for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
-            {
-                string[] rslt = Global.getAccntLstDailyBalsInfo(
-                  int.Parse(dtst.Tables[0].Rows[a][0].ToString()), dateStr);
-                double lstNetBals = double.Parse(rslt[2]);
-                double lstDbtBals = double.Parse(rslt[0]);
-                double lstCrdtBals = double.Parse(rslt[1]);
-
-                //Global.showMsg("Testing!" + rslt[2] + "\r\n" + rslt[3] + "\r\n" + dateStr, 0);
-                Global.updtAcntChrtBals(int.Parse(dtst.Tables[0].Rows[a][0].ToString()),
-                  lstDbtBals, lstCrdtBals, lstNetBals, rslt[3]);
-
-                //get control accnt id
-                int cntrlAcntID = int.Parse(Global.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "control_account_id", int.Parse(dtst.Tables[0].Rows[a][0].ToString())));
-                if (cntrlAcntID > 0)
-                {
-                    rslt = Global.getAccntLstDailyBalsInfo(
-                 cntrlAcntID, dateStr);
-                    lstNetBals = double.Parse(rslt[2]);
-                    lstDbtBals = double.Parse(rslt[0]);
-                    lstCrdtBals = double.Parse(rslt[1]);
-
-                    //Global.showMsg("Testing!" + rslt[2] + "\r\n" + rslt[3] + "\r\n" + dateStr, 0);
-                    Global.updtAcntChrtBals(cntrlAcntID,
-                     lstDbtBals, lstCrdtBals, lstNetBals, rslt[3]);
-                }
-            }
-            if (netaccntid > 0)
-            {
-                string[] rslt = Global.getAccntLstDailyBalsInfo(
-                  netaccntid, dateStr);
-                double lstNetBals = double.Parse(rslt[2]);
-                double lstDbtBals = double.Parse(rslt[0]);
-                double lstCrdtBals = double.Parse(rslt[1]);
-
-                //Global.showMsg("Testing!" + rslt[2] + "\r\n" + rslt[3] + "\r\n" + dateStr, 0);
-                Global.updtAcntChrtBals(netaccntid,
-                  lstDbtBals, lstCrdtBals, lstNetBals, rslt[3]);
             }
         }
 
@@ -3437,14 +3176,15 @@ namespace REMSProcessRunner
         {
             try
             {
+                Global.updateDataNoParams("UPDATE accb.accb_trnsctn_batches SET avlbl_for_postng='1' WHERE avlbl_for_postng='0' and batch_source !='Manual';");
                 if (Global.getEnbldPssblValID("NO", Global.getLovID("Allow Inventory to be Costed")) > 0)
                 {
                     Global.zeroInterfaceValues(Global.UsrsOrg_ID);
                 }
 
-                Program.correctIntrfcImbals(intrfcTblNme);
+                /*Program.correctIntrfcImbals(intrfcTblNme);*/
                 //Check if Dataset Trns are balanced before calling this func
-                Global.updtActnPrcss(prcID);
+                //Global.updtActnPrcss(prcID);
                 long cntr = dtst.Tables[0].Rows.Count;
                 double dbtsum = 0;
                 double crdtsum = 0;
@@ -3453,7 +3193,7 @@ namespace REMSProcessRunner
                 {
                     dbtsum += double.Parse(dtst.Tables[0].Rows[y][2].ToString());
                     crdtsum += double.Parse(dtst.Tables[0].Rows[y][3].ToString());
-                    Global.updtActnPrcss(prcID);
+                    //Global.updtActnPrcss(prcID);
                 }
                 dbtsum = Math.Round(dbtsum, 2);
                 crdtsum = Math.Round(crdtsum, 2);
@@ -3478,7 +3218,15 @@ namespace REMSProcessRunner
                 {
                     btchPrfx = "Inventory";
                 }
-                Global.updtActnPrcss(prcID);
+                else if (intrfcTblNme == "mcf.mcf_gl_interface")
+                {
+                    btchPrfx = "Banking";
+                }
+                else if (intrfcTblNme == "vms.vms_gl_interface")
+                {
+                    btchPrfx = "Vault Management";
+                }
+                //Global.updtActnPrcss(prcID);
                 string todaysGlBatch = btchPrfx + " (" + dateStr + ")";
                 long todbatchid = Global.getTodaysGLBatchID(
                   todaysGlBatch, Global.UsrsOrg_ID);
@@ -3489,7 +3237,7 @@ namespace REMSProcessRunner
                     todbatchid = Global.getTodaysGLBatchID(
                     todaysGlBatch,
                     Global.UsrsOrg_ID);
-                    Global.updtActnPrcss(prcID);
+                    //Global.updtActnPrcss(prcID);
                 }
                 if (todbatchid > 0)
                 {
@@ -3504,10 +3252,10 @@ namespace REMSProcessRunner
                 //DataSet dtst = Global.getAllInGLIntrfcOrg(Global.UsrsOrg_ID);
 
                 //dateStr = Global.getFrmtdDB_Date_time();
-                Global.updtActnPrcss(prcID);
+                //Global.updtActnPrcss(prcID);
                 for (int a = 0; a < cntr; a++)
                 {
-                    Global.updtActnPrcss(prcID);
+                    //Global.updtActnPrcss(prcID);
                     string src_ids = Global.getGLIntrfcIDs(int.Parse(dtst.Tables[0].Rows[a][0].ToString()),
                       dtst.Tables[0].Rows[a][1].ToString(),
                       int.Parse(dtst.Tables[0].Rows[a][5].ToString()), intrfcTblNme);
@@ -3529,7 +3277,7 @@ namespace REMSProcessRunner
                       && actlAmnts[1] == double.Parse(dtst.Tables[0].Rows[a][3].ToString()))
                     {
                         Global.createPymntGLLine(int.Parse(dtst.Tables[0].Rows[a][0].ToString()),
-                "Lumped sum of all payments (from the " + btchPrfx + " module) to this account",
+                "Lumped sum of all transactions (from the " + btchPrfx + " module) to this account",
                     double.Parse(dtst.Tables[0].Rows[a][2].ToString()),
                     dtst.Tables[0].Rows[a][1].ToString(),
                     int.Parse(dtst.Tables[0].Rows[a][5].ToString()), todbatchid,
@@ -3537,7 +3285,7 @@ namespace REMSProcessRunner
                     double.Parse(dtst.Tables[0].Rows[a][4].ToString()), src_ids, dateStr,
                     entrdAmnt, int.Parse(dtst.Tables[0].Rows[a][5].ToString()),
                     entrdAmnt * accntCurrRate, accntCurrID,
-                    1, accntCurrID, dbtCrdt);
+                    1, accntCurrRate, dbtCrdt);
                     }
                     else
                     {
@@ -3549,12 +3297,13 @@ namespace REMSProcessRunner
                 }
                 if (Global.get_Batch_CrdtSum(todbatchid) == Global.get_Batch_DbtSum(todbatchid))
                 {
-                    Global.updtActnPrcss(prcID);
+                    //Global.updtActnPrcss(prcID);
                     Global.updtPymntAllGLIntrfcLnOrg(todbatchid, Global.UsrsOrg_ID, intrfcTblNme);
-                    Global.updtActnPrcss(prcID);
+                    //Global.updtActnPrcss(prcID);
                     Global.updtGLIntrfcLnSpclOrg(Global.UsrsOrg_ID, intrfcTblNme, btchPrfx);
-                    Global.updtActnPrcss(prcID);
+                    //Global.updtActnPrcss(prcID);
                     Global.updtTodaysGLBatchPstngAvlblty(todbatchid, "1");
+                    Global.updateDataNoParams("UPDATE accb.accb_trnsctn_batches SET avlbl_for_postng='1' WHERE avlbl_for_postng='0' and batch_source !='Manual';");
                     return true;
                 }
                 else
@@ -3575,808 +3324,145 @@ namespace REMSProcessRunner
             }
         }
 
-        //    private bool doSalesItmAccntng(long itmID, double qnty, string cnsgmntIDs,
-        //   int txCodeID, int dscntCodeID, int chrgCodeID,
-        //   string docTyp, long docID, long srcDocID, int dfltRcvblAcntID,
-        //   int dfltInvAcntID, int dfltCGSAcntID, int dfltExpnsAcntID, int dfltRvnuAcntID,
-        //   long stckID, double unitSllgPrc, int crncyID, long docLnID,
-        //   int dfltSRAcntID, int dfltCashAcntID, int dfltCheckAcntID, long srcDocLnID,
-        //   string dateStr, string docIDNum, int entrdCurrID, decimal exchngRate, int dfltLbltyAccnt, string strSrcDocType)
-        //    {
-        //      try
-        //      {
-        //        bool succs = true;
-        //        /*For each Item in a Sales Invoice
-        //         * 1. Get Items Consgnmnt Cost Prices using all selected consignments and their used qtys
-        //         * 2. Decrease Inv Account by Cost Price --0Inventory
-        //         * 3. Increase Cost of Goods Sold by Cost Price --0Inventory
-        //         * 4. Get Selling Price, Taxes, Extra Charges, Discounts
-        //         * 5. Get Net Selling Price = (Selling Price - Taxes - Extra Charges + Discounts)*Qty
-        //         * 6. Increase Revenue Account by Net Selling Price --1Initial Amount
-        //         * 7. Increase Receivables account by Net Selling price --1Initial Amount
-        //         * 8. Increase Taxes Payable by Taxes  --2Tax
-        //         * 9. Increase Receivables account by Taxes --2Tax
-        //         * 10.Increase Extra Charges Revenue by Extra Charges --4Extra Charge
-        //         * 11.Increase Receivables account by Extra Charges --4Extra Charge
-        //         * 12.Increase Sales Discounts by Discounts --3Discount
-        //         * 13.Decrease Receivables by Discounts --3Discount
-        //         */
-        //        int itmInvAcntID = -1;
-        //        int itmCGSAcntID = -1;
-        //        //For Sales Return, Item Issues-Unbilled Docs get the ff
-        //        int itmExpnsAcntID = -1;
-        //        //For Sales Invoice, Sales Return get the ff
-        //        int itmRvnuAcntID = -1;
-        //        //Genral
-        //        int txPyblAcntID = -1;
-        //        int chrgRvnuAcntID = -1;
-        //        int salesDscntAcntID = -1;
-
-        //        /*int.TryParse(Global.getGnrlRecNm("inv.inv_itm_list", "item_id", "inv_asset_acct_id", itmID), out itmInvAcntID);
-        //        int.TryParse(Global.getGnrlRecNm("inv.inv_itm_list", "item_id", "cogs_acct_id", itmID), out itmCGSAcntID);
-        //        //For Sales Return, Item Issues-Unbilled Docs get the ff
-        //        int.TryParse(Global.getGnrlRecNm("inv.inv_itm_list", "item_id", "expense_accnt_id", itmID), out itmExpnsAcntID);
-        //        //For Sales Invoice, Sales Return get the ff
-        //        int.TryParse(Global.getGnrlRecNm("inv.inv_itm_list", "item_id", "sales_rev_accnt_id", itmID), out itmRvnuAcntID);
-        //         * */
-        //        //Genral
-        //        int.TryParse(Global.getGnrlRecNm("scm.scm_tax_codes", "code_id", "taxes_payables_accnt_id", txCodeID), out txPyblAcntID);
-        //        int.TryParse(Global.getGnrlRecNm("scm.scm_tax_codes", "code_id", "chrge_revnu_accnt_id", chrgCodeID), out chrgRvnuAcntID);
-        //        int.TryParse(Global.getGnrlRecNm("scm.scm_tax_codes", "code_id", "dscount_expns_accnt_id", dscntCodeID), out salesDscntAcntID);
-        //        if (itmInvAcntID > 0)
-        //        {
-        //          dfltInvAcntID = itmInvAcntID;
-        //        }
-        //        if (itmCGSAcntID > 0)
-        //        {
-        //          dfltCGSAcntID = itmCGSAcntID;
-        //        }
-        //        if (itmExpnsAcntID > 0)
-        //        {
-        //          dfltExpnsAcntID = itmExpnsAcntID;
-        //        }
-        //        if (itmRvnuAcntID > 0)
-        //        {
-        //          dfltRvnuAcntID = itmRvnuAcntID;
-        //        }
-
-        //        if (dfltRcvblAcntID <= 0
-        //  || dfltInvAcntID <= 0
-        //  || dfltCGSAcntID <= 0
-        //  || dfltExpnsAcntID <= 0
-        //  || dfltRvnuAcntID <= 0)
-        //        {
-        //          Global.showMsg("You must first Setup all Default " +
-        //            "Accounts before Accounting can be Created!", 0);
-        //          return false;
-        //        }
-
-        //        string itmType = Global.getGnrlRecNm("inv.inv_itm_list", "item_id", "item_type", itmID);
-        //        //        string dateStr = DateTime.ParseExact(
-        //        //Global.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
-        //        //System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
-        //        //     long SIDocID = -1;
-        //        //     long.TryParse(Global.getGnrlRecNm("scm.scm_sales_invc_hdr",
-        //        //"invc_hdr_id", "src_doc_hdr_id", docID),out SIDocID);
-        //        //Create a List of Consignment IDs, Quantity Used in this doc, Cost Price
-        //        //Get ttlSllngPrc, ttlTxAmnt, ttlChrgAmnt, ttlDsctAmnt for this item only
-
-        //        double funcCurrrate = Math.Round((double)1 / (double)exchngRate, 15);
-
-        //        double ttlSllngPrc = Math.Round(qnty * unitSllgPrc, 2);
-        //        double orgnlSllngPrce = Math.Round(double.Parse(Global.getGnrlRecNm(
-        //          "scm.scm_sales_invc_det", "invc_det_ln_id", "orgnl_selling_price", docLnID)), 2);
-        //        double snglDscnt = Math.Round(Global.getSalesDocCodesAmnt(
-        //          dscntCodeID, orgnlSllngPrce, 1), 2);
-
-        //        double ttlTxAmnt = Math.Round(Global.getSalesDocCodesAmnt(txCodeID, orgnlSllngPrce - snglDscnt, qnty), 2);
-        //        double ttlChrgAmnt = Math.Round(Global.getSalesDocCodesAmnt(chrgCodeID, orgnlSllngPrce, qnty), 2);
-        //        double ttlDsctAmnt = Math.Round(Global.getSalesDocCodesAmnt(
-        //          dscntCodeID, orgnlSllngPrce, qnty), 2);
-        //        string txCodeNm = Global.getGnrlRecNm(
-        //                "scm.scm_tax_codes", "code_id", "code_name",
-        //                txCodeID);
-        //        string chrgCodeNm = Global.getGnrlRecNm(
-        //            "scm.scm_tax_codes", "code_id", "code_name",
-        //            chrgCodeID);
-        //        string dscntCodeNm = Global.getGnrlRecNm(
-        //          "scm.scm_tax_codes", "code_id", "code_name",
-        //          dscntCodeID);
-        //        //Get Net Selling Price = Selling Price - Taxes - Extra Charges + Discounts
-        //        double ttlRvnuAmnt = ttlSllngPrc - ttlTxAmnt - ttlChrgAmnt;// +ttlDsctAmnt;
-        //        //For Sales Invoice, Sales Return, Item Issues-Unbilled Docs get the ff
-        //        if (itmType.Contains("Inventory")
-        //          || itmType.Contains("Fixed Assets"))
-        //        {
-        //          List<string[]> csngmtData;
-        //          if (docTyp != "Sales Return")
-        //          {
-        //            csngmtData = Global.getItmCnsgmtVals(qnty, cnsgmntIDs);
-        //          }
-        //          else
-        //          {
-        //            csngmtData = Global.getSRItmCnsgmtVals(
-        //              docLnID, qnty, cnsgmntIDs, srcDocLnID);
-        //          }
-        //          //From the List get Total Cost Price of the Item
-        //          string csgmtQtyDists = ",";
-        //          for (int i = 0; i < csngmtData.Count; i++)
-        //          {
-        //            string[] ary = csngmtData[i];
-        //            long figID = 0;
-        //            long.TryParse(ary[0], out figID);
-        //            double fig1Qty = 0;
-        //            double fig2Prc = 0;
-        //            double.TryParse(ary[1], out fig1Qty);
-        //            double.TryParse(ary[2], out fig2Prc);
-        //            csgmtQtyDists = csgmtQtyDists + fig1Qty.ToString() + ",";
-        //            if (docTyp == "Sales Order")
-        //            {
-        //              Global.postCnsgnmntQty(figID, 0, fig1Qty, -1 * fig1Qty, dateStr, "SO" + docLnID.ToString());
-        //              Global.postStockQty(stckID, 0, fig1Qty, -1 * fig1Qty, dateStr, "SO" + docLnID.ToString());
-        //            }
-        //            else if (docTyp == "Sales Invoice")
-        //            {
-        //              Global.postCnsgnmntQty(figID, -1 * fig1Qty, 0, -1 * fig1Qty, dateStr, "SI" + docLnID.ToString());
-        //              Global.postStockQty(stckID, -1 * fig1Qty, 0, -1 * fig1Qty, dateStr, "SI" + docLnID.ToString());
-        //            }
-        //            else if (docTyp == "Item Issue-Unbilled")
-        //            {
-        //              Global.postCnsgnmntQty(figID, -1 * fig1Qty, 0, -1 * fig1Qty, dateStr, "IU" + docLnID.ToString());
-        //              Global.postStockQty(stckID, -1 * fig1Qty, 0, -1 * fig1Qty, dateStr, "IU" + docLnID.ToString());
-        //            }
-        //            else if (docTyp == "Sales Return")
-        //            {
-        //              Global.postCnsgnmntQty(figID, fig1Qty, 0, fig1Qty, dateStr, "SR" + docLnID.ToString());
-        //              Global.postStockQty(stckID, fig1Qty, 0, fig1Qty, dateStr, "SR" + docLnID.ToString());
-        //            }
-        //          }
-        //          Global.updateSalesLnCsgmtDist(docLnID, csgmtQtyDists.Trim(','));
-        //          double ttlCstPrice = 0;
-        //          for (int i = 0; i < csngmtData.Count; i++)
-        //          {
-        //            string[] ary = csngmtData[i];
-        //            double fig1Qty = 0;
-        //            double fig2Prc = 0;
-        //            double.TryParse(ary[1], out fig1Qty);
-        //            double.TryParse(ary[2], out fig2Prc);
-        //            ttlCstPrice += fig1Qty * fig2Prc;
-        //          }
-        //          if (dfltInvAcntID > 0 && dfltCGSAcntID > 0 && docTyp == "Sales Invoice")
-        //          {
-        //            succs = this.sendToGLInterfaceMnl(
-        //              dfltInvAcntID, "D", ttlCstPrice, dateStr,
-        //               "Sale of Inventory Items", crncyID, dateStr,
-        //               docTyp, docID, docLnID);
-        //            if (!succs)
-        //            {
-        //              return succs;
-        //            }
-        //            succs = this.sendToGLInterfaceMnl(dfltCGSAcntID, "I", ttlCstPrice, dateStr,
-        //                "Sale of Inventory Items", crncyID, dateStr,
-        //                docTyp, docID, docLnID);
-        //            if (!succs)
-        //            {
-        //              return succs;
-        //            }
-        //          }
-        //          else if (dfltInvAcntID > 0 && dfltCGSAcntID > 0 && docTyp == "Sales Return" && strSrcDocType == "Sales Invoice")
-        //          {
-        //            succs = this.sendToGLInterfaceMnl(dfltInvAcntID, "I", ttlCstPrice, dateStr,
-        //              "Return of Sold Inventory Items", crncyID, dateStr,
-        //              docTyp, docID, docLnID);
-        //            if (!succs)
-        //            {
-        //              return succs;
-        //            }
-        //            succs = this.sendToGLInterfaceMnl(dfltCGSAcntID, "D", ttlCstPrice, dateStr,
-        //              "Return of Sold Inventory Items", crncyID, dateStr,
-        //              docTyp, docID, docLnID);
-        //            if (!succs)
-        //            {
-        //              return succs;
-        //            }
-        //          }
-        //          else if (docTyp == "Item Issue-Unbilled")
-        //          {
-        //            if (dfltInvAcntID > 0 && dfltExpnsAcntID > 0)
-        //            {
-        //              succs = this.sendToGLInterfaceMnl(dfltInvAcntID, "D", ttlCstPrice, dateStr,
-        //                "Issue Out of Inventory Items", crncyID, dateStr,
-        //                docTyp, docID, docLnID);
-        //              if (!succs)
-        //              {
-        //                return succs;
-        //              }
-        //              succs = this.sendToGLInterfaceMnl(dfltExpnsAcntID, "I", ttlCstPrice, dateStr,
-        //                "Issue Out of Inventory Items", crncyID, dateStr,
-        //                docTyp, docID, docLnID);
-        //              if (!succs)
-        //              {
-        //                return succs;
-        //              }
-        //            }
-        //          }
-        //          else if (docTyp == "Sales Return" && strSrcDocType == "Item Issue-Unbilled")
-        //          {
-        //            if (dfltInvAcntID > 0 && dfltExpnsAcntID > 0)
-        //            {
-        //              succs = this.sendToGLInterfaceMnl(dfltInvAcntID, "I", ttlCstPrice, dateStr,
-        //                "Return of Inventory Items Issued Out", crncyID, dateStr,
-        //                docTyp, docID, docLnID);
-        //              if (!succs)
-        //              {
-        //                return succs;
-        //              }
-        //              succs = this.sendToGLInterfaceMnl(dfltExpnsAcntID, "D", ttlCstPrice, dateStr,
-        //                "Return of Inventory Items Issued Out", crncyID, dateStr,
-        //                docTyp, docID, docLnID);
-        //              if (!succs)
-        //              {
-        //                return succs;
-        //              }
-        //            }
-        //          }
-        //        }
-
-        //        if (docTyp == "Sales Invoice")
-        //        {
-        //          if (dfltRvnuAcntID > 0 && dfltRcvblAcntID > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        //"accb.accb_chart_of_accnts", "accnt_id", "crncy_id", dfltRvnuAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "1Initial Amount",
-        //    "Revenue from Sales Invoice (" + docIDNum + ")",
-        //    ttlRvnuAmnt, entrdCurrID, -1, docTyp, false, "Increase", dfltRvnuAcntID,
-        //    "Increase", dfltRcvblAcntID, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlRvnuAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlRvnuAmnt, 2));
-        //          }
-        //          if (txPyblAcntID > 0 && dfltRcvblAcntID > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        // "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", txPyblAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "2Tax",
-        //    "Taxes (" + txCodeNm + ") on Sales Invoice (" + docIDNum + ")",
-        //    ttlTxAmnt, entrdCurrID, txCodeID, docTyp, false, "Increase", txPyblAcntID,
-        //    "Increase", dfltRcvblAcntID, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlTxAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlTxAmnt, 2));
-        //          }
-
-        //          if (chrgRvnuAcntID > 0 && dfltRcvblAcntID > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        // "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", chrgRvnuAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "4Extra Charge",
-        //    "Extra Charges (" + chrgCodeNm + ") on Sales Invoice (" + docIDNum + ")",
-        //    ttlChrgAmnt, entrdCurrID, chrgCodeID, docTyp, false, "Increase", chrgRvnuAcntID,
-        //    "Increase", dfltRcvblAcntID, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlChrgAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlChrgAmnt, 2));
-        //          }
-
-        //          if (salesDscntAcntID > 0 && dfltRcvblAcntID > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        //    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", salesDscntAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "3Discount",
-        //    "Discounts (" + dscntCodeNm + ") on Sales Invoice (" + docIDNum + ")",
-        //    ttlDsctAmnt, entrdCurrID, dscntCodeID, docTyp, false, "Increase", salesDscntAcntID,
-        //    "Decrease", dfltRcvblAcntID, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlDsctAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlDsctAmnt, 2));
-        //          }
-        //        }
-        //        else if (docTyp == "Sales Return" && strSrcDocType == "Sales Invoice")
-        //        {
-        //          if (dfltRvnuAcntID > 0 && dfltLbltyAccnt > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        //"accb.accb_chart_of_accnts", "accnt_id", "crncy_id", dfltRvnuAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "1Initial Amount",
-        //    "Refund from Sales Return (" + docIDNum + ")",
-        //    ttlRvnuAmnt, entrdCurrID, -1, docTyp, false, "Decrease", dfltRvnuAcntID,
-        //    "Increase", dfltLbltyAccnt, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlRvnuAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlRvnuAmnt, 2));
-        //          }
-        //          if (txPyblAcntID > 0 && dfltLbltyAccnt > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        // "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", txPyblAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "2Tax",
-        //    "Refund Taxes (" + txCodeNm + ") on Sales Return (" + docIDNum + ")",
-        //    ttlTxAmnt, entrdCurrID, txCodeID, docTyp, false, "Decrease", txPyblAcntID,
-        //    "Increase", dfltLbltyAccnt, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlTxAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlTxAmnt, 2));
-        //          }
-
-        //          if (chrgRvnuAcntID > 0 && dfltRcvblAcntID > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        // "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", chrgRvnuAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "4Extra Charge",
-        //    "Refund Extra Charges (" + chrgCodeNm + ") on Sales Return (" + docIDNum + ")",
-        //    ttlChrgAmnt, entrdCurrID, chrgCodeID, docTyp, false, "Decrease", chrgRvnuAcntID,
-        //    "Increase", dfltLbltyAccnt, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlChrgAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlChrgAmnt, 2));
-        //          }
-
-        //          if (salesDscntAcntID > 0 && dfltRcvblAcntID > 0)
-        //          {
-        //            int accntCurrID = int.Parse(Global.getGnrlRecNm(
-        //    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", salesDscntAcntID));
-        //            double accntCurrRate = Math.Round(
-        //            Global.get_LtstExchRate(entrdCurrID, accntCurrID,
-        //            this.docDteTextBox.Text + " 00:00:00"), 15);
-
-        //            Global.createScmRcvblsDocDet(docID, "3Discount",
-        //    "Take Back Discounts (" + dscntCodeNm + ") on Sales Return (" + docIDNum + ")",
-        //    ttlDsctAmnt, entrdCurrID, dscntCodeID, docTyp, false, "Decrease", salesDscntAcntID,
-        //    "Decrease", dfltLbltyAccnt, -1, "VALID", -1, this.curid, accntCurrID,
-        //    funcCurrrate, accntCurrRate, Math.Round(funcCurrrate * ttlDsctAmnt, 2),
-        //    Math.Round(accntCurrRate * ttlDsctAmnt, 2));
-        //          }
-        //        }
-        //        return succs;
-        //      }
-        //      catch (Exception ex)
-        //      {
-        //        Global.showMsg(ex.InnerException + "\r\n" + ex.StackTrace + "\r\n" + ex.Message, 0);
-        //        return false;
-        //      }
-        //    }
-
-        //    private void approveSalesInvoice()
-        //    {
-        //      invcAmnt = Global.getScmRcvblsDocGrndAmnt(long.Parse(this.docIDTextBox.Text));
-
-        //        if (accounted)
-        //        {
-        //          bool apprvlSccs = true;
-        //          string rcvblDocNum = "";
-        //          string rcvblDocType = "";
-        //          //string srcDocType = Global.getGnrlRecNm("scm.scm_sales_invc_hdr", "invc_hdr_id", "invc_type", long.Parse(this.srcDocIDTextBox.Text));
-
-        //          if (this.docTypeComboBox.Text == "Sales Invoice")
-        //          {
-        //            rcvblDocNum = "CSP" +
-        //          Global.getLtstRcvblsIDNoInPrfx("CSP") + "-" +
-        //Global.getFrmtdDB_Date_time().Substring(12, 8).Replace(":", "") + "-" +
-        //        Global.getLtstRecPkID("accb.accb_rcvbls_invc_hdr",
-        //        "rcvbls_invc_hdr_id");
-        //            rcvblDocType = "Customer Standard Payment";
-        //            Global.createRcvblsDocHdr(Global.Org_id, this.docDteTextBox.Text,
-        //              rcvblDocNum, rcvblDocType, this.docCommentsTextBox.Text,
-        //              long.Parse(this.docIDTextBox.Text), int.Parse(this.cstmrIDTextBox.Text),
-        //              int.Parse(this.siteIDTextBox.Text), "Not Validated", "Approve",
-        //              invcAmnt, this.payTermsTextBox.Text, this.docTypeComboBox.Text,
-        //              int.Parse(this.pymntMthdIDTextBox.Text), 0, -1, "",
-        //              "Payment of Customer Goods Delivered", int.Parse(this.invcCurrIDTextBox.Text), 0);
-        //          }
-        //          else if (this.docTypeComboBox.Text == "Sales Return" && srcDocType == "Sales Invoice")
-        //          {
-        //            rcvblDocNum = "CDM-IR" +
-        // Global.getLtstRcvblsIDNoInPrfx("CDM-IR") + "-" +
-        //Global.getFrmtdDB_Date_time().Substring(12, 8).Replace(":", "") + "-" +
-        //Global.getLtstRecPkID("accb.accb_rcvbls_invc_hdr",
-        //"rcvbls_invc_hdr_id");
-        //            rcvblDocType = "Customer Debit Memo (InDirect Refund)";
-
-        //            Global.createRcvblsDocHdr(Global.Org_id, this.docDteTextBox.Text,
-        //              rcvblDocNum, rcvblDocType, this.docCommentsTextBox.Text,
-        //              long.Parse(this.docIDTextBox.Text), int.Parse(this.cstmrIDTextBox.Text),
-        //              int.Parse(this.siteIDTextBox.Text), "Not Validated", "Approve",
-        //              invcAmnt, this.payTermsTextBox.Text, this.docTypeComboBox.Text,
-        //              int.Parse(this.pymntMthdIDTextBox.Text), 0, -1, "",
-        //              "Refund-Return of Goods Supplied", int.Parse(this.invcCurrIDTextBox.Text), 0);
-        //          }
-        //          long rcvblDocID = Global.getGnrlRecID("accb.accb_rcvbls_invc_hdr",
-        //            "rcvbls_invc_number", "rcvbls_invc_hdr_id", rcvblDocNum, Global.Org_id);
-        //          if (rcvblDocID > 0 && rcvblDocType != "")
-        //          {
-        //            DataSet dtstSmmry = Global.get_ScmRcvblsDocDets(long.Parse(this.docIDTextBox.Text));
-        //            for (int i = 0; i < dtstSmmry.Tables[0].Rows.Count; i++)
-        //            {
-        //              long curlnID = Global.getNewRcvblsLnID();
-        //              string lineType = dtstSmmry.Tables[0].Rows[i][0].ToString();
-        //              string lineDesc = dtstSmmry.Tables[0].Rows[i][1].ToString();
-        //              double entrdAmnt = double.Parse(dtstSmmry.Tables[0].Rows[i][2].ToString());
-        //              int entrdCurrID = int.Parse(dtstSmmry.Tables[0].Rows[i][10].ToString());
-        //              int codeBhnd = int.Parse(dtstSmmry.Tables[0].Rows[i][3].ToString());
-        //              string docType = rcvblDocType;
-        //              bool autoCalc = Global.cnvrtBitStrToBool(dtstSmmry.Tables[0].Rows[i][4].ToString());
-        //              string incrDcrs1 = dtstSmmry.Tables[0].Rows[i][5].ToString();
-        //              int costngID = int.Parse(dtstSmmry.Tables[0].Rows[i][6].ToString());
-        //              string incrDcrs2 = dtstSmmry.Tables[0].Rows[i][7].ToString();
-        //              int blncgAccntID = int.Parse(dtstSmmry.Tables[0].Rows[i][8].ToString());
-        //              long prepayDocHdrID = long.Parse(dtstSmmry.Tables[0].Rows[i][9].ToString());
-        //              string vldyStatus = "VALID";
-        //              long orgnlLnID = -1;
-        //              int funcCurrID = int.Parse(dtstSmmry.Tables[0].Rows[i][11].ToString());
-        //              int accntCurrID = int.Parse(dtstSmmry.Tables[0].Rows[i][12].ToString());
-        //              double funcCurrRate = double.Parse(dtstSmmry.Tables[0].Rows[i][13].ToString());
-        //              double accntCurrRate = double.Parse(dtstSmmry.Tables[0].Rows[i][14].ToString());
-        //              double funcCurrAmnt = double.Parse(dtstSmmry.Tables[0].Rows[i][15].ToString());
-        //              double accntCurrAmnt = double.Parse(dtstSmmry.Tables[0].Rows[i][16].ToString());
-        //              Global.createRcvblsDocDet(curlnID, rcvblDocID, lineType,
-        //                            lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
-        //                            costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-        //                            accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt);
-        //            }
-        //            this.reCalcRcvblsSmmrys(rcvblDocID, rcvblDocType);
-        //            apprvlSccs = this.approveRcvblsDoc(rcvblDocID, rcvblDocNum);
-        //          }
-        //          if (apprvlSccs)
-        //          {
-        //            Global.updtRcvblsDocApprvl(rcvblDocID, "Approved", "Cancel");
-        //            Global.updtSalesDocApprvl(long.Parse(this.docIDTextBox.Text), "Approved", "Cancel");
-        //            this.apprvlStatusTextBox.Text = "Approved";
-        //            this.nxtApprvlStatusButton.Text = "Cancel";
-        //            this.nxtApprvlStatusButton.ImageKey = "90.png";
-        //            this.disableDetEdit();
-        //            this.disableLnsEdit();
-        //            this.populateDet(long.Parse(this.docIDTextBox.Text));
-        //            this.populateLines(long.Parse(this.docIDTextBox.Text), this.docTypeComboBox.Text);
-        //            this.populateSmmry(long.Parse(this.docIDTextBox.Text), this.docTypeComboBox.Text);
-        //          }
-        //          else
-        //          {
-        //            this.rvrsApprval(dateStr);
-        //            Global.deleteRcvblsDocHdrNDet(rcvblDocID, rcvblDocNum);
-        //            this.saveLabel.Visible = false;
-        //            System.Windows.Forms.Application.DoEvents();
-        //            return;
-        //          }
-        //        }
-        //        else
-        //        {
-        //          this.rvrsApprval(dateStr);
-        //          this.saveLabel.Visible = false;
-        //          System.Windows.Forms.Application.DoEvents();
-        //          return;
-        //        }
-
-        //        this.saveLabel.Visible = false;
-        //        System.Windows.Forms.Application.DoEvents();
-        //        if (this.payDocs && this.docTypeComboBox.Text == "Sales Invoice")
-        //        {
-        //          this.processPayButton_Click(this.processPayButton, e);
-        //        }
-
-        //    }
-        // 
-
-        private static void correctIntrfcImbals(string intrfcTblNm)
-        {
-
-            int suspns_accnt = Global.get_Suspns_Accnt(Global.UsrsOrg_ID);
-            DataSet dteDtSt = Global.get_Intrfc_dateSums(intrfcTblNm, Global.UsrsOrg_ID);
-            if (dteDtSt.Tables[0].Rows.Count > 0 && suspns_accnt > 0)
-            {
-                string msg1 = @"";
-                for (int i = 0; i < dteDtSt.Tables[0].Rows.Count; i++)
-                {
-                    double dlyDbtAmnt = double.Parse(dteDtSt.Tables[0].Rows[i][1].ToString());
-                    double dlyCrdtAmnt = double.Parse(dteDtSt.Tables[0].Rows[i][2].ToString());
-                    int orgID = Global.UsrsOrg_ID;
-                    if (dlyDbtAmnt
-                     != dlyCrdtAmnt)
-                    {
-                        //long suspns_batch_id = glBatchID;
-                        int funcCurrID = Global.getOrgFuncCurID(orgID);
-                        decimal dffrnc = (decimal)(dlyDbtAmnt - dlyCrdtAmnt);
-                        string incrsDcrs = "D";
-                        if (dffrnc < 0)
-                        {
-                            incrsDcrs = "I";
-                        }
-                        decimal imbalAmnt = Math.Abs(dffrnc);
-                        double netAmnt = (double)Global.dbtOrCrdtAccntMultiplier(suspns_accnt,
-                   incrsDcrs) * (double)imbalAmnt;
-                        string dateStr1 = DateTime.ParseExact(dteDtSt.Tables[0].Rows[i][0].ToString(), "yyyy-MM-dd",
-            System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy") + " 00:00:00";
-                        //if (!Global.mnFrm.cmCde.isTransPrmttd(suspns_accnt,
-                        //      dateStr, netAmnt))
-                        //{
-                        //  return; ;
-                        //}
-
-                        /*double netamnt = 0;
-
-                        netamnt = Global.mnFrm.cmCde.dbtOrCrdtAccntMultiplier(
-                          int.Parse(this.accntIDTextBox.Text),
-                          this.incrsDcrsComboBox.Text.Substring(0, 1)) * (double)this.funcCurAmntNumUpDwn.Value;
-                        */
-                        string dateStr = Global.getFrmtdDB_Date_time();
-
-                        if (Global.getIntrfcTrnsID(intrfcTblNm, suspns_accnt, netAmnt,
-                          dteDtSt.Tables[0].Rows[i][0].ToString() + " 00:00:00") > 0)
-                        {
-                            continue;
-                        }
-
-                        if (Global.dbtOrCrdtAccnt(suspns_accnt,
-                          incrsDcrs) == "Debit")
-                        {
-                            if (intrfcTblNm == "scm.scm_gl_interface")
-                            {
-                                Global.createScmGLIntFcLn(suspns_accnt,
-                        "Correction of Imbalance in GL Interface Table as at " + dateStr1,
-                            (double)imbalAmnt, dateStr1,
-                            funcCurrID, 0,
-                            netAmnt, "Imbalance Correction", -1, -1, dateStr, "USR");
-                            }
-                            else
-                            {
-                                Global.createPayGLIntFcLn(suspns_accnt,
-                        "Correction of Imbalance in GL Interface Table as at " + dateStr1,
-                            (double)imbalAmnt, dateStr1,
-                            funcCurrID, 0,
-                            netAmnt, dateStr, "USR");
-                            }
-
-                        }
-                        else
-                        {
-
-                            if (intrfcTblNm == "scm.scm_gl_interface")
-                            {
-                                Global.createScmGLIntFcLn(suspns_accnt,
-                                       "Correction of Imbalance in GL Interface Table as at " + dateStr1,
-                                     0, dateStr1,
-                                     funcCurrID, (double)imbalAmnt,
-                                     netAmnt, "Imbalance Correction", -1, -1, dateStr, "USR");
-                            }
-                            else
-                            {
-                                Global.createPayGLIntFcLn(suspns_accnt,
-                        "Correction of Imbalance in GL Interface Table as at " + dateStr1,
-                            (double)imbalAmnt, dateStr1,
-                            funcCurrID, 0,
-                            netAmnt, dateStr, "USR");
-                            }
-                        }
-
-                        /*if (Global.dbtOrCrdtAccnt(suspns_accnt, incrsDcrs) == "Debit")
-                        {
-                          Global.createTransaction(suspns_accnt,
-                              "Correction of Imbalance in GL Batch " + Global.getGnrlRecNm("accb.accb_trnsctn_batches",
-                              "batch_id", "batch_name", glBatchID) + " as at " + dateStr1, (double)imbalAmnt,
-                              dateStr1
-                              , funcCurrID, suspns_batch_id, 0.00, netAmnt,
-                            (double)imbalAmnt,
-                            funcCurrID,
-                            (double)imbalAmnt,
-                            funcCurrID,
-                            (double)1,
-                            (double)1, "D");
-                        }
-                        else
-                        {
-                          Global.createTransaction(suspns_accnt,
-                          "Correction of Imbalance in GL Batch " + Global.getGnrlRecNm("accb.accb_trnsctn_batches",
-                              "batch_id", "batch_name", glBatchID) + " as at " + dateStr1, 0.00,
-                          dateStr1, funcCurrID,
-                          suspns_batch_id, (double)imbalAmnt, netAmnt,
-                      (double)imbalAmnt,
-                      funcCurrID,
-                      (double)imbalAmnt,
-                      funcCurrID,
-                      (double)1,
-                      (double)1, "C");
-                        }*/
-                    }
-
-                    //msg1 = msg1 + dteDtSt.Tables[0].Rows[i][0].ToString() + "\t DR=" + 
-                    //dteDtSt.Tables[0].Rows[i][1].ToString() + "\t CR=" + 
-                    //dteDtSt.Tables[0].Rows[i][2].ToString() + "\r\n";
-                }
-                //Global.mnFrm.cmCde.showMsg(msg1, 4);
-                //return;
-            }
-            else
-            {
-                //Global.mnFrm.cmCde.showMsg("There's no Imbalance to correct!", 0);
-                //return;
-            }
-        }
-
-        private static void correctImblns()
+        private static void correctImblnsButton(string asAtDate)
         {
             try
             {
                 int suspns_accnt = Global.get_Suspns_Accnt(Global.UsrsOrg_ID);
-                if (suspns_accnt <= -1)
-                {
-                    //Global.showMsg("Please define a suspense Account First!", 0);
-                    return;
-                }
                 int ret_accnt = Global.get_Rtnd_Erngs_Accnt(Global.UsrsOrg_ID);
                 int net_accnt = Global.get_Net_Income_Accnt(Global.UsrsOrg_ID);
-                if (ret_accnt == -1)
-                {
-                    //Global.showMsg("Until a Retained Earnings Account is defined\r\n no Transaction can be posted into the Accounting!", 0);
-                    return;
-                }
-                if (net_accnt == -1)
-                {
-                    //Global.showMsg("Until a Net Income Account is defined\r\n no Transaction can be posted into the Accounting!", 0);
-                    return;
-                }
-                //bool isAnyRnng = true;
-                //do
-                //{
-                //  isAnyRnng = Global.isThereANActvActnPrcss("1,2,3,4,5,6", "10 second");
-                //}
-                //while (isAnyRnng == true);
-                //bool isAnyRnng = true;
-                //int witcntr = 0;
-                //do
-                //{
-                //  witcntr++;
-                //  isAnyRnng = Global.isThereANActvActnPrcss("1,2,3,4,5,6", "10 second");
-                //  System.Windows.Forms.Application.DoEvents();
-                //}
-                //while (isAnyRnng == true);
+                string trnsAftaDate = DateTime.ParseExact(
+        asAtDate, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
 
-                /*PROCEDURE FOR RELOADING ACCOUNT BALANCES
-          1. Correct all Trns Det Net Balance Amount
-          2. Get all wrong daily bals values
-                 */
-                Global.updtActnPrcss(5, 90);
                 DataSet dtst = Global.get_WrongNetBalncs(Global.UsrsOrg_ID);
-
-                for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                Global.updateDataNoParams(@"DELETE FROM accb.accb_accnt_daily_bals WHERE  daily_bals_id IN  (Select tbl1.db1 from (Select count(daily_bals_id), accnt_id, as_at_date, MAX(daily_bals_id) db1 from accb.accb_accnt_daily_bals 
+                                                        GROUP BY  accnt_id, as_at_date
+                                                        HAVING count(daily_bals_id)>1) tbl1)");
+                Global.updateDataNoParams(@"UPDATE accb.accb_accnt_daily_bals a SET dbt_bal=0, crdt_bal=0, net_balance=0 WHERE as_at_date>='" + trnsAftaDate.Replace("'", "''") + "'");
+                string updtSQL = @"UPDATE accb.accb_trnsctn_details 
+      SET dbt_amount=round(dbt_amount,2), crdt_amount=round(crdt_amount,2),
+net_amount = round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)
+      WHERE dbt_amount!=round(dbt_amount,2) or crdt_amount!=round(crdt_amount,2)
+or net_amount != round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)";
+                Global.updateDataNoParams(updtSQL);
+                DateTime StartDate = DateTime.ParseExact(
+            trnsAftaDate + " 00:00:00", "yyyy-MM-dd HH:mm:ss",
+            System.Globalization.CultureInfo.InvariantCulture);
+                DateTime EndDate = DateTime.ParseExact(
+                      "01" + Global.getFrmtdDB_Date_time().Substring(2, 9) + " 23:59:59", "dd-MMM-yyyy HH:mm:ss",
+                      System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1);
+                for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
                 {
-                    double netAmnt = double.Parse(dtst.Tables[0].Rows[i][8].ToString());
-                    long trnsID = long.Parse(dtst.Tables[0].Rows[i][0].ToString());
-                    string updtSQL = @"UPDATE accb.accb_trnsctn_details 
-SET net_amount=" + netAmnt + @" 
-   WHERE transctn_id=" + trnsID;
-                    Global.updateDataNoParams(updtSQL);
-
-                    Global.updtActnPrcss(5, 90);
-                }
-
-                dtst = Global.get_WrongBalncs(Global.UsrsOrg_ID);
-                for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
-                {
-                    Global.updtActnPrcss(5, 30);
-
-                    string acctyp = Global.getAccntType(
-                     int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
-
-                    double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                    double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                    double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
-
-
-                    Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
-                     dbt1,
-                     crdt1,
-                     net1,
-                     dtst.Tables[0].Rows[i][7].ToString(), -993);
-
-
-                    if (acctyp == "R")
+                    trnsAftaDate = date.ToString("yyyy-MM-dd");
+                    dtst = Global.get_WrongBalncs(Global.UsrsOrg_ID, trnsAftaDate);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
                     {
-                        Global.postTransaction(net_accnt,
-                       dbt1,
-                       crdt1,
-                       net1,
-                        dtst.Tables[0].Rows[i][7].ToString(), -993);
-                    }
-                    else if (acctyp == "EX")
-                    {
-                        Global.postTransaction(net_accnt,
-                       dbt1,
-                       crdt1,
-                    (double)(-1) * net1,
-                        dtst.Tables[0].Rows[i][7].ToString(), -993);
-                    }
+                        string acctyp = Global.getAccntType(int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
 
+                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                        double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
 
-                    //get control accnt id
-                    int cntrlAcntID = int.Parse(Global.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "control_account_id",
-                      int.Parse(dtst.Tables[0].Rows[i][1].ToString())));
-                    if (cntrlAcntID > 0)
-                    {
-                        Global.postTransaction(cntrlAcntID,
-                       dbt1,
-                       crdt1,
-                       net1,
+                        Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                         dbt1,
+                         crdt1,
+                         net1,
                          dtst.Tables[0].Rows[i][7].ToString(), -993);
-
                     }
-                    //this.reloadOneAcntChrtBals(int.Parse(dtst.Tables[0].Rows[i][1].ToString()), net_accnt);
-                }
-
-                Global.updtActnPrcss(5, 50);
-                Program.reloadAcntChrtBals(net_accnt);
-
-                dtst = Global.get_WrongNetIncmBalncs(Global.UsrsOrg_ID);
-                for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
-                {
-                    Global.updtActnPrcss(5, 30);
-                    string acctyp = Global.getAccntType(
-                     int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
-
-                    double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                    double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                    double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
-
-
-                    Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
-                     dbt1,
-                     crdt1,
-                     net1,
-                     dtst.Tables[0].Rows[i][7].ToString(), -993);
-
-
-
-                    //this.reloadOneAcntChrtBals(int.Parse(dtst.Tables[0].Rows[i][1].ToString()), net_accnt);
-                }
-
-                Global.updtActnPrcss(5, 50);
-                Program.reloadOneAcntChrtBals(net_accnt, net_accnt);
-
-                string errmsg = "";
-                decimal aesum = (decimal)Global.get_COA_AESum(Global.UsrsOrg_ID);
-                decimal crlsum = (decimal)Global.get_COA_CRLSum(Global.UsrsOrg_ID);
-                if (aesum
-                 != crlsum)
-                {
-                    Global.updtActnPrcss(5, 10);
-                    if (Program.postIntoSuspnsAccnt(aesum,
-                      crlsum, Global.UsrsOrg_ID, false, ref errmsg) == false
-                      && errmsg != "")
+                    //Global.updtActnPrcss(5, 50);
+                    dtst = Global.get_WrongHsSubLdgrBalncs(Global.UsrsOrg_ID, trnsAftaDate);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
                     {
-                        // Global.showMsg(errmsg, 0);
+                        string acctyp = Global.getAccntType(
+                         int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                        double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+                        Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                         dbt1,
+                         crdt1,
+                         net1,
+                         dtst.Tables[0].Rows[i][7].ToString(), -993);
+                    }
+                    //Global.updtActnPrcss(5, 50);
+                    dtst = Global.get_WrongNetIncmBalncs(Global.UsrsOrg_ID, trnsAftaDate);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                    {
+                        string acctyp = Global.getAccntType(
+                         int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+
+                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                        double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+                        Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                         dbt1,
+                         crdt1,
+                         net1,
+                         dtst.Tables[0].Rows[i][7].ToString(), -993);
                     }
                 }
+                //Global.updtActnPrcss(5, 1);
 
-                Program.reloadOneAcntChrtBals(suspns_accnt, net_accnt);
-
-
-                Global.updtActnPrcss(5, 1);
+                //Global.updtActnPrcss(5, 50);
+                Program.reloadAcntChrtBals(net_accnt);
             }
             catch (Exception ex)
             {
-
+                Global.errorLog += ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.InnerException;
             }
         }
 
+        private static void reloadAcntChrtBals(int netaccntid)
+        {
+            string dateStr = DateTime.ParseExact(
+         Global.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
+            DataSet dtst = Global.get_All_Chrt_Det(Global.UsrsOrg_ID);
+            //DataSet dtst = Global.get_Batch_Accnts(btchid);
+            //if (dateStr.Length > 10)
+            //{
+            //  dateStr = dateStr.Substring(0, 10);
+            //}
+            for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
+            {
+                string[] rslt = Global.getAccntLstDailyBalsInfo(
+                  int.Parse(dtst.Tables[0].Rows[a][0].ToString()), dateStr);
+                double lstNetBals = double.Parse(rslt[2]);
+                double lstDbtBals = double.Parse(rslt[0]);
+                double lstCrdtBals = double.Parse(rslt[1]);
+
+                //Global.showMsg("Testing!" + rslt[2] + "\r\n" + rslt[3] + "\r\n" + dateStr, 0);
+                Global.updtAcntChrtBals(int.Parse(dtst.Tables[0].Rows[a][0].ToString()),
+                  lstDbtBals, lstCrdtBals, lstNetBals, rslt[3]);
+
+                //get control accnt id
+                int cntrlAcntID = int.Parse(Global.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "control_account_id", int.Parse(dtst.Tables[0].Rows[a][0].ToString())));
+                if (cntrlAcntID > 0)
+                {
+                    rslt = Global.getAccntLstDailyBalsInfo(
+                 cntrlAcntID, dateStr);
+                    lstNetBals = double.Parse(rslt[2]);
+                    lstDbtBals = double.Parse(rslt[0]);
+                    lstCrdtBals = double.Parse(rslt[1]);
+
+                    //Global.showMsg("Testing!" + rslt[2] + "\r\n" + rslt[3] + "\r\n" + dateStr, 0);
+                    Global.updtAcntChrtBals(cntrlAcntID,
+                     lstDbtBals, lstCrdtBals, lstNetBals, rslt[3]);
+                }
+            }
+            if (netaccntid > 0)
+            {
+                string[] rslt = Global.getAccntLstDailyBalsInfo(
+                  netaccntid, dateStr);
+                double lstNetBals = double.Parse(rslt[2]);
+                double lstDbtBals = double.Parse(rslt[0]);
+                double lstCrdtBals = double.Parse(rslt[1]);
+
+                //Global.showMsg("Testing!" + rslt[2] + "\r\n" + rslt[3] + "\r\n" + dateStr, 0);
+                Global.updtAcntChrtBals(netaccntid,
+                  lstDbtBals, lstCrdtBals, lstNetBals, rslt[3]);
+            }
+        }
     }
 }

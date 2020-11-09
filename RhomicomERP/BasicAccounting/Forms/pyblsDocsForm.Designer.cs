@@ -92,6 +92,7 @@
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
             this.glsLabel3 = new glsLabel.glsLabel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.firstCheckNumTextBox = new System.Windows.Forms.TextBox();
             this.nextPaymentNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.openBatchButton = new System.Windows.Forms.Button();
@@ -168,6 +169,7 @@
             this.docTypeComboBox = new System.Windows.Forms.ComboBox();
             this.docIDPrfxComboBox = new System.Windows.Forms.ComboBox();
             this.docIDNumTextBox = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.vwSmrySQLButton = new System.Windows.Forms.ToolStripButton();
@@ -751,6 +753,7 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.firstCheckNumTextBox);
             this.groupBox10.Controls.Add(this.nextPaymentNumUpDown);
             this.groupBox10.Controls.Add(this.label23);
             this.groupBox10.Controls.Add(this.openBatchButton);
@@ -826,6 +829,7 @@
             this.groupBox10.Controls.Add(this.docTypeComboBox);
             this.groupBox10.Controls.Add(this.docIDPrfxComboBox);
             this.groupBox10.Controls.Add(this.docIDNumTextBox);
+            this.groupBox10.Controls.Add(this.label24);
             this.groupBox10.ForeColor = System.Drawing.Color.White;
             this.groupBox10.Location = new System.Drawing.Point(170, 36);
             this.groupBox10.Name = "groupBox10";
@@ -833,6 +837,14 @@
             this.groupBox10.TabIndex = 1;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "DOCUMENT HEADER";
+            // 
+            // firstCheckNumTextBox
+            // 
+            this.firstCheckNumTextBox.Location = new System.Drawing.Point(824, 105);
+            this.firstCheckNumTextBox.MaxLength = 200;
+            this.firstCheckNumTextBox.Name = "firstCheckNumTextBox";
+            this.firstCheckNumTextBox.Size = new System.Drawing.Size(95, 21);
+            this.firstCheckNumTextBox.TabIndex = 32;
             // 
             // nextPaymentNumUpDown
             // 
@@ -844,8 +856,8 @@
             0,
             0});
             this.nextPaymentNumUpDown.Name = "nextPaymentNumUpDown";
-            this.nextPaymentNumUpDown.Size = new System.Drawing.Size(168, 21);
-            this.nextPaymentNumUpDown.TabIndex = 253;
+            this.nextPaymentNumUpDown.Size = new System.Drawing.Size(195, 21);
+            this.nextPaymentNumUpDown.TabIndex = 33;
             this.nextPaymentNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nextPaymentNumUpDown.ThousandsSeparator = true;
             this.nextPaymentNumUpDown.ValueChanged += new System.EventHandler(this.nextPaymentNumUpDown_ValueChanged);
@@ -891,10 +903,11 @@
             this.lnkdEventComboBox.FormattingEnabled = true;
             this.lnkdEventComboBox.Items.AddRange(new object[] {
             "Attendance Register",
-            "Production Process Run"});
+            "Production Process Run",
+            "Customer File Number"});
             this.lnkdEventComboBox.Location = new System.Drawing.Point(78, 180);
             this.lnkdEventComboBox.Name = "lnkdEventComboBox";
-            this.lnkdEventComboBox.Size = new System.Drawing.Size(214, 21);
+            this.lnkdEventComboBox.Size = new System.Drawing.Size(131, 21);
             this.lnkdEventComboBox.TabIndex = 10;
             this.lnkdEventComboBox.SelectedIndexChanged += new System.EventHandler(this.lnkdEventComboBox_SelectedIndexChanged);
             // 
@@ -913,14 +926,14 @@
             this.rgstrNumTextBox.MaxLength = 200;
             this.rgstrNumTextBox.Name = "rgstrNumTextBox";
             this.rgstrNumTextBox.ReadOnly = true;
-            this.rgstrNumTextBox.Size = new System.Drawing.Size(104, 21);
+            this.rgstrNumTextBox.Size = new System.Drawing.Size(214, 21);
             this.rgstrNumTextBox.TabIndex = 11;
             // 
             // rgstrButton
             // 
             this.rgstrButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rgstrButton.ForeColor = System.Drawing.Color.Black;
-            this.rgstrButton.Location = new System.Drawing.Point(182, 202);
+            this.rgstrButton.Location = new System.Drawing.Point(293, 202);
             this.rgstrButton.Name = "rgstrButton";
             this.rgstrButton.Size = new System.Drawing.Size(27, 23);
             this.rgstrButton.TabIndex = 12;
@@ -932,7 +945,7 @@
             // 
             this.costCtgrButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.costCtgrButton.ForeColor = System.Drawing.Color.Black;
-            this.costCtgrButton.Location = new System.Drawing.Point(292, 202);
+            this.costCtgrButton.Location = new System.Drawing.Point(292, 179);
             this.costCtgrButton.Name = "costCtgrButton";
             this.costCtgrButton.Size = new System.Drawing.Size(28, 23);
             this.costCtgrButton.TabIndex = 14;
@@ -952,7 +965,7 @@
             // 
             // costCtgrTextBox
             // 
-            this.costCtgrTextBox.Location = new System.Drawing.Point(209, 203);
+            this.costCtgrTextBox.Location = new System.Drawing.Point(209, 180);
             this.costCtgrTextBox.MaxLength = 200;
             this.costCtgrTextBox.Name = "costCtgrTextBox";
             this.costCtgrTextBox.ReadOnly = true;
@@ -1054,7 +1067,7 @@
             // 
             this.invcCurrButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invcCurrButton.ForeColor = System.Drawing.Color.Black;
-            this.invcCurrButton.Location = new System.Drawing.Point(892, 104);
+            this.invcCurrButton.Location = new System.Drawing.Point(714, 104);
             this.invcCurrButton.Name = "invcCurrButton";
             this.invcCurrButton.Size = new System.Drawing.Size(28, 23);
             this.invcCurrButton.TabIndex = 31;
@@ -1064,12 +1077,12 @@
             // 
             // invcCurrTextBox
             // 
-            this.invcCurrTextBox.Location = new System.Drawing.Point(724, 105);
+            this.invcCurrTextBox.Location = new System.Drawing.Point(665, 105);
             this.invcCurrTextBox.MaxLength = 200;
             this.invcCurrTextBox.Name = "invcCurrTextBox";
             this.invcCurrTextBox.ReadOnly = true;
             this.invcCurrTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.invcCurrTextBox.Size = new System.Drawing.Size(168, 21);
+            this.invcCurrTextBox.Size = new System.Drawing.Size(49, 21);
             this.invcCurrTextBox.TabIndex = 30;
             this.invcCurrTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.invcCurrTextBox.TextChanged += new System.EventHandler(this.docDteTextBox_TextChanged);
@@ -1080,13 +1093,13 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(612, 109);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(93, 13);
+            this.label19.Size = new System.Drawing.Size(55, 13);
             this.label19.TabIndex = 211;
-            this.label19.Text = "Invoice Currency:";
+            this.label19.Text = "Currency:";
             // 
             // invcCurrIDTextBox
             // 
-            this.invcCurrIDTextBox.Location = new System.Drawing.Point(855, 105);
+            this.invcCurrIDTextBox.Location = new System.Drawing.Point(683, 105);
             this.invcCurrIDTextBox.MaxLength = 200;
             this.invcCurrIDTextBox.Name = "invcCurrIDTextBox";
             this.invcCurrIDTextBox.ReadOnly = true;
@@ -1131,7 +1144,7 @@
             this.docClsfctnButton.Location = new System.Drawing.Point(892, 150);
             this.docClsfctnButton.Name = "docClsfctnButton";
             this.docClsfctnButton.Size = new System.Drawing.Size(28, 22);
-            this.docClsfctnButton.TabIndex = 33;
+            this.docClsfctnButton.TabIndex = 35;
             this.docClsfctnButton.Text = "...";
             this.docClsfctnButton.UseVisualStyleBackColor = true;
             this.docClsfctnButton.Click += new System.EventHandler(this.docClsfctnButton_Click);
@@ -1146,7 +1159,7 @@
             this.docClsfctnTextBox.ReadOnly = true;
             this.docClsfctnTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.docClsfctnTextBox.Size = new System.Drawing.Size(168, 26);
-            this.docClsfctnTextBox.TabIndex = 32;
+            this.docClsfctnTextBox.TabIndex = 34;
             this.docClsfctnTextBox.TextChanged += new System.EventHandler(this.docDteTextBox_TextChanged);
             this.docClsfctnTextBox.Leave += new System.EventHandler(this.docDteTextBox_Leave);
             // 
@@ -1427,7 +1440,7 @@
             this.rejectDocButton.Location = new System.Drawing.Point(772, 202);
             this.rejectDocButton.Name = "rejectDocButton";
             this.rejectDocButton.Size = new System.Drawing.Size(67, 26);
-            this.rejectDocButton.TabIndex = 36;
+            this.rejectDocButton.TabIndex = 38;
             this.rejectDocButton.Text = "Reject";
             this.rejectDocButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.rejectDocButton.UseVisualStyleBackColor = true;
@@ -1441,7 +1454,7 @@
             this.nxtApprvlStatusButton.Location = new System.Drawing.Point(673, 202);
             this.nxtApprvlStatusButton.Name = "nxtApprvlStatusButton";
             this.nxtApprvlStatusButton.Size = new System.Drawing.Size(100, 26);
-            this.nxtApprvlStatusButton.TabIndex = 35;
+            this.nxtApprvlStatusButton.TabIndex = 36;
             this.nxtApprvlStatusButton.Text = "Validate";
             this.nxtApprvlStatusButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.nxtApprvlStatusButton.UseVisualStyleBackColor = true;
@@ -1650,6 +1663,15 @@
             this.docIDNumTextBox.Size = new System.Drawing.Size(148, 21);
             this.docIDNumTextBox.TabIndex = 2;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(740, 109);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(86, 13);
+            this.label24.TabIndex = 255;
+            this.label24.Text = "1st Cheque No.:";
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1841,7 +1863,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(6, 18);
             this.toolStrip2.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(400, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(431, 25);
             this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.TabStop = true;
@@ -2556,5 +2578,7 @@
         private System.Windows.Forms.Button openBatchButton;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.NumericUpDown nextPaymentNumUpDown;
+        private System.Windows.Forms.TextBox firstCheckNumTextBox;
+        private System.Windows.Forms.Label label24;
     }
 }

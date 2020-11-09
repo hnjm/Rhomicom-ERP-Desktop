@@ -45,9 +45,23 @@ namespace SystemAdministration.Dialogs
                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (Global.getUserID(this.uNameTextBox.Text) > 0 && this.uNameTextBox.ReadOnly == false)
+            long uID = Global.getUserID(this.uNameTextBox.Text);
+            if ((uID > 0 && uID != long.Parse(this.usrIDTextBox.Text)))
             {
-                MessageBox.Show("This user name is already in use!", "Rhomicom Message!",
+                MessageBox.Show("New user name is already in use!", "Rhomicom Message!",
+                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            long odlID = Global.getUserIDFrmTrnsCode(this.usrTrnsCodeTextBox.Text);
+            if (odlID > 0 && this.uNameTextBox.ReadOnly == false)
+            {
+                MessageBox.Show("This user trns Code is already in use!", "Rhomicom Message!",
+                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (odlID != long.Parse(this.usrIDTextBox.Text) && odlID > 0)
+            {
+                MessageBox.Show("This user trns Code is already in use by another!", "Rhomicom Message!",
                   MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -55,11 +69,11 @@ namespace SystemAdministration.Dialogs
             long cstmrID = -1;
             prsnID = long.Parse(this.prsnIDTextBox.Text);
             cstmrID = long.Parse(this.asgndCstmrIDTextBox.Text);
-            if (this.uNameTextBox.ReadOnly == false)
+            if (long.Parse(this.usrIDTextBox.Text) <= 0)
             {
                 Global.createUser(this.uNameTextBox.Text, prsnID,
                   this.usrVldStrtDteTextBox.Text, this.usrVldEndDteTextBox.Text,
-                Global.generatePswd(), cstmrID, this.modulesBaughtComboBox.Text);
+                Global.generatePswd(), cstmrID, this.modulesBaughtComboBox.Text, this.usrTrnsCodeTextBox.Text);
                 if (MessageBox.Show("User Saved Successfully! Want to create a new one?", "Rhomicom Message!",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
@@ -73,8 +87,9 @@ namespace SystemAdministration.Dialogs
             }
             else
             {
-                Global.updateUser(this.uNameTextBox.Text, prsnID,
-            this.usrVldStrtDteTextBox.Text, this.usrVldEndDteTextBox.Text, cstmrID, this.modulesBaughtComboBox.Text);
+                Global.updateUser(long.Parse(this.usrIDTextBox.Text), this.uNameTextBox.Text, prsnID,
+            this.usrVldStrtDteTextBox.Text, this.usrVldEndDteTextBox.Text, cstmrID,
+            this.modulesBaughtComboBox.Text, this.usrTrnsCodeTextBox.Text);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

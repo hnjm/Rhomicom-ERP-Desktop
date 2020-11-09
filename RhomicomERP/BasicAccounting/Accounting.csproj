@@ -83,10 +83,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\LIBRARIES\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=2.0.11.92, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Organisation_Management_System\bin\Debug\Npgsql.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Npgsql">
+      <HintPath>..\Enterprise_Management_System\bin\Debug\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -177,6 +175,12 @@
     </Compile>
     <Compile Include="Dialogs\pymntMthdsDiag.Designer.cs">
       <DependentUpon>pymntMthdsDiag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\bdgtAmntBreakDwnDiag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\bdgtAmntBreakDwnDiag.Designer.cs">
+      <DependentUpon>bdgtAmntBreakDwnDiag.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\trnsAmntBreakDwnDiag.cs">
       <SubType>Form</SubType>
@@ -310,6 +314,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\pymntMthdsDiag.resx">
       <DependentUpon>pymntMthdsDiag.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\bdgtAmntBreakDwnDiag.resx">
+      <DependentUpon>bdgtAmntBreakDwnDiag.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\trnsAmntBreakDwnDiag.resx">

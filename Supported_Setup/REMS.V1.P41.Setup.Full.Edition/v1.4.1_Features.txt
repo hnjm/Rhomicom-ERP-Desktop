@@ -1,0 +1,40 @@
+v1.4.1 New Features
+1. Added extra Calculation Methods to Hospitality
+v1.4.0 New Features
+==========================================================================================================
+1. Fixed Slowness in Hospitality
+2. Redesigned the Auto-Correct GL Imbalance Function and automated it's running in Accounting and Process Runner.
+3. Changed TestPermmsns Function from C# to postgre
+4. Enhanced All Financial Statement Calculations and introduced feature to run for a branch across al reports
+5. Did Report/Process versions of Financial Statements
+6. Enhanced Overall System Performance
+7. Introduced feature to hide some report parameters
+8. Changed Default Look and Feel of Raw HTML Output Reports
+9. Fixed bugs in the Java REMSProcessRunner regarding Charts and Other Report Formats
+10. Made it possible to create new account segment values right from accounts segment screen
+11. Made it possible to link Receivables, Payables and Petty Cash Documents via doc numbers for reporting purposes
+12. Introduced a feature to prevent simultaneous posting to gl by different workstations
+13. Filter Chart of Accounts by Account Classifications and Report Classifications
+14. Added Extra Info Feature to Receivables Documents
+15. Added Line Quantity and Unit price to Receivable Documents
+16. Linked Account Access Group to Sites/Locs
+17. Modified SMPT Server Settings and Email Sending Settings to allow IP Address for Inhouse Servers
+18. Enhanced Customized Pay Slip Report
+
+==========================================================================================================
+Installation Steps
+==========================================================================================================
+1. Install Front-End
+2. Backup and Use DBConfig to restore your Database
+3. Apply Patch
+4. Login to Front-End and Load Roles/Priviledges
+5. Go to General Setup and Edit Allow Inventory to be Costed LOV Accordingly
+6. Import New Reports into Reports/Processes and assign appropriate Roles
+7. Upload New jrxml Files for the ff Reports
+	.Petty Cash Voucher
+	.Payables Invoice
+	.Receivables Invoice
+	.Customized Pay Slip
+	.Date Summary Invoice
+	.Sales Invoice
+	.Sales Invoice-No Qtys & Unit Price

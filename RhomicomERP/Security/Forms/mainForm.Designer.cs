@@ -41,7 +41,6 @@ namespace SystemAdministration.Forms
             this.accDndLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.glsLabel1 = new glsLabel.glsLabel();
-            this.waitLabel = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.usersPanel = new System.Windows.Forms.Panel();
@@ -122,6 +121,7 @@ namespace SystemAdministration.Forms
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader60 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader62 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader63 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.usersContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,6 +133,8 @@ namespace SystemAdministration.Forms
             this.label38 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.rolesPanel = new System.Windows.Forms.Panel();
+            this.imprtRolesButton = new System.Windows.Forms.Button();
+            this.exprtRolesButton = new System.Windows.Forms.Button();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
             this.addEditRoleButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip11 = new System.Windows.Forms.ToolStrip();
@@ -507,6 +509,8 @@ namespace SystemAdministration.Forms
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.smtpIPTextBox = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
             this.smtpClientTextBox = new System.Windows.Forms.TextBox();
             this.isDfltNoEmlSvrCheckBox = new System.Windows.Forms.CheckBox();
             this.isDfltYesEmlSvrCheckBox = new System.Windows.Forms.CheckBox();
@@ -582,7 +586,11 @@ namespace SystemAdministration.Forms
             this.columnHeader45 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader44 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader64 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader65 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.loginsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.frcLgoutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator79 = new System.Windows.Forms.ToolStripSeparator();
             this.exptLgnMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshLgnMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator93 = new System.Windows.Forms.ToolStripSeparator();
@@ -617,6 +625,7 @@ namespace SystemAdministration.Forms
             this.label35 = new System.Windows.Forms.Label();
             this.showFaildCheckBox = new System.Windows.Forms.CheckBox();
             this.showSuccsflCheckBox = new System.Windows.Forms.CheckBox();
+            this.waitLabel = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.infoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -723,7 +732,6 @@ namespace SystemAdministration.Forms
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.waitLabel);
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(5);
             this.splitContainer1.Size = new System.Drawing.Size(1276, 733);
@@ -732,24 +740,25 @@ namespace SystemAdministration.Forms
             // 
             // treeVWContextMenuStrip
             // 
+            this.treeVWContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.treeVWContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hideTreevwMenuItem,
             this.toolStripSeparator123});
             this.treeVWContextMenuStrip.Name = "usersContextMenuStrip";
-            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(153, 32);
+            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(183, 36);
             // 
             // hideTreevwMenuItem
             // 
             this.hideTreevwMenuItem.Image = global::SystemAdministration.Properties.Resources.download__26_;
             this.hideTreevwMenuItem.Name = "hideTreevwMenuItem";
-            this.hideTreevwMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hideTreevwMenuItem.Size = new System.Drawing.Size(182, 26);
             this.hideTreevwMenuItem.Text = "Hide Tree View";
             this.hideTreevwMenuItem.Click += new System.EventHandler(this.hideTreevwMenuItem_Click);
             // 
             // toolStripSeparator123
             // 
             this.toolStripSeparator123.Name = "toolStripSeparator123";
-            this.toolStripSeparator123.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator123.Size = new System.Drawing.Size(179, 6);
             // 
             // leftTreeView
             // 
@@ -790,7 +799,6 @@ namespace SystemAdministration.Forms
             // 
             // accDndLabel
             // 
-            this.accDndLabel.AutoSize = true;
             this.accDndLabel.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accDndLabel.ForeColor = System.Drawing.Color.White;
             this.accDndLabel.Location = new System.Drawing.Point(0, 0);
@@ -820,24 +828,11 @@ namespace SystemAdministration.Forms
             this.glsLabel1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel1.ForeColor = System.Drawing.Color.White;
             this.glsLabel1.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel1.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel1.Name = "glsLabel1";
             this.glsLabel1.Size = new System.Drawing.Size(200, 35);
             this.glsLabel1.TabIndex = 1;
             this.glsLabel1.TopFill = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            // 
-            // waitLabel
-            // 
-            this.waitLabel.BackColor = System.Drawing.Color.Green;
-            this.waitLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.waitLabel.ForeColor = System.Drawing.Color.White;
-            this.waitLabel.Location = new System.Drawing.Point(250, 222);
-            this.waitLabel.Name = "waitLabel";
-            this.waitLabel.Size = new System.Drawing.Size(328, 52);
-            this.waitLabel.TabIndex = 135;
-            this.waitLabel.Text = "LOADING STANDARD ROLES & LOVs...PLEASE WAIT...";
-            this.waitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.waitLabel.Visible = false;
             // 
             // tabControl1
             // 
@@ -914,6 +909,7 @@ namespace SystemAdministration.Forms
             this.toolStrip8.AutoSize = false;
             this.toolStrip8.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip8.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEdtUsrRoleButton});
             this.toolStrip8.Location = new System.Drawing.Point(368, 335);
@@ -928,7 +924,7 @@ namespace SystemAdministration.Forms
             this.addEdtUsrRoleButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addEdtUsrRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addEdtUsrRoleButton.Name = "addEdtUsrRoleButton";
-            this.addEdtUsrRoleButton.Size = new System.Drawing.Size(147, 22);
+            this.addEdtUsrRoleButton.Size = new System.Drawing.Size(188, 22);
             this.addEdtUsrRoleButton.Text = "ADD/EDIT USER ROLES";
             this.addEdtUsrRoleButton.Click += new System.EventHandler(this.addEdtUsrRoleButton_Click);
             // 
@@ -937,6 +933,7 @@ namespace SystemAdministration.Forms
             this.toolStrip9.AutoSize = false;
             this.toolStrip9.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip9.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip9.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addUserButton,
             this.editUserButton,
@@ -953,7 +950,7 @@ namespace SystemAdministration.Forms
             this.addUserButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addUserButton.Name = "addUserButton";
-            this.addUserButton.Size = new System.Drawing.Size(51, 22);
+            this.addUserButton.Size = new System.Drawing.Size(65, 22);
             this.addUserButton.Text = "ADD";
             this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
@@ -962,7 +959,7 @@ namespace SystemAdministration.Forms
             this.editUserButton.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.editUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editUserButton.Name = "editUserButton";
-            this.editUserButton.Size = new System.Drawing.Size(51, 22);
+            this.editUserButton.Size = new System.Drawing.Size(64, 22);
             this.editUserButton.Text = "EDIT";
             this.editUserButton.Click += new System.EventHandler(this.editUserButton_Click);
             // 
@@ -971,7 +968,7 @@ namespace SystemAdministration.Forms
             this.delUserButton.Image = global::SystemAdministration.Properties.Resources.delete;
             this.delUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delUserButton.Name = "delUserButton";
-            this.delUserButton.Size = new System.Drawing.Size(66, 22);
+            this.delUserButton.Size = new System.Drawing.Size(83, 22);
             this.delUserButton.Text = "DELETE";
             this.delUserButton.Click += new System.EventHandler(this.delUserButton_Click);
             // 
@@ -1033,7 +1030,7 @@ namespace SystemAdministration.Forms
             this.agePswdTextBox.Location = new System.Drawing.Point(160, 61);
             this.agePswdTextBox.Name = "agePswdTextBox";
             this.agePswdTextBox.ReadOnly = true;
-            this.agePswdTextBox.Size = new System.Drawing.Size(145, 21);
+            this.agePswdTextBox.Size = new System.Drawing.Size(145, 24);
             this.agePswdTextBox.TabIndex = 2;
             // 
             // label4
@@ -1043,7 +1040,7 @@ namespace SystemAdministration.Forms
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(15, 65);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 13);
+            this.label4.Size = new System.Drawing.Size(165, 17);
             this.label4.TabIndex = 15;
             this.label4.Text = "Age of Current Password:";
             // 
@@ -1070,7 +1067,7 @@ namespace SystemAdministration.Forms
             this.isExpiredCheckBox.ForeColor = System.Drawing.Color.White;
             this.isExpiredCheckBox.Location = new System.Drawing.Point(15, 42);
             this.isExpiredCheckBox.Name = "isExpiredCheckBox";
-            this.isExpiredCheckBox.Size = new System.Drawing.Size(111, 17);
+            this.isExpiredCheckBox.Size = new System.Drawing.Size(138, 21);
             this.isExpiredCheckBox.TabIndex = 1;
             this.isExpiredCheckBox.Text = "Password Expired";
             this.isExpiredCheckBox.UseVisualStyleBackColor = true;
@@ -1083,7 +1080,7 @@ namespace SystemAdministration.Forms
             this.lastPwdChngeTextBox.Location = new System.Drawing.Point(160, 85);
             this.lastPwdChngeTextBox.Name = "lastPwdChngeTextBox";
             this.lastPwdChngeTextBox.ReadOnly = true;
-            this.lastPwdChngeTextBox.Size = new System.Drawing.Size(145, 21);
+            this.lastPwdChngeTextBox.Size = new System.Drawing.Size(145, 24);
             this.lastPwdChngeTextBox.TabIndex = 3;
             // 
             // label3
@@ -1093,7 +1090,7 @@ namespace SystemAdministration.Forms
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(15, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(145, 13);
+            this.label3.Size = new System.Drawing.Size(184, 17);
             this.label3.TabIndex = 11;
             this.label3.Text = "Last Password Change Time:";
             // 
@@ -1104,7 +1101,7 @@ namespace SystemAdministration.Forms
             this.isTempCheckBox.ForeColor = System.Drawing.Color.White;
             this.isTempCheckBox.Location = new System.Drawing.Point(15, 20);
             this.isTempCheckBox.Name = "isTempCheckBox";
-            this.isTempCheckBox.Size = new System.Drawing.Size(137, 17);
+            this.isTempCheckBox.Size = new System.Drawing.Size(172, 21);
             this.isTempCheckBox.TabIndex = 0;
             this.isTempCheckBox.Text = "Password is Temporary";
             this.isTempCheckBox.UseVisualStyleBackColor = true;
@@ -1175,6 +1172,7 @@ namespace SystemAdministration.Forms
             // 
             // userRolesContextMenuStrip
             // 
+            this.userRolesContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.userRolesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addUserRoleToolStripMenuItem,
             this.toolStripSeparator2,
@@ -1183,26 +1181,26 @@ namespace SystemAdministration.Forms
             this.recordHistoryUsrRoleToolStripMenuItem,
             this.viewSQLUsrRoleToolStripMenuItem});
             this.userRolesContextMenuStrip.Name = "userRolesContextMenuStrip";
-            this.userRolesContextMenuStrip.Size = new System.Drawing.Size(179, 120);
+            this.userRolesContextMenuStrip.Size = new System.Drawing.Size(216, 140);
             // 
             // addUserRoleToolStripMenuItem
             // 
             this.addUserRoleToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addUserRoleToolStripMenuItem.Name = "addUserRoleToolStripMenuItem";
-            this.addUserRoleToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.addUserRoleToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.addUserRoleToolStripMenuItem.Text = "&Add/Edit User Roles";
             this.addUserRoleToolStripMenuItem.Click += new System.EventHandler(this.addUserRoleToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(175, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(212, 6);
             // 
             // exptUsrRolesMenuItem
             // 
             this.exptUsrRolesMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptUsrRolesMenuItem.Name = "exptUsrRolesMenuItem";
-            this.exptUsrRolesMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.exptUsrRolesMenuItem.Size = new System.Drawing.Size(215, 26);
             this.exptUsrRolesMenuItem.Text = "Export to Excel";
             this.exptUsrRolesMenuItem.Click += new System.EventHandler(this.exptUsrRolesMenuItem_Click);
             // 
@@ -1210,7 +1208,7 @@ namespace SystemAdministration.Forms
             // 
             this.refreshUsrRoleToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshUsrRoleToolStripMenuItem.Name = "refreshUsrRoleToolStripMenuItem";
-            this.refreshUsrRoleToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.refreshUsrRoleToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.refreshUsrRoleToolStripMenuItem.Text = "&Refresh";
             this.refreshUsrRoleToolStripMenuItem.Click += new System.EventHandler(this.refreshUsrRoleToolStripMenuItem_Click);
             // 
@@ -1218,7 +1216,7 @@ namespace SystemAdministration.Forms
             // 
             this.recordHistoryUsrRoleToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recordHistoryUsrRoleToolStripMenuItem.Name = "recordHistoryUsrRoleToolStripMenuItem";
-            this.recordHistoryUsrRoleToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.recordHistoryUsrRoleToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.recordHistoryUsrRoleToolStripMenuItem.Text = "Record &History";
             this.recordHistoryUsrRoleToolStripMenuItem.Click += new System.EventHandler(this.recordHistoryUsrRoleToolStripMenuItem_Click);
             // 
@@ -1226,7 +1224,7 @@ namespace SystemAdministration.Forms
             // 
             this.viewSQLUsrRoleToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.viewSQLUsrRoleToolStripMenuItem.Name = "viewSQLUsrRoleToolStripMenuItem";
-            this.viewSQLUsrRoleToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.viewSQLUsrRoleToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.viewSQLUsrRoleToolStripMenuItem.Text = "&View SQL";
             this.viewSQLUsrRoleToolStripMenuItem.Click += new System.EventHandler(this.viewSQLUsrRoleToolStripMenuItem_Click);
             // 
@@ -1279,7 +1277,7 @@ namespace SystemAdministration.Forms
             this.usrVldEndDteTextBox.ForeColor = System.Drawing.Color.Black;
             this.usrVldEndDteTextBox.Location = new System.Drawing.Point(113, 54);
             this.usrVldEndDteTextBox.Name = "usrVldEndDteTextBox";
-            this.usrVldEndDteTextBox.Size = new System.Drawing.Size(253, 21);
+            this.usrVldEndDteTextBox.Size = new System.Drawing.Size(253, 24);
             this.usrVldEndDteTextBox.TabIndex = 2;
             this.usrVldEndDteTextBox.TextChanged += new System.EventHandler(this.usrVldStrtDteTextBox_TextChanged);
             this.usrVldEndDteTextBox.Leave += new System.EventHandler(this.usrVldStrtDteTextBox_Leave);
@@ -1291,7 +1289,7 @@ namespace SystemAdministration.Forms
             this.usrVldStrtDteTextBox.ForeColor = System.Drawing.Color.Black;
             this.usrVldStrtDteTextBox.Location = new System.Drawing.Point(113, 32);
             this.usrVldStrtDteTextBox.Name = "usrVldStrtDteTextBox";
-            this.usrVldStrtDteTextBox.Size = new System.Drawing.Size(253, 21);
+            this.usrVldStrtDteTextBox.Size = new System.Drawing.Size(253, 24);
             this.usrVldStrtDteTextBox.TabIndex = 0;
             this.usrVldStrtDteTextBox.TextChanged += new System.EventHandler(this.usrVldStrtDteTextBox_TextChanged);
             this.usrVldStrtDteTextBox.Leave += new System.EventHandler(this.usrVldStrtDteTextBox_Leave);
@@ -1303,7 +1301,7 @@ namespace SystemAdministration.Forms
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(23, 58);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 13);
+            this.label5.Size = new System.Drawing.Size(101, 17);
             this.label5.TabIndex = 5;
             this.label5.Text = "Valid End Date:";
             // 
@@ -1314,7 +1312,7 @@ namespace SystemAdministration.Forms
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(23, 35);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 13);
+            this.label6.Size = new System.Drawing.Size(107, 17);
             this.label6.TabIndex = 3;
             this.label6.Text = "Valid Start Date:";
             // 
@@ -1343,7 +1341,7 @@ namespace SystemAdministration.Forms
             this.lastLoginAtmptTextBox.Location = new System.Drawing.Point(284, 64);
             this.lastLoginAtmptTextBox.Name = "lastLoginAtmptTextBox";
             this.lastLoginAtmptTextBox.ReadOnly = true;
-            this.lastLoginAtmptTextBox.Size = new System.Drawing.Size(128, 21);
+            this.lastLoginAtmptTextBox.Size = new System.Drawing.Size(128, 24);
             this.lastLoginAtmptTextBox.TabIndex = 3;
             // 
             // label2
@@ -1353,7 +1351,7 @@ namespace SystemAdministration.Forms
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(134, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 13);
+            this.label2.Size = new System.Drawing.Size(162, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "Last Login Attempt Time:";
             // 
@@ -1364,7 +1362,7 @@ namespace SystemAdministration.Forms
             this.failedLgnAtmptTextBox.Location = new System.Drawing.Point(284, 42);
             this.failedLgnAtmptTextBox.Name = "failedLgnAtmptTextBox";
             this.failedLgnAtmptTextBox.ReadOnly = true;
-            this.failedLgnAtmptTextBox.Size = new System.Drawing.Size(128, 21);
+            this.failedLgnAtmptTextBox.Size = new System.Drawing.Size(128, 24);
             this.failedLgnAtmptTextBox.TabIndex = 2;
             // 
             // label1
@@ -1374,7 +1372,7 @@ namespace SystemAdministration.Forms
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(134, 44);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 13);
+            this.label1.Size = new System.Drawing.Size(194, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Current Failed Login Attempts:";
             // 
@@ -1385,7 +1383,7 @@ namespace SystemAdministration.Forms
             this.isLockedCheckBox.ForeColor = System.Drawing.Color.White;
             this.isLockedCheckBox.Location = new System.Drawing.Point(16, 43);
             this.isLockedCheckBox.Name = "isLockedCheckBox";
-            this.isLockedCheckBox.Size = new System.Drawing.Size(59, 17);
+            this.isLockedCheckBox.Size = new System.Drawing.Size(74, 21);
             this.isLockedCheckBox.TabIndex = 1;
             this.isLockedCheckBox.Text = "Locked";
             this.isLockedCheckBox.UseVisualStyleBackColor = true;
@@ -1398,7 +1396,7 @@ namespace SystemAdministration.Forms
             this.isSuspendedCheckBox.ForeColor = System.Drawing.Color.White;
             this.isSuspendedCheckBox.Location = new System.Drawing.Point(16, 21);
             this.isSuspendedCheckBox.Name = "isSuspendedCheckBox";
-            this.isSuspendedCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.isSuspendedCheckBox.Size = new System.Drawing.Size(98, 21);
             this.isSuspendedCheckBox.TabIndex = 0;
             this.isSuspendedCheckBox.Text = "Suspended";
             this.isSuspendedCheckBox.UseVisualStyleBackColor = true;
@@ -1408,6 +1406,7 @@ namespace SystemAdministration.Forms
             // 
             this.navToolStrip.AutoSize = false;
             this.navToolStrip.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.navToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.navToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstUserButton,
             this.toolStripSeparator9,
@@ -1447,7 +1446,7 @@ namespace SystemAdministration.Forms
             this.moveFirstUserButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstUserButton.Name = "moveFirstUserButton";
-            this.moveFirstUserButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstUserButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstUserButton.Text = "Move First";
             this.moveFirstUserButton.Click += new System.EventHandler(this.userPnlNavButtons);
             // 
@@ -1462,7 +1461,7 @@ namespace SystemAdministration.Forms
             this.movePreviousUserButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousUserButton.Name = "movePreviousUserButton";
-            this.movePreviousUserButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousUserButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousUserButton.Text = "Move Previous";
             this.movePreviousUserButton.Click += new System.EventHandler(this.userPnlNavButtons);
             // 
@@ -1476,7 +1475,7 @@ namespace SystemAdministration.Forms
             this.ToolStripLabel2.AutoToolTip = true;
             this.ToolStripLabel2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolStripLabel2.Name = "ToolStripLabel2";
-            this.ToolStripLabel2.Size = new System.Drawing.Size(47, 22);
+            this.ToolStripLabel2.Size = new System.Drawing.Size(57, 22);
             this.ToolStripLabel2.Text = "Record";
             // 
             // positionUserTextBox
@@ -1496,7 +1495,7 @@ namespace SystemAdministration.Forms
             this.totalRecUserLabel.AutoToolTip = true;
             this.totalRecUserLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecUserLabel.Name = "totalRecUserLabel";
-            this.totalRecUserLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecUserLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecUserLabel.Text = "of Total";
             // 
             // toolStripSeparator11
@@ -1510,7 +1509,7 @@ namespace SystemAdministration.Forms
             this.moveNextUserButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextUserButton.Name = "moveNextUserButton";
-            this.moveNextUserButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextUserButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextUserButton.Text = "Move Next";
             this.moveNextUserButton.Click += new System.EventHandler(this.userPnlNavButtons);
             // 
@@ -1525,7 +1524,7 @@ namespace SystemAdministration.Forms
             this.moveLastUserButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastUserButton.Name = "moveLastUserButton";
-            this.moveLastUserButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastUserButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastUserButton.Text = "Move Last";
             this.moveLastUserButton.Click += new System.EventHandler(this.userPnlNavButtons);
             // 
@@ -1548,7 +1547,7 @@ namespace SystemAdministration.Forms
             "50",
             "100"});
             this.dsplySizeUserComboBox.Name = "dsplySizeUserComboBox";
-            this.dsplySizeUserComboBox.Size = new System.Drawing.Size(40, 23);
+            this.dsplySizeUserComboBox.Size = new System.Drawing.Size(40, 28);
             this.dsplySizeUserComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForUserTextBox_KeyDown);
             // 
             // toolStripSeparator16
@@ -1559,7 +1558,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel1.Text = "Search For:";
             // 
             // toolStripSeparator18
@@ -1583,7 +1582,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel3.Text = "Search In:";
             // 
             // toolStripSeparator20
@@ -1613,7 +1612,7 @@ namespace SystemAdministration.Forms
             this.refreshUserButton.Image = global::SystemAdministration.Properties.Resources.action_go;
             this.refreshUserButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshUserButton.Name = "refreshUserButton";
-            this.refreshUserButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshUserButton.Size = new System.Drawing.Size(52, 22);
             this.refreshUserButton.Text = "Go";
             this.refreshUserButton.Click += new System.EventHandler(this.refreshUserButton_Click);
             // 
@@ -1629,7 +1628,8 @@ namespace SystemAdministration.Forms
             this.columnHeader4,
             this.columnHeader10,
             this.columnHeader60,
-            this.columnHeader62});
+            this.columnHeader62,
+            this.columnHeader63});
             this.userListView.ContextMenuStrip = this.usersContextMenuStrip;
             this.userListView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userListView.FullRowSelect = true;
@@ -1680,8 +1680,14 @@ namespace SystemAdministration.Forms
             this.columnHeader62.Text = "Modules Needed";
             this.columnHeader62.Width = 200;
             // 
+            // columnHeader63
+            // 
+            this.columnHeader63.Text = "TrnsCode";
+            this.columnHeader63.Width = 0;
+            // 
             // usersContextMenuStrip
             // 
+            this.usersContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.usersContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addUserToolStripMenuItem,
             this.editUserToolStripMenuItem,
@@ -1691,13 +1697,13 @@ namespace SystemAdministration.Forms
             this.recordHistoryUsrsToolStripMenuItem,
             this.viewSQLUserToolStripMenuItem});
             this.usersContextMenuStrip.Name = "usersContextMenuStrip";
-            this.usersContextMenuStrip.Size = new System.Drawing.Size(153, 142);
+            this.usersContextMenuStrip.Size = new System.Drawing.Size(182, 166);
             // 
             // addUserToolStripMenuItem
             // 
             this.addUserToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
-            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.addUserToolStripMenuItem.Text = "&Add User";
             this.addUserToolStripMenuItem.Click += new System.EventHandler(this.addUserToolStripMenuItem_Click);
             // 
@@ -1705,20 +1711,20 @@ namespace SystemAdministration.Forms
             // 
             this.editUserToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.editUserToolStripMenuItem.Name = "editUserToolStripMenuItem";
-            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.editUserToolStripMenuItem.Text = "&Edit User";
             this.editUserToolStripMenuItem.Click += new System.EventHandler(this.editUserToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
             // 
             // exptUsrsMenuItem
             // 
             this.exptUsrsMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptUsrsMenuItem.Name = "exptUsrsMenuItem";
-            this.exptUsrsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptUsrsMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptUsrsMenuItem.Text = "Export to Excel";
             this.exptUsrsMenuItem.Click += new System.EventHandler(this.exptUsrsMenuItem_Click);
             // 
@@ -1726,7 +1732,7 @@ namespace SystemAdministration.Forms
             // 
             this.refreshUsersToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshUsersToolStripMenuItem.Name = "refreshUsersToolStripMenuItem";
-            this.refreshUsersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshUsersToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshUsersToolStripMenuItem.Text = "&Refresh";
             this.refreshUsersToolStripMenuItem.Click += new System.EventHandler(this.refreshUsersToolStripMenuItem_Click);
             // 
@@ -1734,7 +1740,7 @@ namespace SystemAdministration.Forms
             // 
             this.recordHistoryUsrsToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recordHistoryUsrsToolStripMenuItem.Name = "recordHistoryUsrsToolStripMenuItem";
-            this.recordHistoryUsrsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recordHistoryUsrsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.recordHistoryUsrsToolStripMenuItem.Text = "Record &History";
             this.recordHistoryUsrsToolStripMenuItem.Click += new System.EventHandler(this.recordHistoryUsrsToolStripMenuItem_Click);
             // 
@@ -1742,7 +1748,7 @@ namespace SystemAdministration.Forms
             // 
             this.viewSQLUserToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.viewSQLUserToolStripMenuItem.Name = "viewSQLUserToolStripMenuItem";
-            this.viewSQLUserToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewSQLUserToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.viewSQLUserToolStripMenuItem.Text = "&View SQL";
             this.viewSQLUserToolStripMenuItem.Click += new System.EventHandler(this.viewSQLUserToolStripMenuItem_Click);
             // 
@@ -1769,6 +1775,8 @@ namespace SystemAdministration.Forms
             // 
             this.rolesPanel.AutoScroll = true;
             this.rolesPanel.BackColor = System.Drawing.Color.LightSlateGray;
+            this.rolesPanel.Controls.Add(this.imprtRolesButton);
+            this.rolesPanel.Controls.Add(this.exprtRolesButton);
             this.rolesPanel.Controls.Add(this.toolStrip10);
             this.rolesPanel.Controls.Add(this.toolStrip11);
             this.rolesPanel.Controls.Add(this.panel6);
@@ -1785,16 +1793,45 @@ namespace SystemAdministration.Forms
             this.rolesPanel.TabIndex = 1;
             this.rolesPanel.Visible = false;
             // 
+            // imprtRolesButton
+            // 
+            this.imprtRolesButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imprtRolesButton.ForeColor = System.Drawing.Color.Black;
+            this.imprtRolesButton.Image = ((System.Drawing.Image)(resources.GetObject("imprtRolesButton.Image")));
+            this.imprtRolesButton.Location = new System.Drawing.Point(858, 72);
+            this.imprtRolesButton.Name = "imprtRolesButton";
+            this.imprtRolesButton.Size = new System.Drawing.Size(108, 25);
+            this.imprtRolesButton.TabIndex = 88;
+            this.imprtRolesButton.Text = "IMPORT ROLES";
+            this.imprtRolesButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.imprtRolesButton.UseVisualStyleBackColor = true;
+            this.imprtRolesButton.Click += new System.EventHandler(this.imprtRolesButton_Click);
+            // 
+            // exprtRolesButton
+            // 
+            this.exprtRolesButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exprtRolesButton.ForeColor = System.Drawing.Color.Black;
+            this.exprtRolesButton.Image = ((System.Drawing.Image)(resources.GetObject("exprtRolesButton.Image")));
+            this.exprtRolesButton.Location = new System.Drawing.Point(694, 72);
+            this.exprtRolesButton.Name = "exprtRolesButton";
+            this.exprtRolesButton.Size = new System.Drawing.Size(158, 24);
+            this.exprtRolesButton.TabIndex = 87;
+            this.exprtRolesButton.Text = "EXPORT EXCEL TEMPLATE";
+            this.exprtRolesButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.exprtRolesButton.UseVisualStyleBackColor = true;
+            this.exprtRolesButton.Click += new System.EventHandler(this.exprtRolesButton_Click);
+            // 
             // toolStrip10
             // 
             this.toolStrip10.AutoSize = false;
             this.toolStrip10.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip10.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip10.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip10.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEditRoleButton});
             this.toolStrip10.Location = new System.Drawing.Point(467, 71);
             this.toolStrip10.Name = "toolStrip10";
-            this.toolStrip10.Size = new System.Drawing.Size(342, 25);
+            this.toolStrip10.Size = new System.Drawing.Size(224, 25);
             this.toolStrip10.TabIndex = 86;
             this.toolStrip10.TabStop = true;
             this.toolStrip10.Text = "toolStrip10";
@@ -1804,7 +1841,7 @@ namespace SystemAdministration.Forms
             this.addEditRoleButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addEditRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addEditRoleButton.Name = "addEditRoleButton";
-            this.addEditRoleButton.Size = new System.Drawing.Size(181, 22);
+            this.addEditRoleButton.Size = new System.Drawing.Size(231, 24);
             this.addEditRoleButton.Text = "ADD/EDIT ROLE PRIVILEDGES";
             this.addEditRoleButton.Click += new System.EventHandler(this.addEditRoleButton_Click);
             // 
@@ -1813,6 +1850,7 @@ namespace SystemAdministration.Forms
             this.toolStrip11.AutoSize = false;
             this.toolStrip11.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip11.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip11.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip11.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRoleButton,
             this.editRoleButton,
@@ -1829,7 +1867,7 @@ namespace SystemAdministration.Forms
             this.addRoleButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addRoleButton.Name = "addRoleButton";
-            this.addRoleButton.Size = new System.Drawing.Size(51, 22);
+            this.addRoleButton.Size = new System.Drawing.Size(65, 22);
             this.addRoleButton.Text = "ADD";
             this.addRoleButton.Click += new System.EventHandler(this.addRoleButton_Click);
             // 
@@ -1838,7 +1876,7 @@ namespace SystemAdministration.Forms
             this.editRoleButton.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.editRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editRoleButton.Name = "editRoleButton";
-            this.editRoleButton.Size = new System.Drawing.Size(51, 22);
+            this.editRoleButton.Size = new System.Drawing.Size(64, 22);
             this.editRoleButton.Text = "EDIT";
             this.editRoleButton.Click += new System.EventHandler(this.editRoleButton_Click);
             // 
@@ -1847,7 +1885,7 @@ namespace SystemAdministration.Forms
             this.loadRolesButton.Image = global::SystemAdministration.Properties.Resources.Window_Refresh_icon;
             this.loadRolesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.loadRolesButton.Name = "loadRolesButton";
-            this.loadRolesButton.Size = new System.Drawing.Size(201, 22);
+            this.loadRolesButton.Size = new System.Drawing.Size(251, 22);
             this.loadRolesButton.Text = "LOAD STANDARD ROLES && LOVs";
             this.loadRolesButton.Click += new System.EventHandler(this.loadRolesButton_Click);
             // 
@@ -1870,7 +1908,7 @@ namespace SystemAdministration.Forms
             this.glsLabel5.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel5.ForeColor = System.Drawing.Color.White;
             this.glsLabel5.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel5.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel5.Name = "glsLabel5";
             this.glsLabel5.Size = new System.Drawing.Size(545, 35);
             this.glsLabel5.TabIndex = 1;
@@ -1893,7 +1931,7 @@ namespace SystemAdministration.Forms
             this.glsLabel4.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel4.ForeColor = System.Drawing.Color.White;
             this.glsLabel4.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel4.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel4.Name = "glsLabel4";
             this.glsLabel4.Size = new System.Drawing.Size(451, 35);
             this.glsLabel4.TabIndex = 1;
@@ -1962,6 +2000,7 @@ namespace SystemAdministration.Forms
             // 
             // rolesPrvlgsContextMenuStrip
             // 
+            this.rolesPrvlgsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.rolesPrvlgsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRlPrvldgMenuItem,
             this.toolStripSeparator28,
@@ -1970,26 +2009,26 @@ namespace SystemAdministration.Forms
             this.recHstryRlPrvldgMenuItem,
             this.vwSQLRlPrvldgMenuItem});
             this.rolesPrvlgsContextMenuStrip.Name = "userRolesContextMenuStrip";
-            this.rolesPrvlgsContextMenuStrip.Size = new System.Drawing.Size(179, 120);
+            this.rolesPrvlgsContextMenuStrip.Size = new System.Drawing.Size(216, 140);
             // 
             // addRlPrvldgMenuItem
             // 
             this.addRlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addRlPrvldgMenuItem.Name = "addRlPrvldgMenuItem";
-            this.addRlPrvldgMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.addRlPrvldgMenuItem.Size = new System.Drawing.Size(215, 26);
             this.addRlPrvldgMenuItem.Text = "&Add/Edit User Roles";
             this.addRlPrvldgMenuItem.Click += new System.EventHandler(this.addRlPrvldgMenuItem_Click);
             // 
             // toolStripSeparator28
             // 
             this.toolStripSeparator28.Name = "toolStripSeparator28";
-            this.toolStripSeparator28.Size = new System.Drawing.Size(175, 6);
+            this.toolStripSeparator28.Size = new System.Drawing.Size(212, 6);
             // 
             // exptRolePrvldgMenuItem
             // 
             this.exptRolePrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptRolePrvldgMenuItem.Name = "exptRolePrvldgMenuItem";
-            this.exptRolePrvldgMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.exptRolePrvldgMenuItem.Size = new System.Drawing.Size(215, 26);
             this.exptRolePrvldgMenuItem.Text = "Export to Excel";
             this.exptRolePrvldgMenuItem.Click += new System.EventHandler(this.exptRolePrvldgMenuItem_Click);
             // 
@@ -1997,7 +2036,7 @@ namespace SystemAdministration.Forms
             // 
             this.refreshRlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshRlPrvldgMenuItem.Name = "refreshRlPrvldgMenuItem";
-            this.refreshRlPrvldgMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.refreshRlPrvldgMenuItem.Size = new System.Drawing.Size(215, 26);
             this.refreshRlPrvldgMenuItem.Text = "&Refresh";
             this.refreshRlPrvldgMenuItem.Click += new System.EventHandler(this.refreshRlPrvldgMenuItem_Click);
             // 
@@ -2005,7 +2044,7 @@ namespace SystemAdministration.Forms
             // 
             this.recHstryRlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recHstryRlPrvldgMenuItem.Name = "recHstryRlPrvldgMenuItem";
-            this.recHstryRlPrvldgMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.recHstryRlPrvldgMenuItem.Size = new System.Drawing.Size(215, 26);
             this.recHstryRlPrvldgMenuItem.Text = "Record &History";
             this.recHstryRlPrvldgMenuItem.Click += new System.EventHandler(this.recHstryRlPrvldgMenuItem_Click);
             // 
@@ -2013,7 +2052,7 @@ namespace SystemAdministration.Forms
             // 
             this.vwSQLRlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLRlPrvldgMenuItem.Name = "vwSQLRlPrvldgMenuItem";
-            this.vwSQLRlPrvldgMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.vwSQLRlPrvldgMenuItem.Size = new System.Drawing.Size(215, 26);
             this.vwSQLRlPrvldgMenuItem.Text = "&View SQL";
             this.vwSQLRlPrvldgMenuItem.Click += new System.EventHandler(this.vwSQLRlPrvldgMenuItem_Click);
             // 
@@ -2077,6 +2116,7 @@ namespace SystemAdministration.Forms
             // 
             // rolesContextMenuStrip
             // 
+            this.rolesContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.rolesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRoleMainMenuItem,
             this.editRoleMainMenuItem,
@@ -2086,13 +2126,13 @@ namespace SystemAdministration.Forms
             this.recHstryRoleMainMenuItem,
             this.vwSQLRoleMainMenuItem});
             this.rolesContextMenuStrip.Name = "usersContextMenuStrip";
-            this.rolesContextMenuStrip.Size = new System.Drawing.Size(153, 142);
+            this.rolesContextMenuStrip.Size = new System.Drawing.Size(182, 166);
             // 
             // addRoleMainMenuItem
             // 
             this.addRoleMainMenuItem.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addRoleMainMenuItem.Name = "addRoleMainMenuItem";
-            this.addRoleMainMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addRoleMainMenuItem.Size = new System.Drawing.Size(181, 26);
             this.addRoleMainMenuItem.Text = "&Add Role";
             this.addRoleMainMenuItem.Click += new System.EventHandler(this.addRoleMainMenuItem_Click);
             // 
@@ -2100,20 +2140,20 @@ namespace SystemAdministration.Forms
             // 
             this.editRoleMainMenuItem.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.editRoleMainMenuItem.Name = "editRoleMainMenuItem";
-            this.editRoleMainMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editRoleMainMenuItem.Size = new System.Drawing.Size(181, 26);
             this.editRoleMainMenuItem.Text = "&Edit Role";
             this.editRoleMainMenuItem.Click += new System.EventHandler(this.editRoleMainMenuItem_Click);
             // 
             // toolStripSeparator27
             // 
             this.toolStripSeparator27.Name = "toolStripSeparator27";
-            this.toolStripSeparator27.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator27.Size = new System.Drawing.Size(178, 6);
             // 
             // exptRolesMenuItem
             // 
             this.exptRolesMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptRolesMenuItem.Name = "exptRolesMenuItem";
-            this.exptRolesMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptRolesMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptRolesMenuItem.Text = "Export to Excel";
             this.exptRolesMenuItem.Click += new System.EventHandler(this.exptRolesMenuItem_Click);
             // 
@@ -2121,7 +2161,7 @@ namespace SystemAdministration.Forms
             // 
             this.refreshRoleMainMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshRoleMainMenuItem.Name = "refreshRoleMainMenuItem";
-            this.refreshRoleMainMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshRoleMainMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshRoleMainMenuItem.Text = "&Refresh";
             this.refreshRoleMainMenuItem.Click += new System.EventHandler(this.refreshRoleMainMenuItem_Click);
             // 
@@ -2129,7 +2169,7 @@ namespace SystemAdministration.Forms
             // 
             this.recHstryRoleMainMenuItem.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recHstryRoleMainMenuItem.Name = "recHstryRoleMainMenuItem";
-            this.recHstryRoleMainMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recHstryRoleMainMenuItem.Size = new System.Drawing.Size(181, 26);
             this.recHstryRoleMainMenuItem.Text = "Record &History";
             this.recHstryRoleMainMenuItem.Click += new System.EventHandler(this.recHstryRoleMainMenuItem_Click);
             // 
@@ -2137,7 +2177,7 @@ namespace SystemAdministration.Forms
             // 
             this.vwSQLRoleMainMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLRoleMainMenuItem.Name = "vwSQLRoleMainMenuItem";
-            this.vwSQLRoleMainMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLRoleMainMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLRoleMainMenuItem.Text = "&View SQL";
             this.vwSQLRoleMainMenuItem.Click += new System.EventHandler(this.vwSQLRoleMainMenuItem_Click);
             // 
@@ -2145,6 +2185,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstRoleButton,
             this.toolStripSeparator3,
@@ -2184,7 +2225,7 @@ namespace SystemAdministration.Forms
             this.moveFirstRoleButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstRoleButton.Name = "moveFirstRoleButton";
-            this.moveFirstRoleButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstRoleButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstRoleButton.Text = "Move First";
             this.moveFirstRoleButton.Click += new System.EventHandler(this.rolePnlNavButtons);
             // 
@@ -2199,7 +2240,7 @@ namespace SystemAdministration.Forms
             this.movePreviousRoleButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousRoleButton.Name = "movePreviousRoleButton";
-            this.movePreviousRoleButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousRoleButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousRoleButton.Text = "Move Previous";
             this.movePreviousRoleButton.Click += new System.EventHandler(this.rolePnlNavButtons);
             // 
@@ -2213,7 +2254,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel4.AutoToolTip = true;
             this.toolStripLabel4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel4.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel4.Text = "Record";
             // 
             // positionRoleTextBox
@@ -2233,7 +2274,7 @@ namespace SystemAdministration.Forms
             this.totalRecRoleLabel.AutoToolTip = true;
             this.totalRecRoleLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecRoleLabel.Name = "totalRecRoleLabel";
-            this.totalRecRoleLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecRoleLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecRoleLabel.Text = "of Total";
             // 
             // toolStripSeparator5
@@ -2247,7 +2288,7 @@ namespace SystemAdministration.Forms
             this.moveNextRoleButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextRoleButton.Name = "moveNextRoleButton";
-            this.moveNextRoleButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextRoleButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextRoleButton.Text = "Move Next";
             this.moveNextRoleButton.Click += new System.EventHandler(this.rolePnlNavButtons);
             // 
@@ -2262,7 +2303,7 @@ namespace SystemAdministration.Forms
             this.moveLastRoleButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastRoleButton.Name = "moveLastRoleButton";
-            this.moveLastRoleButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastRoleButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastRoleButton.Text = "Move Last";
             this.moveLastRoleButton.Click += new System.EventHandler(this.rolePnlNavButtons);
             // 
@@ -2285,7 +2326,7 @@ namespace SystemAdministration.Forms
             "50",
             "100"});
             this.dsplySizeRoleComboBox.Name = "dsplySizeRoleComboBox";
-            this.dsplySizeRoleComboBox.Size = new System.Drawing.Size(40, 23);
+            this.dsplySizeRoleComboBox.Size = new System.Drawing.Size(40, 28);
             this.dsplySizeRoleComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForRoleTextBox_KeyDown);
             // 
             // toolStripSeparator14
@@ -2296,7 +2337,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel6
             // 
             this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel6.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel6.Text = "Search For:";
             // 
             // toolStripSeparator23
@@ -2320,7 +2361,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel7
             // 
             this.toolStripLabel7.Name = "toolStripLabel7";
-            this.toolStripLabel7.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel7.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel7.Text = "Search In:";
             // 
             // toolStripSeparator25
@@ -2350,7 +2391,7 @@ namespace SystemAdministration.Forms
             this.refreshRoleButton.Image = global::SystemAdministration.Properties.Resources.action_go;
             this.refreshRoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshRoleButton.Name = "refreshRoleButton";
-            this.refreshRoleButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshRoleButton.Size = new System.Drawing.Size(52, 22);
             this.refreshRoleButton.Text = "Go";
             this.refreshRoleButton.Click += new System.EventHandler(this.refreshRoleButton_Click);
             // 
@@ -2430,19 +2471,20 @@ namespace SystemAdministration.Forms
             // 
             // modulePrvlgContextMenuStrip
             // 
+            this.modulePrvlgContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.modulePrvlgContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptMdlPrvldgMenuItem,
             this.refreshMdlPrvldgMenuItem,
             this.toolStripSeparator54,
             this.vwSqlMdlPrvldgMenuItem});
             this.modulePrvlgContextMenuStrip.Name = "usersContextMenuStrip";
-            this.modulePrvlgContextMenuStrip.Size = new System.Drawing.Size(151, 76);
+            this.modulePrvlgContextMenuStrip.Size = new System.Drawing.Size(182, 88);
             // 
             // exptMdlPrvldgMenuItem
             // 
             this.exptMdlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptMdlPrvldgMenuItem.Name = "exptMdlPrvldgMenuItem";
-            this.exptMdlPrvldgMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptMdlPrvldgMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptMdlPrvldgMenuItem.Text = "Export to Excel";
             this.exptMdlPrvldgMenuItem.Click += new System.EventHandler(this.exptMdlPrvldgMenuItem_Click);
             // 
@@ -2450,20 +2492,20 @@ namespace SystemAdministration.Forms
             // 
             this.refreshMdlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshMdlPrvldgMenuItem.Name = "refreshMdlPrvldgMenuItem";
-            this.refreshMdlPrvldgMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.refreshMdlPrvldgMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshMdlPrvldgMenuItem.Text = "&Refresh";
             this.refreshMdlPrvldgMenuItem.Click += new System.EventHandler(this.refreshMdlPrvldgMenuItem_Click);
             // 
             // toolStripSeparator54
             // 
             this.toolStripSeparator54.Name = "toolStripSeparator54";
-            this.toolStripSeparator54.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator54.Size = new System.Drawing.Size(178, 6);
             // 
             // vwSqlMdlPrvldgMenuItem
             // 
             this.vwSqlMdlPrvldgMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSqlMdlPrvldgMenuItem.Name = "vwSqlMdlPrvldgMenuItem";
-            this.vwSqlMdlPrvldgMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vwSqlMdlPrvldgMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSqlMdlPrvldgMenuItem.Text = "&View SQL";
             this.vwSqlMdlPrvldgMenuItem.Click += new System.EventHandler(this.vwSqlMdlPrvldgMenuItem_Click);
             // 
@@ -2484,7 +2526,7 @@ namespace SystemAdministration.Forms
             this.glsLabel10.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel10.ForeColor = System.Drawing.Color.White;
             this.glsLabel10.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel10.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel10.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel10.Name = "glsLabel10";
             this.glsLabel10.Size = new System.Drawing.Size(534, 35);
             this.glsLabel10.TabIndex = 1;
@@ -2550,19 +2592,20 @@ namespace SystemAdministration.Forms
             // 
             // modulesContextMenuStrip
             // 
+            this.modulesContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.modulesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptMdlMenuItem,
             this.refreshMdlMenuItem,
             this.toolStripSeparator53,
             this.vwSQLMdlMenuItem});
             this.modulesContextMenuStrip.Name = "userRolesContextMenuStrip";
-            this.modulesContextMenuStrip.Size = new System.Drawing.Size(151, 76);
+            this.modulesContextMenuStrip.Size = new System.Drawing.Size(182, 88);
             // 
             // exptMdlMenuItem
             // 
             this.exptMdlMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptMdlMenuItem.Name = "exptMdlMenuItem";
-            this.exptMdlMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptMdlMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptMdlMenuItem.Text = "Export to Excel";
             this.exptMdlMenuItem.Click += new System.EventHandler(this.exptMdlMenuItem_Click);
             // 
@@ -2570,20 +2613,20 @@ namespace SystemAdministration.Forms
             // 
             this.refreshMdlMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshMdlMenuItem.Name = "refreshMdlMenuItem";
-            this.refreshMdlMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.refreshMdlMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshMdlMenuItem.Text = "&Refresh";
             this.refreshMdlMenuItem.Click += new System.EventHandler(this.refreshMdlMenuItem_Click);
             // 
             // toolStripSeparator53
             // 
             this.toolStripSeparator53.Name = "toolStripSeparator53";
-            this.toolStripSeparator53.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator53.Size = new System.Drawing.Size(178, 6);
             // 
             // vwSQLMdlMenuItem
             // 
             this.vwSQLMdlMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLMdlMenuItem.Name = "vwSQLMdlMenuItem";
-            this.vwSQLMdlMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vwSQLMdlMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLMdlMenuItem.Text = "&View SQL";
             this.vwSQLMdlMenuItem.Click += new System.EventHandler(this.vwSQLMdlMenuItem_Click);
             // 
@@ -2606,7 +2649,7 @@ namespace SystemAdministration.Forms
             this.glsLabel9.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel9.ForeColor = System.Drawing.Color.White;
             this.glsLabel9.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel9.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel9.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel9.Name = "glsLabel9";
             this.glsLabel9.Size = new System.Drawing.Size(459, 35);
             this.glsLabel9.TabIndex = 1;
@@ -2616,6 +2659,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip2.AutoSize = false;
             this.toolStrip2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstMdlButton,
             this.toolStripSeparator29,
@@ -2655,7 +2699,7 @@ namespace SystemAdministration.Forms
             this.moveFirstMdlButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstMdlButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstMdlButton.Name = "moveFirstMdlButton";
-            this.moveFirstMdlButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstMdlButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstMdlButton.Text = "Move First";
             this.moveFirstMdlButton.Click += new System.EventHandler(this.mdlPnlNavButtons);
             // 
@@ -2670,7 +2714,7 @@ namespace SystemAdministration.Forms
             this.movePreviousMdlButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousMdlButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousMdlButton.Name = "movePreviousMdlButton";
-            this.movePreviousMdlButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousMdlButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousMdlButton.Text = "Move Previous";
             this.movePreviousMdlButton.Click += new System.EventHandler(this.mdlPnlNavButtons);
             // 
@@ -2684,7 +2728,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel5.AutoToolTip = true;
             this.toolStripLabel5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel5.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel5.Text = "Record";
             // 
             // positionMdlTextBox
@@ -2704,7 +2748,7 @@ namespace SystemAdministration.Forms
             this.totalRecMdlLabel.AutoToolTip = true;
             this.totalRecMdlLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecMdlLabel.Name = "totalRecMdlLabel";
-            this.totalRecMdlLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecMdlLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecMdlLabel.Text = "of Total";
             // 
             // toolStripSeparator31
@@ -2718,7 +2762,7 @@ namespace SystemAdministration.Forms
             this.moveNextMdlButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextMdlButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextMdlButton.Name = "moveNextMdlButton";
-            this.moveNextMdlButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextMdlButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextMdlButton.Text = "Move Next";
             this.moveNextMdlButton.Click += new System.EventHandler(this.mdlPnlNavButtons);
             // 
@@ -2733,7 +2777,7 @@ namespace SystemAdministration.Forms
             this.moveLastMdlButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastMdlButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastMdlButton.Name = "moveLastMdlButton";
-            this.moveLastMdlButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastMdlButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastMdlButton.Text = "Move Last";
             this.moveLastMdlButton.Click += new System.EventHandler(this.mdlPnlNavButtons);
             // 
@@ -2756,7 +2800,7 @@ namespace SystemAdministration.Forms
             "50",
             "100"});
             this.dsplySizeMdlComboBox.Name = "dsplySizeMdlComboBox";
-            this.dsplySizeMdlComboBox.Size = new System.Drawing.Size(40, 23);
+            this.dsplySizeMdlComboBox.Size = new System.Drawing.Size(40, 28);
             this.dsplySizeMdlComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForMdlTextBox_KeyDown);
             // 
             // toolStripSeparator35
@@ -2767,7 +2811,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel9
             // 
             this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel9.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel9.Text = "Search For:";
             // 
             // toolStripSeparator37
@@ -2791,7 +2835,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel10
             // 
             this.toolStripLabel10.Name = "toolStripLabel10";
-            this.toolStripLabel10.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel10.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel10.Text = "Search In:";
             // 
             // toolStripSeparator39
@@ -2820,7 +2864,7 @@ namespace SystemAdministration.Forms
             this.refreshMdlButton.Image = global::SystemAdministration.Properties.Resources.action_go;
             this.refreshMdlButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshMdlButton.Name = "refreshMdlButton";
-            this.refreshMdlButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshMdlButton.Size = new System.Drawing.Size(52, 22);
             this.refreshMdlButton.Text = "Go";
             this.refreshMdlButton.Click += new System.EventHandler(this.refreshMdlButton_Click);
             // 
@@ -2869,6 +2913,7 @@ namespace SystemAdministration.Forms
             this.toolStrip12.AutoSize = false;
             this.toolStrip12.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip12.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip12.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip12.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEditExtInfButton,
             this.enableDisableButton,
@@ -2885,7 +2930,7 @@ namespace SystemAdministration.Forms
             this.addEditExtInfButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addEditExtInfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addEditExtInfButton.Name = "addEditExtInfButton";
-            this.addEditExtInfButton.Size = new System.Drawing.Size(87, 22);
+            this.addEditExtInfButton.Size = new System.Drawing.Size(110, 22);
             this.addEditExtInfButton.Text = "ADD LABEL";
             this.addEditExtInfButton.Click += new System.EventHandler(this.addEditExtInfButton_Click);
             // 
@@ -2894,7 +2939,7 @@ namespace SystemAdministration.Forms
             this.enableDisableButton.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.enableDisableButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.enableDisableButton.Name = "enableDisableButton";
-            this.enableDisableButton.Size = new System.Drawing.Size(118, 22);
+            this.enableDisableButton.Size = new System.Drawing.Size(149, 22);
             this.enableDisableButton.Text = "ENABLE/DISABLE";
             this.enableDisableButton.Click += new System.EventHandler(this.enableDisableButton_Click);
             // 
@@ -2903,7 +2948,7 @@ namespace SystemAdministration.Forms
             this.delLblButton.Image = global::SystemAdministration.Properties.Resources.delete;
             this.delLblButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delLblButton.Name = "delLblButton";
-            this.delLblButton.Size = new System.Drawing.Size(66, 22);
+            this.delLblButton.Size = new System.Drawing.Size(83, 24);
             this.delLblButton.Text = "DELETE";
             this.delLblButton.Click += new System.EventHandler(this.delLblButton_Click);
             // 
@@ -2958,6 +3003,7 @@ namespace SystemAdministration.Forms
             // 
             // extInfLabelContextMenuStrip
             // 
+            this.extInfLabelContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.extInfLabelContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEditExtInfMenuItem,
             this.toolStripSeparator87,
@@ -2969,25 +3015,25 @@ namespace SystemAdministration.Forms
             this.vwSQLExtInfLblMenuItem,
             this.recordHistoryExtInfToolStripMenuItem});
             this.extInfLabelContextMenuStrip.Name = "usersContextMenuStrip";
-            this.extInfLabelContextMenuStrip.Size = new System.Drawing.Size(205, 170);
+            this.extInfLabelContextMenuStrip.Size = new System.Drawing.Size(250, 198);
             // 
             // addEditExtInfMenuItem
             // 
             this.addEditExtInfMenuItem.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addEditExtInfMenuItem.Name = "addEditExtInfMenuItem";
-            this.addEditExtInfMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.addEditExtInfMenuItem.Size = new System.Drawing.Size(249, 26);
             this.addEditExtInfMenuItem.Text = "Add/Edit Extra Info Label";
             this.addEditExtInfMenuItem.Click += new System.EventHandler(this.addEditExtInfMenuItem_Click);
             // 
             // toolStripSeparator87
             // 
             this.toolStripSeparator87.Name = "toolStripSeparator87";
-            this.toolStripSeparator87.Size = new System.Drawing.Size(201, 6);
+            this.toolStripSeparator87.Size = new System.Drawing.Size(246, 6);
             // 
             // enableDisableToolStripMenuItem
             // 
             this.enableDisableToolStripMenuItem.Name = "enableDisableToolStripMenuItem";
-            this.enableDisableToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.enableDisableToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
             this.enableDisableToolStripMenuItem.Text = "Enable/Disable";
             this.enableDisableToolStripMenuItem.Click += new System.EventHandler(this.enableDisableToolStripMenuItem_Click);
             // 
@@ -2995,20 +3041,20 @@ namespace SystemAdministration.Forms
             // 
             this.deleteLaToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.delete;
             this.deleteLaToolStripMenuItem.Name = "deleteLaToolStripMenuItem";
-            this.deleteLaToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.deleteLaToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
             this.deleteLaToolStripMenuItem.Text = "Delete Label(s)";
             this.deleteLaToolStripMenuItem.Click += new System.EventHandler(this.deleteLaToolStripMenuItem_Click);
             // 
             // toolStripSeparator92
             // 
             this.toolStripSeparator92.Name = "toolStripSeparator92";
-            this.toolStripSeparator92.Size = new System.Drawing.Size(201, 6);
+            this.toolStripSeparator92.Size = new System.Drawing.Size(246, 6);
             // 
             // exptInfLblMenuItem
             // 
             this.exptInfLblMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptInfLblMenuItem.Name = "exptInfLblMenuItem";
-            this.exptInfLblMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.exptInfLblMenuItem.Size = new System.Drawing.Size(249, 26);
             this.exptInfLblMenuItem.Text = "Export to Excel";
             this.exptInfLblMenuItem.Click += new System.EventHandler(this.exptInfLblMenuItem_Click);
             // 
@@ -3016,7 +3062,7 @@ namespace SystemAdministration.Forms
             // 
             this.refreshExtInfLblMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshExtInfLblMenuItem.Name = "refreshExtInfLblMenuItem";
-            this.refreshExtInfLblMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.refreshExtInfLblMenuItem.Size = new System.Drawing.Size(249, 26);
             this.refreshExtInfLblMenuItem.Text = "&Refresh";
             this.refreshExtInfLblMenuItem.Click += new System.EventHandler(this.refreshExtInfLblMenuItem_Click);
             // 
@@ -3024,7 +3070,7 @@ namespace SystemAdministration.Forms
             // 
             this.vwSQLExtInfLblMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLExtInfLblMenuItem.Name = "vwSQLExtInfLblMenuItem";
-            this.vwSQLExtInfLblMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.vwSQLExtInfLblMenuItem.Size = new System.Drawing.Size(249, 26);
             this.vwSQLExtInfLblMenuItem.Text = "&View SQL";
             this.vwSQLExtInfLblMenuItem.Click += new System.EventHandler(this.vwSQLExtInfLblMenuItem_Click);
             // 
@@ -3032,7 +3078,7 @@ namespace SystemAdministration.Forms
             // 
             this.recordHistoryExtInfToolStripMenuItem.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recordHistoryExtInfToolStripMenuItem.Name = "recordHistoryExtInfToolStripMenuItem";
-            this.recordHistoryExtInfToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.recordHistoryExtInfToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
             this.recordHistoryExtInfToolStripMenuItem.Text = "Record History";
             this.recordHistoryExtInfToolStripMenuItem.Click += new System.EventHandler(this.recordHistoryExtInfToolStripMenuItem_Click);
             // 
@@ -3055,7 +3101,7 @@ namespace SystemAdministration.Forms
             this.glsLabel21.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel21.ForeColor = System.Drawing.Color.White;
             this.glsLabel21.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel21.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel21.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel21.Name = "glsLabel21";
             this.glsLabel21.Size = new System.Drawing.Size(327, 35);
             this.glsLabel21.TabIndex = 1;
@@ -3117,19 +3163,20 @@ namespace SystemAdministration.Forms
             // 
             // subGroupsContextMenuStrip
             // 
+            this.subGroupsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.subGroupsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptSubGrpMenuItem,
             this.refreshSubGrpsMenuItem,
             this.toolStripSeparator85,
             this.vwSQLSubGrpsMenuItem});
             this.subGroupsContextMenuStrip.Name = "usersContextMenuStrip";
-            this.subGroupsContextMenuStrip.Size = new System.Drawing.Size(151, 76);
+            this.subGroupsContextMenuStrip.Size = new System.Drawing.Size(182, 88);
             // 
             // exptSubGrpMenuItem
             // 
             this.exptSubGrpMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptSubGrpMenuItem.Name = "exptSubGrpMenuItem";
-            this.exptSubGrpMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptSubGrpMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptSubGrpMenuItem.Text = "Export to Excel";
             this.exptSubGrpMenuItem.Click += new System.EventHandler(this.exptSubGrpMenuItem_Click);
             // 
@@ -3137,20 +3184,20 @@ namespace SystemAdministration.Forms
             // 
             this.refreshSubGrpsMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshSubGrpsMenuItem.Name = "refreshSubGrpsMenuItem";
-            this.refreshSubGrpsMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.refreshSubGrpsMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshSubGrpsMenuItem.Text = "&Refresh";
             this.refreshSubGrpsMenuItem.Click += new System.EventHandler(this.refreshSubGrpsMenuItem_Click);
             // 
             // toolStripSeparator85
             // 
             this.toolStripSeparator85.Name = "toolStripSeparator85";
-            this.toolStripSeparator85.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator85.Size = new System.Drawing.Size(178, 6);
             // 
             // vwSQLSubGrpsMenuItem
             // 
             this.vwSQLSubGrpsMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLSubGrpsMenuItem.Name = "vwSQLSubGrpsMenuItem";
-            this.vwSQLSubGrpsMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vwSQLSubGrpsMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLSubGrpsMenuItem.Text = "&View SQL";
             this.vwSQLSubGrpsMenuItem.Click += new System.EventHandler(this.vwSQLSubGrpsMenuItem_Click);
             // 
@@ -3171,7 +3218,7 @@ namespace SystemAdministration.Forms
             this.glsLabel18.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel18.ForeColor = System.Drawing.Color.White;
             this.glsLabel18.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel18.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel18.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel18.Name = "glsLabel18";
             this.glsLabel18.Size = new System.Drawing.Size(253, 35);
             this.glsLabel18.TabIndex = 1;
@@ -3219,19 +3266,20 @@ namespace SystemAdministration.Forms
             // 
             // extInfMdlContextMenuStrip
             // 
+            this.extInfMdlContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.extInfMdlContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExtInfMenuItem,
             this.refreshExtInfMdlMenuItem,
             this.toolStripSeparator78,
             this.viewSQLExtInfMdlMenuItem});
             this.extInfMdlContextMenuStrip.Name = "usersContextMenuStrip";
-            this.extInfMdlContextMenuStrip.Size = new System.Drawing.Size(151, 76);
+            this.extInfMdlContextMenuStrip.Size = new System.Drawing.Size(182, 88);
             // 
             // exptExtInfMenuItem
             // 
             this.exptExtInfMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptExtInfMenuItem.Name = "exptExtInfMenuItem";
-            this.exptExtInfMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptExtInfMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptExtInfMenuItem.Text = "Export to Excel";
             this.exptExtInfMenuItem.Click += new System.EventHandler(this.exptExtInfMenuItem_Click);
             // 
@@ -3239,20 +3287,20 @@ namespace SystemAdministration.Forms
             // 
             this.refreshExtInfMdlMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshExtInfMdlMenuItem.Name = "refreshExtInfMdlMenuItem";
-            this.refreshExtInfMdlMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.refreshExtInfMdlMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshExtInfMdlMenuItem.Text = "&Refresh";
             this.refreshExtInfMdlMenuItem.Click += new System.EventHandler(this.refreshExtInfMdlMenuItem_Click);
             // 
             // toolStripSeparator78
             // 
             this.toolStripSeparator78.Name = "toolStripSeparator78";
-            this.toolStripSeparator78.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator78.Size = new System.Drawing.Size(178, 6);
             // 
             // viewSQLExtInfMdlMenuItem
             // 
             this.viewSQLExtInfMdlMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.viewSQLExtInfMdlMenuItem.Name = "viewSQLExtInfMdlMenuItem";
-            this.viewSQLExtInfMdlMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.viewSQLExtInfMdlMenuItem.Size = new System.Drawing.Size(181, 26);
             this.viewSQLExtInfMdlMenuItem.Text = "&View SQL";
             this.viewSQLExtInfMdlMenuItem.Click += new System.EventHandler(this.viewSQLExtInfMdlMenuItem_Click);
             // 
@@ -3273,7 +3321,7 @@ namespace SystemAdministration.Forms
             this.glsLabel19.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel19.ForeColor = System.Drawing.Color.White;
             this.glsLabel19.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel19.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel19.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel19.Name = "glsLabel19";
             this.glsLabel19.Size = new System.Drawing.Size(403, 35);
             this.glsLabel19.TabIndex = 1;
@@ -3283,6 +3331,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip7.AutoSize = false;
             this.toolStrip7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstExtInfButton,
             this.toolStripSeparator33,
@@ -3322,7 +3371,7 @@ namespace SystemAdministration.Forms
             this.moveFirstExtInfButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstExtInfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstExtInfButton.Name = "moveFirstExtInfButton";
-            this.moveFirstExtInfButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstExtInfButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstExtInfButton.Text = "Move First";
             this.moveFirstExtInfButton.Click += new System.EventHandler(this.extInfPnlNavButtons);
             // 
@@ -3337,7 +3386,7 @@ namespace SystemAdministration.Forms
             this.movePreviousExtInfButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousExtInfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousExtInfButton.Name = "movePreviousExtInfButton";
-            this.movePreviousExtInfButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousExtInfButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousExtInfButton.Text = "Move Previous";
             this.movePreviousExtInfButton.Click += new System.EventHandler(this.extInfPnlNavButtons);
             // 
@@ -3351,7 +3400,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel14.AutoToolTip = true;
             this.toolStripLabel14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel14.Name = "toolStripLabel14";
-            this.toolStripLabel14.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel14.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel14.Text = "Record";
             // 
             // positionExtInfTextBox
@@ -3371,7 +3420,7 @@ namespace SystemAdministration.Forms
             this.totalRecExtInfLabel.AutoToolTip = true;
             this.totalRecExtInfLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecExtInfLabel.Name = "totalRecExtInfLabel";
-            this.totalRecExtInfLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecExtInfLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecExtInfLabel.Text = "of Total";
             // 
             // toolStripSeparator46
@@ -3385,7 +3434,7 @@ namespace SystemAdministration.Forms
             this.moveNextExtInfButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextExtInfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextExtInfButton.Name = "moveNextExtInfButton";
-            this.moveNextExtInfButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextExtInfButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextExtInfButton.Text = "Move Next";
             this.moveNextExtInfButton.Click += new System.EventHandler(this.extInfPnlNavButtons);
             // 
@@ -3400,7 +3449,7 @@ namespace SystemAdministration.Forms
             this.moveLastExtInfButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastExtInfButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastExtInfButton.Name = "moveLastExtInfButton";
-            this.moveLastExtInfButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastExtInfButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastExtInfButton.Text = "Move Last";
             this.moveLastExtInfButton.Click += new System.EventHandler(this.extInfPnlNavButtons);
             // 
@@ -3423,7 +3472,7 @@ namespace SystemAdministration.Forms
             "50",
             "100"});
             this.dsplySizeExtInfComboBox.Name = "dsplySizeExtInfComboBox";
-            this.dsplySizeExtInfComboBox.Size = new System.Drawing.Size(40, 23);
+            this.dsplySizeExtInfComboBox.Size = new System.Drawing.Size(40, 28);
             this.dsplySizeExtInfComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForExtInfTextBox_KeyDown);
             // 
             // toolStripSeparator67
@@ -3434,7 +3483,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel22
             // 
             this.toolStripLabel22.Name = "toolStripLabel22";
-            this.toolStripLabel22.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel22.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel22.Text = "Search For:";
             // 
             // toolStripSeparator69
@@ -3458,7 +3507,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel25
             // 
             this.toolStripLabel25.Name = "toolStripLabel25";
-            this.toolStripLabel25.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel25.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel25.Text = "Search In:";
             // 
             // toolStripSeparator75
@@ -3487,7 +3536,7 @@ namespace SystemAdministration.Forms
             this.refreshExtInfoButton.Image = global::SystemAdministration.Properties.Resources.action_go;
             this.refreshExtInfoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshExtInfoButton.Name = "refreshExtInfoButton";
-            this.refreshExtInfoButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshExtInfoButton.Size = new System.Drawing.Size(52, 22);
             this.refreshExtInfoButton.Text = "Go";
             this.refreshExtInfoButton.Click += new System.EventHandler(this.refreshExtInfoButton_Click);
             // 
@@ -3589,6 +3638,7 @@ namespace SystemAdministration.Forms
             // 
             // plcyMdlsContextMenuStrip
             // 
+            this.plcyMdlsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.plcyMdlsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editPlcyMdlMenuItem,
             this.toolStripSeparator61,
@@ -3597,26 +3647,26 @@ namespace SystemAdministration.Forms
             this.recHstryPlcyMdlsMenuItem,
             this.vwSQLPlcyMdlsMenuItem});
             this.plcyMdlsContextMenuStrip.Name = "userRolesContextMenuStrip";
-            this.plcyMdlsContextMenuStrip.Size = new System.Drawing.Size(153, 120);
+            this.plcyMdlsContextMenuStrip.Size = new System.Drawing.Size(182, 140);
             // 
             // editPlcyMdlMenuItem
             // 
             this.editPlcyMdlMenuItem.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.editPlcyMdlMenuItem.Name = "editPlcyMdlMenuItem";
-            this.editPlcyMdlMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editPlcyMdlMenuItem.Size = new System.Drawing.Size(181, 26);
             this.editPlcyMdlMenuItem.Text = "Edit Settings";
             this.editPlcyMdlMenuItem.Click += new System.EventHandler(this.editPlcyMdlMenuItem_Click);
             // 
             // toolStripSeparator61
             // 
             this.toolStripSeparator61.Name = "toolStripSeparator61";
-            this.toolStripSeparator61.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator61.Size = new System.Drawing.Size(178, 6);
             // 
             // exptPlcyMenuItem
             // 
             this.exptPlcyMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptPlcyMenuItem.Name = "exptPlcyMenuItem";
-            this.exptPlcyMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptPlcyMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptPlcyMenuItem.Text = "Export to Excel";
             this.exptPlcyMenuItem.Click += new System.EventHandler(this.exptPlcyMenuItem_Click);
             // 
@@ -3624,7 +3674,7 @@ namespace SystemAdministration.Forms
             // 
             this.refreshPlcyMdlsMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshPlcyMdlsMenuItem.Name = "refreshPlcyMdlsMenuItem";
-            this.refreshPlcyMdlsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshPlcyMdlsMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshPlcyMdlsMenuItem.Text = "&Refresh";
             this.refreshPlcyMdlsMenuItem.Click += new System.EventHandler(this.refreshPlcyMdlsMenuItem_Click);
             // 
@@ -3632,7 +3682,7 @@ namespace SystemAdministration.Forms
             // 
             this.recHstryPlcyMdlsMenuItem.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recHstryPlcyMdlsMenuItem.Name = "recHstryPlcyMdlsMenuItem";
-            this.recHstryPlcyMdlsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recHstryPlcyMdlsMenuItem.Size = new System.Drawing.Size(181, 26);
             this.recHstryPlcyMdlsMenuItem.Text = "Record &History";
             this.recHstryPlcyMdlsMenuItem.Click += new System.EventHandler(this.recHstryPlcyMdlsMenuItem_Click);
             // 
@@ -3640,7 +3690,7 @@ namespace SystemAdministration.Forms
             // 
             this.vwSQLPlcyMdlsMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLPlcyMdlsMenuItem.Name = "vwSQLPlcyMdlsMenuItem";
-            this.vwSQLPlcyMdlsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLPlcyMdlsMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLPlcyMdlsMenuItem.Text = "&View SQL";
             this.vwSQLPlcyMdlsMenuItem.Click += new System.EventHandler(this.vwSQLPlcyMdlsMenuItem_Click);
             // 
@@ -3692,7 +3742,7 @@ namespace SystemAdministration.Forms
             0,
             0});
             this.sessionNumUpDown.Name = "sessionNumUpDown";
-            this.sessionNumUpDown.Size = new System.Drawing.Size(93, 21);
+            this.sessionNumUpDown.Size = new System.Drawing.Size(93, 24);
             this.sessionNumUpDown.TabIndex = 9;
             this.sessionNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -3702,7 +3752,7 @@ namespace SystemAdministration.Forms
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(7, 182);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(136, 13);
+            this.label7.Size = new System.Drawing.Size(174, 17);
             this.label7.TabIndex = 22;
             this.label7.Text = "Session Timeout(Seconds):";
             // 
@@ -3712,7 +3762,7 @@ namespace SystemAdministration.Forms
             this.wildNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.wildNoCheckBox.Location = new System.Drawing.Point(258, 127);
             this.wildNoCheckBox.Name = "wildNoCheckBox";
-            this.wildNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.wildNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.wildNoCheckBox.TabIndex = 7;
             this.wildNoCheckBox.Text = "No";
             this.wildNoCheckBox.UseVisualStyleBackColor = true;
@@ -3724,7 +3774,7 @@ namespace SystemAdministration.Forms
             this.wildYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.wildYesCheckBox.Location = new System.Drawing.Point(209, 127);
             this.wildYesCheckBox.Name = "wildYesCheckBox";
-            this.wildYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.wildYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.wildYesCheckBox.TabIndex = 6;
             this.wildYesCheckBox.Text = "Yes";
             this.wildYesCheckBox.UseVisualStyleBackColor = true;
@@ -3736,7 +3786,7 @@ namespace SystemAdministration.Forms
             this.digitsNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.digitsNoCheckBox.Location = new System.Drawing.Point(258, 90);
             this.digitsNoCheckBox.Name = "digitsNoCheckBox";
-            this.digitsNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.digitsNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.digitsNoCheckBox.TabIndex = 5;
             this.digitsNoCheckBox.Text = "No";
             this.digitsNoCheckBox.UseVisualStyleBackColor = true;
@@ -3748,7 +3798,7 @@ namespace SystemAdministration.Forms
             this.digitsYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.digitsYesCheckBox.Location = new System.Drawing.Point(209, 90);
             this.digitsYesCheckBox.Name = "digitsYesCheckBox";
-            this.digitsYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.digitsYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.digitsYesCheckBox.TabIndex = 4;
             this.digitsYesCheckBox.Text = "Yes";
             this.digitsYesCheckBox.UseVisualStyleBackColor = true;
@@ -3760,7 +3810,7 @@ namespace SystemAdministration.Forms
             this.smallNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.smallNoCheckBox.Location = new System.Drawing.Point(258, 55);
             this.smallNoCheckBox.Name = "smallNoCheckBox";
-            this.smallNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.smallNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.smallNoCheckBox.TabIndex = 3;
             this.smallNoCheckBox.Text = "No";
             this.smallNoCheckBox.UseVisualStyleBackColor = true;
@@ -3772,7 +3822,7 @@ namespace SystemAdministration.Forms
             this.smallYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.smallYesCheckBox.Location = new System.Drawing.Point(209, 55);
             this.smallYesCheckBox.Name = "smallYesCheckBox";
-            this.smallYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.smallYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.smallYesCheckBox.TabIndex = 2;
             this.smallYesCheckBox.Text = "Yes";
             this.smallYesCheckBox.UseVisualStyleBackColor = true;
@@ -3784,7 +3834,7 @@ namespace SystemAdministration.Forms
             this.capsNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.capsNoCheckBox.Location = new System.Drawing.Point(258, 18);
             this.capsNoCheckBox.Name = "capsNoCheckBox";
-            this.capsNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.capsNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.capsNoCheckBox.TabIndex = 1;
             this.capsNoCheckBox.Text = "No";
             this.capsNoCheckBox.UseVisualStyleBackColor = true;
@@ -3796,7 +3846,7 @@ namespace SystemAdministration.Forms
             this.capsYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.capsYesCheckBox.Location = new System.Drawing.Point(209, 18);
             this.capsYesCheckBox.Name = "capsYesCheckBox";
-            this.capsYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.capsYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.capsYesCheckBox.TabIndex = 0;
             this.capsYesCheckBox.Text = "Yes";
             this.capsYesCheckBox.UseVisualStyleBackColor = true;
@@ -3808,7 +3858,7 @@ namespace SystemAdministration.Forms
             this.label23.ForeColor = System.Drawing.Color.White;
             this.label23.Location = new System.Drawing.Point(6, 153);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(195, 13);
+            this.label23.Size = new System.Drawing.Size(248, 17);
             this.label23.TabIndex = 19;
             this.label23.Text = "Combinations of the above to insist on:";
             // 
@@ -3824,7 +3874,7 @@ namespace SystemAdministration.Forms
             "ANY 1"});
             this.combinatnsComboBox.Location = new System.Drawing.Point(201, 149);
             this.combinatnsComboBox.Name = "combinatnsComboBox";
-            this.combinatnsComboBox.Size = new System.Drawing.Size(93, 21);
+            this.combinatnsComboBox.Size = new System.Drawing.Size(93, 25);
             this.combinatnsComboBox.TabIndex = 8;
             this.combinatnsComboBox.SelectedIndexChanged += new System.EventHandler(this.combinatnsComboBox_SelectedIndexChanged);
             // 
@@ -3834,7 +3884,7 @@ namespace SystemAdministration.Forms
             this.label22.ForeColor = System.Drawing.Color.White;
             this.label22.Location = new System.Drawing.Point(7, 129);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(202, 13);
+            this.label22.Size = new System.Drawing.Size(256, 17);
             this.label22.TabIndex = 15;
             this.label22.Text = "Check for Wild Characters in passwords?";
             // 
@@ -3844,7 +3894,7 @@ namespace SystemAdministration.Forms
             this.label20.ForeColor = System.Drawing.Color.White;
             this.label20.Location = new System.Drawing.Point(7, 92);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(152, 13);
+            this.label20.Size = new System.Drawing.Size(193, 17);
             this.label20.TabIndex = 12;
             this.label20.Text = "Check for Digits in passwords?";
             // 
@@ -3854,7 +3904,7 @@ namespace SystemAdministration.Forms
             this.label16.ForeColor = System.Drawing.Color.White;
             this.label16.Location = new System.Drawing.Point(7, 57);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(187, 13);
+            this.label16.Size = new System.Drawing.Size(237, 17);
             this.label16.TabIndex = 9;
             this.label16.Text = "Check for Small Letters in passwords?";
             // 
@@ -3864,7 +3914,7 @@ namespace SystemAdministration.Forms
             this.label21.ForeColor = System.Drawing.Color.White;
             this.label21.Location = new System.Drawing.Point(7, 20);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(196, 13);
+            this.label21.Size = new System.Drawing.Size(246, 17);
             this.label21.TabIndex = 0;
             this.label21.Text = "Check for Capital Letters in passwords?";
             // 
@@ -3898,7 +3948,7 @@ namespace SystemAdministration.Forms
             this.allwRptnNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.allwRptnNoCheckBox.Location = new System.Drawing.Point(257, 125);
             this.allwRptnNoCheckBox.Name = "allwRptnNoCheckBox";
-            this.allwRptnNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.allwRptnNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.allwRptnNoCheckBox.TabIndex = 6;
             this.allwRptnNoCheckBox.Text = "No";
             this.allwRptnNoCheckBox.UseVisualStyleBackColor = true;
@@ -3910,7 +3960,7 @@ namespace SystemAdministration.Forms
             this.allwRptnYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.allwRptnYesCheckBox.Location = new System.Drawing.Point(208, 125);
             this.allwRptnYesCheckBox.Name = "allwRptnYesCheckBox";
-            this.allwRptnYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.allwRptnYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.allwRptnYesCheckBox.TabIndex = 5;
             this.allwRptnYesCheckBox.Text = "Yes";
             this.allwRptnYesCheckBox.UseVisualStyleBackColor = true;
@@ -3922,7 +3972,7 @@ namespace SystemAdministration.Forms
             this.allwUnmNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.allwUnmNoCheckBox.Location = new System.Drawing.Point(257, 99);
             this.allwUnmNoCheckBox.Name = "allwUnmNoCheckBox";
-            this.allwUnmNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.allwUnmNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.allwUnmNoCheckBox.TabIndex = 4;
             this.allwUnmNoCheckBox.Text = "No";
             this.allwUnmNoCheckBox.UseVisualStyleBackColor = true;
@@ -3934,7 +3984,7 @@ namespace SystemAdministration.Forms
             this.allwUnmYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.allwUnmYesCheckBox.Location = new System.Drawing.Point(208, 99);
             this.allwUnmYesCheckBox.Name = "allwUnmYesCheckBox";
-            this.allwUnmYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.allwUnmYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.allwUnmYesCheckBox.TabIndex = 3;
             this.allwUnmYesCheckBox.Text = "Yes";
             this.allwUnmYesCheckBox.UseVisualStyleBackColor = true;
@@ -3949,7 +3999,7 @@ namespace SystemAdministration.Forms
             0,
             0});
             this.autoUnlkTmNmUpDown.Name = "autoUnlkTmNmUpDown";
-            this.autoUnlkTmNmUpDown.Size = new System.Drawing.Size(89, 21);
+            this.autoUnlkTmNmUpDown.Size = new System.Drawing.Size(89, 24);
             this.autoUnlkTmNmUpDown.TabIndex = 8;
             this.autoUnlkTmNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.autoUnlkTmNmUpDown.ValueChanged += new System.EventHandler(this.autoUnlkTmNmUpDown_ValueChanged);
@@ -3960,7 +4010,7 @@ namespace SystemAdministration.Forms
             this.label14.ForeColor = System.Drawing.Color.White;
             this.label14.Location = new System.Drawing.Point(6, 181);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(169, 13);
+            this.label14.Size = new System.Drawing.Size(218, 17);
             this.label14.TabIndex = 20;
             this.label14.Text = "Time (mins) to auto unlock a user:";
             // 
@@ -3968,7 +4018,7 @@ namespace SystemAdministration.Forms
             // 
             this.faildLgnCntNmUpDown.Location = new System.Drawing.Point(208, 154);
             this.faildLgnCntNmUpDown.Name = "faildLgnCntNmUpDown";
-            this.faildLgnCntNmUpDown.Size = new System.Drawing.Size(89, 21);
+            this.faildLgnCntNmUpDown.Size = new System.Drawing.Size(89, 24);
             this.faildLgnCntNmUpDown.TabIndex = 7;
             this.faildLgnCntNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.faildLgnCntNmUpDown.ValueChanged += new System.EventHandler(this.faildLgnCntNmUpDown_ValueChanged);
@@ -3979,7 +4029,7 @@ namespace SystemAdministration.Forms
             this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(6, 158);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(201, 13);
+            this.label13.Size = new System.Drawing.Size(255, 17);
             this.label13.TabIndex = 18;
             this.label13.Text = "Maximum Allowed Failed Login Attempts:";
             // 
@@ -3989,7 +4039,7 @@ namespace SystemAdministration.Forms
             this.label25.ForeColor = System.Drawing.Color.White;
             this.label25.Location = new System.Drawing.Point(7, 101);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(161, 13);
+            this.label25.Size = new System.Drawing.Size(202, 17);
             this.label25.TabIndex = 12;
             this.label25.Text = "Allow User names in passwords?";
             // 
@@ -3997,7 +4047,7 @@ namespace SystemAdministration.Forms
             // 
             this.maxLenPswdNmUpDown.Location = new System.Drawing.Point(209, 42);
             this.maxLenPswdNmUpDown.Name = "maxLenPswdNmUpDown";
-            this.maxLenPswdNmUpDown.Size = new System.Drawing.Size(88, 21);
+            this.maxLenPswdNmUpDown.Size = new System.Drawing.Size(88, 24);
             this.maxLenPswdNmUpDown.TabIndex = 1;
             this.maxLenPswdNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.maxLenPswdNmUpDown.ValueChanged += new System.EventHandler(this.maxLenPswdNmUpDown_ValueChanged);
@@ -4008,7 +4058,7 @@ namespace SystemAdministration.Forms
             this.label17.ForeColor = System.Drawing.Color.White;
             this.label17.Location = new System.Drawing.Point(7, 46);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(158, 13);
+            this.label17.Size = new System.Drawing.Size(203, 17);
             this.label17.TabIndex = 4;
             this.label17.Text = "Maximum Length of Passwords:";
             // 
@@ -4016,7 +4066,7 @@ namespace SystemAdministration.Forms
             // 
             this.oldPswdCntNmUpDown.Location = new System.Drawing.Point(209, 67);
             this.oldPswdCntNmUpDown.Name = "oldPswdCntNmUpDown";
-            this.oldPswdCntNmUpDown.Size = new System.Drawing.Size(88, 21);
+            this.oldPswdCntNmUpDown.Size = new System.Drawing.Size(88, 24);
             this.oldPswdCntNmUpDown.TabIndex = 2;
             this.oldPswdCntNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.oldPswdCntNmUpDown.ValueChanged += new System.EventHandler(this.oldPswdCntNmUpDown_ValueChanged);
@@ -4034,7 +4084,7 @@ namespace SystemAdministration.Forms
             // 
             this.minLenPswdNumericUpDown.Location = new System.Drawing.Point(209, 17);
             this.minLenPswdNumericUpDown.Name = "minLenPswdNumericUpDown";
-            this.minLenPswdNumericUpDown.Size = new System.Drawing.Size(88, 21);
+            this.minLenPswdNumericUpDown.Size = new System.Drawing.Size(88, 24);
             this.minLenPswdNumericUpDown.TabIndex = 0;
             this.minLenPswdNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.minLenPswdNumericUpDown.ValueChanged += new System.EventHandler(this.minLenPswdNumericUpDown_ValueChanged);
@@ -4045,7 +4095,7 @@ namespace SystemAdministration.Forms
             this.label19.ForeColor = System.Drawing.Color.White;
             this.label19.Location = new System.Drawing.Point(7, 20);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(154, 13);
+            this.label19.Size = new System.Drawing.Size(198, 17);
             this.label19.TabIndex = 0;
             this.label19.Text = "Minimum Length of Passwords:";
             // 
@@ -4074,7 +4124,7 @@ namespace SystemAdministration.Forms
             // 
             this.mxNoRecsNmUpDown.Location = new System.Drawing.Point(201, 40);
             this.mxNoRecsNmUpDown.Name = "mxNoRecsNmUpDown";
-            this.mxNoRecsNmUpDown.Size = new System.Drawing.Size(93, 21);
+            this.mxNoRecsNmUpDown.Size = new System.Drawing.Size(93, 24);
             this.mxNoRecsNmUpDown.TabIndex = 1;
             this.mxNoRecsNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mxNoRecsNmUpDown.ValueChanged += new System.EventHandler(this.mxNoRecsNmUpDown_ValueChanged);
@@ -4085,7 +4135,7 @@ namespace SystemAdministration.Forms
             this.label15.ForeColor = System.Drawing.Color.White;
             this.label15.Location = new System.Drawing.Point(3, 44);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(199, 13);
+            this.label15.Size = new System.Drawing.Size(250, 17);
             this.label15.TabIndex = 6;
             this.label15.Text = "Max No. Records to display in ListViews:";
             // 
@@ -4098,7 +4148,7 @@ namespace SystemAdministration.Forms
             0,
             0});
             this.expryDaysNmUpDown.Name = "expryDaysNmUpDown";
-            this.expryDaysNmUpDown.Size = new System.Drawing.Size(93, 21);
+            this.expryDaysNmUpDown.Size = new System.Drawing.Size(93, 24);
             this.expryDaysNmUpDown.TabIndex = 0;
             this.expryDaysNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.expryDaysNmUpDown.ValueChanged += new System.EventHandler(this.expryDaysNmUpDown_ValueChanged);
@@ -4109,7 +4159,7 @@ namespace SystemAdministration.Forms
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(3, 19);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(117, 13);
+            this.label12.Size = new System.Drawing.Size(149, 17);
             this.label12.TabIndex = 2;
             this.label12.Text = "Password Expiry Days:";
             // 
@@ -4134,7 +4184,7 @@ namespace SystemAdministration.Forms
             this.policyNmTextBox.MaxLength = 100;
             this.policyNmTextBox.Name = "policyNmTextBox";
             this.policyNmTextBox.ReadOnly = true;
-            this.policyNmTextBox.Size = new System.Drawing.Size(213, 21);
+            this.policyNmTextBox.Size = new System.Drawing.Size(213, 24);
             this.policyNmTextBox.TabIndex = 0;
             // 
             // isDefltNoCheckBox
@@ -4143,7 +4193,7 @@ namespace SystemAdministration.Forms
             this.isDefltNoCheckBox.ForeColor = System.Drawing.Color.White;
             this.isDefltNoCheckBox.Location = new System.Drawing.Point(133, 40);
             this.isDefltNoCheckBox.Name = "isDefltNoCheckBox";
-            this.isDefltNoCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.isDefltNoCheckBox.Size = new System.Drawing.Size(47, 21);
             this.isDefltNoCheckBox.TabIndex = 2;
             this.isDefltNoCheckBox.Text = "No";
             this.isDefltNoCheckBox.UseVisualStyleBackColor = true;
@@ -4155,7 +4205,7 @@ namespace SystemAdministration.Forms
             this.isDefltYesCheckBox.ForeColor = System.Drawing.Color.White;
             this.isDefltYesCheckBox.Location = new System.Drawing.Point(84, 40);
             this.isDefltYesCheckBox.Name = "isDefltYesCheckBox";
-            this.isDefltYesCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.isDefltYesCheckBox.Size = new System.Drawing.Size(51, 21);
             this.isDefltYesCheckBox.TabIndex = 1;
             this.isDefltYesCheckBox.Text = "Yes";
             this.isDefltYesCheckBox.UseVisualStyleBackColor = true;
@@ -4167,7 +4217,7 @@ namespace SystemAdministration.Forms
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(7, 40);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 13);
+            this.label11.Size = new System.Drawing.Size(72, 17);
             this.label11.TabIndex = 4;
             this.label11.Text = "Is Default?";
             // 
@@ -4177,7 +4227,7 @@ namespace SystemAdministration.Forms
             this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(7, 20);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 13);
+            this.label10.Size = new System.Drawing.Size(87, 17);
             this.label10.TabIndex = 0;
             this.label10.Text = "Policy Name:";
             // 
@@ -4186,7 +4236,7 @@ namespace SystemAdministration.Forms
             this.plcyIDTextBox.Location = new System.Drawing.Point(252, 16);
             this.plcyIDTextBox.Name = "plcyIDTextBox";
             this.plcyIDTextBox.ReadOnly = true;
-            this.plcyIDTextBox.Size = new System.Drawing.Size(40, 21);
+            this.plcyIDTextBox.Size = new System.Drawing.Size(40, 24);
             this.plcyIDTextBox.TabIndex = 0;
             this.plcyIDTextBox.TabStop = false;
             this.plcyIDTextBox.Text = "-1";
@@ -4195,6 +4245,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip3.AutoSize = false;
             this.toolStrip3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPlcyButton,
             this.toolStripSeparator59,
@@ -4243,7 +4294,7 @@ namespace SystemAdministration.Forms
             this.addPlcyButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addPlcyButton.Name = "addPlcyButton";
-            this.addPlcyButton.Size = new System.Drawing.Size(51, 22);
+            this.addPlcyButton.Size = new System.Drawing.Size(65, 22);
             this.addPlcyButton.Text = "ADD";
             this.addPlcyButton.Click += new System.EventHandler(this.addPlcyButton_Click);
             // 
@@ -4257,7 +4308,7 @@ namespace SystemAdministration.Forms
             this.editPlcyButton.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.editPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editPlcyButton.Name = "editPlcyButton";
-            this.editPlcyButton.Size = new System.Drawing.Size(51, 22);
+            this.editPlcyButton.Size = new System.Drawing.Size(64, 22);
             this.editPlcyButton.Text = "EDIT";
             this.editPlcyButton.Click += new System.EventHandler(this.editPlcyButton_Click);
             // 
@@ -4271,7 +4322,7 @@ namespace SystemAdministration.Forms
             this.savePlcyButton.Image = global::SystemAdministration.Properties.Resources.FloppyDisk;
             this.savePlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.savePlcyButton.Name = "savePlcyButton";
-            this.savePlcyButton.Size = new System.Drawing.Size(53, 22);
+            this.savePlcyButton.Size = new System.Drawing.Size(67, 22);
             this.savePlcyButton.Text = "SAVE";
             this.savePlcyButton.Click += new System.EventHandler(this.savePlcyButton_Click);
             // 
@@ -4286,7 +4337,7 @@ namespace SystemAdministration.Forms
             this.deletePolicyButton.Image = global::SystemAdministration.Properties.Resources.delete;
             this.deletePolicyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deletePolicyButton.Name = "deletePolicyButton";
-            this.deletePolicyButton.Size = new System.Drawing.Size(23, 22);
+            this.deletePolicyButton.Size = new System.Drawing.Size(24, 22);
             this.deletePolicyButton.Text = "DELETE";
             this.deletePolicyButton.Click += new System.EventHandler(this.deletePolicyButton_Click);
             // 
@@ -4300,7 +4351,7 @@ namespace SystemAdministration.Forms
             this.refreshPlcyButton.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshPlcyButton.Name = "refreshPlcyButton";
-            this.refreshPlcyButton.Size = new System.Drawing.Size(66, 22);
+            this.refreshPlcyButton.Size = new System.Drawing.Size(82, 22);
             this.refreshPlcyButton.Text = "Refresh";
             this.refreshPlcyButton.Click += new System.EventHandler(this.refreshPlcyButton_Click);
             // 
@@ -4315,7 +4366,7 @@ namespace SystemAdministration.Forms
             this.vwSQLPlcyButton.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLPlcyButton.Name = "vwSQLPlcyButton";
-            this.vwSQLPlcyButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLPlcyButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLPlcyButton.Text = "View SQL";
             this.vwSQLPlcyButton.Click += new System.EventHandler(this.vwSQLPlcyButton_Click);
             // 
@@ -4330,7 +4381,7 @@ namespace SystemAdministration.Forms
             this.recHstryPlcyButton.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recHstryPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryPlcyButton.Name = "recHstryPlcyButton";
-            this.recHstryPlcyButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryPlcyButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryPlcyButton.Text = "Record History";
             this.recHstryPlcyButton.Click += new System.EventHandler(this.recHstryPlcyButton_Click);
             // 
@@ -4345,7 +4396,7 @@ namespace SystemAdministration.Forms
             this.moveFirstPlcyButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstPlcyButton.Name = "moveFirstPlcyButton";
-            this.moveFirstPlcyButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstPlcyButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstPlcyButton.Text = "Move First";
             this.moveFirstPlcyButton.Click += new System.EventHandler(this.plcyPnlNavButtons);
             // 
@@ -4360,7 +4411,7 @@ namespace SystemAdministration.Forms
             this.movePreviousPlcyButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousPlcyButton.Name = "movePreviousPlcyButton";
-            this.movePreviousPlcyButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousPlcyButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousPlcyButton.Text = "Move Previous";
             this.movePreviousPlcyButton.Click += new System.EventHandler(this.plcyPnlNavButtons);
             // 
@@ -4374,7 +4425,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel8.AutoToolTip = true;
             this.toolStripLabel8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel8.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel8.Text = "Record";
             // 
             // positionPlcyTextBox
@@ -4394,7 +4445,7 @@ namespace SystemAdministration.Forms
             this.totalRecPlcyLabel.AutoToolTip = true;
             this.totalRecPlcyLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecPlcyLabel.Name = "totalRecPlcyLabel";
-            this.totalRecPlcyLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecPlcyLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecPlcyLabel.Text = "of Total";
             // 
             // toolStripSeparator43
@@ -4408,7 +4459,7 @@ namespace SystemAdministration.Forms
             this.moveNextPlcyButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextPlcyButton.Name = "moveNextPlcyButton";
-            this.moveNextPlcyButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextPlcyButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextPlcyButton.Text = "Move Next";
             this.moveNextPlcyButton.Click += new System.EventHandler(this.plcyPnlNavButtons);
             // 
@@ -4423,7 +4474,7 @@ namespace SystemAdministration.Forms
             this.moveLastPlcyButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastPlcyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastPlcyButton.Name = "moveLastPlcyButton";
-            this.moveLastPlcyButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastPlcyButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastPlcyButton.Text = "Move Last";
             this.moveLastPlcyButton.Click += new System.EventHandler(this.plcyPnlNavButtons);
             // 
@@ -4435,7 +4486,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel12
             // 
             this.toolStripLabel12.Name = "toolStripLabel12";
-            this.toolStripLabel12.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel12.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel12.Text = "Search For:";
             // 
             // toolStripSeparator49
@@ -4459,7 +4510,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel13
             // 
             this.toolStripLabel13.Name = "toolStripLabel13";
-            this.toolStripLabel13.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel13.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel13.Text = "Search In:";
             // 
             // toolStripSeparator51
@@ -4473,7 +4524,7 @@ namespace SystemAdministration.Forms
             this.searchInPlcyComboBox.Items.AddRange(new object[] {
             "Policy Name"});
             this.searchInPlcyComboBox.Name = "searchInPlcyComboBox";
-            this.searchInPlcyComboBox.Size = new System.Drawing.Size(121, 25);
+            this.searchInPlcyComboBox.Size = new System.Drawing.Size(121, 28);
             this.searchInPlcyComboBox.Sorted = true;
             this.searchInPlcyComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForPlcyTextBox_KeyDown);
             // 
@@ -4552,10 +4603,10 @@ namespace SystemAdministration.Forms
             this.smsDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.smsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.smsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.smsDataGridView.Location = new System.Drawing.Point(3, 17);
+            this.smsDataGridView.Location = new System.Drawing.Point(3, 20);
             this.smsDataGridView.Name = "smsDataGridView";
             this.smsDataGridView.RowHeadersWidth = 15;
-            this.smsDataGridView.Size = new System.Drawing.Size(381, 309);
+            this.smsDataGridView.Size = new System.Drawing.Size(381, 306);
             this.smsDataGridView.TabIndex = 0;
             // 
             // Column8
@@ -4587,6 +4638,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip6.AutoSize = false;
             this.toolStrip6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEmlSvrButton,
             this.toolStripSeparator114,
@@ -4636,7 +4688,7 @@ namespace SystemAdministration.Forms
             this.addEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.plus_32;
             this.addEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addEmlSvrButton.Name = "addEmlSvrButton";
-            this.addEmlSvrButton.Size = new System.Drawing.Size(51, 22);
+            this.addEmlSvrButton.Size = new System.Drawing.Size(65, 22);
             this.addEmlSvrButton.Text = "ADD";
             this.addEmlSvrButton.Click += new System.EventHandler(this.addEmlSvrButton_Click);
             // 
@@ -4650,7 +4702,7 @@ namespace SystemAdministration.Forms
             this.editEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.edit32;
             this.editEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editEmlSvrButton.Name = "editEmlSvrButton";
-            this.editEmlSvrButton.Size = new System.Drawing.Size(51, 22);
+            this.editEmlSvrButton.Size = new System.Drawing.Size(64, 22);
             this.editEmlSvrButton.Text = "EDIT";
             this.editEmlSvrButton.Click += new System.EventHandler(this.editEmlSvrButton_Click);
             // 
@@ -4664,7 +4716,7 @@ namespace SystemAdministration.Forms
             this.saveEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.FloppyDisk;
             this.saveEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveEmlSvrButton.Name = "saveEmlSvrButton";
-            this.saveEmlSvrButton.Size = new System.Drawing.Size(53, 22);
+            this.saveEmlSvrButton.Size = new System.Drawing.Size(67, 22);
             this.saveEmlSvrButton.Text = "SAVE";
             this.saveEmlSvrButton.Click += new System.EventHandler(this.saveEmlSvrButton_Click);
             // 
@@ -4679,7 +4731,7 @@ namespace SystemAdministration.Forms
             this.deleteSrvrButton.Image = global::SystemAdministration.Properties.Resources.delete;
             this.deleteSrvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteSrvrButton.Name = "deleteSrvrButton";
-            this.deleteSrvrButton.Size = new System.Drawing.Size(23, 22);
+            this.deleteSrvrButton.Size = new System.Drawing.Size(24, 22);
             this.deleteSrvrButton.Text = "DELETE";
             this.deleteSrvrButton.Click += new System.EventHandler(this.deleteSrvrButton_Click);
             // 
@@ -4693,7 +4745,7 @@ namespace SystemAdministration.Forms
             this.refreshEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshEmlSvrButton.Name = "refreshEmlSvrButton";
-            this.refreshEmlSvrButton.Size = new System.Drawing.Size(66, 22);
+            this.refreshEmlSvrButton.Size = new System.Drawing.Size(82, 22);
             this.refreshEmlSvrButton.Text = "Refresh";
             this.refreshEmlSvrButton.Click += new System.EventHandler(this.refreshEmlSvrButton_Click);
             // 
@@ -4708,7 +4760,7 @@ namespace SystemAdministration.Forms
             this.recHstryEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.statistics_32;
             this.recHstryEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryEmlSvrButton.Name = "recHstryEmlSvrButton";
-            this.recHstryEmlSvrButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryEmlSvrButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryEmlSvrButton.Text = "Record History";
             this.recHstryEmlSvrButton.Click += new System.EventHandler(this.recHstryEmlSvrButton_Click);
             // 
@@ -4723,7 +4775,7 @@ namespace SystemAdministration.Forms
             this.vwSQLEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLEmlSvrButton.Name = "vwSQLEmlSvrButton";
-            this.vwSQLEmlSvrButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLEmlSvrButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLEmlSvrButton.Text = "View SQL";
             this.vwSQLEmlSvrButton.Click += new System.EventHandler(this.vwSQLEmlSvrButton_Click);
             // 
@@ -4738,7 +4790,7 @@ namespace SystemAdministration.Forms
             this.moveFirstEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstEmlSvrButton.Name = "moveFirstEmlSvrButton";
-            this.moveFirstEmlSvrButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstEmlSvrButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstEmlSvrButton.Text = "Move First";
             this.moveFirstEmlSvrButton.Click += new System.EventHandler(this.emlSvrPnlNavButtons);
             // 
@@ -4753,7 +4805,7 @@ namespace SystemAdministration.Forms
             this.movePreviousEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousEmlSvrButton.Name = "movePreviousEmlSvrButton";
-            this.movePreviousEmlSvrButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousEmlSvrButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousEmlSvrButton.Text = "Move Previous";
             this.movePreviousEmlSvrButton.Click += new System.EventHandler(this.emlSvrPnlNavButtons);
             // 
@@ -4767,7 +4819,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel21.AutoToolTip = true;
             this.toolStripLabel21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel21.Name = "toolStripLabel21";
-            this.toolStripLabel21.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel21.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel21.Text = "Record";
             // 
             // positionEmlSvrTextBox
@@ -4787,7 +4839,7 @@ namespace SystemAdministration.Forms
             this.totalRecEmlSvrLabel.AutoToolTip = true;
             this.totalRecEmlSvrLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecEmlSvrLabel.Name = "totalRecEmlSvrLabel";
-            this.totalRecEmlSvrLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecEmlSvrLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecEmlSvrLabel.Text = "of Total";
             // 
             // toolStripSeparator100
@@ -4801,7 +4853,7 @@ namespace SystemAdministration.Forms
             this.moveNextEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextEmlSvrButton.Name = "moveNextEmlSvrButton";
-            this.moveNextEmlSvrButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextEmlSvrButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextEmlSvrButton.Text = "Move Next";
             this.moveNextEmlSvrButton.Click += new System.EventHandler(this.emlSvrPnlNavButtons);
             // 
@@ -4816,7 +4868,7 @@ namespace SystemAdministration.Forms
             this.moveLastEmlSvrButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastEmlSvrButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastEmlSvrButton.Name = "moveLastEmlSvrButton";
-            this.moveLastEmlSvrButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastEmlSvrButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastEmlSvrButton.Text = "Move Last";
             this.moveLastEmlSvrButton.Click += new System.EventHandler(this.emlSvrPnlNavButtons);
             // 
@@ -4828,7 +4880,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel23
             // 
             this.toolStripLabel23.Name = "toolStripLabel23";
-            this.toolStripLabel23.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel23.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel23.Text = "Search For:";
             // 
             // toolStripSeparator106
@@ -4852,7 +4904,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel24
             // 
             this.toolStripLabel24.Name = "toolStripLabel24";
-            this.toolStripLabel24.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel24.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel24.Text = "Search In:";
             // 
             // toolStripSeparator108
@@ -4867,7 +4919,7 @@ namespace SystemAdministration.Forms
             "SENDER\'s USER NAME",
             "SMTP CLIENT"});
             this.searchInEmlSvrComboBox.Name = "searchInEmlSvrComboBox";
-            this.searchInEmlSvrComboBox.Size = new System.Drawing.Size(121, 25);
+            this.searchInEmlSvrComboBox.Size = new System.Drawing.Size(121, 28);
             this.searchInEmlSvrComboBox.Sorted = true;
             this.searchInEmlSvrComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForEmlSvrTextBox_KeyDown);
             // 
@@ -5092,7 +5144,7 @@ namespace SystemAdministration.Forms
             this.bckpFileDirTextBox.MaxLength = 100;
             this.bckpFileDirTextBox.Name = "bckpFileDirTextBox";
             this.bckpFileDirTextBox.ReadOnly = true;
-            this.bckpFileDirTextBox.Size = new System.Drawing.Size(337, 21);
+            this.bckpFileDirTextBox.Size = new System.Drawing.Size(337, 24);
             this.bckpFileDirTextBox.TabIndex = 1;
             // 
             // pgDirTextBox
@@ -5101,7 +5153,7 @@ namespace SystemAdministration.Forms
             this.pgDirTextBox.MaxLength = 200;
             this.pgDirTextBox.Name = "pgDirTextBox";
             this.pgDirTextBox.ReadOnly = true;
-            this.pgDirTextBox.Size = new System.Drawing.Size(337, 21);
+            this.pgDirTextBox.Size = new System.Drawing.Size(337, 24);
             this.pgDirTextBox.TabIndex = 0;
             // 
             // label48
@@ -5110,7 +5162,7 @@ namespace SystemAdministration.Forms
             this.label48.ForeColor = System.Drawing.Color.White;
             this.label48.Location = new System.Drawing.Point(9, 59);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(141, 13);
+            this.label48.Size = new System.Drawing.Size(180, 17);
             this.label48.TabIndex = 1;
             this.label48.Text = "BACKUP FILES DIRECTORY:";
             // 
@@ -5120,7 +5172,7 @@ namespace SystemAdministration.Forms
             this.label49.ForeColor = System.Drawing.Color.White;
             this.label49.Location = new System.Drawing.Point(9, 19);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(119, 13);
+            this.label49.Size = new System.Drawing.Size(154, 17);
             this.label49.TabIndex = 0;
             this.label49.Text = "PG_DUMP DIRECTORY:";
             // 
@@ -5133,7 +5185,7 @@ namespace SystemAdministration.Forms
             this.groupBox10.Controls.Add(this.label45);
             this.groupBox10.Controls.Add(this.label44);
             this.groupBox10.ForeColor = System.Drawing.Color.White;
-            this.groupBox10.Location = new System.Drawing.Point(8, 214);
+            this.groupBox10.Location = new System.Drawing.Point(8, 241);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(354, 99);
             this.groupBox10.TabIndex = 81;
@@ -5155,7 +5207,7 @@ namespace SystemAdministration.Forms
             this.timeoutComboBox.Location = new System.Drawing.Point(137, 70);
             this.timeoutComboBox.MaxLength = 100;
             this.timeoutComboBox.Name = "timeoutComboBox";
-            this.timeoutComboBox.Size = new System.Drawing.Size(199, 21);
+            this.timeoutComboBox.Size = new System.Drawing.Size(199, 25);
             this.timeoutComboBox.TabIndex = 11;
             // 
             // label46
@@ -5164,7 +5216,7 @@ namespace SystemAdministration.Forms
             this.label46.ForeColor = System.Drawing.Color.White;
             this.label46.Location = new System.Drawing.Point(14, 73);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(52, 13);
+            this.label46.Size = new System.Drawing.Size(66, 17);
             this.label46.TabIndex = 10;
             this.label46.Text = "TMEOUT:";
             // 
@@ -5180,7 +5232,7 @@ namespace SystemAdministration.Forms
             this.baudRateComboBox.Location = new System.Drawing.Point(137, 44);
             this.baudRateComboBox.MaxLength = 100;
             this.baudRateComboBox.Name = "baudRateComboBox";
-            this.baudRateComboBox.Size = new System.Drawing.Size(199, 21);
+            this.baudRateComboBox.Size = new System.Drawing.Size(199, 25);
             this.baudRateComboBox.TabIndex = 9;
             // 
             // comPortComboBox
@@ -5200,7 +5252,7 @@ namespace SystemAdministration.Forms
             this.comPortComboBox.Location = new System.Drawing.Point(137, 19);
             this.comPortComboBox.MaxLength = 100;
             this.comPortComboBox.Name = "comPortComboBox";
-            this.comPortComboBox.Size = new System.Drawing.Size(199, 21);
+            this.comPortComboBox.Size = new System.Drawing.Size(199, 25);
             this.comPortComboBox.TabIndex = 8;
             // 
             // label45
@@ -5209,7 +5261,7 @@ namespace SystemAdministration.Forms
             this.label45.ForeColor = System.Drawing.Color.White;
             this.label45.Location = new System.Drawing.Point(14, 47);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(67, 13);
+            this.label45.Size = new System.Drawing.Size(85, 17);
             this.label45.TabIndex = 7;
             this.label45.Text = "BAUD RATE:";
             // 
@@ -5219,7 +5271,7 @@ namespace SystemAdministration.Forms
             this.label44.ForeColor = System.Drawing.Color.White;
             this.label44.Location = new System.Drawing.Point(14, 24);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(64, 13);
+            this.label44.Size = new System.Drawing.Size(81, 17);
             this.label44.TabIndex = 3;
             this.label44.Text = "COM PORT:";
             // 
@@ -5239,7 +5291,7 @@ namespace SystemAdministration.Forms
             this.groupBox9.Controls.Add(this.label41);
             this.groupBox9.Controls.Add(this.label42);
             this.groupBox9.ForeColor = System.Drawing.Color.White;
-            this.groupBox9.Location = new System.Drawing.Point(7, 315);
+            this.groupBox9.Location = new System.Drawing.Point(7, 342);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(354, 184);
             this.groupBox9.TabIndex = 80;
@@ -5251,7 +5303,7 @@ namespace SystemAdministration.Forms
             this.ftpHomeDirTextBox.Location = new System.Drawing.Point(138, 116);
             this.ftpHomeDirTextBox.MaxLength = 200;
             this.ftpHomeDirTextBox.Name = "ftpHomeDirTextBox";
-            this.ftpHomeDirTextBox.Size = new System.Drawing.Size(198, 21);
+            this.ftpHomeDirTextBox.Size = new System.Drawing.Size(198, 24);
             this.ftpHomeDirTextBox.TabIndex = 4;
             // 
             // label59
@@ -5260,7 +5312,7 @@ namespace SystemAdministration.Forms
             this.label59.ForeColor = System.Drawing.Color.White;
             this.label59.Location = new System.Drawing.Point(4, 120);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(138, 13);
+            this.label59.Size = new System.Drawing.Size(177, 17);
             this.label59.TabIndex = 8;
             this.label59.Text = "FTP User\'s Home Directory:";
             // 
@@ -5270,7 +5322,7 @@ namespace SystemAdministration.Forms
             this.enforceFTPCheckBox.ForeColor = System.Drawing.Color.White;
             this.enforceFTPCheckBox.Location = new System.Drawing.Point(137, 163);
             this.enforceFTPCheckBox.Name = "enforceFTPCheckBox";
-            this.enforceFTPCheckBox.Size = new System.Drawing.Size(171, 17);
+            this.enforceFTPCheckBox.Size = new System.Drawing.Size(211, 21);
             this.enforceFTPCheckBox.TabIndex = 7;
             this.enforceFTPCheckBox.Text = "Enforce FTP File Server Usage";
             this.enforceFTPCheckBox.UseVisualStyleBackColor = true;
@@ -5281,7 +5333,7 @@ namespace SystemAdministration.Forms
             this.ftpBaseDirTextBox.Location = new System.Drawing.Point(138, 139);
             this.ftpBaseDirTextBox.MaxLength = 200;
             this.ftpBaseDirTextBox.Name = "ftpBaseDirTextBox";
-            this.ftpBaseDirTextBox.Size = new System.Drawing.Size(198, 21);
+            this.ftpBaseDirTextBox.Size = new System.Drawing.Size(198, 24);
             this.ftpBaseDirTextBox.TabIndex = 6;
             // 
             // ftpPortNumUpDown
@@ -5293,7 +5345,7 @@ namespace SystemAdministration.Forms
             0,
             0});
             this.ftpPortNumUpDown.Name = "ftpPortNumUpDown";
-            this.ftpPortNumUpDown.Size = new System.Drawing.Size(198, 21);
+            this.ftpPortNumUpDown.Size = new System.Drawing.Size(198, 24);
             this.ftpPortNumUpDown.TabIndex = 3;
             this.ftpPortNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ftpPortNumUpDown.ValueChanged += new System.EventHandler(this.ftpPortNumUpDown_ValueChanged);
@@ -5304,7 +5356,7 @@ namespace SystemAdministration.Forms
             this.ftpPswdTextBox.MaxLength = 100;
             this.ftpPswdTextBox.Name = "ftpPswdTextBox";
             this.ftpPswdTextBox.PasswordChar = '*';
-            this.ftpPswdTextBox.Size = new System.Drawing.Size(198, 21);
+            this.ftpPswdTextBox.Size = new System.Drawing.Size(198, 24);
             this.ftpPswdTextBox.TabIndex = 2;
             // 
             // ftpUnmTextBox
@@ -5312,7 +5364,7 @@ namespace SystemAdministration.Forms
             this.ftpUnmTextBox.Location = new System.Drawing.Point(138, 45);
             this.ftpUnmTextBox.MaxLength = 100;
             this.ftpUnmTextBox.Name = "ftpUnmTextBox";
-            this.ftpUnmTextBox.Size = new System.Drawing.Size(198, 21);
+            this.ftpUnmTextBox.Size = new System.Drawing.Size(198, 24);
             this.ftpUnmTextBox.TabIndex = 1;
             // 
             // ftpServerTextBox
@@ -5320,7 +5372,7 @@ namespace SystemAdministration.Forms
             this.ftpServerTextBox.Location = new System.Drawing.Point(138, 21);
             this.ftpServerTextBox.MaxLength = 200;
             this.ftpServerTextBox.Name = "ftpServerTextBox";
-            this.ftpServerTextBox.Size = new System.Drawing.Size(198, 21);
+            this.ftpServerTextBox.Size = new System.Drawing.Size(198, 24);
             this.ftpServerTextBox.TabIndex = 0;
             // 
             // label37
@@ -5329,7 +5381,7 @@ namespace SystemAdministration.Forms
             this.label37.ForeColor = System.Drawing.Color.White;
             this.label37.Location = new System.Drawing.Point(4, 143);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(120, 13);
+            this.label37.Size = new System.Drawing.Size(153, 17);
             this.label37.TabIndex = 5;
             this.label37.Text = "Base Subdirectory URL:";
             // 
@@ -5339,7 +5391,7 @@ namespace SystemAdministration.Forms
             this.label39.ForeColor = System.Drawing.Color.White;
             this.label39.Location = new System.Drawing.Point(4, 97);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(59, 13);
+            this.label39.Size = new System.Drawing.Size(75, 17);
             this.label39.TabIndex = 3;
             this.label39.Text = "FTP PORT:";
             // 
@@ -5349,7 +5401,7 @@ namespace SystemAdministration.Forms
             this.label40.ForeColor = System.Drawing.Color.White;
             this.label40.Location = new System.Drawing.Point(4, 73);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(118, 13);
+            this.label40.Size = new System.Drawing.Size(153, 17);
             this.label40.TabIndex = 2;
             this.label40.Text = "FTP USER PASSWORD:";
             // 
@@ -5359,7 +5411,7 @@ namespace SystemAdministration.Forms
             this.label41.ForeColor = System.Drawing.Color.White;
             this.label41.Location = new System.Drawing.Point(4, 49);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(89, 13);
+            this.label41.Size = new System.Drawing.Size(113, 17);
             this.label41.TabIndex = 1;
             this.label41.Text = "FTP USER NAME:";
             // 
@@ -5369,12 +5421,14 @@ namespace SystemAdministration.Forms
             this.label42.ForeColor = System.Drawing.Color.White;
             this.label42.Location = new System.Drawing.Point(4, 25);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(92, 13);
+            this.label42.Size = new System.Drawing.Size(119, 17);
             this.label42.TabIndex = 0;
             this.label42.Text = "FTP SERVER URL:";
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.smtpIPTextBox);
+            this.groupBox8.Controls.Add(this.label60);
             this.groupBox8.Controls.Add(this.smtpClientTextBox);
             this.groupBox8.Controls.Add(this.isDfltNoEmlSvrCheckBox);
             this.groupBox8.Controls.Add(this.isDfltYesEmlSvrCheckBox);
@@ -5392,17 +5446,35 @@ namespace SystemAdministration.Forms
             this.groupBox8.ForeColor = System.Drawing.Color.White;
             this.groupBox8.Location = new System.Drawing.Point(8, 28);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(354, 183);
+            this.groupBox8.Size = new System.Drawing.Size(354, 207);
             this.groupBox8.TabIndex = 0;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "EMAIL SERVER";
+            // 
+            // smtpIPTextBox
+            // 
+            this.smtpIPTextBox.Location = new System.Drawing.Point(115, 176);
+            this.smtpIPTextBox.MaxLength = 200;
+            this.smtpIPTextBox.Name = "smtpIPTextBox";
+            this.smtpIPTextBox.Size = new System.Drawing.Size(221, 24);
+            this.smtpIPTextBox.TabIndex = 14;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.ForeColor = System.Drawing.Color.White;
+            this.label60.Location = new System.Drawing.Point(13, 180);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(112, 17);
+            this.label60.TabIndex = 15;
+            this.label60.Text = "SMTP CLIENT IP:";
             // 
             // smtpClientTextBox
             // 
             this.smtpClientTextBox.Location = new System.Drawing.Point(101, 21);
             this.smtpClientTextBox.MaxLength = 200;
             this.smtpClientTextBox.Name = "smtpClientTextBox";
-            this.smtpClientTextBox.Size = new System.Drawing.Size(235, 21);
+            this.smtpClientTextBox.Size = new System.Drawing.Size(235, 24);
             this.smtpClientTextBox.TabIndex = 0;
             // 
             // isDfltNoEmlSvrCheckBox
@@ -5411,7 +5483,7 @@ namespace SystemAdministration.Forms
             this.isDfltNoEmlSvrCheckBox.ForeColor = System.Drawing.Color.White;
             this.isDfltNoEmlSvrCheckBox.Location = new System.Drawing.Point(237, 117);
             this.isDfltNoEmlSvrCheckBox.Name = "isDfltNoEmlSvrCheckBox";
-            this.isDfltNoEmlSvrCheckBox.Size = new System.Drawing.Size(39, 17);
+            this.isDfltNoEmlSvrCheckBox.Size = new System.Drawing.Size(47, 21);
             this.isDfltNoEmlSvrCheckBox.TabIndex = 5;
             this.isDfltNoEmlSvrCheckBox.Text = "No";
             this.isDfltNoEmlSvrCheckBox.UseVisualStyleBackColor = true;
@@ -5423,7 +5495,7 @@ namespace SystemAdministration.Forms
             this.isDfltYesEmlSvrCheckBox.ForeColor = System.Drawing.Color.White;
             this.isDfltYesEmlSvrCheckBox.Location = new System.Drawing.Point(178, 117);
             this.isDfltYesEmlSvrCheckBox.Name = "isDfltYesEmlSvrCheckBox";
-            this.isDfltYesEmlSvrCheckBox.Size = new System.Drawing.Size(43, 17);
+            this.isDfltYesEmlSvrCheckBox.Size = new System.Drawing.Size(51, 21);
             this.isDfltYesEmlSvrCheckBox.TabIndex = 4;
             this.isDfltYesEmlSvrCheckBox.Text = "Yes";
             this.isDfltYesEmlSvrCheckBox.UseVisualStyleBackColor = true;
@@ -5438,7 +5510,7 @@ namespace SystemAdministration.Forms
             0,
             0});
             this.smtpPortNmUpDown.Name = "smtpPortNmUpDown";
-            this.smtpPortNmUpDown.Size = new System.Drawing.Size(159, 21);
+            this.smtpPortNmUpDown.Size = new System.Drawing.Size(159, 24);
             this.smtpPortNmUpDown.TabIndex = 3;
             this.smtpPortNmUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.smtpPortNmUpDown.ValueChanged += new System.EventHandler(this.smtpPortNmUpDown_ValueChanged);
@@ -5449,7 +5521,7 @@ namespace SystemAdministration.Forms
             this.emailPswdTextBox.MaxLength = 100;
             this.emailPswdTextBox.Name = "emailPswdTextBox";
             this.emailPswdTextBox.PasswordChar = '*';
-            this.emailPswdTextBox.Size = new System.Drawing.Size(158, 21);
+            this.emailPswdTextBox.Size = new System.Drawing.Size(158, 24);
             this.emailPswdTextBox.TabIndex = 2;
             // 
             // emailUnameTextBox
@@ -5457,7 +5529,7 @@ namespace SystemAdministration.Forms
             this.emailUnameTextBox.Location = new System.Drawing.Point(178, 45);
             this.emailUnameTextBox.MaxLength = 100;
             this.emailUnameTextBox.Name = "emailUnameTextBox";
-            this.emailUnameTextBox.Size = new System.Drawing.Size(158, 21);
+            this.emailUnameTextBox.Size = new System.Drawing.Size(158, 24);
             this.emailUnameTextBox.TabIndex = 1;
             // 
             // label32
@@ -5466,7 +5538,7 @@ namespace SystemAdministration.Forms
             this.label32.ForeColor = System.Drawing.Color.White;
             this.label32.Location = new System.Drawing.Point(14, 119);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(69, 13);
+            this.label32.Size = new System.Drawing.Size(88, 17);
             this.label32.TabIndex = 4;
             this.label32.Text = "IS DEFAULT?";
             // 
@@ -5476,7 +5548,7 @@ namespace SystemAdministration.Forms
             this.label31.ForeColor = System.Drawing.Color.White;
             this.label31.Location = new System.Drawing.Point(14, 97);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(67, 13);
+            this.label31.Size = new System.Drawing.Size(86, 17);
             this.label31.TabIndex = 3;
             this.label31.Text = "SMTP PORT:";
             // 
@@ -5486,7 +5558,7 @@ namespace SystemAdministration.Forms
             this.label30.ForeColor = System.Drawing.Color.White;
             this.label30.Location = new System.Drawing.Point(14, 73);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(150, 13);
+            this.label30.Size = new System.Drawing.Size(194, 17);
             this.label30.TabIndex = 2;
             this.label30.Text = "SENDER\'s EMAIL PASSWORD:";
             // 
@@ -5496,7 +5568,7 @@ namespace SystemAdministration.Forms
             this.label29.ForeColor = System.Drawing.Color.White;
             this.label29.Location = new System.Drawing.Point(14, 49);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(150, 13);
+            this.label29.Size = new System.Drawing.Size(192, 17);
             this.label29.TabIndex = 1;
             this.label29.Text = "SENDER\'s EMAIL USER NAME:";
             // 
@@ -5506,7 +5578,7 @@ namespace SystemAdministration.Forms
             this.label28.ForeColor = System.Drawing.Color.White;
             this.label28.Location = new System.Drawing.Point(14, 25);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(75, 13);
+            this.label28.Size = new System.Drawing.Size(96, 17);
             this.label28.TabIndex = 0;
             this.label28.Text = "SMTP CLIENT:";
             // 
@@ -5516,7 +5588,7 @@ namespace SystemAdministration.Forms
             this.emlSrvrIDTextBox.Location = new System.Drawing.Point(237, 21);
             this.emlSrvrIDTextBox.Name = "emlSrvrIDTextBox";
             this.emlSrvrIDTextBox.ReadOnly = true;
-            this.emlSrvrIDTextBox.Size = new System.Drawing.Size(99, 21);
+            this.emlSrvrIDTextBox.Size = new System.Drawing.Size(99, 24);
             this.emlSrvrIDTextBox.TabIndex = 13;
             this.emlSrvrIDTextBox.TabStop = false;
             // 
@@ -5557,7 +5629,7 @@ namespace SystemAdministration.Forms
             this.label43.ForeColor = System.Drawing.Color.White;
             this.label43.Location = new System.Drawing.Point(762, 32);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(135, 13);
+            this.label43.Size = new System.Drawing.Size(169, 17);
             this.label43.TabIndex = 154;
             this.label43.Text = "CURRENT ORGANIZATION";
             // 
@@ -5619,6 +5691,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip5.AutoSize = false;
             this.toolStrip5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstAdtButton,
             this.toolStripSeparator80,
@@ -5661,7 +5734,7 @@ namespace SystemAdministration.Forms
             this.moveFirstAdtButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstAdtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstAdtButton.Name = "moveFirstAdtButton";
-            this.moveFirstAdtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstAdtButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstAdtButton.Text = "Move First";
             this.moveFirstAdtButton.Click += new System.EventHandler(this.adtPnlNavButtons);
             // 
@@ -5676,7 +5749,7 @@ namespace SystemAdministration.Forms
             this.movePreviousAdtButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousAdtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousAdtButton.Name = "movePreviousAdtButton";
-            this.movePreviousAdtButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousAdtButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousAdtButton.Text = "Move Previous";
             this.movePreviousAdtButton.Click += new System.EventHandler(this.adtPnlNavButtons);
             // 
@@ -5690,7 +5763,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel17.AutoToolTip = true;
             this.toolStripLabel17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel17.Name = "toolStripLabel17";
-            this.toolStripLabel17.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel17.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel17.Text = "Record";
             // 
             // positionAdtTextBox
@@ -5710,7 +5783,7 @@ namespace SystemAdministration.Forms
             this.totalRecAdtLabel.AutoToolTip = true;
             this.totalRecAdtLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecAdtLabel.Name = "totalRecAdtLabel";
-            this.totalRecAdtLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecAdtLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecAdtLabel.Text = "of Total";
             // 
             // toolStripSeparator82
@@ -5724,7 +5797,7 @@ namespace SystemAdministration.Forms
             this.moveNextAdtButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextAdtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextAdtButton.Name = "moveNextAdtButton";
-            this.moveNextAdtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextAdtButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextAdtButton.Text = "Move Next";
             this.moveNextAdtButton.Click += new System.EventHandler(this.adtPnlNavButtons);
             // 
@@ -5739,7 +5812,7 @@ namespace SystemAdministration.Forms
             this.moveLastAdtButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastAdtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastAdtButton.Name = "moveLastAdtButton";
-            this.moveLastAdtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastAdtButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastAdtButton.Text = "Move Last";
             this.moveLastAdtButton.Click += new System.EventHandler(this.adtPnlNavButtons);
             // 
@@ -5762,7 +5835,7 @@ namespace SystemAdministration.Forms
             "50",
             "100"});
             this.dsplySizeAdtComboBox.Name = "dsplySizeAdtComboBox";
-            this.dsplySizeAdtComboBox.Size = new System.Drawing.Size(40, 23);
+            this.dsplySizeAdtComboBox.Size = new System.Drawing.Size(40, 28);
             this.dsplySizeAdtComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForAdtTextBox_KeyDown);
             // 
             // toolStripSeparator86
@@ -5773,7 +5846,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel19
             // 
             this.toolStripLabel19.Name = "toolStripLabel19";
-            this.toolStripLabel19.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel19.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel19.Text = "Search For:";
             // 
             // toolStripSeparator88
@@ -5797,7 +5870,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel20
             // 
             this.toolStripLabel20.Name = "toolStripLabel20";
-            this.toolStripLabel20.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel20.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel20.Text = "Search In:";
             // 
             // toolStripSeparator90
@@ -5830,7 +5903,7 @@ namespace SystemAdministration.Forms
             this.refreshAdtButton.Image = global::SystemAdministration.Properties.Resources.action_go;
             this.refreshAdtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshAdtButton.Name = "refreshAdtButton";
-            this.refreshAdtButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshAdtButton.Size = new System.Drawing.Size(52, 22);
             this.refreshAdtButton.Text = "Go";
             this.refreshAdtButton.Click += new System.EventHandler(this.refreshAdtButton_Click);
             // 
@@ -5845,7 +5918,7 @@ namespace SystemAdministration.Forms
             this.vwSQLAdtButton.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLAdtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLAdtButton.Name = "vwSQLAdtButton";
-            this.vwSQLAdtButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLAdtButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLAdtButton.Text = "View SQL";
             this.vwSQLAdtButton.Click += new System.EventHandler(this.vwSQLAdtButton_Click);
             // 
@@ -5960,19 +6033,20 @@ namespace SystemAdministration.Forms
             // 
             // auditContextMenuStrip
             // 
+            this.auditContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.auditContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptAudtMenuItem,
             this.refreshAdtMenuItem,
             this.toolStripSeparator94,
             this.vwSQLAdtMenuItem});
             this.auditContextMenuStrip.Name = "usersContextMenuStrip";
-            this.auditContextMenuStrip.Size = new System.Drawing.Size(151, 76);
+            this.auditContextMenuStrip.Size = new System.Drawing.Size(182, 88);
             // 
             // exptAudtMenuItem
             // 
             this.exptAudtMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptAudtMenuItem.Name = "exptAudtMenuItem";
-            this.exptAudtMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptAudtMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptAudtMenuItem.Text = "Export to Excel";
             this.exptAudtMenuItem.Click += new System.EventHandler(this.exptAudtMenuItem_Click);
             // 
@@ -5980,20 +6054,20 @@ namespace SystemAdministration.Forms
             // 
             this.refreshAdtMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshAdtMenuItem.Name = "refreshAdtMenuItem";
-            this.refreshAdtMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.refreshAdtMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshAdtMenuItem.Text = "&Refresh";
             this.refreshAdtMenuItem.Click += new System.EventHandler(this.refreshAdtMenuItem_Click);
             // 
             // toolStripSeparator94
             // 
             this.toolStripSeparator94.Name = "toolStripSeparator94";
-            this.toolStripSeparator94.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator94.Size = new System.Drawing.Size(178, 6);
             // 
             // vwSQLAdtMenuItem
             // 
             this.vwSQLAdtMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLAdtMenuItem.Name = "vwSQLAdtMenuItem";
-            this.vwSQLAdtMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vwSQLAdtMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLAdtMenuItem.Text = "&View SQL";
             this.vwSQLAdtMenuItem.Click += new System.EventHandler(this.vwSQLAdtMenuItem_Click);
             // 
@@ -6015,7 +6089,7 @@ namespace SystemAdministration.Forms
             this.glsLabel16.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.glsLabel16.ForeColor = System.Drawing.Color.White;
             this.glsLabel16.Location = new System.Drawing.Point(0, 0);
-            this.glsLabel16.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.glsLabel16.Margin = new System.Windows.Forms.Padding(6);
             this.glsLabel16.Name = "glsLabel16";
             this.glsLabel16.Size = new System.Drawing.Size(195, 35);
             this.glsLabel16.TabIndex = 1;
@@ -6070,7 +6144,9 @@ namespace SystemAdministration.Forms
             this.columnHeader42,
             this.columnHeader45,
             this.columnHeader43,
-            this.columnHeader44});
+            this.columnHeader44,
+            this.columnHeader64,
+            this.columnHeader65});
             this.loginsListView.ContextMenuStrip = this.loginsContextMenuStrip;
             this.loginsListView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginsListView.FullRowSelect = true;
@@ -6125,21 +6201,47 @@ namespace SystemAdministration.Forms
             this.columnHeader44.Text = "Login Number";
             this.columnHeader44.Width = 100;
             // 
+            // columnHeader64
+            // 
+            this.columnHeader64.Text = "Last Time Active";
+            this.columnHeader64.Width = 120;
+            // 
+            // columnHeader65
+            // 
+            this.columnHeader65.Text = "Logon Remarks";
+            this.columnHeader65.Width = 300;
+            // 
             // loginsContextMenuStrip
             // 
+            this.loginsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.loginsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.frcLgoutMenuItem,
+            this.toolStripSeparator79,
             this.exptLgnMenuItem,
             this.refreshLgnMenuItem,
             this.toolStripSeparator93,
             this.vwSQLLgnMenuItem});
             this.loginsContextMenuStrip.Name = "usersContextMenuStrip";
-            this.loginsContextMenuStrip.Size = new System.Drawing.Size(151, 76);
+            this.loginsContextMenuStrip.Size = new System.Drawing.Size(182, 120);
+            // 
+            // frcLgoutMenuItem
+            // 
+            this.frcLgoutMenuItem.Image = global::SystemAdministration.Properties.Resources._90;
+            this.frcLgoutMenuItem.Name = "frcLgoutMenuItem";
+            this.frcLgoutMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.frcLgoutMenuItem.Text = "Force Log-Out";
+            this.frcLgoutMenuItem.Click += new System.EventHandler(this.frcLgoutMenuItem_Click);
+            // 
+            // toolStripSeparator79
+            // 
+            this.toolStripSeparator79.Name = "toolStripSeparator79";
+            this.toolStripSeparator79.Size = new System.Drawing.Size(178, 6);
             // 
             // exptLgnMenuItem
             // 
             this.exptLgnMenuItem.Image = global::SystemAdministration.Properties.Resources.image007;
             this.exptLgnMenuItem.Name = "exptLgnMenuItem";
-            this.exptLgnMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptLgnMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptLgnMenuItem.Text = "Export to Excel";
             this.exptLgnMenuItem.Click += new System.EventHandler(this.exptLgnMenuItem_Click);
             // 
@@ -6147,20 +6249,20 @@ namespace SystemAdministration.Forms
             // 
             this.refreshLgnMenuItem.Image = global::SystemAdministration.Properties.Resources.refresh;
             this.refreshLgnMenuItem.Name = "refreshLgnMenuItem";
-            this.refreshLgnMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.refreshLgnMenuItem.Size = new System.Drawing.Size(181, 26);
             this.refreshLgnMenuItem.Text = "&Refresh";
             this.refreshLgnMenuItem.Click += new System.EventHandler(this.refreshLgnMenuItem_Click);
             // 
             // toolStripSeparator93
             // 
             this.toolStripSeparator93.Name = "toolStripSeparator93";
-            this.toolStripSeparator93.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator93.Size = new System.Drawing.Size(178, 6);
             // 
             // vwSQLLgnMenuItem
             // 
             this.vwSQLLgnMenuItem.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLLgnMenuItem.Name = "vwSQLLgnMenuItem";
-            this.vwSQLLgnMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vwSQLLgnMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLLgnMenuItem.Text = "&View SQL";
             this.vwSQLLgnMenuItem.Click += new System.EventHandler(this.vwSQLLgnMenuItem_Click);
             // 
@@ -6168,6 +6270,7 @@ namespace SystemAdministration.Forms
             // 
             this.toolStrip4.AutoSize = false;
             this.toolStrip4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstLgnsButton,
             this.toolStripSeparator62,
@@ -6210,7 +6313,7 @@ namespace SystemAdministration.Forms
             this.moveFirstLgnsButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstLgnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstLgnsButton.Name = "moveFirstLgnsButton";
-            this.moveFirstLgnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstLgnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstLgnsButton.Text = "Move First";
             this.moveFirstLgnsButton.Click += new System.EventHandler(this.lgnsPnlNavButtons);
             // 
@@ -6225,7 +6328,7 @@ namespace SystemAdministration.Forms
             this.movePreviousLgnsButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousLgnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousLgnsButton.Name = "movePreviousLgnsButton";
-            this.movePreviousLgnsButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousLgnsButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousLgnsButton.Text = "Move Previous";
             this.movePreviousLgnsButton.Click += new System.EventHandler(this.lgnsPnlNavButtons);
             // 
@@ -6239,7 +6342,7 @@ namespace SystemAdministration.Forms
             this.toolStripLabel11.AutoToolTip = true;
             this.toolStripLabel11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel11.Name = "toolStripLabel11";
-            this.toolStripLabel11.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel11.Size = new System.Drawing.Size(57, 22);
             this.toolStripLabel11.Text = "Record";
             // 
             // positionLgnsTextBox
@@ -6259,7 +6362,7 @@ namespace SystemAdministration.Forms
             this.totalRecLgnsLabel.AutoToolTip = true;
             this.totalRecLgnsLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecLgnsLabel.Name = "totalRecLgnsLabel";
-            this.totalRecLgnsLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecLgnsLabel.Size = new System.Drawing.Size(61, 22);
             this.totalRecLgnsLabel.Text = "of Total";
             // 
             // toolStripSeparator64
@@ -6273,7 +6376,7 @@ namespace SystemAdministration.Forms
             this.moveNextLgnsButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextLgnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextLgnsButton.Name = "moveNextLgnsButton";
-            this.moveNextLgnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextLgnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextLgnsButton.Text = "Move Next";
             this.moveNextLgnsButton.Click += new System.EventHandler(this.lgnsPnlNavButtons);
             // 
@@ -6288,7 +6391,7 @@ namespace SystemAdministration.Forms
             this.moveLastLgnsButton.Image = global::SystemAdministration.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastLgnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastLgnsButton.Name = "moveLastLgnsButton";
-            this.moveLastLgnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastLgnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastLgnsButton.Text = "Move Last";
             this.moveLastLgnsButton.Click += new System.EventHandler(this.lgnsPnlNavButtons);
             // 
@@ -6311,7 +6414,7 @@ namespace SystemAdministration.Forms
             "50",
             "100"});
             this.dsplySizeLgnsComboBox.Name = "dsplySizeLgnsComboBox";
-            this.dsplySizeLgnsComboBox.Size = new System.Drawing.Size(40, 23);
+            this.dsplySizeLgnsComboBox.Size = new System.Drawing.Size(40, 28);
             this.dsplySizeLgnsComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForLgnsTextBox_KeyDown);
             // 
             // toolStripSeparator68
@@ -6322,7 +6425,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel15
             // 
             this.toolStripLabel15.Name = "toolStripLabel15";
-            this.toolStripLabel15.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel15.Size = new System.Drawing.Size(81, 22);
             this.toolStripLabel15.Text = "Search For:";
             // 
             // toolStripSeparator70
@@ -6347,7 +6450,7 @@ namespace SystemAdministration.Forms
             // toolStripLabel16
             // 
             this.toolStripLabel16.Name = "toolStripLabel16";
-            this.toolStripLabel16.Size = new System.Drawing.Size(58, 22);
+            this.toolStripLabel16.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel16.Text = "Search In:";
             // 
             // toolStripSeparator72
@@ -6379,7 +6482,7 @@ namespace SystemAdministration.Forms
             this.refreshLgnsButton.Image = global::SystemAdministration.Properties.Resources.action_go;
             this.refreshLgnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshLgnsButton.Name = "refreshLgnsButton";
-            this.refreshLgnsButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshLgnsButton.Size = new System.Drawing.Size(52, 22);
             this.refreshLgnsButton.Text = "Go";
             this.refreshLgnsButton.Click += new System.EventHandler(this.refreshLgnsButton_Click);
             // 
@@ -6394,7 +6497,7 @@ namespace SystemAdministration.Forms
             this.vwSQLLgnsButton.Image = global::SystemAdministration.Properties.Resources.SQL;
             this.vwSQLLgnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLLgnsButton.Name = "vwSQLLgnsButton";
-            this.vwSQLLgnsButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLLgnsButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLLgnsButton.Text = "View SQL";
             this.vwSQLLgnsButton.Click += new System.EventHandler(this.vwSQLLgnsButton_Click);
             // 
@@ -6417,9 +6520,9 @@ namespace SystemAdministration.Forms
             this.showFaildCheckBox.Checked = true;
             this.showFaildCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showFaildCheckBox.ForeColor = System.Drawing.Color.White;
-            this.showFaildCheckBox.Location = new System.Drawing.Point(8816, 99);
+            this.showFaildCheckBox.Location = new System.Drawing.Point(8788, 99);
             this.showFaildCheckBox.Name = "showFaildCheckBox";
-            this.showFaildCheckBox.Size = new System.Drawing.Size(116, 17);
+            this.showFaildCheckBox.Size = new System.Drawing.Size(144, 21);
             this.showFaildCheckBox.TabIndex = 83;
             this.showFaildCheckBox.Text = "Show Failed Logins";
             this.showFaildCheckBox.UseVisualStyleBackColor = true;
@@ -6432,13 +6535,25 @@ namespace SystemAdministration.Forms
             this.showSuccsflCheckBox.Checked = true;
             this.showSuccsflCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showSuccsflCheckBox.ForeColor = System.Drawing.Color.White;
-            this.showSuccsflCheckBox.Location = new System.Drawing.Point(8818, 73);
+            this.showSuccsflCheckBox.Location = new System.Drawing.Point(8782, 73);
             this.showSuccsflCheckBox.Name = "showSuccsflCheckBox";
-            this.showSuccsflCheckBox.Size = new System.Drawing.Size(138, 17);
+            this.showSuccsflCheckBox.Size = new System.Drawing.Size(174, 21);
             this.showSuccsflCheckBox.TabIndex = 82;
             this.showSuccsflCheckBox.Text = "Show Successful Logins";
             this.showSuccsflCheckBox.UseVisualStyleBackColor = true;
             this.showSuccsflCheckBox.CheckedChanged += new System.EventHandler(this.showSuccsflCheckBox_CheckedChanged);
+            // 
+            // waitLabel
+            // 
+            this.waitLabel.BackColor = System.Drawing.Color.Green;
+            this.waitLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitLabel.ForeColor = System.Drawing.Color.White;
+            this.waitLabel.Location = new System.Drawing.Point(564, 223);
+            this.waitLabel.Name = "waitLabel";
+            this.waitLabel.Size = new System.Drawing.Size(328, 52);
+            this.waitLabel.TabIndex = 135;
+            this.waitLabel.Text = "LOADING STANDARD ROLES && LOVs...PLEASE WAIT...";
+            this.waitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // openFileDialog1
             // 
@@ -6463,6 +6578,7 @@ namespace SystemAdministration.Forms
             // 
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(1276, 733);
+            this.Controls.Add(this.waitLabel);
             this.Controls.Add(this.splitContainer1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) 
             | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) 
@@ -6476,7 +6592,6 @@ namespace SystemAdministration.Forms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -7178,5 +7293,14 @@ namespace SystemAdministration.Forms
         private System.Windows.Forms.ToolStripButton deletePolicyButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator60;
         private System.Windows.Forms.ColumnHeader columnHeader62;
+        private System.Windows.Forms.ColumnHeader columnHeader63;
+        private System.Windows.Forms.ColumnHeader columnHeader64;
+        private System.Windows.Forms.ColumnHeader columnHeader65;
+        private System.Windows.Forms.ToolStripMenuItem frcLgoutMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator79;
+        private System.Windows.Forms.Button imprtRolesButton;
+        private System.Windows.Forms.Button exprtRolesButton;
+        private System.Windows.Forms.TextBox smtpIPTextBox;
+        private System.Windows.Forms.Label label60;
     }
 	}

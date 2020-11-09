@@ -85,10 +85,8 @@
       <HintPath>..\..\..\LIBRARIES\MarkupConverter.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Npgsql, Version=2.0.11.92, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Organisation_Management_System\bin\Debug\Npgsql.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Npgsql">
+      <HintPath>..\Enterprise_Management_System\bin\Debug\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="RicherTextBox">
       <HintPath>..\..\..\LIBRARIES\RicherTextBox.dll</HintPath>

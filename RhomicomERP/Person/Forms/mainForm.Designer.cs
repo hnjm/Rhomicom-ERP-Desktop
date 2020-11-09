@@ -30,22 +30,22 @@ namespace BasicPersonData.Forms
 			{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.prsnContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addPrsnMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -569,6 +569,12 @@ namespace BasicPersonData.Forms
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.infoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.saveLabel = new System.Windows.Forms.Label();
+            this.absenceTabPage = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.prsnContextMenuStrip.SuspendLayout();
             this.ntnltyContextMenuStrip.SuspendLayout();
             this.educContextMenuStrip.SuspendLayout();
@@ -647,6 +653,10 @@ namespace BasicPersonData.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.extraDataTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -854,6 +864,7 @@ namespace BasicPersonData.Forms
             this.imageList2.Images.SetKeyName(42, "adjunto.png");
             this.imageList2.Images.SetKeyName(43, "Mail.png");
             this.imageList2.Images.SetKeyName(44, "Folder.png");
+            this.imageList2.Images.SetKeyName(45, "absence_1.png");
             // 
             // ntnltyContextMenuStrip
             // 
@@ -1422,7 +1433,8 @@ namespace BasicPersonData.Forms
             "Grade",
             "Job",
             "Position",
-            "Relation Type"});
+            "Relation Type",
+            "Site/Location"});
             this.fltrByComboBox.Location = new System.Drawing.Point(5, 88);
             this.fltrByComboBox.Name = "fltrByComboBox";
             this.fltrByComboBox.Size = new System.Drawing.Size(85, 21);
@@ -1608,6 +1620,7 @@ namespace BasicPersonData.Forms
             this.prsnTabControl.Controls.Add(this.bscAsgnTabPage);
             this.prsnTabControl.Controls.Add(this.otherInfoTabPage);
             this.prsnTabControl.Controls.Add(this.extraDataTabPage);
+            this.prsnTabControl.Controls.Add(this.absenceTabPage);
             this.prsnTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.prsnTabControl.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prsnTabControl.HotTrack = true;
@@ -1630,9 +1643,9 @@ namespace BasicPersonData.Forms
             this.prsnInfoTabPage.Controls.Add(this.tableLayoutPanel1);
             this.prsnInfoTabPage.Controls.Add(this.label8);
             this.prsnInfoTabPage.ImageKey = "12991670401459277586supervisor-hi.png";
-            this.prsnInfoTabPage.Location = new System.Drawing.Point(4, 29);
+            this.prsnInfoTabPage.Location = new System.Drawing.Point(4, 54);
             this.prsnInfoTabPage.Name = "prsnInfoTabPage";
-            this.prsnInfoTabPage.Size = new System.Drawing.Size(1001, 696);
+            this.prsnInfoTabPage.Size = new System.Drawing.Size(1001, 671);
             this.prsnInfoTabPage.TabIndex = 0;
             this.prsnInfoTabPage.Text = "BASIC PERSON DATA";
             this.prsnInfoTabPage.UseVisualStyleBackColor = true;
@@ -1653,27 +1666,23 @@ namespace BasicPersonData.Forms
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92F));
-            this.tableLayoutPanel1.Controls.Add(this.panel10, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.panel5, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel6, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel8, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel9, 7, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(947, 653);
+            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(947, 553);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.040816F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 225F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 212F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(947, 670);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.040816F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.87755F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.040816F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(947, 553);
             this.tableLayoutPanel1.TabIndex = 157;
             // 
             // panel10
@@ -1686,8 +1695,7 @@ namespace BasicPersonData.Forms
             this.panel10.Controls.Add(this.vwAttchmntsButton);
             this.panel10.Controls.Add(this.imgTextBox);
             this.panel10.Controls.Add(this.pdfRptButton);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(536, 236);
+            this.panel10.Location = new System.Drawing.Point(6, 4);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(193, 206);
             this.panel10.TabIndex = 7;
@@ -1805,7 +1813,7 @@ namespace BasicPersonData.Forms
             this.panel3.Controls.Add(this.emailButton);
             this.panel3.Controls.Add(this.runQckPyButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(735, 7);
+            this.panel3.Location = new System.Drawing.Point(735, 9);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(204, 219);
             this.panel3.TabIndex = 8;
@@ -1904,11 +1912,9 @@ namespace BasicPersonData.Forms
             this.panel4.Controls.Add(this.groupBox11);
             this.panel4.Controls.Add(this.groupBox5);
             this.panel4.Controls.Add(this.groupBox4);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 236);
+            this.panel4.Location = new System.Drawing.Point(6, 6);
             this.panel4.Name = "panel4";
-            this.tableLayoutPanel1.SetRowSpan(this.panel4, 3);
-            this.panel4.Size = new System.Drawing.Size(267, 424);
+            this.panel4.Size = new System.Drawing.Size(532, 214);
             this.panel4.TabIndex = 2;
             // 
             // groupBox11
@@ -1920,10 +1926,10 @@ namespace BasicPersonData.Forms
             this.groupBox11.Controls.Add(this.resAddrsTextBox);
             this.groupBox11.Controls.Add(this.label9);
             this.groupBox11.ForeColor = System.Drawing.Color.White;
-            this.groupBox11.Location = new System.Drawing.Point(8, 205);
+            this.groupBox11.Location = new System.Drawing.Point(270, 8);
             this.groupBox11.MinimumSize = new System.Drawing.Size(252, 197);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(252, 215);
+            this.groupBox11.Size = new System.Drawing.Size(252, 197);
             this.groupBox11.TabIndex = 3;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "ADDRESS";
@@ -1958,7 +1964,7 @@ namespace BasicPersonData.Forms
             this.resAddrsTextBox.Name = "resAddrsTextBox";
             this.resAddrsTextBox.ReadOnly = true;
             this.resAddrsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.resAddrsTextBox.Size = new System.Drawing.Size(174, 106);
+            this.resAddrsTextBox.Size = new System.Drawing.Size(174, 88);
             this.resAddrsTextBox.TabIndex = 4;
             // 
             // label9
@@ -1991,7 +1997,7 @@ namespace BasicPersonData.Forms
             this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(8, 8);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(252, 191);
+            this.groupBox5.Size = new System.Drawing.Size(252, 197);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Contact Information";
@@ -2212,7 +2218,7 @@ namespace BasicPersonData.Forms
             // 
             this.panel5.Controls.Add(this.groupBox3);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 7);
+            this.panel5.Location = new System.Drawing.Point(3, 9);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(267, 219);
             this.panel5.TabIndex = 1;
@@ -2462,10 +2468,9 @@ namespace BasicPersonData.Forms
             // panel6
             // 
             this.panel6.Controls.Add(this.groupBox21);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(276, 236);
+            this.panel6.Location = new System.Drawing.Point(544, 6);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(254, 206);
+            this.panel6.Size = new System.Drawing.Size(254, 214);
             this.panel6.TabIndex = 4;
             // 
             // groupBox21
@@ -2487,9 +2492,9 @@ namespace BasicPersonData.Forms
             this.groupBox21.Controls.Add(this.label31);
             this.groupBox21.Controls.Add(this.prsTypHstryButton);
             this.groupBox21.ForeColor = System.Drawing.Color.White;
-            this.groupBox21.Location = new System.Drawing.Point(6, 9);
+            this.groupBox21.Location = new System.Drawing.Point(6, 8);
             this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(241, 190);
+            this.groupBox21.Size = new System.Drawing.Size(241, 197);
             this.groupBox21.TabIndex = 5;
             this.groupBox21.TabStop = false;
             this.groupBox21.Text = "Person\'s Relationship with Organisation";
@@ -2688,7 +2693,7 @@ namespace BasicPersonData.Forms
             // 
             this.panel7.Controls.Add(this.groupBox6);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(276, 7);
+            this.panel7.Location = new System.Drawing.Point(276, 9);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(254, 219);
             this.panel7.TabIndex = 3;
@@ -2878,7 +2883,7 @@ namespace BasicPersonData.Forms
             // 
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(536, 7);
+            this.panel2.Location = new System.Drawing.Point(536, 9);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(193, 219);
             this.panel2.TabIndex = 6;
@@ -2933,14 +2938,13 @@ namespace BasicPersonData.Forms
             // 
             // panel8
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.panel8, 5);
             this.panel8.Controls.Add(this.groupBox7);
             this.panel8.Controls.Add(this.groupBox12);
             this.panel8.Controls.Add(this.toolStrip10);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(276, 452);
+            this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(663, 208);
+            this.panel8.Size = new System.Drawing.Size(922, 269);
             this.panel8.TabIndex = 5;
             // 
             // groupBox7
@@ -2953,7 +2957,7 @@ namespace BasicPersonData.Forms
             this.groupBox7.Location = new System.Drawing.Point(6, 33);
             this.groupBox7.MinimumSize = new System.Drawing.Size(647, 130);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(647, 171);
+            this.groupBox7.Size = new System.Drawing.Size(913, 233);
             this.groupBox7.TabIndex = 6;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "NATIONAL IDENTIFICATION CARDS";
@@ -2978,7 +2982,7 @@ namespace BasicPersonData.Forms
             this.nationalityListView.HideSelection = false;
             this.nationalityListView.Location = new System.Drawing.Point(3, 14);
             this.nationalityListView.Name = "nationalityListView";
-            this.nationalityListView.Size = new System.Drawing.Size(641, 153);
+            this.nationalityListView.Size = new System.Drawing.Size(907, 215);
             this.nationalityListView.TabIndex = 0;
             this.nationalityListView.UseCompatibleStateImageBehavior = false;
             this.nationalityListView.View = System.Windows.Forms.View.Details;
@@ -3096,8 +3100,7 @@ namespace BasicPersonData.Forms
             // panel9
             // 
             this.panel9.Controls.Add(this.groupBox10);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(735, 236);
+            this.panel9.Location = new System.Drawing.Point(205, 4);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(204, 206);
             this.panel9.TabIndex = 9;
@@ -3106,12 +3109,13 @@ namespace BasicPersonData.Forms
             // 
             this.groupBox10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox10.Controls.Add(this.qrCodePictureBox);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.ForeColor = System.Drawing.Color.White;
             this.groupBox10.Location = new System.Drawing.Point(0, 0);
             this.groupBox10.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Padding = new System.Windows.Forms.Padding(7, 7, 10, 10);
-            this.groupBox10.Size = new System.Drawing.Size(195, 199);
+            this.groupBox10.Size = new System.Drawing.Size(204, 206);
             this.groupBox10.TabIndex = 155;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "QR Code";
@@ -3123,7 +3127,7 @@ namespace BasicPersonData.Forms
             this.qrCodePictureBox.Image = global::BasicPersonData.Properties.Resources.staffs;
             this.qrCodePictureBox.Location = new System.Drawing.Point(7, 21);
             this.qrCodePictureBox.Name = "qrCodePictureBox";
-            this.qrCodePictureBox.Size = new System.Drawing.Size(178, 168);
+            this.qrCodePictureBox.Size = new System.Drawing.Size(187, 175);
             this.qrCodePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.qrCodePictureBox.TabIndex = 91;
             this.qrCodePictureBox.TabStop = false;
@@ -3131,9 +3135,9 @@ namespace BasicPersonData.Forms
             // label8
             // 
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Location = new System.Drawing.Point(651, 356);
+            this.label8.Location = new System.Drawing.Point(659, 366);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(299, 300);
+            this.label8.Size = new System.Drawing.Size(299, 190);
             this.label8.TabIndex = 158;
             // 
             // educTabPage
@@ -3142,9 +3146,9 @@ namespace BasicPersonData.Forms
             this.educTabPage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.educTabPage.Controls.Add(this.educPanel);
             this.educTabPage.ImageKey = "education.png";
-            this.educTabPage.Location = new System.Drawing.Point(4, 29);
+            this.educTabPage.Location = new System.Drawing.Point(4, 54);
             this.educTabPage.Name = "educTabPage";
-            this.educTabPage.Size = new System.Drawing.Size(1009, 704);
+            this.educTabPage.Size = new System.Drawing.Size(1001, 671);
             this.educTabPage.TabIndex = 1;
             this.educTabPage.Text = "CURRICULUM VITAE";
             this.educTabPage.UseVisualStyleBackColor = true;
@@ -3161,7 +3165,7 @@ namespace BasicPersonData.Forms
             this.educPanel.Location = new System.Drawing.Point(0, 0);
             this.educPanel.Name = "educPanel";
             this.educPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.educPanel.Size = new System.Drawing.Size(1005, 700);
+            this.educPanel.Size = new System.Drawing.Size(997, 667);
             this.educPanel.TabIndex = 0;
             // 
             // groupBox33
@@ -3182,7 +3186,7 @@ namespace BasicPersonData.Forms
             this.groupBox33.Location = new System.Drawing.Point(5, 0);
             this.groupBox33.Name = "groupBox33";
             this.groupBox33.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox33.Size = new System.Drawing.Size(996, 184);
+            this.groupBox33.Size = new System.Drawing.Size(988, 184);
             this.groupBox33.TabIndex = 0;
             this.groupBox33.TabStop = false;
             this.groupBox33.Text = "EDUCATIONAL BACKGROUND";
@@ -3215,21 +3219,21 @@ namespace BasicPersonData.Forms
             this.Column9,
             this.Column10});
             this.educDataGridView.ContextMenuStrip = this.educContextMenuStrip;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.educDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle57.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle57.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle57.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.educDataGridView.DefaultCellStyle = dataGridViewCellStyle57;
             this.educDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.educDataGridView.Location = new System.Drawing.Point(5, 19);
             this.educDataGridView.Name = "educDataGridView";
             this.educDataGridView.ReadOnly = true;
             this.educDataGridView.RowHeadersWidth = 20;
             this.educDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.educDataGridView.Size = new System.Drawing.Size(949, 160);
+            this.educDataGridView.Size = new System.Drawing.Size(941, 160);
             this.educDataGridView.TabIndex = 0;
             this.educDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.educDataGridView_CellBeginEdit);
             this.educDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.educDataGridView_CellContentClick);
@@ -3355,7 +3359,7 @@ namespace BasicPersonData.Forms
             // GridDte3TextBox
             // 
             this.GridDte3TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridDte3TextBox.Location = new System.Drawing.Point(812, 104);
+            this.GridDte3TextBox.Location = new System.Drawing.Point(804, 104);
             this.GridDte3TextBox.Name = "GridDte3TextBox";
             this.GridDte3TextBox.ReadOnly = true;
             this.GridDte3TextBox.Size = new System.Drawing.Size(100, 21);
@@ -3370,7 +3374,7 @@ namespace BasicPersonData.Forms
             this.refreshEducButton.ForeColor = System.Drawing.Color.Black;
             this.refreshEducButton.ImageKey = "refresh.bmp";
             this.refreshEducButton.ImageList = this.imageList1;
-            this.refreshEducButton.Location = new System.Drawing.Point(960, 134);
+            this.refreshEducButton.Location = new System.Drawing.Point(952, 134);
             this.refreshEducButton.Name = "refreshEducButton";
             this.refreshEducButton.Size = new System.Drawing.Size(29, 29);
             this.refreshEducButton.TabIndex = 5;
@@ -3385,7 +3389,7 @@ namespace BasicPersonData.Forms
             this.saveEducButton.ForeColor = System.Drawing.Color.Black;
             this.saveEducButton.ImageKey = "save.png";
             this.saveEducButton.ImageList = this.imageList1;
-            this.saveEducButton.Location = new System.Drawing.Point(960, 105);
+            this.saveEducButton.Location = new System.Drawing.Point(952, 105);
             this.saveEducButton.Name = "saveEducButton";
             this.saveEducButton.Size = new System.Drawing.Size(29, 29);
             this.saveEducButton.TabIndex = 4;
@@ -3400,7 +3404,7 @@ namespace BasicPersonData.Forms
             this.delEducButton.ForeColor = System.Drawing.Color.Black;
             this.delEducButton.ImageKey = "delete.png";
             this.delEducButton.ImageList = this.imageList1;
-            this.delEducButton.Location = new System.Drawing.Point(960, 76);
+            this.delEducButton.Location = new System.Drawing.Point(952, 76);
             this.delEducButton.Name = "delEducButton";
             this.delEducButton.Size = new System.Drawing.Size(29, 29);
             this.delEducButton.TabIndex = 3;
@@ -3415,7 +3419,7 @@ namespace BasicPersonData.Forms
             this.editEducButton.ForeColor = System.Drawing.Color.Black;
             this.editEducButton.ImageKey = "edit32.png";
             this.editEducButton.ImageList = this.imageList1;
-            this.editEducButton.Location = new System.Drawing.Point(960, 47);
+            this.editEducButton.Location = new System.Drawing.Point(952, 47);
             this.editEducButton.Name = "editEducButton";
             this.editEducButton.Size = new System.Drawing.Size(29, 29);
             this.editEducButton.TabIndex = 2;
@@ -3430,7 +3434,7 @@ namespace BasicPersonData.Forms
             this.addEducButton.ForeColor = System.Drawing.Color.Black;
             this.addEducButton.ImageKey = "plus_32.png";
             this.addEducButton.ImageList = this.imageList1;
-            this.addEducButton.Location = new System.Drawing.Point(960, 18);
+            this.addEducButton.Location = new System.Drawing.Point(952, 18);
             this.addEducButton.Name = "addEducButton";
             this.addEducButton.Size = new System.Drawing.Size(29, 29);
             this.addEducButton.TabIndex = 1;
@@ -3441,7 +3445,7 @@ namespace BasicPersonData.Forms
             // GridCertTypTextBox
             // 
             this.GridCertTypTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridCertTypTextBox.Location = new System.Drawing.Point(706, 130);
+            this.GridCertTypTextBox.Location = new System.Drawing.Point(698, 130);
             this.GridCertTypTextBox.Name = "GridCertTypTextBox";
             this.GridCertTypTextBox.ReadOnly = true;
             this.GridCertTypTextBox.Size = new System.Drawing.Size(100, 21);
@@ -3451,7 +3455,7 @@ namespace BasicPersonData.Forms
             // GridDte2TextBox
             // 
             this.GridDte2TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridDte2TextBox.Location = new System.Drawing.Point(706, 104);
+            this.GridDte2TextBox.Location = new System.Drawing.Point(698, 104);
             this.GridDte2TextBox.Name = "GridDte2TextBox";
             this.GridDte2TextBox.ReadOnly = true;
             this.GridDte2TextBox.Size = new System.Drawing.Size(100, 21);
@@ -3461,7 +3465,7 @@ namespace BasicPersonData.Forms
             // GridDte1TextBox
             // 
             this.GridDte1TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridDte1TextBox.Location = new System.Drawing.Point(597, 105);
+            this.GridDte1TextBox.Location = new System.Drawing.Point(589, 105);
             this.GridDte1TextBox.Name = "GridDte1TextBox";
             this.GridDte1TextBox.ReadOnly = true;
             this.GridDte1TextBox.Size = new System.Drawing.Size(100, 21);
@@ -3482,7 +3486,7 @@ namespace BasicPersonData.Forms
             this.groupBox32.Location = new System.Drawing.Point(5, 185);
             this.groupBox32.Name = "groupBox32";
             this.groupBox32.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox32.Size = new System.Drawing.Size(996, 194);
+            this.groupBox32.Size = new System.Drawing.Size(988, 194);
             this.groupBox32.TabIndex = 83;
             this.groupBox32.TabStop = false;
             this.groupBox32.Text = "WORK EXPERIENCE";
@@ -3495,7 +3499,7 @@ namespace BasicPersonData.Forms
             this.refreshWrkButton.ForeColor = System.Drawing.Color.Black;
             this.refreshWrkButton.ImageKey = "refresh.bmp";
             this.refreshWrkButton.ImageList = this.imageList1;
-            this.refreshWrkButton.Location = new System.Drawing.Point(960, 135);
+            this.refreshWrkButton.Location = new System.Drawing.Point(952, 135);
             this.refreshWrkButton.Name = "refreshWrkButton";
             this.refreshWrkButton.Size = new System.Drawing.Size(29, 29);
             this.refreshWrkButton.TabIndex = 5;
@@ -3510,7 +3514,7 @@ namespace BasicPersonData.Forms
             this.saveWrkButton.ForeColor = System.Drawing.Color.Black;
             this.saveWrkButton.ImageKey = "save.png";
             this.saveWrkButton.ImageList = this.imageList1;
-            this.saveWrkButton.Location = new System.Drawing.Point(960, 106);
+            this.saveWrkButton.Location = new System.Drawing.Point(952, 106);
             this.saveWrkButton.Name = "saveWrkButton";
             this.saveWrkButton.Size = new System.Drawing.Size(29, 29);
             this.saveWrkButton.TabIndex = 4;
@@ -3525,7 +3529,7 @@ namespace BasicPersonData.Forms
             this.delWrkButton.ForeColor = System.Drawing.Color.Black;
             this.delWrkButton.ImageKey = "delete.png";
             this.delWrkButton.ImageList = this.imageList1;
-            this.delWrkButton.Location = new System.Drawing.Point(960, 77);
+            this.delWrkButton.Location = new System.Drawing.Point(952, 77);
             this.delWrkButton.Name = "delWrkButton";
             this.delWrkButton.Size = new System.Drawing.Size(29, 29);
             this.delWrkButton.TabIndex = 3;
@@ -3540,7 +3544,7 @@ namespace BasicPersonData.Forms
             this.editWrkButton.ForeColor = System.Drawing.Color.Black;
             this.editWrkButton.ImageKey = "edit32.png";
             this.editWrkButton.ImageList = this.imageList1;
-            this.editWrkButton.Location = new System.Drawing.Point(960, 48);
+            this.editWrkButton.Location = new System.Drawing.Point(952, 48);
             this.editWrkButton.Name = "editWrkButton";
             this.editWrkButton.Size = new System.Drawing.Size(29, 29);
             this.editWrkButton.TabIndex = 2;
@@ -3555,7 +3559,7 @@ namespace BasicPersonData.Forms
             this.addWrkButton.ForeColor = System.Drawing.Color.Black;
             this.addWrkButton.ImageKey = "plus_32.png";
             this.addWrkButton.ImageList = this.imageList1;
-            this.addWrkButton.Location = new System.Drawing.Point(960, 19);
+            this.addWrkButton.Location = new System.Drawing.Point(952, 19);
             this.addWrkButton.Name = "addWrkButton";
             this.addWrkButton.Size = new System.Drawing.Size(29, 29);
             this.addWrkButton.TabIndex = 1;
@@ -3588,21 +3592,21 @@ namespace BasicPersonData.Forms
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10});
             this.wrkExpDataGridView.ContextMenuStrip = this.wkExpContextMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.wrkExpDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle53.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.wrkExpDataGridView.DefaultCellStyle = dataGridViewCellStyle53;
             this.wrkExpDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.wrkExpDataGridView.Location = new System.Drawing.Point(5, 19);
             this.wrkExpDataGridView.Name = "wrkExpDataGridView";
             this.wrkExpDataGridView.ReadOnly = true;
             this.wrkExpDataGridView.RowHeadersWidth = 20;
             this.wrkExpDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.wrkExpDataGridView.Size = new System.Drawing.Size(949, 170);
+            this.wrkExpDataGridView.Size = new System.Drawing.Size(941, 170);
             this.wrkExpDataGridView.TabIndex = 0;
             this.wrkExpDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.wrkExpDataGridView_CellBeginEdit);
             this.wrkExpDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.wrkExpDataGridView_CellContentClick);
@@ -3820,7 +3824,7 @@ namespace BasicPersonData.Forms
             this.groupBox31.Location = new System.Drawing.Point(5, 380);
             this.groupBox31.Name = "groupBox31";
             this.groupBox31.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox31.Size = new System.Drawing.Size(996, 317);
+            this.groupBox31.Size = new System.Drawing.Size(988, 284);
             this.groupBox31.TabIndex = 83;
             this.groupBox31.TabStop = false;
             this.groupBox31.Text = "NATURE/SKILLS/TALENTS";
@@ -3833,7 +3837,7 @@ namespace BasicPersonData.Forms
             this.refreshSkillButton.ForeColor = System.Drawing.Color.Black;
             this.refreshSkillButton.ImageKey = "refresh.bmp";
             this.refreshSkillButton.ImageList = this.imageList1;
-            this.refreshSkillButton.Location = new System.Drawing.Point(960, 134);
+            this.refreshSkillButton.Location = new System.Drawing.Point(952, 134);
             this.refreshSkillButton.Name = "refreshSkillButton";
             this.refreshSkillButton.Size = new System.Drawing.Size(29, 29);
             this.refreshSkillButton.TabIndex = 5;
@@ -3848,7 +3852,7 @@ namespace BasicPersonData.Forms
             this.saveSkillButton.ForeColor = System.Drawing.Color.Black;
             this.saveSkillButton.ImageKey = "save.png";
             this.saveSkillButton.ImageList = this.imageList1;
-            this.saveSkillButton.Location = new System.Drawing.Point(960, 105);
+            this.saveSkillButton.Location = new System.Drawing.Point(952, 105);
             this.saveSkillButton.Name = "saveSkillButton";
             this.saveSkillButton.Size = new System.Drawing.Size(29, 29);
             this.saveSkillButton.TabIndex = 4;
@@ -3863,7 +3867,7 @@ namespace BasicPersonData.Forms
             this.delSkillButton.ForeColor = System.Drawing.Color.Black;
             this.delSkillButton.ImageKey = "delete.png";
             this.delSkillButton.ImageList = this.imageList1;
-            this.delSkillButton.Location = new System.Drawing.Point(960, 76);
+            this.delSkillButton.Location = new System.Drawing.Point(952, 76);
             this.delSkillButton.Name = "delSkillButton";
             this.delSkillButton.Size = new System.Drawing.Size(29, 29);
             this.delSkillButton.TabIndex = 3;
@@ -3878,7 +3882,7 @@ namespace BasicPersonData.Forms
             this.editSkillButton.ForeColor = System.Drawing.Color.Black;
             this.editSkillButton.ImageKey = "edit32.png";
             this.editSkillButton.ImageList = this.imageList1;
-            this.editSkillButton.Location = new System.Drawing.Point(960, 47);
+            this.editSkillButton.Location = new System.Drawing.Point(952, 47);
             this.editSkillButton.Name = "editSkillButton";
             this.editSkillButton.Size = new System.Drawing.Size(29, 29);
             this.editSkillButton.TabIndex = 2;
@@ -3893,7 +3897,7 @@ namespace BasicPersonData.Forms
             this.addSkillButton.ForeColor = System.Drawing.Color.Black;
             this.addSkillButton.ImageKey = "plus_32.png";
             this.addSkillButton.ImageList = this.imageList1;
-            this.addSkillButton.Location = new System.Drawing.Point(960, 18);
+            this.addSkillButton.Location = new System.Drawing.Point(952, 18);
             this.addSkillButton.Name = "addSkillButton";
             this.addSkillButton.Size = new System.Drawing.Size(29, 29);
             this.addSkillButton.TabIndex = 1;
@@ -3928,21 +3932,21 @@ namespace BasicPersonData.Forms
             this.dataGridViewTextBoxColumn19,
             this.dataGridViewTextBoxColumn20});
             this.skillsDataGridView.ContextMenuStrip = this.skillsContextMenuStrip;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.skillsDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle49.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.skillsDataGridView.DefaultCellStyle = dataGridViewCellStyle49;
             this.skillsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.skillsDataGridView.Location = new System.Drawing.Point(5, 19);
             this.skillsDataGridView.Name = "skillsDataGridView";
             this.skillsDataGridView.ReadOnly = true;
             this.skillsDataGridView.RowHeadersWidth = 20;
             this.skillsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.skillsDataGridView.Size = new System.Drawing.Size(949, 293);
+            this.skillsDataGridView.Size = new System.Drawing.Size(941, 260);
             this.skillsDataGridView.TabIndex = 0;
             this.skillsDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.skillsDataGridView_CellBeginEdit);
             this.skillsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.skillsDataGridView_CellContentClick);
@@ -4164,7 +4168,7 @@ namespace BasicPersonData.Forms
             this.panel11.Controls.Add(this.glsLabel8);
             this.panel11.Location = new System.Drawing.Point(775, 521);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(175, 39);
+            this.panel11.Size = new System.Drawing.Size(167, 39);
             this.panel11.TabIndex = 82;
             this.panel11.Visible = false;
             // 
@@ -4178,7 +4182,7 @@ namespace BasicPersonData.Forms
             this.glsLabel8.Location = new System.Drawing.Point(0, 0);
             this.glsLabel8.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.glsLabel8.Name = "glsLabel8";
-            this.glsLabel8.Size = new System.Drawing.Size(171, 35);
+            this.glsLabel8.Size = new System.Drawing.Size(163, 35);
             this.glsLabel8.TabIndex = 1;
             this.glsLabel8.TopFill = System.Drawing.Color.SteelBlue;
             // 
@@ -4188,7 +4192,7 @@ namespace BasicPersonData.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox9.Location = new System.Drawing.Point(596, 462);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(352, 100);
+            this.groupBox9.Size = new System.Drawing.Size(344, 100);
             this.groupBox9.TabIndex = 84;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "groupBox9";
@@ -4199,9 +4203,9 @@ namespace BasicPersonData.Forms
             this.bscAsgnTabPage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.bscAsgnTabPage.Controls.Add(this.basicAsgnmntsPanel);
             this.bscAsgnTabPage.ImageKey = "reports.png";
-            this.bscAsgnTabPage.Location = new System.Drawing.Point(4, 29);
+            this.bscAsgnTabPage.Location = new System.Drawing.Point(4, 54);
             this.bscAsgnTabPage.Name = "bscAsgnTabPage";
-            this.bscAsgnTabPage.Size = new System.Drawing.Size(1009, 704);
+            this.bscAsgnTabPage.Size = new System.Drawing.Size(1001, 671);
             this.bscAsgnTabPage.TabIndex = 2;
             this.bscAsgnTabPage.Text = "ORGANISATIONAL ASSIGNMENTS/DESIGNATIONS";
             this.bscAsgnTabPage.UseVisualStyleBackColor = true;
@@ -4220,7 +4224,7 @@ namespace BasicPersonData.Forms
             this.basicAsgnmntsPanel.Location = new System.Drawing.Point(0, 0);
             this.basicAsgnmntsPanel.Name = "basicAsgnmntsPanel";
             this.basicAsgnmntsPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.basicAsgnmntsPanel.Size = new System.Drawing.Size(1005, 700);
+            this.basicAsgnmntsPanel.Size = new System.Drawing.Size(997, 667);
             this.basicAsgnmntsPanel.TabIndex = 0;
             // 
             // groupBox16
@@ -4236,7 +4240,7 @@ namespace BasicPersonData.Forms
             this.groupBox16.ForeColor = System.Drawing.Color.White;
             this.groupBox16.Location = new System.Drawing.Point(448, 296);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(439, 403);
+            this.groupBox16.Size = new System.Drawing.Size(439, 370);
             this.groupBox16.TabIndex = 1;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "ASSIGNED POSITIONS";
@@ -4340,21 +4344,21 @@ namespace BasicPersonData.Forms
             this.Column20,
             this.Column21});
             this.positionDataGridView.ContextMenuStrip = this.posContextMenuStrip;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.positionDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle45.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle45.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.positionDataGridView.DefaultCellStyle = dataGridViewCellStyle45;
             this.positionDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.positionDataGridView.Location = new System.Drawing.Point(3, 32);
             this.positionDataGridView.Name = "positionDataGridView";
             this.positionDataGridView.ReadOnly = true;
             this.positionDataGridView.RowHeadersWidth = 4;
             this.positionDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.positionDataGridView.Size = new System.Drawing.Size(433, 368);
+            this.positionDataGridView.Size = new System.Drawing.Size(433, 335);
             this.positionDataGridView.TabIndex = 0;
             this.positionDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.positionDataGridView_CellBeginEdit);
             this.positionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.positionDataGridView_CellContentClick);
@@ -4647,14 +4651,14 @@ namespace BasicPersonData.Forms
             this.Column14,
             this.dataGridViewTextBoxColumn23});
             this.sitesDataGridView.ContextMenuStrip = this.sitesContextMenuStrip;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sitesDataGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle41.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle41.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sitesDataGridView.DefaultCellStyle = dataGridViewCellStyle41;
             this.sitesDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
             this.sitesDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.sitesDataGridView.Location = new System.Drawing.Point(3, 17);
@@ -4662,10 +4666,10 @@ namespace BasicPersonData.Forms
             this.sitesDataGridView.ReadOnly = true;
             this.sitesDataGridView.RowHeadersWidth = 4;
             this.sitesDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sitesDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle62.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle62.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sitesDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle62;
             this.sitesDataGridView.Size = new System.Drawing.Size(385, 111);
             this.sitesDataGridView.TabIndex = 0;
             this.sitesDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.sitesDataGridView_CellBeginEdit);
@@ -4855,7 +4859,7 @@ namespace BasicPersonData.Forms
             this.groupBox13.ForeColor = System.Drawing.Color.White;
             this.groupBox13.Location = new System.Drawing.Point(4, 296);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(438, 403);
+            this.groupBox13.Size = new System.Drawing.Size(438, 370);
             this.groupBox13.TabIndex = 2;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "ASSIGNED DIVISIONS/GROUPS";
@@ -4958,25 +4962,25 @@ namespace BasicPersonData.Forms
             this.Column13,
             this.dataGridViewTextBoxColumn27});
             this.divsDataGridView.ContextMenuStrip = this.divsContextMenuStrip;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.divsDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle58.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle58.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle58.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.divsDataGridView.DefaultCellStyle = dataGridViewCellStyle58;
             this.divsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.divsDataGridView.Location = new System.Drawing.Point(3, 35);
             this.divsDataGridView.Name = "divsDataGridView";
             this.divsDataGridView.ReadOnly = true;
             this.divsDataGridView.RowHeadersWidth = 4;
             this.divsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.divsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.divsDataGridView.Size = new System.Drawing.Size(432, 365);
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle63.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle63.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.divsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle63;
+            this.divsDataGridView.Size = new System.Drawing.Size(432, 332);
             this.divsDataGridView.TabIndex = 5;
             this.divsDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.divsDataGridView_CellBeginEdit);
             this.divsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.divsDataGridView_CellContentClick);
@@ -5001,8 +5005,8 @@ namespace BasicPersonData.Forms
             // 
             // Column22
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Column22.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Column22.DefaultCellStyle = dataGridViewCellStyle37;
             this.Column22.HeaderText = "Division / Group Type";
             this.Column22.Name = "Column22";
             this.Column22.ReadOnly = true;
@@ -5272,14 +5276,14 @@ namespace BasicPersonData.Forms
             this.Column15,
             this.dataGridViewTextBoxColumn31});
             this.sprvisrDataGridView.ContextMenuStrip = this.spvsrContextMenuStrip;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sprvisrDataGridView.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sprvisrDataGridView.DefaultCellStyle = dataGridViewCellStyle54;
             this.sprvisrDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
             this.sprvisrDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.sprvisrDataGridView.Location = new System.Drawing.Point(3, 17);
@@ -5557,14 +5561,14 @@ namespace BasicPersonData.Forms
             this.Column16,
             this.dataGridViewTextBoxColumn36});
             this.jobsDataGridView.ContextMenuStrip = this.jobContextMenuStrip;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.jobsDataGridView.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle50.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle50.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.jobsDataGridView.DefaultCellStyle = dataGridViewCellStyle50;
             this.jobsDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
             this.jobsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.jobsDataGridView.Location = new System.Drawing.Point(3, 17);
@@ -5842,14 +5846,14 @@ namespace BasicPersonData.Forms
             this.Column18,
             this.dataGridViewTextBoxColumn46});
             this.gradesDataGridView.ContextMenuStrip = this.gradeContextMenuStrip;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradesDataGridView.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle46.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle46.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gradesDataGridView.DefaultCellStyle = dataGridViewCellStyle46;
             this.gradesDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
             this.gradesDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.gradesDataGridView.Location = new System.Drawing.Point(3, 17);
@@ -6043,7 +6047,7 @@ namespace BasicPersonData.Forms
             this.otherInfoTabPage.Location = new System.Drawing.Point(4, 29);
             this.otherInfoTabPage.Name = "otherInfoTabPage";
             this.otherInfoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.otherInfoTabPage.Size = new System.Drawing.Size(1009, 704);
+            this.otherInfoTabPage.Size = new System.Drawing.Size(1001, 696);
             this.otherInfoTabPage.TabIndex = 10;
             this.otherInfoTabPage.Text = "OTHER INFORMATION";
             this.otherInfoTabPage.UseVisualStyleBackColor = true;
@@ -6062,7 +6066,7 @@ namespace BasicPersonData.Forms
             this.othrInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.othrInfoPanel.Location = new System.Drawing.Point(3, 3);
             this.othrInfoPanel.Name = "othrInfoPanel";
-            this.othrInfoPanel.Size = new System.Drawing.Size(999, 694);
+            this.othrInfoPanel.Size = new System.Drawing.Size(991, 686);
             this.othrInfoPanel.TabIndex = 0;
             // 
             // gotoButton
@@ -6094,31 +6098,31 @@ namespace BasicPersonData.Forms
             this.dataGridViewTextBoxColumn63,
             this.Column23});
             this.extInfoDataGridView.ContextMenuStrip = this.othInfoContextMenuStrip;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.extInfoDataGridView.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle65.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle65.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle65.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle65.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle65.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle65.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.extInfoDataGridView.DefaultCellStyle = dataGridViewCellStyle65;
             this.extInfoDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.extInfoDataGridView.Location = new System.Drawing.Point(3, 56);
             this.extInfoDataGridView.Name = "extInfoDataGridView";
             this.extInfoDataGridView.RowHeadersWidth = 21;
             this.extInfoDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.extInfoDataGridView.Size = new System.Drawing.Size(989, 631);
+            this.extInfoDataGridView.Size = new System.Drawing.Size(981, 623);
             this.extInfoDataGridView.TabIndex = 4;
             this.extInfoDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.extInfoDataGridView_CellContentClick);
             this.extInfoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.extInfoDataGridView_CellValueChanged);
             // 
             // Column45
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column45.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle42.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column45.DefaultCellStyle = dataGridViewCellStyle42;
             this.Column45.HeaderText = "Extra Info Category";
             this.Column45.Name = "Column45";
             this.Column45.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -6132,9 +6136,9 @@ namespace BasicPersonData.Forms
             // 
             // dataGridViewTextBoxColumn65
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn65.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn65.DefaultCellStyle = dataGridViewCellStyle59;
             this.dataGridViewTextBoxColumn65.HeaderText = "Extra Info Label";
             this.dataGridViewTextBoxColumn65.Name = "dataGridViewTextBoxColumn65";
             this.dataGridViewTextBoxColumn65.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -6142,9 +6146,9 @@ namespace BasicPersonData.Forms
             // 
             // dataGridViewTextBoxColumn64
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn64.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn64.DefaultCellStyle = dataGridViewCellStyle64;
             this.dataGridViewTextBoxColumn64.HeaderText = "Value";
             this.dataGridViewTextBoxColumn64.Name = "dataGridViewTextBoxColumn64";
             this.dataGridViewTextBoxColumn64.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -6306,7 +6310,7 @@ namespace BasicPersonData.Forms
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(995, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(987, 25);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
@@ -6470,7 +6474,7 @@ namespace BasicPersonData.Forms
             this.extraDataTabPage.Location = new System.Drawing.Point(4, 29);
             this.extraDataTabPage.Name = "extraDataTabPage";
             this.extraDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.extraDataTabPage.Size = new System.Drawing.Size(1009, 704);
+            this.extraDataTabPage.Size = new System.Drawing.Size(1001, 696);
             this.extraDataTabPage.TabIndex = 11;
             this.extraDataTabPage.Text = "ADDITIONAL PERSON DATA";
             this.extraDataTabPage.UseVisualStyleBackColor = true;
@@ -6485,7 +6489,7 @@ namespace BasicPersonData.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(999, 34);
+            this.panel1.Size = new System.Drawing.Size(991, 34);
             this.panel1.TabIndex = 83;
             // 
             // imptAdtnlDataTmpButton
@@ -6495,7 +6499,7 @@ namespace BasicPersonData.Forms
             this.imptAdtnlDataTmpButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imptAdtnlDataTmpButton.ForeColor = System.Drawing.Color.Black;
             this.imptAdtnlDataTmpButton.Image = ((System.Drawing.Image)(resources.GetObject("imptAdtnlDataTmpButton.Image")));
-            this.imptAdtnlDataTmpButton.Location = new System.Drawing.Point(641, 1);
+            this.imptAdtnlDataTmpButton.Location = new System.Drawing.Point(633, 1);
             this.imptAdtnlDataTmpButton.Name = "imptAdtnlDataTmpButton";
             this.imptAdtnlDataTmpButton.Size = new System.Drawing.Size(102, 28);
             this.imptAdtnlDataTmpButton.TabIndex = 204;
@@ -6510,7 +6514,7 @@ namespace BasicPersonData.Forms
             this.exptAdtnlDataTmpButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exptAdtnlDataTmpButton.ForeColor = System.Drawing.Color.Black;
             this.exptAdtnlDataTmpButton.Image = ((System.Drawing.Image)(resources.GetObject("exptAdtnlDataTmpButton.Image")));
-            this.exptAdtnlDataTmpButton.Location = new System.Drawing.Point(512, 1);
+            this.exptAdtnlDataTmpButton.Location = new System.Drawing.Point(504, 1);
             this.exptAdtnlDataTmpButton.Name = "exptAdtnlDataTmpButton";
             this.exptAdtnlDataTmpButton.Size = new System.Drawing.Size(129, 28);
             this.exptAdtnlDataTmpButton.TabIndex = 203;
@@ -6524,7 +6528,7 @@ namespace BasicPersonData.Forms
             this.fieldsStpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fieldsStpButton.ImageKey = "edit32.png";
             this.fieldsStpButton.ImageList = this.imageList1;
-            this.fieldsStpButton.Location = new System.Drawing.Point(743, 1);
+            this.fieldsStpButton.Location = new System.Drawing.Point(735, 1);
             this.fieldsStpButton.Name = "fieldsStpButton";
             this.fieldsStpButton.Size = new System.Drawing.Size(249, 28);
             this.fieldsStpButton.TabIndex = 84;
@@ -6543,7 +6547,7 @@ namespace BasicPersonData.Forms
             this.glsLabel12.Location = new System.Drawing.Point(0, 0);
             this.glsLabel12.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.glsLabel12.Name = "glsLabel12";
-            this.glsLabel12.Size = new System.Drawing.Size(995, 30);
+            this.glsLabel12.Size = new System.Drawing.Size(987, 30);
             this.glsLabel12.TabIndex = 1;
             this.glsLabel12.TopFill = System.Drawing.Color.SteelBlue;
             // 
@@ -6556,7 +6560,7 @@ namespace BasicPersonData.Forms
             this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel13.Location = new System.Drawing.Point(3, 39);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(999, 660);
+            this.panel13.Size = new System.Drawing.Size(991, 652);
             this.panel13.TabIndex = 86;
             // 
             // openFileDialog1
@@ -6579,13 +6583,83 @@ namespace BasicPersonData.Forms
             this.saveLabel.BackColor = System.Drawing.Color.Green;
             this.saveLabel.Font = new System.Drawing.Font("Times New Roman", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveLabel.ForeColor = System.Drawing.Color.White;
-            this.saveLabel.Location = new System.Drawing.Point(233, 274);
+            this.saveLabel.Location = new System.Drawing.Point(233, 253);
             this.saveLabel.Name = "saveLabel";
             this.saveLabel.Size = new System.Drawing.Size(606, 33);
             this.saveLabel.TabIndex = 194;
             this.saveLabel.Text = "VALIDATING && APPROVING DOCUMENT....PLEASE WAIT....";
             this.saveLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.saveLabel.Visible = false;
+            // 
+            // absenceTabPage
+            // 
+            this.absenceTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.absenceTabPage.ImageKey = "absence_1.png";
+            this.absenceTabPage.Location = new System.Drawing.Point(4, 54);
+            this.absenceTabPage.Name = "absenceTabPage";
+            this.absenceTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.absenceTabPage.Size = new System.Drawing.Size(1001, 671);
+            this.absenceTabPage.TabIndex = 12;
+            this.absenceTabPage.Text = "LEAVE OF ABSENCE";
+            // 
+            // tabControl1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.tabControl1, 7);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(3, 240);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(936, 301);
+            this.tabControl1.TabIndex = 159;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.tabPage1.Controls.Add(this.panel4);
+            this.tabPage1.Controls.Add(this.panel6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(928, 275);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Contact Information";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.tabPage2.Controls.Add(this.panel8);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(928, 275);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "ID Cards";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.tabPage3.Controls.Add(this.panel10);
+            this.tabPage3.Controls.Add(this.panel9);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(928, 275);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "QR Code/Other Info";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(928, 275);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Absence Information";
             // 
             // mainForm
             // 
@@ -6701,6 +6775,10 @@ namespace BasicPersonData.Forms
             this.extraDataTabPage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
 			}
@@ -7229,5 +7307,11 @@ namespace BasicPersonData.Forms
     private System.Windows.Forms.Panel panel9;
     private System.Windows.Forms.Panel panel10;
     private System.Windows.Forms.Label label8;
-		}
+        private System.Windows.Forms.TabPage absenceTabPage;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+    }
 	}

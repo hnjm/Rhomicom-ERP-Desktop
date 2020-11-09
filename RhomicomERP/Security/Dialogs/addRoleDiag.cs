@@ -58,7 +58,7 @@ namespace SystemAdministration.Dialogs
         this.roleVldStrtDteTextBox.Text, this.roleVldEndDteTextBox.Text,
           this.checkBox1.Checked);
         if (MessageBox.Show("Role Saved Successfully! Want to create a new one?", "Rhomicom Message!",
-    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
         {
           this.DialogResult = DialogResult.OK;
           this.Close();

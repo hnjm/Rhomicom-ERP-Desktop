@@ -44,7 +44,7 @@ namespace Enterprise_Management_System.Forms
             this.mainDockPanel.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor = clrs[0];
             this.mainDockPanel.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.EndColor = clrs[1];
             this.mainDockPanel.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.TextColor = Color.White;
-
+            //this.mainDockPanel.DockBottomPortion
             if (Global.homeFrm != null)
             {
                 Global.homeFrm.curRoleLabel.BackColor = clrs[0];
@@ -113,7 +113,7 @@ namespace Enterprise_Management_System.Forms
 
             Global.refreshRqrdVrbls();
             this.changeBackground();
-
+            CommonCode.CommonCodes.DatabaseNm = "";
             Global.homeFrm = new homePageForm();
             Global.homeFrm.Show(this.mainDockPanel, WeifenLuo.WinFormsUI.Docking.DockState.Document);
 
@@ -131,23 +131,25 @@ namespace Enterprise_Management_System.Forms
             System.Threading.Thread.Sleep(200);
             jarPrcs.Close();
         }
+
         private void mainForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            try
+            /*try
             {
                 //CommonCode.CommonCodes.GlobalSQLConn.ConnectionString = CommonCode.CommonCodes.ConnStr;
-                CommonCode.CommonCodes.GlobalSQLConn.Close();
+                //Global.myNwMainFrm.cmnCdMn.adminForceLogoutLgns(Global.myNwMainFrm.cmnCdMn.User_id);
+                //CommonCode.CommonCodes.GlobalSQLConn.Close();
             }
             catch (Exception ex)
             {
-            }
 
+            }*/
             if (Global.myNwMainFrm.cmnCdMn.showMsg("Are you sure you want to exit the application?", 1) == DialogResult.No)
             {
                 e.Cancel = true;
                 return;
             }
-            Global.myNwMainFrm.cmnCdMn.minimizeMemory();
+            //Global.myNwMainFrm.cmnCdMn.minimizeMemory();
             e.Cancel = false;
             //try
             //{
@@ -195,7 +197,7 @@ namespace Enterprise_Management_System.Forms
                 homePageForm nwFrm = new homePageForm();
                 Global.homeFrm = nwFrm;
                 Global.homeFrm.Show(this.mainDockPanel, WeifenLuo.WinFormsUI.Docking.DockState.Document);
-                if (Global.login_number <= 0 && CommonCode.CommonCodes.GlobalSQLConn.State != ConnectionState.Open)
+                if (Global.login_number <= 0 && CommonCode.CommonCodes.DatabaseNm != "")
                 {
                     Global.homeFrm.loadConnectDiag();
                 }
@@ -211,7 +213,6 @@ namespace Enterprise_Management_System.Forms
                 {
                     try
                     {
-
                         ////System.Windows.Forms.Application.DoEvents();
                         if (Global.homeFrm != null)
                         {
@@ -239,10 +240,6 @@ namespace Enterprise_Management_System.Forms
                 catch (Exception ex)
                 {
                 }
-                //if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open)
-                //{
-                //  CommonCode.CommonCodes.GlobalSQLConn.Close();
-                //}
             }
         }
 
@@ -253,8 +250,7 @@ namespace Enterprise_Management_System.Forms
                 homePageForm nwFrm = new homePageForm();
                 Global.homeFrm = nwFrm;
                 Global.homeFrm.Show(this.mainDockPanel, WeifenLuo.WinFormsUI.Docking.DockState.Document);
-                if (Global.login_number <= 0 &&
-                  CommonCode.CommonCodes.GlobalSQLConn.State != ConnectionState.Open)
+                if (Global.login_number <= 0 && CommonCode.CommonCodes.DatabaseNm == "")
                 {
                     Global.homeFrm.loadConnectDiag();
                 }
@@ -470,8 +466,7 @@ namespace Enterprise_Management_System.Forms
                 homePageForm nwFrm = new homePageForm();
                 Global.homeFrm = nwFrm;
                 Global.homeFrm.Show(this.mainDockPanel, WeifenLuo.WinFormsUI.Docking.DockState.Document);
-                if (Global.login_number <= 0 &&
-                  CommonCode.CommonCodes.GlobalSQLConn.State != ConnectionState.Open)
+                if (Global.login_number <= 0 && CommonCode.CommonCodes.DatabaseNm == "")
                 {
                     Global.homeFrm.loadConnectDiag();
                 }
@@ -736,6 +731,41 @@ namespace Enterprise_Management_System.Forms
         #region "HELP MENU ITEMS EVENT HANDLERS..."
         private void operationalManualsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Global.myNwMainFrm.cmnCdMn.CheckForInternetConnection())
+            {
+                string strUrl = @"http://rhomicom.com/manual";
+                bool error = false;
+                try
+                {
+                    System.Diagnostics.Process.Start("chrome.exe", strUrl);
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                }
+                if (error)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start("firefox.exe", strUrl);
+                    }
+                    catch (Exception ex)
+                    {
+                        error = true;
+                    }
+                }
+                if (error)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start("IEXPLORE.EXE", strUrl);
+                    }
+                    catch (Exception ex)
+                    {
+                        Global.myNwMainFrm.cmnCdMn.showMsg(ex.Message, 0);
+                    }
+                }
+            }
             try
             {
                 String strTitle = "Operational Manuals";
@@ -815,6 +845,8 @@ namespace Enterprise_Management_System.Forms
             Global.homeFrm.connectDBPanel.Dock = DockStyle.Fill;
             Global.homeFrm.connectDBPanel.Visible = true;
             Global.homeFrm.loadConnectDiag();
+            this.timer1.Interval = 1000;
+            this.timer1.Enabled = true;
             //if (dgRes == DialogResult.OK)
             //{
 
@@ -829,8 +861,7 @@ namespace Enterprise_Management_System.Forms
         {
             //string[] srvr = {"","","","","","0" };
             //srvr = Global.myNwMainFrm.cmnCdMn.getFTPServerDet();
-            if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open
-              /*&& CommonCode.CommonCodes.GlobalSQLConn.FullState != ConnectionState.Broken*/)
+            if (CommonCode.CommonCodes.DatabaseNm != "")
             {
                 this.logoutActions();
                 CommonCode.CommonCodes.GlobalSQLConn.Close();
@@ -864,14 +895,6 @@ namespace Enterprise_Management_System.Forms
             this.isDsconnet = false;
             Global.myNwMainFrm.statusLoadLabel.Visible = false;
             Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
-            ////System.Windows.Forms.Application.DoEvents();
-            //if (srvr[5] == "1")
-            //{
-            //  if (System.IO.Directory.Exists(Application.StartupPath + "\\Images\\" + CommonCode.CommonCodes.DatabaseNm))
-            //  {
-            //    System.IO.Directory.Delete(Application.StartupPath + "\\Images\\" + CommonCode.CommonCodes.DatabaseNm, true);
-            //  }
-            //}
         }
         public bool connectionFailed = false;
 
@@ -897,8 +920,7 @@ namespace Enterprise_Management_System.Forms
             try
             {
                 this.appVersionStatusLabel.Text = CommonCode.CommonCodes.AppName + " " + CommonCode.CommonCodes.AppVersion;
-                if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open
-                  /*&& CommonCode.CommonCodes.GlobalSQLConn.FullState != ConnectionState.Broken*/)
+                if (CommonCode.CommonCodes.DatabaseNm != "")
                 {
                     CommonCode.CommonCodes.Bsc_prsn_name = Global.myNwMainFrm.cmnCdMn.getEnbldPssblValDesc("Basic Person Data",
                         Global.myNwMainFrm.cmnCdMn.getEnbldLovID("Customized Module Names"));
@@ -1102,7 +1124,6 @@ namespace Enterprise_Management_System.Forms
             Global.homeFrm.uname1TextBox.SelectAll();
             Global.myNwMainFrm.statusLoadLabel.Visible = false;
             Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
-
             /**/
         }
 
@@ -1160,8 +1181,7 @@ namespace Enterprise_Management_System.Forms
             {
                 string orgSlogan = "Rhomicom...Building Dreams...";
 
-                if (Global.login_number > 0 &&
-                  CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open)
+                if (Global.login_number > 0 && CommonCode.CommonCodes.DatabaseNm != "")
                 {
                     this.basicSetupToolStripMenuItem.Enabled = true;
                     this.basicSetupToolStripMenuItem.Visible = true;
@@ -1517,6 +1537,22 @@ namespace Enterprise_Management_System.Forms
                             this.projectManagementToolStripMenuItem.Visible = true;
                             this.eventsMenuItem.Visible = true;
                         }
+                    }
+                    if (Global.myNwMainFrm.cmnCdMn.getModuleID("System Administration") > 0)
+                    {
+                        this.systemAdministrationToolStripMenuItem.Visible = Global.myNwMainFrm.cmnCdMn.test_prmssns("View System Administration", "System Administration");
+                        this.generalSetupToolStripMenuItem.Visible = Global.myNwMainFrm.cmnCdMn.test_prmssns("View General Setup", "General Setup");
+                        this.organisationSetupToolStripMenuItem.Visible = Global.myNwMainFrm.cmnCdMn.test_prmssns("View Organization Setup", "Organization Setup");
+                        this.reportsAndProcessesToolStripMenuItem.Visible = Global.myNwMainFrm.cmnCdMn.test_prmssns("View Reports And Processes", "Reports And Processes");
+                        this.dBConfigToolStripMenuItem.Visible = Global.myNwMainFrm.cmnCdMn.test_prmssns("View System Administration", "System Administration");
+                    }
+                    else
+                    {
+                        this.systemAdministrationToolStripMenuItem.Visible = true;
+                        this.generalSetupToolStripMenuItem.Visible = true;
+                        this.organisationSetupToolStripMenuItem.Visible = true;
+                        this.reportsAndProcessesToolStripMenuItem.Visible = true;
+                        this.dBConfigToolStripMenuItem.Visible = true;
                     }
                     this.loginToolStripMenuItem.Text = "&Logout";
                     this.loginToolStripMenuItem.Image = Enterprise_Management_System.Properties.Resources._49;
@@ -2420,25 +2456,22 @@ namespace Enterprise_Management_System.Forms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            this.timer1.Enabled = false;
             try
             {
-                this.timer1.Enabled = false;
-                //System.Windows.Forms.Application.DoEvents();
-                this.Refresh();
-                ////System.Threading.Thread.Sleep(20000);
-                //System.Windows.Forms.Application.DoEvents();
-                this.Refresh();
-
-                if (CommonCode.CommonCodes.GlobalSQLConn.State != ConnectionState.Open)
+                try
                 {
-                    //CommonCode.CommonCodes.GlobalSQLConn.ConnectionString = CommonCode.CommonCodes.ConnStr;
-                    //CommonCode.CommonCodes.GlobalSQLConn.Open();
+                    CommonCode.CommonCodes.GlobalSQLConn.ConnectionString = CommonCode.CommonCodes.ConnStr;
+                    CommonCode.CommonCodes.GlobalSQLConn.Open();
+                    CommonCode.CommonCodes.DatabaseNm = CommonCode.CommonCodes.GlobalSQLConn.Database;
                     Global.db_server = CommonCode.CommonCodes.GlobalSQLConn.Host;
                     Global.db_name = CommonCode.CommonCodes.GlobalSQLConn.Database;
                 }
+                catch (Exception ex)
+                {
 
-                if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open
-                  /*&& CommonCode.CommonCodes.GlobalSQLConn.FullState != ConnectionState.Broken*/)
+                }
+                if (CommonCode.CommonCodes.DatabaseNm != "")
                 {
                     int lvid = Global.myNwMainFrm.cmnCdMn.getLovID("Allowed DB Name for Request Listener");
                     if (lvid <= 0)
@@ -2454,13 +2487,6 @@ namespace Enterprise_Management_System.Forms
                     string tst = System.Environment.GetEnvironmentVariable("Path");
                     if (isIPAllwd > 0 && isDBAllwd > 0)
                     {
-                        //for (int i = 0; i < 10; i++)
-                        //{
-                        //  rnnrRnng = Global.isRunnrRnng("REQUESTS LISTENER PROGRAM");
-                        //  //System.Threading.Thread.Sleep(250);
-                        //  //System.Windows.Forms.Application.DoEvents();
-                        //}
-                        //Global.myNwMainFrm.cmnCdMn.User_id > 0 &&
                         if (rnnrRnng == false)
                         {
                             Global.updatePrcsRnnrCmd("REQUESTS LISTENER PROGRAM", "0");
@@ -2482,14 +2508,14 @@ namespace Enterprise_Management_System.Forms
                             startInfo.Arguments = String.Join(" ", args);//"/C xcopy \"" + srcpath + "\" \"" + destpath + "\" /E /I /Q /Y /C";
                             processDB.StartInfo = startInfo;
                             processDB.Start();
-                            //Global.myNwMainFrm.cmnCdMn.showSQLNoPermsn(startInfo.FileName + "/" + startInfo.Arguments);
-                            //System.Diagnostics.Process.Start(Application.StartupPath + @"\bin\REMSProcessRunner.exe", String.Join(" ", args));
                         }
                     }
+                    CommonCode.CommonCodes.GlobalSQLConn.Close();
                 }
             }
             catch (Exception ex)
             {
+                //Global.myNwMainFrm.cmnCdMn.showSQLNoPermsn(ex.Message+"\r\n"+ex.StackTrace+"\r\n"+ex.InnerException);
             }
         }
 
@@ -2785,6 +2811,11 @@ namespace Enterprise_Management_System.Forms
         private void registerForSupportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.myNwMainFrm.cmnCdMn.showSupportDiag(Global.myNwMainFrm.cmnCdMn);
+        }
+
+        private void dBConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process processDB = System.Diagnostics.Process.Start(Application.StartupPath + @"\DBConfig.exe");
         }
     }
 

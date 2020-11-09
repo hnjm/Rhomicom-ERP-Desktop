@@ -1,0 +1,83 @@
+1. How to Install Rhomicom ERP
+   a. .Net Framework Installation
+   b. Java
+2. How to Install Postgres Database
+3. How to Install Filezilla FTP Server (Networks)
+4. Alternatively working with the Pre-Configured Ubuntu Virtual Machine
+5. How to Create a Test_Database
+   a. Creating the Default Test Database (Rho20161)
+   b. Creating Customer's Test Database
+6. How to create Empty Databases
+7. How to Apply Patches and Select Modules Needed
+8. How to Configure a Fresh Database
+   a. System Admin/Basic Person
+	i.  Click Load Roles/Priviledges
+	ii. Assign admin all Module Roles
+	iii. Click Select Roles or Restart Software
+   b. Org Setup
+	i. Define an Organisation and it's related data (Jobs/Grades/Positions/Departments etc)
+	ii. Click Select Roles or Restart Software and Select the Org you just Created
+   c. General Setup(List of Values)
+	i.   Transactions Date Limit 1
+	     Transactions Date Limit 2
+	     Transactions not Allowed Dates
+	     Transactions not Allowed Days
+	     Transactions Amount Breakdown Descriptions
+	ii.  Allowed DB Name for Request Listener
+	     Allowed IP Address for Request Listener
+	     Max Allowed Concurrent Connections
+	iii. Allowed Person Types for Roles
+	     Person Types
+	     Person ID No. Prefix Determines ID Serial No.
+	     Person ID No. Prefix
+	iv.  Customized Modules Names
+	v.   Document Custom Print Process Names
+	vi.  Directory LOVs
+	vii. Default Document Notes
+	viii.Document Signatory Columns
+	ix.  Default POS Sizes
+	x.   Allow Inventory to be costed
+   d. Import Reports/Processes
+		i. Import Sample Reports and assign necessary roles
+		ii. Upload New jrxml Files for the ff Reports
+			.Petty Cash Voucher
+			.Payables Invoice
+			.Receivables Invoice
+			.Customized Pay Slip
+			.Date Summary Invoice
+			.Sales Invoice
+			.Sales Invoice-No Qtys & Unit Price
+   e. Accounting
+	i. Chart of Accounts
+	ii. Accounting Periods
+	iii. Default Accounts
+	iv. Payment Methods
+	v. Payables/Receivables Doc Templates
+   f. Other Module Configuration
+	i.   Sales/Inventory
+		.Product Categories
+		.Stores/Warehouses
+		.Item UOMs
+		.Item Templates
+		.Create Stockable/Non-Stockable Items
+	ii.  Internal Payments (Dues/Payroll)
+		.Global Values
+		.Pay Items/Values
+		.Pay Item Sets
+		.Person Sets
+	iii. Events Management
+		.Venues
+		.Activities/Events
+		.Time Tables
+	iv.  Visits & Appointments
+		.Services Offered
+		.Service Providers
+	v.   Hospitality
+		.Facility Types & Facilities
+	vi.  Projects 
+		.Equipment/Resources
+		.Account Setups
+	vii. Academics
+		.Continuous Assessment Types & Data Columns
+		.Assessment Periods
+		.Groups/Courses/Subjects

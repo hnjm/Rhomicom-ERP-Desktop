@@ -195,7 +195,7 @@ namespace Accounting.Forms
             DataSet dtst = Global.get_PtycshDocHdr(this.searchForTextBox.Text,
               this.searchInComboBox.Text, this.rec_cur_indx,
               int.Parse(this.dsplySizeComboBox.Text), Global.mnFrm.cmCde.Org_id,
-              this.showUnpaidCheckBox.Checked);
+              this.showUnpostedCheckBox.Checked);
             this.ptycshDocListView.Items.Clear();
 
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
@@ -207,7 +207,13 @@ namespace Accounting.Forms
     dtst.Tables[0].Rows[i][0].ToString(),
     dtst.Tables[0].Rows[i][2].ToString()});
 
-                if (dtst.Tables[0].Rows[i][4].ToString() == "Cancelled")
+                string isBatchPosted = Global.mnFrm.cmCde.getGnrlRecNm(
+                            "accb.accb_trnsctn_batches", "batch_id", "batch_status", int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                if (isBatchPosted == "0")
+                {
+                    nwItem.BackColor = Color.Brown;
+                }
+                else if (dtst.Tables[0].Rows[i][4].ToString() == "Cancelled")
                 {
                     nwItem.BackColor = Color.Gainsboro;
                 }
@@ -299,6 +305,16 @@ namespace Accounting.Forms
                "scm.scm_process_run", "process_run_id", "batch_code_num",
                long.Parse(dtst.Tables[0].Rows[i][26].ToString()));
                 }
+                else if (dtst.Tables[0].Rows[i][28].ToString() == "Customer File Number")
+                {
+                    this.rgstrNumTextBox.Text = Global.mnFrm.cmCde.getGnrlRecNm(
+               "accb.accb_rcvbls_invc_hdr", "rcvbls_invc_hdr_id", "cstmrs_doc_num",
+               long.Parse(dtst.Tables[0].Rows[i][26].ToString()));
+                }
+                else if (dtst.Tables[0].Rows[i][28].ToString() == "Project Management")
+                {
+                    this.rgstrNumTextBox.Text ="";
+                }
                 else
                 {
                     this.rgstrNumTextBox.Text = "";
@@ -311,7 +327,6 @@ namespace Accounting.Forms
 
                 this.glBatchIDTextBox.Text = dtst.Tables[0].Rows[i][20].ToString();
                 this.glBatchNmTextBox.Text = dtst.Tables[0].Rows[i][21].ToString();
-
                 double.TryParse(dtst.Tables[0].Rows[i][14].ToString(), out invAmnt);//.ToString("#,##0.00");
                 double.TryParse(dtst.Tables[0].Rows[i][19].ToString(), out amntPaid);
                 this.invcAmntTextBox.Text = invAmnt.ToString("#,##0.00");
@@ -362,7 +377,6 @@ namespace Accounting.Forms
                 {
                     this.outstndngBalsTextBox.BackColor = Color.FromArgb(255, 100, 100);
                 }
-
                 if (this.nxtApprvlStatusButton.Text == "Cancel")
                 {
                     this.nxtApprvlStatusButton.ImageKey = "90.png";
@@ -521,7 +535,7 @@ namespace Accounting.Forms
             {
                 this.is_last_rec = true;
                 this.totl_rec = Global.get_Total_PtycshDoc(this.searchForTextBox.Text,
-                  this.searchInComboBox.Text, Global.mnFrm.cmCde.Org_id, this.showUnpaidCheckBox.Checked);
+                  this.searchInComboBox.Text, Global.mnFrm.cmCde.Org_id, this.showUnpostedCheckBox.Checked);
                 this.updtTotals();
                 this.rec_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -596,7 +610,7 @@ namespace Accounting.Forms
             this.cashAccntTextBox.BackColor = Color.FromArgb(255, 255, 128);
 
             this.docCommentsTextBox.ReadOnly = false;
-            this.docCommentsTextBox.BackColor = Color.White;
+            this.docCommentsTextBox.BackColor = Color.FromArgb(255, 255, 128);
 
             this.pymntTermsTextBox.ReadOnly = false;
             this.pymntTermsTextBox.BackColor = Color.White;
@@ -648,6 +662,8 @@ namespace Accounting.Forms
             this.lnkdEventComboBox.Items.Add("None");
             this.lnkdEventComboBox.Items.Add("Attendance Register");
             this.lnkdEventComboBox.Items.Add("Production Process Run");
+            this.lnkdEventComboBox.Items.Add("Customer File Number");
+            this.lnkdEventComboBox.Items.Add("Project Management");
 
             string selItm = this.docTypeComboBox.Text;
             this.docTypeComboBox.Items.Clear();
@@ -1773,11 +1789,13 @@ namespace Accounting.Forms
             int dflACntID = Global.get_DfltPtyCshAcnt(Global.mnFrm.cmCde.Org_id);
             this.cashAccntIDTextBox.Text = dflACntID.ToString();
             this.cashAccntTextBox.Text = Global.mnFrm.cmCde.getAccntNum(dflACntID) + "." + Global.mnFrm.cmCde.getAccntName(dflACntID);
+            if (dflACntID > 0)
+            {
+                int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
+                            "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", dflACntID));
 
-            int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
-                        "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", dflACntID));
-
-            this.currcyLabel1.Text = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                this.currcyLabel1.Text = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+            }
             this.currcyLabel2.Text = this.currcyLabel1.Text;
             this.currcyLabel3.Text = this.currcyLabel1.Text;
 
@@ -2367,8 +2385,55 @@ namespace Accounting.Forms
                     srchWrd = "%" + srchWrd + "%";
                     //this.smmryDataGridView.Rows[e.RowIndex].Cells[4].Value = "-1";
                 }
+                int lnAccntID = int.Parse(this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString());
+                bool isReadOnly = false;
+                string lovName = "";
+                if (this.docTypeComboBox.Text == "Petty Cash Re-imbursements")
+                {
+                    lovName = "Asset Accounts";
+                }
+                else
+                {
+                    lovName = "Expense Accounts";
+                }
+                DialogResult dgRes = Global.mnFrm.cmCde.showAcntsDiag(ref lnAccntID, true,
+              true, srchWrd, "Account Details", this.autoLoad, isReadOnly, lovName, Global.mnFrm.cmCde);
+                this.autoLoad = false;
+                if (dgRes == DialogResult.OK)
+                {
+                    this.obey_evnts = false;
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value = lnAccntID.ToString();
+                    //this.smmryDataGridView.Rows[e.RowIndex].Cells[6].Value = 
 
-                string[] selVals = new string[1];
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[9].Value = Global.mnFrm.cmCde.getAccntNum(lnAccntID) +
+              "." + Global.mnFrm.cmCde.getAccntName(lnAccntID);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
+                    "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", lnAccntID));
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[25].Value = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[26].Value = accntCurrID;
+
+                    string slctdCurrID = this.smmryDataGridView.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[19].Value = Math.Round(
+                        Global.get_LtstExchRate(int.Parse(slctdCurrID), this.curid,
+                        this.docDteTextBox.Text + " 00:00:00"), 15);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[20].Value = Math.Round(
+                      Global.get_LtstExchRate(int.Parse(slctdCurrID), accntCurrID,
+                      this.docDteTextBox.Text + " 00:00:00"), 15);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    double funcCurrRate = 0;
+                    double accntCurrRate = 0;
+                    double entrdAmnt = 0;
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(), out entrdAmnt);
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[19].Value.ToString(), out funcCurrRate);
+                    double.TryParse(this.smmryDataGridView.Rows[e.RowIndex].Cells[20].Value.ToString(), out accntCurrRate);
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[21].Value = (funcCurrRate * entrdAmnt).ToString("#,##0.00");
+                    this.smmryDataGridView.Rows[e.RowIndex].Cells[24].Value = (accntCurrRate * entrdAmnt).ToString("#,##0.00");
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                /*string[] selVals = new string[1];
                 selVals[0] = this.smmryDataGridView.Rows[e.RowIndex].Cells[10].Value.ToString();
                 DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                   Global.mnFrm.cmCde.getLovID("Transaction Accounts"),
@@ -2412,7 +2477,7 @@ namespace Accounting.Forms
                         System.Windows.Forms.Application.DoEvents();
 
                     }
-                }
+                }*/
                 //SendKeys.Send("{Tab}"); 
                 //SendKeys.Send("{Tab}"); 
                 this.smmryDataGridView.EndEdit();
@@ -2989,6 +3054,11 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("Document Type cannot be empty!", 0);
                 return false;
             }
+            if (this.docCommentsTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Document Description cannot be empty!", 0);
+                return false;
+            }
 
             if (this.docDteTextBox.Text == "")
             {
@@ -3146,9 +3216,9 @@ namespace Accounting.Forms
                         if (lineType == "1Initial Amount")
                         {
                             Global.createPtycshDocDet(curlnID, long.Parse(this.docIDTextBox.Text), lineType,
-    lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
-    costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
-    accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, -1);
+                                lineDesc, entrdAmnt, entrdCurrID, codeBhnd, docType, autoCalc, incrDcrs1,
+                                costngID, incrDcrs2, blncgAccntID, prepayDocHdrID, vldyStatus, orgnlLnID, funcCurrID,
+                                accntCurrID, funcCurrRate, accntCurrRate, funcCurrAmnt, accntCurrAmnt, -1);
                             this.smmryDataGridView.Rows[i].Cells[5].Value = curlnID;
                             this.smmryDataGridView.EndEdit();
                             if (rndmNum != -1)
@@ -3168,7 +3238,6 @@ namespace Accounting.Forms
                     }
                     else
                     {
-
                         if (lineType == "1Initial Amount")
                         {
                             Global.updtPtycshDocDet(curlnID, long.Parse(this.docIDTextBox.Text), lineType,
@@ -4101,6 +4170,28 @@ namespace Accounting.Forms
                     }
                 }
             }
+            else if (this.lnkdEventComboBox.Text == "Customer File Number")
+            {
+                string[] selVals = new string[1];
+                selVals[0] = this.rgstrIDTextBox.Text;
+                DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                  Global.mnFrm.cmCde.getLovID("Customer File Numbers"), ref selVals,
+                  true, false, Global.mnFrm.cmCde.Org_id, "", "",
+                 "%", "Both", true);
+                if (dgRes == DialogResult.OK)
+                {
+                    for (int i = 0; i < selVals.Length; i++)
+                    {
+                        this.rgstrIDTextBox.Text = selVals[i];
+                        this.rgstrNumTextBox.Text = Global.mnFrm.cmCde.getGnrlRecNm(
+                   "accb.accb_rcvbls_invc_hdr", "rcvbls_invc_hdr_id", "cstmrs_doc_num", long.Parse(selVals[i]));
+                    }
+                }
+            }
+            else if (this.lnkdEventComboBox.Text == "Project Management")
+            {
+                Global.mnFrm.cmCde.showMsg("Not Yet Implemented!", 3);
+            }
             else
             {
                 string[] selVals = new string[1];
@@ -4142,7 +4233,7 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("You must indicate Event Type first!", 0);
                 return;
             }
-            else if (this.lnkdEventComboBox.Text == "Attendance Register")
+            else if (this.lnkdEventComboBox.Text == "Attendance Register" || this.lnkdEventComboBox.Text == "Project Management")
             {
                 int[] selVals = new int[1];
                 selVals[0] = Global.mnFrm.cmCde.getPssblValID(this.costCtgrTextBox.Text,
@@ -4161,6 +4252,11 @@ namespace Accounting.Forms
                     //DataGridViewCellEventArgs ex = new DataGridViewCellEventArgs(0, e.RowIndex);
                     //this.costingDataGridView_CellValueChanged(this.costingDataGridView, ex);
                 }
+            }
+            else if (this.lnkdEventComboBox.Text == "Customer File Number")
+            {
+                Global.mnFrm.cmCde.showMsg("Category not Required for this Type!", 0);
+                return;
             }
             else
             {
@@ -4227,6 +4323,10 @@ namespace Accounting.Forms
             this.rgstrIDTextBox.Text = "-1";
             this.rgstrNumTextBox.Text = "";
             this.costCtgrTextBox.Text = "";
+            if (this.lnkdEventComboBox.Text == "Customer File Number")
+            {
+                this.costCtgrTextBox.Text = "Petty Cash";
+            }
         }
 
         private void prvwInvoiceButton_Click(object sender, EventArgs e)
@@ -4332,7 +4432,24 @@ namespace Accounting.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::Accounting.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -5072,7 +5189,7 @@ namespace Accounting.Forms
                     {
                         this.netBalanceLabel.BackColor = Color.Green;
                     }
-                    for(int j=0;j<this.smmryDataGridView.Rows.Count;j++)
+                    for (int j = 0; j < this.smmryDataGridView.Rows.Count; j++)
                     {
                         this.smmryDataGridView.Rows[j].Cells[14].Value = this.cashAccntIDTextBox.Text;
                         this.smmryDataGridView.Rows[j].Cells[13].Value = this.cashAccntTextBox.Text;

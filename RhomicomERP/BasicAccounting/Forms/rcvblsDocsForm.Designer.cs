@@ -133,6 +133,8 @@
             this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.totalRecsLabel = new System.Windows.Forms.ToolStripLabel();
             this.cstmrButton = new System.Windows.Forms.Button();
@@ -197,6 +199,7 @@
             this.cstmrNmTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.extraInfoButton = new System.Windows.Forms.Button();
             this.openBatchButton = new System.Windows.Forms.Button();
             this.pymntTermsButton = new System.Windows.Forms.Button();
             this.rgstrNumTextBox = new System.Windows.Forms.TextBox();
@@ -273,6 +276,7 @@
             // 
             this.toolStrip3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vwSmrySQLButton,
             this.toolStripSeparator16,
@@ -292,7 +296,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(412, 15);
             this.toolStrip3.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(472, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(485, 27);
             this.toolStrip3.Stretch = true;
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.TabStop = true;
@@ -305,14 +309,14 @@
             this.vwSmrySQLButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSmrySQLButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSmrySQLButton.Name = "vwSmrySQLButton";
-            this.vwSmrySQLButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSmrySQLButton.Size = new System.Drawing.Size(24, 24);
             this.vwSmrySQLButton.Text = "View SQL";
             this.vwSmrySQLButton.Click += new System.EventHandler(this.vwSmrySQLButton_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(6, 27);
             // 
             // rcHstrySmryButton
             // 
@@ -321,14 +325,14 @@
             this.rcHstrySmryButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstrySmryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstrySmryButton.Name = "rcHstrySmryButton";
-            this.rcHstrySmryButton.Size = new System.Drawing.Size(23, 22);
+            this.rcHstrySmryButton.Size = new System.Drawing.Size(24, 24);
             this.rcHstrySmryButton.Text = "Record History";
             this.rcHstrySmryButton.Click += new System.EventHandler(this.rcHstrySmryButton_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
             // 
             // calcSmryButton
             // 
@@ -337,14 +341,14 @@
             this.calcSmryButton.Image = global::Accounting.Properties.Resources.refresh;
             this.calcSmryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.calcSmryButton.Name = "calcSmryButton";
-            this.calcSmryButton.Size = new System.Drawing.Size(23, 22);
+            this.calcSmryButton.Size = new System.Drawing.Size(24, 24);
             this.calcSmryButton.Text = "Re-Calc";
             this.calcSmryButton.Click += new System.EventHandler(this.calcSmryButton_Click);
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 27);
             // 
             // customInvoiceButton
             // 
@@ -352,7 +356,7 @@
             this.customInvoiceButton.Image = global::Accounting.Properties.Resources.actions_document_preview;
             this.customInvoiceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.customInvoiceButton.Name = "customInvoiceButton";
-            this.customInvoiceButton.Size = new System.Drawing.Size(69, 22);
+            this.customInvoiceButton.Size = new System.Drawing.Size(73, 24);
             this.customInvoiceButton.Text = "Custom";
             this.customInvoiceButton.ToolTipText = "Custom Document Print Preview";
             this.customInvoiceButton.Click += new System.EventHandler(this.customInvoiceButton_Click);
@@ -363,7 +367,7 @@
             this.prvwInvoiceButton.Image = global::Accounting.Properties.Resources.actions_document_preview;
             this.prvwInvoiceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.prvwInvoiceButton.Name = "prvwInvoiceButton";
-            this.prvwInvoiceButton.Size = new System.Drawing.Size(74, 22);
+            this.prvwInvoiceButton.Size = new System.Drawing.Size(78, 24);
             this.prvwInvoiceButton.Text = "Standard";
             this.prvwInvoiceButton.ToolTipText = "Standard Document Preview";
             this.prvwInvoiceButton.Click += new System.EventHandler(this.prvwInvoiceButton_Click);
@@ -374,7 +378,7 @@
             this.printRcptButton.Image = global::Accounting.Properties.Resources.Printer;
             this.printRcptButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printRcptButton.Name = "printRcptButton";
-            this.printRcptButton.Size = new System.Drawing.Size(23, 22);
+            this.printRcptButton.Size = new System.Drawing.Size(24, 24);
             this.printRcptButton.Text = "Print";
             this.printRcptButton.Click += new System.EventHandler(this.printRcptButton_Click);
             // 
@@ -384,7 +388,7 @@
             this.printRcptButton1.Image = global::Accounting.Properties.Resources.Printer;
             this.printRcptButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printRcptButton1.Name = "printRcptButton1";
-            this.printRcptButton1.Size = new System.Drawing.Size(23, 22);
+            this.printRcptButton1.Size = new System.Drawing.Size(24, 24);
             this.printRcptButton1.Text = "Print";
             this.printRcptButton1.Visible = false;
             this.printRcptButton1.Click += new System.EventHandler(this.printRcptButton_Click);
@@ -397,21 +401,21 @@
             this.viewAtchmntsButton.Image = global::Accounting.Properties.Resources.adjunto;
             this.viewAtchmntsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.viewAtchmntsButton.Name = "viewAtchmntsButton";
-            this.viewAtchmntsButton.Size = new System.Drawing.Size(23, 22);
+            this.viewAtchmntsButton.Size = new System.Drawing.Size(24, 24);
             this.viewAtchmntsButton.Text = "Attachments";
             this.viewAtchmntsButton.Click += new System.EventHandler(this.viewAtchmntsButton_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel1.ForeColor = System.Drawing.Color.Black;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(76, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(76, 24);
             this.toolStripLabel1.Text = "Grand Total:";
             // 
             // grndTotalTextBox
@@ -419,7 +423,7 @@
             this.grndTotalTextBox.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grndTotalTextBox.Name = "grndTotalTextBox";
             this.grndTotalTextBox.ReadOnly = true;
-            this.grndTotalTextBox.Size = new System.Drawing.Size(100, 25);
+            this.grndTotalTextBox.Size = new System.Drawing.Size(100, 27);
             // 
             // srcDocButton
             // 
@@ -442,6 +446,7 @@
             this.imageList1.Images.SetKeyName(2, "Select.png");
             this.imageList1.Images.SetKeyName(3, "tick_32.png");
             this.imageList1.Images.SetKeyName(4, "98.png");
+            this.imageList1.Images.SetKeyName(5, "Infologo2.jpg");
             // 
             // invcCurrButton
             // 
@@ -513,31 +518,32 @@
             // 
             // balShtsMenuStrip
             // 
+            this.balShtsMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.balShtsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclBlsMenuItem,
             this.toolStripSeparator70,
             this.vwSQLBlsMenuItem});
             this.balShtsMenuStrip.Name = "usersContextMenuStrip";
-            this.balShtsMenuStrip.Size = new System.Drawing.Size(151, 54);
+            this.balShtsMenuStrip.Size = new System.Drawing.Size(155, 62);
             // 
             // exptExclBlsMenuItem
             // 
             this.exptExclBlsMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclBlsMenuItem.Name = "exptExclBlsMenuItem";
-            this.exptExclBlsMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptExclBlsMenuItem.Size = new System.Drawing.Size(154, 26);
             this.exptExclBlsMenuItem.Text = "Export to Excel";
             this.exptExclBlsMenuItem.Click += new System.EventHandler(this.exptExclBlsMenuItem_Click);
             // 
             // toolStripSeparator70
             // 
             this.toolStripSeparator70.Name = "toolStripSeparator70";
-            this.toolStripSeparator70.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator70.Size = new System.Drawing.Size(151, 6);
             // 
             // vwSQLBlsMenuItem
             // 
             this.vwSQLBlsMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBlsMenuItem.Name = "vwSQLBlsMenuItem";
-            this.vwSQLBlsMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vwSQLBlsMenuItem.Size = new System.Drawing.Size(154, 26);
             this.vwSQLBlsMenuItem.Text = "&View SQL";
             this.vwSQLBlsMenuItem.Click += new System.EventHandler(this.vwSQLBlsMenuItem_Click);
             // 
@@ -690,7 +696,7 @@
             this.createdByTextBox.MaxLength = 200;
             this.createdByTextBox.Name = "createdByTextBox";
             this.createdByTextBox.ReadOnly = true;
-            this.createdByTextBox.Size = new System.Drawing.Size(189, 21);
+            this.createdByTextBox.Size = new System.Drawing.Size(83, 21);
             this.createdByTextBox.TabIndex = 22;
             // 
             // label4
@@ -815,17 +821,18 @@
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addLineButton,
             this.delLineButton,
@@ -839,7 +846,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(7, 15);
             this.toolStrip2.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(400, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(424, 27);
             this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.TabStop = true;
@@ -851,7 +858,7 @@
             this.addLineButton.Image = ((System.Drawing.Image)(resources.GetObject("addLineButton.Image")));
             this.addLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addLineButton.Name = "addLineButton";
-            this.addLineButton.Size = new System.Drawing.Size(65, 22);
+            this.addLineButton.Size = new System.Drawing.Size(69, 24);
             this.addLineButton.Text = "AMNT.";
             this.addLineButton.Click += new System.EventHandler(this.addLineButton_Click);
             // 
@@ -861,7 +868,7 @@
             this.delLineButton.Image = ((System.Drawing.Image)(resources.GetObject("delLineButton.Image")));
             this.delLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delLineButton.Name = "delLineButton";
-            this.delLineButton.Size = new System.Drawing.Size(50, 22);
+            this.delLineButton.Size = new System.Drawing.Size(54, 24);
             this.delLineButton.Text = "DEL.";
             this.delLineButton.Click += new System.EventHandler(this.delLineButton_Click);
             // 
@@ -871,7 +878,7 @@
             this.addTaxButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTaxButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTaxButton.Name = "addTaxButton";
-            this.addTaxButton.Size = new System.Drawing.Size(48, 22);
+            this.addTaxButton.Size = new System.Drawing.Size(52, 24);
             this.addTaxButton.Text = "TAX";
             this.addTaxButton.Click += new System.EventHandler(this.addTaxButton_Click);
             // 
@@ -881,7 +888,7 @@
             this.addDscntButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addDscntButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addDscntButton.Name = "addDscntButton";
-            this.addDscntButton.Size = new System.Drawing.Size(71, 22);
+            this.addDscntButton.Size = new System.Drawing.Size(75, 24);
             this.addDscntButton.Text = "DISCNT.";
             this.addDscntButton.Click += new System.EventHandler(this.addDscntButton_Click);
             // 
@@ -891,7 +898,7 @@
             this.addChrgButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addChrgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addChrgButton.Name = "addChrgButton";
-            this.addChrgButton.Size = new System.Drawing.Size(62, 22);
+            this.addChrgButton.Size = new System.Drawing.Size(66, 24);
             this.addChrgButton.Text = "EXTRA";
             this.addChrgButton.ToolTipText = "EXTRA CHARGES";
             this.addChrgButton.Click += new System.EventHandler(this.addChrgButton_Click);
@@ -902,7 +909,7 @@
             this.applyPrpymntButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.applyPrpymntButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.applyPrpymntButton.Name = "applyPrpymntButton";
-            this.applyPrpymntButton.Size = new System.Drawing.Size(80, 22);
+            this.applyPrpymntButton.Size = new System.Drawing.Size(84, 24);
             this.applyPrpymntButton.Text = "ADVANCE";
             this.applyPrpymntButton.ToolTipText = "APPLY CUSTOMER ADVANCE PAYMENTS";
             this.applyPrpymntButton.Click += new System.EventHandler(this.applyPrpymntButton_Click);
@@ -946,7 +953,9 @@
             this.Column22,
             this.Column25,
             this.Column26,
-            this.Column15});
+            this.Column15,
+            this.Column27,
+            this.Column28});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -960,7 +969,7 @@
             this.smmryDataGridView.Name = "smmryDataGridView";
             this.smmryDataGridView.ReadOnly = true;
             this.smmryDataGridView.RowHeadersWidth = 21;
-            this.smmryDataGridView.Size = new System.Drawing.Size(1075, 297);
+            this.smmryDataGridView.Size = new System.Drawing.Size(1163, 297);
             this.smmryDataGridView.TabIndex = 2;
             this.smmryDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.smmryDataGridView_CellContentClick);
             this.smmryDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.smmryDataGridView_CellValueChanged);
@@ -1165,6 +1174,7 @@
             this.Column19.Name = "Column19";
             this.Column19.ReadOnly = true;
             this.Column19.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column19.Visible = false;
             this.Column19.Width = 150;
             // 
             // Column20
@@ -1174,6 +1184,7 @@
             this.Column20.Name = "Column20";
             this.Column20.ReadOnly = true;
             this.Column20.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column20.Visible = false;
             this.Column20.Width = 150;
             // 
             // Column21
@@ -1189,6 +1200,7 @@
             this.Column21.Name = "Column21";
             this.Column21.ReadOnly = true;
             this.Column21.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column21.Visible = false;
             // 
             // Column23
             // 
@@ -1196,6 +1208,7 @@
             this.Column23.Name = "Column23";
             this.Column23.ReadOnly = true;
             this.Column23.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column23.Visible = false;
             // 
             // Column24
             // 
@@ -1218,6 +1231,7 @@
             this.Column22.Name = "Column22";
             this.Column22.ReadOnly = true;
             this.Column22.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column22.Visible = false;
             // 
             // Column25
             // 
@@ -1225,6 +1239,7 @@
             this.Column25.Name = "Column25";
             this.Column25.ReadOnly = true;
             this.Column25.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column25.Visible = false;
             // 
             // Column26
             // 
@@ -1239,7 +1254,23 @@
             this.Column15.HeaderText = "Initial Amount Line ID";
             this.Column15.Name = "Column15";
             this.Column15.ReadOnly = true;
+            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.Column15.Visible = false;
+            // 
+            // Column27
+            // 
+            this.Column27.HeaderText = "QTY";
+            this.Column27.Name = "Column27";
+            this.Column27.ReadOnly = true;
+            this.Column27.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column27.Width = 50;
+            // 
+            // Column28
+            // 
+            this.Column28.HeaderText = "Unit Price";
+            this.Column28.Name = "Column28";
+            this.Column28.ReadOnly = true;
+            this.Column28.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // groupBox2
             // 
@@ -1252,7 +1283,7 @@
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(170, 270);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1081, 343);
+            this.groupBox2.Size = new System.Drawing.Size(1169, 343);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "AMOUNT DETAILS/DISTRIBUTION";
@@ -1385,6 +1416,7 @@
             // 
             this.toolStrip4.AutoSize = false;
             this.toolStrip4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addButton,
             this.toolStripSeparator53,
@@ -1430,7 +1462,7 @@
             this.toolStrip4.Location = new System.Drawing.Point(0, 5);
             this.toolStrip4.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(1253, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(1341, 25);
             this.toolStrip4.Stretch = true;
             this.toolStrip4.TabIndex = 0;
             this.toolStrip4.TabStop = true;
@@ -1442,7 +1474,7 @@
             this.addButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(23, 22);
+            this.addButton.Size = new System.Drawing.Size(24, 22);
             this.addButton.Text = "NEW";
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
@@ -1457,7 +1489,7 @@
             this.editButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(23, 22);
+            this.editButton.Size = new System.Drawing.Size(24, 22);
             this.editButton.Text = "EDIT";
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
@@ -1472,7 +1504,7 @@
             this.saveButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(23, 22);
+            this.saveButton.Size = new System.Drawing.Size(24, 22);
             this.saveButton.Text = "SAVE";
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -1487,7 +1519,7 @@
             this.delButton.Image = global::Accounting.Properties.Resources.delete;
             this.delButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delButton.Name = "delButton";
-            this.delButton.Size = new System.Drawing.Size(23, 22);
+            this.delButton.Size = new System.Drawing.Size(24, 22);
             this.delButton.Text = "DELETE";
             this.delButton.Click += new System.EventHandler(this.delButton_Click);
             // 
@@ -1502,7 +1534,7 @@
             this.vwSQLButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLButton.Name = "vwSQLButton";
-            this.vwSQLButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLButton.Text = "View SQL";
             this.vwSQLButton.Click += new System.EventHandler(this.vwSQLButton_Click);
             // 
@@ -1517,7 +1549,7 @@
             this.rcHstryButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstryButton.Name = "rcHstryButton";
-            this.rcHstryButton.Size = new System.Drawing.Size(23, 22);
+            this.rcHstryButton.Size = new System.Drawing.Size(24, 22);
             this.rcHstryButton.Text = "Record History";
             this.rcHstryButton.Click += new System.EventHandler(this.rcHstryButton_Click);
             // 
@@ -1532,7 +1564,7 @@
             this.rfrshButton.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rfrshButton.Name = "rfrshButton";
-            this.rfrshButton.Size = new System.Drawing.Size(23, 22);
+            this.rfrshButton.Size = new System.Drawing.Size(24, 22);
             this.rfrshButton.Text = "Refresh";
             this.rfrshButton.Click += new System.EventHandler(this.rfrshButton_Click);
             // 
@@ -1547,7 +1579,7 @@
             this.moveFirstButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstButton.Name = "moveFirstButton";
-            this.moveFirstButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstButton.Text = "Move First";
             this.moveFirstButton.Click += new System.EventHandler(this.PnlNavButtons);
             // 
@@ -1557,7 +1589,7 @@
             this.movePreviousButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousButton.Name = "movePreviousButton";
-            this.movePreviousButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousButton.Text = "Move Previous";
             this.movePreviousButton.Click += new System.EventHandler(this.PnlNavButtons);
             // 
@@ -1567,7 +1599,7 @@
             this.moveNextButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextButton.Name = "moveNextButton";
-            this.moveNextButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextButton.Text = "Move Next";
             this.moveNextButton.Click += new System.EventHandler(this.PnlNavButtons);
             // 
@@ -1577,7 +1609,7 @@
             this.moveLastButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastButton.Name = "moveLastButton";
-            this.moveLastButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastButton.Text = "Move Last";
             this.moveLastButton.Click += new System.EventHandler(this.PnlNavButtons);
             // 
@@ -1606,7 +1638,7 @@
             this.goButton.Image = global::Accounting.Properties.Resources.action_go;
             this.goButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goButton.Name = "goButton";
-            this.goButton.Size = new System.Drawing.Size(23, 22);
+            this.goButton.Size = new System.Drawing.Size(24, 22);
             this.goButton.Text = "Go";
             this.goButton.Visible = false;
             this.goButton.Click += new System.EventHandler(this.goButton_Click);
@@ -1622,7 +1654,7 @@
             this.resetTrnsButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetTrnsButton.Name = "resetTrnsButton";
-            this.resetTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.resetTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.resetTrnsButton.Text = "RESET";
             this.resetTrnsButton.Click += new System.EventHandler(this.resetTrnsButton_Click);
             // 
@@ -1636,7 +1668,7 @@
             this.toolStripButton1.Image = global::Accounting.Properties.Resources.edit32;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(158, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(162, 22);
             this.toolStripButton1.Text = "SETUP DOC. TEMPLATES";
             this.toolStripButton1.Click += new System.EventHandler(this.setupDocTmpltsButton_Click);
             // 
@@ -1647,7 +1679,7 @@
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel7.Size = new System.Drawing.Size(1253, 33);
+            this.panel7.Size = new System.Drawing.Size(1341, 33);
             this.panel7.TabIndex = 1;
             this.panel7.TabStop = true;
             // 
@@ -1834,6 +1866,7 @@
             this.docIDNumTextBox.Name = "docIDNumTextBox";
             this.docIDNumTextBox.Size = new System.Drawing.Size(139, 21);
             this.docIDNumTextBox.TabIndex = 2;
+            this.docIDNumTextBox.TextChanged += new System.EventHandler(this.docIDNumTextBox_TextChanged);
             // 
             // cstmrNmTextBox
             // 
@@ -1857,6 +1890,8 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.extraInfoButton);
+            this.groupBox10.Controls.Add(this.availblePrepayAmntTextBox);
             this.groupBox10.Controls.Add(this.openBatchButton);
             this.groupBox10.Controls.Add(this.pymntTermsButton);
             this.groupBox10.Controls.Add(this.docIDTextBox);
@@ -1869,7 +1904,6 @@
             this.groupBox10.Controls.Add(this.docsUsngThisButton);
             this.groupBox10.Controls.Add(this.pymntHstryButton);
             this.groupBox10.Controls.Add(this.label20);
-            this.groupBox10.Controls.Add(this.availblePrepayAmntTextBox);
             this.groupBox10.Controls.Add(this.srcDocButton);
             this.groupBox10.Controls.Add(this.makePaymentButton);
             this.groupBox10.Controls.Add(this.invcCurrButton);
@@ -1937,6 +1971,21 @@
             this.groupBox10.TabIndex = 3;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "DOCUMENT HEADER";
+            // 
+            // extraInfoButton
+            // 
+            this.extraInfoButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.extraInfoButton.ForeColor = System.Drawing.Color.Black;
+            this.extraInfoButton.ImageKey = "Infologo2.jpg";
+            this.extraInfoButton.ImageList = this.imageList1;
+            this.extraInfoButton.Location = new System.Drawing.Point(506, 200);
+            this.extraInfoButton.Name = "extraInfoButton";
+            this.extraInfoButton.Size = new System.Drawing.Size(105, 26);
+            this.extraInfoButton.TabIndex = 250;
+            this.extraInfoButton.Text = "Extra Info.";
+            this.extraInfoButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.extraInfoButton.UseVisualStyleBackColor = true;
+            this.extraInfoButton.Click += new System.EventHandler(this.extraInfoButton_Click);
             // 
             // openBatchButton
             // 
@@ -2170,7 +2219,7 @@
             // 
             // createdByIDTextBox
             // 
-            this.createdByIDTextBox.Location = new System.Drawing.Point(557, 202);
+            this.createdByIDTextBox.Location = new System.Drawing.Point(451, 202);
             this.createdByIDTextBox.MaxLength = 200;
             this.createdByIDTextBox.Name = "createdByIDTextBox";
             this.createdByIDTextBox.ReadOnly = true;
@@ -2194,7 +2243,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(92, 28);
             this.label16.TabIndex = 197;
-            this.label16.Text = "Customer\'s Doc. Number:";
+            this.label16.Text = "Customer\'s File Number:";
             // 
             // panel6
             // 
@@ -2282,7 +2331,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1253, 618);
+            this.ClientSize = new System.Drawing.Size(1341, 618);
             this.Controls.Add(this.waitLabel);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.rcvblsDocListView);
@@ -2480,6 +2529,9 @@
     private System.Windows.Forms.TextBox costCtgrTextBox;
     private System.Windows.Forms.Label label21;
     private System.Windows.Forms.ToolStripButton customInvoiceButton;
+        private System.Windows.Forms.Button pymntTermsButton;
+        private System.Windows.Forms.Button openBatchButton;
+        private System.Windows.Forms.Button extraInfoButton;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
@@ -2508,7 +2560,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column25;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column26;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.Button pymntTermsButton;
-        private System.Windows.Forms.Button openBatchButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column28;
     }
 }

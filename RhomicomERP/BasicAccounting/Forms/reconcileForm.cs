@@ -238,8 +238,43 @@ namespace Accounting.Forms
             }
             if (e.ColumnIndex == 6)
             {
+                int lnAccntID = int.Parse(this.trnsDataGridView.Rows[e.RowIndex].Cells[5].Value.ToString());
+                bool isReadOnly = false;
+                DialogResult dgRes = Global.mnFrm.cmCde.showAcntsDiag(ref lnAccntID, true,
+              true, this.srchWrd, "Account Details", true, isReadOnly, Global.mnFrm.cmCde);
+                if (dgRes == DialogResult.OK)
+                {
+                    this.obey_evnts = false;
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[5].Value = lnAccntID.ToString();
+                    //this.trnsDataGridView.Rows[e.RowIndex].Cells[6].Value = 
 
-                string[] selVals = new string[1];
+                    int accntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "crncy_id", lnAccntID));
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[19].Value = Global.mnFrm.cmCde.getPssblValNm(accntCurrID);
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[20].Value = accntCurrID;
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[4].Value = Global.mnFrm.cmCde.getAccntNum(lnAccntID) +
+              "." + Global.mnFrm.cmCde.getAccntName(lnAccntID);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    string slctdCurrID = this.trnsDataGridView.Rows[e.RowIndex].Cells[9].Value.ToString();
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[14].Value = Math.Round(
+              Global.get_LtstExchRate(int.Parse(slctdCurrID), this.curid,
+              this.trnsDataGridView.Rows[e.RowIndex].Cells[12].Value.ToString()), 15);
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[15].Value = Math.Round(
+                      Global.get_LtstExchRate(int.Parse(slctdCurrID), accntCurrID,
+              this.trnsDataGridView.Rows[e.RowIndex].Cells[12].Value.ToString()), 15);
+                    System.Windows.Forms.Application.DoEvents();
+
+                    double funcCurrRate = 0;
+                    double accntCurrRate = 0;
+                    double entrdAmnt = 0;
+                    double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[7].Value.ToString(), out entrdAmnt);
+                    double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[14].Value.ToString(), out funcCurrRate);
+                    double.TryParse(this.trnsDataGridView.Rows[e.RowIndex].Cells[15].Value.ToString(), out accntCurrRate);
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[16].Value = (funcCurrRate * entrdAmnt).ToString("#,##0.00");
+                    this.trnsDataGridView.Rows[e.RowIndex].Cells[18].Value = (accntCurrRate * entrdAmnt).ToString("#,##0.00");
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                    /*string[] selVals = new string[1];
                 selVals[0] = this.trnsDataGridView.Rows[e.RowIndex].Cells[5].Value.ToString();
                 DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                   Global.mnFrm.cmCde.getLovID("Transaction Accounts"),
@@ -281,7 +316,7 @@ namespace Accounting.Forms
                         System.Windows.Forms.Application.DoEvents();
 
                     }
-                }
+                }*/
                 //SendKeys.Send("{Tab}"); 
                 //SendKeys.Send("{Tab}"); 
                 this.trnsDataGridView.EndEdit();
@@ -1364,21 +1399,22 @@ namespace Accounting.Forms
         private void populateAccntStmntBals(int accntID, string strDate, string endDate)
         {
             //Check if no other accounting process is running
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             do
             {
                 isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
                 System.Windows.Forms.Application.DoEvents();
             }
             while (isAnyRnng == true);
-            Global.updtActnPrcss(4);
+            Global.updtActnPrcss(4);*/
             this.statusLoadLabel.Visible = true;
             this.statusLoadPictureBox.Visible = true;
             this.accntStmntListView.Visible = false;
             System.Windows.Forms.Application.DoEvents();
 
             this.acctStmntProgressBar.Value = 10;
-            DataSet dtst = Global.get_AccntStmntTransactions(accntID, strDate, endDate, true, 0, 0);
+            DataSet dtst = Global.get_AccntStmntTransactions(accntID, strDate, endDate, true, 0, 0, this.shwManualEntriesCheckBox.Checked,
+                this.shwUnbalcdCheckBox.Checked, this.shwIntrfcTrnsCheckBox.Checked);
             this.accntStmntListView.Items.Clear();
             int count = dtst.Tables[0].Rows.Count;
             string funccur = Global.mnFrm.cmCde.getPssblValNm(
@@ -1451,12 +1487,12 @@ namespace Accounting.Forms
             for (int i = 0; i < count; i++)
             {
                 //;
-                Global.updtActnPrcss(4);
+                //Global.updtActnPrcss(4);
                 this.acctStmntProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
                 if (this.showUnrcnciledCheckBox.Checked && dtst.Tables[0].Rows[i][24].ToString() == "1")
                 {
                     continue;
-                }
+                }                
                 else if (this.hideRvrsdCheckBox.Checked && (dtst.Tables[0].Rows[i][26].ToString() == "VOID"
                     || long.Parse(dtst.Tables[0].Rows[i][27].ToString()) > 0))
                 {

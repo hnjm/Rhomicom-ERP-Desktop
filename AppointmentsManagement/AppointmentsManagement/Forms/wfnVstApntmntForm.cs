@@ -4870,11 +4870,11 @@ namespace AppointmentsManagement.Forms
                     {
                         if (int.Parse(codeIDs[j]) > 0)
                         {
-                            txAmnts1 = Global.getSalesDocCodesAmnt(int.Parse(codeIDs[j]), 1, 1);
-                            txAmnts1 = orgnlDscnt / (1.0 + txAmnts1);
-                            txAmnts += txAmnts1;
+                            txAmnts1 += Global.getSalesDocCodesAmnt(int.Parse(codeIDs[j]), 1, 1);
                         }
                     }
+                    txAmnts1 = orgnlDscnt / (1.0 + txAmnts1);
+                    txAmnts += txAmnts1;
                 }
                 else
                 {
@@ -4897,10 +4897,10 @@ namespace AppointmentsManagement.Forms
             string rcvblDoctype = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_rcvbls_invc_hdr",
               "rcvbls_invc_hdr_id", "rcvbls_invc_type", rcvblHdrID);
 
-            if (docStatus == "Approved" && Global.mnFrm.cmCde.doesDteTmeExceedIntrvl(Global.getRcvblsDocLastUpdate(rcvblHdrID, rcvblDoctype), "1 day"))
+            /*if (docStatus == "Approved" && Global.mnFrm.cmCde.doesDteTmeExceedIntrvl(Global.getRcvblsDocLastUpdate(rcvblHdrID, rcvblDoctype), "1 day"))
             {
                 return;
-            }
+            }*/
             DataSet dtst = Global.get_One_SalesDcLines(srcDocID);
             double grndAmnt = Global.getSalesDocGrndAmnt(srcDocID);
             // Grand Total
@@ -6076,7 +6076,24 @@ namespace AppointmentsManagement.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::AppointmentsManagement.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -9165,7 +9182,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
         private void rejectDoc()
         {
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -9173,7 +9190,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             //Global.updtActnPrcss(7);//Invetory Import Process
             //Global.mnFrm.cmCde.showMsg(this.salesApprvlStatusTextBox.Text, 0);
@@ -9288,7 +9305,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
 
             this.cancelButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -9296,7 +9313,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = this.rvrsApprval(dateStr);
@@ -9448,6 +9465,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
 
         private void autoBals(string srcDocType)
         {
+            return;
             //DataSet dtst = Global.get_DocSmryLns(docHdrID, docTyp);
             //for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             //{
@@ -9819,7 +9837,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
 
             this.badDebtButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -9827,7 +9845,7 @@ ELSE scm.get_cstmr_splr_name(cstmr_id) END)",
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = true;// this.rvrsApprval(dateStr);

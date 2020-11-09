@@ -29,6 +29,7 @@ namespace InternalPayments.Forms
         cadmaFunctions.NavFuncs myNav1 = new cadmaFunctions.NavFuncs();
         //public NpgsqlConnection gnrlSQLConn = new NpgsqlConnection();
         public Int64 usr_id = -1;
+        public Int64 prsn_id = -1;
         public int[] role_st_id = new int[0];
         public Int64 lgn_num = -1;
         public int Og_id = -1;
@@ -241,6 +242,8 @@ namespace InternalPayments.Forms
             Global.mnFrm.cmCde.Role_Set_IDs = this.role_st_id;
             Global.mnFrm.cmCde.User_id = this.usr_id;
             Global.mnFrm.cmCde.Org_id = this.Og_id;
+            this.prsn_id = Global.mnFrm.cmCde.getUserPrsnID(this.usr_id);
+            Global.mnFrm.cmCde.Prsn_id = this.prsn_id;
             this.hideAllPanels();
             Global.refreshRqrdVrbls();
 
@@ -252,6 +255,7 @@ namespace InternalPayments.Forms
             Global3.mnFrm.cmCde1.User_id = this.usr_id;
             Global3.mnFrm.cmCde1.Org_id = this.Og_id;
             Global3.refreshRqrdVrbls();
+            this.prsn_id = Global.mnFrm.cmCde.getUserPrsnID(this.usr_id);
 
             this.storeIDTextBox.Text = Global3.getUserStoreID().ToString();
             Global3.selectedStoreID = int.Parse(this.storeIDTextBox.Text);
@@ -3303,7 +3307,7 @@ namespace InternalPayments.Forms
                 //Create GL Lines based on item's defined accounts
                 string[] accntinf = new string[4];
                 double netamnt = 0;
-                accntinf = Global.get_ItmAccntInfo(itm_id);
+                accntinf = Global.get_ItmAccntInfo(itm_id, prsn_id);
 
                 if (itm_uom != "Number" && int.Parse(accntinf[1]) > 0 && int.Parse(accntinf[3]) > 0)
                 {
@@ -3392,7 +3396,7 @@ namespace InternalPayments.Forms
                 //Create GL Lines based on item's defined accounts
                 string[] accntinf = new string[4];
                 double netamnt = 0;
-                accntinf = Global.get_ItmAccntInfo(itm_id);
+                accntinf = Global.get_ItmAccntInfo(itm_id, prsn_id);
 
                 if (itm_uom != "Number" && int.Parse(accntinf[1]) > 0 && int.Parse(accntinf[3]) > 0)
                 {
@@ -3476,7 +3480,7 @@ namespace InternalPayments.Forms
                 pay_amnt, trns_date, orgnlTrnsID);
                 //Create GL Lines based on item's defined accounts
                 string[] accntinf = new string[4];
-                accntinf = Global.get_ItmAccntInfo(itm_id);
+                accntinf = Global.get_ItmAccntInfo(itm_id, prsn_id);
 
                 if (itm_uom != "Number" && int.Parse(accntinf[1]) > 0 && int.Parse(accntinf[3]) > 0)
                 {
@@ -3871,7 +3875,7 @@ namespace InternalPayments.Forms
                 string[] accntinf = new string[4];
                 double netamnt = 0;
                 accntinf = Global.get_ItmAccntInfo(long.Parse(
-            this.itmListViewPymnt.SelectedItems[0].SubItems[4].Text));
+            this.itmListViewPymnt.SelectedItems[0].SubItems[4].Text), Global.mnFrm.prsn_id);
 
                 netamnt = Global.mnFrm.cmCde.dbtOrCrdtAccntMultiplier(int.Parse(accntinf[1]),
                   accntinf[0].Substring(0, 1)) * (double)this.amntNumericUpDown.Value;
@@ -3894,7 +3898,7 @@ namespace InternalPayments.Forms
             {
                 string[] accntinf = new string[4];
                 double netamnt = 0;
-                accntinf = Global.get_ItmAccntInfo(itmid);
+                accntinf = Global.get_ItmAccntInfo(itmid, Global.mnFrm.prsn_id);
                 if (int.Parse(accntinf[1]) > 0 && int.Parse(accntinf[3]) > 0)
                 {
                     netamnt = Global.mnFrm.cmCde.dbtOrCrdtAccntMultiplier(int.Parse(accntinf[1]),
@@ -4741,7 +4745,6 @@ namespace InternalPayments.Forms
                 Global.mnFrm.cmCde.showMsg("Please Select a Saved Item Set First!", 0);
                 return;
             }
-
             string[] selValuesIDs = new string[this.itmSetDetListView.Items.Count];
             for (int j = 0; j < this.itmSetDetListView.Items.Count; j++)
             {
@@ -4774,7 +4777,6 @@ namespace InternalPayments.Forms
                         {
                             trnsTyp = "Purely Informational";
                         }
-
                         Global.createItmStDet(int.Parse(this.itmSetIDTextBox.Text),
                          int.Parse(selValuesIDs[i]), trnsTyp);
                     }
@@ -8040,19 +8042,11 @@ namespace InternalPayments.Forms
                 Global.mnFrm.cmCde.showMsg("Cannot Roll Back a Pay Run that was Generated from Sales!\r\nCancel the Source Sales Document Instead!", 0);
                 return;
             }
-            if (this.msPyItmStIDTextBox.Text == "" || this.msPyItmStIDTextBox.Text == "-1")
+            /*if (this.msPyItmStIDTextBox.Text == "" || this.msPyItmStIDTextBox.Text == "-1")
             {
                 Global.mnFrm.cmCde.showMsg("Please select a Mass Pay Item Set!", 0);
                 return;
-            }
-            //if (Global.hsMsPyBnRun(long.Parse(this.msPyIDTextBox.Text)) == false
-            //  || Global.hsMsPyGoneToGL(long.Parse(this.msPyIDTextBox.Text)) == false)
-            //{
-            //  Global.mnFrm.cmCde.showMsg("Cannot rollback an incompletely run mass pay!" +
-            //    "\r\nPlease complete the mass pay run first!", 0);
-            //  return;
-            //}
-
+            }*/
             if (!Global.mnFrm.cmCde.isTransPrmttd(
                               Global.mnFrm.cmCde.get_DfltCashAcnt(Global.mnFrm.cmCde.Org_id),
                               this.msPyGLDateTextBox.Text, 200))
@@ -8068,7 +8062,7 @@ namespace InternalPayments.Forms
             this.rllbckMsPyRnButton.Enabled = false;
             this.rmvPayItmMenuItem.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -8076,7 +8070,7 @@ namespace InternalPayments.Forms
                 isAnyRnng = Global.isThereANActvActnPrcss("8", "10 second");//Payments Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             this.rllbckMsPyRnButton.Enabled = true;
             this.rmvPayItmMenuItem.Enabled = true;
@@ -8539,7 +8533,24 @@ namespace InternalPayments.Forms
                //BackgroundImage.Height);
                //RectangleF destRect = new Rectangle(0, 0, nWidth, nHeight);
                //Rectangle destRect = new Rectangle(0, 0, nWidth, nHeight);
-            Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+               //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+            Image img = global::InternalPayments.Properties.Resources.actions_document_preview;
+            string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+            string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+            if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+            {
+                System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+               System.IO.FileMode.OpenOrCreate,
+               System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                Byte[] imgRead = new Byte[rs.Length];
+                rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                img = Image.FromStream(rs);
+                rs.Close();
+            }
+            else
+            {
+                img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+            }
             float picWdth = 100.00F;
             float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -9112,7 +9123,24 @@ namespace InternalPayments.Forms
                //BackgroundImage.Height);
                //RectangleF destRect = new Rectangle(0, 0, nWidth, nHeight);
                //Rectangle destRect = new Rectangle(0, 0, nWidth, nHeight);
-            Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+               //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+            Image img = global::InternalPayments.Properties.Resources.actions_document_preview;
+            string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+            string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+            if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+            {
+                System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+               System.IO.FileMode.OpenOrCreate,
+               System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                Byte[] imgRead = new Byte[rs.Length];
+                rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                img = Image.FromStream(rs);
+                rs.Close();
+            }
+            else
+            {
+                img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+            }
             float picWdth = 100.00F;
             float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -17134,6 +17162,11 @@ Are you sure you want to VOID/DELETE Concerned GL Transactions?", 1)
                     Global3.selectedStoreID = int.Parse(selVals[i]);
                 }
             }
+        }
+
+        private void groupBox13_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

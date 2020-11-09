@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="InventoryManagment/Forms/invoiceForm.cs">
+    <Files>
+      <File FileName="InventoryManagment/Forms/consgmtRcpt.cs" Line="1031" Column="60" />
+      <File FileName="InventoryManagment/Forms/invoiceForm.cs" Line="529" Column="37" />
+      <File FileName="InventoryManagment/Classes/Global.cs" Line="1925" Column="50" />
+      <File FileName="InventoryManagment/Forms/consgmtRecReturns.cs" Line="2903" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

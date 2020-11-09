@@ -119,10 +119,10 @@ namespace StoresAndInventoryManager.Forms
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.tmpltNametextBox = new System.Windows.Forms.TextBox();
             this.tmpltDesctextBox = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.tmpltNametextBox = new System.Windows.Forms.TextBox();
             this.tmpltIDtextBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.glsLabel1 = new glsLabel.glsLabel();
@@ -446,7 +446,9 @@ namespace StoresAndInventoryManager.Forms
             "Non-Merchandise Inventory",
             "Fixed Assets",
             "Expense Item",
-            "Services"});
+            "Services",
+            "VaultItem-Cash",
+            "VaultItem-NonCash"});
             this.itemTypecomboBox.Location = new System.Drawing.Point(103, 14);
             this.itemTypecomboBox.Name = "itemTypecomboBox";
             this.itemTypecomboBox.Size = new System.Drawing.Size(220, 23);
@@ -1181,6 +1183,14 @@ namespace StoresAndInventoryManager.Forms
             this.splitContainer3.SplitterDistance = 86;
             this.splitContainer3.TabIndex = 42;
             // 
+            // tmpltNametextBox
+            // 
+            this.tmpltNametextBox.Location = new System.Drawing.Point(96, 8);
+            this.tmpltNametextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tmpltNametextBox.Name = "tmpltNametextBox";
+            this.tmpltNametextBox.Size = new System.Drawing.Size(273, 21);
+            this.tmpltNametextBox.TabIndex = 6;
+            // 
             // tmpltDesctextBox
             // 
             this.tmpltDesctextBox.Location = new System.Drawing.Point(96, 30);
@@ -1212,14 +1222,6 @@ namespace StoresAndInventoryManager.Forms
             this.label18.TabIndex = 9;
             this.label18.Text = "Description";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tmpltNametextBox
-            // 
-            this.tmpltNametextBox.Location = new System.Drawing.Point(96, 8);
-            this.tmpltNametextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tmpltNametextBox.Name = "tmpltNametextBox";
-            this.tmpltNametextBox.Size = new System.Drawing.Size(273, 21);
-            this.tmpltNametextBox.TabIndex = 6;
             // 
             // tmpltIDtextBox
             // 

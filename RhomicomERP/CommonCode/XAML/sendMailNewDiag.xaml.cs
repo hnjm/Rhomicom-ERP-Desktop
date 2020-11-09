@@ -360,7 +360,7 @@ namespace CommonCode.XAML
                     }
                     else if (this.grpComboBox.Text == "Site/Location")
                     {
-                        this.grpNmTextBox.Text = cmnCde.getSiteName(int.Parse(selVals[i]));
+                        this.grpNmTextBox.Text = cmnCde.getSiteNameDesc(int.Parse(selVals[i]));
                     }
                     else if (this.grpComboBox.Text == "Person Type")
                     {
@@ -616,7 +616,7 @@ namespace CommonCode.XAML
             else if (this.grpComboBox.Text == "Site/Location")
             {
                 grpSQL = "Select distinct a.person_id From pasn.prsn_locations a Where ((a.location_id IN " +
-                    "(select z.location_id from org.org_sites_locations z where z.location_code_name ilike '" + srchCrtr + "')) and (to_timestamp('" + dateStr +
+                    "(select z.location_id from org.org_sites_locations z where REPLACE(z.location_code_name || '.' || z.site_desc, '.' || z.location_code_name,'') ilike '" + srchCrtr + "')) and (to_timestamp('" + dateStr +
                   "','YYYY-MM-DD HH24:MI:SS') between to_timestamp(a.valid_start_date|| ' 00:00:00','YYYY-MM-DD HH24:MI:SS') " +
                     "AND to_timestamp(a.valid_end_date || ' 23:59:59','YYYY-MM-DD HH24:MI:SS'))" + extrWhr + ") ORDER BY a.person_id";
             }
@@ -741,6 +741,16 @@ namespace CommonCode.XAML
                 MessageBox.Show("Receipient Address cannot be Empty!", "Rhomicom Message", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            if (this.msgTypComboBox.Text == "Email" && this.subjTextBox.Text == "")
+            {
+                MessageBox.Show("Not advisable to send Message with no subject for Bulk Messages!", "Rhomicom Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (this.msgTypComboBox.Text == "Email" && cmnCde.isAllUpper(this.subjTextBox.Text))
+            {
+                MessageBox.Show("Not advisable to use ALL CAPS in the subject for Bulk Messages!", "Rhomicom Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             string innerText = this.webBrowserEditor.doc.documentElement.innerText;
             string innerHtml = this.webBrowserEditor.doc.documentElement.innerHTML;
             if (innerText == "")
@@ -748,23 +758,15 @@ namespace CommonCode.XAML
                 cmnCde.showMsg("Cannot Send an Empty Message!", 0);
                 return;
             }
-            //if (this.bodyTextBox.Text.Length > 160
-            // && this.msgTypComboBox.Text == "SMS")
-            //{
-            //  cmnCde.showMsg("Your Number of Characters (" + this.bodyTextBox.Text.Length +
-            //    ") Exceeds the Limit for SMS (160 Chars)", 0);
-            //  return;
-            //  //this.bodyTextBox.Text = this.bodyTextBox.Text.Substring(0, 160);
-            ////}
-            //if (this.msgTypComboBox.Text == "SMS")
-            //{
-            //    this.toTextBox.Text = this.toTextBox.Text + ";" + this.ccTextBox.Text + ";" + this.bccTextBox.Text;
-            //}
+            if (this.msgTypComboBox.Text == "Email" && cmnCde.isAllUpper(innerText))
+            {
+                MessageBox.Show("Not advisable to use ALL CAPS in the Message Body for Bulk Messages!", "Rhomicom Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             this.toTextBox.Text = this.toTextBox.Text.Replace(",", ";").Replace("\r\n", "");
             this.ccTextBox.Text = this.ccTextBox.Text.Replace(",", ";").Replace("\r\n", "");
             this.bccTextBox.Text = this.bccTextBox.Text.Replace(",", ";").Replace("\r\n", "");
             this.attchMntsTextBox.Text = this.attchMntsTextBox.Text.Replace(",", ";").Replace("\r\n", "");
-            string errMsg = "";
             try
             {
                 this.mailLabel.Visibility = System.Windows.Visibility.Visible;

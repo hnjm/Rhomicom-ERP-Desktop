@@ -3888,7 +3888,7 @@ and round(f.smmry_amnt,2)>0 and a.invc_hdr_id=f.src_doc_hdr_id and f.src_doc_typ
         public static DataSet get_DocSmryLns(long dochdrID, string docTyp)
         {
             string strSql = "SELECT a.smmry_id, CASE WHEN a.smmry_type='3Discount' THEN 'Discount' ELSE a.smmry_name END, " +
-             "a.smmry_amnt, a.code_id_behind, a.smmry_type, a.auto_calc,REPLACE(REPLACE(a.smmry_type,'2Tax','3Tax'),'3Discount','2Discount') smtyp " +
+             "a.smmry_amnt, a.code_id_behind, a.smmry_type, a.auto_calc,REPLACE(REPLACE(a.smmry_type,'2Tax','3Tax'),'3Discount','2Discount') smtyZp " +
              "FROM scm.scm_doc_amnt_smmrys a " +
              "WHERE((a.src_doc_hdr_id = " + dochdrID +
              ") and (a.src_doc_type='" + docTyp + "')) ORDER BY 7";
@@ -5743,19 +5743,6 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
         #endregion
 
         #region "DEFAULT ACCOUNTS..."
-        public static DataSet get_One_DfltAcnt(int orgID)
-        {
-            string strSql = "SELECT row_id, itm_inv_asst_acnt_id, cost_of_goods_acnt_id, expense_acnt_id, " +
-                  "prchs_rtrns_acnt_id, rvnu_acnt_id, sales_rtrns_acnt_id, sales_cash_acnt_id, " +
-                  "sales_check_acnt_id, sales_rcvbl_acnt_id, rcpt_cash_acnt_id, " +
-                  "rcpt_lblty_acnt_id " +
-             "FROM scm.scm_dflt_accnts a " +
-             "WHERE(a.org_id = " + orgID + ")";
-
-            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
-            return dtst;
-        }
-
         public static double get_PyblPrepayDocAppldAmnt(long prepayDocID)
         {
             string strSql = "SELECT invc_amnt_appld_elswhr " +
@@ -5805,7 +5792,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltBadDbtAcnt(int orgID)
         {
-            string strSql = "SELECT bad_debt_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", bad_debt_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5819,7 +5806,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltRcvblAcnt(int orgID)
         {
-            string strSql = "SELECT sales_rcvbl_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_rcvbl_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5833,7 +5820,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltInvAcnt(int orgID)
         {
-            string strSql = "SELECT itm_inv_asst_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", itm_inv_asst_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5847,7 +5834,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltCSGAcnt(int orgID)
         {
-            string strSql = "SELECT cost_of_goods_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", cost_of_goods_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5861,7 +5848,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltExpnsAcnt(int orgID)
         {
-            string strSql = "SELECT expense_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", expense_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5875,7 +5862,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltRvnuAcnt(int orgID)
         {
-            string strSql = "SELECT rvnu_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rvnu_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5889,7 +5876,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltSRAcnt(int orgID)
         {
-            string strSql = "SELECT sales_rtrns_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_rtrns_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5918,7 +5905,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltCashAcnt(int orgID)
         {
-            string strSql = "SELECT sales_cash_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_cash_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5932,7 +5919,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltCheckAcnt(int orgID)
         {
-            string strSql = "SELECT sales_check_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", sales_check_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5944,23 +5931,9 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
             return -1;
         }
 
-        ////public static int get_DfltCashAcnt(int orgID)
-        //  {
-        //      string strSql = "SELECT rcpt_cash_acnt_id " +
-        //       "FROM scm.scm_dflt_accnts a " +
-        //       "WHERE(a.org_id = " + orgID + ")";
-
-        //      DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
-        //      if (dtst.Tables[0].Rows.Count > 0)
-        //      {
-        //          return int.Parse(dtst.Tables[0].Rows[0][0].ToString());
-        //      }
-        //      return -1;
-        //  }
-
         public static int get_DfltAdjstLbltyAcnt(int orgID)
         {
-            string strSql = "SELECT inv_adjstmnts_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", inv_adjstmnts_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5974,7 +5947,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltAccPyblAcnt(int orgID)
         {
-            string strSql = "SELECT rcpt_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rcpt_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -5988,7 +5961,7 @@ a.rcvbl_smmry_type !='7Total Payments Made' and a.rcvbl_smmry_type !='8Outstandi
 
         public static int get_DfltPurchRtrnAcnt(int orgID)
         {
-            string strSql = "SELECT prchs_rtrns_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", prchs_rtrns_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 
@@ -6030,7 +6003,7 @@ incrs_dcrs, costing_accnt_id, auto_calc, code_behind_id
 
         public static int get_DfltPyblAcnt(int orgID)
         {
-            string strSql = "SELECT rcpt_lblty_acnt_id " +
+            string strSql = "SELECT org.get_dflt_accnt_id(" + Global.mnFrm.prsn_id + ", rcpt_lblty_acnt_id) " +
              "FROM scm.scm_dflt_accnts a " +
              "WHERE(a.org_id = " + orgID + ")";
 

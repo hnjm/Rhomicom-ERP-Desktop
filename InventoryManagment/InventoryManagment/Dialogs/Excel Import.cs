@@ -496,7 +496,8 @@ namespace StoresAndInventoryManager.Forms
       double maxQty = 0.00;
 
       if (parItemType == "" || !(parItemType == "Merchandise Inventory" || parItemType == "Expense Item" || parItemType == "Fixed Assets" ||
-          parItemType == "Services" || parItemType == "Non-Merchandise Inventory"))
+          parItemType == "Services" || parItemType == "Non-Merchandise Inventory" || parItemType == "VaultItem-Cash"
+           || parItemType == "VaultItem-NonCash"))
       {
         Global.mnFrm.cmCde.showMsg("parItemType/" + parItemType, 0);
         return 0;
@@ -524,7 +525,7 @@ namespace StoresAndInventoryManager.Forms
         Global.mnFrm.cmCde.showMsg("parInvAccnt" + "/" + parInvAccnt + "/" + parItemType + "/" + Global.mnFrm.cmCde.getAccntID(parInvAccnt, Global.mnFrm.cmCde.Org_id), 0);
         return 0;
       }
-      else if (parCOGSAccnt == "" && !(parItemType.Equals("Expense Item") || parItemType.Equals("Services")))
+      /*else if (parCOGSAccnt == "" && !(parItemType.Equals("Expense Item") || parItemType.Equals("Services")))
       {
         Global.mnFrm.cmCde.showMsg("parCOGSAccnt/" + parCOGSAccnt + "/" + parItemType, 0);
         return 0;
@@ -536,7 +537,7 @@ namespace StoresAndInventoryManager.Forms
       {
         Global.mnFrm.cmCde.showMsg("parCOGSAccnt/" + parCOGSAccnt + "/" + Global.mnFrm.cmCde.getAccntID(parCOGSAccnt, Global.mnFrm.cmCde.Org_id), 0);
         return 0;
-      }
+      }*/
       else if (parSalesRevAccnt == "" || (Global.mnFrm.cmCde.getAccntID(parSalesRevAccnt, Global.mnFrm.cmCde.Org_id) <= 0
         || Global.mnFrm.cmCde.isAccntContra(Global.mnFrm.cmCde.getAccntID(parSalesRevAccnt, Global.mnFrm.cmCde.Org_id)) == "1"
         || Global.mnFrm.cmCde.getAccntType(Global.mnFrm.cmCde.getAccntID(parSalesRevAccnt, Global.mnFrm.cmCde.Org_id)) != "R"))
@@ -544,7 +545,7 @@ namespace StoresAndInventoryManager.Forms
         Global.mnFrm.cmCde.showMsg("parSalesRevAccnt/" + parSalesRevAccnt + "/" + Global.mnFrm.cmCde.getAccntID(parSalesRevAccnt, Global.mnFrm.cmCde.Org_id), 0);
         return 0;
       }
-      else if (parSalesRetAccnt == "" || (Global.mnFrm.cmCde.getAccntID(parSalesRetAccnt, Global.mnFrm.cmCde.Org_id) <= 0
+      /*else if (parSalesRetAccnt == "" || (Global.mnFrm.cmCde.getAccntID(parSalesRetAccnt, Global.mnFrm.cmCde.Org_id) <= 0
         || Global.mnFrm.cmCde.isAccntContra(Global.mnFrm.cmCde.getAccntID(parSalesRetAccnt, Global.mnFrm.cmCde.Org_id)) != "1"
         || Global.mnFrm.cmCde.getAccntType(Global.mnFrm.cmCde.getAccntID(parSalesRetAccnt, Global.mnFrm.cmCde.Org_id)) != "R"))
       {
@@ -557,7 +558,7 @@ namespace StoresAndInventoryManager.Forms
       {
         Global.mnFrm.cmCde.showMsg("parPurchRetAccnt/" + parPurchRetAccnt + "/" + Global.mnFrm.cmCde.getAccntID(parPurchRetAccnt, Global.mnFrm.cmCde.Org_id), 0);
         return 0;
-      }
+      }*/
       else if (parExpAccnt == "" || (Global.mnFrm.cmCde.getAccntID(parExpAccnt, Global.mnFrm.cmCde.Org_id) <= 0
         || Global.mnFrm.cmCde.isAccntContra(Global.mnFrm.cmCde.getAccntID(parExpAccnt, Global.mnFrm.cmCde.Org_id)) == "1"
         || Global.mnFrm.cmCde.getAccntType(Global.mnFrm.cmCde.getAccntID(parExpAccnt, Global.mnFrm.cmCde.Org_id)) != "EX"))

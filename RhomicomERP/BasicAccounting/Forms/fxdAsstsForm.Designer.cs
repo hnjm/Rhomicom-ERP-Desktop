@@ -343,6 +343,7 @@
             this.dataGridViewButtonColumn6 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label27 = new System.Windows.Forms.Label();
             this.panel7.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trnsDataGridView)).BeginInit();
@@ -1723,6 +1724,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.AutoScroll = true;
             this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.tabPage4.Controls.Add(this.assetRmLifeTextBox);
             this.tabPage4.Controls.Add(this.label5);
@@ -1792,7 +1794,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1157, 187);
+            this.tabPage5.Size = new System.Drawing.Size(822, 187);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "MEASURED RECORDS SETUP";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1830,7 +1832,7 @@
             this.pmStpsDataGridView.Name = "pmStpsDataGridView";
             this.pmStpsDataGridView.ReadOnly = true;
             this.pmStpsDataGridView.RowHeadersWidth = 21;
-            this.pmStpsDataGridView.Size = new System.Drawing.Size(1148, 147);
+            this.pmStpsDataGridView.Size = new System.Drawing.Size(813, 147);
             this.pmStpsDataGridView.TabIndex = 3;
             this.pmStpsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pmStpsDataGridView_CellContentClick);
             this.pmStpsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.pmStpsDataGridView_CellValueChanged);
@@ -2609,6 +2611,7 @@
             this.tabPage1.Controls.Add(this.importAssetsButton);
             this.tabPage1.Controls.Add(this.exptAssetsButton);
             this.tabPage1.Controls.Add(this.groupBox10);
+            this.tabPage1.Controls.Add(this.label27);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -3404,6 +3407,14 @@
             this.dataGridViewTextBoxColumn14.HeaderText = "Doc. Number";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             // 
+            // label27
+            // 
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.Location = new System.Drawing.Point(774, 282);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(65, 188);
+            this.label27.TabIndex = 193;
+            // 
             // fxdAsstsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3765,5 +3776,6 @@
     private System.Windows.Forms.DataGridViewButtonColumn Column42;
     private System.Windows.Forms.DataGridViewTextBoxColumn Column44;
     private System.Windows.Forms.TextBox textBox1;
-  }
+        private System.Windows.Forms.Label label27;
+    }
 }

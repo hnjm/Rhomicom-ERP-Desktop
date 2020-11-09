@@ -38,7 +38,7 @@ namespace InternalPayments.Classes
     /*32*/"Edit Pay Item Assignments", "Delete Pay Item Assignments",
     /*34*/"Add Pay Item Assignments", "Edit Pay Item Assignments", "Delete Pay Item Assignments",
     /*37*/"View Global Values", "Add Global Values","Edit Global Values","Delete Global Values",
-    /*41*/"View other User's Mass Pays"                                         };
+    /*41*/"View other User's Mass Pays"};
         public static string currentPanel = "";
 
         #endregion
@@ -121,8 +121,7 @@ namespace InternalPayments.Classes
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
-        public static void createItmSt(int orgid, string itmsetname,
-        string itmstdesc, bool isenbled, bool isdflt, bool usesSQL, string sqlTxt)
+        public static void createItmSt(int orgid, string itmsetname, string itmstdesc, bool isenbled, bool isdflt, bool usesSQL, string sqlTxt)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = "INSERT INTO pay.pay_itm_sets_hdr(" +
@@ -140,9 +139,7 @@ namespace InternalPayments.Classes
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
-        public static void createItmBals(long blsitmid, double netbals,
-        long prsn_id,
-        string balsDate, long py_trns_id)
+        public static void createItmBals(long blsitmid, double netbals, long prsn_id, string balsDate, long py_trns_id)
         {
             balsDate = DateTime.ParseExact(
          balsDate, "dd-MMM-yyyy HH:mm:ss",
@@ -167,9 +164,7 @@ namespace InternalPayments.Classes
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
-        public static void createItmBalsRetro(long blsitmid, double netbals,
-       long prsn_id,
-       string balsDate, long py_trns_id)
+        public static void createItmBalsRetro(long blsitmid, double netbals, long prsn_id, string balsDate, long py_trns_id)
         {
             balsDate = DateTime.ParseExact(
          balsDate, "dd-MMM-yyyy HH:mm:ss",
@@ -193,7 +188,6 @@ namespace InternalPayments.Classes
                               "', " + Global.myPay.user_id + ", '" + dateStr + "', '" + src_trns.Replace("'", "''") + "')";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
-
 
         public static void createPaymntLine(long prsnid, long itmid, double amnt, string paydate,
         string paysource, string trnsType, long msspyid, string paydesc, int crncyid, string dateStr,
@@ -683,8 +677,8 @@ age(now(),to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS')) > interval '
             string updtSQL = "UPDATE pay.pay_balsitm_bals " +
             "SET last_update_by = " + Global.myPay.user_id +
             ", last_update_date = '" + dateStr +
-            "', bals_amount = bals_amount +" + netAmnt +
-            ", source_trns_ids = source_trns_ids || '" + py_trns_id +
+            "', bals_amount = " + netAmnt +
+            ", source_trns_ids = '," + py_trns_id +
             ",' WHERE (to_timestamp(bals_date,'YYYY-MM-DD') = to_timestamp('" + balsDate +
             "','YYYY-MM-DD') and bals_itm_id = " + blsItmID + " and person_id = " + prsn_id + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
@@ -721,8 +715,8 @@ age(now(),to_timestamp(a.last_update_date,'YYYY-MM-DD HH24:MI:SS')) > interval '
             string updtSQL = "UPDATE pay.pay_balsitm_bals_retro " +
             "SET last_update_by = " + Global.myPay.user_id +
             ", last_update_date = '" + dateStr +
-            "', bals_amount = bals_amount +" + netAmnt +
-            ", source_trns_ids = source_trns_ids || '" + py_trns_id +
+            "', bals_amount = " + netAmnt +
+            ", source_trns_ids = '," + py_trns_id +
             ",' WHERE (to_timestamp(bals_date,'YYYY-MM-DD') = to_timestamp('" + balsDate +
             "','YYYY-MM-DD') and bals_itm_id = " + blsItmID + " and person_id = " + prsn_id + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
@@ -3241,7 +3235,6 @@ to_char(to_timestamp(a.paymnt_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI
              "LEFT OUTER JOIN prs.prsn_names_nos c on a.person_id = c.person_id " +
              "WHERE(a.mass_pay_id = " + mspyid + ") ORDER BY a.pay_trns_id LIMIT " + limit_size +
                 " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
-
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             Global.mnFrm.mspydt_SQL = strSql;
             return dtst;
@@ -3250,13 +3243,12 @@ to_char(to_timestamp(a.paymnt_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI
         public static DataSet getMsPyToRllBck(long mspyid)
         {
             string strSql = @"SELECT a.pay_trns_id, a.person_id, a.item_id, a.amount_paid, 
-to_char(to_timestamp(a.paymnt_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS'), a.paymnt_source, " +
+            to_char(to_timestamp(a.paymnt_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS'), a.paymnt_source, " +
                   "a.pay_trns_type, a.pymnt_desc, -1, a.crncy_id, c.local_id_no, trim(c.title || ' ' || c.sur_name || " +
                "', ' || c.first_name || ' ' || c.other_names) fullname, b.item_code_name, b.item_value_uom, b.item_maj_type, b.item_min_type " +
              "FROM (pay.pay_itm_trnsctns a LEFT OUTER JOIN org.org_pay_items b ON a.item_id = b.item_id) " +
              "LEFT OUTER JOIN prs.prsn_names_nos c on a.person_id = c.person_id " +
              "WHERE(a.mass_pay_id = " + mspyid + ") ORDER BY a.pay_trns_id ";
-
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             return dtst;
         }
@@ -3326,7 +3318,8 @@ to_char(to_timestamp(a.paymnt_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI
             if (searchIn == "Mass Pay Run Name")
             {
                 strSql = @"SELECT a.mass_pay_id, a.mass_pay_name, a.mass_pay_desc, a.run_status, 
-        to_char(to_timestamp(a.mass_pay_trns_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS'), a.prs_st_id, a.itm_st_id, a.sent_to_gl, a.gl_date " +
+        to_char(to_timestamp(a.mass_pay_trns_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS'), a.prs_st_id, a.itm_st_id, a.sent_to_gl, 
+        to_char(to_timestamp(a.gl_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI:SS') " +
                               "FROM pay.pay_mass_pay_run_hdr a " +
                               "WHERE ((a.mass_pay_name ilike '" + searchWord.Replace("'", "''") +
                "') AND (org_id = " + orgID + ")" + extrWhr + ") ORDER BY a.mass_pay_id DESC LIMIT " + limit_size +
@@ -3491,7 +3484,7 @@ d.accnt_id, d.accnt_name, b.dbt_amount, b.crdt_amount, COALESCE(round(SUM(a.dbt_
 COALESCE(round(SUM(a.crdt_amount),2),0)
 FROM pay.pay_gl_interface a, accb.accb_trnsctn_details b, accb.accb_trnsctn_batches c, accb.accb_chart_of_accnts d
 WHERE (a.accnt_id = d.accnt_id and a.accnt_id = b.accnt_id and b.batch_id=c.batch_id and 
-d.org_id=" + orgID + @" and c.batch_source ilike 'Inventory%'
+d.org_id=" + orgID + @" and c.batch_source ilike 'Internal%'
 and b.source_trns_ids like '%,' || a.interface_id || ',%') 
 GROUP BY b.transctn_id, c.batch_name, c.batch_id, b.trnsctn_date, 
 d.accnt_id, d.accnt_name, b.dbt_amount, b.crdt_amount
@@ -4148,7 +4141,8 @@ and '" + intrfcids + "' like '%,' || a.interface_id || ',%') ";
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             return dtst;
         }
-        public static void updtActnPrcss(int prcsID)
+
+        /*public static void updtActnPrcss(int prcsID)
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             Global.mnFrm.cmCde.ignorAdtTrail = true;
@@ -4172,7 +4166,7 @@ and '" + intrfcids + "' like '%,' || a.interface_id || ',%') ";
                 return bool.Parse(dtst.Tables[0].Rows[0][0].ToString());
             }
             return false;
-        }
+        }*/
 
         public static DataSet get_Infc_Trns(string searchWord, string searchIn,
       Int64 offset, int limit_size, int orgID, string dte1, string dte2,
@@ -4920,10 +4914,10 @@ to_char(to_timestamp(a.paymnt_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY HH24:MI
             return "";
         }
 
-        public static string[] get_ItmAccntInfo(long itmID)
+        public static string[] get_ItmAccntInfo(long itmID, long prsnID)
         {
             string[] retSql = { "Q", "-123", "Q", "-123" };
-            string strSql = "SELECT a.incrs_dcrs_cost_acnt, a.cost_accnt_id, a.incrs_dcrs_bals_acnt, a.bals_accnt_id " +
+            string strSql = "SELECT a.incrs_dcrs_cost_acnt, org.get_dflt_accnt_id(" + prsnID + ", a.cost_accnt_id), a.incrs_dcrs_bals_acnt, org.get_dflt_accnt_id(" + prsnID + ", a.bals_accnt_id) " +
          "FROM org.org_pay_items a " +
          "WHERE(a.item_id = " + itmID + ")";
 

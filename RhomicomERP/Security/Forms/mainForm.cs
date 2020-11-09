@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using SystemAdministration.Classes;
 using SystemAdministration.Dialogs;
 using Npgsql;
+using Microsoft.VisualBasic;
+using Excel = Microsoft.Office.Interop.Excel;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace SystemAdministration.Forms
 {
@@ -124,6 +127,7 @@ namespace SystemAdministration.Forms
         private void mainForm_Load(object sender, EventArgs e)
         {
             this.accDndLabel.Visible = false;
+            this.waitLabel.Visible = false;
             Global.mySecurity.Initialize();
             Global.myNwMainFrm = this;
             //Global.myNwMainFrm.cmmnCode.pgSqlConn = this.gnrlSQLConn;
@@ -209,13 +213,32 @@ namespace SystemAdministration.Forms
             System.Windows.Forms.Application.DoEvents();
             Global.refreshRqrdVrbls();
             Global.mySecurity.loadMyRolesNMsgtyps();
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID("System Administration", Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                this.accDndLabel.Visible = true;
+                this.waitLabel.Visible = true;
+                System.Windows.Forms.Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
+                int psblVlID = Global.myNwMainFrm.cmmnCode.getPssblValID("System Administration", Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules"));
+                if (psblVlID > 0)
+                {
+                    Global.enblPssblValForLov(psblVlID, true);
+                }
+                this.loadRolesButton_Click(this.loadRolesButton, e);
+                //this.timer1_Tick(this.timer1, e);
+            }
             System.Windows.Forms.Application.DoEvents();
+
             bool vwAct = Global.myNwMainFrm.cmmnCode.test_prmssns(Global.dfltPrvldgs[0]);
             if (!vwAct)
             {
                 this.Controls.Clear();
                 this.Controls.Add(this.accDndLabel);
+                this.Controls.Add(this.waitLabel);
                 this.accDndLabel.Visible = true;
+                this.waitLabel.Visible = true;
+                System.Windows.Forms.Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
                 return;
             }
 
@@ -339,7 +362,7 @@ namespace SystemAdministration.Forms
                       "ftp://127.0.0.1", "ftpuser", "123",
                       21, "/test_database", false, Global.myNwMainFrm.cmmnCode.getPGBinDrctry(),
                       Global.myNwMainFrm.cmmnCode.getBackupDrctry(),
-                      "1", "9600", "1200", "");
+                      "1", "9600", "1200", "", "74.125.206.109");
                 }
                 this.loadEmailSrvrPanel();
             }
@@ -631,7 +654,8 @@ namespace SystemAdministration.Forms
                 dtst.Tables[0].Rows[i][0].ToString(), dtst.Tables[0].Rows[i][1].ToString(),
                 dtst.Tables[0].Rows[i][2].ToString(), dtst.Tables[0].Rows[i][3].ToString(),
         dtst.Tables[0].Rows[i][4].ToString(),
-        dtst.Tables[0].Rows[i][5].ToString() });
+        dtst.Tables[0].Rows[i][5].ToString(),
+        dtst.Tables[0].Rows[i][6].ToString() });
                 this.userListView.Items.Add(nwItm);
             }
             this.correctUsrNavLbls(dtst);
@@ -1077,7 +1101,7 @@ namespace SystemAdministration.Forms
               "<br/><br/>Your Login Details have been changed as follows:<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Username: " +
               this.userListView.SelectedItems[0].SubItems[1].Text +
               "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Password: " + nwPswd +
-              "<br/>Please login immediately to change it!<br/>Thank you!", prsnID.ToString()+"Pwd", ref errMsg);
+              "<br/>Please login immediately to change it!<br/>Thank you!", prsnID.ToString() + "Pwd", ref errMsg);
             this.mailLabel.Visible = false;
             System.Windows.Forms.Application.DoEvents();
             if (emlRes)
@@ -2937,6 +2961,10 @@ namespace SystemAdministration.Forms
             this.smtpClientTextBox.ReadOnly = true;
             this.smtpClientTextBox.BackColor = Color.WhiteSmoke;
 
+            this.smtpIPTextBox.Text = "";
+            this.smtpIPTextBox.ReadOnly = true;
+            this.smtpIPTextBox.BackColor = Color.WhiteSmoke;
+
             this.smsDataGridView.ReadOnly = true;
             this.smsDataGridView.BackColor = Color.WhiteSmoke;
 
@@ -3019,6 +3047,9 @@ namespace SystemAdministration.Forms
             this.smtpClientTextBox.Text = "";
             this.smtpClientTextBox.ReadOnly = false;
             this.smtpClientTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.smtpIPTextBox.Text = "";
+            this.smtpIPTextBox.ReadOnly = false;
+            this.smtpIPTextBox.BackColor = Color.FromArgb(255, 255, 118);
 
             this.emailUnameTextBox.Text = "";
             this.emailUnameTextBox.ReadOnly = false;
@@ -3096,6 +3127,8 @@ namespace SystemAdministration.Forms
             this.addEmlSvrButton.Enabled = false;
             this.smtpClientTextBox.ReadOnly = false;
             this.smtpClientTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.smtpIPTextBox.ReadOnly = false;
+            this.smtpIPTextBox.BackColor = Color.FromArgb(255, 255, 118);
 
             this.emailUnameTextBox.ReadOnly = false;
             this.emailUnameTextBox.BackColor = Color.FromArgb(255, 255, 118);
@@ -3176,12 +3209,20 @@ namespace SystemAdministration.Forms
                 this.ftpBaseDirTextBox.Text = dtst.Tables[0].Rows[i][11].ToString();
                 this.ftpHomeDirTextBox.Text = dtst.Tables[0].Rows[i][18].ToString();
                 this.enforceFTPCheckBox.Checked = Global.myNwMainFrm.cmmnCode.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][12].ToString());
-                //this.pgDirTextBox.Text = dtst.Tables[0].Rows[i][13].ToString();
-                this.pgDirTextBox.Text = Global.myNwMainFrm.cmmnCode.getPGBinDrctry();
-                this.bckpFileDirTextBox.Text = Global.myNwMainFrm.cmmnCode.getBackupDrctry();
+                this.pgDirTextBox.Text = dtst.Tables[0].Rows[i][13].ToString();
+                if (!System.IO.Directory.Exists(this.pgDirTextBox.Text))
+                {
+                    this.pgDirTextBox.Text = Global.myNwMainFrm.cmmnCode.getPGBinDrctry();
+                }
+                this.bckpFileDirTextBox.Text = dtst.Tables[0].Rows[i][14].ToString();
+                if (!System.IO.Directory.Exists(this.bckpFileDirTextBox.Text))
+                {
+                    this.bckpFileDirTextBox.Text = Global.myNwMainFrm.cmmnCode.getBackupDrctry();
+                }
                 this.comPortComboBox.Text = dtst.Tables[0].Rows[i][15].ToString();
                 this.baudRateComboBox.Text = dtst.Tables[0].Rows[i][16].ToString();
                 this.timeoutComboBox.Text = dtst.Tables[0].Rows[i][17].ToString();
+                this.smtpIPTextBox.Text = dtst.Tables[0].Rows[i][19].ToString();
 
                 this.smsDataGridView.Rows.Clear();
                 this.smsDataGridView.RowCount = 10;
@@ -3366,6 +3407,7 @@ namespace SystemAdministration.Forms
             }
             if (this.smtpClientTextBox.Text == "" || this.emailUnameTextBox.Text == ""
               || this.emailPswdTextBox.Text == "" || this.smtpPortNmUpDown.Value <= 0
+              ||this.smtpIPTextBox.Text==""
             )
             {
                 Global.myNwMainFrm.cmmnCode.showMsg("Please fill all required fields!", 0);
@@ -3397,7 +3439,8 @@ namespace SystemAdministration.Forms
                   this.ftpServerTextBox.Text, this.ftpUnmTextBox.Text, this.ftpPswdTextBox.Text,
                   (int)this.ftpPortNumUpDown.Value, this.ftpBaseDirTextBox.Text,
                   this.enforceFTPCheckBox.Checked, this.pgDirTextBox.Text, this.bckpFileDirTextBox.Text,
-                  this.comPortComboBox.Text, this.baudRateComboBox.Text, this.timeoutComboBox.Text, this.ftpHomeDirTextBox.Text);
+                  this.comPortComboBox.Text, this.baudRateComboBox.Text, this.timeoutComboBox.Text,
+                  this.ftpHomeDirTextBox.Text, this.smtpIPTextBox.Text);
                 this.saveEmlSvrButton.Enabled = true;
                 this.addEmlSvrButton.Enabled = true;
                 this.editEmlSvrButton.Enabled = true;
@@ -3419,7 +3462,8 @@ namespace SystemAdministration.Forms
                   this.ftpServerTextBox.Text, this.ftpUnmTextBox.Text, this.ftpPswdTextBox.Text,
                   (int)this.ftpPortNumUpDown.Value, this.ftpBaseDirTextBox.Text,
                   this.enforceFTPCheckBox.Checked, this.pgDirTextBox.Text, this.bckpFileDirTextBox.Text,
-                  this.comPortComboBox.Text, this.baudRateComboBox.Text, this.timeoutComboBox.Text, this.ftpHomeDirTextBox.Text);
+                  this.comPortComboBox.Text, this.baudRateComboBox.Text, this.timeoutComboBox.Text, 
+                  this.ftpHomeDirTextBox.Text, this.smtpIPTextBox.Text);
                 this.saveEmlSvrButton.Enabled = false;
                 this.addEmlSvrButton.Enabled = true;
                 this.editEmlSvrButton.Enabled = true;
@@ -3632,7 +3676,21 @@ namespace SystemAdministration.Forms
                 dtst.Tables[0].Rows[i][0].ToString(), dtst.Tables[0].Rows[i][1].ToString(),
                 dtst.Tables[0].Rows[i][2].ToString(), dtst.Tables[0].Rows[i][3].ToString(),
                 dtst.Tables[0].Rows[i][4].ToString().ToUpper(),dtst.Tables[0].Rows[i][5].ToString(),
-                dtst.Tables[0].Rows[i][6].ToString()});
+                dtst.Tables[0].Rows[i][6].ToString(),
+                dtst.Tables[0].Rows[i][7].ToString(),
+                dtst.Tables[0].Rows[i][8].ToString()});
+                if (dtst.Tables[0].Rows[i][2].ToString() == "" && dtst.Tables[0].Rows[i][4].ToString().ToUpper() == "TRUE")
+                {
+                    nwItm.BackColor = Color.Lime;
+                }
+                else if (dtst.Tables[0].Rows[i][4].ToString().ToUpper() == "FALSE")
+                {
+                    nwItm.BackColor = Color.Red;
+                }
+                else if (dtst.Tables[0].Rows[i][2].ToString() != "" && dtst.Tables[0].Rows[i][4].ToString().ToUpper() == "TRUE")
+                {
+                    nwItm.BackColor = Color.LightGray;
+                }
                 this.loginsListView.Items.Add(nwItm);
             }
             this.correctLgnsNavLbls(dtst);
@@ -4128,7 +4186,7 @@ namespace SystemAdministration.Forms
                 return;
             }
             addUserDiag nwDiag = new addUserDiag();
-            nwDiag.uNameTextBox.ReadOnly = true;
+            nwDiag.uNameTextBox.ReadOnly = false;
             nwDiag.uNameTextBox.Text = this.userListView.SelectedItems[0].SubItems[1].Text;
             if (long.Parse(this.userListView.SelectedItems[0].SubItems[4].Text) > 0)
             {
@@ -4145,6 +4203,8 @@ namespace SystemAdministration.Forms
             nwDiag.usrVldStrtDteTextBox.Text = this.usrVldStrtDteTextBox.Text;
             nwDiag.usrVldEndDteTextBox.Text = this.usrVldEndDteTextBox.Text;
             nwDiag.modulesBaughtComboBox.Text = this.userListView.SelectedItems[0].SubItems[6].Text;
+            nwDiag.usrTrnsCodeTextBox.Text = this.userListView.SelectedItems[0].SubItems[7].Text;
+            nwDiag.usrIDTextBox.Text = long.Parse(this.userListView.SelectedItems[0].SubItems[3].Text).ToString();
             DialogResult dgres = nwDiag.ShowDialog();
             if (dgres == DialogResult.OK)
             {
@@ -4367,7 +4427,7 @@ namespace SystemAdministration.Forms
                 string timeStr = Global.myNwMainFrm.cmmnCode.getDB_Date_time().Replace(" ", "").Replace(":", "").Replace("-", "").ToLower();
                 strSB.Append("pg_dump.exe --host " + hostnm +
                   " --port " + CommonCode.CommonCodes.Db_port +
-                  " --username postgres --format tar --blobs --verbose --file ");
+                  " --username postgres --format c --blobs --verbose --file ");
                 strSB.Append("\"" + this.bckpFileDirTextBox.Text + "\\" + dbnm + timeStr + ".backup\"");
                 strSB.Append(" \"" + dbnm + "\"\r\n\r\n");
                 strSB.Append("\r\n\r\nPAUSE");
@@ -4512,6 +4572,14 @@ namespace SystemAdministration.Forms
               "\r\nContent of all Accounting LOVs Especially \r\n1. Transactions Date Limit 1" +
             "\r\n2. Transactions Date Limit 2 \r\n3.Transactions not Allowed Days " +
             "\r\n4.Transactions not Allowed Dates\r\n5.Transactions Amount Breakdown Descriptions", 3);
+            try
+            {
+                System.Windows.Forms.Application.Restart();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.Application.Restart();
+            }
         }
 
         private void userListView_KeyDown(object sender, KeyEventArgs e)
@@ -4921,6 +4989,321 @@ namespace SystemAdministration.Forms
             this.loadPolicyPanel();
 
         }
+
+        private void frcLgoutMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.loginsListView.SelectedItems.Count <= 0)
+            {
+                Global.myNwMainFrm.cmmnCode.showMsg("Please select the Logon(s) to Logout!", 0);
+                return;
+            }
+            if (Global.myNwMainFrm.cmmnCode.showMsg("Are you sure you want to LOGOUT the selected LOG-ONS?" +
+       "\r\nThis action cannot be undone!", 1) == DialogResult.No)
+            {
+                //Global.myNwMainFrm.cmmnCode.showMsg("Operation Cancelled!", 4);
+                return;
+            }
+            for (int i = 0; i < this.loginsListView.SelectedItems.Count; i++)
+            {
+                long usrID = long.Parse(this.loginsListView.SelectedItems[i].SubItems[6].Text);
+                Global.myNwMainFrm.cmmnCode.adminForceLogoutLgns(usrID);
+            }
+            this.refreshLgnsButton.PerformClick();
+        }
+
+        private void exprtRolesButton_Click(object sender, EventArgs e)
+        {
+            string rspnse = Interaction.InputBox("How many Roles/Priviledges will you like to Export?" +
+            "\r\n1=No Roles/Priviledges(Empty Template)" +
+            "\r\n2=All Roles/Priviledges" +
+          "\r\n3-Infinity=Specify the exact number of Roles/Priviledges to Export\r\n",
+            "Rhomicom", "1", (Global.myNwMainFrm.cmmnCode.myComputer.Screen.Bounds.Width / 2) - 170,
+            (Global.myNwMainFrm.cmmnCode.myComputer.Screen.Bounds.Height / 2) - 100);
+            if (rspnse.Equals(string.Empty) || rspnse.Equals(null))
+            {
+                //Global.myNwMainFrm.cmmnCode.showMsg("Operation Cancelled!", 4);
+                return;
+            }
+            int rsponse = 0;
+            bool rsps = int.TryParse(rspnse, out rsponse);
+            if (rsps == false)
+            {
+                Global.myNwMainFrm.cmmnCode.showMsg("Invalid Option! Expecting 1-Infinity", 4);
+                return;
+            }
+            if (rsponse < 1)
+            {
+                Global.myNwMainFrm.cmmnCode.showMsg("Invalid Option! Expecting 1-Infinity", 4);
+                return;
+            }
+            this.exprtRolesTmp(rsponse);
+        }
+
+        private void exprtRolesTmp(int exprtTyp)
+        {
+            System.Windows.Forms.Application.DoEvents();
+            Global.myNwMainFrm.cmmnCode.clearPrvExclFiles();
+            Global.myNwMainFrm.cmmnCode.exclApp = new Microsoft.Office.Interop.Excel.Application();
+            Global.myNwMainFrm.cmmnCode.exclApp.WindowState = Excel.XlWindowState.xlNormal;
+            Global.myNwMainFrm.cmmnCode.exclApp.Visible = true;
+            CommonCode.CommonCodes.SetWindowPos((IntPtr)Global.myNwMainFrm.cmmnCode.exclApp.Hwnd, CommonCode.CommonCodes.HWND_TOP, 0, 0, 0, 0, CommonCode.CommonCodes.SWP_NOMOVE | CommonCode.CommonCodes.SWP_NOSIZE | CommonCode.CommonCodes.SWP_SHOWWINDOW);
+
+            Global.myNwMainFrm.cmmnCode.nwWrkBk = Global.myNwMainFrm.cmmnCode.exclApp.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            Global.myNwMainFrm.cmmnCode.nwWrkBk.Worksheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+            Global.myNwMainFrm.cmmnCode.trgtSheets = new Excel.Worksheet[1];
+
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0] = (Excel.Worksheet)Global.myNwMainFrm.cmmnCode.nwWrkBk.Worksheets[1];
+
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B2:C3", Type.Missing).MergeCells = true;
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B2:C3", Type.Missing).Value2 = Global.myNwMainFrm.cmmnCode.getOrgName(Global.myNwMainFrm.cmmnCode.Org_id).ToUpper();
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B2:C3", Type.Missing).Font.Bold = true;
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B2:C3", Type.Missing).Font.Size = 13;
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B2:C3", Type.Missing).WrapText = true;
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].Shapes.AddPicture(Global.myNwMainFrm.cmmnCode.getOrgImgsDrctry() + @"\" + Global.myNwMainFrm.cmmnCode.Org_id + ".png",
+                Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 1, 1, 50, 50);
+
+            ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, 1]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+            ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, 1]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
+            ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, 1]).Font.Bold = true;
+            ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, 1]).Value2 = "No.";
+            string[] hdngs = { "Role Name**", "Can Mini-Admins Assign?**", "Role Start Date**", "Role End Date**", "Priviledge Name**", "Owner Module**", "Validity Start Date**", "Validity End Date**" };
+
+            for (int a = 0; a < hdngs.Length; a++)
+            {
+                ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, (a + 2)]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+                ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, (a + 2)]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
+                ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, (a + 2)]).Font.Bold = true;
+                ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[5, (a + 2)]).Value2 = hdngs[a].ToUpper();
+            }
+
+            DataSet dtst;
+            if (exprtTyp == 2)
+            {
+                dtst = Global.get_Roles_Excel("%", "Role Name", 0, 100000000);
+            }
+            else if (exprtTyp > 2)
+            {
+                dtst = Global.get_Roles_Excel("%", "Role Name", 0, exprtTyp);
+            }
+            else
+            {
+                dtst = new DataSet();
+            }
+            if (exprtTyp > 1)
+            {
+                for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 1]).Value2 = a + 1;
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 2]).Value2 = dtst.Tables[0].Rows[a][1].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 3]).Value2 = dtst.Tables[0].Rows[a][4].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 4]).Value2 = "'" + dtst.Tables[0].Rows[a][2].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 5]).Value2 = "'" + dtst.Tables[0].Rows[a][3].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 6]).Value2 = dtst.Tables[0].Rows[a][5].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 7]).Value2 = dtst.Tables[0].Rows[a][6].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 8]).Value2 = "'" + dtst.Tables[0].Rows[a][7].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[(a + 6), 9]).Value2 = "'" + dtst.Tables[0].Rows[a][8].ToString();
+                }
+            }
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("A1:A65535", Type.Missing).ColumnWidth = 10;
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("A1:A65535", Type.Missing).WrapText = true;
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B1:AH65535", Type.Missing).Columns.AutoFit();
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("B1:AH65535", Type.Missing).Rows.AutoFit();
+        }
+
+        private void imprtRolesButton_Click(object sender, EventArgs e)
+        {
+            if (Global.myNwMainFrm.cmmnCode.test_prmssns(Global.dfltPrvldgs[10]) == false)
+            {
+                Global.myNwMainFrm.cmmnCode.showMsg("You don't have permission to perform" +
+                  " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            this.openFileDialog1.RestoreDirectory = true;
+            this.openFileDialog1.Filter = "All Files|*.*|Excel Files|*.xls;*.xlsx";
+            this.openFileDialog1.FilterIndex = 2;
+            this.openFileDialog1.Title = "Select an Excel File to Upload...";
+            this.openFileDialog1.FileName = "";
+            if (this.openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.imprtTrnsTmp(this.openFileDialog1.FileName);
+            }
+            this.refreshRoleButton_Click(this.refreshRoleButton, e);
+        }
+
+        private void imprtTrnsTmp(string filename)
+        {
+            System.Windows.Forms.Application.DoEvents();
+            Global.myNwMainFrm.cmmnCode.clearPrvExclFiles();
+            Global.myNwMainFrm.cmmnCode.exclApp = new Microsoft.Office.Interop.Excel.Application();
+            Global.myNwMainFrm.cmmnCode.exclApp.WindowState = Excel.XlWindowState.xlNormal;
+            Global.myNwMainFrm.cmmnCode.exclApp.Visible = true;
+            CommonCode.CommonCodes.SetWindowPos((IntPtr)Global.myNwMainFrm.cmmnCode.exclApp.Hwnd, CommonCode.CommonCodes.HWND_TOP, 0, 0, 0, 0, CommonCode.CommonCodes.SWP_NOMOVE | CommonCode.CommonCodes.SWP_NOSIZE | CommonCode.CommonCodes.SWP_SHOWWINDOW);
+
+            Global.myNwMainFrm.cmmnCode.nwWrkBk = Global.myNwMainFrm.cmmnCode.exclApp.Workbooks.Open(filename, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+
+            Global.myNwMainFrm.cmmnCode.trgtSheets = new Excel.Worksheet[1];
+
+            Global.myNwMainFrm.cmmnCode.trgtSheets[0] = (Excel.Worksheet)Global.myNwMainFrm.cmmnCode.nwWrkBk.Worksheets[1];
+
+            string roleName = "";
+            string canAdmnAsgn = "";
+            string roleStartDte = "";
+            string roleEndDte = "";
+            string prvldgName = "";
+            string ownrModule = "";
+            string prvldgStartDte = "";
+            string prvldgEndDte = "";
+            char[] w = { '\'' };
+            int rownum = 5;
+            do
+            {
+                try
+                {
+                    roleName = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 2]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    roleName = "";
+                }
+                try
+                {
+                    canAdmnAsgn = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 3]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    canAdmnAsgn = "";
+                }
+                try
+                {
+                    roleStartDte = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 4]).Value2.ToString().Trim(w);
+                }
+                catch (Exception ex)
+                {
+                    roleStartDte = "";
+                }
+                try
+                {
+                    roleEndDte = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 5]).Value2.ToString().Trim(w);
+                }
+                catch (Exception ex)
+                {
+                    roleEndDte = "";
+                }
+                try
+                {
+                    prvldgName = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 6]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    prvldgName = "";
+                }
+                try
+                {
+                    ownrModule = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 7]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    ownrModule = "";
+                }
+
+                try
+                {
+                    prvldgStartDte = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 8]).Value2.ToString().Trim(w);
+                }
+                catch (Exception ex)
+                {
+                    prvldgStartDte = "";
+                }
+                try
+                {
+                    prvldgEndDte = ((Microsoft.Office.Interop.Excel.Range)Global.myNwMainFrm.cmmnCode.trgtSheets[0].Cells[rownum, 9]).Value2.ToString().Trim(w);
+                }
+                catch (Exception ex)
+                {
+                    prvldgEndDte = "";
+                }
+                if (rownum == 5)
+                {
+                    string[] hdngs = { "Role Name**", "Can Mini-Admins Assign?**", "Role Start Date**", "Role End Date**", "Priviledge Name**", "Owner Module**", "Validity Start Date**", "Validity End Date**" };
+                    //Global.myNwMainFrm.cmmnCode.showSQLNoPermsn(roleName + ":" + canAdmnAsgn + ":" + roleStartDte + ":" + roleEndDte + ":" + prvldgName + ":" + ownrModule + ":" + prvldgStartDte + ":" + prvldgEndDte);
+                    if (roleName != hdngs[0].ToUpper()
+                      || canAdmnAsgn != hdngs[1].ToUpper()
+                      || roleStartDte != hdngs[2].ToUpper()
+                      || roleEndDte != hdngs[3].ToUpper()
+                      || prvldgName != hdngs[4].ToUpper()
+                      || ownrModule != hdngs[5].ToUpper()
+                      || prvldgStartDte != hdngs[6].ToUpper()
+                      || prvldgEndDte != hdngs[7].ToUpper())
+                    {
+                        Global.myNwMainFrm.cmmnCode.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
+                        return;
+                    }
+                    rownum++;
+                    continue;
+                }
+
+                if (roleName != "" && canAdmnAsgn != "" && roleStartDte != "" && roleEndDte != ""
+                  && prvldgName != "" && ownrModule != "" && prvldgStartDte != "" && prvldgEndDte != "")
+                {
+                    int roleID = Global.myNwMainFrm.cmmnCode.getRoleID(roleName);
+                    int modlueID = Global.myNwMainFrm.cmmnCode.getModuleID(ownrModule);
+                    bool canAdmnAsgnBl = (canAdmnAsgn == "YES") ? true : false;
+                    if (roleID <= 0 && modlueID > 0)
+                    {
+                        Global.createRole(roleName, roleStartDte, roleEndDte, canAdmnAsgnBl);
+                        Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("A" + rownum + ":E" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                        roleID = Global.myNwMainFrm.cmmnCode.getRoleID(roleName);
+                        int prvldgID = Global.myNwMainFrm.cmmnCode.getPrvldgID(prvldgName, ownrModule);
+                        if (prvldgID > 0 && Global.myNwMainFrm.cmmnCode.hasRoleEvrHdThsPrvlg(roleID, prvldgID) == false)
+                        {
+                            Global.asgnPrvlgToRole(prvldgID, roleID, roleStartDte, roleEndDte);
+                            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("F" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                        }
+                        else if (prvldgID > 0)
+                        {
+                            Global.updateRolesPrticulrPrvldg(prvldgID, roleID, roleStartDte, roleEndDte);
+                            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("F" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 180, 0));
+                        }
+                        else
+                        {
+                            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("F" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 0, 0));
+                        }
+                    }
+                    else if (roleID > 0 && modlueID > 0)
+                    {
+                        Global.updateRole(roleID, roleName, roleStartDte, roleEndDte, canAdmnAsgnBl);
+                        Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("A" + rownum + ":E" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 180, 0));
+                        int prvldgID = Global.myNwMainFrm.cmmnCode.getPrvldgID(prvldgName, ownrModule);
+                        if (prvldgID > 0 && Global.myNwMainFrm.cmmnCode.hasRoleEvrHdThsPrvlg(roleID, prvldgID) == false)
+                        {
+                            Global.asgnPrvlgToRole(prvldgID, roleID, roleStartDte, roleEndDte);
+                            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("F" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
+                        }
+                        else if (prvldgID > 0)
+                        {
+                            Global.updateRolesPrticulrPrvldg(prvldgID, roleID, roleStartDte, roleEndDte);
+                            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("F" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 180, 0));
+                        }
+                        else
+                        {
+                            Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("F" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 0, 0));
+                        }
+                    }
+                    else
+                    {
+                        Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("A" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 0, 0));
+                    }
+                }
+                else
+                {
+                    Global.myNwMainFrm.cmmnCode.trgtSheets[0].get_Range("A" + rownum + ":I" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 0, 0));
+                }
+
+                rownum++;
+            }
+            while (roleName != "");
+        }
+
     }
 }
 

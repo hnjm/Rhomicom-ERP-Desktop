@@ -30,23 +30,23 @@ namespace Accounting.Forms
 			{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeVWContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.hideTreevwMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,16 @@ namespace Accounting.Forms
             this.accntsChrtPanel = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.mjrClsfctnTextBox = new System.Windows.Forms.ComboBox();
+            this.mnrClsfctnButton = new System.Windows.Forms.Button();
+            this.mnrClsfctnTextBox = new System.Windows.Forms.TextBox();
+            this.clearClsfctnsButton = new System.Windows.Forms.Button();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.label102 = new System.Windows.Forms.Label();
+            this.label101 = new System.Windows.Forms.Label();
+            this.imprtRprtClsfctnsButton = new System.Windows.Forms.Button();
+            this.exprtRprtClsfctnsButton = new System.Windows.Forms.Button();
+            this.exprtCmbntnsButton = new System.Windows.Forms.Button();
             this.waitLabel = new System.Windows.Forms.Label();
             this.importChartButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -136,8 +146,10 @@ namespace Accounting.Forms
             this.rcHstryAcntMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vwSQLAcntMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.mappedAccntTextBox = new System.Windows.Forms.TextBox();
+            this.accntNumTextBox = new System.Windows.Forms.TextBox();
+            this.rprtClsfctnsButton = new System.Windows.Forms.Button();
             this.accntNameTextBox = new System.Windows.Forms.TextBox();
+            this.mappedAccntTextBox = new System.Windows.Forms.TextBox();
             this.accntSgmnt10TextBox = new System.Windows.Forms.TextBox();
             this.accntSgmnt9TextBox = new System.Windows.Forms.TextBox();
             this.accntSgmnt8TextBox = new System.Windows.Forms.TextBox();
@@ -148,7 +160,6 @@ namespace Accounting.Forms
             this.accntSgmnt3TextBox = new System.Windows.Forms.TextBox();
             this.accntSgmnt2TextBox = new System.Windows.Forms.TextBox();
             this.accntSgmnt1TextBox = new System.Windows.Forms.TextBox();
-            this.accntNumTextBox = new System.Windows.Forms.TextBox();
             this.segmentsButton = new System.Windows.Forms.Button();
             this.mappedAccntButton = new System.Windows.Forms.Button();
             this.mappedAccntIDTextBox = new System.Windows.Forms.TextBox();
@@ -188,8 +199,8 @@ namespace Accounting.Forms
             this.label15 = new System.Windows.Forms.Label();
             this.coaCRLBalNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.coaAEBalNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.accntsExtraInfoButton = new System.Windows.Forms.Button();
             this.vwAccntTrnsctnsButton = new System.Windows.Forms.Button();
             this.tabPage17 = new System.Windows.Forms.TabPage();
@@ -333,6 +344,7 @@ namespace Accounting.Forms
             this.searchInIMAComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator130 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshIMAButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator154 = new System.Windows.Forms.ToolStripSeparator();
             this.resetIMAButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator131 = new System.Windows.Forms.ToolStripSeparator();
             this.imaListView = new System.Windows.Forms.ListView();
@@ -584,23 +596,6 @@ namespace Accounting.Forms
             this.finStmntsTabControl = new System.Windows.Forms.TabControl();
             this.tbalTabPage = new System.Windows.Forms.TabPage();
             this.trialBalancePanel = new System.Windows.Forms.Panel();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.tbalsAcctNmTextBox = new System.Windows.Forms.TextBox();
-            this.label85 = new System.Windows.Forms.Label();
-            this.tbalsAcctButton = new System.Windows.Forms.Button();
-            this.tbalsAcctIDTextBox = new System.Windows.Forms.TextBox();
-            this.smmryTBalsCheckBox = new System.Windows.Forms.CheckBox();
-            this.hideZeroAccntCheckBox1 = new System.Windows.Forms.CheckBox();
-            this.crrctBalsVarnceButton = new System.Windows.Forms.Button();
-            this.shwBalsVarnCheckBox = new System.Windows.Forms.CheckBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.tbalDteButton = new System.Windows.Forms.Button();
-            this.tbalDteTextBox = new System.Windows.Forms.TextBox();
-            this.exptRptTrialBalButton = new System.Windows.Forms.Button();
-            this.genRptTrialBalButton = new System.Windows.Forms.Button();
-            this.trialBalProgressBar = new System.Windows.Forms.ProgressBar();
             this.trialBalGroupBox = new System.Windows.Forms.GroupBox();
             this.trialBalListView = new System.Windows.Forms.ListView();
             this.columnHeader42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -618,11 +613,46 @@ namespace Accounting.Forms
             this.toolStripSeparator121 = new System.Windows.Forms.ToolStripSeparator();
             this.vwTrnsTbalsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vwSQLTbalsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.rptSgmntTextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt10TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt9TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt8TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt5TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt7TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt4TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt3TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt2TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt6TextBox = new System.Windows.Forms.TextBox();
+            this.rptSgmnt1TextBox = new System.Windows.Forms.TextBox();
+            this.tbalRptSgmntButton = new System.Windows.Forms.Button();
+            this.useNetPosCheckBox = new System.Windows.Forms.CheckBox();
+            this.label91 = new System.Windows.Forms.Label();
+            this.tbalsNumUpDown = new System.Windows.Forms.NumericUpDown();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.tbalsAcctNmTextBox = new System.Windows.Forms.TextBox();
+            this.label85 = new System.Windows.Forms.Label();
+            this.tbalsAcctButton = new System.Windows.Forms.Button();
+            this.tbalsAcctIDTextBox = new System.Windows.Forms.TextBox();
+            this.smmryTBalsCheckBox = new System.Windows.Forms.CheckBox();
+            this.hideZeroAccntCheckBox1 = new System.Windows.Forms.CheckBox();
+            this.crrctBalsVarnceButton = new System.Windows.Forms.Button();
+            this.shwBalsVarnCheckBox = new System.Windows.Forms.CheckBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.tbalDteButton = new System.Windows.Forms.Button();
+            this.tbalDteTextBox = new System.Windows.Forms.TextBox();
+            this.exptRptTrialBalButton = new System.Windows.Forms.Button();
+            this.genRptTrialBalButton = new System.Windows.Forms.Button();
+            this.trialBalProgressBar = new System.Windows.Forms.ProgressBar();
             this.panel12 = new System.Windows.Forms.Panel();
             this.glsLabel5 = new glsLabel.glsLabel();
             this.pnlTabPage = new System.Windows.Forms.TabPage();
             this.prftnlossPanel = new System.Windows.Forms.Panel();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.pnlRptSgmntTextBox = new System.Windows.Forms.TextBox();
+            this.pnlSgmntButton = new System.Windows.Forms.Button();
+            this.label94 = new System.Windows.Forms.Label();
+            this.pnlNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.pnlAccntNmTextBox = new System.Windows.Forms.TextBox();
             this.resetPnLButton = new System.Windows.Forms.Button();
             this.label86 = new System.Windows.Forms.Label();
@@ -639,6 +669,16 @@ namespace Accounting.Forms
             this.plDate1TextBox = new System.Windows.Forms.TextBox();
             this.plExprtExclButton = new System.Windows.Forms.Button();
             this.plProgressBar = new System.Windows.Forms.ProgressBar();
+            this.pnlRptSgmnt1TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt2TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt3TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt4TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt5TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt6TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt7TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt8TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt9TextBox = new System.Windows.Forms.TextBox();
+            this.pnlRptSgmnt10TextBox = new System.Windows.Forms.TextBox();
             this.plGroupBox = new System.Windows.Forms.GroupBox();
             this.plListView = new System.Windows.Forms.ListView();
             this.columnHeader46 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -658,6 +698,10 @@ namespace Accounting.Forms
             this.balsShtTabPage = new System.Windows.Forms.TabPage();
             this.balSheetPanel = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.blShtSgmntTextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmntButton = new System.Windows.Forms.Button();
+            this.label95 = new System.Windows.Forms.Label();
+            this.balsShtAcntLvlNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.blsSmmryCheckBox = new System.Windows.Forms.CheckBox();
             this.hideZeroAccntCheckBox3 = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -666,6 +710,16 @@ namespace Accounting.Forms
             this.blsExptExclButton = new System.Windows.Forms.Button();
             this.blsGenRptButton = new System.Windows.Forms.Button();
             this.blsProgressBar = new System.Windows.Forms.ProgressBar();
+            this.blShtSgmnt1TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt2TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt3TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt4TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt5TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt6TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt7TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt8TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt9TextBox = new System.Windows.Forms.TextBox();
+            this.blShtSgmnt10TextBox = new System.Windows.Forms.TextBox();
             this.blsGroupBox = new System.Windows.Forms.GroupBox();
             this.blsListView = new System.Windows.Forms.ListView();
             this.columnHeader56 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -711,6 +765,7 @@ namespace Accounting.Forms
             this.glsLabel11 = new glsLabel.glsLabel();
             this.accntStmntTabPage = new System.Windows.Forms.TabPage();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.shwIntrfcTrnsCheckBox = new System.Windows.Forms.CheckBox();
             this.accntStmntTextBox = new System.Windows.Forms.TextBox();
             this.label63 = new System.Windows.Forms.Label();
             this.accntStmntButton = new System.Windows.Forms.Button();
@@ -748,6 +803,8 @@ namespace Accounting.Forms
             this.glsLabel12 = new glsLabel.glsLabel();
             this.tabPage22 = new System.Windows.Forms.TabPage();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.pbpSgmntTextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmntButton = new System.Windows.Forms.Button();
             this.hideZeroMnthlyCheckBox = new System.Windows.Forms.CheckBox();
             this.label64 = new System.Windows.Forms.Label();
             this.mnthlyAccTypComboBox = new System.Windows.Forms.ComboBox();
@@ -762,6 +819,16 @@ namespace Accounting.Forms
             this.genMthlyRptButton = new System.Windows.Forms.Button();
             this.mnthlyProgressBar = new System.Windows.Forms.ProgressBar();
             this.mnthlyDrtnComboBox = new System.Windows.Forms.ComboBox();
+            this.pbpSgmnt1TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt2TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt3TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt4TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt5TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt6TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt7TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt8TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt9TextBox = new System.Windows.Forms.TextBox();
+            this.pbpSgmnt10TextBox = new System.Windows.Forms.TextBox();
             this.periodGroupBox = new System.Windows.Forms.GroupBox();
             this.periodStmntListView = new System.Windows.Forms.ListView();
             this.columnHeader178 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -778,6 +845,7 @@ namespace Accounting.Forms
             this.vwSQLMnthlyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage20 = new System.Windows.Forms.TabPage();
             this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.cflwSgmntButton = new System.Windows.Forms.Button();
             this.hideZerosCashFlwCheckBox = new System.Windows.Forms.CheckBox();
             this.label80 = new System.Windows.Forms.Label();
             this.cashFlowTypComboBox = new System.Windows.Forms.ComboBox();
@@ -792,6 +860,17 @@ namespace Accounting.Forms
             this.genCashFlowRptButton = new System.Windows.Forms.Button();
             this.cashFlowProgressBar = new System.Windows.Forms.ProgressBar();
             this.cashFlowDrtnComboBox = new System.Windows.Forms.ComboBox();
+            this.cflwSgmntTextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt1TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt2TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt3TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt4TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt5TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt6TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt7TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt8TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt9TextBox = new System.Windows.Forms.TextBox();
+            this.cflwSgmnt10TextBox = new System.Windows.Forms.TextBox();
             this.cashFlowGroupBox = new System.Windows.Forms.GroupBox();
             this.cashFlowListView = new System.Windows.Forms.ListView();
             this.columnHeader179 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -857,6 +936,36 @@ namespace Accounting.Forms
             this.ttlDebitsRcnclLabel = new System.Windows.Forms.Label();
             this.label92 = new System.Windows.Forms.Label();
             this.label93 = new System.Windows.Forms.Label();
+            this.cashBookTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox27 = new System.Windows.Forms.GroupBox();
+            this.accntClassComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.cshBkStrtDteButton = new System.Windows.Forms.Button();
+            this.cshBkStrtDteTextBox = new System.Windows.Forms.TextBox();
+            this.label90 = new System.Windows.Forms.Label();
+            this.cshBkEndDteButton = new System.Windows.Forms.Button();
+            this.cshBkEndDteTextBox = new System.Windows.Forms.TextBox();
+            this.exprtExclCshBkButton = new System.Windows.Forms.Button();
+            this.gnrtRptCshBkButton = new System.Windows.Forms.Button();
+            this.cashBkProgressBar = new System.Windows.Forms.ProgressBar();
+            this.cashBookGroupBox = new System.Windows.Forms.GroupBox();
+            this.cashBookListView = new System.Windows.Forms.ListView();
+            this.columnHeader192 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader193 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader194 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader195 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader199 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader200 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader201 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader202 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cshBkContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exprtExclCshBkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator150 = new System.Windows.Forms.ToolStripSeparator();
+            this.openBatchCshBkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator151 = new System.Windows.Forms.ToolStripSeparator();
+            this.vwTrnsCshBkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vwSQLCshBkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.budgetPanel = new System.Windows.Forms.Panel();
             this.toolStrip11 = new System.Windows.Forms.ToolStrip();
@@ -865,12 +974,22 @@ namespace Accounting.Forms
             this.saveBdgButton = new System.Windows.Forms.ToolStripButton();
             this.delBdgButton = new System.Windows.Forms.ToolStripButton();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.budgetNmTextBox = new System.Windows.Forms.TextBox();
+            this.budgetDescTextBox = new System.Windows.Forms.TextBox();
+            this.prdTypComboBox = new System.Windows.Forms.ComboBox();
+            this.label96 = new System.Windows.Forms.Label();
+            this.endDteButton = new System.Windows.Forms.Button();
+            this.label97 = new System.Windows.Forms.Label();
+            this.endDteTextBox = new System.Windows.Forms.TextBox();
+            this.startDteButton = new System.Windows.Forms.Button();
+            this.label98 = new System.Windows.Forms.Label();
+            this.startDteTextBox = new System.Windows.Forms.TextBox();
+            this.autoLoadBdgtButton = new System.Windows.Forms.Button();
+            this.duplicateBdgtButton = new System.Windows.Forms.Button();
             this.imprtBdgtTmpltButton = new System.Windows.Forms.Button();
             this.exptBdgtTmpltButton = new System.Windows.Forms.Button();
             this.isBdgActiveCheckBox = new System.Windows.Forms.CheckBox();
-            this.budgetNmTextBox = new System.Windows.Forms.TextBox();
             this.budgetIDTextBox = new System.Windows.Forms.TextBox();
-            this.budgetDescTextBox = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
@@ -878,6 +997,9 @@ namespace Accounting.Forms
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.addBdgtDtButton = new System.Windows.Forms.ToolStripButton();
             this.editBdgtDtButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator152 = new System.Windows.Forms.ToolStripSeparator();
+            this.vwSprtngDetailsButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator153 = new System.Windows.Forms.ToolStripSeparator();
             this.delBdgtDtButton = new System.Windows.Forms.ToolStripButton();
             this.moveFirstBdgDtButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator93 = new System.Windows.Forms.ToolStripSeparator();
@@ -928,6 +1050,9 @@ namespace Accounting.Forms
             this.columnHeader120 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader121 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader122 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader196 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader197 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader198 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bdgtContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addBdgtMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editBdgtMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1277,19 +1402,22 @@ namespace Accounting.Forms
             this.finStmntsTabControl.SuspendLayout();
             this.tbalTabPage.SuspendLayout();
             this.trialBalancePanel.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.trialBalGroupBox.SuspendLayout();
             this.tBalMenuStrip.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbalsNumUpDown)).BeginInit();
             this.panel12.SuspendLayout();
             this.pnlTabPage.SuspendLayout();
             this.prftnlossPanel.SuspendLayout();
             this.groupBox11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlNumUpDown)).BeginInit();
             this.plGroupBox.SuspendLayout();
             this.prfNlsMenuStrip.SuspendLayout();
             this.panel15.SuspendLayout();
             this.balsShtTabPage.SuspendLayout();
             this.balSheetPanel.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.balsShtAcntLvlNumUpDown)).BeginInit();
             this.blsGroupBox.SuspendLayout();
             this.balShtsMenuStrip.SuspendLayout();
             this.panel18.SuspendLayout();
@@ -1315,6 +1443,10 @@ namespace Accounting.Forms
             this.toolStrip20.SuspendLayout();
             this.groupBox24.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trnsDataGridView)).BeginInit();
+            this.cashBookTabPage.SuspendLayout();
+            this.groupBox27.SuspendLayout();
+            this.cashBookGroupBox.SuspendLayout();
+            this.cshBkContextMenuStrip.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.budgetPanel.SuspendLayout();
             this.toolStrip11.SuspendLayout();
@@ -1372,30 +1504,31 @@ namespace Accounting.Forms
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.splitContainer1.Size = new System.Drawing.Size(1354, 733);
+            this.splitContainer1.Size = new System.Drawing.Size(1317, 733);
             this.splitContainer1.SplitterDistance = 227;
             this.splitContainer1.TabIndex = 0;
             // 
             // treeVWContextMenuStrip
             // 
+            this.treeVWContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.treeVWContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hideTreevwMenuItem,
             this.toolStripSeparator123});
             this.treeVWContextMenuStrip.Name = "usersContextMenuStrip";
-            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(153, 32);
+            this.treeVWContextMenuStrip.Size = new System.Drawing.Size(157, 36);
             // 
             // hideTreevwMenuItem
             // 
             this.hideTreevwMenuItem.Image = global::Accounting.Properties.Resources.download__26_;
             this.hideTreevwMenuItem.Name = "hideTreevwMenuItem";
-            this.hideTreevwMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hideTreevwMenuItem.Size = new System.Drawing.Size(156, 26);
             this.hideTreevwMenuItem.Text = "Hide Tree View";
             this.hideTreevwMenuItem.Click += new System.EventHandler(this.hideTreevwMenuItem_Click);
             // 
             // toolStripSeparator123
             // 
             this.toolStripSeparator123.Name = "toolStripSeparator123";
-            this.toolStripSeparator123.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator123.Size = new System.Drawing.Size(153, 6);
             // 
             // runRptButton
             // 
@@ -1443,6 +1576,7 @@ namespace Accounting.Forms
             this.imageList1.Images.SetKeyName(25, "AccountingIcon1.png");
             this.imageList1.Images.SetKeyName(26, "generaljournal.png");
             this.imageList1.Images.SetKeyName(27, "cashbook_big_icon.png");
+            this.imageList1.Images.SetKeyName(28, "delete.png");
             // 
             // panel2
             // 
@@ -1517,7 +1651,7 @@ namespace Accounting.Forms
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer2.Size = new System.Drawing.Size(1113, 723);
+            this.splitContainer2.Size = new System.Drawing.Size(1076, 723);
             this.splitContainer2.SplitterDistance = 69;
             this.splitContainer2.TabIndex = 34;
             // 
@@ -1545,7 +1679,7 @@ namespace Accounting.Forms
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1113, 723);
+            this.tabControl1.Size = new System.Drawing.Size(1076, 723);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 84;
             // 
@@ -1555,10 +1689,10 @@ namespace Accounting.Forms
             this.tabPage1.BackColor = System.Drawing.Color.DimGray;
             this.tabPage1.Controls.Add(this.accntsChrtPanel);
             this.tabPage1.ImageKey = "AccountingIcon1.png";
-            this.tabPage1.Location = new System.Drawing.Point(4, 60);
+            this.tabPage1.Location = new System.Drawing.Point(4, 88);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1105, 659);
+            this.tabPage1.Size = new System.Drawing.Size(1068, 631);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "CHART OF ACCOUNTS";
             // 
@@ -1570,7 +1704,7 @@ namespace Accounting.Forms
             this.accntsChrtPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.accntsChrtPanel.Location = new System.Drawing.Point(3, 3);
             this.accntsChrtPanel.Name = "accntsChrtPanel";
-            this.accntsChrtPanel.Size = new System.Drawing.Size(1099, 653);
+            this.accntsChrtPanel.Size = new System.Drawing.Size(1062, 625);
             this.accntsChrtPanel.TabIndex = 0;
             // 
             // tabControl2
@@ -1582,13 +1716,22 @@ namespace Accounting.Forms
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1099, 653);
+            this.tabControl2.Size = new System.Drawing.Size(1062, 625);
             this.tabControl2.TabIndex = 137;
             // 
             // tabPage16
             // 
             this.tabPage16.AutoScroll = true;
             this.tabPage16.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage16.Controls.Add(this.mjrClsfctnTextBox);
+            this.tabPage16.Controls.Add(this.mnrClsfctnButton);
+            this.tabPage16.Controls.Add(this.mnrClsfctnTextBox);
+            this.tabPage16.Controls.Add(this.clearClsfctnsButton);
+            this.tabPage16.Controls.Add(this.label102);
+            this.tabPage16.Controls.Add(this.label101);
+            this.tabPage16.Controls.Add(this.imprtRprtClsfctnsButton);
+            this.tabPage16.Controls.Add(this.exprtRprtClsfctnsButton);
+            this.tabPage16.Controls.Add(this.exprtCmbntnsButton);
             this.tabPage16.Controls.Add(this.waitLabel);
             this.tabPage16.Controls.Add(this.importChartButton);
             this.tabPage16.Controls.Add(this.panel3);
@@ -1603,18 +1746,151 @@ namespace Accounting.Forms
             this.tabPage16.Location = new System.Drawing.Point(4, 29);
             this.tabPage16.Name = "tabPage16";
             this.tabPage16.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage16.Size = new System.Drawing.Size(1091, 620);
+            this.tabPage16.Size = new System.Drawing.Size(1054, 592);
             this.tabPage16.TabIndex = 0;
             this.tabPage16.Text = "GENERAL LEDGER ACCOUNTS";
+            // 
+            // mjrClsfctnTextBox
+            // 
+            this.mjrClsfctnTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mjrClsfctnTextBox.DropDownWidth = 400;
+            this.mjrClsfctnTextBox.FormattingEnabled = true;
+            this.mjrClsfctnTextBox.Items.AddRange(new object[] {
+            "A -ASSET",
+            "EQ-EQUITY",
+            "L -LIABILITY",
+            "R -REVENUE",
+            "EX-EXPENSE"});
+            this.mjrClsfctnTextBox.Location = new System.Drawing.Point(533, 41);
+            this.mjrClsfctnTextBox.Name = "mjrClsfctnTextBox";
+            this.mjrClsfctnTextBox.Size = new System.Drawing.Size(145, 21);
+            this.mjrClsfctnTextBox.TabIndex = 150;
+            this.mjrClsfctnTextBox.SelectedIndexChanged += new System.EventHandler(this.mjrClsfctnTextBox_SelectedIndexChanged);
+            // 
+            // mnrClsfctnButton
+            // 
+            this.mnrClsfctnButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnrClsfctnButton.ForeColor = System.Drawing.Color.Black;
+            this.mnrClsfctnButton.Location = new System.Drawing.Point(907, 38);
+            this.mnrClsfctnButton.Name = "mnrClsfctnButton";
+            this.mnrClsfctnButton.Size = new System.Drawing.Size(28, 24);
+            this.mnrClsfctnButton.TabIndex = 149;
+            this.mnrClsfctnButton.Text = "...";
+            this.mnrClsfctnButton.UseVisualStyleBackColor = true;
+            this.mnrClsfctnButton.Click += new System.EventHandler(this.mnrClsfctnButton_Click);
+            // 
+            // mnrClsfctnTextBox
+            // 
+            this.mnrClsfctnTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mnrClsfctnTextBox.Location = new System.Drawing.Point(786, 38);
+            this.mnrClsfctnTextBox.Multiline = true;
+            this.mnrClsfctnTextBox.Name = "mnrClsfctnTextBox";
+            this.mnrClsfctnTextBox.ReadOnly = true;
+            this.mnrClsfctnTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mnrClsfctnTextBox.Size = new System.Drawing.Size(120, 24);
+            this.mnrClsfctnTextBox.TabIndex = 148;
+            // 
+            // clearClsfctnsButton
+            // 
+            this.clearClsfctnsButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearClsfctnsButton.ForeColor = System.Drawing.Color.Black;
+            this.clearClsfctnsButton.ImageKey = "delete.png";
+            this.clearClsfctnsButton.ImageList = this.imageList2;
+            this.clearClsfctnsButton.Location = new System.Drawing.Point(936, 314);
+            this.clearClsfctnsButton.Name = "clearClsfctnsButton";
+            this.clearClsfctnsButton.Size = new System.Drawing.Size(115, 49);
+            this.clearClsfctnsButton.TabIndex = 147;
+            this.clearClsfctnsButton.Text = "Clear All Report Classifications";
+            this.clearClsfctnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.clearClsfctnsButton.UseVisualStyleBackColor = true;
+            this.clearClsfctnsButton.Click += new System.EventHandler(this.clearClsfctnsButton_Click);
+            // 
+            // imageList2
+            // 
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "refresh.bmp");
+            this.imageList2.Images.SetKeyName(1, "custom-reports.ico");
+            this.imageList2.Images.SetKeyName(2, "open-folder-yellow.png");
+            this.imageList2.Images.SetKeyName(3, "98.png");
+            this.imageList2.Images.SetKeyName(4, "Mail.png");
+            this.imageList2.Images.SetKeyName(5, "90.png");
+            this.imageList2.Images.SetKeyName(6, "Copy.png");
+            this.imageList2.Images.SetKeyName(7, "undo_256.png");
+            this.imageList2.Images.SetKeyName(8, "tick_64.png");
+            this.imageList2.Images.SetKeyName(9, "success_w.gif");
+            this.imageList2.Images.SetKeyName(10, "delete.png");
+            // 
+            // label102
+            // 
+            this.label102.AutoSize = true;
+            this.label102.ForeColor = System.Drawing.Color.White;
+            this.label102.Location = new System.Drawing.Point(378, 44);
+            this.label102.Name = "label102";
+            this.label102.Size = new System.Drawing.Size(157, 13);
+            this.label102.TabIndex = 146;
+            this.label102.Text = "Filter By Account Classification:";
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.ForeColor = System.Drawing.Color.White;
+            this.label101.Location = new System.Drawing.Point(680, 44);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(109, 13);
+            this.label101.TabIndex = 144;
+            this.label101.Text = "Report Classification:";
+            // 
+            // imprtRprtClsfctnsButton
+            // 
+            this.imprtRprtClsfctnsButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imprtRprtClsfctnsButton.ForeColor = System.Drawing.Color.Black;
+            this.imprtRprtClsfctnsButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.imprtRprtClsfctnsButton.Location = new System.Drawing.Point(936, 269);
+            this.imprtRprtClsfctnsButton.Name = "imprtRprtClsfctnsButton";
+            this.imprtRprtClsfctnsButton.Size = new System.Drawing.Size(115, 42);
+            this.imprtRprtClsfctnsButton.TabIndex = 139;
+            this.imprtRprtClsfctnsButton.Text = "IMPORT REPORT CLASSIFICATIONS";
+            this.imprtRprtClsfctnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.imprtRprtClsfctnsButton.UseVisualStyleBackColor = true;
+            this.imprtRprtClsfctnsButton.Click += new System.EventHandler(this.imprtRprtClsfctnsButton_Click);
+            // 
+            // exprtRprtClsfctnsButton
+            // 
+            this.exprtRprtClsfctnsButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exprtRprtClsfctnsButton.ForeColor = System.Drawing.Color.Black;
+            this.exprtRprtClsfctnsButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.exprtRprtClsfctnsButton.Location = new System.Drawing.Point(936, 223);
+            this.exprtRprtClsfctnsButton.Name = "exprtRprtClsfctnsButton";
+            this.exprtRprtClsfctnsButton.Size = new System.Drawing.Size(115, 44);
+            this.exprtRprtClsfctnsButton.TabIndex = 138;
+            this.exprtRprtClsfctnsButton.Text = "EXPORT REPORT CLASSIFICATIONS";
+            this.exprtRprtClsfctnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.exprtRprtClsfctnsButton.UseVisualStyleBackColor = true;
+            this.exprtRprtClsfctnsButton.Click += new System.EventHandler(this.exprtRprtClsfctnsButton_Click);
+            // 
+            // exprtCmbntnsButton
+            // 
+            this.exprtCmbntnsButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exprtCmbntnsButton.ForeColor = System.Drawing.Color.Black;
+            this.exprtCmbntnsButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.exprtCmbntnsButton.Location = new System.Drawing.Point(936, 181);
+            this.exprtCmbntnsButton.Name = "exprtCmbntnsButton";
+            this.exprtCmbntnsButton.Size = new System.Drawing.Size(115, 40);
+            this.exprtCmbntnsButton.TabIndex = 137;
+            this.exprtCmbntnsButton.Text = "EXPORT CODE COMBINATIONS";
+            this.exprtCmbntnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.exprtCmbntnsButton.UseVisualStyleBackColor = true;
+            this.exprtCmbntnsButton.Click += new System.EventHandler(this.exprtCmbntnsButton_Click);
             // 
             // waitLabel
             // 
             this.waitLabel.BackColor = System.Drawing.Color.Green;
             this.waitLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.waitLabel.ForeColor = System.Drawing.Color.White;
-            this.waitLabel.Location = new System.Drawing.Point(710, 79);
+            this.waitLabel.Location = new System.Drawing.Point(697, 82);
             this.waitLabel.Name = "waitLabel";
-            this.waitLabel.Size = new System.Drawing.Size(369, 52);
+            this.waitLabel.Size = new System.Drawing.Size(332, 52);
             this.waitLabel.TabIndex = 136;
             this.waitLabel.Text = "CORRECTING WRONG BALANCES...PLEASE WAIT...";
             this.waitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1625,9 +1901,9 @@ namespace Accounting.Forms
             this.importChartButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.importChartButton.ForeColor = System.Drawing.Color.Black;
             this.importChartButton.Image = global::Accounting.Properties.Resources.action_go;
-            this.importChartButton.Location = new System.Drawing.Point(949, 92);
+            this.importChartButton.Location = new System.Drawing.Point(936, 83);
             this.importChartButton.Name = "importChartButton";
-            this.importChartButton.Size = new System.Drawing.Size(121, 50);
+            this.importChartButton.Size = new System.Drawing.Size(115, 32);
             this.importChartButton.TabIndex = 6;
             this.importChartButton.Text = "IMPORT A CHART";
             this.importChartButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -1642,13 +1918,14 @@ namespace Accounting.Forms
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel3.Size = new System.Drawing.Size(1085, 33);
+            this.panel3.Size = new System.Drawing.Size(1048, 33);
             this.panel3.TabIndex = 0;
             this.panel3.TabStop = true;
             // 
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstChrtButton,
             this.toolStripSeparator1,
@@ -1679,7 +1956,7 @@ namespace Accounting.Forms
             this.toolStrip1.Location = new System.Drawing.Point(0, 5);
             this.toolStrip1.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1085, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1048, 25);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
@@ -1691,7 +1968,7 @@ namespace Accounting.Forms
             this.moveFirstChrtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstChrtButton.Name = "moveFirstChrtButton";
-            this.moveFirstChrtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstChrtButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstChrtButton.Text = "Move First";
             this.moveFirstChrtButton.Click += new System.EventHandler(this.ChrtPnlNavButtons);
             // 
@@ -1706,7 +1983,7 @@ namespace Accounting.Forms
             this.movePreviousChrtButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousChrtButton.Name = "movePreviousChrtButton";
-            this.movePreviousChrtButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousChrtButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousChrtButton.Text = "Move Previous";
             this.movePreviousChrtButton.Click += new System.EventHandler(this.ChrtPnlNavButtons);
             // 
@@ -1754,7 +2031,7 @@ namespace Accounting.Forms
             this.moveNextChrtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextChrtButton.Name = "moveNextChrtButton";
-            this.moveNextChrtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextChrtButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextChrtButton.Text = "Move Next";
             this.moveNextChrtButton.Click += new System.EventHandler(this.ChrtPnlNavButtons);
             // 
@@ -1769,7 +2046,7 @@ namespace Accounting.Forms
             this.moveLastChrtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastChrtButton.Name = "moveLastChrtButton";
-            this.moveLastChrtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastChrtButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastChrtButton.Text = "Move Last";
             this.moveLastChrtButton.Click += new System.EventHandler(this.ChrtPnlNavButtons);
             // 
@@ -1790,7 +2067,11 @@ namespace Accounting.Forms
             "30",
             "40",
             "50",
-            "100"});
+            "100",
+            "500",
+            "1000",
+            "5000",
+            "10000"});
             this.dsplySizeChrtComboBox.Name = "dsplySizeChrtComboBox";
             this.dsplySizeChrtComboBox.Size = new System.Drawing.Size(35, 23);
             this.dsplySizeChrtComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchForChrtTextBox_KeyDown);
@@ -1856,7 +2137,7 @@ namespace Accounting.Forms
             this.resetChrtButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetChrtButton.Name = "resetChrtButton";
-            this.resetChrtButton.Size = new System.Drawing.Size(59, 22);
+            this.resetChrtButton.Size = new System.Drawing.Size(63, 22);
             this.resetChrtButton.Text = "RESET";
             this.resetChrtButton.Click += new System.EventHandler(this.resetChrtButton_Click);
             // 
@@ -1865,7 +2146,7 @@ namespace Accounting.Forms
             this.goChrtButton.Image = global::Accounting.Properties.Resources._98;
             this.goChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goChrtButton.Name = "goChrtButton";
-            this.goChrtButton.Size = new System.Drawing.Size(42, 22);
+            this.goChrtButton.Size = new System.Drawing.Size(46, 22);
             this.goChrtButton.Text = "Go";
             this.goChrtButton.Visible = false;
             this.goChrtButton.Click += new System.EventHandler(this.goChrtButton_Click);
@@ -1897,7 +2178,7 @@ namespace Accounting.Forms
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.netBalTypeLabel);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(438, 322);
+            this.groupBox1.Location = new System.Drawing.Point(425, 322);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(508, 152);
             this.groupBox1.TabIndex = 4;
@@ -2221,6 +2502,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip10.AutoSize = false;
             this.toolStrip10.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip10.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip10.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addChrtButton,
             this.editChrtButton,
@@ -2229,7 +2511,7 @@ namespace Accounting.Forms
             this.rfrshChrtButton,
             this.vwSQLChrtButton,
             this.recHstryChrtButton});
-            this.toolStrip10.Location = new System.Drawing.Point(3, 41);
+            this.toolStrip10.Location = new System.Drawing.Point(3, 38);
             this.toolStrip10.Name = "toolStrip10";
             this.toolStrip10.Size = new System.Drawing.Size(372, 25);
             this.toolStrip10.TabIndex = 1;
@@ -2241,7 +2523,7 @@ namespace Accounting.Forms
             this.addChrtButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addChrtButton.Name = "addChrtButton";
-            this.addChrtButton.Size = new System.Drawing.Size(51, 22);
+            this.addChrtButton.Size = new System.Drawing.Size(55, 22);
             this.addChrtButton.Text = "ADD";
             this.addChrtButton.Click += new System.EventHandler(this.addChrtButton_Click);
             // 
@@ -2250,7 +2532,7 @@ namespace Accounting.Forms
             this.editChrtButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editChrtButton.Name = "editChrtButton";
-            this.editChrtButton.Size = new System.Drawing.Size(51, 22);
+            this.editChrtButton.Size = new System.Drawing.Size(55, 22);
             this.editChrtButton.Text = "EDIT";
             this.editChrtButton.Click += new System.EventHandler(this.editChrtButton_Click);
             // 
@@ -2259,7 +2541,7 @@ namespace Accounting.Forms
             this.saveChrtButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveChrtButton.Name = "saveChrtButton";
-            this.saveChrtButton.Size = new System.Drawing.Size(53, 22);
+            this.saveChrtButton.Size = new System.Drawing.Size(57, 22);
             this.saveChrtButton.Text = "SAVE";
             this.saveChrtButton.Click += new System.EventHandler(this.saveChrtButton_Click);
             // 
@@ -2268,7 +2550,7 @@ namespace Accounting.Forms
             this.deleteChrtButton.Image = global::Accounting.Properties.Resources.delete;
             this.deleteChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteChrtButton.Name = "deleteChrtButton";
-            this.deleteChrtButton.Size = new System.Drawing.Size(66, 22);
+            this.deleteChrtButton.Size = new System.Drawing.Size(70, 22);
             this.deleteChrtButton.Text = "DELETE";
             this.deleteChrtButton.Click += new System.EventHandler(this.deleteChrtButton_Click);
             // 
@@ -2277,7 +2559,7 @@ namespace Accounting.Forms
             this.rfrshChrtButton.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rfrshChrtButton.Name = "rfrshChrtButton";
-            this.rfrshChrtButton.Size = new System.Drawing.Size(66, 22);
+            this.rfrshChrtButton.Size = new System.Drawing.Size(70, 22);
             this.rfrshChrtButton.Text = "Refresh";
             this.rfrshChrtButton.Click += new System.EventHandler(this.rfrshChrtButton_Click);
             // 
@@ -2287,7 +2569,7 @@ namespace Accounting.Forms
             this.vwSQLChrtButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLChrtButton.Name = "vwSQLChrtButton";
-            this.vwSQLChrtButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLChrtButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLChrtButton.Text = "View SQL";
             this.vwSQLChrtButton.Click += new System.EventHandler(this.vwSQLChrtButton_Click);
             // 
@@ -2297,7 +2579,7 @@ namespace Accounting.Forms
             this.recHstryChrtButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryChrtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryChrtButton.Name = "recHstryChrtButton";
-            this.recHstryChrtButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryChrtButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryChrtButton.Text = "Record History";
             this.recHstryChrtButton.Click += new System.EventHandler(this.recHstryChrtButton_Click);
             // 
@@ -2317,9 +2599,9 @@ namespace Accounting.Forms
             this.accntsChrtListView.FullRowSelect = true;
             this.accntsChrtListView.GridLines = true;
             this.accntsChrtListView.HideSelection = false;
-            this.accntsChrtListView.Location = new System.Drawing.Point(5, 70);
+            this.accntsChrtListView.Location = new System.Drawing.Point(3, 65);
             this.accntsChrtListView.Name = "accntsChrtListView";
-            this.accntsChrtListView.Size = new System.Drawing.Size(431, 547);
+            this.accntsChrtListView.Size = new System.Drawing.Size(422, 524);
             this.accntsChrtListView.TabIndex = 1;
             this.accntsChrtListView.UseCompatibleStateImageBehavior = false;
             this.accntsChrtListView.View = System.Windows.Forms.View.Details;
@@ -2356,6 +2638,7 @@ namespace Accounting.Forms
             // 
             // acntChrtContextMenuStrip
             // 
+            this.acntChrtContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.acntChrtContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addAcntMenuItem,
             this.editAcntMenuItem,
@@ -2366,13 +2649,13 @@ namespace Accounting.Forms
             this.rcHstryAcntMenuItem,
             this.vwSQLAcntMenuItem});
             this.acntChrtContextMenuStrip.Name = "usersContextMenuStrip";
-            this.acntChrtContextMenuStrip.Size = new System.Drawing.Size(156, 164);
+            this.acntChrtContextMenuStrip.Size = new System.Drawing.Size(160, 192);
             // 
             // addAcntMenuItem
             // 
             this.addAcntMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addAcntMenuItem.Name = "addAcntMenuItem";
-            this.addAcntMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.addAcntMenuItem.Size = new System.Drawing.Size(159, 26);
             this.addAcntMenuItem.Text = "&Add Account";
             this.addAcntMenuItem.Click += new System.EventHandler(this.addAcntMenuItem_Click);
             // 
@@ -2380,7 +2663,7 @@ namespace Accounting.Forms
             // 
             this.editAcntMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editAcntMenuItem.Name = "editAcntMenuItem";
-            this.editAcntMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.editAcntMenuItem.Size = new System.Drawing.Size(159, 26);
             this.editAcntMenuItem.Text = "&Edit Account";
             this.editAcntMenuItem.Click += new System.EventHandler(this.editAcntMenuItem_Click);
             // 
@@ -2388,20 +2671,20 @@ namespace Accounting.Forms
             // 
             this.delAcntMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.delAcntMenuItem.Name = "delAcntMenuItem";
-            this.delAcntMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.delAcntMenuItem.Size = new System.Drawing.Size(159, 26);
             this.delAcntMenuItem.Text = "Delete Account";
             this.delAcntMenuItem.Click += new System.EventHandler(this.delAcntMenuItem_Click);
             // 
             // toolStripSeparator63
             // 
             this.toolStripSeparator63.Name = "toolStripSeparator63";
-            this.toolStripSeparator63.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator63.Size = new System.Drawing.Size(156, 6);
             // 
             // exprtExclMenuItem
             // 
             this.exprtExclMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exprtExclMenuItem.Name = "exprtExclMenuItem";
-            this.exprtExclMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exprtExclMenuItem.Size = new System.Drawing.Size(159, 26);
             this.exprtExclMenuItem.Text = "Export to Excel";
             this.exprtExclMenuItem.Click += new System.EventHandler(this.exprtExclMenuItem_Click);
             // 
@@ -2409,7 +2692,7 @@ namespace Accounting.Forms
             // 
             this.rfrshAcntMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshAcntMenuItem.Name = "rfrshAcntMenuItem";
-            this.rfrshAcntMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.rfrshAcntMenuItem.Size = new System.Drawing.Size(159, 26);
             this.rfrshAcntMenuItem.Text = "&Refresh";
             this.rfrshAcntMenuItem.Click += new System.EventHandler(this.rfrshAcntMenuItem_Click);
             // 
@@ -2417,7 +2700,7 @@ namespace Accounting.Forms
             // 
             this.rcHstryAcntMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryAcntMenuItem.Name = "rcHstryAcntMenuItem";
-            this.rcHstryAcntMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.rcHstryAcntMenuItem.Size = new System.Drawing.Size(159, 26);
             this.rcHstryAcntMenuItem.Text = "Record &History";
             this.rcHstryAcntMenuItem.Click += new System.EventHandler(this.rcHstryAcntMenuItem_Click);
             // 
@@ -2425,14 +2708,16 @@ namespace Accounting.Forms
             // 
             this.vwSQLAcntMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLAcntMenuItem.Name = "vwSQLAcntMenuItem";
-            this.vwSQLAcntMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.vwSQLAcntMenuItem.Size = new System.Drawing.Size(159, 26);
             this.vwSQLAcntMenuItem.Text = "&View SQL";
             this.vwSQLAcntMenuItem.Click += new System.EventHandler(this.vwSQLAcntMenuItem_Click);
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.mappedAccntTextBox);
+            this.groupBox5.Controls.Add(this.accntNumTextBox);
+            this.groupBox5.Controls.Add(this.rprtClsfctnsButton);
             this.groupBox5.Controls.Add(this.accntNameTextBox);
+            this.groupBox5.Controls.Add(this.mappedAccntTextBox);
             this.groupBox5.Controls.Add(this.accntSgmnt10TextBox);
             this.groupBox5.Controls.Add(this.accntSgmnt9TextBox);
             this.groupBox5.Controls.Add(this.accntSgmnt8TextBox);
@@ -2443,7 +2728,6 @@ namespace Accounting.Forms
             this.groupBox5.Controls.Add(this.accntSgmnt3TextBox);
             this.groupBox5.Controls.Add(this.accntSgmnt2TextBox);
             this.groupBox5.Controls.Add(this.accntSgmnt1TextBox);
-            this.groupBox5.Controls.Add(this.accntNumTextBox);
             this.groupBox5.Controls.Add(this.segmentsButton);
             this.groupBox5.Controls.Add(this.mappedAccntButton);
             this.groupBox5.Controls.Add(this.mappedAccntIDTextBox);
@@ -2477,12 +2761,50 @@ namespace Accounting.Forms
             this.groupBox5.Controls.Add(this.label51);
             this.groupBox5.Controls.Add(this.accntDescTextBox);
             this.groupBox5.ForeColor = System.Drawing.Color.White;
-            this.groupBox5.Location = new System.Drawing.Point(438, 100);
+            this.groupBox5.Location = new System.Drawing.Point(426, 100);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(508, 219);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "ACCOUNT DETAILS";
+            // 
+            // accntNumTextBox
+            // 
+            this.accntNumTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.accntNumTextBox.Location = new System.Drawing.Point(72, 24);
+            this.accntNumTextBox.MaxLength = 25;
+            this.accntNumTextBox.Name = "accntNumTextBox";
+            this.accntNumTextBox.ReadOnly = true;
+            this.accntNumTextBox.Size = new System.Drawing.Size(198, 21);
+            this.accntNumTextBox.TabIndex = 0;
+            this.accntNumTextBox.Text = "1";
+            this.accntNumTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.acntsChrtTxtbx_KeyDown);
+            // 
+            // rprtClsfctnsButton
+            // 
+            this.rprtClsfctnsButton.ForeColor = System.Drawing.Color.Black;
+            this.rprtClsfctnsButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.rprtClsfctnsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rprtClsfctnsButton.Location = new System.Drawing.Point(357, 23);
+            this.rprtClsfctnsButton.Name = "rprtClsfctnsButton";
+            this.rprtClsfctnsButton.Size = new System.Drawing.Size(138, 23);
+            this.rprtClsfctnsButton.TabIndex = 141;
+            this.rprtClsfctnsButton.Text = "Report Classifications";
+            this.rprtClsfctnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.rprtClsfctnsButton.UseVisualStyleBackColor = true;
+            this.rprtClsfctnsButton.Click += new System.EventHandler(this.rprtClsfctnsButton_Click);
+            // 
+            // accntNameTextBox
+            // 
+            this.accntNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.accntNameTextBox.Location = new System.Drawing.Point(72, 49);
+            this.accntNameTextBox.MaxLength = 100;
+            this.accntNameTextBox.Multiline = true;
+            this.accntNameTextBox.Name = "accntNameTextBox";
+            this.accntNameTextBox.ReadOnly = true;
+            this.accntNameTextBox.Size = new System.Drawing.Size(423, 34);
+            this.accntNameTextBox.TabIndex = 2;
+            this.accntNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.acntsChrtTxtbx_KeyDown);
             // 
             // mappedAccntTextBox
             // 
@@ -2494,18 +2816,6 @@ namespace Accounting.Forms
             this.mappedAccntTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.mappedAccntTextBox.Size = new System.Drawing.Size(127, 23);
             this.mappedAccntTextBox.TabIndex = 127;
-            // 
-            // accntNameTextBox
-            // 
-            this.accntNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.accntNameTextBox.Location = new System.Drawing.Point(74, 49);
-            this.accntNameTextBox.MaxLength = 100;
-            this.accntNameTextBox.Multiline = true;
-            this.accntNameTextBox.Name = "accntNameTextBox";
-            this.accntNameTextBox.ReadOnly = true;
-            this.accntNameTextBox.Size = new System.Drawing.Size(421, 34);
-            this.accntNameTextBox.TabIndex = 2;
-            this.accntNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.acntsChrtTxtbx_KeyDown);
             // 
             // accntSgmnt10TextBox
             // 
@@ -2627,26 +2937,17 @@ namespace Accounting.Forms
             this.accntSgmnt1TextBox.TabIndex = 131;
             this.accntSgmnt1TextBox.TabStop = false;
             // 
-            // accntNumTextBox
-            // 
-            this.accntNumTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.accntNumTextBox.Location = new System.Drawing.Point(74, 24);
-            this.accntNumTextBox.MaxLength = 25;
-            this.accntNumTextBox.Name = "accntNumTextBox";
-            this.accntNumTextBox.ReadOnly = true;
-            this.accntNumTextBox.Size = new System.Drawing.Size(308, 21);
-            this.accntNumTextBox.TabIndex = 0;
-            this.accntNumTextBox.Text = "1";
-            this.accntNumTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.acntsChrtTxtbx_KeyDown);
-            // 
             // segmentsButton
             // 
             this.segmentsButton.ForeColor = System.Drawing.Color.Black;
-            this.segmentsButton.Location = new System.Drawing.Point(388, 22);
+            this.segmentsButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.segmentsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.segmentsButton.Location = new System.Drawing.Point(272, 23);
             this.segmentsButton.Name = "segmentsButton";
-            this.segmentsButton.Size = new System.Drawing.Size(107, 23);
+            this.segmentsButton.Size = new System.Drawing.Size(85, 23);
             this.segmentsButton.TabIndex = 1;
-            this.segmentsButton.Text = "Account Segments";
+            this.segmentsButton.Text = "Segments";
+            this.segmentsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.segmentsButton.UseVisualStyleBackColor = true;
             this.segmentsButton.Click += new System.EventHandler(this.segmentsButton_Click);
             // 
@@ -2660,6 +2961,7 @@ namespace Accounting.Forms
             this.mappedAccntButton.TabIndex = 128;
             this.mappedAccntButton.Text = "...";
             this.mappedAccntButton.UseVisualStyleBackColor = true;
+            this.mappedAccntButton.Click += new System.EventHandler(this.mappedAccntButton_Click);
             // 
             // mappedAccntIDTextBox
             // 
@@ -2975,7 +3277,7 @@ namespace Accounting.Forms
             // hasSubldgrCheckBox
             // 
             this.hasSubldgrCheckBox.AutoSize = true;
-            this.hasSubldgrCheckBox.Location = new System.Drawing.Point(283, 112);
+            this.hasSubldgrCheckBox.Location = new System.Drawing.Point(245, 112);
             this.hasSubldgrCheckBox.Name = "hasSubldgrCheckBox";
             this.hasSubldgrCheckBox.Size = new System.Drawing.Size(147, 17);
             this.hasSubldgrCheckBox.TabIndex = 7;
@@ -3030,9 +3332,9 @@ namespace Accounting.Forms
             this.exptChartButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exptChartButton.ForeColor = System.Drawing.Color.Black;
             this.exptChartButton.Image = global::Accounting.Properties.Resources.action_go;
-            this.exptChartButton.Location = new System.Drawing.Point(949, 42);
+            this.exptChartButton.Location = new System.Drawing.Point(936, 38);
             this.exptChartButton.Name = "exptChartButton";
-            this.exptChartButton.Size = new System.Drawing.Size(121, 50);
+            this.exptChartButton.Size = new System.Drawing.Size(115, 43);
             this.exptChartButton.TabIndex = 5;
             this.exptChartButton.Text = "EXPORT CHART TEMPLATE";
             this.exptChartButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -3048,25 +3350,25 @@ namespace Accounting.Forms
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.coaCRLBalNumericUpDown);
             this.groupBox4.Controls.Add(this.coaAEBalNumericUpDown);
-            this.groupBox4.Controls.Add(this.label17);
             this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.label17);
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(438, 37);
+            this.groupBox4.Location = new System.Drawing.Point(426, 59);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(508, 60);
+            this.groupBox4.Size = new System.Drawing.Size(508, 38);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "CHART OF ACCOUNTS BALANCE DETAILS";
+            this.infoToolTip.SetToolTip(this.groupBox4, "CHART OF ACCOUNTS BALANCE DETAILS");
             // 
             // correctImblnsButton
             // 
             this.correctImblnsButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correctImblnsButton.ForeColor = System.Drawing.Color.Black;
-            this.correctImblnsButton.ImageKey = "tick_64.png";
-            this.correctImblnsButton.ImageList = this.imageList1;
-            this.correctImblnsButton.Location = new System.Drawing.Point(452, 18);
+            this.correctImblnsButton.ImageKey = "success_w.gif";
+            this.correctImblnsButton.ImageList = this.imageList2;
+            this.correctImblnsButton.Location = new System.Drawing.Point(463, 10);
             this.correctImblnsButton.Name = "correctImblnsButton";
-            this.correctImblnsButton.Size = new System.Drawing.Size(50, 35);
+            this.correctImblnsButton.Size = new System.Drawing.Size(43, 24);
             this.correctImblnsButton.TabIndex = 83;
             this.correctImblnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.infoToolTip.SetToolTip(this.correctImblnsButton, "Auto Correct Imbalance into the Suspense Account");
@@ -3083,7 +3385,7 @@ namespace Accounting.Forms
             0,
             0,
             0});
-            this.coaNetBalNumericUpDown.Location = new System.Drawing.Point(327, 33);
+            this.coaNetBalNumericUpDown.Location = new System.Drawing.Point(370, 12);
             this.coaNetBalNumericUpDown.Maximum = new decimal(new int[] {
             1241513983,
             370409800,
@@ -3096,7 +3398,7 @@ namespace Accounting.Forms
             -2147483648});
             this.coaNetBalNumericUpDown.Name = "coaNetBalNumericUpDown";
             this.coaNetBalNumericUpDown.ReadOnly = true;
-            this.coaNetBalNumericUpDown.Size = new System.Drawing.Size(122, 21);
+            this.coaNetBalNumericUpDown.Size = new System.Drawing.Size(91, 21);
             this.coaNetBalNumericUpDown.TabIndex = 127;
             this.coaNetBalNumericUpDown.TabStop = false;
             this.coaNetBalNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -3107,11 +3409,11 @@ namespace Accounting.Forms
             // 
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(325, 17);
+            this.label15.Location = new System.Drawing.Point(345, 16);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(57, 13);
+            this.label15.Size = new System.Drawing.Size(28, 13);
             this.label15.TabIndex = 126;
-            this.label15.Text = "Difference";
+            this.label15.Text = "Net:";
             // 
             // coaCRLBalNumericUpDown
             // 
@@ -3123,7 +3425,7 @@ namespace Accounting.Forms
             0,
             0,
             0});
-            this.coaCRLBalNumericUpDown.Location = new System.Drawing.Point(169, 33);
+            this.coaCRLBalNumericUpDown.Location = new System.Drawing.Point(208, 12);
             this.coaCRLBalNumericUpDown.Maximum = new decimal(new int[] {
             1241513983,
             370409800,
@@ -3136,7 +3438,7 @@ namespace Accounting.Forms
             -2147483648});
             this.coaCRLBalNumericUpDown.Name = "coaCRLBalNumericUpDown";
             this.coaCRLBalNumericUpDown.ReadOnly = true;
-            this.coaCRLBalNumericUpDown.Size = new System.Drawing.Size(155, 21);
+            this.coaCRLBalNumericUpDown.Size = new System.Drawing.Size(133, 21);
             this.coaCRLBalNumericUpDown.TabIndex = 125;
             this.coaCRLBalNumericUpDown.TabStop = false;
             this.coaCRLBalNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -3153,7 +3455,7 @@ namespace Accounting.Forms
             0,
             0,
             0});
-            this.coaAEBalNumericUpDown.Location = new System.Drawing.Point(9, 33);
+            this.coaAEBalNumericUpDown.Location = new System.Drawing.Point(35, 12);
             this.coaAEBalNumericUpDown.Maximum = new decimal(new int[] {
             1241513983,
             370409800,
@@ -3166,41 +3468,41 @@ namespace Accounting.Forms
             -2147483648});
             this.coaAEBalNumericUpDown.Name = "coaAEBalNumericUpDown";
             this.coaAEBalNumericUpDown.ReadOnly = true;
-            this.coaAEBalNumericUpDown.Size = new System.Drawing.Size(155, 21);
+            this.coaAEBalNumericUpDown.Size = new System.Drawing.Size(129, 21);
             this.coaAEBalNumericUpDown.TabIndex = 124;
             this.coaAEBalNumericUpDown.TabStop = false;
             this.coaAEBalNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.coaAEBalNumericUpDown.ThousandsSeparator = true;
             this.coaAEBalNumericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.acntsChrtTxtbx_KeyDown);
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(167, 17);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(153, 13);
-            this.label17.TabIndex = 123;
-            this.label17.Text = "Capital + Revenue + Liabilities";
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(7, 17);
+            this.label20.Location = new System.Drawing.Point(7, 16);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(99, 13);
+            this.label20.Size = new System.Drawing.Size(32, 13);
             this.label20.TabIndex = 122;
-            this.label20.Text = "Assets + Expenses";
+            this.label20.Text = "A+E:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(165, 16);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(46, 13);
+            this.label17.TabIndex = 123;
+            this.label17.Text = "C+R+L:";
             // 
             // accntsExtraInfoButton
             // 
             this.accntsExtraInfoButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.accntsExtraInfoButton.ForeColor = System.Drawing.Color.Black;
             this.accntsExtraInfoButton.Image = global::Accounting.Properties.Resources.action_go;
-            this.accntsExtraInfoButton.Location = new System.Drawing.Point(949, 142);
+            this.accntsExtraInfoButton.Location = new System.Drawing.Point(936, 117);
             this.accntsExtraInfoButton.Name = "accntsExtraInfoButton";
-            this.accntsExtraInfoButton.Size = new System.Drawing.Size(121, 50);
+            this.accntsExtraInfoButton.Size = new System.Drawing.Size(115, 29);
             this.accntsExtraInfoButton.TabIndex = 16;
             this.accntsExtraInfoButton.Text = "EXTRA INFO.";
             this.accntsExtraInfoButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3214,9 +3516,9 @@ namespace Accounting.Forms
             this.vwAccntTrnsctnsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.vwAccntTrnsctnsButton.ForeColor = System.Drawing.Color.Black;
             this.vwAccntTrnsctnsButton.Image = global::Accounting.Properties.Resources.action_go;
-            this.vwAccntTrnsctnsButton.Location = new System.Drawing.Point(949, 192);
+            this.vwAccntTrnsctnsButton.Location = new System.Drawing.Point(936, 148);
             this.vwAccntTrnsctnsButton.Name = "vwAccntTrnsctnsButton";
-            this.vwAccntTrnsctnsButton.Size = new System.Drawing.Size(121, 50);
+            this.vwAccntTrnsctnsButton.Size = new System.Drawing.Size(115, 31);
             this.vwAccntTrnsctnsButton.TabIndex = 17;
             this.vwAccntTrnsctnsButton.Text = "TRANSACTIONS";
             this.vwAccntTrnsctnsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -3234,7 +3536,7 @@ namespace Accounting.Forms
             this.tabPage17.Location = new System.Drawing.Point(4, 29);
             this.tabPage17.Name = "tabPage17";
             this.tabPage17.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage17.Size = new System.Drawing.Size(1091, 620);
+            this.tabPage17.Size = new System.Drawing.Size(1054, 592);
             this.tabPage17.TabIndex = 1;
             this.tabPage17.Text = "INFORMATIONAL/MEMO ACCOUNTS";
             // 
@@ -3249,7 +3551,7 @@ namespace Accounting.Forms
             this.tabControl3.Location = new System.Drawing.Point(241, 38);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(847, 579);
+            this.tabControl3.Size = new System.Drawing.Size(810, 551);
             this.tabControl3.TabIndex = 146;
             // 
             // tabPage18
@@ -3265,7 +3567,7 @@ namespace Accounting.Forms
             this.tabPage18.Location = new System.Drawing.Point(4, 29);
             this.tabPage18.Name = "tabPage18";
             this.tabPage18.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage18.Size = new System.Drawing.Size(839, 546);
+            this.tabPage18.Size = new System.Drawing.Size(802, 518);
             this.tabPage18.TabIndex = 0;
             this.tabPage18.Text = "ACCOUNT DETAILS";
             // 
@@ -3278,7 +3580,7 @@ namespace Accounting.Forms
             this.groupBox21.ForeColor = System.Drawing.Color.White;
             this.groupBox21.Location = new System.Drawing.Point(5, 286);
             this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(831, 257);
+            this.groupBox21.Size = new System.Drawing.Size(794, 229);
             this.groupBox21.TabIndex = 145;
             this.groupBox21.TabStop = false;
             this.groupBox21.Text = "SQL QUERY/FORMULA";
@@ -3291,7 +3593,7 @@ namespace Accounting.Forms
             this.acctSQLIMATextBox.Multiline = true;
             this.acctSQLIMATextBox.Name = "acctSQLIMATextBox";
             this.acctSQLIMATextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.acctSQLIMATextBox.Size = new System.Drawing.Size(825, 237);
+            this.acctSQLIMATextBox.Size = new System.Drawing.Size(788, 209);
             this.acctSQLIMATextBox.TabIndex = 131;
             // 
             // groupBox22
@@ -3768,6 +4070,7 @@ namespace Accounting.Forms
             // toolStrip17
             // 
             this.toolStrip17.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip17.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip17.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addIMAButton,
             this.editIMAButton,
@@ -3777,7 +4080,7 @@ namespace Accounting.Forms
             this.rcHstryIMAButton});
             this.toolStrip17.Location = new System.Drawing.Point(5, 6);
             this.toolStrip17.Name = "toolStrip17";
-            this.toolStrip17.Size = new System.Drawing.Size(279, 25);
+            this.toolStrip17.Size = new System.Drawing.Size(297, 27);
             this.toolStrip17.TabIndex = 139;
             this.toolStrip17.TabStop = true;
             this.toolStrip17.Text = "toolStrip17";
@@ -3787,7 +4090,7 @@ namespace Accounting.Forms
             this.addIMAButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addIMAButton.Name = "addIMAButton";
-            this.addIMAButton.Size = new System.Drawing.Size(51, 22);
+            this.addIMAButton.Size = new System.Drawing.Size(55, 24);
             this.addIMAButton.Text = "ADD";
             this.addIMAButton.Click += new System.EventHandler(this.addIMAButton_Click);
             // 
@@ -3796,7 +4099,7 @@ namespace Accounting.Forms
             this.editIMAButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editIMAButton.Name = "editIMAButton";
-            this.editIMAButton.Size = new System.Drawing.Size(51, 22);
+            this.editIMAButton.Size = new System.Drawing.Size(55, 24);
             this.editIMAButton.Text = "EDIT";
             // 
             // saveIMAButton
@@ -3804,7 +4107,7 @@ namespace Accounting.Forms
             this.saveIMAButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveIMAButton.Name = "saveIMAButton";
-            this.saveIMAButton.Size = new System.Drawing.Size(53, 22);
+            this.saveIMAButton.Size = new System.Drawing.Size(57, 24);
             this.saveIMAButton.Text = "SAVE";
             // 
             // delIMAButton
@@ -3812,7 +4115,7 @@ namespace Accounting.Forms
             this.delIMAButton.Image = global::Accounting.Properties.Resources.delete;
             this.delIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delIMAButton.Name = "delIMAButton";
-            this.delIMAButton.Size = new System.Drawing.Size(66, 22);
+            this.delIMAButton.Size = new System.Drawing.Size(70, 24);
             this.delIMAButton.Text = "DELETE";
             // 
             // vwSQLIMAButton
@@ -3821,7 +4124,7 @@ namespace Accounting.Forms
             this.vwSQLIMAButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLIMAButton.Name = "vwSQLIMAButton";
-            this.vwSQLIMAButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLIMAButton.Size = new System.Drawing.Size(24, 24);
             this.vwSQLIMAButton.Text = "View SQL";
             this.vwSQLIMAButton.Click += new System.EventHandler(this.vwSQLIMAButton_Click);
             // 
@@ -3831,7 +4134,7 @@ namespace Accounting.Forms
             this.rcHstryIMAButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstryIMAButton.Name = "rcHstryIMAButton";
-            this.rcHstryIMAButton.Size = new System.Drawing.Size(23, 22);
+            this.rcHstryIMAButton.Size = new System.Drawing.Size(24, 24);
             this.rcHstryIMAButton.Text = "Record History";
             this.rcHstryIMAButton.Click += new System.EventHandler(this.rcHstryIMAButton_Click);
             // 
@@ -3872,7 +4175,7 @@ namespace Accounting.Forms
             this.tabPage19.Location = new System.Drawing.Point(4, 29);
             this.tabPage19.Name = "tabPage19";
             this.tabPage19.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage19.Size = new System.Drawing.Size(839, 546);
+            this.tabPage19.Size = new System.Drawing.Size(802, 518);
             this.tabPage19.TabIndex = 1;
             this.tabPage19.Text = "MEMO ACCOUNT ENTRIES";
             // 
@@ -4100,6 +4403,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip18.AutoSize = false;
             this.toolStrip18.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip18.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip18.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstIMADtButton,
             this.toolStripSeparator132,
@@ -4131,7 +4435,7 @@ namespace Accounting.Forms
             this.moveFirstIMADtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstIMADtButton.Name = "moveFirstIMADtButton";
-            this.moveFirstIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstIMADtButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstIMADtButton.Text = "Move First";
             this.moveFirstIMADtButton.Click += new System.EventHandler(this.IMADTPnlNavButtons);
             // 
@@ -4147,7 +4451,7 @@ namespace Accounting.Forms
             this.movePreviousIMADtButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousIMADtButton.Name = "movePreviousIMADtButton";
-            this.movePreviousIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousIMADtButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousIMADtButton.Text = "Move Previous";
             this.movePreviousIMADtButton.Click += new System.EventHandler(this.IMADTPnlNavButtons);
             // 
@@ -4199,7 +4503,7 @@ namespace Accounting.Forms
             this.moveNextIMADtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextIMADtButton.Name = "moveNextIMADtButton";
-            this.moveNextIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextIMADtButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextIMADtButton.Text = "Move Next";
             this.moveNextIMADtButton.Click += new System.EventHandler(this.IMADTPnlNavButtons);
             // 
@@ -4215,7 +4519,7 @@ namespace Accounting.Forms
             this.moveLastIMADtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastIMADtButton.Name = "moveLastIMADtButton";
-            this.moveLastIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastIMADtButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastIMADtButton.Text = "Move Last";
             this.moveLastIMADtButton.Click += new System.EventHandler(this.IMADTPnlNavButtons);
             // 
@@ -4245,6 +4549,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip19.AutoSize = false;
             this.toolStrip19.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip19.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip19.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addIMADtButton,
             this.toolStripSeparator138,
@@ -4268,7 +4573,7 @@ namespace Accounting.Forms
             this.addIMADtButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addIMADtButton.Name = "addIMADtButton";
-            this.addIMADtButton.Size = new System.Drawing.Size(81, 22);
+            this.addIMADtButton.Size = new System.Drawing.Size(85, 22);
             this.addIMADtButton.Text = "ADD TRNS.";
             this.addIMADtButton.Click += new System.EventHandler(this.addIMADtButton_Click);
             // 
@@ -4284,7 +4589,7 @@ namespace Accounting.Forms
             this.editIMADtButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editIMADtButton.Name = "editIMADtButton";
-            this.editIMADtButton.Size = new System.Drawing.Size(83, 22);
+            this.editIMADtButton.Size = new System.Drawing.Size(87, 22);
             this.editIMADtButton.Text = "EDIT TRNS.";
             // 
             // toolStripSeparator139
@@ -4299,7 +4604,7 @@ namespace Accounting.Forms
             this.delIMADtButton.Image = global::Accounting.Properties.Resources.delete;
             this.delIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delIMADtButton.Name = "delIMADtButton";
-            this.delIMADtButton.Size = new System.Drawing.Size(96, 22);
+            this.delIMADtButton.Size = new System.Drawing.Size(100, 22);
             this.delIMADtButton.Text = "DELETE TRNS.";
             // 
             // vwSQLIMADtButton
@@ -4308,7 +4613,7 @@ namespace Accounting.Forms
             this.vwSQLIMADtButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLIMADtButton.Name = "vwSQLIMADtButton";
-            this.vwSQLIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLIMADtButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLIMADtButton.Text = "View SQL";
             this.vwSQLIMADtButton.Click += new System.EventHandler(this.vwSQLIMADtButton_Click);
             // 
@@ -4318,7 +4623,7 @@ namespace Accounting.Forms
             this.rcHstryIMADtButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rcHstryIMADtButton.Name = "rcHstryIMADtButton";
-            this.rcHstryIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.rcHstryIMADtButton.Size = new System.Drawing.Size(24, 22);
             this.rcHstryIMADtButton.Text = "Record History";
             this.rcHstryIMADtButton.Click += new System.EventHandler(this.rcHstryIMADtButton_Click);
             // 
@@ -4329,7 +4634,7 @@ namespace Accounting.Forms
             this.slctAllIMADtButton.Image = global::Accounting.Properties.Resources.tick_64;
             this.slctAllIMADtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.slctAllIMADtButton.Name = "slctAllIMADtButton";
-            this.slctAllIMADtButton.Size = new System.Drawing.Size(23, 22);
+            this.slctAllIMADtButton.Size = new System.Drawing.Size(24, 24);
             this.slctAllIMADtButton.Click += new System.EventHandler(this.slctAllIMADtButton_Click);
             // 
             // imaDtListView
@@ -4359,7 +4664,7 @@ namespace Accounting.Forms
             this.imaDtListView.HideSelection = false;
             this.imaDtListView.Location = new System.Drawing.Point(2, 67);
             this.imaDtListView.Name = "imaDtListView";
-            this.imaDtListView.Size = new System.Drawing.Size(862, 357);
+            this.imaDtListView.Size = new System.Drawing.Size(1358, 0);
             this.imaDtListView.TabIndex = 2;
             this.imaDtListView.UseCompatibleStateImageBehavior = false;
             this.imaDtListView.View = System.Windows.Forms.View.Details;
@@ -4441,6 +4746,7 @@ namespace Accounting.Forms
             // 
             // trnsContextMenuStrip
             // 
+            this.trnsContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.trnsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTrnsMenuItem,
             this.addTrnsTmpltMenuItem,
@@ -4455,13 +4761,13 @@ namespace Accounting.Forms
             this.recHstryTrnsMenuItem,
             this.vwSQLTrnsMenuItem});
             this.trnsContextMenuStrip.Name = "usersContextMenuStrip";
-            this.trnsContextMenuStrip.Size = new System.Drawing.Size(242, 236);
+            this.trnsContextMenuStrip.Size = new System.Drawing.Size(246, 276);
             // 
             // addTrnsMenuItem
             // 
             this.addTrnsMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTrnsMenuItem.Name = "addTrnsMenuItem";
-            this.addTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.addTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.addTrnsMenuItem.Text = "&Add Transaction";
             this.addTrnsMenuItem.Click += new System.EventHandler(this.addTrnsMenuItem_Click);
             // 
@@ -4469,7 +4775,7 @@ namespace Accounting.Forms
             // 
             this.addTrnsTmpltMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTrnsTmpltMenuItem.Name = "addTrnsTmpltMenuItem";
-            this.addTrnsTmpltMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.addTrnsTmpltMenuItem.Size = new System.Drawing.Size(245, 26);
             this.addTrnsTmpltMenuItem.Text = "Add Transaction from Template";
             this.addTrnsTmpltMenuItem.Click += new System.EventHandler(this.addTrnsTmpltMenuItem_Click);
             // 
@@ -4477,7 +4783,7 @@ namespace Accounting.Forms
             // 
             this.editTrnsMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editTrnsMenuItem.Name = "editTrnsMenuItem";
-            this.editTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.editTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.editTrnsMenuItem.Text = "&Edit Transaction";
             this.editTrnsMenuItem.Click += new System.EventHandler(this.editTrnsMenuItem_Click);
             // 
@@ -4485,20 +4791,20 @@ namespace Accounting.Forms
             // 
             this.deleteTrnsMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.deleteTrnsMenuItem.Name = "deleteTrnsMenuItem";
-            this.deleteTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.deleteTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.deleteTrnsMenuItem.Text = "Delete Transaction";
             this.deleteTrnsMenuItem.Click += new System.EventHandler(this.deleteTrnsMenuItem_Click);
             // 
             // toolStripSeparator67
             // 
             this.toolStripSeparator67.Name = "toolStripSeparator67";
-            this.toolStripSeparator67.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator67.Size = new System.Drawing.Size(242, 6);
             // 
             // trnsDetMenuItem
             // 
             this.trnsDetMenuItem.Image = global::Accounting.Properties.Resources.actions_document_preview;
             this.trnsDetMenuItem.Name = "trnsDetMenuItem";
-            this.trnsDetMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.trnsDetMenuItem.Size = new System.Drawing.Size(245, 26);
             this.trnsDetMenuItem.Text = "View Amount Breakdown";
             this.trnsDetMenuItem.Click += new System.EventHandler(this.trnsDetMenuItem_Click);
             // 
@@ -4506,20 +4812,20 @@ namespace Accounting.Forms
             // 
             this.validateTrnsMenuItem.Image = global::Accounting.Properties.Resources.tick_64;
             this.validateTrnsMenuItem.Name = "validateTrnsMenuItem";
-            this.validateTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.validateTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.validateTrnsMenuItem.Text = "Check Transaction Validity";
             this.validateTrnsMenuItem.Click += new System.EventHandler(this.validateTrnsMenuItem_Click);
             // 
             // toolStripSeparator32
             // 
             this.toolStripSeparator32.Name = "toolStripSeparator32";
-            this.toolStripSeparator32.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator32.Size = new System.Drawing.Size(242, 6);
             // 
             // exptExclTdetMenuItem
             // 
             this.exptExclTdetMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclTdetMenuItem.Name = "exptExclTdetMenuItem";
-            this.exptExclTdetMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.exptExclTdetMenuItem.Size = new System.Drawing.Size(245, 26);
             this.exptExclTdetMenuItem.Text = "Export to Excel";
             this.exptExclTdetMenuItem.Click += new System.EventHandler(this.exptExclTdetMenuItem_Click);
             // 
@@ -4527,7 +4833,7 @@ namespace Accounting.Forms
             // 
             this.refreshTrnsMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.refreshTrnsMenuItem.Name = "refreshTrnsMenuItem";
-            this.refreshTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.refreshTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.refreshTrnsMenuItem.Text = "&Refresh";
             this.refreshTrnsMenuItem.Click += new System.EventHandler(this.refreshTrnsMenuItem_Click);
             // 
@@ -4535,7 +4841,7 @@ namespace Accounting.Forms
             // 
             this.recHstryTrnsMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryTrnsMenuItem.Name = "recHstryTrnsMenuItem";
-            this.recHstryTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.recHstryTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.recHstryTrnsMenuItem.Text = "Record &History";
             this.recHstryTrnsMenuItem.Click += new System.EventHandler(this.recHstryTrnsMenuItem_Click);
             // 
@@ -4543,7 +4849,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLTrnsMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTrnsMenuItem.Name = "vwSQLTrnsMenuItem";
-            this.vwSQLTrnsMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.vwSQLTrnsMenuItem.Size = new System.Drawing.Size(245, 26);
             this.vwSQLTrnsMenuItem.Text = "&View SQL";
             this.vwSQLTrnsMenuItem.Click += new System.EventHandler(this.vwSQLTrnsMenuItem_Click);
             // 
@@ -4554,13 +4860,14 @@ namespace Accounting.Forms
             this.panel21.Location = new System.Drawing.Point(3, 3);
             this.panel21.Name = "panel21";
             this.panel21.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel21.Size = new System.Drawing.Size(1085, 33);
+            this.panel21.Size = new System.Drawing.Size(1048, 33);
             this.panel21.TabIndex = 137;
             this.panel21.TabStop = true;
             // 
             // toolStrip13
             // 
             this.toolStrip13.AutoSize = false;
+            this.toolStrip13.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip13.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveFirstIMAButton,
             this.toolStripSeparator114,
@@ -4585,13 +4892,14 @@ namespace Accounting.Forms
             this.searchInIMAComboBox,
             this.toolStripSeparator130,
             this.refreshIMAButton,
+            this.toolStripSeparator154,
             this.resetIMAButton,
             this.toolStripSeparator131});
             this.toolStrip13.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip13.Location = new System.Drawing.Point(0, 5);
             this.toolStrip13.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip13.Name = "toolStrip13";
-            this.toolStrip13.Size = new System.Drawing.Size(1085, 25);
+            this.toolStrip13.Size = new System.Drawing.Size(1048, 25);
             this.toolStrip13.Stretch = true;
             this.toolStrip13.TabIndex = 0;
             this.toolStrip13.TabStop = true;
@@ -4603,7 +4911,7 @@ namespace Accounting.Forms
             this.moveFirstIMAButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstIMAButton.Name = "moveFirstIMAButton";
-            this.moveFirstIMAButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstIMAButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstIMAButton.Text = "Move First";
             this.moveFirstIMAButton.Click += new System.EventHandler(this.IMAPnlNavButtons);
             // 
@@ -4618,7 +4926,7 @@ namespace Accounting.Forms
             this.movePreviousIMAButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousIMAButton.Name = "movePreviousIMAButton";
-            this.movePreviousIMAButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousIMAButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousIMAButton.Text = "Move Previous";
             this.movePreviousIMAButton.Click += new System.EventHandler(this.IMAPnlNavButtons);
             // 
@@ -4666,7 +4974,7 @@ namespace Accounting.Forms
             this.moveNextIMAButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextIMAButton.Name = "moveNextIMAButton";
-            this.moveNextIMAButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextIMAButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextIMAButton.Text = "Move Next";
             this.moveNextIMAButton.Click += new System.EventHandler(this.IMAPnlNavButtons);
             // 
@@ -4681,7 +4989,7 @@ namespace Accounting.Forms
             this.moveLastIMAButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastIMAButton.Name = "moveLastIMAButton";
-            this.moveLastIMAButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastIMAButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastIMAButton.Text = "Move Last";
             this.moveLastIMAButton.Click += new System.EventHandler(this.IMAPnlNavButtons);
             // 
@@ -4770,16 +5078,21 @@ namespace Accounting.Forms
             this.refreshIMAButton.Image = global::Accounting.Properties.Resources._98;
             this.refreshIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshIMAButton.Name = "refreshIMAButton";
-            this.refreshIMAButton.Size = new System.Drawing.Size(42, 22);
+            this.refreshIMAButton.Size = new System.Drawing.Size(46, 22);
             this.refreshIMAButton.Text = "Go";
             this.refreshIMAButton.Click += new System.EventHandler(this.refreshIMAButton_Click);
+            // 
+            // toolStripSeparator154
+            // 
+            this.toolStripSeparator154.Name = "toolStripSeparator154";
+            this.toolStripSeparator154.Size = new System.Drawing.Size(6, 25);
             // 
             // resetIMAButton
             // 
             this.resetIMAButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetIMAButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetIMAButton.Name = "resetIMAButton";
-            this.resetIMAButton.Size = new System.Drawing.Size(59, 22);
+            this.resetIMAButton.Size = new System.Drawing.Size(63, 22);
             this.resetIMAButton.Text = "RESET";
             this.resetIMAButton.Click += new System.EventHandler(this.resetIMAButton_Click);
             // 
@@ -4803,7 +5116,7 @@ namespace Accounting.Forms
             this.imaListView.HideSelection = false;
             this.imaListView.Location = new System.Drawing.Point(5, 38);
             this.imaListView.Name = "imaListView";
-            this.imaListView.Size = new System.Drawing.Size(234, 579);
+            this.imaListView.Size = new System.Drawing.Size(234, 551);
             this.imaListView.TabIndex = 138;
             this.imaListView.UseCompatibleStateImageBehavior = false;
             this.imaListView.View = System.Windows.Forms.View.Details;
@@ -4857,7 +5170,7 @@ namespace Accounting.Forms
             this.tabPage2.Location = new System.Drawing.Point(4, 88);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage2.Size = new System.Drawing.Size(1068, 631);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "JOURNAL ENTRIES";
             // 
@@ -4876,7 +5189,7 @@ namespace Accounting.Forms
             this.trnsctnsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trnsctnsPanel.Location = new System.Drawing.Point(3, 3);
             this.trnsctnsPanel.Name = "trnsctnsPanel";
-            this.trnsctnsPanel.Size = new System.Drawing.Size(1099, 625);
+            this.trnsctnsPanel.Size = new System.Drawing.Size(1062, 625);
             this.trnsctnsPanel.TabIndex = 1;
             // 
             // showUnpostedCheckBox
@@ -4898,6 +5211,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip9.AutoSize = false;
             this.toolStrip9.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip9.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTrnsBatchButton,
             this.editTrnsBatchButton,
@@ -4915,7 +5229,7 @@ namespace Accounting.Forms
             this.addTrnsBatchButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTrnsBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTrnsBatchButton.Name = "addTrnsBatchButton";
-            this.addTrnsBatchButton.Size = new System.Drawing.Size(51, 22);
+            this.addTrnsBatchButton.Size = new System.Drawing.Size(55, 22);
             this.addTrnsBatchButton.Text = "ADD";
             this.addTrnsBatchButton.Click += new System.EventHandler(this.addTrnsBatchButton_Click);
             // 
@@ -4924,7 +5238,7 @@ namespace Accounting.Forms
             this.editTrnsBatchButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editTrnsBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editTrnsBatchButton.Name = "editTrnsBatchButton";
-            this.editTrnsBatchButton.Size = new System.Drawing.Size(51, 22);
+            this.editTrnsBatchButton.Size = new System.Drawing.Size(55, 22);
             this.editTrnsBatchButton.Text = "EDIT";
             this.editTrnsBatchButton.Click += new System.EventHandler(this.editTrnsBatchButton_Click);
             // 
@@ -4933,7 +5247,7 @@ namespace Accounting.Forms
             this.saveTrnsBatchButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveTrnsBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveTrnsBatchButton.Name = "saveTrnsBatchButton";
-            this.saveTrnsBatchButton.Size = new System.Drawing.Size(53, 22);
+            this.saveTrnsBatchButton.Size = new System.Drawing.Size(57, 22);
             this.saveTrnsBatchButton.Text = "SAVE";
             this.saveTrnsBatchButton.Click += new System.EventHandler(this.saveTrnsBatchButton_Click);
             // 
@@ -4942,7 +5256,7 @@ namespace Accounting.Forms
             this.voidBatchButton.Image = global::Accounting.Properties.Resources._90;
             this.voidBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.voidBatchButton.Name = "voidBatchButton";
-            this.voidBatchButton.Size = new System.Drawing.Size(54, 22);
+            this.voidBatchButton.Size = new System.Drawing.Size(58, 22);
             this.voidBatchButton.Text = "VOID";
             this.voidBatchButton.Click += new System.EventHandler(this.voidBatchButton_Click);
             // 
@@ -5345,6 +5659,7 @@ namespace Accounting.Forms
             // 
             // trnsBatchContextMenuStrip
             // 
+            this.trnsBatchContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.trnsBatchContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBatchMenuItem,
             this.editBatchMenuItem,
@@ -5357,13 +5672,13 @@ namespace Accounting.Forms
             this.recHstryBatchMenuItem,
             this.vwSQLBatchMenuItem});
             this.trnsBatchContextMenuStrip.Name = "usersContextMenuStrip";
-            this.trnsBatchContextMenuStrip.Size = new System.Drawing.Size(210, 192);
+            this.trnsBatchContextMenuStrip.Size = new System.Drawing.Size(214, 224);
             // 
             // addBatchMenuItem
             // 
             this.addBatchMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addBatchMenuItem.Name = "addBatchMenuItem";
-            this.addBatchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addBatchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.addBatchMenuItem.Text = "&Add Batch";
             this.addBatchMenuItem.Click += new System.EventHandler(this.addBatchMenuItem_Click);
             // 
@@ -5371,7 +5686,7 @@ namespace Accounting.Forms
             // 
             this.editBatchMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editBatchMenuItem.Name = "editBatchMenuItem";
-            this.editBatchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.editBatchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.editBatchMenuItem.Text = "&Edit Batch";
             this.editBatchMenuItem.Click += new System.EventHandler(this.editBatchMenuItem_Click);
             // 
@@ -5379,33 +5694,33 @@ namespace Accounting.Forms
             // 
             this.delBatchMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.delBatchMenuItem.Name = "delBatchMenuItem";
-            this.delBatchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.delBatchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.delBatchMenuItem.Text = "Delete/Void Batch";
             this.delBatchMenuItem.Click += new System.EventHandler(this.delBatchMenuItem_Click);
             // 
             // toolStripSeparator62
             // 
             this.toolStripSeparator62.Name = "toolStripSeparator62";
-            this.toolStripSeparator62.Size = new System.Drawing.Size(206, 6);
+            this.toolStripSeparator62.Size = new System.Drawing.Size(210, 6);
             // 
             // enableAutoPostMenuItem
             // 
             this.enableAutoPostMenuItem.Image = global::Accounting.Properties.Resources._98;
             this.enableAutoPostMenuItem.Name = "enableAutoPostMenuItem";
-            this.enableAutoPostMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.enableAutoPostMenuItem.Size = new System.Drawing.Size(213, 26);
             this.enableAutoPostMenuItem.Text = "Enable/Disable Auto-Post";
             this.enableAutoPostMenuItem.Click += new System.EventHandler(this.enableAutoPostMenuItem_Click);
             // 
             // toolStripSeparator141
             // 
             this.toolStripSeparator141.Name = "toolStripSeparator141";
-            this.toolStripSeparator141.Size = new System.Drawing.Size(206, 6);
+            this.toolStripSeparator141.Size = new System.Drawing.Size(210, 6);
             // 
             // exptExclBtchMenuItem
             // 
             this.exptExclBtchMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclBtchMenuItem.Name = "exptExclBtchMenuItem";
-            this.exptExclBtchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.exptExclBtchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.exptExclBtchMenuItem.Text = "Export to Excel";
             this.exptExclBtchMenuItem.Click += new System.EventHandler(this.exptExclBtchMenuItem_Click);
             // 
@@ -5413,7 +5728,7 @@ namespace Accounting.Forms
             // 
             this.refreshBatchMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.refreshBatchMenuItem.Name = "refreshBatchMenuItem";
-            this.refreshBatchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.refreshBatchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.refreshBatchMenuItem.Text = "&Refresh";
             this.refreshBatchMenuItem.Click += new System.EventHandler(this.refreshBatchMenuItem_Click);
             // 
@@ -5421,7 +5736,7 @@ namespace Accounting.Forms
             // 
             this.recHstryBatchMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryBatchMenuItem.Name = "recHstryBatchMenuItem";
-            this.recHstryBatchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.recHstryBatchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.recHstryBatchMenuItem.Text = "Record &History";
             this.recHstryBatchMenuItem.Click += new System.EventHandler(this.recHstryBatchMenuItem_Click);
             // 
@@ -5429,7 +5744,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLBatchMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBatchMenuItem.Name = "vwSQLBatchMenuItem";
-            this.vwSQLBatchMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.vwSQLBatchMenuItem.Size = new System.Drawing.Size(213, 26);
             this.vwSQLBatchMenuItem.Text = "&View SQL";
             this.vwSQLBatchMenuItem.Click += new System.EventHandler(this.vwSQLBatchMenuItem_Click);
             // 
@@ -5440,13 +5755,14 @@ namespace Accounting.Forms
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel8.Size = new System.Drawing.Size(1099, 33);
+            this.panel8.Size = new System.Drawing.Size(1062, 33);
             this.panel8.TabIndex = 1;
             this.panel8.TabStop = true;
             // 
             // toolStrip3
             // 
             this.toolStrip3.AutoSize = false;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vwLogMsgButton,
             this.toolStripSeparator50,
@@ -5486,7 +5802,7 @@ namespace Accounting.Forms
             this.toolStrip3.Location = new System.Drawing.Point(0, 5);
             this.toolStrip3.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(1099, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(1062, 25);
             this.toolStrip3.Stretch = true;
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.TabStop = true;
@@ -5498,7 +5814,7 @@ namespace Accounting.Forms
             this.vwLogMsgButton.Image = global::Accounting.Properties.Resources._15;
             this.vwLogMsgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwLogMsgButton.Name = "vwLogMsgButton";
-            this.vwLogMsgButton.Size = new System.Drawing.Size(23, 22);
+            this.vwLogMsgButton.Size = new System.Drawing.Size(24, 22);
             this.vwLogMsgButton.Text = "View Log Messages";
             this.vwLogMsgButton.Click += new System.EventHandler(this.vwLogMsgButton_Click);
             // 
@@ -5513,7 +5829,7 @@ namespace Accounting.Forms
             this.vwSQLBatchButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLBatchButton.Name = "vwSQLBatchButton";
-            this.vwSQLBatchButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLBatchButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLBatchButton.Text = "View SQL";
             this.vwSQLBatchButton.Click += new System.EventHandler(this.vwSQLBatchButton_Click);
             // 
@@ -5528,7 +5844,7 @@ namespace Accounting.Forms
             this.recHstryBatchButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryBatchButton.Name = "recHstryBatchButton";
-            this.recHstryBatchButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryBatchButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryBatchButton.Text = "Record History";
             this.recHstryBatchButton.Click += new System.EventHandler(this.recHstryBatchButton_Click);
             // 
@@ -5543,7 +5859,7 @@ namespace Accounting.Forms
             this.rfrshTrnsButton.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rfrshTrnsButton.Name = "rfrshTrnsButton";
-            this.rfrshTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.rfrshTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.rfrshTrnsButton.Text = "Refresh";
             this.rfrshTrnsButton.Click += new System.EventHandler(this.rfrshTrnsButton_Click);
             // 
@@ -5558,7 +5874,7 @@ namespace Accounting.Forms
             this.moveFirstTrnsButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstTrnsButton.Name = "moveFirstTrnsButton";
-            this.moveFirstTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstTrnsButton.Text = "Move First";
             this.moveFirstTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -5573,7 +5889,7 @@ namespace Accounting.Forms
             this.movePreviousTrnsButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousTrnsButton.Name = "movePreviousTrnsButton";
-            this.movePreviousTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousTrnsButton.Text = "Move Previous";
             this.movePreviousTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -5621,7 +5937,7 @@ namespace Accounting.Forms
             this.moveNextTrnsButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextTrnsButton.Name = "moveNextTrnsButton";
-            this.moveNextTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextTrnsButton.Text = "Move Next";
             this.moveNextTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -5636,7 +5952,7 @@ namespace Accounting.Forms
             this.moveLastTrnsButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastTrnsButton.Name = "moveLastTrnsButton";
-            this.moveLastTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastTrnsButton.Text = "Move Last";
             this.moveLastTrnsButton.Click += new System.EventHandler(this.TrnsPnlNavButtons);
             // 
@@ -5728,7 +6044,7 @@ namespace Accounting.Forms
             this.resetTrnsButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetTrnsButton.Name = "resetTrnsButton";
-            this.resetTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.resetTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.resetTrnsButton.Text = "RESET";
             this.resetTrnsButton.Click += new System.EventHandler(this.resetTrnsButton_Click);
             // 
@@ -5738,7 +6054,7 @@ namespace Accounting.Forms
             this.goTrnsButton.Image = global::Accounting.Properties.Resources._98;
             this.goTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goTrnsButton.Name = "goTrnsButton";
-            this.goTrnsButton.Size = new System.Drawing.Size(23, 22);
+            this.goTrnsButton.Size = new System.Drawing.Size(24, 22);
             this.goTrnsButton.Text = "Go";
             this.goTrnsButton.Visible = false;
             this.goTrnsButton.Click += new System.EventHandler(this.goTrnsButton_Click);
@@ -5753,7 +6069,7 @@ namespace Accounting.Forms
             this.toolStripButton16.Image = global::Accounting.Properties.Resources.pay;
             this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton16.Name = "toolStripButton16";
-            this.toolStripButton16.Size = new System.Drawing.Size(161, 22);
+            this.toolStripButton16.Size = new System.Drawing.Size(165, 22);
             this.toolStripButton16.Text = "SETUP EXCHANGE RATES";
             this.toolStripButton16.Click += new System.EventHandler(this.exchngRatesButton_Click);
             // 
@@ -5809,13 +6125,14 @@ namespace Accounting.Forms
             this.groupBox3.Location = new System.Drawing.Point(246, 147);
             this.groupBox3.MinimumSize = new System.Drawing.Size(782, 300);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(853, 475);
+            this.groupBox3.Size = new System.Drawing.Size(816, 475);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             // 
             // toolStrip12
             // 
             this.toolStrip12.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip12.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip12.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectAllButton,
             this.moveFirstDetButton,
@@ -5837,7 +6154,7 @@ namespace Accounting.Forms
             this.toolStrip12.Location = new System.Drawing.Point(7, 12);
             this.toolStrip12.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip12.Name = "toolStrip12";
-            this.toolStrip12.Size = new System.Drawing.Size(683, 25);
+            this.toolStrip12.Size = new System.Drawing.Size(699, 27);
             this.toolStrip12.Stretch = true;
             this.toolStrip12.TabIndex = 0;
             this.toolStrip12.TabStop = true;
@@ -5850,7 +6167,7 @@ namespace Accounting.Forms
             this.selectAllButton.Image = global::Accounting.Properties.Resources.tick_64;
             this.selectAllButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectAllButton.Name = "selectAllButton";
-            this.selectAllButton.Size = new System.Drawing.Size(70, 22);
+            this.selectAllButton.Size = new System.Drawing.Size(74, 24);
             this.selectAllButton.Text = "Select All";
             this.selectAllButton.Click += new System.EventHandler(this.selectAllButton_Click);
             // 
@@ -5861,14 +6178,14 @@ namespace Accounting.Forms
             this.moveFirstDetButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstDetButton.Name = "moveFirstDetButton";
-            this.moveFirstDetButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstDetButton.Size = new System.Drawing.Size(24, 24);
             this.moveFirstDetButton.Text = "Move First";
             this.moveFirstDetButton.Click += new System.EventHandler(this.TdetPnlNavButtons);
             // 
             // toolStripSeparator108
             // 
             this.toolStripSeparator108.Name = "toolStripSeparator108";
-            this.toolStripSeparator108.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator108.Size = new System.Drawing.Size(6, 27);
             // 
             // movePreviousDetButton
             // 
@@ -5877,14 +6194,14 @@ namespace Accounting.Forms
             this.movePreviousDetButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousDetButton.Name = "movePreviousDetButton";
-            this.movePreviousDetButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousDetButton.Size = new System.Drawing.Size(24, 24);
             this.movePreviousDetButton.Text = "Move Previous";
             this.movePreviousDetButton.Click += new System.EventHandler(this.TdetPnlNavButtons);
             // 
             // toolStripSeparator109
             // 
             this.toolStripSeparator109.Name = "toolStripSeparator109";
-            this.toolStripSeparator109.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator109.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel9
             // 
@@ -5892,7 +6209,7 @@ namespace Accounting.Forms
             this.toolStripLabel9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel9.ForeColor = System.Drawing.Color.Black;
             this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(47, 22);
+            this.toolStripLabel9.Size = new System.Drawing.Size(47, 24);
             this.toolStripLabel9.Text = "Record";
             // 
             // positionDetTextBox
@@ -5904,7 +6221,7 @@ namespace Accounting.Forms
             this.positionDetTextBox.ForeColor = System.Drawing.Color.Black;
             this.positionDetTextBox.Name = "positionDetTextBox";
             this.positionDetTextBox.ReadOnly = true;
-            this.positionDetTextBox.Size = new System.Drawing.Size(70, 25);
+            this.positionDetTextBox.Size = new System.Drawing.Size(70, 27);
             this.positionDetTextBox.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.positionDetTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.positionDetTextBox_KeyDown);
             // 
@@ -5914,13 +6231,13 @@ namespace Accounting.Forms
             this.totalRecsDetLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalRecsDetLabel.ForeColor = System.Drawing.Color.Black;
             this.totalRecsDetLabel.Name = "totalRecsDetLabel";
-            this.totalRecsDetLabel.Size = new System.Drawing.Size(50, 22);
+            this.totalRecsDetLabel.Size = new System.Drawing.Size(50, 24);
             this.totalRecsDetLabel.Text = "of Total";
             // 
             // toolStripSeparator110
             // 
             this.toolStripSeparator110.Name = "toolStripSeparator110";
-            this.toolStripSeparator110.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator110.Size = new System.Drawing.Size(6, 27);
             // 
             // moveNextDetButton
             // 
@@ -5929,14 +6246,14 @@ namespace Accounting.Forms
             this.moveNextDetButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextDetButton.Name = "moveNextDetButton";
-            this.moveNextDetButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextDetButton.Size = new System.Drawing.Size(24, 24);
             this.moveNextDetButton.Text = "Move Next";
             this.moveNextDetButton.Click += new System.EventHandler(this.TdetPnlNavButtons);
             // 
             // toolStripSeparator111
             // 
             this.toolStripSeparator111.Name = "toolStripSeparator111";
-            this.toolStripSeparator111.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator111.Size = new System.Drawing.Size(6, 27);
             // 
             // moveLastDetButton
             // 
@@ -5945,14 +6262,14 @@ namespace Accounting.Forms
             this.moveLastDetButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastDetButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastDetButton.Name = "moveLastDetButton";
-            this.moveLastDetButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastDetButton.Size = new System.Drawing.Size(24, 24);
             this.moveLastDetButton.Text = "Move Last";
             this.moveLastDetButton.Click += new System.EventHandler(this.TdetPnlNavButtons);
             // 
             // toolStripSeparator183
             // 
             this.toolStripSeparator183.Name = "toolStripSeparator183";
-            this.toolStripSeparator183.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator183.Size = new System.Drawing.Size(6, 27);
             // 
             // dsplySizeDetComboBox
             // 
@@ -5981,7 +6298,7 @@ namespace Accounting.Forms
             this.viewAtchmntsButton.Image = global::Accounting.Properties.Resources.adjunto;
             this.viewAtchmntsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.viewAtchmntsButton.Name = "viewAtchmntsButton";
-            this.viewAtchmntsButton.Size = new System.Drawing.Size(113, 22);
+            this.viewAtchmntsButton.Size = new System.Drawing.Size(117, 24);
             this.viewAtchmntsButton.Text = "View Attachments";
             this.viewAtchmntsButton.Click += new System.EventHandler(this.viewAtchmntsButton_Click);
             // 
@@ -5992,13 +6309,14 @@ namespace Accounting.Forms
             this.crrctImblncButton.Image = global::Accounting.Properties.Resources.tick_64;
             this.crrctImblncButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.crrctImblncButton.Name = "crrctImblncButton";
-            this.crrctImblncButton.Size = new System.Drawing.Size(135, 22);
+            this.crrctImblncButton.Size = new System.Drawing.Size(139, 24);
             this.crrctImblncButton.Text = "CORRECT IMBALANCE";
             this.crrctImblncButton.Click += new System.EventHandler(this.crrctImblncButton_Click);
             // 
             // toolStrip14
             // 
             this.toolStrip14.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip14.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip14.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTrnsFrmTmpButton,
             this.toolStripSeparator13,
@@ -6011,7 +6329,7 @@ namespace Accounting.Forms
             this.delTrnsButton});
             this.toolStrip14.Location = new System.Drawing.Point(7, 40);
             this.toolStrip14.Name = "toolStrip14";
-            this.toolStrip14.Size = new System.Drawing.Size(708, 25);
+            this.toolStrip14.Size = new System.Drawing.Size(732, 27);
             this.toolStrip14.TabIndex = 1;
             this.toolStrip14.TabStop = true;
             this.toolStrip14.Text = "toolStrip14";
@@ -6023,14 +6341,14 @@ namespace Accounting.Forms
             this.addTrnsFrmTmpButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTrnsFrmTmpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTrnsFrmTmpButton.Name = "addTrnsFrmTmpButton";
-            this.addTrnsFrmTmpButton.Size = new System.Drawing.Size(142, 22);
+            this.addTrnsFrmTmpButton.Size = new System.Drawing.Size(146, 24);
             this.addTrnsFrmTmpButton.Text = "ADD TRNS. (TEMPLATE)";
             this.addTrnsFrmTmpButton.Click += new System.EventHandler(this.addTrnsFrmTmpButton_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 27);
             // 
             // addTrnsLstButton
             // 
@@ -6039,7 +6357,7 @@ namespace Accounting.Forms
             this.addTrnsLstButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTrnsLstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTrnsLstButton.Name = "addTrnsLstButton";
-            this.addTrnsLstButton.Size = new System.Drawing.Size(113, 22);
+            this.addTrnsLstButton.Size = new System.Drawing.Size(117, 24);
             this.addTrnsLstButton.Text = "ADD TRNS. (LIST)";
             this.addTrnsLstButton.Click += new System.EventHandler(this.addTrnsLstButton_Click);
             // 
@@ -6050,7 +6368,7 @@ namespace Accounting.Forms
             this.editTrnsLstButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editTrnsLstButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editTrnsLstButton.Name = "editTrnsLstButton";
-            this.editTrnsLstButton.Size = new System.Drawing.Size(115, 22);
+            this.editTrnsLstButton.Size = new System.Drawing.Size(119, 24);
             this.editTrnsLstButton.Text = "EDIT TRNS. (LIST)";
             this.editTrnsLstButton.Click += new System.EventHandler(this.editTrnsLstButton_Click);
             // 
@@ -6061,14 +6379,14 @@ namespace Accounting.Forms
             this.addDirTrnsButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addDirTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addDirTrnsButton.Name = "addDirTrnsButton";
-            this.addDirTrnsButton.Size = new System.Drawing.Size(105, 22);
+            this.addDirTrnsButton.Size = new System.Drawing.Size(109, 24);
             this.addDirTrnsButton.Text = "ADD ONE TRNS.";
             this.addDirTrnsButton.Click += new System.EventHandler(this.addDirTrnsButton_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 27);
             // 
             // editTrnsButton
             // 
@@ -6077,14 +6395,14 @@ namespace Accounting.Forms
             this.editTrnsButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editTrnsButton.Name = "editTrnsButton";
-            this.editTrnsButton.Size = new System.Drawing.Size(107, 22);
+            this.editTrnsButton.Size = new System.Drawing.Size(111, 24);
             this.editTrnsButton.Text = "EDIT ONE TRNS.";
             this.editTrnsButton.Click += new System.EventHandler(this.editTrnsButton_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 27);
             // 
             // delTrnsButton
             // 
@@ -6093,7 +6411,7 @@ namespace Accounting.Forms
             this.delTrnsButton.Image = global::Accounting.Properties.Resources.delete;
             this.delTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delTrnsButton.Name = "delTrnsButton";
-            this.delTrnsButton.Size = new System.Drawing.Size(96, 22);
+            this.delTrnsButton.Size = new System.Drawing.Size(100, 24);
             this.delTrnsButton.Text = "DELETE TRNS.";
             this.delTrnsButton.Click += new System.EventHandler(this.delTrnsButton_Click);
             // 
@@ -6133,7 +6451,7 @@ namespace Accounting.Forms
             this.trnsDetListView.HideSelection = false;
             this.trnsDetListView.Location = new System.Drawing.Point(7, 68);
             this.trnsDetListView.Name = "trnsDetListView";
-            this.trnsDetListView.Size = new System.Drawing.Size(841, 404);
+            this.trnsDetListView.Size = new System.Drawing.Size(804, 404);
             this.trnsDetListView.TabIndex = 2;
             this.trnsDetListView.UseCompatibleStateImageBehavior = false;
             this.trnsDetListView.View = System.Windows.Forms.View.Details;
@@ -6284,7 +6602,7 @@ namespace Accounting.Forms
             this.tabPage3.Location = new System.Drawing.Point(4, 88);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage3.Size = new System.Drawing.Size(1068, 631);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TRNS. SEARCH";
             // 
@@ -6298,7 +6616,7 @@ namespace Accounting.Forms
             this.trnsSearchPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trnsSearchPanel.Location = new System.Drawing.Point(3, 3);
             this.trnsSearchPanel.Name = "trnsSearchPanel";
-            this.trnsSearchPanel.Size = new System.Drawing.Size(1099, 625);
+            this.trnsSearchPanel.Size = new System.Drawing.Size(1062, 625);
             this.trnsSearchPanel.TabIndex = 2;
             this.trnsSearchPanel.TabStop = true;
             // 
@@ -6309,13 +6627,14 @@ namespace Accounting.Forms
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel7.Size = new System.Drawing.Size(1099, 33);
+            this.panel7.Size = new System.Drawing.Size(1062, 33);
             this.panel7.TabIndex = 0;
             this.panel7.TabStop = true;
             // 
             // toolStrip4
             // 
             this.toolStrip4.AutoSize = false;
+            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator65,
             this.vwSQLSrchButton,
@@ -6353,7 +6672,7 @@ namespace Accounting.Forms
             this.toolStrip4.Location = new System.Drawing.Point(0, 5);
             this.toolStrip4.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(1099, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(1062, 25);
             this.toolStrip4.Stretch = true;
             this.toolStrip4.TabIndex = 0;
             this.toolStrip4.TabStop = true;
@@ -6370,7 +6689,7 @@ namespace Accounting.Forms
             this.vwSQLSrchButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLSrchButton.Name = "vwSQLSrchButton";
-            this.vwSQLSrchButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLSrchButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLSrchButton.Text = "View SQL";
             this.vwSQLSrchButton.Click += new System.EventHandler(this.vwSQLSrchButton_Click);
             // 
@@ -6385,7 +6704,7 @@ namespace Accounting.Forms
             this.recHstrySrchButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstrySrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstrySrchButton.Name = "recHstrySrchButton";
-            this.recHstrySrchButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstrySrchButton.Size = new System.Drawing.Size(24, 22);
             this.recHstrySrchButton.Text = "Record History";
             this.recHstrySrchButton.Click += new System.EventHandler(this.recHstrySrchButton_Click);
             // 
@@ -6400,7 +6719,7 @@ namespace Accounting.Forms
             this.moveFirstSrchButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstSrchButton.Name = "moveFirstSrchButton";
-            this.moveFirstSrchButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstSrchButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstSrchButton.Text = "Move First";
             this.moveFirstSrchButton.Click += new System.EventHandler(this.SrchPnlNavButtons);
             // 
@@ -6415,7 +6734,7 @@ namespace Accounting.Forms
             this.movePreviousSrchButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousSrchButton.Name = "movePreviousSrchButton";
-            this.movePreviousSrchButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousSrchButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousSrchButton.Text = "Move Previous";
             this.movePreviousSrchButton.Click += new System.EventHandler(this.SrchPnlNavButtons);
             // 
@@ -6463,7 +6782,7 @@ namespace Accounting.Forms
             this.moveNextSrchButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextSrchButton.Name = "moveNextSrchButton";
-            this.moveNextSrchButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextSrchButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextSrchButton.Text = "Move Next";
             this.moveNextSrchButton.Click += new System.EventHandler(this.SrchPnlNavButtons);
             // 
@@ -6478,7 +6797,7 @@ namespace Accounting.Forms
             this.moveLastSrchButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastSrchButton.Name = "moveLastSrchButton";
-            this.moveLastSrchButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastSrchButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastSrchButton.Text = "Move Last";
             this.moveLastSrchButton.Click += new System.EventHandler(this.SrchPnlNavButtons);
             // 
@@ -6584,7 +6903,7 @@ namespace Accounting.Forms
             this.goSrchButton.Image = global::Accounting.Properties.Resources._98;
             this.goSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goSrchButton.Name = "goSrchButton";
-            this.goSrchButton.Size = new System.Drawing.Size(42, 22);
+            this.goSrchButton.Size = new System.Drawing.Size(46, 22);
             this.goSrchButton.Text = "Go";
             this.goSrchButton.Click += new System.EventHandler(this.goSrchButton_Click);
             // 
@@ -6598,7 +6917,7 @@ namespace Accounting.Forms
             this.resetSrchButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetSrchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetSrchButton.Name = "resetSrchButton";
-            this.resetSrchButton.Size = new System.Drawing.Size(59, 22);
+            this.resetSrchButton.Size = new System.Drawing.Size(63, 22);
             this.resetSrchButton.Text = "RESET";
             this.resetSrchButton.Click += new System.EventHandler(this.resetSrchButton_Click);
             // 
@@ -6785,7 +7104,7 @@ namespace Accounting.Forms
             this.groupBox9.ForeColor = System.Drawing.Color.White;
             this.groupBox9.Location = new System.Drawing.Point(0, 78);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(1093, 547);
+            this.groupBox9.Size = new System.Drawing.Size(1056, 547);
             this.groupBox9.TabIndex = 2;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "TRANSACTIONS DETAIL INFORMATION";
@@ -6827,7 +7146,7 @@ namespace Accounting.Forms
             this.trnsSearchListView.HideSelection = false;
             this.trnsSearchListView.Location = new System.Drawing.Point(3, 15);
             this.trnsSearchListView.Name = "trnsSearchListView";
-            this.trnsSearchListView.Size = new System.Drawing.Size(1084, 529);
+            this.trnsSearchListView.Size = new System.Drawing.Size(1047, 529);
             this.trnsSearchListView.TabIndex = 0;
             this.trnsSearchListView.UseCompatibleStateImageBehavior = false;
             this.trnsSearchListView.View = System.Windows.Forms.View.Details;
@@ -6965,6 +7284,7 @@ namespace Accounting.Forms
             // 
             // trnsSrchContextMenuStrip
             // 
+            this.trnsSrchContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.trnsSrchContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclTSrchMenuItem,
             this.exptToTmplt1MenuItem,
@@ -6976,13 +7296,13 @@ namespace Accounting.Forms
             this.rcHstryTsrchMenuItem,
             this.vwSQLTsrchMenuItem});
             this.trnsSrchContextMenuStrip.Name = "usersContextMenuStrip";
-            this.trnsSrchContextMenuStrip.Size = new System.Drawing.Size(183, 170);
+            this.trnsSrchContextMenuStrip.Size = new System.Drawing.Size(187, 198);
             // 
             // exptExclTSrchMenuItem
             // 
             this.exptExclTSrchMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclTSrchMenuItem.Name = "exptExclTSrchMenuItem";
-            this.exptExclTSrchMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exptExclTSrchMenuItem.Size = new System.Drawing.Size(186, 26);
             this.exptExclTSrchMenuItem.Text = "Export to Excel";
             this.exptExclTSrchMenuItem.Click += new System.EventHandler(this.exptExclTSrchMenuItem_Click);
             // 
@@ -6990,7 +7310,7 @@ namespace Accounting.Forms
             // 
             this.exptToTmplt1MenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptToTmplt1MenuItem.Name = "exptToTmplt1MenuItem";
-            this.exptToTmplt1MenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exptToTmplt1MenuItem.Size = new System.Drawing.Size(186, 26);
             this.exptToTmplt1MenuItem.Text = "Export to Template 1";
             this.exptToTmplt1MenuItem.Click += new System.EventHandler(this.exptToTmplt1MenuItem_Click);
             // 
@@ -6998,33 +7318,33 @@ namespace Accounting.Forms
             // 
             this.exptToTmplt2MenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptToTmplt2MenuItem.Name = "exptToTmplt2MenuItem";
-            this.exptToTmplt2MenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exptToTmplt2MenuItem.Size = new System.Drawing.Size(186, 26);
             this.exptToTmplt2MenuItem.Text = "Export to Template 2";
             this.exptToTmplt2MenuItem.Click += new System.EventHandler(this.exptToTmplt2MenuItem_Click);
             // 
             // toolStripSeparator137
             // 
             this.toolStripSeparator137.Name = "toolStripSeparator137";
-            this.toolStripSeparator137.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator137.Size = new System.Drawing.Size(183, 6);
             // 
             // openBatchMenuItem
             // 
             this.openBatchMenuItem.Image = global::Accounting.Properties.Resources.openfileicon;
             this.openBatchMenuItem.Name = "openBatchMenuItem";
-            this.openBatchMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.openBatchMenuItem.Size = new System.Drawing.Size(186, 26);
             this.openBatchMenuItem.Text = "Open Journal Batch";
             this.openBatchMenuItem.Click += new System.EventHandler(this.openBatchMenuItem_Click);
             // 
             // toolStripSeparator64
             // 
             this.toolStripSeparator64.Name = "toolStripSeparator64";
-            this.toolStripSeparator64.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator64.Size = new System.Drawing.Size(183, 6);
             // 
             // rfrshTsrchMenuItem
             // 
             this.rfrshTsrchMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshTsrchMenuItem.Name = "rfrshTsrchMenuItem";
-            this.rfrshTsrchMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.rfrshTsrchMenuItem.Size = new System.Drawing.Size(186, 26);
             this.rfrshTsrchMenuItem.Text = "&Refresh";
             this.rfrshTsrchMenuItem.Click += new System.EventHandler(this.rfrshTsrchMenuItem_Click);
             // 
@@ -7032,7 +7352,7 @@ namespace Accounting.Forms
             // 
             this.rcHstryTsrchMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryTsrchMenuItem.Name = "rcHstryTsrchMenuItem";
-            this.rcHstryTsrchMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.rcHstryTsrchMenuItem.Size = new System.Drawing.Size(186, 26);
             this.rcHstryTsrchMenuItem.Text = "Record &History";
             this.rcHstryTsrchMenuItem.Click += new System.EventHandler(this.rcHstryTsrchMenuItem_Click);
             // 
@@ -7040,7 +7360,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLTsrchMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTsrchMenuItem.Name = "vwSQLTsrchMenuItem";
-            this.vwSQLTsrchMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.vwSQLTsrchMenuItem.Size = new System.Drawing.Size(186, 26);
             this.vwSQLTsrchMenuItem.Text = "&View SQL";
             this.vwSQLTsrchMenuItem.Click += new System.EventHandler(this.vwSQLTsrchMenuItem_Click);
             // 
@@ -7074,10 +7394,10 @@ namespace Accounting.Forms
             this.tabPage4.BackColor = System.Drawing.Color.Transparent;
             this.tabPage4.Controls.Add(this.finStmntsPanel);
             this.tabPage4.ImageKey = "tbals.jpg";
-            this.tabPage4.Location = new System.Drawing.Point(4, 60);
+            this.tabPage4.Location = new System.Drawing.Point(4, 88);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1105, 659);
+            this.tabPage4.Size = new System.Drawing.Size(1068, 631);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "FINANCIAL STATEMENTS";
             // 
@@ -7089,7 +7409,7 @@ namespace Accounting.Forms
             this.finStmntsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finStmntsPanel.Location = new System.Drawing.Point(3, 3);
             this.finStmntsPanel.Name = "finStmntsPanel";
-            this.finStmntsPanel.Size = new System.Drawing.Size(1099, 653);
+            this.finStmntsPanel.Size = new System.Drawing.Size(1062, 625);
             this.finStmntsPanel.TabIndex = 83;
             // 
             // statusLoadPictureBox
@@ -7097,7 +7417,7 @@ namespace Accounting.Forms
             this.statusLoadPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statusLoadPictureBox.BackColor = System.Drawing.Color.White;
             this.statusLoadPictureBox.Image = global::Accounting.Properties.Resources.animated;
-            this.statusLoadPictureBox.Location = new System.Drawing.Point(211, 225);
+            this.statusLoadPictureBox.Location = new System.Drawing.Point(193, 211);
             this.statusLoadPictureBox.Name = "statusLoadPictureBox";
             this.statusLoadPictureBox.Size = new System.Drawing.Size(67, 49);
             this.statusLoadPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -7111,7 +7431,7 @@ namespace Accounting.Forms
             this.statusLoadLabel.BackColor = System.Drawing.Color.White;
             this.statusLoadLabel.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusLoadLabel.ForeColor = System.Drawing.Color.Blue;
-            this.statusLoadLabel.Location = new System.Drawing.Point(274, 225);
+            this.statusLoadLabel.Location = new System.Drawing.Point(256, 211);
             this.statusLoadLabel.Name = "statusLoadLabel";
             this.statusLoadLabel.Size = new System.Drawing.Size(457, 49);
             this.statusLoadLabel.TabIndex = 10;
@@ -7129,13 +7449,14 @@ namespace Accounting.Forms
             this.finStmntsTabControl.Controls.Add(this.tabPage22);
             this.finStmntsTabControl.Controls.Add(this.tabPage20);
             this.finStmntsTabControl.Controls.Add(this.tabPage21);
+            this.finStmntsTabControl.Controls.Add(this.cashBookTabPage);
             this.finStmntsTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finStmntsTabControl.ItemSize = new System.Drawing.Size(100, 20);
             this.finStmntsTabControl.Location = new System.Drawing.Point(0, 0);
             this.finStmntsTabControl.Multiline = true;
             this.finStmntsTabControl.Name = "finStmntsTabControl";
             this.finStmntsTabControl.SelectedIndex = 0;
-            this.finStmntsTabControl.Size = new System.Drawing.Size(1099, 653);
+            this.finStmntsTabControl.Size = new System.Drawing.Size(1062, 625);
             this.finStmntsTabControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.finStmntsTabControl.TabIndex = 1;
             // 
@@ -7143,9 +7464,9 @@ namespace Accounting.Forms
             // 
             this.tbalTabPage.BackColor = System.Drawing.Color.DarkGray;
             this.tbalTabPage.Controls.Add(this.trialBalancePanel);
-            this.tbalTabPage.Location = new System.Drawing.Point(4, 24);
+            this.tbalTabPage.Location = new System.Drawing.Point(4, 44);
             this.tbalTabPage.Name = "tbalTabPage";
-            this.tbalTabPage.Size = new System.Drawing.Size(1091, 625);
+            this.tbalTabPage.Size = new System.Drawing.Size(1054, 577);
             this.tbalTabPage.TabIndex = 0;
             this.tbalTabPage.Text = "TRIAL BALANCE";
             this.tbalTabPage.UseVisualStyleBackColor = true;
@@ -7153,219 +7474,15 @@ namespace Accounting.Forms
             // trialBalancePanel
             // 
             this.trialBalancePanel.AutoScroll = true;
-            this.trialBalancePanel.Controls.Add(this.groupBox10);
             this.trialBalancePanel.Controls.Add(this.trialBalGroupBox);
+            this.trialBalancePanel.Controls.Add(this.groupBox10);
             this.trialBalancePanel.Controls.Add(this.panel12);
             this.trialBalancePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trialBalancePanel.Location = new System.Drawing.Point(0, 0);
             this.trialBalancePanel.Margin = new System.Windows.Forms.Padding(0);
             this.trialBalancePanel.Name = "trialBalancePanel";
-            this.trialBalancePanel.Size = new System.Drawing.Size(1091, 625);
+            this.trialBalancePanel.Size = new System.Drawing.Size(1054, 577);
             this.trialBalancePanel.TabIndex = 5;
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox10.Controls.Add(this.resetButton);
-            this.groupBox10.Controls.Add(this.tbalsAcctNmTextBox);
-            this.groupBox10.Controls.Add(this.label85);
-            this.groupBox10.Controls.Add(this.tbalsAcctButton);
-            this.groupBox10.Controls.Add(this.tbalsAcctIDTextBox);
-            this.groupBox10.Controls.Add(this.smmryTBalsCheckBox);
-            this.groupBox10.Controls.Add(this.hideZeroAccntCheckBox1);
-            this.groupBox10.Controls.Add(this.crrctBalsVarnceButton);
-            this.groupBox10.Controls.Add(this.shwBalsVarnCheckBox);
-            this.groupBox10.Controls.Add(this.label32);
-            this.groupBox10.Controls.Add(this.tbalDteButton);
-            this.groupBox10.Controls.Add(this.tbalDteTextBox);
-            this.groupBox10.Controls.Add(this.exptRptTrialBalButton);
-            this.groupBox10.Controls.Add(this.genRptTrialBalButton);
-            this.groupBox10.Controls.Add(this.trialBalProgressBar);
-            this.groupBox10.ForeColor = System.Drawing.Color.White;
-            this.groupBox10.Location = new System.Drawing.Point(884, 1);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(203, 320);
-            this.groupBox10.TabIndex = 1;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Report Generation";
-            // 
-            // resetButton
-            // 
-            this.resetButton.ForeColor = System.Drawing.Color.Black;
-            this.resetButton.ImageKey = "undo_256.png";
-            this.resetButton.ImageList = this.imageList2;
-            this.resetButton.Location = new System.Drawing.Point(124, 148);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(73, 27);
-            this.resetButton.TabIndex = 171;
-            this.resetButton.Text = "Reset";
-            this.resetButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // imageList2
-            // 
-            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList2.Images.SetKeyName(0, "refresh.bmp");
-            this.imageList2.Images.SetKeyName(1, "custom-reports.ico");
-            this.imageList2.Images.SetKeyName(2, "open-folder-yellow.png");
-            this.imageList2.Images.SetKeyName(3, "98.png");
-            this.imageList2.Images.SetKeyName(4, "Mail.png");
-            this.imageList2.Images.SetKeyName(5, "90.png");
-            this.imageList2.Images.SetKeyName(6, "Copy.png");
-            this.imageList2.Images.SetKeyName(7, "undo_256.png");
-            // 
-            // tbalsAcctNmTextBox
-            // 
-            this.tbalsAcctNmTextBox.BackColor = System.Drawing.Color.White;
-            this.tbalsAcctNmTextBox.Location = new System.Drawing.Point(4, 177);
-            this.tbalsAcctNmTextBox.Name = "tbalsAcctNmTextBox";
-            this.tbalsAcctNmTextBox.Size = new System.Drawing.Size(164, 21);
-            this.tbalsAcctNmTextBox.TabIndex = 109;
-            this.tbalsAcctNmTextBox.TextChanged += new System.EventHandler(this.tbalsAcctNmTextBox_TextChanged);
-            this.tbalsAcctNmTextBox.Enter += new System.EventHandler(this.tbalsAcctNmTextBox_Click);
-            this.tbalsAcctNmTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbalsAcctNmTextBox_KeyDown);
-            this.tbalsAcctNmTextBox.Leave += new System.EventHandler(this.tbalsAcctNmTextBox_Leave);
-            // 
-            // label85
-            // 
-            this.label85.AutoSize = true;
-            this.label85.ForeColor = System.Drawing.Color.White;
-            this.label85.Location = new System.Drawing.Point(4, 158);
-            this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(50, 13);
-            this.label85.TabIndex = 111;
-            this.label85.Text = "Account:";
-            // 
-            // tbalsAcctButton
-            // 
-            this.tbalsAcctButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbalsAcctButton.ForeColor = System.Drawing.Color.Black;
-            this.tbalsAcctButton.Location = new System.Drawing.Point(169, 176);
-            this.tbalsAcctButton.Name = "tbalsAcctButton";
-            this.tbalsAcctButton.Size = new System.Drawing.Size(28, 23);
-            this.tbalsAcctButton.TabIndex = 110;
-            this.tbalsAcctButton.Text = "...";
-            this.tbalsAcctButton.UseVisualStyleBackColor = true;
-            this.tbalsAcctButton.Click += new System.EventHandler(this.tbalsAcctButton_Click);
-            // 
-            // tbalsAcctIDTextBox
-            // 
-            this.tbalsAcctIDTextBox.Location = new System.Drawing.Point(113, 177);
-            this.tbalsAcctIDTextBox.Name = "tbalsAcctIDTextBox";
-            this.tbalsAcctIDTextBox.ReadOnly = true;
-            this.tbalsAcctIDTextBox.Size = new System.Drawing.Size(10, 21);
-            this.tbalsAcctIDTextBox.TabIndex = 112;
-            this.tbalsAcctIDTextBox.TabStop = false;
-            this.tbalsAcctIDTextBox.Text = "-1";
-            // 
-            // smmryTBalsCheckBox
-            // 
-            this.smmryTBalsCheckBox.AutoSize = true;
-            this.smmryTBalsCheckBox.Checked = true;
-            this.smmryTBalsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.smmryTBalsCheckBox.Location = new System.Drawing.Point(7, 128);
-            this.smmryTBalsCheckBox.Name = "smmryTBalsCheckBox";
-            this.smmryTBalsCheckBox.Size = new System.Drawing.Size(106, 17);
-            this.smmryTBalsCheckBox.TabIndex = 102;
-            this.smmryTBalsCheckBox.Text = "Summary Report";
-            this.smmryTBalsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // hideZeroAccntCheckBox1
-            // 
-            this.hideZeroAccntCheckBox1.AutoSize = true;
-            this.hideZeroAccntCheckBox1.Checked = true;
-            this.hideZeroAccntCheckBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.hideZeroAccntCheckBox1.Location = new System.Drawing.Point(7, 110);
-            this.hideZeroAccntCheckBox1.Name = "hideZeroAccntCheckBox1";
-            this.hideZeroAccntCheckBox1.Size = new System.Drawing.Size(159, 17);
-            this.hideZeroAccntCheckBox1.TabIndex = 4;
-            this.hideZeroAccntCheckBox1.Text = "Hide Zero Balance Accounts";
-            this.hideZeroAccntCheckBox1.UseVisualStyleBackColor = true;
-            // 
-            // crrctBalsVarnceButton
-            // 
-            this.crrctBalsVarnceButton.ForeColor = System.Drawing.Color.Black;
-            this.crrctBalsVarnceButton.Location = new System.Drawing.Point(4, 274);
-            this.crrctBalsVarnceButton.Name = "crrctBalsVarnceButton";
-            this.crrctBalsVarnceButton.Size = new System.Drawing.Size(193, 40);
-            this.crrctBalsVarnceButton.TabIndex = 7;
-            this.crrctBalsVarnceButton.Text = "Adjust Selected Balance(s)";
-            this.crrctBalsVarnceButton.UseVisualStyleBackColor = true;
-            this.crrctBalsVarnceButton.Click += new System.EventHandler(this.crrctBalsVarnceButton_Click);
-            // 
-            // shwBalsVarnCheckBox
-            // 
-            this.shwBalsVarnCheckBox.AutoSize = true;
-            this.shwBalsVarnCheckBox.Location = new System.Drawing.Point(7, 92);
-            this.shwBalsVarnCheckBox.Name = "shwBalsVarnCheckBox";
-            this.shwBalsVarnCheckBox.Size = new System.Drawing.Size(170, 17);
-            this.shwBalsVarnCheckBox.TabIndex = 3;
-            this.shwBalsVarnCheckBox.Text = "Show Bals/Trns. Sum Variance";
-            this.shwBalsVarnCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(6, 47);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(63, 13);
-            this.label32.TabIndex = 101;
-            this.label32.Text = "As At Date:";
-            // 
-            // tbalDteButton
-            // 
-            this.tbalDteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbalDteButton.ForeColor = System.Drawing.Color.Black;
-            this.tbalDteButton.Location = new System.Drawing.Point(169, 63);
-            this.tbalDteButton.Name = "tbalDteButton";
-            this.tbalDteButton.Size = new System.Drawing.Size(28, 23);
-            this.tbalDteButton.TabIndex = 1;
-            this.tbalDteButton.Text = "...";
-            this.tbalDteButton.UseVisualStyleBackColor = true;
-            this.tbalDteButton.Click += new System.EventHandler(this.tbalDteButton_Click);
-            // 
-            // tbalDteTextBox
-            // 
-            this.tbalDteTextBox.Location = new System.Drawing.Point(6, 64);
-            this.tbalDteTextBox.Name = "tbalDteTextBox";
-            this.tbalDteTextBox.Size = new System.Drawing.Size(162, 21);
-            this.tbalDteTextBox.TabIndex = 0;
-            this.tbalDteTextBox.TextChanged += new System.EventHandler(this.tbalDteTextBox_TextChanged);
-            this.tbalDteTextBox.Enter += new System.EventHandler(this.tbalDteTextBox_Click);
-            this.tbalDteTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbalDteTextBox_KeyDown);
-            this.tbalDteTextBox.Leave += new System.EventHandler(this.tbalDteTextBox_Leave);
-            // 
-            // exptRptTrialBalButton
-            // 
-            this.exptRptTrialBalButton.ForeColor = System.Drawing.Color.Black;
-            this.exptRptTrialBalButton.Location = new System.Drawing.Point(4, 240);
-            this.exptRptTrialBalButton.Name = "exptRptTrialBalButton";
-            this.exptRptTrialBalButton.Size = new System.Drawing.Size(193, 29);
-            this.exptRptTrialBalButton.TabIndex = 6;
-            this.exptRptTrialBalButton.Text = "Export Report to Excel";
-            this.exptRptTrialBalButton.UseVisualStyleBackColor = true;
-            this.exptRptTrialBalButton.Click += new System.EventHandler(this.exptRptTrialBalButton_Click);
-            // 
-            // genRptTrialBalButton
-            // 
-            this.genRptTrialBalButton.ForeColor = System.Drawing.Color.Black;
-            this.genRptTrialBalButton.Location = new System.Drawing.Point(4, 211);
-            this.genRptTrialBalButton.Name = "genRptTrialBalButton";
-            this.genRptTrialBalButton.Size = new System.Drawing.Size(193, 29);
-            this.genRptTrialBalButton.TabIndex = 5;
-            this.genRptTrialBalButton.Text = "Generate Report";
-            this.genRptTrialBalButton.UseVisualStyleBackColor = true;
-            this.genRptTrialBalButton.Click += new System.EventHandler(this.genRptTrialBalButton_Click);
-            // 
-            // trialBalProgressBar
-            // 
-            this.trialBalProgressBar.ForeColor = System.Drawing.Color.Black;
-            this.trialBalProgressBar.Location = new System.Drawing.Point(6, 19);
-            this.trialBalProgressBar.Name = "trialBalProgressBar";
-            this.trialBalProgressBar.Size = new System.Drawing.Size(191, 23);
-            this.trialBalProgressBar.TabIndex = 0;
             // 
             // trialBalGroupBox
             // 
@@ -7377,7 +7494,7 @@ namespace Accounting.Forms
             this.trialBalGroupBox.ForeColor = System.Drawing.Color.White;
             this.trialBalGroupBox.Location = new System.Drawing.Point(2, 0);
             this.trialBalGroupBox.Name = "trialBalGroupBox";
-            this.trialBalGroupBox.Size = new System.Drawing.Size(880, 622);
+            this.trialBalGroupBox.Size = new System.Drawing.Size(843, 574);
             this.trialBalGroupBox.TabIndex = 0;
             this.trialBalGroupBox.TabStop = false;
             this.trialBalGroupBox.Text = "TRIAL BALANCE AS AT NOW";
@@ -7405,7 +7522,7 @@ namespace Accounting.Forms
             this.trialBalListView.HideSelection = false;
             this.trialBalListView.Location = new System.Drawing.Point(3, 19);
             this.trialBalListView.Name = "trialBalListView";
-            this.trialBalListView.Size = new System.Drawing.Size(874, 600);
+            this.trialBalListView.Size = new System.Drawing.Size(837, 552);
             this.trialBalListView.TabIndex = 0;
             this.trialBalListView.UseCompatibleStateImageBehavior = false;
             this.trialBalListView.View = System.Windows.Forms.View.Details;
@@ -7468,32 +7585,33 @@ namespace Accounting.Forms
             // 
             // tBalMenuStrip
             // 
+            this.tBalMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tBalMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclTBalMenuItem,
             this.toolStripSeparator121,
             this.vwTrnsTbalsMenuItem,
             this.vwSQLTbalsMenuItem});
             this.tBalMenuStrip.Name = "usersContextMenuStrip";
-            this.tBalMenuStrip.Size = new System.Drawing.Size(169, 76);
+            this.tBalMenuStrip.Size = new System.Drawing.Size(173, 88);
             // 
             // exptExclTBalMenuItem
             // 
             this.exptExclTBalMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclTBalMenuItem.Name = "exptExclTBalMenuItem";
-            this.exptExclTBalMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exptExclTBalMenuItem.Size = new System.Drawing.Size(172, 26);
             this.exptExclTBalMenuItem.Text = "&Export to Excel";
             this.exptExclTBalMenuItem.Click += new System.EventHandler(this.exptExclTBalMenuItem_Click);
             // 
             // toolStripSeparator121
             // 
             this.toolStripSeparator121.Name = "toolStripSeparator121";
-            this.toolStripSeparator121.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator121.Size = new System.Drawing.Size(169, 6);
             // 
             // vwTrnsTbalsMenuItem
             // 
             this.vwTrnsTbalsMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwTrnsTbalsMenuItem.Name = "vwTrnsTbalsMenuItem";
-            this.vwTrnsTbalsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwTrnsTbalsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwTrnsTbalsMenuItem.Text = "View &Transactions";
             this.vwTrnsTbalsMenuItem.Click += new System.EventHandler(this.vwTrnsTbalsMenuItem_Click);
             // 
@@ -7501,9 +7619,394 @@ namespace Accounting.Forms
             // 
             this.vwSQLTbalsMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTbalsMenuItem.Name = "vwSQLTbalsMenuItem";
-            this.vwSQLTbalsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSQLTbalsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSQLTbalsMenuItem.Text = "&View SQL";
             this.vwSQLTbalsMenuItem.Click += new System.EventHandler(this.vwSQLTbalsMenuItem_Click);
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox10.Controls.Add(this.rptSgmntTextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt10TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt9TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt8TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt5TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt7TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt4TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt3TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt2TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt6TextBox);
+            this.groupBox10.Controls.Add(this.rptSgmnt1TextBox);
+            this.groupBox10.Controls.Add(this.tbalRptSgmntButton);
+            this.groupBox10.Controls.Add(this.useNetPosCheckBox);
+            this.groupBox10.Controls.Add(this.label91);
+            this.groupBox10.Controls.Add(this.tbalsNumUpDown);
+            this.groupBox10.Controls.Add(this.resetButton);
+            this.groupBox10.Controls.Add(this.tbalsAcctNmTextBox);
+            this.groupBox10.Controls.Add(this.label85);
+            this.groupBox10.Controls.Add(this.tbalsAcctButton);
+            this.groupBox10.Controls.Add(this.tbalsAcctIDTextBox);
+            this.groupBox10.Controls.Add(this.smmryTBalsCheckBox);
+            this.groupBox10.Controls.Add(this.hideZeroAccntCheckBox1);
+            this.groupBox10.Controls.Add(this.crrctBalsVarnceButton);
+            this.groupBox10.Controls.Add(this.shwBalsVarnCheckBox);
+            this.groupBox10.Controls.Add(this.label32);
+            this.groupBox10.Controls.Add(this.tbalDteButton);
+            this.groupBox10.Controls.Add(this.tbalDteTextBox);
+            this.groupBox10.Controls.Add(this.exptRptTrialBalButton);
+            this.groupBox10.Controls.Add(this.genRptTrialBalButton);
+            this.groupBox10.Controls.Add(this.trialBalProgressBar);
+            this.groupBox10.ForeColor = System.Drawing.Color.White;
+            this.groupBox10.Location = new System.Drawing.Point(847, 1);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(203, 375);
+            this.groupBox10.TabIndex = 1;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Report Generation";
+            // 
+            // rptSgmntTextBox
+            // 
+            this.rptSgmntTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmntTextBox.Location = new System.Drawing.Point(108, 189);
+            this.rptSgmntTextBox.MaxLength = 200;
+            this.rptSgmntTextBox.Name = "rptSgmntTextBox";
+            this.rptSgmntTextBox.ReadOnly = true;
+            this.rptSgmntTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmntTextBox.Size = new System.Drawing.Size(89, 21);
+            this.rptSgmntTextBox.TabIndex = 151;
+            this.rptSgmntTextBox.TabStop = false;
+            // 
+            // rptSgmnt10TextBox
+            // 
+            this.rptSgmnt10TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt10TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt10TextBox.MaxLength = 200;
+            this.rptSgmnt10TextBox.Name = "rptSgmnt10TextBox";
+            this.rptSgmnt10TextBox.ReadOnly = true;
+            this.rptSgmnt10TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt10TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt10TextBox.TabIndex = 185;
+            this.rptSgmnt10TextBox.TabStop = false;
+            // 
+            // rptSgmnt9TextBox
+            // 
+            this.rptSgmnt9TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt9TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt9TextBox.MaxLength = 200;
+            this.rptSgmnt9TextBox.Name = "rptSgmnt9TextBox";
+            this.rptSgmnt9TextBox.ReadOnly = true;
+            this.rptSgmnt9TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt9TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt9TextBox.TabIndex = 184;
+            this.rptSgmnt9TextBox.TabStop = false;
+            // 
+            // rptSgmnt8TextBox
+            // 
+            this.rptSgmnt8TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt8TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt8TextBox.MaxLength = 200;
+            this.rptSgmnt8TextBox.Name = "rptSgmnt8TextBox";
+            this.rptSgmnt8TextBox.ReadOnly = true;
+            this.rptSgmnt8TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt8TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt8TextBox.TabIndex = 183;
+            this.rptSgmnt8TextBox.TabStop = false;
+            // 
+            // rptSgmnt5TextBox
+            // 
+            this.rptSgmnt5TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt5TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt5TextBox.MaxLength = 200;
+            this.rptSgmnt5TextBox.Name = "rptSgmnt5TextBox";
+            this.rptSgmnt5TextBox.ReadOnly = true;
+            this.rptSgmnt5TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt5TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt5TextBox.TabIndex = 182;
+            this.rptSgmnt5TextBox.TabStop = false;
+            // 
+            // rptSgmnt7TextBox
+            // 
+            this.rptSgmnt7TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt7TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt7TextBox.MaxLength = 200;
+            this.rptSgmnt7TextBox.Name = "rptSgmnt7TextBox";
+            this.rptSgmnt7TextBox.ReadOnly = true;
+            this.rptSgmnt7TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt7TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt7TextBox.TabIndex = 181;
+            this.rptSgmnt7TextBox.TabStop = false;
+            // 
+            // rptSgmnt4TextBox
+            // 
+            this.rptSgmnt4TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt4TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt4TextBox.MaxLength = 200;
+            this.rptSgmnt4TextBox.Name = "rptSgmnt4TextBox";
+            this.rptSgmnt4TextBox.ReadOnly = true;
+            this.rptSgmnt4TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt4TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt4TextBox.TabIndex = 180;
+            this.rptSgmnt4TextBox.TabStop = false;
+            // 
+            // rptSgmnt3TextBox
+            // 
+            this.rptSgmnt3TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt3TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt3TextBox.MaxLength = 200;
+            this.rptSgmnt3TextBox.Name = "rptSgmnt3TextBox";
+            this.rptSgmnt3TextBox.ReadOnly = true;
+            this.rptSgmnt3TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt3TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt3TextBox.TabIndex = 179;
+            this.rptSgmnt3TextBox.TabStop = false;
+            // 
+            // rptSgmnt2TextBox
+            // 
+            this.rptSgmnt2TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt2TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt2TextBox.MaxLength = 200;
+            this.rptSgmnt2TextBox.Name = "rptSgmnt2TextBox";
+            this.rptSgmnt2TextBox.ReadOnly = true;
+            this.rptSgmnt2TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt2TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt2TextBox.TabIndex = 178;
+            this.rptSgmnt2TextBox.TabStop = false;
+            // 
+            // rptSgmnt6TextBox
+            // 
+            this.rptSgmnt6TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt6TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt6TextBox.MaxLength = 200;
+            this.rptSgmnt6TextBox.Name = "rptSgmnt6TextBox";
+            this.rptSgmnt6TextBox.ReadOnly = true;
+            this.rptSgmnt6TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt6TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt6TextBox.TabIndex = 177;
+            this.rptSgmnt6TextBox.TabStop = false;
+            // 
+            // rptSgmnt1TextBox
+            // 
+            this.rptSgmnt1TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rptSgmnt1TextBox.Location = new System.Drawing.Point(145, 189);
+            this.rptSgmnt1TextBox.MaxLength = 200;
+            this.rptSgmnt1TextBox.Name = "rptSgmnt1TextBox";
+            this.rptSgmnt1TextBox.ReadOnly = true;
+            this.rptSgmnt1TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rptSgmnt1TextBox.Size = new System.Drawing.Size(52, 21);
+            this.rptSgmnt1TextBox.TabIndex = 176;
+            this.rptSgmnt1TextBox.TabStop = false;
+            // 
+            // tbalRptSgmntButton
+            // 
+            this.tbalRptSgmntButton.ForeColor = System.Drawing.Color.Black;
+            this.tbalRptSgmntButton.Location = new System.Drawing.Point(6, 188);
+            this.tbalRptSgmntButton.Name = "tbalRptSgmntButton";
+            this.tbalRptSgmntButton.Size = new System.Drawing.Size(101, 23);
+            this.tbalRptSgmntButton.TabIndex = 175;
+            this.tbalRptSgmntButton.Text = "Segments";
+            this.tbalRptSgmntButton.UseVisualStyleBackColor = true;
+            this.tbalRptSgmntButton.Click += new System.EventHandler(this.tbalRptSgmntButton_Click);
+            // 
+            // useNetPosCheckBox
+            // 
+            this.useNetPosCheckBox.AutoSize = true;
+            this.useNetPosCheckBox.Checked = true;
+            this.useNetPosCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.useNetPosCheckBox.Location = new System.Drawing.Point(7, 146);
+            this.useNetPosCheckBox.Name = "useNetPosCheckBox";
+            this.useNetPosCheckBox.Size = new System.Drawing.Size(134, 17);
+            this.useNetPosCheckBox.TabIndex = 174;
+            this.useNetPosCheckBox.Text = "Use Net Positions Only";
+            this.useNetPosCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.ForeColor = System.Drawing.Color.White;
+            this.label91.Location = new System.Drawing.Point(6, 169);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(101, 13);
+            this.label91.TabIndex = 173;
+            this.label91.Text = "Max Account Level:";
+            // 
+            // tbalsNumUpDown
+            // 
+            this.tbalsNumUpDown.Location = new System.Drawing.Point(124, 165);
+            this.tbalsNumUpDown.Name = "tbalsNumUpDown";
+            this.tbalsNumUpDown.Size = new System.Drawing.Size(73, 21);
+            this.tbalsNumUpDown.TabIndex = 172;
+            this.tbalsNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbalsNumUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // resetButton
+            // 
+            this.resetButton.ForeColor = System.Drawing.Color.Black;
+            this.resetButton.ImageKey = "undo_256.png";
+            this.resetButton.ImageList = this.imageList2;
+            this.resetButton.Location = new System.Drawing.Point(124, 217);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(73, 27);
+            this.resetButton.TabIndex = 171;
+            this.resetButton.Text = "Reset";
+            this.resetButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
+            // tbalsAcctNmTextBox
+            // 
+            this.tbalsAcctNmTextBox.BackColor = System.Drawing.Color.White;
+            this.tbalsAcctNmTextBox.Location = new System.Drawing.Point(4, 246);
+            this.tbalsAcctNmTextBox.Name = "tbalsAcctNmTextBox";
+            this.tbalsAcctNmTextBox.Size = new System.Drawing.Size(164, 21);
+            this.tbalsAcctNmTextBox.TabIndex = 109;
+            this.tbalsAcctNmTextBox.TextChanged += new System.EventHandler(this.tbalsAcctNmTextBox_TextChanged);
+            this.tbalsAcctNmTextBox.Enter += new System.EventHandler(this.tbalsAcctNmTextBox_Click);
+            this.tbalsAcctNmTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbalsAcctNmTextBox_KeyDown);
+            this.tbalsAcctNmTextBox.Leave += new System.EventHandler(this.tbalsAcctNmTextBox_Leave);
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.ForeColor = System.Drawing.Color.White;
+            this.label85.Location = new System.Drawing.Point(4, 227);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(50, 13);
+            this.label85.TabIndex = 111;
+            this.label85.Text = "Account:";
+            // 
+            // tbalsAcctButton
+            // 
+            this.tbalsAcctButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbalsAcctButton.ForeColor = System.Drawing.Color.Black;
+            this.tbalsAcctButton.Location = new System.Drawing.Point(169, 245);
+            this.tbalsAcctButton.Name = "tbalsAcctButton";
+            this.tbalsAcctButton.Size = new System.Drawing.Size(28, 23);
+            this.tbalsAcctButton.TabIndex = 110;
+            this.tbalsAcctButton.Text = "...";
+            this.tbalsAcctButton.UseVisualStyleBackColor = true;
+            this.tbalsAcctButton.Click += new System.EventHandler(this.tbalsAcctButton_Click);
+            // 
+            // tbalsAcctIDTextBox
+            // 
+            this.tbalsAcctIDTextBox.Location = new System.Drawing.Point(113, 246);
+            this.tbalsAcctIDTextBox.Name = "tbalsAcctIDTextBox";
+            this.tbalsAcctIDTextBox.ReadOnly = true;
+            this.tbalsAcctIDTextBox.Size = new System.Drawing.Size(10, 21);
+            this.tbalsAcctIDTextBox.TabIndex = 112;
+            this.tbalsAcctIDTextBox.TabStop = false;
+            this.tbalsAcctIDTextBox.Text = "-1";
+            // 
+            // smmryTBalsCheckBox
+            // 
+            this.smmryTBalsCheckBox.AutoSize = true;
+            this.smmryTBalsCheckBox.Checked = true;
+            this.smmryTBalsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.smmryTBalsCheckBox.Location = new System.Drawing.Point(7, 128);
+            this.smmryTBalsCheckBox.Name = "smmryTBalsCheckBox";
+            this.smmryTBalsCheckBox.Size = new System.Drawing.Size(106, 17);
+            this.smmryTBalsCheckBox.TabIndex = 102;
+            this.smmryTBalsCheckBox.Text = "Summary Report";
+            this.smmryTBalsCheckBox.UseVisualStyleBackColor = true;
+            this.smmryTBalsCheckBox.Click += new System.EventHandler(this.smmryTBalsCheckBox_Click);
+            // 
+            // hideZeroAccntCheckBox1
+            // 
+            this.hideZeroAccntCheckBox1.AutoSize = true;
+            this.hideZeroAccntCheckBox1.Checked = true;
+            this.hideZeroAccntCheckBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hideZeroAccntCheckBox1.Location = new System.Drawing.Point(7, 110);
+            this.hideZeroAccntCheckBox1.Name = "hideZeroAccntCheckBox1";
+            this.hideZeroAccntCheckBox1.Size = new System.Drawing.Size(159, 17);
+            this.hideZeroAccntCheckBox1.TabIndex = 4;
+            this.hideZeroAccntCheckBox1.Text = "Hide Zero Balance Accounts";
+            this.hideZeroAccntCheckBox1.UseVisualStyleBackColor = true;
+            // 
+            // crrctBalsVarnceButton
+            // 
+            this.crrctBalsVarnceButton.ForeColor = System.Drawing.Color.Black;
+            this.crrctBalsVarnceButton.Location = new System.Drawing.Point(4, 328);
+            this.crrctBalsVarnceButton.Name = "crrctBalsVarnceButton";
+            this.crrctBalsVarnceButton.Size = new System.Drawing.Size(193, 40);
+            this.crrctBalsVarnceButton.TabIndex = 7;
+            this.crrctBalsVarnceButton.Text = "Adjust Selected Balance(s)";
+            this.crrctBalsVarnceButton.UseVisualStyleBackColor = true;
+            this.crrctBalsVarnceButton.Click += new System.EventHandler(this.crrctBalsVarnceButton_Click);
+            // 
+            // shwBalsVarnCheckBox
+            // 
+            this.shwBalsVarnCheckBox.AutoSize = true;
+            this.shwBalsVarnCheckBox.Location = new System.Drawing.Point(7, 92);
+            this.shwBalsVarnCheckBox.Name = "shwBalsVarnCheckBox";
+            this.shwBalsVarnCheckBox.Size = new System.Drawing.Size(170, 17);
+            this.shwBalsVarnCheckBox.TabIndex = 3;
+            this.shwBalsVarnCheckBox.Text = "Show Bals/Trns. Sum Variance";
+            this.shwBalsVarnCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(6, 47);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(63, 13);
+            this.label32.TabIndex = 101;
+            this.label32.Text = "As At Date:";
+            // 
+            // tbalDteButton
+            // 
+            this.tbalDteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbalDteButton.ForeColor = System.Drawing.Color.Black;
+            this.tbalDteButton.Location = new System.Drawing.Point(169, 63);
+            this.tbalDteButton.Name = "tbalDteButton";
+            this.tbalDteButton.Size = new System.Drawing.Size(28, 23);
+            this.tbalDteButton.TabIndex = 1;
+            this.tbalDteButton.Text = "...";
+            this.tbalDteButton.UseVisualStyleBackColor = true;
+            this.tbalDteButton.Click += new System.EventHandler(this.tbalDteButton_Click);
+            // 
+            // tbalDteTextBox
+            // 
+            this.tbalDteTextBox.Location = new System.Drawing.Point(6, 64);
+            this.tbalDteTextBox.Name = "tbalDteTextBox";
+            this.tbalDteTextBox.Size = new System.Drawing.Size(162, 21);
+            this.tbalDteTextBox.TabIndex = 0;
+            this.tbalDteTextBox.TextChanged += new System.EventHandler(this.tbalDteTextBox_TextChanged);
+            this.tbalDteTextBox.Enter += new System.EventHandler(this.tbalDteTextBox_Click);
+            this.tbalDteTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbalDteTextBox_KeyDown);
+            this.tbalDteTextBox.Leave += new System.EventHandler(this.tbalDteTextBox_Leave);
+            // 
+            // exptRptTrialBalButton
+            // 
+            this.exptRptTrialBalButton.ForeColor = System.Drawing.Color.Black;
+            this.exptRptTrialBalButton.Location = new System.Drawing.Point(4, 299);
+            this.exptRptTrialBalButton.Name = "exptRptTrialBalButton";
+            this.exptRptTrialBalButton.Size = new System.Drawing.Size(193, 29);
+            this.exptRptTrialBalButton.TabIndex = 6;
+            this.exptRptTrialBalButton.Text = "Export Report to Excel";
+            this.exptRptTrialBalButton.UseVisualStyleBackColor = true;
+            this.exptRptTrialBalButton.Click += new System.EventHandler(this.exptRptTrialBalButton_Click);
+            // 
+            // genRptTrialBalButton
+            // 
+            this.genRptTrialBalButton.ForeColor = System.Drawing.Color.Black;
+            this.genRptTrialBalButton.Location = new System.Drawing.Point(4, 270);
+            this.genRptTrialBalButton.Name = "genRptTrialBalButton";
+            this.genRptTrialBalButton.Size = new System.Drawing.Size(193, 29);
+            this.genRptTrialBalButton.TabIndex = 5;
+            this.genRptTrialBalButton.Text = "Generate Report";
+            this.genRptTrialBalButton.UseVisualStyleBackColor = true;
+            this.genRptTrialBalButton.Click += new System.EventHandler(this.genRptTrialBalButton_Click);
+            // 
+            // trialBalProgressBar
+            // 
+            this.trialBalProgressBar.ForeColor = System.Drawing.Color.Black;
+            this.trialBalProgressBar.Location = new System.Drawing.Point(6, 19);
+            this.trialBalProgressBar.Name = "trialBalProgressBar";
+            this.trialBalProgressBar.Size = new System.Drawing.Size(191, 23);
+            this.trialBalProgressBar.TabIndex = 0;
             // 
             // panel12
             // 
@@ -7535,7 +8038,7 @@ namespace Accounting.Forms
             this.pnlTabPage.Controls.Add(this.prftnlossPanel);
             this.pnlTabPage.Location = new System.Drawing.Point(4, 44);
             this.pnlTabPage.Name = "pnlTabPage";
-            this.pnlTabPage.Size = new System.Drawing.Size(1091, 577);
+            this.pnlTabPage.Size = new System.Drawing.Size(1054, 577);
             this.pnlTabPage.TabIndex = 1;
             this.pnlTabPage.Text = "PROFIT & LOSS";
             this.pnlTabPage.UseVisualStyleBackColor = true;
@@ -7550,12 +8053,16 @@ namespace Accounting.Forms
             this.prftnlossPanel.Location = new System.Drawing.Point(0, 0);
             this.prftnlossPanel.Margin = new System.Windows.Forms.Padding(0);
             this.prftnlossPanel.Name = "prftnlossPanel";
-            this.prftnlossPanel.Size = new System.Drawing.Size(1091, 577);
+            this.prftnlossPanel.Size = new System.Drawing.Size(1054, 577);
             this.prftnlossPanel.TabIndex = 6;
             // 
             // groupBox11
             // 
             this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox11.Controls.Add(this.pnlRptSgmntTextBox);
+            this.groupBox11.Controls.Add(this.pnlSgmntButton);
+            this.groupBox11.Controls.Add(this.label94);
+            this.groupBox11.Controls.Add(this.pnlNumUpDown);
             this.groupBox11.Controls.Add(this.pnlAccntNmTextBox);
             this.groupBox11.Controls.Add(this.resetPnLButton);
             this.groupBox11.Controls.Add(this.label86);
@@ -7572,18 +8079,74 @@ namespace Accounting.Forms
             this.groupBox11.Controls.Add(this.plDate1TextBox);
             this.groupBox11.Controls.Add(this.plExprtExclButton);
             this.groupBox11.Controls.Add(this.plProgressBar);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt1TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt2TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt3TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt4TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt5TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt6TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt7TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt8TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt9TextBox);
+            this.groupBox11.Controls.Add(this.pnlRptSgmnt10TextBox);
             this.groupBox11.ForeColor = System.Drawing.Color.White;
-            this.groupBox11.Location = new System.Drawing.Point(894, 1);
+            this.groupBox11.Location = new System.Drawing.Point(857, 1);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(193, 306);
+            this.groupBox11.Size = new System.Drawing.Size(193, 343);
             this.groupBox11.TabIndex = 1;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Report Generation";
             // 
+            // pnlRptSgmntTextBox
+            // 
+            this.pnlRptSgmntTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmntTextBox.Location = new System.Drawing.Point(103, 202);
+            this.pnlRptSgmntTextBox.MaxLength = 200;
+            this.pnlRptSgmntTextBox.Name = "pnlRptSgmntTextBox";
+            this.pnlRptSgmntTextBox.ReadOnly = true;
+            this.pnlRptSgmntTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmntTextBox.Size = new System.Drawing.Size(86, 21);
+            this.pnlRptSgmntTextBox.TabIndex = 186;
+            this.pnlRptSgmntTextBox.TabStop = false;
+            // 
+            // pnlSgmntButton
+            // 
+            this.pnlSgmntButton.ForeColor = System.Drawing.Color.Black;
+            this.pnlSgmntButton.Location = new System.Drawing.Point(7, 201);
+            this.pnlSgmntButton.Name = "pnlSgmntButton";
+            this.pnlSgmntButton.Size = new System.Drawing.Size(95, 23);
+            this.pnlSgmntButton.TabIndex = 187;
+            this.pnlSgmntButton.Text = "Segments";
+            this.pnlSgmntButton.UseVisualStyleBackColor = true;
+            this.pnlSgmntButton.Click += new System.EventHandler(this.pnlSgmntButton_Click);
+            // 
+            // label94
+            // 
+            this.label94.AutoSize = true;
+            this.label94.ForeColor = System.Drawing.Color.White;
+            this.label94.Location = new System.Drawing.Point(7, 182);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(101, 13);
+            this.label94.TabIndex = 178;
+            this.label94.Text = "Max Account Level:";
+            // 
+            // pnlNumUpDown
+            // 
+            this.pnlNumUpDown.Location = new System.Drawing.Point(116, 178);
+            this.pnlNumUpDown.Name = "pnlNumUpDown";
+            this.pnlNumUpDown.Size = new System.Drawing.Size(73, 21);
+            this.pnlNumUpDown.TabIndex = 177;
+            this.pnlNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.pnlNumUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // pnlAccntNmTextBox
             // 
             this.pnlAccntNmTextBox.BackColor = System.Drawing.Color.White;
-            this.pnlAccntNmTextBox.Location = new System.Drawing.Point(7, 202);
+            this.pnlAccntNmTextBox.Location = new System.Drawing.Point(7, 259);
             this.pnlAccntNmTextBox.Name = "pnlAccntNmTextBox";
             this.pnlAccntNmTextBox.Size = new System.Drawing.Size(153, 21);
             this.pnlAccntNmTextBox.TabIndex = 172;
@@ -7596,7 +8159,7 @@ namespace Accounting.Forms
             this.resetPnLButton.ForeColor = System.Drawing.Color.Black;
             this.resetPnLButton.ImageKey = "undo_256.png";
             this.resetPnLButton.ImageList = this.imageList2;
-            this.resetPnLButton.Location = new System.Drawing.Point(116, 173);
+            this.resetPnLButton.Location = new System.Drawing.Point(116, 230);
             this.resetPnLButton.Name = "resetPnLButton";
             this.resetPnLButton.Size = new System.Drawing.Size(73, 27);
             this.resetPnLButton.TabIndex = 176;
@@ -7609,7 +8172,7 @@ namespace Accounting.Forms
             // 
             this.label86.AutoSize = true;
             this.label86.ForeColor = System.Drawing.Color.White;
-            this.label86.Location = new System.Drawing.Point(5, 183);
+            this.label86.Location = new System.Drawing.Point(5, 240);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(50, 13);
             this.label86.TabIndex = 174;
@@ -7619,7 +8182,7 @@ namespace Accounting.Forms
             // 
             this.pnlAccntNmButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlAccntNmButton.ForeColor = System.Drawing.Color.Black;
-            this.pnlAccntNmButton.Location = new System.Drawing.Point(161, 201);
+            this.pnlAccntNmButton.Location = new System.Drawing.Point(161, 258);
             this.pnlAccntNmButton.Name = "pnlAccntNmButton";
             this.pnlAccntNmButton.Size = new System.Drawing.Size(28, 23);
             this.pnlAccntNmButton.TabIndex = 173;
@@ -7629,7 +8192,7 @@ namespace Accounting.Forms
             // 
             // pnlAccntIDTextBox
             // 
-            this.pnlAccntIDTextBox.Location = new System.Drawing.Point(99, 202);
+            this.pnlAccntIDTextBox.Location = new System.Drawing.Point(99, 259);
             this.pnlAccntIDTextBox.Name = "pnlAccntIDTextBox";
             this.pnlAccntIDTextBox.ReadOnly = true;
             this.pnlAccntIDTextBox.Size = new System.Drawing.Size(10, 21);
@@ -7640,9 +8203,9 @@ namespace Accounting.Forms
             // plGenRptButton
             // 
             this.plGenRptButton.ForeColor = System.Drawing.Color.Black;
-            this.plGenRptButton.Location = new System.Drawing.Point(8, 241);
+            this.plGenRptButton.Location = new System.Drawing.Point(6, 281);
             this.plGenRptButton.Name = "plGenRptButton";
-            this.plGenRptButton.Size = new System.Drawing.Size(181, 29);
+            this.plGenRptButton.Size = new System.Drawing.Size(183, 29);
             this.plGenRptButton.TabIndex = 6;
             this.plGenRptButton.Text = "Generate Report";
             this.plGenRptButton.UseVisualStyleBackColor = true;
@@ -7659,6 +8222,7 @@ namespace Accounting.Forms
             this.pnlSmmryCheckBox.TabIndex = 103;
             this.pnlSmmryCheckBox.Text = "Summary Report";
             this.pnlSmmryCheckBox.UseVisualStyleBackColor = true;
+            this.pnlSmmryCheckBox.Click += new System.EventHandler(this.pnlSmmryCheckBox_Click);
             // 
             // hideZeroAccntCheckBox2
             // 
@@ -7739,9 +8303,9 @@ namespace Accounting.Forms
             // plExprtExclButton
             // 
             this.plExprtExclButton.ForeColor = System.Drawing.Color.Black;
-            this.plExprtExclButton.Location = new System.Drawing.Point(8, 272);
+            this.plExprtExclButton.Location = new System.Drawing.Point(6, 310);
             this.plExprtExclButton.Name = "plExprtExclButton";
-            this.plExprtExclButton.Size = new System.Drawing.Size(181, 29);
+            this.plExprtExclButton.Size = new System.Drawing.Size(183, 29);
             this.plExprtExclButton.TabIndex = 7;
             this.plExprtExclButton.Text = "Export Report to Excel";
             this.plExprtExclButton.UseVisualStyleBackColor = true;
@@ -7755,6 +8319,126 @@ namespace Accounting.Forms
             this.plProgressBar.Size = new System.Drawing.Size(182, 23);
             this.plProgressBar.TabIndex = 4;
             // 
+            // pnlRptSgmnt1TextBox
+            // 
+            this.pnlRptSgmnt1TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt1TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt1TextBox.MaxLength = 200;
+            this.pnlRptSgmnt1TextBox.Name = "pnlRptSgmnt1TextBox";
+            this.pnlRptSgmnt1TextBox.ReadOnly = true;
+            this.pnlRptSgmnt1TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt1TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt1TextBox.TabIndex = 197;
+            this.pnlRptSgmnt1TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt2TextBox
+            // 
+            this.pnlRptSgmnt2TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt2TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt2TextBox.MaxLength = 200;
+            this.pnlRptSgmnt2TextBox.Name = "pnlRptSgmnt2TextBox";
+            this.pnlRptSgmnt2TextBox.ReadOnly = true;
+            this.pnlRptSgmnt2TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt2TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt2TextBox.TabIndex = 196;
+            this.pnlRptSgmnt2TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt3TextBox
+            // 
+            this.pnlRptSgmnt3TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt3TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt3TextBox.MaxLength = 200;
+            this.pnlRptSgmnt3TextBox.Name = "pnlRptSgmnt3TextBox";
+            this.pnlRptSgmnt3TextBox.ReadOnly = true;
+            this.pnlRptSgmnt3TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt3TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt3TextBox.TabIndex = 195;
+            this.pnlRptSgmnt3TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt4TextBox
+            // 
+            this.pnlRptSgmnt4TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt4TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt4TextBox.MaxLength = 200;
+            this.pnlRptSgmnt4TextBox.Name = "pnlRptSgmnt4TextBox";
+            this.pnlRptSgmnt4TextBox.ReadOnly = true;
+            this.pnlRptSgmnt4TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt4TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt4TextBox.TabIndex = 194;
+            this.pnlRptSgmnt4TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt5TextBox
+            // 
+            this.pnlRptSgmnt5TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt5TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt5TextBox.MaxLength = 200;
+            this.pnlRptSgmnt5TextBox.Name = "pnlRptSgmnt5TextBox";
+            this.pnlRptSgmnt5TextBox.ReadOnly = true;
+            this.pnlRptSgmnt5TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt5TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt5TextBox.TabIndex = 193;
+            this.pnlRptSgmnt5TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt6TextBox
+            // 
+            this.pnlRptSgmnt6TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt6TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt6TextBox.MaxLength = 200;
+            this.pnlRptSgmnt6TextBox.Name = "pnlRptSgmnt6TextBox";
+            this.pnlRptSgmnt6TextBox.ReadOnly = true;
+            this.pnlRptSgmnt6TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt6TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt6TextBox.TabIndex = 192;
+            this.pnlRptSgmnt6TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt7TextBox
+            // 
+            this.pnlRptSgmnt7TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt7TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt7TextBox.MaxLength = 200;
+            this.pnlRptSgmnt7TextBox.Name = "pnlRptSgmnt7TextBox";
+            this.pnlRptSgmnt7TextBox.ReadOnly = true;
+            this.pnlRptSgmnt7TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt7TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt7TextBox.TabIndex = 191;
+            this.pnlRptSgmnt7TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt8TextBox
+            // 
+            this.pnlRptSgmnt8TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt8TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt8TextBox.MaxLength = 200;
+            this.pnlRptSgmnt8TextBox.Name = "pnlRptSgmnt8TextBox";
+            this.pnlRptSgmnt8TextBox.ReadOnly = true;
+            this.pnlRptSgmnt8TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt8TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt8TextBox.TabIndex = 190;
+            this.pnlRptSgmnt8TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt9TextBox
+            // 
+            this.pnlRptSgmnt9TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt9TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt9TextBox.MaxLength = 200;
+            this.pnlRptSgmnt9TextBox.Name = "pnlRptSgmnt9TextBox";
+            this.pnlRptSgmnt9TextBox.ReadOnly = true;
+            this.pnlRptSgmnt9TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt9TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt9TextBox.TabIndex = 189;
+            this.pnlRptSgmnt9TextBox.TabStop = false;
+            // 
+            // pnlRptSgmnt10TextBox
+            // 
+            this.pnlRptSgmnt10TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRptSgmnt10TextBox.Location = new System.Drawing.Point(140, 202);
+            this.pnlRptSgmnt10TextBox.MaxLength = 200;
+            this.pnlRptSgmnt10TextBox.Name = "pnlRptSgmnt10TextBox";
+            this.pnlRptSgmnt10TextBox.ReadOnly = true;
+            this.pnlRptSgmnt10TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pnlRptSgmnt10TextBox.Size = new System.Drawing.Size(49, 21);
+            this.pnlRptSgmnt10TextBox.TabIndex = 188;
+            this.pnlRptSgmnt10TextBox.TabStop = false;
+            // 
             // plGroupBox
             // 
             this.plGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -7765,7 +8449,7 @@ namespace Accounting.Forms
             this.plGroupBox.ForeColor = System.Drawing.Color.White;
             this.plGroupBox.Location = new System.Drawing.Point(2, 0);
             this.plGroupBox.Name = "plGroupBox";
-            this.plGroupBox.Size = new System.Drawing.Size(886, 574);
+            this.plGroupBox.Size = new System.Drawing.Size(849, 574);
             this.plGroupBox.TabIndex = 0;
             this.plGroupBox.TabStop = false;
             this.plGroupBox.Text = "PROFIT && LOSS STATEMENT FOR THE CHOSEN PERIOD";
@@ -7791,7 +8475,7 @@ namespace Accounting.Forms
             this.plListView.HoverSelection = true;
             this.plListView.Location = new System.Drawing.Point(3, 19);
             this.plListView.Name = "plListView";
-            this.plListView.Size = new System.Drawing.Size(880, 552);
+            this.plListView.Size = new System.Drawing.Size(843, 552);
             this.plListView.TabIndex = 0;
             this.plListView.UseCompatibleStateImageBehavior = false;
             this.plListView.View = System.Windows.Forms.View.Details;
@@ -7836,32 +8520,33 @@ namespace Accounting.Forms
             // 
             // prfNlsMenuStrip
             // 
+            this.prfNlsMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.prfNlsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclPrfNLsMenuItem,
             this.toolStripSeparator122,
             this.vwTrnsPrfNLsMenuItem,
             this.vwSQLPrfNLsMenuItem});
             this.prfNlsMenuStrip.Name = "usersContextMenuStrip";
-            this.prfNlsMenuStrip.Size = new System.Drawing.Size(169, 76);
+            this.prfNlsMenuStrip.Size = new System.Drawing.Size(173, 88);
             // 
             // exptExclPrfNLsMenuItem
             // 
             this.exptExclPrfNLsMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclPrfNLsMenuItem.Name = "exptExclPrfNLsMenuItem";
-            this.exptExclPrfNLsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exptExclPrfNLsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.exptExclPrfNLsMenuItem.Text = "Export to Excel";
             this.exptExclPrfNLsMenuItem.Click += new System.EventHandler(this.exptExclPrfNLsMenuItem_Click);
             // 
             // toolStripSeparator122
             // 
             this.toolStripSeparator122.Name = "toolStripSeparator122";
-            this.toolStripSeparator122.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator122.Size = new System.Drawing.Size(169, 6);
             // 
             // vwTrnsPrfNLsMenuItem
             // 
             this.vwTrnsPrfNLsMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwTrnsPrfNLsMenuItem.Name = "vwTrnsPrfNLsMenuItem";
-            this.vwTrnsPrfNLsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwTrnsPrfNLsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwTrnsPrfNLsMenuItem.Text = "View &Transactions";
             this.vwTrnsPrfNLsMenuItem.Click += new System.EventHandler(this.vwTrnsPrfNLsMenuItem_Click);
             // 
@@ -7869,7 +8554,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLPrfNLsMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLPrfNLsMenuItem.Name = "vwSQLPrfNLsMenuItem";
-            this.vwSQLPrfNLsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSQLPrfNLsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSQLPrfNLsMenuItem.Text = "&View SQL";
             this.vwSQLPrfNLsMenuItem.Click += new System.EventHandler(this.vwSQLPrfNLsMenuItem_Click);
             // 
@@ -7903,7 +8588,7 @@ namespace Accounting.Forms
             this.balsShtTabPage.Controls.Add(this.balSheetPanel);
             this.balsShtTabPage.Location = new System.Drawing.Point(4, 44);
             this.balsShtTabPage.Name = "balsShtTabPage";
-            this.balsShtTabPage.Size = new System.Drawing.Size(1091, 577);
+            this.balsShtTabPage.Size = new System.Drawing.Size(1054, 577);
             this.balsShtTabPage.TabIndex = 2;
             this.balsShtTabPage.Text = "BALANCE SHEET";
             this.balsShtTabPage.UseVisualStyleBackColor = true;
@@ -7917,12 +8602,16 @@ namespace Accounting.Forms
             this.balSheetPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.balSheetPanel.Location = new System.Drawing.Point(0, 0);
             this.balSheetPanel.Name = "balSheetPanel";
-            this.balSheetPanel.Size = new System.Drawing.Size(1091, 577);
+            this.balSheetPanel.Size = new System.Drawing.Size(1054, 577);
             this.balSheetPanel.TabIndex = 7;
             // 
             // groupBox13
             // 
             this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox13.Controls.Add(this.blShtSgmntTextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmntButton);
+            this.groupBox13.Controls.Add(this.label95);
+            this.groupBox13.Controls.Add(this.balsShtAcntLvlNumUpDown);
             this.groupBox13.Controls.Add(this.blsSmmryCheckBox);
             this.groupBox13.Controls.Add(this.hideZeroAccntCheckBox3);
             this.groupBox13.Controls.Add(this.label27);
@@ -7931,13 +8620,69 @@ namespace Accounting.Forms
             this.groupBox13.Controls.Add(this.blsExptExclButton);
             this.groupBox13.Controls.Add(this.blsGenRptButton);
             this.groupBox13.Controls.Add(this.blsProgressBar);
+            this.groupBox13.Controls.Add(this.blShtSgmnt1TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt2TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt3TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt4TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt5TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt6TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt7TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt8TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt9TextBox);
+            this.groupBox13.Controls.Add(this.blShtSgmnt10TextBox);
             this.groupBox13.ForeColor = System.Drawing.Color.White;
-            this.groupBox13.Location = new System.Drawing.Point(911, 1);
+            this.groupBox13.Location = new System.Drawing.Point(874, 1);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(176, 204);
+            this.groupBox13.Size = new System.Drawing.Size(176, 261);
             this.groupBox13.TabIndex = 1;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Report Generation";
+            // 
+            // blShtSgmntTextBox
+            // 
+            this.blShtSgmntTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmntTextBox.Location = new System.Drawing.Point(102, 159);
+            this.blShtSgmntTextBox.MaxLength = 200;
+            this.blShtSgmntTextBox.Name = "blShtSgmntTextBox";
+            this.blShtSgmntTextBox.ReadOnly = true;
+            this.blShtSgmntTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmntTextBox.Size = new System.Drawing.Size(67, 21);
+            this.blShtSgmntTextBox.TabIndex = 198;
+            this.blShtSgmntTextBox.TabStop = false;
+            // 
+            // blShtSgmntButton
+            // 
+            this.blShtSgmntButton.ForeColor = System.Drawing.Color.Black;
+            this.blShtSgmntButton.Location = new System.Drawing.Point(6, 158);
+            this.blShtSgmntButton.Name = "blShtSgmntButton";
+            this.blShtSgmntButton.Size = new System.Drawing.Size(95, 23);
+            this.blShtSgmntButton.TabIndex = 199;
+            this.blShtSgmntButton.Text = "Segments";
+            this.blShtSgmntButton.UseVisualStyleBackColor = true;
+            this.blShtSgmntButton.Click += new System.EventHandler(this.blShtSgmntButton_Click);
+            // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.ForeColor = System.Drawing.Color.White;
+            this.label95.Location = new System.Drawing.Point(7, 140);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(101, 13);
+            this.label95.TabIndex = 180;
+            this.label95.Text = "Max Account Level:";
+            // 
+            // balsShtAcntLvlNumUpDown
+            // 
+            this.balsShtAcntLvlNumUpDown.Location = new System.Drawing.Point(114, 136);
+            this.balsShtAcntLvlNumUpDown.Name = "balsShtAcntLvlNumUpDown";
+            this.balsShtAcntLvlNumUpDown.Size = new System.Drawing.Size(55, 21);
+            this.balsShtAcntLvlNumUpDown.TabIndex = 179;
+            this.balsShtAcntLvlNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.balsShtAcntLvlNumUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // blsSmmryCheckBox
             // 
@@ -7950,6 +8695,7 @@ namespace Accounting.Forms
             this.blsSmmryCheckBox.TabIndex = 103;
             this.blsSmmryCheckBox.Text = "Summary Report";
             this.blsSmmryCheckBox.UseVisualStyleBackColor = true;
+            this.blsSmmryCheckBox.Click += new System.EventHandler(this.blsSmmryCheckBox_Click);
             // 
             // hideZeroAccntCheckBox3
             // 
@@ -7998,7 +8744,7 @@ namespace Accounting.Forms
             // blsExptExclButton
             // 
             this.blsExptExclButton.ForeColor = System.Drawing.Color.Black;
-            this.blsExptExclButton.Location = new System.Drawing.Point(6, 167);
+            this.blsExptExclButton.Location = new System.Drawing.Point(6, 220);
             this.blsExptExclButton.Name = "blsExptExclButton";
             this.blsExptExclButton.Size = new System.Drawing.Size(163, 34);
             this.blsExptExclButton.TabIndex = 4;
@@ -8009,7 +8755,7 @@ namespace Accounting.Forms
             // blsGenRptButton
             // 
             this.blsGenRptButton.ForeColor = System.Drawing.Color.Black;
-            this.blsGenRptButton.Location = new System.Drawing.Point(6, 133);
+            this.blsGenRptButton.Location = new System.Drawing.Point(6, 186);
             this.blsGenRptButton.Name = "blsGenRptButton";
             this.blsGenRptButton.Size = new System.Drawing.Size(163, 34);
             this.blsGenRptButton.TabIndex = 3;
@@ -8025,6 +8771,136 @@ namespace Accounting.Forms
             this.blsProgressBar.Size = new System.Drawing.Size(163, 23);
             this.blsProgressBar.TabIndex = 0;
             // 
+            // blShtSgmnt1TextBox
+            // 
+            this.blShtSgmnt1TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt1TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt1TextBox.MaxLength = 200;
+            this.blShtSgmnt1TextBox.Name = "blShtSgmnt1TextBox";
+            this.blShtSgmnt1TextBox.ReadOnly = true;
+            this.blShtSgmnt1TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt1TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt1TextBox.TabIndex = 209;
+            this.blShtSgmnt1TextBox.TabStop = false;
+            this.blShtSgmnt1TextBox.Text = "-1";
+            // 
+            // blShtSgmnt2TextBox
+            // 
+            this.blShtSgmnt2TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt2TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt2TextBox.MaxLength = 200;
+            this.blShtSgmnt2TextBox.Name = "blShtSgmnt2TextBox";
+            this.blShtSgmnt2TextBox.ReadOnly = true;
+            this.blShtSgmnt2TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt2TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt2TextBox.TabIndex = 208;
+            this.blShtSgmnt2TextBox.TabStop = false;
+            this.blShtSgmnt2TextBox.Text = "-1";
+            // 
+            // blShtSgmnt3TextBox
+            // 
+            this.blShtSgmnt3TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt3TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt3TextBox.MaxLength = 200;
+            this.blShtSgmnt3TextBox.Name = "blShtSgmnt3TextBox";
+            this.blShtSgmnt3TextBox.ReadOnly = true;
+            this.blShtSgmnt3TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt3TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt3TextBox.TabIndex = 207;
+            this.blShtSgmnt3TextBox.TabStop = false;
+            this.blShtSgmnt3TextBox.Text = "-1";
+            // 
+            // blShtSgmnt4TextBox
+            // 
+            this.blShtSgmnt4TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt4TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt4TextBox.MaxLength = 200;
+            this.blShtSgmnt4TextBox.Name = "blShtSgmnt4TextBox";
+            this.blShtSgmnt4TextBox.ReadOnly = true;
+            this.blShtSgmnt4TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt4TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt4TextBox.TabIndex = 206;
+            this.blShtSgmnt4TextBox.TabStop = false;
+            this.blShtSgmnt4TextBox.Text = "-1";
+            // 
+            // blShtSgmnt5TextBox
+            // 
+            this.blShtSgmnt5TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt5TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt5TextBox.MaxLength = 200;
+            this.blShtSgmnt5TextBox.Name = "blShtSgmnt5TextBox";
+            this.blShtSgmnt5TextBox.ReadOnly = true;
+            this.blShtSgmnt5TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt5TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt5TextBox.TabIndex = 205;
+            this.blShtSgmnt5TextBox.TabStop = false;
+            this.blShtSgmnt5TextBox.Text = "-1";
+            // 
+            // blShtSgmnt6TextBox
+            // 
+            this.blShtSgmnt6TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt6TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt6TextBox.MaxLength = 200;
+            this.blShtSgmnt6TextBox.Name = "blShtSgmnt6TextBox";
+            this.blShtSgmnt6TextBox.ReadOnly = true;
+            this.blShtSgmnt6TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt6TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt6TextBox.TabIndex = 204;
+            this.blShtSgmnt6TextBox.TabStop = false;
+            this.blShtSgmnt6TextBox.Text = "-1";
+            // 
+            // blShtSgmnt7TextBox
+            // 
+            this.blShtSgmnt7TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt7TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt7TextBox.MaxLength = 200;
+            this.blShtSgmnt7TextBox.Name = "blShtSgmnt7TextBox";
+            this.blShtSgmnt7TextBox.ReadOnly = true;
+            this.blShtSgmnt7TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt7TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt7TextBox.TabIndex = 203;
+            this.blShtSgmnt7TextBox.TabStop = false;
+            this.blShtSgmnt7TextBox.Text = "-1";
+            // 
+            // blShtSgmnt8TextBox
+            // 
+            this.blShtSgmnt8TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt8TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt8TextBox.MaxLength = 200;
+            this.blShtSgmnt8TextBox.Name = "blShtSgmnt8TextBox";
+            this.blShtSgmnt8TextBox.ReadOnly = true;
+            this.blShtSgmnt8TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt8TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt8TextBox.TabIndex = 202;
+            this.blShtSgmnt8TextBox.TabStop = false;
+            this.blShtSgmnt8TextBox.Text = "-1";
+            // 
+            // blShtSgmnt9TextBox
+            // 
+            this.blShtSgmnt9TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt9TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt9TextBox.MaxLength = 200;
+            this.blShtSgmnt9TextBox.Name = "blShtSgmnt9TextBox";
+            this.blShtSgmnt9TextBox.ReadOnly = true;
+            this.blShtSgmnt9TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt9TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt9TextBox.TabIndex = 201;
+            this.blShtSgmnt9TextBox.TabStop = false;
+            this.blShtSgmnt9TextBox.Text = "-1";
+            // 
+            // blShtSgmnt10TextBox
+            // 
+            this.blShtSgmnt10TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.blShtSgmnt10TextBox.Location = new System.Drawing.Point(139, 159);
+            this.blShtSgmnt10TextBox.MaxLength = 200;
+            this.blShtSgmnt10TextBox.Name = "blShtSgmnt10TextBox";
+            this.blShtSgmnt10TextBox.ReadOnly = true;
+            this.blShtSgmnt10TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.blShtSgmnt10TextBox.Size = new System.Drawing.Size(30, 21);
+            this.blShtSgmnt10TextBox.TabIndex = 200;
+            this.blShtSgmnt10TextBox.TabStop = false;
+            this.blShtSgmnt10TextBox.Text = "-1";
+            // 
             // blsGroupBox
             // 
             this.blsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -8035,7 +8911,7 @@ namespace Accounting.Forms
             this.blsGroupBox.ForeColor = System.Drawing.Color.White;
             this.blsGroupBox.Location = new System.Drawing.Point(2, 0);
             this.blsGroupBox.Name = "blsGroupBox";
-            this.blsGroupBox.Size = new System.Drawing.Size(906, 574);
+            this.blsGroupBox.Size = new System.Drawing.Size(869, 574);
             this.blsGroupBox.TabIndex = 0;
             this.blsGroupBox.TabStop = false;
             this.blsGroupBox.Text = "BALANCE SHEET REPORT AS AT";
@@ -8061,7 +8937,7 @@ namespace Accounting.Forms
             this.blsListView.HoverSelection = true;
             this.blsListView.Location = new System.Drawing.Point(3, 19);
             this.blsListView.Name = "blsListView";
-            this.blsListView.Size = new System.Drawing.Size(900, 552);
+            this.blsListView.Size = new System.Drawing.Size(863, 552);
             this.blsListView.TabIndex = 0;
             this.blsListView.UseCompatibleStateImageBehavior = false;
             this.blsListView.View = System.Windows.Forms.View.Details;
@@ -8106,32 +8982,33 @@ namespace Accounting.Forms
             // 
             // balShtsMenuStrip
             // 
+            this.balShtsMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.balShtsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclBlsMenuItem,
             this.toolStripSeparator70,
             this.vwTrnsBlsMenuItem,
             this.vwSQLBlsMenuItem});
             this.balShtsMenuStrip.Name = "usersContextMenuStrip";
-            this.balShtsMenuStrip.Size = new System.Drawing.Size(169, 76);
+            this.balShtsMenuStrip.Size = new System.Drawing.Size(173, 88);
             // 
             // exptExclBlsMenuItem
             // 
             this.exptExclBlsMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclBlsMenuItem.Name = "exptExclBlsMenuItem";
-            this.exptExclBlsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exptExclBlsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.exptExclBlsMenuItem.Text = "Export to Excel";
             this.exptExclBlsMenuItem.Click += new System.EventHandler(this.exptExclBlsMenuItem_Click);
             // 
             // toolStripSeparator70
             // 
             this.toolStripSeparator70.Name = "toolStripSeparator70";
-            this.toolStripSeparator70.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator70.Size = new System.Drawing.Size(169, 6);
             // 
             // vwTrnsBlsMenuItem
             // 
             this.vwTrnsBlsMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwTrnsBlsMenuItem.Name = "vwTrnsBlsMenuItem";
-            this.vwTrnsBlsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwTrnsBlsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwTrnsBlsMenuItem.Text = "View &Transactions";
             this.vwTrnsBlsMenuItem.Click += new System.EventHandler(this.vwTrnsBlsMenuItem_Click);
             // 
@@ -8139,7 +9016,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLBlsMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBlsMenuItem.Name = "vwSQLBlsMenuItem";
-            this.vwSQLBlsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSQLBlsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSQLBlsMenuItem.Text = "&View SQL";
             this.vwSQLBlsMenuItem.Click += new System.EventHandler(this.vwSQLBlsMenuItem_Click);
             // 
@@ -8177,7 +9054,7 @@ namespace Accounting.Forms
             this.subLedgerTabPage.ForeColor = System.Drawing.Color.White;
             this.subLedgerTabPage.Location = new System.Drawing.Point(4, 44);
             this.subLedgerTabPage.Name = "subLedgerTabPage";
-            this.subLedgerTabPage.Size = new System.Drawing.Size(1091, 577);
+            this.subLedgerTabPage.Size = new System.Drawing.Size(1054, 577);
             this.subLedgerTabPage.TabIndex = 3;
             this.subLedgerTabPage.Text = "SUB-LEDGER BALANCES";
             this.subLedgerTabPage.UseVisualStyleBackColor = true;
@@ -8193,7 +9070,7 @@ namespace Accounting.Forms
             this.groupBox18.Controls.Add(this.gnrtSubLdgrButton);
             this.groupBox18.Controls.Add(this.subledgrProgressBar);
             this.groupBox18.ForeColor = System.Drawing.Color.White;
-            this.groupBox18.Location = new System.Drawing.Point(918, 1);
+            this.groupBox18.Location = new System.Drawing.Point(881, 1);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(173, 177);
             this.groupBox18.TabIndex = 1;
@@ -8284,7 +9161,7 @@ namespace Accounting.Forms
             this.subLdgrGroupBox.ForeColor = System.Drawing.Color.White;
             this.subLdgrGroupBox.Location = new System.Drawing.Point(2, 0);
             this.subLdgrGroupBox.Name = "subLdgrGroupBox";
-            this.subLdgrGroupBox.Size = new System.Drawing.Size(914, 574);
+            this.subLdgrGroupBox.Size = new System.Drawing.Size(877, 574);
             this.subLdgrGroupBox.TabIndex = 0;
             this.subLdgrGroupBox.TabStop = false;
             this.subLdgrGroupBox.Text = "SUBLEDGER ACCOUNT BALANCE AS AT NOW";
@@ -8312,7 +9189,7 @@ namespace Accounting.Forms
             this.subledgerListView.HoverSelection = true;
             this.subledgerListView.Location = new System.Drawing.Point(3, 19);
             this.subledgerListView.Name = "subledgerListView";
-            this.subledgerListView.Size = new System.Drawing.Size(908, 552);
+            this.subledgerListView.Size = new System.Drawing.Size(871, 552);
             this.subledgerListView.TabIndex = 0;
             this.subledgerListView.UseCompatibleStateImageBehavior = false;
             this.subledgerListView.View = System.Windows.Forms.View.Details;
@@ -8369,32 +9246,33 @@ namespace Accounting.Forms
             // 
             // subLdgrContextMenuStrip
             // 
+            this.subLdgrContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.subLdgrContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exprtSubLgdrMenuItem,
             this.toolStripSeparator47,
             this.vwSublLdgrTrnsMenuItem,
             this.vwSQLSubLdgrMenuItem});
             this.subLdgrContextMenuStrip.Name = "usersContextMenuStrip";
-            this.subLdgrContextMenuStrip.Size = new System.Drawing.Size(169, 76);
+            this.subLdgrContextMenuStrip.Size = new System.Drawing.Size(173, 88);
             // 
             // exprtSubLgdrMenuItem
             // 
             this.exprtSubLgdrMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exprtSubLgdrMenuItem.Name = "exprtSubLgdrMenuItem";
-            this.exprtSubLgdrMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exprtSubLgdrMenuItem.Size = new System.Drawing.Size(172, 26);
             this.exprtSubLgdrMenuItem.Text = "Export to Excel";
             this.exprtSubLgdrMenuItem.Click += new System.EventHandler(this.exprtSubLgdrMenuItem_Click);
             // 
             // toolStripSeparator47
             // 
             this.toolStripSeparator47.Name = "toolStripSeparator47";
-            this.toolStripSeparator47.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator47.Size = new System.Drawing.Size(169, 6);
             // 
             // vwSublLdgrTrnsMenuItem
             // 
             this.vwSublLdgrTrnsMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwSublLdgrTrnsMenuItem.Name = "vwSublLdgrTrnsMenuItem";
-            this.vwSublLdgrTrnsMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSublLdgrTrnsMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSublLdgrTrnsMenuItem.Text = "View &Transactions";
             this.vwSublLdgrTrnsMenuItem.Click += new System.EventHandler(this.vwSublLdgrTrnsMenuItem_Click);
             // 
@@ -8402,7 +9280,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLSubLdgrMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLSubLdgrMenuItem.Name = "vwSQLSubLdgrMenuItem";
-            this.vwSQLSubLdgrMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSQLSubLdgrMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSQLSubLdgrMenuItem.Text = "&View SQL";
             this.vwSQLSubLdgrMenuItem.Click += new System.EventHandler(this.vwSQLSubLdgrMenuItem_Click);
             // 
@@ -8438,7 +9316,7 @@ namespace Accounting.Forms
             this.accntStmntTabPage.Controls.Add(this.panel20);
             this.accntStmntTabPage.Location = new System.Drawing.Point(4, 44);
             this.accntStmntTabPage.Name = "accntStmntTabPage";
-            this.accntStmntTabPage.Size = new System.Drawing.Size(1091, 577);
+            this.accntStmntTabPage.Size = new System.Drawing.Size(1054, 577);
             this.accntStmntTabPage.TabIndex = 4;
             this.accntStmntTabPage.Text = "GL ACCOUNT STATEMENTS";
             this.accntStmntTabPage.UseVisualStyleBackColor = true;
@@ -8446,6 +9324,7 @@ namespace Accounting.Forms
             // groupBox19
             // 
             this.groupBox19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox19.Controls.Add(this.shwIntrfcTrnsCheckBox);
             this.groupBox19.Controls.Add(this.accntStmntTextBox);
             this.groupBox19.Controls.Add(this.label63);
             this.groupBox19.Controls.Add(this.accntStmntButton);
@@ -8460,12 +9339,24 @@ namespace Accounting.Forms
             this.groupBox19.Controls.Add(this.genRptAccntStmntButton);
             this.groupBox19.Controls.Add(this.acctStmntProgressBar);
             this.groupBox19.ForeColor = System.Drawing.Color.White;
-            this.groupBox19.Location = new System.Drawing.Point(917, 1);
+            this.groupBox19.Location = new System.Drawing.Point(880, 1);
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.Size = new System.Drawing.Size(173, 253);
             this.groupBox19.TabIndex = 1;
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "Report Generation";
+            // 
+            // shwIntrfcTrnsCheckBox
+            // 
+            this.shwIntrfcTrnsCheckBox.AutoSize = true;
+            this.shwIntrfcTrnsCheckBox.Checked = true;
+            this.shwIntrfcTrnsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.shwIntrfcTrnsCheckBox.Location = new System.Drawing.Point(6, 43);
+            this.shwIntrfcTrnsCheckBox.Name = "shwIntrfcTrnsCheckBox";
+            this.shwIntrfcTrnsCheckBox.Size = new System.Drawing.Size(128, 17);
+            this.shwIntrfcTrnsCheckBox.TabIndex = 109;
+            this.shwIntrfcTrnsCheckBox.Text = "Show Interface Trns.";
+            this.shwIntrfcTrnsCheckBox.UseVisualStyleBackColor = true;
             // 
             // accntStmntTextBox
             // 
@@ -8615,7 +9506,7 @@ namespace Accounting.Forms
             this.accntStmntGroupBox.ForeColor = System.Drawing.Color.White;
             this.accntStmntGroupBox.Location = new System.Drawing.Point(2, 0);
             this.accntStmntGroupBox.Name = "accntStmntGroupBox";
-            this.accntStmntGroupBox.Size = new System.Drawing.Size(914, 574);
+            this.accntStmntGroupBox.Size = new System.Drawing.Size(877, 574);
             this.accntStmntGroupBox.TabIndex = 0;
             this.accntStmntGroupBox.TabStop = false;
             this.accntStmntGroupBox.Text = "ACCOUNT TRANSACTIONS FOR THE PERIOD CHOSEN";
@@ -8645,7 +9536,7 @@ namespace Accounting.Forms
             this.accntStmntListView.HoverSelection = true;
             this.accntStmntListView.Location = new System.Drawing.Point(3, 19);
             this.accntStmntListView.Name = "accntStmntListView";
-            this.accntStmntListView.Size = new System.Drawing.Size(908, 552);
+            this.accntStmntListView.Size = new System.Drawing.Size(871, 552);
             this.accntStmntListView.TabIndex = 0;
             this.accntStmntListView.UseCompatibleStateImageBehavior = false;
             this.accntStmntListView.View = System.Windows.Forms.View.Details;
@@ -8712,6 +9603,7 @@ namespace Accounting.Forms
             // 
             // accntStmntContextMenuStrip
             // 
+            this.accntStmntContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.accntStmntContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclActStmntMenuItem,
             this.toolStripSeparator113,
@@ -8720,39 +9612,39 @@ namespace Accounting.Forms
             this.vwTrnsActStmntMenuItem,
             this.vwSQLActStmntMenuItem});
             this.accntStmntContextMenuStrip.Name = "usersContextMenuStrip";
-            this.accntStmntContextMenuStrip.Size = new System.Drawing.Size(178, 104);
+            this.accntStmntContextMenuStrip.Size = new System.Drawing.Size(182, 120);
             // 
             // exptExclActStmntMenuItem
             // 
             this.exptExclActStmntMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclActStmntMenuItem.Name = "exptExclActStmntMenuItem";
-            this.exptExclActStmntMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.exptExclActStmntMenuItem.Size = new System.Drawing.Size(181, 26);
             this.exptExclActStmntMenuItem.Text = "Export to Excel";
             this.exptExclActStmntMenuItem.Click += new System.EventHandler(this.exptExclActStmntMenuItem_Click);
             // 
             // toolStripSeparator113
             // 
             this.toolStripSeparator113.Name = "toolStripSeparator113";
-            this.toolStripSeparator113.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator113.Size = new System.Drawing.Size(178, 6);
             // 
             // openBtchMenuItem
             // 
             this.openBtchMenuItem.Image = global::Accounting.Properties.Resources.openfileicon;
             this.openBtchMenuItem.Name = "openBtchMenuItem";
-            this.openBtchMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.openBtchMenuItem.Size = new System.Drawing.Size(181, 26);
             this.openBtchMenuItem.Text = "Open Journal Batch";
             this.openBtchMenuItem.Click += new System.EventHandler(this.openBtchMenuItem_Click);
             // 
             // toolStripSeparator140
             // 
             this.toolStripSeparator140.Name = "toolStripSeparator140";
-            this.toolStripSeparator140.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator140.Size = new System.Drawing.Size(178, 6);
             // 
             // vwTrnsActStmntMenuItem
             // 
             this.vwTrnsActStmntMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwTrnsActStmntMenuItem.Name = "vwTrnsActStmntMenuItem";
-            this.vwTrnsActStmntMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.vwTrnsActStmntMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwTrnsActStmntMenuItem.Text = "View &Transactions";
             this.vwTrnsActStmntMenuItem.Click += new System.EventHandler(this.vwTrnsActStmntMenuItem_Click);
             // 
@@ -8760,7 +9652,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLActStmntMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLActStmntMenuItem.Name = "vwSQLActStmntMenuItem";
-            this.vwSQLActStmntMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.vwSQLActStmntMenuItem.Size = new System.Drawing.Size(181, 26);
             this.vwSQLActStmntMenuItem.Text = "&View SQL";
             this.vwSQLActStmntMenuItem.Click += new System.EventHandler(this.vwSQLActStmntMenuItem_Click);
             // 
@@ -8793,15 +9685,17 @@ namespace Accounting.Forms
             this.tabPage22.BackColor = System.Drawing.Color.Silver;
             this.tabPage22.Controls.Add(this.groupBox25);
             this.tabPage22.Controls.Add(this.periodGroupBox);
-            this.tabPage22.Location = new System.Drawing.Point(4, 24);
+            this.tabPage22.Location = new System.Drawing.Point(4, 44);
             this.tabPage22.Name = "tabPage22";
-            this.tabPage22.Size = new System.Drawing.Size(1091, 625);
+            this.tabPage22.Size = new System.Drawing.Size(1054, 577);
             this.tabPage22.TabIndex = 7;
             this.tabPage22.Text = "PERIOD BY PERIOD NET TRNS.";
             // 
             // groupBox25
             // 
             this.groupBox25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox25.Controls.Add(this.pbpSgmntTextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmntButton);
             this.groupBox25.Controls.Add(this.hideZeroMnthlyCheckBox);
             this.groupBox25.Controls.Add(this.label64);
             this.groupBox25.Controls.Add(this.mnthlyAccTypComboBox);
@@ -8816,20 +9710,53 @@ namespace Accounting.Forms
             this.groupBox25.Controls.Add(this.genMthlyRptButton);
             this.groupBox25.Controls.Add(this.mnthlyProgressBar);
             this.groupBox25.Controls.Add(this.mnthlyDrtnComboBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt1TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt2TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt3TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt4TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt5TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt6TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt7TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt8TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt9TextBox);
+            this.groupBox25.Controls.Add(this.pbpSgmnt10TextBox);
             this.groupBox25.ForeColor = System.Drawing.Color.White;
-            this.groupBox25.Location = new System.Drawing.Point(885, 1);
+            this.groupBox25.Location = new System.Drawing.Point(848, 1);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(173, 290);
+            this.groupBox25.Size = new System.Drawing.Size(173, 310);
             this.groupBox25.TabIndex = 2;
             this.groupBox25.TabStop = false;
             this.groupBox25.Text = "Report Generation";
+            // 
+            // pbpSgmntTextBox
+            // 
+            this.pbpSgmntTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmntTextBox.Location = new System.Drawing.Point(100, 203);
+            this.pbpSgmntTextBox.MaxLength = 200;
+            this.pbpSgmntTextBox.Name = "pbpSgmntTextBox";
+            this.pbpSgmntTextBox.ReadOnly = true;
+            this.pbpSgmntTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmntTextBox.Size = new System.Drawing.Size(67, 21);
+            this.pbpSgmntTextBox.TabIndex = 210;
+            this.pbpSgmntTextBox.TabStop = false;
+            // 
+            // pbpSgmntButton
+            // 
+            this.pbpSgmntButton.ForeColor = System.Drawing.Color.Black;
+            this.pbpSgmntButton.Location = new System.Drawing.Point(4, 202);
+            this.pbpSgmntButton.Name = "pbpSgmntButton";
+            this.pbpSgmntButton.Size = new System.Drawing.Size(95, 23);
+            this.pbpSgmntButton.TabIndex = 211;
+            this.pbpSgmntButton.Text = "Segments";
+            this.pbpSgmntButton.UseVisualStyleBackColor = true;
+            this.pbpSgmntButton.Click += new System.EventHandler(this.pbpSgmntButton_Click);
             // 
             // hideZeroMnthlyCheckBox
             // 
             this.hideZeroMnthlyCheckBox.AutoSize = true;
             this.hideZeroMnthlyCheckBox.Checked = true;
             this.hideZeroMnthlyCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.hideZeroMnthlyCheckBox.Location = new System.Drawing.Point(7, 268);
+            this.hideZeroMnthlyCheckBox.Location = new System.Drawing.Point(7, 288);
             this.hideZeroMnthlyCheckBox.Name = "hideZeroMnthlyCheckBox";
             this.hideZeroMnthlyCheckBox.Size = new System.Drawing.Size(159, 17);
             this.hideZeroMnthlyCheckBox.TabIndex = 119;
@@ -8939,7 +9866,7 @@ namespace Accounting.Forms
             // exprtMnthlyRptButton
             // 
             this.exprtMnthlyRptButton.ForeColor = System.Drawing.Color.Black;
-            this.exprtMnthlyRptButton.Location = new System.Drawing.Point(4, 236);
+            this.exprtMnthlyRptButton.Location = new System.Drawing.Point(4, 256);
             this.exprtMnthlyRptButton.Name = "exprtMnthlyRptButton";
             this.exprtMnthlyRptButton.Size = new System.Drawing.Size(164, 29);
             this.exprtMnthlyRptButton.TabIndex = 8;
@@ -8950,7 +9877,7 @@ namespace Accounting.Forms
             // genMthlyRptButton
             // 
             this.genMthlyRptButton.ForeColor = System.Drawing.Color.Black;
-            this.genMthlyRptButton.Location = new System.Drawing.Point(4, 205);
+            this.genMthlyRptButton.Location = new System.Drawing.Point(4, 225);
             this.genMthlyRptButton.Name = "genMthlyRptButton";
             this.genMthlyRptButton.Size = new System.Drawing.Size(164, 29);
             this.genMthlyRptButton.TabIndex = 7;
@@ -8982,6 +9909,136 @@ namespace Accounting.Forms
             this.mnthlyDrtnComboBox.Size = new System.Drawing.Size(160, 21);
             this.mnthlyDrtnComboBox.TabIndex = 116;
             // 
+            // pbpSgmnt1TextBox
+            // 
+            this.pbpSgmnt1TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt1TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt1TextBox.MaxLength = 200;
+            this.pbpSgmnt1TextBox.Name = "pbpSgmnt1TextBox";
+            this.pbpSgmnt1TextBox.ReadOnly = true;
+            this.pbpSgmnt1TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt1TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt1TextBox.TabIndex = 221;
+            this.pbpSgmnt1TextBox.TabStop = false;
+            this.pbpSgmnt1TextBox.Text = "-1";
+            // 
+            // pbpSgmnt2TextBox
+            // 
+            this.pbpSgmnt2TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt2TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt2TextBox.MaxLength = 200;
+            this.pbpSgmnt2TextBox.Name = "pbpSgmnt2TextBox";
+            this.pbpSgmnt2TextBox.ReadOnly = true;
+            this.pbpSgmnt2TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt2TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt2TextBox.TabIndex = 220;
+            this.pbpSgmnt2TextBox.TabStop = false;
+            this.pbpSgmnt2TextBox.Text = "-1";
+            // 
+            // pbpSgmnt3TextBox
+            // 
+            this.pbpSgmnt3TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt3TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt3TextBox.MaxLength = 200;
+            this.pbpSgmnt3TextBox.Name = "pbpSgmnt3TextBox";
+            this.pbpSgmnt3TextBox.ReadOnly = true;
+            this.pbpSgmnt3TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt3TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt3TextBox.TabIndex = 219;
+            this.pbpSgmnt3TextBox.TabStop = false;
+            this.pbpSgmnt3TextBox.Text = "-1";
+            // 
+            // pbpSgmnt4TextBox
+            // 
+            this.pbpSgmnt4TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt4TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt4TextBox.MaxLength = 200;
+            this.pbpSgmnt4TextBox.Name = "pbpSgmnt4TextBox";
+            this.pbpSgmnt4TextBox.ReadOnly = true;
+            this.pbpSgmnt4TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt4TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt4TextBox.TabIndex = 218;
+            this.pbpSgmnt4TextBox.TabStop = false;
+            this.pbpSgmnt4TextBox.Text = "-1";
+            // 
+            // pbpSgmnt5TextBox
+            // 
+            this.pbpSgmnt5TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt5TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt5TextBox.MaxLength = 200;
+            this.pbpSgmnt5TextBox.Name = "pbpSgmnt5TextBox";
+            this.pbpSgmnt5TextBox.ReadOnly = true;
+            this.pbpSgmnt5TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt5TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt5TextBox.TabIndex = 217;
+            this.pbpSgmnt5TextBox.TabStop = false;
+            this.pbpSgmnt5TextBox.Text = "-1";
+            // 
+            // pbpSgmnt6TextBox
+            // 
+            this.pbpSgmnt6TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt6TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt6TextBox.MaxLength = 200;
+            this.pbpSgmnt6TextBox.Name = "pbpSgmnt6TextBox";
+            this.pbpSgmnt6TextBox.ReadOnly = true;
+            this.pbpSgmnt6TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt6TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt6TextBox.TabIndex = 216;
+            this.pbpSgmnt6TextBox.TabStop = false;
+            this.pbpSgmnt6TextBox.Text = "-1";
+            // 
+            // pbpSgmnt7TextBox
+            // 
+            this.pbpSgmnt7TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt7TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt7TextBox.MaxLength = 200;
+            this.pbpSgmnt7TextBox.Name = "pbpSgmnt7TextBox";
+            this.pbpSgmnt7TextBox.ReadOnly = true;
+            this.pbpSgmnt7TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt7TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt7TextBox.TabIndex = 215;
+            this.pbpSgmnt7TextBox.TabStop = false;
+            this.pbpSgmnt7TextBox.Text = "-1";
+            // 
+            // pbpSgmnt8TextBox
+            // 
+            this.pbpSgmnt8TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt8TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt8TextBox.MaxLength = 200;
+            this.pbpSgmnt8TextBox.Name = "pbpSgmnt8TextBox";
+            this.pbpSgmnt8TextBox.ReadOnly = true;
+            this.pbpSgmnt8TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt8TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt8TextBox.TabIndex = 214;
+            this.pbpSgmnt8TextBox.TabStop = false;
+            this.pbpSgmnt8TextBox.Text = "-1";
+            // 
+            // pbpSgmnt9TextBox
+            // 
+            this.pbpSgmnt9TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt9TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt9TextBox.MaxLength = 200;
+            this.pbpSgmnt9TextBox.Name = "pbpSgmnt9TextBox";
+            this.pbpSgmnt9TextBox.ReadOnly = true;
+            this.pbpSgmnt9TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt9TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt9TextBox.TabIndex = 213;
+            this.pbpSgmnt9TextBox.TabStop = false;
+            this.pbpSgmnt9TextBox.Text = "-1";
+            // 
+            // pbpSgmnt10TextBox
+            // 
+            this.pbpSgmnt10TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pbpSgmnt10TextBox.Location = new System.Drawing.Point(137, 203);
+            this.pbpSgmnt10TextBox.MaxLength = 200;
+            this.pbpSgmnt10TextBox.Name = "pbpSgmnt10TextBox";
+            this.pbpSgmnt10TextBox.ReadOnly = true;
+            this.pbpSgmnt10TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.pbpSgmnt10TextBox.Size = new System.Drawing.Size(30, 21);
+            this.pbpSgmnt10TextBox.TabIndex = 212;
+            this.pbpSgmnt10TextBox.TabStop = false;
+            this.pbpSgmnt10TextBox.Text = "-1";
+            // 
             // periodGroupBox
             // 
             this.periodGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -8992,7 +10049,7 @@ namespace Accounting.Forms
             this.periodGroupBox.ForeColor = System.Drawing.Color.White;
             this.periodGroupBox.Location = new System.Drawing.Point(2, 0);
             this.periodGroupBox.Name = "periodGroupBox";
-            this.periodGroupBox.Size = new System.Drawing.Size(880, 622);
+            this.periodGroupBox.Size = new System.Drawing.Size(843, 574);
             this.periodGroupBox.TabIndex = 1;
             this.periodGroupBox.TabStop = false;
             this.periodGroupBox.Text = "PERIOD BY PERIOD TRIAL BALANCE FOR 2015";
@@ -9018,7 +10075,7 @@ namespace Accounting.Forms
             this.periodStmntListView.HoverSelection = true;
             this.periodStmntListView.Location = new System.Drawing.Point(3, 19);
             this.periodStmntListView.Name = "periodStmntListView";
-            this.periodStmntListView.Size = new System.Drawing.Size(874, 600);
+            this.periodStmntListView.Size = new System.Drawing.Size(837, 552);
             this.periodStmntListView.TabIndex = 0;
             this.periodStmntListView.UseCompatibleStateImageBehavior = false;
             this.periodStmntListView.View = System.Windows.Forms.View.Details;
@@ -9064,32 +10121,33 @@ namespace Accounting.Forms
             // 
             // mnthlyMenuStrip
             // 
+            this.mnthlyMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mnthlyMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exprtExclMnthlyMenuItem,
             this.toolStripSeparator143,
             this.vwTrnsMnthlyMenuItem,
             this.vwSQLMnthlyMenuItem});
             this.mnthlyMenuStrip.Name = "usersContextMenuStrip";
-            this.mnthlyMenuStrip.Size = new System.Drawing.Size(169, 76);
+            this.mnthlyMenuStrip.Size = new System.Drawing.Size(173, 88);
             // 
             // exprtExclMnthlyMenuItem
             // 
             this.exprtExclMnthlyMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exprtExclMnthlyMenuItem.Name = "exprtExclMnthlyMenuItem";
-            this.exprtExclMnthlyMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exprtExclMnthlyMenuItem.Size = new System.Drawing.Size(172, 26);
             this.exprtExclMnthlyMenuItem.Text = "&Export to Excel";
             this.exprtExclMnthlyMenuItem.Click += new System.EventHandler(this.exptExclMnthlyMenuItem_Click);
             // 
             // toolStripSeparator143
             // 
             this.toolStripSeparator143.Name = "toolStripSeparator143";
-            this.toolStripSeparator143.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator143.Size = new System.Drawing.Size(169, 6);
             // 
             // vwTrnsMnthlyMenuItem
             // 
             this.vwTrnsMnthlyMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwTrnsMnthlyMenuItem.Name = "vwTrnsMnthlyMenuItem";
-            this.vwTrnsMnthlyMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwTrnsMnthlyMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwTrnsMnthlyMenuItem.Text = "View &Transactions";
             this.vwTrnsMnthlyMenuItem.Click += new System.EventHandler(this.vwTrnsMnthlyMenuItem_Click);
             // 
@@ -9097,7 +10155,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLMnthlyMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLMnthlyMenuItem.Name = "vwSQLMnthlyMenuItem";
-            this.vwSQLMnthlyMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSQLMnthlyMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSQLMnthlyMenuItem.Text = "&View SQL";
             this.vwSQLMnthlyMenuItem.Click += new System.EventHandler(this.vwSQLMnthlyMenuItem_Click);
             // 
@@ -9108,7 +10166,7 @@ namespace Accounting.Forms
             this.tabPage20.Controls.Add(this.cashFlowGroupBox);
             this.tabPage20.Location = new System.Drawing.Point(4, 44);
             this.tabPage20.Name = "tabPage20";
-            this.tabPage20.Size = new System.Drawing.Size(1091, 577);
+            this.tabPage20.Size = new System.Drawing.Size(1054, 577);
             this.tabPage20.TabIndex = 5;
             this.tabPage20.Text = "CASH FLOW STATEMENT";
             this.tabPage20.UseVisualStyleBackColor = true;
@@ -9116,6 +10174,7 @@ namespace Accounting.Forms
             // groupBox26
             // 
             this.groupBox26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox26.Controls.Add(this.cflwSgmntButton);
             this.groupBox26.Controls.Add(this.hideZerosCashFlwCheckBox);
             this.groupBox26.Controls.Add(this.label80);
             this.groupBox26.Controls.Add(this.cashFlowTypComboBox);
@@ -9130,18 +10189,40 @@ namespace Accounting.Forms
             this.groupBox26.Controls.Add(this.genCashFlowRptButton);
             this.groupBox26.Controls.Add(this.cashFlowProgressBar);
             this.groupBox26.Controls.Add(this.cashFlowDrtnComboBox);
+            this.groupBox26.Controls.Add(this.cflwSgmntTextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt1TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt2TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt3TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt4TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt5TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt6TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt7TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt8TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt9TextBox);
+            this.groupBox26.Controls.Add(this.cflwSgmnt10TextBox);
             this.groupBox26.ForeColor = System.Drawing.Color.White;
-            this.groupBox26.Location = new System.Drawing.Point(884, 1);
+            this.groupBox26.Location = new System.Drawing.Point(847, 1);
             this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Size = new System.Drawing.Size(173, 294);
+            this.groupBox26.Size = new System.Drawing.Size(173, 323);
             this.groupBox26.TabIndex = 4;
             this.groupBox26.TabStop = false;
             this.groupBox26.Text = "Report Generation";
             // 
+            // cflwSgmntButton
+            // 
+            this.cflwSgmntButton.ForeColor = System.Drawing.Color.Black;
+            this.cflwSgmntButton.Location = new System.Drawing.Point(5, 204);
+            this.cflwSgmntButton.Name = "cflwSgmntButton";
+            this.cflwSgmntButton.Size = new System.Drawing.Size(95, 23);
+            this.cflwSgmntButton.TabIndex = 223;
+            this.cflwSgmntButton.Text = "Segments";
+            this.cflwSgmntButton.UseVisualStyleBackColor = true;
+            this.cflwSgmntButton.Click += new System.EventHandler(this.cflwSgmntButton_Click);
+            // 
             // hideZerosCashFlwCheckBox
             // 
             this.hideZerosCashFlwCheckBox.AutoSize = true;
-            this.hideZerosCashFlwCheckBox.Location = new System.Drawing.Point(7, 271);
+            this.hideZerosCashFlwCheckBox.Location = new System.Drawing.Point(7, 295);
             this.hideZerosCashFlwCheckBox.Name = "hideZerosCashFlwCheckBox";
             this.hideZerosCashFlwCheckBox.Size = new System.Drawing.Size(159, 17);
             this.hideZerosCashFlwCheckBox.TabIndex = 118;
@@ -9249,7 +10330,7 @@ namespace Accounting.Forms
             // exprtCashFlowRptButton
             // 
             this.exprtCashFlowRptButton.ForeColor = System.Drawing.Color.Black;
-            this.exprtCashFlowRptButton.Location = new System.Drawing.Point(4, 236);
+            this.exprtCashFlowRptButton.Location = new System.Drawing.Point(4, 260);
             this.exprtCashFlowRptButton.Name = "exprtCashFlowRptButton";
             this.exprtCashFlowRptButton.Size = new System.Drawing.Size(164, 29);
             this.exprtCashFlowRptButton.TabIndex = 8;
@@ -9260,7 +10341,7 @@ namespace Accounting.Forms
             // genCashFlowRptButton
             // 
             this.genCashFlowRptButton.ForeColor = System.Drawing.Color.Black;
-            this.genCashFlowRptButton.Location = new System.Drawing.Point(4, 205);
+            this.genCashFlowRptButton.Location = new System.Drawing.Point(4, 229);
             this.genCashFlowRptButton.Name = "genCashFlowRptButton";
             this.genCashFlowRptButton.Size = new System.Drawing.Size(164, 29);
             this.genCashFlowRptButton.TabIndex = 7;
@@ -9292,6 +10373,148 @@ namespace Accounting.Forms
             this.cashFlowDrtnComboBox.Size = new System.Drawing.Size(160, 21);
             this.cashFlowDrtnComboBox.TabIndex = 116;
             // 
+            // cflwSgmntTextBox
+            // 
+            this.cflwSgmntTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmntTextBox.Location = new System.Drawing.Point(101, 205);
+            this.cflwSgmntTextBox.MaxLength = 200;
+            this.cflwSgmntTextBox.Name = "cflwSgmntTextBox";
+            this.cflwSgmntTextBox.ReadOnly = true;
+            this.cflwSgmntTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmntTextBox.Size = new System.Drawing.Size(65, 21);
+            this.cflwSgmntTextBox.TabIndex = 222;
+            this.cflwSgmntTextBox.TabStop = false;
+            // 
+            // cflwSgmnt1TextBox
+            // 
+            this.cflwSgmnt1TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt1TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt1TextBox.MaxLength = 200;
+            this.cflwSgmnt1TextBox.Name = "cflwSgmnt1TextBox";
+            this.cflwSgmnt1TextBox.ReadOnly = true;
+            this.cflwSgmnt1TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt1TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt1TextBox.TabIndex = 233;
+            this.cflwSgmnt1TextBox.TabStop = false;
+            this.cflwSgmnt1TextBox.Text = "-1";
+            // 
+            // cflwSgmnt2TextBox
+            // 
+            this.cflwSgmnt2TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt2TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt2TextBox.MaxLength = 200;
+            this.cflwSgmnt2TextBox.Name = "cflwSgmnt2TextBox";
+            this.cflwSgmnt2TextBox.ReadOnly = true;
+            this.cflwSgmnt2TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt2TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt2TextBox.TabIndex = 232;
+            this.cflwSgmnt2TextBox.TabStop = false;
+            this.cflwSgmnt2TextBox.Text = "-1";
+            // 
+            // cflwSgmnt3TextBox
+            // 
+            this.cflwSgmnt3TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt3TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt3TextBox.MaxLength = 200;
+            this.cflwSgmnt3TextBox.Name = "cflwSgmnt3TextBox";
+            this.cflwSgmnt3TextBox.ReadOnly = true;
+            this.cflwSgmnt3TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt3TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt3TextBox.TabIndex = 231;
+            this.cflwSgmnt3TextBox.TabStop = false;
+            this.cflwSgmnt3TextBox.Text = "-1";
+            // 
+            // cflwSgmnt4TextBox
+            // 
+            this.cflwSgmnt4TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt4TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt4TextBox.MaxLength = 200;
+            this.cflwSgmnt4TextBox.Name = "cflwSgmnt4TextBox";
+            this.cflwSgmnt4TextBox.ReadOnly = true;
+            this.cflwSgmnt4TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt4TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt4TextBox.TabIndex = 230;
+            this.cflwSgmnt4TextBox.TabStop = false;
+            this.cflwSgmnt4TextBox.Text = "-1";
+            // 
+            // cflwSgmnt5TextBox
+            // 
+            this.cflwSgmnt5TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt5TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt5TextBox.MaxLength = 200;
+            this.cflwSgmnt5TextBox.Name = "cflwSgmnt5TextBox";
+            this.cflwSgmnt5TextBox.ReadOnly = true;
+            this.cflwSgmnt5TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt5TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt5TextBox.TabIndex = 229;
+            this.cflwSgmnt5TextBox.TabStop = false;
+            this.cflwSgmnt5TextBox.Text = "-1";
+            // 
+            // cflwSgmnt6TextBox
+            // 
+            this.cflwSgmnt6TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt6TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt6TextBox.MaxLength = 200;
+            this.cflwSgmnt6TextBox.Name = "cflwSgmnt6TextBox";
+            this.cflwSgmnt6TextBox.ReadOnly = true;
+            this.cflwSgmnt6TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt6TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt6TextBox.TabIndex = 228;
+            this.cflwSgmnt6TextBox.TabStop = false;
+            this.cflwSgmnt6TextBox.Text = "-1";
+            // 
+            // cflwSgmnt7TextBox
+            // 
+            this.cflwSgmnt7TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt7TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt7TextBox.MaxLength = 200;
+            this.cflwSgmnt7TextBox.Name = "cflwSgmnt7TextBox";
+            this.cflwSgmnt7TextBox.ReadOnly = true;
+            this.cflwSgmnt7TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt7TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt7TextBox.TabIndex = 227;
+            this.cflwSgmnt7TextBox.TabStop = false;
+            this.cflwSgmnt7TextBox.Text = "-1";
+            // 
+            // cflwSgmnt8TextBox
+            // 
+            this.cflwSgmnt8TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt8TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt8TextBox.MaxLength = 200;
+            this.cflwSgmnt8TextBox.Name = "cflwSgmnt8TextBox";
+            this.cflwSgmnt8TextBox.ReadOnly = true;
+            this.cflwSgmnt8TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt8TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt8TextBox.TabIndex = 226;
+            this.cflwSgmnt8TextBox.TabStop = false;
+            this.cflwSgmnt8TextBox.Text = "-1";
+            // 
+            // cflwSgmnt9TextBox
+            // 
+            this.cflwSgmnt9TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt9TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt9TextBox.MaxLength = 200;
+            this.cflwSgmnt9TextBox.Name = "cflwSgmnt9TextBox";
+            this.cflwSgmnt9TextBox.ReadOnly = true;
+            this.cflwSgmnt9TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt9TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt9TextBox.TabIndex = 225;
+            this.cflwSgmnt9TextBox.TabStop = false;
+            this.cflwSgmnt9TextBox.Text = "-1";
+            // 
+            // cflwSgmnt10TextBox
+            // 
+            this.cflwSgmnt10TextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cflwSgmnt10TextBox.Location = new System.Drawing.Point(138, 205);
+            this.cflwSgmnt10TextBox.MaxLength = 200;
+            this.cflwSgmnt10TextBox.Name = "cflwSgmnt10TextBox";
+            this.cflwSgmnt10TextBox.ReadOnly = true;
+            this.cflwSgmnt10TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cflwSgmnt10TextBox.Size = new System.Drawing.Size(28, 21);
+            this.cflwSgmnt10TextBox.TabIndex = 224;
+            this.cflwSgmnt10TextBox.TabStop = false;
+            this.cflwSgmnt10TextBox.Text = "-1";
+            // 
             // cashFlowGroupBox
             // 
             this.cashFlowGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -9302,7 +10525,7 @@ namespace Accounting.Forms
             this.cashFlowGroupBox.ForeColor = System.Drawing.Color.White;
             this.cashFlowGroupBox.Location = new System.Drawing.Point(2, 0);
             this.cashFlowGroupBox.Name = "cashFlowGroupBox";
-            this.cashFlowGroupBox.Size = new System.Drawing.Size(880, 574);
+            this.cashFlowGroupBox.Size = new System.Drawing.Size(843, 574);
             this.cashFlowGroupBox.TabIndex = 3;
             this.cashFlowGroupBox.TabStop = false;
             this.cashFlowGroupBox.Text = "PERIOD BY PERIOD TRIAL BALANCE FOR 2015";
@@ -9326,7 +10549,7 @@ namespace Accounting.Forms
             this.cashFlowListView.HoverSelection = true;
             this.cashFlowListView.Location = new System.Drawing.Point(3, 19);
             this.cashFlowListView.Name = "cashFlowListView";
-            this.cashFlowListView.Size = new System.Drawing.Size(874, 552);
+            this.cashFlowListView.Size = new System.Drawing.Size(837, 552);
             this.cashFlowListView.TabIndex = 0;
             this.cashFlowListView.UseCompatibleStateImageBehavior = false;
             this.cashFlowListView.View = System.Windows.Forms.View.Details;
@@ -9360,32 +10583,33 @@ namespace Accounting.Forms
             // 
             // cashFlowContextMenuStrip
             // 
+            this.cashFlowContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cashFlowContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exprtCashFlowMenuItem,
             this.toolStripSeparator144,
             this.vwTrnsCashFlowMenuItem,
             this.vwSQLCashFlowMenuItem});
             this.cashFlowContextMenuStrip.Name = "usersContextMenuStrip";
-            this.cashFlowContextMenuStrip.Size = new System.Drawing.Size(169, 76);
+            this.cashFlowContextMenuStrip.Size = new System.Drawing.Size(173, 88);
             // 
             // exprtCashFlowMenuItem
             // 
             this.exprtCashFlowMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exprtCashFlowMenuItem.Name = "exprtCashFlowMenuItem";
-            this.exprtCashFlowMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exprtCashFlowMenuItem.Size = new System.Drawing.Size(172, 26);
             this.exprtCashFlowMenuItem.Text = "&Export to Excel";
             this.exprtCashFlowMenuItem.Click += new System.EventHandler(this.exptExclCashFlowMenuItem_Click);
             // 
             // toolStripSeparator144
             // 
             this.toolStripSeparator144.Name = "toolStripSeparator144";
-            this.toolStripSeparator144.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator144.Size = new System.Drawing.Size(169, 6);
             // 
             // vwTrnsCashFlowMenuItem
             // 
             this.vwTrnsCashFlowMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.vwTrnsCashFlowMenuItem.Name = "vwTrnsCashFlowMenuItem";
-            this.vwTrnsCashFlowMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwTrnsCashFlowMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwTrnsCashFlowMenuItem.Text = "View &Transactions";
             this.vwTrnsCashFlowMenuItem.Click += new System.EventHandler(this.vwTrnsCashFlowMenuItem_Click);
             // 
@@ -9393,7 +10617,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLCashFlowMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLCashFlowMenuItem.Name = "vwSQLCashFlowMenuItem";
-            this.vwSQLCashFlowMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.vwSQLCashFlowMenuItem.Size = new System.Drawing.Size(172, 26);
             this.vwSQLCashFlowMenuItem.Text = "&View SQL";
             this.vwSQLCashFlowMenuItem.Click += new System.EventHandler(this.vwSQLCashFlowMenuItem_Click);
             // 
@@ -9416,7 +10640,7 @@ namespace Accounting.Forms
             this.tabPage21.Location = new System.Drawing.Point(4, 44);
             this.tabPage21.Name = "tabPage21";
             this.tabPage21.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage21.Size = new System.Drawing.Size(1091, 577);
+            this.tabPage21.Size = new System.Drawing.Size(1054, 577);
             this.tabPage21.TabIndex = 6;
             this.tabPage21.Text = "NEWLY CREATED CORRECTION TRANSACTIONS";
             // 
@@ -9512,6 +10736,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip20.AutoSize = false;
             this.toolStrip20.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip20.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip20.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTrnsLineButton,
             this.toolStripSeparator145,
@@ -9538,7 +10763,7 @@ namespace Accounting.Forms
             this.addTrnsLineButton.Image = ((System.Drawing.Image)(resources.GetObject("addTrnsLineButton.Image")));
             this.addTrnsLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTrnsLineButton.Name = "addTrnsLineButton";
-            this.addTrnsLineButton.Size = new System.Drawing.Size(107, 22);
+            this.addTrnsLineButton.Size = new System.Drawing.Size(111, 22);
             this.addTrnsLineButton.Text = "ADD NEW LINE";
             this.addTrnsLineButton.Click += new System.EventHandler(this.addTrnsLineButton_Click);
             // 
@@ -9554,7 +10779,7 @@ namespace Accounting.Forms
             this.delLineButton.Image = ((System.Drawing.Image)(resources.GetObject("delLineButton.Image")));
             this.delLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delLineButton.Name = "delLineButton";
-            this.delLineButton.Size = new System.Drawing.Size(23, 22);
+            this.delLineButton.Size = new System.Drawing.Size(24, 22);
             this.delLineButton.Text = "DELETE SELECTED LINES";
             this.delLineButton.Click += new System.EventHandler(this.delLineButton_Click);
             // 
@@ -9568,7 +10793,7 @@ namespace Accounting.Forms
             this.saveTrnsBatchRcnclButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveTrnsBatchRcnclButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveTrnsBatchRcnclButton.Name = "saveTrnsBatchRcnclButton";
-            this.saveTrnsBatchRcnclButton.Size = new System.Drawing.Size(154, 22);
+            this.saveTrnsBatchRcnclButton.Size = new System.Drawing.Size(158, 22);
             this.saveTrnsBatchRcnclButton.Text = "SAVE IN A TRNS. BATCH";
             this.saveTrnsBatchRcnclButton.Click += new System.EventHandler(this.saveTrnsBatchRcnclButton_Click);
             // 
@@ -9582,7 +10807,7 @@ namespace Accounting.Forms
             this.openBatchButton.Image = global::Accounting.Properties.Resources.openfileicon;
             this.openBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openBatchButton.Name = "openBatchButton";
-            this.openBatchButton.Size = new System.Drawing.Size(98, 22);
+            this.openBatchButton.Size = new System.Drawing.Size(102, 22);
             this.openBatchButton.Text = "OPEN BATCH";
             this.openBatchButton.Click += new System.EventHandler(this.refreshRcnclButton_Click);
             // 
@@ -9611,7 +10836,7 @@ namespace Accounting.Forms
             this.unpostedBatchButton.Image = global::Accounting.Properties.Resources.mi_scare_report;
             this.unpostedBatchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.unpostedBatchButton.Name = "unpostedBatchButton";
-            this.unpostedBatchButton.Size = new System.Drawing.Size(23, 22);
+            this.unpostedBatchButton.Size = new System.Drawing.Size(24, 22);
             this.unpostedBatchButton.Text = "...";
             this.unpostedBatchButton.ToolTipText = "Select Unposted Batch";
             this.unpostedBatchButton.Click += new System.EventHandler(this.unpostedBatchButton_Click);
@@ -9627,7 +10852,7 @@ namespace Accounting.Forms
             this.resetRcnclButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetRcnclButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetRcnclButton.Name = "resetRcnclButton";
-            this.resetRcnclButton.Size = new System.Drawing.Size(23, 22);
+            this.resetRcnclButton.Size = new System.Drawing.Size(24, 24);
             this.resetRcnclButton.Text = "toolStripButton1";
             this.resetRcnclButton.Click += new System.EventHandler(this.resetRcnclButton_Click);
             // 
@@ -9643,7 +10868,7 @@ namespace Accounting.Forms
             this.groupBox24.ForeColor = System.Drawing.Color.White;
             this.groupBox24.Location = new System.Drawing.Point(0, 58);
             this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Size = new System.Drawing.Size(1092, 519);
+            this.groupBox24.Size = new System.Drawing.Size(1055, 519);
             this.groupBox24.TabIndex = 163;
             this.groupBox24.TabStop = false;
             this.groupBox24.Text = "TRANSACTION LINES";
@@ -9694,20 +10919,20 @@ namespace Accounting.Forms
             this.Column20,
             this.Column21,
             this.Column23});
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trnsDataGridView.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.trnsDataGridView.DefaultCellStyle = dataGridViewCellStyle17;
             this.trnsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trnsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.trnsDataGridView.Location = new System.Drawing.Point(3, 17);
             this.trnsDataGridView.Name = "trnsDataGridView";
             this.trnsDataGridView.RowHeadersWidth = 20;
-            this.trnsDataGridView.Size = new System.Drawing.Size(1086, 499);
+            this.trnsDataGridView.Size = new System.Drawing.Size(1049, 499);
             this.trnsDataGridView.TabIndex = 134;
             this.trnsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.trnsDataGridView_CellContentClick);
             this.trnsDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trnsDataGridView_CellEnter);
@@ -9715,13 +10940,13 @@ namespace Accounting.Forms
             // 
             // Column1
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column1.HeaderText = "Transaction ID";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -9730,13 +10955,13 @@ namespace Accounting.Forms
             // 
             // Column3
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column3.FillWeight = 273.8832F;
             this.Column3.HeaderText = "Transaction Description (MEMO)";
             this.Column3.Name = "Column3";
@@ -9744,11 +10969,11 @@ namespace Accounting.Forms
             // 
             // Column22
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column22.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column22.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column22.FillWeight = 115F;
             this.Column22.HeaderText = "Cheque/ Voucher/ Receipt No. (Ref. Doc. No.)";
             this.Column22.Name = "Column22";
@@ -9756,9 +10981,9 @@ namespace Accounting.Forms
             // 
             // Column4
             // 
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black;
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column4.FillWeight = 71.59898F;
             this.Column4.HeaderText = "Increase / Decrease";
             this.Column4.Items.AddRange(new object[] {
@@ -9768,9 +10993,9 @@ namespace Accounting.Forms
             // 
             // Column5
             // 
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black;
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column5.FillWeight = 122.2843F;
             this.Column5.HeaderText = "Account Number/Name";
             this.Column5.Name = "Column5";
@@ -9792,13 +11017,13 @@ namespace Accounting.Forms
             // 
             // Column8
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle23.Format = "N2";
-            dataGridViewCellStyle23.NullValue = "0";
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = "0";
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column8.FillWeight = 102.2843F;
             this.Column8.HeaderText = "Entered Amount";
             this.Column8.Name = "Column8";
@@ -9806,9 +11031,9 @@ namespace Accounting.Forms
             // 
             // Column7
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black;
-            this.Column7.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            this.Column7.DefaultCellStyle = dataGridViewCellStyle7;
             this.Column7.FillWeight = 25.57106F;
             this.Column7.HeaderText = "...";
             this.Column7.Name = "Column7";
@@ -9824,9 +11049,9 @@ namespace Accounting.Forms
             // 
             // Column12
             // 
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black;
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle8;
             this.Column12.FillWeight = 50.37055F;
             this.Column12.HeaderText = "Entered Curr.";
             this.Column12.Name = "Column12";
@@ -9840,9 +11065,9 @@ namespace Accounting.Forms
             // 
             // Column2
             // 
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle9;
             this.Column2.FillWeight = 81.82741F;
             this.Column2.HeaderText = "Transaction Date";
             this.Column2.Name = "Column2";
@@ -9850,20 +11075,20 @@ namespace Accounting.Forms
             // 
             // Column11
             // 
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black;
-            this.Column11.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            this.Column11.DefaultCellStyle = dataGridViewCellStyle10;
             this.Column11.FillWeight = 25.57106F;
             this.Column11.HeaderText = "...";
             this.Column11.Name = "Column11";
             // 
             // Column18
             // 
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column18.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column18.DefaultCellStyle = dataGridViewCellStyle11;
             this.Column18.FillWeight = 72.2843F;
             this.Column18.HeaderText = "Func. Curr. Exch. Rate";
             this.Column18.Name = "Column18";
@@ -9871,11 +11096,11 @@ namespace Accounting.Forms
             // 
             // Column19
             // 
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column19.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column19.DefaultCellStyle = dataGridViewCellStyle12;
             this.Column19.FillWeight = 72.2843F;
             this.Column19.HeaderText = "Account Curr. Exch. Rate";
             this.Column19.Name = "Column19";
@@ -9883,13 +11108,13 @@ namespace Accounting.Forms
             // 
             // Column14
             // 
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle30.Format = "N2";
-            dataGridViewCellStyle30.NullValue = "0";
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column14.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = "0";
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column14.DefaultCellStyle = dataGridViewCellStyle13;
             this.Column14.FillWeight = 92.2843F;
             this.Column14.HeaderText = "Func. Curr. Amount";
             this.Column14.Name = "Column14";
@@ -9898,9 +11123,9 @@ namespace Accounting.Forms
             // 
             // Column17
             // 
-            dataGridViewCellStyle31.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black;
-            this.Column17.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
+            this.Column17.DefaultCellStyle = dataGridViewCellStyle14;
             this.Column17.FillWeight = 50.37055F;
             this.Column17.HeaderText = "Func. Curr.";
             this.Column17.Name = "Column17";
@@ -9909,13 +11134,13 @@ namespace Accounting.Forms
             // 
             // Column15
             // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle32.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle32.Format = "N2";
-            dataGridViewCellStyle32.NullValue = "0";
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column15.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = "0";
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column15.DefaultCellStyle = dataGridViewCellStyle15;
             this.Column15.FillWeight = 92.2843F;
             this.Column15.HeaderText = "Account Curr. Amount";
             this.Column15.Name = "Column15";
@@ -9924,9 +11149,9 @@ namespace Accounting.Forms
             // 
             // Column16
             // 
-            dataGridViewCellStyle33.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black;
-            this.Column16.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            this.Column16.DefaultCellStyle = dataGridViewCellStyle16;
             this.Column16.FillWeight = 50.37055F;
             this.Column16.HeaderText = "Account Curr.";
             this.Column16.Name = "Column16";
@@ -10010,6 +11235,289 @@ namespace Accounting.Forms
             this.label93.TabIndex = 166;
             this.label93.Text = "Total Credits = ";
             // 
+            // cashBookTabPage
+            // 
+            this.cashBookTabPage.BackColor = System.Drawing.Color.Gray;
+            this.cashBookTabPage.Controls.Add(this.groupBox27);
+            this.cashBookTabPage.Controls.Add(this.cashBookGroupBox);
+            this.cashBookTabPage.Location = new System.Drawing.Point(4, 44);
+            this.cashBookTabPage.Name = "cashBookTabPage";
+            this.cashBookTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.cashBookTabPage.Size = new System.Drawing.Size(1054, 577);
+            this.cashBookTabPage.TabIndex = 8;
+            this.cashBookTabPage.Text = "CASH BOOK";
+            // 
+            // groupBox27
+            // 
+            this.groupBox27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox27.Controls.Add(this.accntClassComboBox);
+            this.groupBox27.Controls.Add(this.label1);
+            this.groupBox27.Controls.Add(this.label89);
+            this.groupBox27.Controls.Add(this.cshBkStrtDteButton);
+            this.groupBox27.Controls.Add(this.cshBkStrtDteTextBox);
+            this.groupBox27.Controls.Add(this.label90);
+            this.groupBox27.Controls.Add(this.cshBkEndDteButton);
+            this.groupBox27.Controls.Add(this.cshBkEndDteTextBox);
+            this.groupBox27.Controls.Add(this.exprtExclCshBkButton);
+            this.groupBox27.Controls.Add(this.gnrtRptCshBkButton);
+            this.groupBox27.Controls.Add(this.cashBkProgressBar);
+            this.groupBox27.ForeColor = System.Drawing.Color.White;
+            this.groupBox27.Location = new System.Drawing.Point(879, 2);
+            this.groupBox27.Name = "groupBox27";
+            this.groupBox27.Size = new System.Drawing.Size(173, 253);
+            this.groupBox27.TabIndex = 3;
+            this.groupBox27.TabStop = false;
+            this.groupBox27.Text = "Report Generation";
+            // 
+            // accntClassComboBox
+            // 
+            this.accntClassComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.accntClassComboBox.DropDownWidth = 400;
+            this.accntClassComboBox.FormattingEnabled = true;
+            this.accntClassComboBox.Items.AddRange(new object[] {
+            "A -ASSET",
+            "EQ-EQUITY",
+            "L -LIABILITY",
+            "R -REVENUE",
+            "EX-EXPENSE"});
+            this.accntClassComboBox.Location = new System.Drawing.Point(6, 74);
+            this.accntClassComboBox.Name = "accntClassComboBox";
+            this.accntClassComboBox.Size = new System.Drawing.Size(161, 21);
+            this.accntClassComboBox.TabIndex = 127;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 126;
+            this.label1.Text = "Classification:";
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(6, 105);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(61, 13);
+            this.label89.TabIndex = 104;
+            this.label89.Text = "Start Date:";
+            // 
+            // cshBkStrtDteButton
+            // 
+            this.cshBkStrtDteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cshBkStrtDteButton.ForeColor = System.Drawing.Color.Black;
+            this.cshBkStrtDteButton.Location = new System.Drawing.Point(141, 121);
+            this.cshBkStrtDteButton.Name = "cshBkStrtDteButton";
+            this.cshBkStrtDteButton.Size = new System.Drawing.Size(28, 23);
+            this.cshBkStrtDteButton.TabIndex = 4;
+            this.cshBkStrtDteButton.Text = "...";
+            this.cshBkStrtDteButton.UseVisualStyleBackColor = true;
+            this.cshBkStrtDteButton.Click += new System.EventHandler(this.cshBkStrtDteButton_Click);
+            // 
+            // cshBkStrtDteTextBox
+            // 
+            this.cshBkStrtDteTextBox.Location = new System.Drawing.Point(6, 122);
+            this.cshBkStrtDteTextBox.Name = "cshBkStrtDteTextBox";
+            this.cshBkStrtDteTextBox.Size = new System.Drawing.Size(133, 21);
+            this.cshBkStrtDteTextBox.TabIndex = 3;
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(6, 145);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(55, 13);
+            this.label90.TabIndex = 101;
+            this.label90.Text = "End Date:";
+            // 
+            // cshBkEndDteButton
+            // 
+            this.cshBkEndDteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cshBkEndDteButton.ForeColor = System.Drawing.Color.Black;
+            this.cshBkEndDteButton.Location = new System.Drawing.Point(141, 161);
+            this.cshBkEndDteButton.Name = "cshBkEndDteButton";
+            this.cshBkEndDteButton.Size = new System.Drawing.Size(28, 23);
+            this.cshBkEndDteButton.TabIndex = 6;
+            this.cshBkEndDteButton.Text = "...";
+            this.cshBkEndDteButton.UseVisualStyleBackColor = true;
+            this.cshBkEndDteButton.Click += new System.EventHandler(this.cshBkEndDteButton_Click);
+            // 
+            // cshBkEndDteTextBox
+            // 
+            this.cshBkEndDteTextBox.Location = new System.Drawing.Point(6, 162);
+            this.cshBkEndDteTextBox.Name = "cshBkEndDteTextBox";
+            this.cshBkEndDteTextBox.Size = new System.Drawing.Size(132, 21);
+            this.cshBkEndDteTextBox.TabIndex = 5;
+            // 
+            // exprtExclCshBkButton
+            // 
+            this.exprtExclCshBkButton.ForeColor = System.Drawing.Color.Black;
+            this.exprtExclCshBkButton.Location = new System.Drawing.Point(4, 218);
+            this.exprtExclCshBkButton.Name = "exprtExclCshBkButton";
+            this.exprtExclCshBkButton.Size = new System.Drawing.Size(164, 29);
+            this.exprtExclCshBkButton.TabIndex = 8;
+            this.exprtExclCshBkButton.Text = "Export Report to Excel";
+            this.exprtExclCshBkButton.UseVisualStyleBackColor = true;
+            this.exprtExclCshBkButton.Click += new System.EventHandler(this.exprtExclCshBkButton_Click);
+            // 
+            // gnrtRptCshBkButton
+            // 
+            this.gnrtRptCshBkButton.ForeColor = System.Drawing.Color.Black;
+            this.gnrtRptCshBkButton.Location = new System.Drawing.Point(4, 187);
+            this.gnrtRptCshBkButton.Name = "gnrtRptCshBkButton";
+            this.gnrtRptCshBkButton.Size = new System.Drawing.Size(164, 29);
+            this.gnrtRptCshBkButton.TabIndex = 7;
+            this.gnrtRptCshBkButton.Text = "Generate Report";
+            this.gnrtRptCshBkButton.UseVisualStyleBackColor = true;
+            this.gnrtRptCshBkButton.Click += new System.EventHandler(this.gnrtRptCshBkButton_Click);
+            // 
+            // cashBkProgressBar
+            // 
+            this.cashBkProgressBar.ForeColor = System.Drawing.Color.Black;
+            this.cashBkProgressBar.Location = new System.Drawing.Point(6, 19);
+            this.cashBkProgressBar.Name = "cashBkProgressBar";
+            this.cashBkProgressBar.Size = new System.Drawing.Size(161, 23);
+            this.cashBkProgressBar.TabIndex = 0;
+            // 
+            // cashBookGroupBox
+            // 
+            this.cashBookGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cashBookGroupBox.Controls.Add(this.cashBookListView);
+            this.cashBookGroupBox.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashBookGroupBox.ForeColor = System.Drawing.Color.White;
+            this.cashBookGroupBox.Location = new System.Drawing.Point(1, 1);
+            this.cashBookGroupBox.Name = "cashBookGroupBox";
+            this.cashBookGroupBox.Size = new System.Drawing.Size(877, 574);
+            this.cashBookGroupBox.TabIndex = 2;
+            this.cashBookGroupBox.TabStop = false;
+            this.cashBookGroupBox.Text = "ACCOUNT TRANSACTIONS FOR THE PERIOD CHOSEN";
+            // 
+            // cashBookListView
+            // 
+            this.cashBookListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.cashBookListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader192,
+            this.columnHeader193,
+            this.columnHeader194,
+            this.columnHeader195,
+            this.columnHeader199,
+            this.columnHeader200,
+            this.columnHeader201,
+            this.columnHeader202});
+            this.cashBookListView.ContextMenuStrip = this.cshBkContextMenuStrip;
+            this.cashBookListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cashBookListView.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashBookListView.FullRowSelect = true;
+            this.cashBookListView.GridLines = true;
+            this.cashBookListView.HideSelection = false;
+            this.cashBookListView.HotTracking = true;
+            this.cashBookListView.HoverSelection = true;
+            this.cashBookListView.Location = new System.Drawing.Point(3, 19);
+            this.cashBookListView.Name = "cashBookListView";
+            this.cashBookListView.Size = new System.Drawing.Size(871, 552);
+            this.cashBookListView.TabIndex = 0;
+            this.cashBookListView.UseCompatibleStateImageBehavior = false;
+            this.cashBookListView.View = System.Windows.Forms.View.Details;
+            this.cashBookListView.DoubleClick += new System.EventHandler(this.cashBookListView_DoubleClick);
+            // 
+            // columnHeader192
+            // 
+            this.columnHeader192.Text = "No.";
+            this.columnHeader192.Width = 30;
+            // 
+            // columnHeader193
+            // 
+            this.columnHeader193.Text = "Transaction ID";
+            this.columnHeader193.Width = 0;
+            // 
+            // columnHeader194
+            // 
+            this.columnHeader194.Text = "Transaction Description";
+            this.columnHeader194.Width = 350;
+            // 
+            // columnHeader195
+            // 
+            this.columnHeader195.Text = "Ref. Doc. No.";
+            this.columnHeader195.Width = 100;
+            // 
+            // columnHeader199
+            // 
+            this.columnHeader199.Text = "Transaction Date";
+            this.columnHeader199.Width = 120;
+            // 
+            // columnHeader200
+            // 
+            this.columnHeader200.Text = "accntid";
+            this.columnHeader200.Width = 0;
+            // 
+            // columnHeader201
+            // 
+            this.columnHeader201.Text = "Account Num/Name";
+            this.columnHeader201.Width = 0;
+            // 
+            // columnHeader202
+            // 
+            this.columnHeader202.Text = "Batch Name";
+            this.columnHeader202.Width = 0;
+            // 
+            // cshBkContextMenuStrip
+            // 
+            this.cshBkContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cshBkContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exprtExclCshBkMenuItem,
+            this.toolStripSeparator150,
+            this.openBatchCshBkMenuItem,
+            this.toolStripSeparator151,
+            this.vwTrnsCshBkMenuItem,
+            this.vwSQLCshBkMenuItem});
+            this.cshBkContextMenuStrip.Name = "usersContextMenuStrip";
+            this.cshBkContextMenuStrip.Size = new System.Drawing.Size(182, 120);
+            // 
+            // exprtExclCshBkMenuItem
+            // 
+            this.exprtExclCshBkMenuItem.Image = global::Accounting.Properties.Resources.image007;
+            this.exprtExclCshBkMenuItem.Name = "exprtExclCshBkMenuItem";
+            this.exprtExclCshBkMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exprtExclCshBkMenuItem.Text = "Export to Excel";
+            this.exprtExclCshBkMenuItem.Click += new System.EventHandler(this.exprtExclCshBkMenuItem_Click);
+            // 
+            // toolStripSeparator150
+            // 
+            this.toolStripSeparator150.Name = "toolStripSeparator150";
+            this.toolStripSeparator150.Size = new System.Drawing.Size(178, 6);
+            // 
+            // openBatchCshBkMenuItem
+            // 
+            this.openBatchCshBkMenuItem.Image = global::Accounting.Properties.Resources.openfileicon;
+            this.openBatchCshBkMenuItem.Name = "openBatchCshBkMenuItem";
+            this.openBatchCshBkMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.openBatchCshBkMenuItem.Text = "Open Journal Batch";
+            this.openBatchCshBkMenuItem.Click += new System.EventHandler(this.openBatchCshBkMenuItem_Click);
+            // 
+            // toolStripSeparator151
+            // 
+            this.toolStripSeparator151.Name = "toolStripSeparator151";
+            this.toolStripSeparator151.Size = new System.Drawing.Size(178, 6);
+            // 
+            // vwTrnsCshBkMenuItem
+            // 
+            this.vwTrnsCshBkMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
+            this.vwTrnsCshBkMenuItem.Name = "vwTrnsCshBkMenuItem";
+            this.vwTrnsCshBkMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.vwTrnsCshBkMenuItem.Text = "View &Transactions";
+            this.vwTrnsCshBkMenuItem.Click += new System.EventHandler(this.vwTrnsCshBkMenuItem_Click);
+            // 
+            // vwSQLCshBkMenuItem
+            // 
+            this.vwSQLCshBkMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
+            this.vwSQLCshBkMenuItem.Name = "vwSQLCshBkMenuItem";
+            this.vwSQLCshBkMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.vwSQLCshBkMenuItem.Text = "&View SQL";
+            this.vwSQLCshBkMenuItem.Click += new System.EventHandler(this.vwSQLCshBkMenuItem_Click);
+            // 
             // tabPage5
             // 
             this.tabPage5.AutoScroll = true;
@@ -10019,7 +11527,7 @@ namespace Accounting.Forms
             this.tabPage5.Location = new System.Drawing.Point(4, 88);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage5.Size = new System.Drawing.Size(1068, 631);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "BUDGETS";
             // 
@@ -10035,13 +11543,14 @@ namespace Accounting.Forms
             this.budgetPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.budgetPanel.Location = new System.Drawing.Point(3, 3);
             this.budgetPanel.Name = "budgetPanel";
-            this.budgetPanel.Size = new System.Drawing.Size(1099, 625);
+            this.budgetPanel.Size = new System.Drawing.Size(1062, 625);
             this.budgetPanel.TabIndex = 39;
             // 
             // toolStrip11
             // 
             this.toolStrip11.AutoSize = false;
             this.toolStrip11.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip11.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip11.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBdgButton,
             this.editBdgButton,
@@ -10059,7 +11568,7 @@ namespace Accounting.Forms
             this.addBdgButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addBdgButton.Name = "addBdgButton";
-            this.addBdgButton.Size = new System.Drawing.Size(51, 22);
+            this.addBdgButton.Size = new System.Drawing.Size(55, 22);
             this.addBdgButton.Text = "ADD";
             this.addBdgButton.Click += new System.EventHandler(this.addBdgButton_Click);
             // 
@@ -10068,7 +11577,7 @@ namespace Accounting.Forms
             this.editBdgButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editBdgButton.Name = "editBdgButton";
-            this.editBdgButton.Size = new System.Drawing.Size(51, 22);
+            this.editBdgButton.Size = new System.Drawing.Size(55, 22);
             this.editBdgButton.Text = "EDIT";
             this.editBdgButton.Click += new System.EventHandler(this.editBdgButton_Click);
             // 
@@ -10077,7 +11586,7 @@ namespace Accounting.Forms
             this.saveBdgButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveBdgButton.Name = "saveBdgButton";
-            this.saveBdgButton.Size = new System.Drawing.Size(53, 22);
+            this.saveBdgButton.Size = new System.Drawing.Size(57, 22);
             this.saveBdgButton.Text = "SAVE";
             this.saveBdgButton.Click += new System.EventHandler(this.saveBdgButton_Click);
             // 
@@ -10086,37 +11595,188 @@ namespace Accounting.Forms
             this.delBdgButton.Image = global::Accounting.Properties.Resources.delete;
             this.delBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delBdgButton.Name = "delBdgButton";
-            this.delBdgButton.Size = new System.Drawing.Size(66, 22);
+            this.delBdgButton.Size = new System.Drawing.Size(70, 22);
             this.delBdgButton.Text = "DELETE";
             this.delBdgButton.Click += new System.EventHandler(this.delBdgButton_Click);
             // 
             // groupBox17
             // 
+            this.groupBox17.Controls.Add(this.budgetNmTextBox);
+            this.groupBox17.Controls.Add(this.budgetDescTextBox);
+            this.groupBox17.Controls.Add(this.prdTypComboBox);
+            this.groupBox17.Controls.Add(this.label96);
+            this.groupBox17.Controls.Add(this.endDteButton);
+            this.groupBox17.Controls.Add(this.label97);
+            this.groupBox17.Controls.Add(this.endDteTextBox);
+            this.groupBox17.Controls.Add(this.startDteButton);
+            this.groupBox17.Controls.Add(this.label98);
+            this.groupBox17.Controls.Add(this.startDteTextBox);
+            this.groupBox17.Controls.Add(this.autoLoadBdgtButton);
+            this.groupBox17.Controls.Add(this.duplicateBdgtButton);
             this.groupBox17.Controls.Add(this.imprtBdgtTmpltButton);
             this.groupBox17.Controls.Add(this.exptBdgtTmpltButton);
             this.groupBox17.Controls.Add(this.isBdgActiveCheckBox);
-            this.groupBox17.Controls.Add(this.budgetNmTextBox);
             this.groupBox17.Controls.Add(this.budgetIDTextBox);
-            this.groupBox17.Controls.Add(this.budgetDescTextBox);
             this.groupBox17.Controls.Add(this.label58);
             this.groupBox17.Controls.Add(this.label59);
             this.groupBox17.ForeColor = System.Drawing.Color.White;
             this.groupBox17.Location = new System.Drawing.Point(253, 33);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(486, 115);
+            this.groupBox17.Size = new System.Drawing.Size(798, 115);
             this.groupBox17.TabIndex = 2;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "BUDGET HEADER INFORMATION";
+            // 
+            // budgetNmTextBox
+            // 
+            this.budgetNmTextBox.Location = new System.Drawing.Point(84, 15);
+            this.budgetNmTextBox.MaxLength = 200;
+            this.budgetNmTextBox.Name = "budgetNmTextBox";
+            this.budgetNmTextBox.Size = new System.Drawing.Size(199, 21);
+            this.budgetNmTextBox.TabIndex = 1;
+            this.budgetNmTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bdgtTxtbx_KeyDown);
+            // 
+            // budgetDescTextBox
+            // 
+            this.budgetDescTextBox.Location = new System.Drawing.Point(84, 37);
+            this.budgetDescTextBox.MaxLength = 300;
+            this.budgetDescTextBox.Multiline = true;
+            this.budgetDescTextBox.Name = "budgetDescTextBox";
+            this.budgetDescTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.budgetDescTextBox.Size = new System.Drawing.Size(199, 72);
+            this.budgetDescTextBox.TabIndex = 2;
+            this.budgetDescTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bdgtTxtbx_KeyDown);
+            // 
+            // prdTypComboBox
+            // 
+            this.prdTypComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.prdTypComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.prdTypComboBox.FormattingEnabled = true;
+            this.prdTypComboBox.Items.AddRange(new object[] {
+            "Yearly",
+            "Half Yearly",
+            "Quarterly",
+            "Monthly",
+            "Fortnightly",
+            "Weekly"});
+            this.prdTypComboBox.Location = new System.Drawing.Point(375, 67);
+            this.prdTypComboBox.Name = "prdTypComboBox";
+            this.prdTypComboBox.Size = new System.Drawing.Size(164, 21);
+            this.prdTypComboBox.TabIndex = 7;
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.ForeColor = System.Drawing.Color.White;
+            this.label96.Location = new System.Drawing.Point(289, 70);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(68, 13);
+            this.label96.TabIndex = 134;
+            this.label96.Text = "Period Type:";
+            // 
+            // endDteButton
+            // 
+            this.endDteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endDteButton.ForeColor = System.Drawing.Color.Black;
+            this.endDteButton.Location = new System.Drawing.Point(511, 40);
+            this.endDteButton.Name = "endDteButton";
+            this.endDteButton.Size = new System.Drawing.Size(28, 23);
+            this.endDteButton.TabIndex = 6;
+            this.endDteButton.Text = "...";
+            this.endDteButton.UseVisualStyleBackColor = true;
+            this.endDteButton.Click += new System.EventHandler(this.endDteButton_Click);
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.ForeColor = System.Drawing.Color.White;
+            this.label97.Location = new System.Drawing.Point(289, 45);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(78, 13);
+            this.label97.TabIndex = 133;
+            this.label97.Text = "Max End Date:";
+            // 
+            // endDteTextBox
+            // 
+            this.endDteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.endDteTextBox.Location = new System.Drawing.Point(375, 41);
+            this.endDteTextBox.Name = "endDteTextBox";
+            this.endDteTextBox.Size = new System.Drawing.Size(133, 21);
+            this.endDteTextBox.TabIndex = 5;
+            this.endDteTextBox.TextChanged += new System.EventHandler(this.startDteTextBox_TextChanged);
+            this.endDteTextBox.Leave += new System.EventHandler(this.startDteTextBox_Leave);
+            // 
+            // startDteButton
+            // 
+            this.startDteButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startDteButton.ForeColor = System.Drawing.Color.Black;
+            this.startDteButton.Location = new System.Drawing.Point(511, 14);
+            this.startDteButton.Name = "startDteButton";
+            this.startDteButton.Size = new System.Drawing.Size(28, 23);
+            this.startDteButton.TabIndex = 4;
+            this.startDteButton.Text = "...";
+            this.startDteButton.UseVisualStyleBackColor = true;
+            this.startDteButton.Click += new System.EventHandler(this.startDteButton_Click);
+            // 
+            // label98
+            // 
+            this.label98.AutoSize = true;
+            this.label98.ForeColor = System.Drawing.Color.White;
+            this.label98.Location = new System.Drawing.Point(289, 19);
+            this.label98.Name = "label98";
+            this.label98.Size = new System.Drawing.Size(84, 13);
+            this.label98.TabIndex = 132;
+            this.label98.Text = "Min. Start Date:";
+            // 
+            // startDteTextBox
+            // 
+            this.startDteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.startDteTextBox.Location = new System.Drawing.Point(375, 15);
+            this.startDteTextBox.Name = "startDteTextBox";
+            this.startDteTextBox.Size = new System.Drawing.Size(133, 21);
+            this.startDteTextBox.TabIndex = 3;
+            this.startDteTextBox.TextChanged += new System.EventHandler(this.startDteTextBox_TextChanged);
+            this.startDteTextBox.Leave += new System.EventHandler(this.startDteTextBox_Leave);
+            // 
+            // autoLoadBdgtButton
+            // 
+            this.autoLoadBdgtButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLoadBdgtButton.ForeColor = System.Drawing.Color.Black;
+            this.autoLoadBdgtButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.autoLoadBdgtButton.Location = new System.Drawing.Point(639, 11);
+            this.autoLoadBdgtButton.Name = "autoLoadBdgtButton";
+            this.autoLoadBdgtButton.Size = new System.Drawing.Size(153, 100);
+            this.autoLoadBdgtButton.TabIndex = 12;
+            this.autoLoadBdgtButton.Text = "AUTO-LOAD ALL BUDGETABLE ACCOUNTS";
+            this.autoLoadBdgtButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.autoLoadBdgtButton.UseVisualStyleBackColor = true;
+            this.autoLoadBdgtButton.Click += new System.EventHandler(this.autoLoadBdgtButton_Click);
+            // 
+            // duplicateBdgtButton
+            // 
+            this.duplicateBdgtButton.Enabled = false;
+            this.duplicateBdgtButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.duplicateBdgtButton.ForeColor = System.Drawing.Color.Black;
+            this.duplicateBdgtButton.Image = global::Accounting.Properties.Resources.action_go;
+            this.duplicateBdgtButton.Location = new System.Drawing.Point(639, 47);
+            this.duplicateBdgtButton.Name = "duplicateBdgtButton";
+            this.duplicateBdgtButton.Size = new System.Drawing.Size(153, 14);
+            this.duplicateBdgtButton.TabIndex = 11;
+            this.duplicateBdgtButton.Text = "DUPLICATE THIS BUDGET";
+            this.duplicateBdgtButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.duplicateBdgtButton.UseVisualStyleBackColor = true;
+            this.duplicateBdgtButton.Visible = false;
+            this.duplicateBdgtButton.Click += new System.EventHandler(this.duplicateBdgtButton_Click);
             // 
             // imprtBdgtTmpltButton
             // 
             this.imprtBdgtTmpltButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imprtBdgtTmpltButton.ForeColor = System.Drawing.Color.Black;
             this.imprtBdgtTmpltButton.Image = global::Accounting.Properties.Resources.action_go;
-            this.imprtBdgtTmpltButton.Location = new System.Drawing.Point(387, 61);
+            this.imprtBdgtTmpltButton.Location = new System.Drawing.Point(541, 61);
             this.imprtBdgtTmpltButton.Name = "imprtBdgtTmpltButton";
-            this.imprtBdgtTmpltButton.Size = new System.Drawing.Size(90, 50);
-            this.imprtBdgtTmpltButton.TabIndex = 5;
+            this.imprtBdgtTmpltButton.Size = new System.Drawing.Size(98, 50);
+            this.imprtBdgtTmpltButton.TabIndex = 10;
             this.imprtBdgtTmpltButton.Text = "IMPORT A BUDGET";
             this.imprtBdgtTmpltButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.imprtBdgtTmpltButton.UseVisualStyleBackColor = true;
@@ -10127,10 +11787,10 @@ namespace Accounting.Forms
             this.exptBdgtTmpltButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exptBdgtTmpltButton.ForeColor = System.Drawing.Color.Black;
             this.exptBdgtTmpltButton.Image = global::Accounting.Properties.Resources.action_go;
-            this.exptBdgtTmpltButton.Location = new System.Drawing.Point(387, 11);
+            this.exptBdgtTmpltButton.Location = new System.Drawing.Point(541, 11);
             this.exptBdgtTmpltButton.Name = "exptBdgtTmpltButton";
-            this.exptBdgtTmpltButton.Size = new System.Drawing.Size(90, 50);
-            this.exptBdgtTmpltButton.TabIndex = 4;
+            this.exptBdgtTmpltButton.Size = new System.Drawing.Size(98, 50);
+            this.exptBdgtTmpltButton.TabIndex = 9;
             this.exptBdgtTmpltButton.Text = "EXPORT BUDGET TEMPLATE";
             this.exptBdgtTmpltButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.exptBdgtTmpltButton.UseVisualStyleBackColor = true;
@@ -10139,42 +11799,24 @@ namespace Accounting.Forms
             // isBdgActiveCheckBox
             // 
             this.isBdgActiveCheckBox.AutoSize = true;
-            this.isBdgActiveCheckBox.Location = new System.Drawing.Point(101, 89);
+            this.isBdgActiveCheckBox.Location = new System.Drawing.Point(375, 92);
             this.isBdgActiveCheckBox.Name = "isBdgActiveCheckBox";
             this.isBdgActiveCheckBox.Size = new System.Drawing.Size(110, 17);
-            this.isBdgActiveCheckBox.TabIndex = 3;
+            this.isBdgActiveCheckBox.TabIndex = 8;
             this.isBdgActiveCheckBox.Text = "Is the Active One";
             this.isBdgActiveCheckBox.UseVisualStyleBackColor = true;
+            this.isBdgActiveCheckBox.CheckedChanged += new System.EventHandler(this.isBdgActiveCheckBox_CheckedChanged);
             this.isBdgActiveCheckBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bdgtTxtbx_KeyDown);
-            // 
-            // budgetNmTextBox
-            // 
-            this.budgetNmTextBox.Location = new System.Drawing.Point(102, 15);
-            this.budgetNmTextBox.MaxLength = 200;
-            this.budgetNmTextBox.Name = "budgetNmTextBox";
-            this.budgetNmTextBox.Size = new System.Drawing.Size(282, 21);
-            this.budgetNmTextBox.TabIndex = 1;
-            this.budgetNmTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bdgtTxtbx_KeyDown);
             // 
             // budgetIDTextBox
             // 
-            this.budgetIDTextBox.Location = new System.Drawing.Point(361, 15);
+            this.budgetIDTextBox.Location = new System.Drawing.Point(273, 15);
             this.budgetIDTextBox.Name = "budgetIDTextBox";
             this.budgetIDTextBox.ReadOnly = true;
-            this.budgetIDTextBox.Size = new System.Drawing.Size(23, 21);
+            this.budgetIDTextBox.Size = new System.Drawing.Size(10, 21);
             this.budgetIDTextBox.TabIndex = 124;
             this.budgetIDTextBox.TabStop = false;
-            // 
-            // budgetDescTextBox
-            // 
-            this.budgetDescTextBox.Location = new System.Drawing.Point(102, 37);
-            this.budgetDescTextBox.MaxLength = 300;
-            this.budgetDescTextBox.Multiline = true;
-            this.budgetDescTextBox.Name = "budgetDescTextBox";
-            this.budgetDescTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.budgetDescTextBox.Size = new System.Drawing.Size(282, 48);
-            this.budgetDescTextBox.TabIndex = 2;
-            this.budgetDescTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bdgtTxtbx_KeyDown);
+            this.budgetIDTextBox.Text = "-1";
             // 
             // label58
             // 
@@ -10204,7 +11846,7 @@ namespace Accounting.Forms
             this.groupBox16.Location = new System.Drawing.Point(252, 148);
             this.groupBox16.MinimumSize = new System.Drawing.Size(779, 300);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(844, 474);
+            this.groupBox16.Size = new System.Drawing.Size(807, 474);
             this.groupBox16.TabIndex = 3;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "BUDGET DETAIL INFORMATION";
@@ -10216,16 +11858,20 @@ namespace Accounting.Forms
             this.panel16.Location = new System.Drawing.Point(3, 17);
             this.panel16.Name = "panel16";
             this.panel16.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel16.Size = new System.Drawing.Size(838, 33);
+            this.panel16.Size = new System.Drawing.Size(801, 33);
             this.panel16.TabIndex = 0;
             this.panel16.TabStop = true;
             // 
             // toolStrip7
             // 
             this.toolStrip7.AutoSize = false;
+            this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBdgtDtButton,
             this.editBdgtDtButton,
+            this.toolStripSeparator152,
+            this.vwSprtngDetailsButton,
+            this.toolStripSeparator153,
             this.delBdgtDtButton,
             this.moveFirstBdgDtButton,
             this.toolStripSeparator93,
@@ -10253,7 +11899,7 @@ namespace Accounting.Forms
             this.toolStrip7.Location = new System.Drawing.Point(0, 5);
             this.toolStrip7.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.Size = new System.Drawing.Size(838, 25);
+            this.toolStrip7.Size = new System.Drawing.Size(801, 25);
             this.toolStrip7.Stretch = true;
             this.toolStrip7.TabIndex = 0;
             this.toolStrip7.TabStop = true;
@@ -10266,7 +11912,7 @@ namespace Accounting.Forms
             this.addBdgtDtButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addBdgtDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addBdgtDtButton.Name = "addBdgtDtButton";
-            this.addBdgtDtButton.Size = new System.Drawing.Size(23, 22);
+            this.addBdgtDtButton.Size = new System.Drawing.Size(24, 22);
             this.addBdgtDtButton.Text = "ADD";
             this.addBdgtDtButton.Click += new System.EventHandler(this.addBdgtDtButton_Click);
             // 
@@ -10277,9 +11923,30 @@ namespace Accounting.Forms
             this.editBdgtDtButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editBdgtDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editBdgtDtButton.Name = "editBdgtDtButton";
-            this.editBdgtDtButton.Size = new System.Drawing.Size(23, 22);
+            this.editBdgtDtButton.Size = new System.Drawing.Size(24, 22);
             this.editBdgtDtButton.Text = "EDIT";
             this.editBdgtDtButton.Click += new System.EventHandler(this.editBdgtDtButton_Click);
+            // 
+            // toolStripSeparator152
+            // 
+            this.toolStripSeparator152.Name = "toolStripSeparator152";
+            this.toolStripSeparator152.Size = new System.Drawing.Size(6, 25);
+            // 
+            // vwSprtngDetailsButton
+            // 
+            this.vwSprtngDetailsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.vwSprtngDetailsButton.ForeColor = System.Drawing.Color.Black;
+            this.vwSprtngDetailsButton.Image = global::Accounting.Properties.Resources.openfileicon;
+            this.vwSprtngDetailsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.vwSprtngDetailsButton.Name = "vwSprtngDetailsButton";
+            this.vwSprtngDetailsButton.Size = new System.Drawing.Size(24, 22);
+            this.vwSprtngDetailsButton.Text = "Budget Amount Breakdown";
+            this.vwSprtngDetailsButton.Click += new System.EventHandler(this.vwSprtngDetailsButton_Click);
+            // 
+            // toolStripSeparator153
+            // 
+            this.toolStripSeparator153.Name = "toolStripSeparator153";
+            this.toolStripSeparator153.Size = new System.Drawing.Size(6, 25);
             // 
             // delBdgtDtButton
             // 
@@ -10288,7 +11955,7 @@ namespace Accounting.Forms
             this.delBdgtDtButton.Image = global::Accounting.Properties.Resources.delete;
             this.delBdgtDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delBdgtDtButton.Name = "delBdgtDtButton";
-            this.delBdgtDtButton.Size = new System.Drawing.Size(23, 22);
+            this.delBdgtDtButton.Size = new System.Drawing.Size(24, 22);
             this.delBdgtDtButton.Text = "DELETE";
             this.delBdgtDtButton.ToolTipText = "DELETE";
             this.delBdgtDtButton.Click += new System.EventHandler(this.delBdgtDtButton_Click);
@@ -10300,7 +11967,7 @@ namespace Accounting.Forms
             this.moveFirstBdgDtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstBdgDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstBdgDtButton.Name = "moveFirstBdgDtButton";
-            this.moveFirstBdgDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstBdgDtButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstBdgDtButton.Text = "Move First";
             this.moveFirstBdgDtButton.Click += new System.EventHandler(this.BdgDtPnlNavButtons);
             // 
@@ -10316,7 +11983,7 @@ namespace Accounting.Forms
             this.movePreviousBdgDtButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousBdgDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousBdgDtButton.Name = "movePreviousBdgDtButton";
-            this.movePreviousBdgDtButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousBdgDtButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousBdgDtButton.Text = "Move Previous";
             this.movePreviousBdgDtButton.Click += new System.EventHandler(this.BdgDtPnlNavButtons);
             // 
@@ -10369,7 +12036,7 @@ namespace Accounting.Forms
             this.moveNextBdgDtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextBdgDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextBdgDtButton.Name = "moveNextBdgDtButton";
-            this.moveNextBdgDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextBdgDtButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextBdgDtButton.Text = "Move Next";
             this.moveNextBdgDtButton.Click += new System.EventHandler(this.BdgDtPnlNavButtons);
             // 
@@ -10385,7 +12052,7 @@ namespace Accounting.Forms
             this.moveLastBdgDtButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastBdgDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastBdgDtButton.Name = "moveLastBdgDtButton";
-            this.moveLastBdgDtButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastBdgDtButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastBdgDtButton.Text = "Move Last";
             this.moveLastBdgDtButton.Click += new System.EventHandler(this.BdgDtPnlNavButtons);
             // 
@@ -10396,7 +12063,6 @@ namespace Accounting.Forms
             // 
             // dsplySizeBdgDtComboBox
             // 
-            this.dsplySizeBdgDtComboBox.AutoSize = false;
             this.dsplySizeBdgDtComboBox.Items.AddRange(new object[] {
             "1",
             "5",
@@ -10406,9 +12072,13 @@ namespace Accounting.Forms
             "30",
             "40",
             "50",
-            "100"});
+            "100",
+            "500",
+            "1000",
+            "10000",
+            "100000"});
             this.dsplySizeBdgDtComboBox.Name = "dsplySizeBdgDtComboBox";
-            this.dsplySizeBdgDtComboBox.Size = new System.Drawing.Size(35, 23);
+            this.dsplySizeBdgDtComboBox.Size = new System.Drawing.Size(75, 25);
             // 
             // toolStripLabel21
             // 
@@ -10481,7 +12151,7 @@ namespace Accounting.Forms
             this.refreshBdgtDtButton.Image = global::Accounting.Properties.Resources.refresh;
             this.refreshBdgtDtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshBdgtDtButton.Name = "refreshBdgtDtButton";
-            this.refreshBdgtDtButton.Size = new System.Drawing.Size(23, 22);
+            this.refreshBdgtDtButton.Size = new System.Drawing.Size(24, 22);
             this.refreshBdgtDtButton.Text = "Refresh";
             this.refreshBdgtDtButton.Click += new System.EventHandler(this.refreshBdgtDtButton_Click);
             // 
@@ -10508,7 +12178,7 @@ namespace Accounting.Forms
             this.budgetDetListView.HideSelection = false;
             this.budgetDetListView.Location = new System.Drawing.Point(3, 52);
             this.budgetDetListView.Name = "budgetDetListView";
-            this.budgetDetListView.Size = new System.Drawing.Size(837, 416);
+            this.budgetDetListView.Size = new System.Drawing.Size(800, 416);
             this.budgetDetListView.TabIndex = 3;
             this.budgetDetListView.UseCompatibleStateImageBehavior = false;
             this.budgetDetListView.View = System.Windows.Forms.View.Details;
@@ -10575,6 +12245,7 @@ namespace Accounting.Forms
             // 
             // bdgtDtContextMenuStrip
             // 
+            this.bdgtDtContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.bdgtDtContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBdgtDtMenuItem,
             this.editBdgtDtMenuItem,
@@ -10585,13 +12256,13 @@ namespace Accounting.Forms
             this.rcHstryBdgtDtMenuItem,
             this.vwSQLBdgtDtMenuItem});
             this.bdgtDtContextMenuStrip.Name = "usersContextMenuStrip";
-            this.bdgtDtContextMenuStrip.Size = new System.Drawing.Size(174, 164);
+            this.bdgtDtContextMenuStrip.Size = new System.Drawing.Size(178, 192);
             // 
             // addBdgtDtMenuItem
             // 
             this.addBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addBdgtDtMenuItem.Name = "addBdgtDtMenuItem";
-            this.addBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.addBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.addBdgtDtMenuItem.Text = "&Add Budget Line";
             this.addBdgtDtMenuItem.Click += new System.EventHandler(this.addBdgtDtMenuItem_Click);
             // 
@@ -10599,7 +12270,7 @@ namespace Accounting.Forms
             // 
             this.editBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editBdgtDtMenuItem.Name = "editBdgtDtMenuItem";
-            this.editBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.editBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.editBdgtDtMenuItem.Text = "&Edit Budget Line";
             this.editBdgtDtMenuItem.Click += new System.EventHandler(this.editBdgtDtMenuItem_Click);
             // 
@@ -10607,20 +12278,20 @@ namespace Accounting.Forms
             // 
             this.delBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.delBdgtDtMenuItem.Name = "delBdgtDtMenuItem";
-            this.delBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.delBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.delBdgtDtMenuItem.Text = "Delete Budget Line";
             this.delBdgtDtMenuItem.Click += new System.EventHandler(this.delBdgtDtMenuItem_Click);
             // 
             // toolStripSeparator120
             // 
             this.toolStripSeparator120.Name = "toolStripSeparator120";
-            this.toolStripSeparator120.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator120.Size = new System.Drawing.Size(174, 6);
             // 
             // exptBdgtDtMenuItem
             // 
             this.exptBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptBdgtDtMenuItem.Name = "exptBdgtDtMenuItem";
-            this.exptBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.exptBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.exptBdgtDtMenuItem.Text = "Export to Excel";
             this.exptBdgtDtMenuItem.Click += new System.EventHandler(this.exptBdgtDtMenuItem_Click);
             // 
@@ -10628,7 +12299,7 @@ namespace Accounting.Forms
             // 
             this.rfrshBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshBdgtDtMenuItem.Name = "rfrshBdgtDtMenuItem";
-            this.rfrshBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.rfrshBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.rfrshBdgtDtMenuItem.Text = "&Refresh";
             this.rfrshBdgtDtMenuItem.Click += new System.EventHandler(this.rfrshBdgtDtMenuItem_Click);
             // 
@@ -10636,7 +12307,7 @@ namespace Accounting.Forms
             // 
             this.rcHstryBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryBdgtDtMenuItem.Name = "rcHstryBdgtDtMenuItem";
-            this.rcHstryBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.rcHstryBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.rcHstryBdgtDtMenuItem.Text = "Record &History";
             this.rcHstryBdgtDtMenuItem.Click += new System.EventHandler(this.rcHstryBdgtDtMenuItem_Click);
             // 
@@ -10644,7 +12315,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLBdgtDtMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBdgtDtMenuItem.Name = "vwSQLBdgtDtMenuItem";
-            this.vwSQLBdgtDtMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.vwSQLBdgtDtMenuItem.Size = new System.Drawing.Size(177, 26);
             this.vwSQLBdgtDtMenuItem.Text = "&View SQL";
             this.vwSQLBdgtDtMenuItem.Click += new System.EventHandler(this.vwSQLBdgtDtMenuItem_Click);
             // 
@@ -10657,7 +12328,10 @@ namespace Accounting.Forms
             this.columnHeader119,
             this.columnHeader120,
             this.columnHeader121,
-            this.columnHeader122});
+            this.columnHeader122,
+            this.columnHeader196,
+            this.columnHeader197,
+            this.columnHeader198});
             this.budgetListView.ContextMenuStrip = this.bdgtContextMenuStrip;
             this.budgetListView.FullRowSelect = true;
             this.budgetListView.GridLines = true;
@@ -10697,8 +12371,24 @@ namespace Accounting.Forms
             this.columnHeader122.Text = "isActive";
             this.columnHeader122.Width = 0;
             // 
+            // columnHeader196
+            // 
+            this.columnHeader196.Text = "Start Date";
+            this.columnHeader196.Width = 100;
+            // 
+            // columnHeader197
+            // 
+            this.columnHeader197.Text = "End Date";
+            this.columnHeader197.Width = 100;
+            // 
+            // columnHeader198
+            // 
+            this.columnHeader198.Text = "Period Type";
+            this.columnHeader198.Width = 100;
+            // 
             // bdgtContextMenuStrip
             // 
+            this.bdgtContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.bdgtContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addBdgtMenuItem,
             this.editBdgtMenuItem,
@@ -10709,13 +12399,13 @@ namespace Accounting.Forms
             this.rcHstryBdgtMenuItem,
             this.vwSQLBdgtMenuItem});
             this.bdgtContextMenuStrip.Name = "usersContextMenuStrip";
-            this.bdgtContextMenuStrip.Size = new System.Drawing.Size(153, 164);
+            this.bdgtContextMenuStrip.Size = new System.Drawing.Size(157, 192);
             // 
             // addBdgtMenuItem
             // 
             this.addBdgtMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addBdgtMenuItem.Name = "addBdgtMenuItem";
-            this.addBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.addBdgtMenuItem.Text = "&Add Budget";
             this.addBdgtMenuItem.Click += new System.EventHandler(this.addBdgtMenuItem_Click);
             // 
@@ -10723,7 +12413,7 @@ namespace Accounting.Forms
             // 
             this.editBdgtMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editBdgtMenuItem.Name = "editBdgtMenuItem";
-            this.editBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.editBdgtMenuItem.Text = "&Edit Budget";
             this.editBdgtMenuItem.Click += new System.EventHandler(this.editBdgtMenuItem_Click);
             // 
@@ -10731,20 +12421,20 @@ namespace Accounting.Forms
             // 
             this.delBdgtMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.delBdgtMenuItem.Name = "delBdgtMenuItem";
-            this.delBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.delBdgtMenuItem.Text = "Delete Budget";
             this.delBdgtMenuItem.Click += new System.EventHandler(this.delBdgtMenuItem_Click);
             // 
             // toolStripSeparator119
             // 
             this.toolStripSeparator119.Name = "toolStripSeparator119";
-            this.toolStripSeparator119.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator119.Size = new System.Drawing.Size(153, 6);
             // 
             // exptBdgtMenuItem
             // 
             this.exptBdgtMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptBdgtMenuItem.Name = "exptBdgtMenuItem";
-            this.exptBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exptBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.exptBdgtMenuItem.Text = "Export to Excel";
             this.exptBdgtMenuItem.Click += new System.EventHandler(this.exptBdgtMenuItem_Click);
             // 
@@ -10752,7 +12442,7 @@ namespace Accounting.Forms
             // 
             this.rfrshBdgtMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshBdgtMenuItem.Name = "rfrshBdgtMenuItem";
-            this.rfrshBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rfrshBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rfrshBdgtMenuItem.Text = "&Refresh";
             this.rfrshBdgtMenuItem.Click += new System.EventHandler(this.rfrshBdgtMenuItem_Click);
             // 
@@ -10760,7 +12450,7 @@ namespace Accounting.Forms
             // 
             this.rcHstryBdgtMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryBdgtMenuItem.Name = "rcHstryBdgtMenuItem";
-            this.rcHstryBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rcHstryBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.rcHstryBdgtMenuItem.Text = "Record &History";
             this.rcHstryBdgtMenuItem.Click += new System.EventHandler(this.rcHstryBdgtMenuItem_Click);
             // 
@@ -10768,7 +12458,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLBdgtMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBdgtMenuItem.Name = "vwSQLBdgtMenuItem";
-            this.vwSQLBdgtMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vwSQLBdgtMenuItem.Size = new System.Drawing.Size(156, 26);
             this.vwSQLBdgtMenuItem.Text = "&View SQL";
             this.vwSQLBdgtMenuItem.Click += new System.EventHandler(this.vwSQLBdgtMenuItem_Click);
             // 
@@ -10779,13 +12469,14 @@ namespace Accounting.Forms
             this.panel17.Location = new System.Drawing.Point(0, 0);
             this.panel17.Name = "panel17";
             this.panel17.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel17.Size = new System.Drawing.Size(1099, 33);
+            this.panel17.Size = new System.Drawing.Size(1062, 33);
             this.panel17.TabIndex = 0;
             this.panel17.TabStop = true;
             // 
             // toolStrip8
             // 
             this.toolStrip8.AutoSize = false;
+            this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vwSQLBdgButton,
             this.toolStripSeparator117,
@@ -10822,7 +12513,7 @@ namespace Accounting.Forms
             this.toolStrip8.Location = new System.Drawing.Point(0, 5);
             this.toolStrip8.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip8.Name = "toolStrip8";
-            this.toolStrip8.Size = new System.Drawing.Size(1099, 25);
+            this.toolStrip8.Size = new System.Drawing.Size(1062, 25);
             this.toolStrip8.Stretch = true;
             this.toolStrip8.TabIndex = 0;
             this.toolStrip8.TabStop = true;
@@ -10834,7 +12525,7 @@ namespace Accounting.Forms
             this.vwSQLBdgButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLBdgButton.Name = "vwSQLBdgButton";
-            this.vwSQLBdgButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLBdgButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLBdgButton.Text = "View SQL";
             this.vwSQLBdgButton.Click += new System.EventHandler(this.vwSQLBdgButton_Click);
             // 
@@ -10849,7 +12540,7 @@ namespace Accounting.Forms
             this.recHstryBdgButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryBdgButton.Name = "recHstryBdgButton";
-            this.recHstryBdgButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryBdgButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryBdgButton.Text = "Record History";
             this.recHstryBdgButton.Click += new System.EventHandler(this.recHstryBdgButton_Click);
             // 
@@ -10863,7 +12554,7 @@ namespace Accounting.Forms
             this.rfrshBdgtButton.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshBdgtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rfrshBdgtButton.Name = "rfrshBdgtButton";
-            this.rfrshBdgtButton.Size = new System.Drawing.Size(66, 22);
+            this.rfrshBdgtButton.Size = new System.Drawing.Size(70, 22);
             this.rfrshBdgtButton.Text = "Refresh";
             this.rfrshBdgtButton.Click += new System.EventHandler(this.rfrshBdgtButton_Click);
             // 
@@ -10878,7 +12569,7 @@ namespace Accounting.Forms
             this.moveFirstBdgButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstBdgButton.Name = "moveFirstBdgButton";
-            this.moveFirstBdgButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstBdgButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstBdgButton.Text = "Move First";
             this.moveFirstBdgButton.Click += new System.EventHandler(this.BdgtPnlNavButtons);
             // 
@@ -10893,7 +12584,7 @@ namespace Accounting.Forms
             this.movePreviousBdgButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousBdgButton.Name = "movePreviousBdgButton";
-            this.movePreviousBdgButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousBdgButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousBdgButton.Text = "Move Previous";
             this.movePreviousBdgButton.Click += new System.EventHandler(this.BdgtPnlNavButtons);
             // 
@@ -10941,7 +12632,7 @@ namespace Accounting.Forms
             this.moveNextBdgButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextBdgButton.Name = "moveNextBdgButton";
-            this.moveNextBdgButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextBdgButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextBdgButton.Text = "Move Next";
             this.moveNextBdgButton.Click += new System.EventHandler(this.BdgtPnlNavButtons);
             // 
@@ -10956,7 +12647,7 @@ namespace Accounting.Forms
             this.moveLastBdgButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastBdgButton.Name = "moveLastBdgButton";
-            this.moveLastBdgButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastBdgButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastBdgButton.Text = "Move Last";
             this.moveLastBdgButton.Click += new System.EventHandler(this.BdgtPnlNavButtons);
             // 
@@ -11043,7 +12734,7 @@ namespace Accounting.Forms
             this.goBdgButton.Image = global::Accounting.Properties.Resources._98;
             this.goBdgButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goBdgButton.Name = "goBdgButton";
-            this.goBdgButton.Size = new System.Drawing.Size(42, 22);
+            this.goBdgButton.Size = new System.Drawing.Size(46, 22);
             this.goBdgButton.Text = "Go";
             this.goBdgButton.Click += new System.EventHandler(this.goBdgButton_Click);
             // 
@@ -11057,7 +12748,7 @@ namespace Accounting.Forms
             this.resetBdgtButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetBdgtButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetBdgtButton.Name = "resetBdgtButton";
-            this.resetBdgtButton.Size = new System.Drawing.Size(59, 22);
+            this.resetBdgtButton.Size = new System.Drawing.Size(63, 22);
             this.resetBdgtButton.Text = "RESET";
             this.resetBdgtButton.Click += new System.EventHandler(this.resetBdgtButton_Click);
             // 
@@ -11093,7 +12784,7 @@ namespace Accounting.Forms
             this.tabPage6.Location = new System.Drawing.Point(4, 88);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage6.Size = new System.Drawing.Size(1068, 631);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "TRNS. TEMPLATES";
             // 
@@ -11112,13 +12803,14 @@ namespace Accounting.Forms
             this.trnsTmpltsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trnsTmpltsPanel.Location = new System.Drawing.Point(3, 3);
             this.trnsTmpltsPanel.Name = "trnsTmpltsPanel";
-            this.trnsTmpltsPanel.Size = new System.Drawing.Size(1099, 625);
+            this.trnsTmpltsPanel.Size = new System.Drawing.Size(1062, 625);
             this.trnsTmpltsPanel.TabIndex = 39;
             // 
             // toolStrip15
             // 
             this.toolStrip15.AutoSize = false;
             this.toolStrip15.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip15.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip15.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTmpltButton,
             this.editTmpltButton,
@@ -11136,7 +12828,7 @@ namespace Accounting.Forms
             this.addTmpltButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTmpltButton.Name = "addTmpltButton";
-            this.addTmpltButton.Size = new System.Drawing.Size(51, 22);
+            this.addTmpltButton.Size = new System.Drawing.Size(55, 22);
             this.addTmpltButton.Text = "ADD";
             this.addTmpltButton.Click += new System.EventHandler(this.addTmpltButton_Click);
             // 
@@ -11145,7 +12837,7 @@ namespace Accounting.Forms
             this.editTmpltButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editTmpltButton.Name = "editTmpltButton";
-            this.editTmpltButton.Size = new System.Drawing.Size(51, 22);
+            this.editTmpltButton.Size = new System.Drawing.Size(55, 22);
             this.editTmpltButton.Text = "EDIT";
             this.editTmpltButton.Click += new System.EventHandler(this.editTmpltButton_Click);
             // 
@@ -11154,7 +12846,7 @@ namespace Accounting.Forms
             this.saveTmpltButton.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.saveTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveTmpltButton.Name = "saveTmpltButton";
-            this.saveTmpltButton.Size = new System.Drawing.Size(53, 22);
+            this.saveTmpltButton.Size = new System.Drawing.Size(57, 22);
             this.saveTmpltButton.Text = "SAVE";
             this.saveTmpltButton.Click += new System.EventHandler(this.saveTmpltButton_Click);
             // 
@@ -11163,7 +12855,7 @@ namespace Accounting.Forms
             this.deleteTmpltButton.Image = global::Accounting.Properties.Resources.delete;
             this.deleteTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteTmpltButton.Name = "deleteTmpltButton";
-            this.deleteTmpltButton.Size = new System.Drawing.Size(66, 22);
+            this.deleteTmpltButton.Size = new System.Drawing.Size(70, 22);
             this.deleteTmpltButton.Text = "DELETE";
             this.deleteTmpltButton.Click += new System.EventHandler(this.deleteTmpltButton_Click);
             // 
@@ -11213,6 +12905,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip16.AutoSize = false;
             this.toolStrip16.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip16.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip16.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTmpDirTrnsButton,
             this.editTmpDirTrnsButton,
@@ -11230,7 +12923,7 @@ namespace Accounting.Forms
             this.addTmpDirTrnsButton.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTmpDirTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addTmpDirTrnsButton.Name = "addTmpDirTrnsButton";
-            this.addTmpDirTrnsButton.Size = new System.Drawing.Size(51, 22);
+            this.addTmpDirTrnsButton.Size = new System.Drawing.Size(55, 22);
             this.addTmpDirTrnsButton.Text = "ADD";
             this.addTmpDirTrnsButton.Click += new System.EventHandler(this.addTmpDirTrnsButton_Click);
             // 
@@ -11240,7 +12933,7 @@ namespace Accounting.Forms
             this.editTmpDirTrnsButton.Image = global::Accounting.Properties.Resources.edit32;
             this.editTmpDirTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editTmpDirTrnsButton.Name = "editTmpDirTrnsButton";
-            this.editTmpDirTrnsButton.Size = new System.Drawing.Size(51, 22);
+            this.editTmpDirTrnsButton.Size = new System.Drawing.Size(55, 22);
             this.editTmpDirTrnsButton.Text = "EDIT";
             this.editTmpDirTrnsButton.Click += new System.EventHandler(this.editTmpDirTrnsButton_Click);
             // 
@@ -11250,7 +12943,7 @@ namespace Accounting.Forms
             this.delTmpDirTrnsButton.Image = global::Accounting.Properties.Resources._90;
             this.delTmpDirTrnsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delTmpDirTrnsButton.Name = "delTmpDirTrnsButton";
-            this.delTmpDirTrnsButton.Size = new System.Drawing.Size(66, 22);
+            this.delTmpDirTrnsButton.Size = new System.Drawing.Size(70, 22);
             this.delTmpDirTrnsButton.Text = "DELETE";
             this.delTmpDirTrnsButton.Click += new System.EventHandler(this.delTmpDirTrnsButton_Click);
             // 
@@ -11315,6 +13008,7 @@ namespace Accounting.Forms
             // 
             // tmpltContextMenuStrip
             // 
+            this.tmpltContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tmpltContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTmpltTrnsMenuItem,
             this.editTmpltTrnsMenuItem,
@@ -11325,13 +13019,13 @@ namespace Accounting.Forms
             this.recHstryTmpTrnsMenuItem,
             this.vwSQLTmpTrnsMenuItem});
             this.tmpltContextMenuStrip.Name = "usersContextMenuStrip";
-            this.tmpltContextMenuStrip.Size = new System.Drawing.Size(172, 164);
+            this.tmpltContextMenuStrip.Size = new System.Drawing.Size(176, 192);
             // 
             // addTmpltTrnsMenuItem
             // 
             this.addTmpltTrnsMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTmpltTrnsMenuItem.Name = "addTmpltTrnsMenuItem";
-            this.addTmpltTrnsMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.addTmpltTrnsMenuItem.Size = new System.Drawing.Size(175, 26);
             this.addTmpltTrnsMenuItem.Text = "&Add Transaction";
             this.addTmpltTrnsMenuItem.Click += new System.EventHandler(this.addTmpltTrnsMenuItem_Click);
             // 
@@ -11339,7 +13033,7 @@ namespace Accounting.Forms
             // 
             this.editTmpltTrnsMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editTmpltTrnsMenuItem.Name = "editTmpltTrnsMenuItem";
-            this.editTmpltTrnsMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.editTmpltTrnsMenuItem.Size = new System.Drawing.Size(175, 26);
             this.editTmpltTrnsMenuItem.Text = "&Edit Transaction";
             this.editTmpltTrnsMenuItem.Click += new System.EventHandler(this.editTmpltTrnsMenuItem_Click);
             // 
@@ -11347,20 +13041,20 @@ namespace Accounting.Forms
             // 
             this.delTmpltTrnsMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.delTmpltTrnsMenuItem.Name = "delTmpltTrnsMenuItem";
-            this.delTmpltTrnsMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.delTmpltTrnsMenuItem.Size = new System.Drawing.Size(175, 26);
             this.delTmpltTrnsMenuItem.Text = "Delete Transaction";
             this.delTmpltTrnsMenuItem.Click += new System.EventHandler(this.delTmpltTrnsMenuItem_Click);
             // 
             // toolStripSeparator33
             // 
             this.toolStripSeparator33.Name = "toolStripSeparator33";
-            this.toolStripSeparator33.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator33.Size = new System.Drawing.Size(172, 6);
             // 
             // exptExclTmpDtMenuItem
             // 
             this.exptExclTmpDtMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclTmpDtMenuItem.Name = "exptExclTmpDtMenuItem";
-            this.exptExclTmpDtMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.exptExclTmpDtMenuItem.Size = new System.Drawing.Size(175, 26);
             this.exptExclTmpDtMenuItem.Text = "Export to Excel";
             this.exptExclTmpDtMenuItem.Click += new System.EventHandler(this.exptExclTmpDtMenuItem_Click);
             // 
@@ -11368,7 +13062,7 @@ namespace Accounting.Forms
             // 
             this.refreshTmpltTrnsMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.refreshTmpltTrnsMenuItem.Name = "refreshTmpltTrnsMenuItem";
-            this.refreshTmpltTrnsMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.refreshTmpltTrnsMenuItem.Size = new System.Drawing.Size(175, 26);
             this.refreshTmpltTrnsMenuItem.Text = "&Refresh";
             this.refreshTmpltTrnsMenuItem.Click += new System.EventHandler(this.refreshTmpltTrnsMenuItem_Click);
             // 
@@ -11376,7 +13070,7 @@ namespace Accounting.Forms
             // 
             this.recHstryTmpTrnsMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryTmpTrnsMenuItem.Name = "recHstryTmpTrnsMenuItem";
-            this.recHstryTmpTrnsMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.recHstryTmpTrnsMenuItem.Size = new System.Drawing.Size(175, 26);
             this.recHstryTmpTrnsMenuItem.Text = "Record &History";
             this.recHstryTmpTrnsMenuItem.Click += new System.EventHandler(this.recHstryTmpTrnsMenuItem_Click);
             // 
@@ -11384,7 +13078,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLTmpTrnsMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTmpTrnsMenuItem.Name = "vwSQLTmpTrnsMenuItem";
-            this.vwSQLTmpTrnsMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.vwSQLTmpTrnsMenuItem.Size = new System.Drawing.Size(175, 26);
             this.vwSQLTmpTrnsMenuItem.Text = "&View SQL";
             this.vwSQLTmpTrnsMenuItem.Click += new System.EventHandler(this.vwSQLTmpTrnsMenuItem_Click);
             // 
@@ -11433,6 +13127,7 @@ namespace Accounting.Forms
             // 
             // tmpltMnMenuStrip
             // 
+            this.tmpltMnMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tmpltMnMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addTmpltMenuItem,
             this.editTmpltMenuItem,
@@ -11443,13 +13138,13 @@ namespace Accounting.Forms
             this.rcHstryTmpltMenuItem,
             this.vwSQLTmpltMenuItem});
             this.tmpltMnMenuStrip.Name = "usersContextMenuStrip";
-            this.tmpltMnMenuStrip.Size = new System.Drawing.Size(160, 164);
+            this.tmpltMnMenuStrip.Size = new System.Drawing.Size(164, 192);
             // 
             // addTmpltMenuItem
             // 
             this.addTmpltMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addTmpltMenuItem.Name = "addTmpltMenuItem";
-            this.addTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.addTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.addTmpltMenuItem.Text = "&Add Template";
             this.addTmpltMenuItem.Click += new System.EventHandler(this.addTmpltMenuItem_Click);
             // 
@@ -11457,7 +13152,7 @@ namespace Accounting.Forms
             // 
             this.editTmpltMenuItem.Image = global::Accounting.Properties.Resources.edit32;
             this.editTmpltMenuItem.Name = "editTmpltMenuItem";
-            this.editTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.editTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.editTmpltMenuItem.Text = "&Edit Template";
             this.editTmpltMenuItem.Click += new System.EventHandler(this.editTmpltMenuItem_Click);
             // 
@@ -11465,20 +13160,20 @@ namespace Accounting.Forms
             // 
             this.delTmpltMenuItem.Image = global::Accounting.Properties.Resources.delete;
             this.delTmpltMenuItem.Name = "delTmpltMenuItem";
-            this.delTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.delTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.delTmpltMenuItem.Text = "Delete Template";
             this.delTmpltMenuItem.Click += new System.EventHandler(this.delTmpltMenuItem_Click);
             // 
             // toolStripSeparator68
             // 
             this.toolStripSeparator68.Name = "toolStripSeparator68";
-            this.toolStripSeparator68.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator68.Size = new System.Drawing.Size(160, 6);
             // 
             // exptExclTmpltMenuItem
             // 
             this.exptExclTmpltMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclTmpltMenuItem.Name = "exptExclTmpltMenuItem";
-            this.exptExclTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.exptExclTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.exptExclTmpltMenuItem.Text = "Export to Excel";
             this.exptExclTmpltMenuItem.Click += new System.EventHandler(this.exptExclTmpltMenuItem_Click);
             // 
@@ -11486,7 +13181,7 @@ namespace Accounting.Forms
             // 
             this.rfrshTmpltMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshTmpltMenuItem.Name = "rfrshTmpltMenuItem";
-            this.rfrshTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.rfrshTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.rfrshTmpltMenuItem.Text = "&Refresh";
             this.rfrshTmpltMenuItem.Click += new System.EventHandler(this.rfrshTmpltMenuItem_Click);
             // 
@@ -11494,7 +13189,7 @@ namespace Accounting.Forms
             // 
             this.rcHstryTmpltMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryTmpltMenuItem.Name = "rcHstryTmpltMenuItem";
-            this.rcHstryTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.rcHstryTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.rcHstryTmpltMenuItem.Text = "Record &History";
             this.rcHstryTmpltMenuItem.Click += new System.EventHandler(this.rcHstryTmpltMenuItem_Click);
             // 
@@ -11502,7 +13197,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLTmpltMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTmpltMenuItem.Name = "vwSQLTmpltMenuItem";
-            this.vwSQLTmpltMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.vwSQLTmpltMenuItem.Size = new System.Drawing.Size(163, 26);
             this.vwSQLTmpltMenuItem.Text = "&View SQL";
             this.vwSQLTmpltMenuItem.Click += new System.EventHandler(this.vwSQLTmpltMenuItem_Click);
             // 
@@ -11513,13 +13208,14 @@ namespace Accounting.Forms
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel5.Size = new System.Drawing.Size(1099, 33);
+            this.panel5.Size = new System.Drawing.Size(1062, 33);
             this.panel5.TabIndex = 0;
             this.panel5.TabStop = true;
             // 
             // toolStrip2
             // 
             this.toolStrip2.AutoSize = false;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vwSQLTmpltButton,
             this.toolStripSeparator30,
@@ -11556,7 +13252,7 @@ namespace Accounting.Forms
             this.toolStrip2.Location = new System.Drawing.Point(0, 5);
             this.toolStrip2.Margin = new System.Windows.Forms.Padding(3);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1099, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1062, 25);
             this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.TabStop = true;
@@ -11568,7 +13264,7 @@ namespace Accounting.Forms
             this.vwSQLTmpltButton.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.vwSQLTmpltButton.Name = "vwSQLTmpltButton";
-            this.vwSQLTmpltButton.Size = new System.Drawing.Size(23, 22);
+            this.vwSQLTmpltButton.Size = new System.Drawing.Size(24, 22);
             this.vwSQLTmpltButton.Text = "View SQL";
             this.vwSQLTmpltButton.Click += new System.EventHandler(this.vwSQLTmpltButton_Click);
             // 
@@ -11583,7 +13279,7 @@ namespace Accounting.Forms
             this.recHstryTmpltButton.Image = global::Accounting.Properties.Resources.statistics_32;
             this.recHstryTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.recHstryTmpltButton.Name = "recHstryTmpltButton";
-            this.recHstryTmpltButton.Size = new System.Drawing.Size(23, 22);
+            this.recHstryTmpltButton.Size = new System.Drawing.Size(24, 22);
             this.recHstryTmpltButton.Text = "Record History";
             this.recHstryTmpltButton.Click += new System.EventHandler(this.recHstryTmpltButton_Click);
             // 
@@ -11597,7 +13293,7 @@ namespace Accounting.Forms
             this.rfrshTmpButton.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshTmpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rfrshTmpButton.Name = "rfrshTmpButton";
-            this.rfrshTmpButton.Size = new System.Drawing.Size(66, 22);
+            this.rfrshTmpButton.Size = new System.Drawing.Size(70, 22);
             this.rfrshTmpButton.Text = "Refresh";
             this.rfrshTmpButton.Click += new System.EventHandler(this.rfrshButton_Click);
             // 
@@ -11612,7 +13308,7 @@ namespace Accounting.Forms
             this.moveFirstTmpltButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.moveFirstTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveFirstTmpltButton.Name = "moveFirstTmpltButton";
-            this.moveFirstTmpltButton.Size = new System.Drawing.Size(23, 22);
+            this.moveFirstTmpltButton.Size = new System.Drawing.Size(24, 22);
             this.moveFirstTmpltButton.Text = "Move First";
             this.moveFirstTmpltButton.Click += new System.EventHandler(this.TmpltPnlNavButtons);
             // 
@@ -11627,7 +13323,7 @@ namespace Accounting.Forms
             this.movePreviousTmpltButton.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.movePreviousTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.movePreviousTmpltButton.Name = "movePreviousTmpltButton";
-            this.movePreviousTmpltButton.Size = new System.Drawing.Size(23, 22);
+            this.movePreviousTmpltButton.Size = new System.Drawing.Size(24, 22);
             this.movePreviousTmpltButton.Text = "Move Previous";
             this.movePreviousTmpltButton.Click += new System.EventHandler(this.TmpltPnlNavButtons);
             // 
@@ -11675,7 +13371,7 @@ namespace Accounting.Forms
             this.moveNextTmpltButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.moveNextTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveNextTmpltButton.Name = "moveNextTmpltButton";
-            this.moveNextTmpltButton.Size = new System.Drawing.Size(23, 22);
+            this.moveNextTmpltButton.Size = new System.Drawing.Size(24, 22);
             this.moveNextTmpltButton.Text = "Move Next";
             this.moveNextTmpltButton.Click += new System.EventHandler(this.TmpltPnlNavButtons);
             // 
@@ -11690,7 +13386,7 @@ namespace Accounting.Forms
             this.moveLastTmpltButton.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.moveLastTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveLastTmpltButton.Name = "moveLastTmpltButton";
-            this.moveLastTmpltButton.Size = new System.Drawing.Size(23, 22);
+            this.moveLastTmpltButton.Size = new System.Drawing.Size(24, 22);
             this.moveLastTmpltButton.Text = "Move Last";
             this.moveLastTmpltButton.Click += new System.EventHandler(this.TmpltPnlNavButtons);
             // 
@@ -11777,7 +13473,7 @@ namespace Accounting.Forms
             this.goTmpltButton.Image = global::Accounting.Properties.Resources._98;
             this.goTmpltButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.goTmpltButton.Name = "goTmpltButton";
-            this.goTmpltButton.Size = new System.Drawing.Size(42, 22);
+            this.goTmpltButton.Size = new System.Drawing.Size(46, 22);
             this.goTmpltButton.Text = "Go";
             this.goTmpltButton.Click += new System.EventHandler(this.goTmpltButton_Click);
             // 
@@ -11791,7 +13487,7 @@ namespace Accounting.Forms
             this.resetTmpltsButton.Image = global::Accounting.Properties.Resources.undo_256;
             this.resetTmpltsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.resetTmpltsButton.Name = "resetTmpltsButton";
-            this.resetTmpltsButton.Size = new System.Drawing.Size(59, 22);
+            this.resetTmpltsButton.Size = new System.Drawing.Size(63, 22);
             this.resetTmpltsButton.Text = "RESET";
             this.resetTmpltsButton.Click += new System.EventHandler(this.resetTmpltsButton_Click);
             // 
@@ -11911,7 +13607,7 @@ namespace Accounting.Forms
             this.groupBox8.ForeColor = System.Drawing.Color.White;
             this.groupBox8.Location = new System.Drawing.Point(815, 123);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(281, 502);
+            this.groupBox8.Size = new System.Drawing.Size(244, 502);
             this.groupBox8.TabIndex = 3;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "TEMPLATE USERS";
@@ -12018,7 +13714,7 @@ namespace Accounting.Forms
             this.tmpltUsrsListView.HideSelection = false;
             this.tmpltUsrsListView.Location = new System.Drawing.Point(7, 134);
             this.tmpltUsrsListView.Name = "tmpltUsrsListView";
-            this.tmpltUsrsListView.Size = new System.Drawing.Size(266, 365);
+            this.tmpltUsrsListView.Size = new System.Drawing.Size(229, 365);
             this.tmpltUsrsListView.TabIndex = 0;
             this.tmpltUsrsListView.UseCompatibleStateImageBehavior = false;
             this.tmpltUsrsListView.View = System.Windows.Forms.View.Details;
@@ -12067,6 +13763,7 @@ namespace Accounting.Forms
             // 
             // tmpltUsrsMenuStrip
             // 
+            this.tmpltUsrsMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tmpltUsrsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addUsrMenuItem,
             this.exptExclTusrMenuItem,
@@ -12075,13 +13772,13 @@ namespace Accounting.Forms
             this.rcHstryTusrMenuItem,
             this.vwSQLTusrMenuItem});
             this.tmpltUsrsMenuStrip.Name = "usersContextMenuStrip";
-            this.tmpltUsrsMenuStrip.Size = new System.Drawing.Size(175, 120);
+            this.tmpltUsrsMenuStrip.Size = new System.Drawing.Size(179, 140);
             // 
             // addUsrMenuItem
             // 
             this.addUsrMenuItem.Image = global::Accounting.Properties.Resources.plus_32;
             this.addUsrMenuItem.Name = "addUsrMenuItem";
-            this.addUsrMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.addUsrMenuItem.Size = new System.Drawing.Size(178, 26);
             this.addUsrMenuItem.Text = "Add Template User";
             this.addUsrMenuItem.Click += new System.EventHandler(this.addUsrMenuItem_Click);
             // 
@@ -12089,20 +13786,20 @@ namespace Accounting.Forms
             // 
             this.exptExclTusrMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclTusrMenuItem.Name = "exptExclTusrMenuItem";
-            this.exptExclTusrMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.exptExclTusrMenuItem.Size = new System.Drawing.Size(178, 26);
             this.exptExclTusrMenuItem.Text = "Export to Excel";
             this.exptExclTusrMenuItem.Click += new System.EventHandler(this.exptExclTusrMenuItem_Click);
             // 
             // toolStripSeparator69
             // 
             this.toolStripSeparator69.Name = "toolStripSeparator69";
-            this.toolStripSeparator69.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator69.Size = new System.Drawing.Size(175, 6);
             // 
             // rfrshTUsrMenuItem
             // 
             this.rfrshTUsrMenuItem.Image = global::Accounting.Properties.Resources.refresh;
             this.rfrshTUsrMenuItem.Name = "rfrshTUsrMenuItem";
-            this.rfrshTUsrMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.rfrshTUsrMenuItem.Size = new System.Drawing.Size(178, 26);
             this.rfrshTUsrMenuItem.Text = "&Refresh";
             this.rfrshTUsrMenuItem.Click += new System.EventHandler(this.rfrshTUsrMenuItem_Click);
             // 
@@ -12110,7 +13807,7 @@ namespace Accounting.Forms
             // 
             this.rcHstryTusrMenuItem.Image = global::Accounting.Properties.Resources.statistics_32;
             this.rcHstryTusrMenuItem.Name = "rcHstryTusrMenuItem";
-            this.rcHstryTusrMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.rcHstryTusrMenuItem.Size = new System.Drawing.Size(178, 26);
             this.rcHstryTusrMenuItem.Text = "Record &History";
             this.rcHstryTusrMenuItem.Click += new System.EventHandler(this.rcHstryTusrMenuItem_Click);
             // 
@@ -12118,7 +13815,7 @@ namespace Accounting.Forms
             // 
             this.vwSQLTusrMenuItem.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.vwSQLTusrMenuItem.Name = "vwSQLTusrMenuItem";
-            this.vwSQLTusrMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.vwSQLTusrMenuItem.Size = new System.Drawing.Size(178, 26);
             this.vwSQLTusrMenuItem.Text = "&View SQL";
             this.vwSQLTusrMenuItem.Click += new System.EventHandler(this.vwSQLTusrMenuItem_Click);
             // 
@@ -12131,7 +13828,7 @@ namespace Accounting.Forms
             this.tabPage7.Location = new System.Drawing.Point(4, 88);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage7.Size = new System.Drawing.Size(1068, 631);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "ACCOUNTING PERIODS";
             // 
@@ -12140,7 +13837,7 @@ namespace Accounting.Forms
             this.otherFormsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.otherFormsPanel.Location = new System.Drawing.Point(3, 3);
             this.otherFormsPanel.Name = "otherFormsPanel";
-            this.otherFormsPanel.Size = new System.Drawing.Size(1099, 625);
+            this.otherFormsPanel.Size = new System.Drawing.Size(1062, 625);
             this.otherFormsPanel.TabIndex = 39;
             // 
             // tabPage8
@@ -12151,7 +13848,7 @@ namespace Accounting.Forms
             this.tabPage8.Location = new System.Drawing.Point(4, 88);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage8.Size = new System.Drawing.Size(1068, 631);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "ASSETS/INVESTMENTS";
             // 
@@ -12163,7 +13860,7 @@ namespace Accounting.Forms
             this.tabPage9.Location = new System.Drawing.Point(4, 88);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage9.Size = new System.Drawing.Size(1068, 631);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "PAYABLES";
             // 
@@ -12175,7 +13872,7 @@ namespace Accounting.Forms
             this.tabPage10.Location = new System.Drawing.Point(4, 88);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage10.Size = new System.Drawing.Size(1068, 631);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "RECEIVABLES";
             // 
@@ -12187,7 +13884,7 @@ namespace Accounting.Forms
             this.tabPage11.Location = new System.Drawing.Point(4, 88);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage11.Size = new System.Drawing.Size(1068, 631);
             this.tabPage11.TabIndex = 10;
             this.tabPage11.Text = "PAYMENTS";
             // 
@@ -12199,7 +13896,7 @@ namespace Accounting.Forms
             this.tabPage12.Location = new System.Drawing.Point(4, 88);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage12.Size = new System.Drawing.Size(1068, 631);
             this.tabPage12.TabIndex = 11;
             this.tabPage12.Text = "BUSINESS PARTNERS/FIRMS";
             // 
@@ -12211,7 +13908,7 @@ namespace Accounting.Forms
             this.tabPage13.Location = new System.Drawing.Point(4, 88);
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage13.Size = new System.Drawing.Size(1068, 631);
             this.tabPage13.TabIndex = 12;
             this.tabPage13.Text = "TAX CODES";
             // 
@@ -12223,7 +13920,7 @@ namespace Accounting.Forms
             this.tabPage14.Location = new System.Drawing.Point(4, 88);
             this.tabPage14.Name = "tabPage14";
             this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage14.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage14.Size = new System.Drawing.Size(1068, 631);
             this.tabPage14.TabIndex = 13;
             this.tabPage14.Text = "DEFAULT ACCOUNT";
             // 
@@ -12235,7 +13932,7 @@ namespace Accounting.Forms
             this.tabPage15.Location = new System.Drawing.Point(4, 88);
             this.tabPage15.Name = "tabPage15";
             this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage15.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage15.Size = new System.Drawing.Size(1068, 631);
             this.tabPage15.TabIndex = 14;
             this.tabPage15.Text = "ACCOUNT RECONCILIATION";
             // 
@@ -12245,23 +13942,24 @@ namespace Accounting.Forms
             this.tabPage23.Location = new System.Drawing.Point(4, 88);
             this.tabPage23.Name = "tabPage23";
             this.tabPage23.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage23.Size = new System.Drawing.Size(1105, 631);
+            this.tabPage23.Size = new System.Drawing.Size(1068, 631);
             this.tabPage23.TabIndex = 15;
             this.tabPage23.Text = "PETTY CASH VOUCHERS";
             this.tabPage23.UseVisualStyleBackColor = true;
             // 
             // blsMenuStrip
             // 
+            this.blsMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.blsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exptExclBlsMMenuItem});
             this.blsMenuStrip.Name = "usersContextMenuStrip";
-            this.blsMenuStrip.Size = new System.Drawing.Size(151, 26);
+            this.blsMenuStrip.Size = new System.Drawing.Size(155, 30);
             // 
             // exptExclBlsMMenuItem
             // 
             this.exptExclBlsMMenuItem.Image = global::Accounting.Properties.Resources.image007;
             this.exptExclBlsMMenuItem.Name = "exptExclBlsMMenuItem";
-            this.exptExclBlsMMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exptExclBlsMMenuItem.Size = new System.Drawing.Size(154, 26);
             this.exptExclBlsMMenuItem.Text = "Export to Excel";
             this.exptExclBlsMMenuItem.Click += new System.EventHandler(this.exptExclBlsMMenuItem_Click);
             // 
@@ -12293,6 +13991,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip5.AutoSize = false;
             this.toolStrip5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripSeparator71,
@@ -12323,7 +14022,7 @@ namespace Accounting.Forms
             this.toolStripButton1.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton1.Text = "Move First";
             // 
             // toolStripSeparator71
@@ -12338,7 +14037,7 @@ namespace Accounting.Forms
             this.toolStripButton2.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton2.Text = "Move Previous";
             // 
             // toolStripSeparator72
@@ -12388,7 +14087,7 @@ namespace Accounting.Forms
             this.toolStripButton3.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton3.Text = "Move Next";
             // 
             // toolStripSeparator74
@@ -12403,7 +14102,7 @@ namespace Accounting.Forms
             this.toolStripButton4.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton4.Text = "Move Last";
             // 
             // toolStripSeparator75
@@ -12822,6 +14521,7 @@ namespace Accounting.Forms
             // 
             this.toolStrip6.AutoSize = false;
             this.toolStrip6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton5,
             this.toolStripSeparator76,
@@ -12874,7 +14574,7 @@ namespace Accounting.Forms
             this.toolStripButton5.Image = global::Accounting.Properties.Resources.DataContainer_MoveFirstHS;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton5.Text = "Move First";
             // 
             // toolStripSeparator76
@@ -12888,7 +14588,7 @@ namespace Accounting.Forms
             this.toolStripButton6.Image = global::Accounting.Properties.Resources.DataContainer_MovePreviousHS;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton6.Text = "Move Previous";
             // 
             // toolStripSeparator77
@@ -12934,7 +14634,7 @@ namespace Accounting.Forms
             this.toolStripButton7.Image = global::Accounting.Properties.Resources.DataContainer_MoveNextHS;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton7.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton7.Text = "Move Next";
             // 
             // toolStripSeparator79
@@ -12948,7 +14648,7 @@ namespace Accounting.Forms
             this.toolStripButton8.Image = global::Accounting.Properties.Resources.DataContainer_MoveLastHS;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton8.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton8.Text = "Move Last";
             // 
             // toolStripSeparator80
@@ -13029,7 +14729,7 @@ namespace Accounting.Forms
             this.toolStripButton9.Image = global::Accounting.Properties.Resources._98;
             this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(42, 22);
+            this.toolStripButton9.Size = new System.Drawing.Size(46, 22);
             this.toolStripButton9.Text = "Go";
             // 
             // toolStripSeparator86
@@ -13043,7 +14743,7 @@ namespace Accounting.Forms
             this.toolStripButton10.Image = global::Accounting.Properties.Resources.plus_32;
             this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton10.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton10.Text = "Add Batch";
             // 
             // toolStripSeparator87
@@ -13057,7 +14757,7 @@ namespace Accounting.Forms
             this.toolStripButton11.Image = global::Accounting.Properties.Resources.edit32;
             this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton11.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton11.Text = "Edit Batch";
             // 
             // toolStripSeparator88
@@ -13071,7 +14771,7 @@ namespace Accounting.Forms
             this.toolStripButton12.Image = global::Accounting.Properties.Resources._90;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton12.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton12.Text = "Void Batch";
             // 
             // toolStripButton13
@@ -13080,7 +14780,7 @@ namespace Accounting.Forms
             this.toolStripButton13.Image = global::Accounting.Properties.Resources.FloppyDisk;
             this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton13.Name = "toolStripButton13";
-            this.toolStripButton13.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton13.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton13.Text = "Save Batch";
             // 
             // toolStripSeparator89
@@ -13094,7 +14794,7 @@ namespace Accounting.Forms
             this.toolStripButton14.Image = global::Accounting.Properties.Resources.sql_icon_by_raisch_d3ax2ih;
             this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton14.Name = "toolStripButton14";
-            this.toolStripButton14.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton14.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton14.Text = "View SQL";
             // 
             // toolStripSeparator90
@@ -13108,7 +14808,7 @@ namespace Accounting.Forms
             this.toolStripButton15.Image = global::Accounting.Properties.Resources.statistics_32;
             this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton15.Name = "toolStripButton15";
-            this.toolStripButton15.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton15.Size = new System.Drawing.Size(24, 22);
             this.toolStripButton15.Text = "Record History";
             // 
             // toolStripSeparator91
@@ -13171,7 +14871,7 @@ namespace Accounting.Forms
             // mainForm
             // 
             this.BackColor = System.Drawing.Color.LightSlateGray;
-            this.ClientSize = new System.Drawing.Size(1354, 733);
+            this.ClientSize = new System.Drawing.Size(1317, 733);
             this.Controls.Add(this.splitContainer1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) 
             | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) 
@@ -13200,6 +14900,7 @@ namespace Accounting.Forms
             this.accntsChrtPanel.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage16.ResumeLayout(false);
+            this.tabPage16.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -13287,15 +14988,17 @@ namespace Accounting.Forms
             this.finStmntsTabControl.ResumeLayout(false);
             this.tbalTabPage.ResumeLayout(false);
             this.trialBalancePanel.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.trialBalGroupBox.ResumeLayout(false);
             this.tBalMenuStrip.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbalsNumUpDown)).EndInit();
             this.panel12.ResumeLayout(false);
             this.pnlTabPage.ResumeLayout(false);
             this.prftnlossPanel.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlNumUpDown)).EndInit();
             this.plGroupBox.ResumeLayout(false);
             this.prfNlsMenuStrip.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -13303,6 +15006,7 @@ namespace Accounting.Forms
             this.balSheetPanel.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.balsShtAcntLvlNumUpDown)).EndInit();
             this.blsGroupBox.ResumeLayout(false);
             this.balShtsMenuStrip.ResumeLayout(false);
             this.panel18.ResumeLayout(false);
@@ -13335,6 +15039,11 @@ namespace Accounting.Forms
             this.groupBox24.ResumeLayout(false);
             this.groupBox24.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trnsDataGridView)).EndInit();
+            this.cashBookTabPage.ResumeLayout(false);
+            this.groupBox27.ResumeLayout(false);
+            this.groupBox27.PerformLayout();
+            this.cashBookGroupBox.ResumeLayout(false);
+            this.cshBkContextMenuStrip.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.budgetPanel.ResumeLayout(false);
             this.toolStrip11.ResumeLayout(false);
@@ -14539,5 +16248,130 @@ namespace Accounting.Forms
         private System.Windows.Forms.TextBox accntSgmnt3TextBox;
         private System.Windows.Forms.TextBox accntSgmnt2TextBox;
         private System.Windows.Forms.ColumnHeader columnHeader189;
+        private System.Windows.Forms.Button exprtCmbntnsButton;
+        private System.Windows.Forms.TabPage cashBookTabPage;
+        private System.Windows.Forms.GroupBox groupBox27;
+        private System.Windows.Forms.Label label89;
+        public System.Windows.Forms.Button cshBkStrtDteButton;
+        public System.Windows.Forms.TextBox cshBkStrtDteTextBox;
+        private System.Windows.Forms.Label label90;
+        public System.Windows.Forms.Button cshBkEndDteButton;
+        public System.Windows.Forms.TextBox cshBkEndDteTextBox;
+        private System.Windows.Forms.Button exprtExclCshBkButton;
+        private System.Windows.Forms.Button gnrtRptCshBkButton;
+        private System.Windows.Forms.ProgressBar cashBkProgressBar;
+        private System.Windows.Forms.GroupBox cashBookGroupBox;
+        private System.Windows.Forms.ListView cashBookListView;
+        private System.Windows.Forms.ColumnHeader columnHeader192;
+        private System.Windows.Forms.ColumnHeader columnHeader193;
+        private System.Windows.Forms.ColumnHeader columnHeader194;
+        private System.Windows.Forms.ColumnHeader columnHeader195;
+        private System.Windows.Forms.ColumnHeader columnHeader199;
+        private System.Windows.Forms.ColumnHeader columnHeader200;
+        private System.Windows.Forms.ColumnHeader columnHeader201;
+        private System.Windows.Forms.ColumnHeader columnHeader202;
+        private System.Windows.Forms.ComboBox accntClassComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip cshBkContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem exprtExclCshBkMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator150;
+        private System.Windows.Forms.ToolStripMenuItem openBatchCshBkMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator151;
+        private System.Windows.Forms.ToolStripMenuItem vwTrnsCshBkMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vwSQLCshBkMenuItem;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.NumericUpDown tbalsNumUpDown;
+        private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.NumericUpDown pnlNumUpDown;
+        private System.Windows.Forms.CheckBox useNetPosCheckBox;
+        private System.Windows.Forms.Button tbalRptSgmntButton;
+        private System.Windows.Forms.TextBox rptSgmntTextBox;
+        private System.Windows.Forms.Label label95;
+        private System.Windows.Forms.NumericUpDown balsShtAcntLvlNumUpDown;
+        private System.Windows.Forms.TextBox rptSgmnt10TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt9TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt8TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt5TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt7TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt4TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt3TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt2TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt6TextBox;
+        private System.Windows.Forms.TextBox rptSgmnt1TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmntTextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt1TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt2TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt3TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt4TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt5TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt6TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt7TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt8TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt9TextBox;
+        private System.Windows.Forms.TextBox pnlRptSgmnt10TextBox;
+        private System.Windows.Forms.Button pnlSgmntButton;
+        private System.Windows.Forms.Button rprtClsfctnsButton;
+        private System.Windows.Forms.Button imprtRprtClsfctnsButton;
+        private System.Windows.Forms.Button exprtRprtClsfctnsButton;
+        private System.Windows.Forms.ToolStripButton vwSprtngDetailsButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator152;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator153;
+        private System.Windows.Forms.Button autoLoadBdgtButton;
+        private System.Windows.Forms.Button duplicateBdgtButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator154;
+        public System.Windows.Forms.ComboBox prdTypComboBox;
+        private System.Windows.Forms.Label label96;
+        public System.Windows.Forms.Button endDteButton;
+        private System.Windows.Forms.Label label97;
+        public System.Windows.Forms.TextBox endDteTextBox;
+        public System.Windows.Forms.Button startDteButton;
+        private System.Windows.Forms.Label label98;
+        public System.Windows.Forms.TextBox startDteTextBox;
+        private System.Windows.Forms.ColumnHeader columnHeader196;
+        private System.Windows.Forms.ColumnHeader columnHeader197;
+        private System.Windows.Forms.ColumnHeader columnHeader198;
+        private System.Windows.Forms.TextBox blShtSgmntTextBox;
+        private System.Windows.Forms.Button blShtSgmntButton;
+        private System.Windows.Forms.TextBox blShtSgmnt1TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt2TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt3TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt4TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt5TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt6TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt7TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt8TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt9TextBox;
+        private System.Windows.Forms.TextBox blShtSgmnt10TextBox;
+        private System.Windows.Forms.CheckBox shwIntrfcTrnsCheckBox;
+        private System.Windows.Forms.TextBox pbpSgmntTextBox;
+        private System.Windows.Forms.Button pbpSgmntButton;
+        private System.Windows.Forms.TextBox pbpSgmnt1TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt2TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt3TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt4TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt5TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt6TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt7TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt8TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt9TextBox;
+        private System.Windows.Forms.TextBox pbpSgmnt10TextBox;
+        private System.Windows.Forms.TextBox cflwSgmntTextBox;
+        private System.Windows.Forms.Button cflwSgmntButton;
+        private System.Windows.Forms.TextBox cflwSgmnt1TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt2TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt3TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt4TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt5TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt6TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt7TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt8TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt9TextBox;
+        private System.Windows.Forms.TextBox cflwSgmnt10TextBox;
+        private System.Windows.Forms.Label label102;
+        private System.Windows.Forms.Label label101;
+        private System.Windows.Forms.Button clearClsfctnsButton;
+        private System.Windows.Forms.Button mnrClsfctnButton;
+        private System.Windows.Forms.TextBox mnrClsfctnTextBox;
+        private System.Windows.Forms.ComboBox mjrClsfctnTextBox;
     }
 	}

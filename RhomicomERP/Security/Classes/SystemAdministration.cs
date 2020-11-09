@@ -125,14 +125,71 @@ namespace SystemAdministration.Classes
             this.loadSelfServiceMdl();
             string updtSQL = @"UPDATE prs.prsn_names_nos 
         SET first_name='SYSTEM'
-        WHERE local_id_no = 'RHO0002012'";
+        WHERE local_id_no = 'RHO0002012';
+
+  DELETE FROM sec.sec_audit_trail_tbls_to_enbl 
+  WHERE module_id NOT IN (SELECT a.module_id
+  FROM sec.sec_modules a, gst.gen_stp_lov_values b, gst.gen_stp_lov_names c
+  WHERE b.value_list_id=c.value_list_id
+  and c.value_list_name='All Enabled Modules'
+  and b.pssbl_value=a.module_name
+  and b.is_enabled='1');
+
+   DELETE FROM sec.sec_module_sub_groups 
+  WHERE module_id NOT IN (SELECT a.module_id
+  FROM sec.sec_modules a, gst.gen_stp_lov_values b, gst.gen_stp_lov_names c
+  WHERE b.value_list_id=c.value_list_id
+  and c.value_list_name='All Enabled Modules'
+  and b.pssbl_value=a.module_name
+  and b.is_enabled='1');
+  
+   DELETE FROM sec.sec_prvldgs 
+  WHERE module_id NOT IN (SELECT a.module_id
+  FROM sec.sec_modules a, gst.gen_stp_lov_values b, gst.gen_stp_lov_names c
+  WHERE b.value_list_id=c.value_list_id
+  and c.value_list_name='All Enabled Modules'
+  and b.pssbl_value=a.module_name
+  and b.is_enabled='1');
+
+  DELETE FROM sec.sec_roles_n_prvldgs WHERE prvldg_id NOT IN (SELECT prvldg_id FROM sec.sec_prvldgs);
+
+  DELETE FROM sec.sec_roles a WHERE (SELECT count(1) FROM sec.sec_roles_n_prvldgs b WHERE a.role_id = b.role_id)<=0;
+
+  DELETE FROM sec.sec_users_n_roles WHERE role_id NOT IN (SELECT role_id FROM sec.sec_roles);
+
+  DELETE FROM wkf.wkf_apps
+  WHERE source_module NOT IN (SELECT a.module_name
+  FROM sec.sec_modules a, gst.gen_stp_lov_values b, gst.gen_stp_lov_names c
+  WHERE b.value_list_id=c.value_list_id
+  and c.value_list_name='All Enabled Modules'
+  and b.pssbl_value=a.module_name
+  and b.is_enabled='1');
+
+  DELETE FROM wkf.wkf_actual_msgs_hdr WHERE app_id NOT IN (SELECT app_id
+  FROM wkf.wkf_apps);
+
+  DELETE FROM wkf.wkf_apps_actions WHERE app_id NOT IN (SELECT app_id
+  FROM wkf.wkf_apps);
+  
+  DELETE FROM wkf.wkf_apps_n_hrchies WHERE app_id NOT IN (SELECT app_id
+  FROM wkf.wkf_apps);
+  
+  DELETE FROM wkf.wkf_actual_msgs_routng WHERE msg_id NOT IN (SELECT msg_id FROM wkf.wkf_actual_msgs_hdr);
+  
+  DELETE FROM sec.sec_modules 
+  WHERE module_id NOT IN (SELECT a.module_id
+  FROM sec.sec_modules a, gst.gen_stp_lov_values b, gst.gen_stp_lov_names c
+  WHERE b.value_list_id=c.value_list_id
+  and c.value_list_name='All Enabled Modules'
+  and b.pssbl_value=a.module_name
+  and b.is_enabled='1');";
             Global.myNwMainFrm.cmmnCode.updateDataNoParams(updtSQL);
         }
 
         public void loadAccntngMdl()
         {
             //For Accounting
-            string[] dfltPrvldgs ={ "View Accounting","View Chart of Accounts", 
+            string[] dfltPrvldgs = { "View Accounting","View Chart of Accounts", 
     /*2*/"View Account Transactions", "View Transactions Search",
     /*4*/"View/Generate Trial Balance", "View/Generate Profit & Loss Statement", 
     /*6*/"View/Generate Balance Sheet","View Budgets",
@@ -168,17 +225,20 @@ namespace SystemAdministration.Classes
     /*88*/"Add Customer Debit Memo (InDirect Refund)", "Edit Customer Debit Memo (InDirect Refund)", "Delete Customer Debit Memo (InDirect Refund)",
     /*91*/"Add Customers/Suppliers", "Edit Customers/Suppliers", "Delete Customers/Suppliers",
     /*94*/"Add Fixed Assets","Edit Fixed Assets", "Delete Fixed Assets"
-                /*97*/,"View Petty Cash Vouchers", "View Petty Cash Payments","Add Petty Cash Payments","Edit Petty Cash Payments","Delete Petty Cash Payments"
-                /*102*/,"View Petty Cash Re-imbursements","Add Petty Cash Re-imbursements","Edit Petty Cash Re-imbursements","Delete Petty Cash Re-imbursements"};
+    /*97*/,"View Petty Cash Vouchers", "View Petty Cash Payments","Add Petty Cash Payments","Edit Petty Cash Payments","Delete Petty Cash Payments"
+    /*102*/,"View Petty Cash Re-imbursements","Add Petty Cash Re-imbursements","Edit Petty Cash Re-imbursements","Delete Petty Cash Re-imbursements"};
 
-            string[] subGrpNames = { "Chart of Accounts", "Fixed Assets", "Customers/Suppliers", "Fixed Assets PM Records" };//, "Accounting Transactions"
-            string[] mainTableNames = { "accb.accb_chart_of_accnts", "accb.accb_fa_assets_rgstr", "scm.scm_cstmr_suplr", "accb.accb_fa_assets_pm_recs" };//, "accb.accb_trnsctn_details"
-            string[] keyColumnNames = { "accnt_id", "asset_id", "cust_sup_id", "asset_pm_rec_id" };//, "transctn_id" 
+            string[] subGrpNames = { "Chart of Accounts", "Fixed Assets", "Customers/Suppliers", "Fixed Assets PM Records", "Receivable Invoices" };//, "Accounting Transactions"
+            string[] mainTableNames = { "accb.accb_chart_of_accnts", "accb.accb_fa_assets_rgstr", "scm.scm_cstmr_suplr", "accb.accb_fa_assets_pm_recs", "accb.accb_rcvbls_invc_hdr" };//, "accb.accb_trnsctn_details"
+            string[] keyColumnNames = { "accnt_id", "asset_id", "cust_sup_id", "asset_pm_rec_id", "rcvbls_invc_hdr_id" };//, "transctn_id" 
             String myName = "Accounting";
             string myDesc = "This module helps you to manage your organization's Accounting!";
             string audit_tbl_name = "accb.accb_audit_trail_tbl";
             String smplRoleName = "Accounting Administrator";
-
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -210,14 +270,15 @@ namespace SystemAdministration.Classes
                            "Supplier Prepayments","Supplier Debit Memos","Supplier Standard Payments",
                            "Customer Prepayments","Customer Credit Memos","Customer Standard Payments",
                          "Transaction Amount Breakdown Parameters","Receivables Docs. with Prepayments Applied",
-                         "Payables Docs. with Prepayments Applied","Unposted Batches"};
+                         "Payables Docs. with Prepayments Applied","Unposted Batches", "Weekend Days",
+                "Holiday Dates","Customer File Numbers"};
             string[] sysLovsDesc = { "Control Accounts", "Transactions not Allowed Days",
                                "Transactions not Allowed Dates", "Account Transaction Templates",
                                "Currencies", "Payment Document Templates", "Payment Methods",
                                "Supplier Prepayments","Supplier Debit Memos","Supplier Standard Payments",
                            "Customer Prepayments","Customer Credit Memos","Customer Standard Payments",
                              "Transaction Amount Breakdown Parameters","Receivables Docs. with Prepayments Applied",
-                         "Payables Docs. with Prepayments Applied","Unposted Batches"};
+                         "Payables Docs. with Prepayments Applied","Unposted Batches", "Weekend Days", "Holiday Dates","Customer File Numbers"};
             string[] sysLovsDynQrys = { "select distinct trim(to_char(accnt_id,'999999999999999999999999999999')) a, accnt_num || '.' || accnt_name b, '' c, org_id d, accnt_type e, accnt_num f from accb.accb_chart_of_accnts where (has_sub_ledgers = '1' and is_enabled = '1' and org.does_prsn_hv_accnt_id({:prsn_id},accnt_id)>0) order by accnt_num",
                                 "","",
                             @"SELECT distinct trim(to_char(z.template_id,'999999999999999999999999999999')) a, z.template_name b,'' c, z.org_id d, trim(to_char(w.user_id,'999999999999999999999999999999')) e
@@ -238,7 +299,8 @@ namespace SystemAdministration.Classes
                                 "SELECT y.pybls_invc_number a, z.pybls_smmry_amnt || ' (' || y.approval_status || ')' b, '' c, 1 d, z.appld_prepymnt_doc_id||'' e, accb.get_src_doc_type(z.appld_prepymnt_doc_id,'Supplier') f FROM accb.accb_pybls_invc_hdr y,accb.accb_pybls_amnt_smmrys z WHERE y.pybls_invc_hdr_id =z.src_pybls_hdr_id and z.appld_prepymnt_doc_id > 0 UNION Select accb.get_src_doc_num(w.src_doc_id, w.src_doc_typ) a, CASE WHEN (w.amount_paid>0 and w.change_or_balance <=0) or (w.amount_paid<0 and w.change_or_balance >=0) THEN Round(((w.amount_paid/abs(w.amount_paid))*w.amount_paid)-w.change_or_balance,2)|| ' (' || w.pymnt_vldty_status || ')' ELSE w.amount_paid || ' (' || w.pymnt_vldty_status || ')' END b, '' c, 1 d, w.prepay_doc_id||'' e, prepay_doc_type f FROM accb.accb_payments w WHERE w.prepay_doc_id>0 and prepay_doc_type ilike '%Supplier%'",
                             @"SELECT distinct '' || z.batch_id a, z.batch_name b,'' c, z.org_id d, ''||z.last_update_by e, z.batch_status f, z.batch_id g 
                             FROM accb.accb_trnsctn_batches z 
-                            ORDER BY z.batch_id DESC"};
+                            ORDER BY z.batch_id DESC","","",
+            "select trim(to_char(rcvbls_invc_hdr_id,'999999999999999999999999999999')) a, cstmrs_doc_num ||' - '|| COALESCE(scm.get_cstmr_splr_name(customer_id),'') ||' ('|| comments_desc||' - '|| rcvbls_invc_number || ')' b, '' c, org_id d, trim(to_char(customer_id,'999999999999999999999999999999')) e, trim(to_char(invc_curr_id,'999999999999999999999999999999')) f, rcvbls_invc_hdr_id g from accb.accb_rcvbls_invc_hdr where (cstmrs_doc_num!='' and cstmrs_doc_num IS NOT NULL) order by rcvbls_invc_hdr_id DESC"};
 
             string[] pssblVals = {"2", "01-JAN-1901", "Sample Holiday Date Disallowed",
                            "2", "01-JAN-2014", "Sample Holiday Date Disallowed",
@@ -260,14 +322,19 @@ namespace SystemAdministration.Classes
                            "13","GHS 0.20","GHS 0.20",
                            "13","GHS 0.10","GHS 0.10",
                            "13","GHS 0.05","GHS 0.05",
-                           "13","GHS 0.01","GHS 0.01"};
+                           "13","GHS 0.01","GHS 0.01",
+        "17", "SUNDAY", "Weekend",
+        "17", "SATURDAY", "Weekend",
+        "18", "01-JAN-1901", "Sample Holiday Date",
+        "18", "01-JAN-2014", "Sample Holiday Date"};
 
             Global.myNwMainFrm.cmmnCode.createSysLovs(sysLovs, sysLovsDynQrys, sysLovsDesc);
             Global.myNwMainFrm.cmmnCode.createSysLovsPssblVals(sysLovs, pssblVals);
             string[] prcsstyps = { "Trial Balance Report", "Profit and Loss Report",
                              "Balance Sheet Report", "Subledger Balance Report",
                              "Post GL Batch", "Open/Close Periods",
-                             "Inventory Journal Import", "Internal Payments Journal Import" };
+                             "Inventory Journal Import", "Internal Payments Journal Import",
+                             "Banking Journal Import", "VMS Journal Import" };
             for (int i = 1; i < 9; i++)
             {
                 if (Global.getActnPrcssID(i.ToString()) <= 0)
@@ -279,6 +346,10 @@ namespace SystemAdministration.Classes
                     Global.updtActnPrcss(i, prcsstyps[i - 1]);
                 }
             }
+
+            Global.myNwMainFrm.cmmnCode.updateDataNoParams(@"UPDATE rpt.rpt_reports
+   SET rpt_or_sys_prcs = 'Command Line Script-Windows'
+ WHERE rpt_or_sys_prcs = 'Command Line Script'");
         }
 
         public void createAcctngRqrdLOVs1()
@@ -449,6 +520,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Stores And Inventory Manager Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -492,7 +567,7 @@ namespace SystemAdministration.Classes
         /*22*/"Production Process Runs", "Production Process Run Stages","Production Process Classifications",
         /*25*/"Default POS Paper Size","Default Document Notes", "Document Custom Print Process Names",
         /*28*/"All Sales Documents","Production Cost Explanations",
-        /*30*/"All Receivables Documents", "All Payables Documents","Allow Inventory to be Costed"};
+        /*30*/"All Receivables Documents", "All Payables Documents","Allow Inventory to be Costed","Sample Sales Narrations"};
             string[] sysLovsDesc = {"Cash Accounts", "Inventory/Asset Accounts", "Contra Expense Accounts",
       "Contra Revenue Accounts","Customer Classifications","Supplier Classifications",
         "Tax Codes","Discount Codes","Extra Charges","Approved Requisitions",
@@ -505,7 +580,7 @@ namespace SystemAdministration.Classes
                          "Default POS Paper Size","Default Document Notes",
                          "Document Custom Print Process Names",
         /*28*/"All Sales Documents","Production Cost Explanations",
-        /*30*/"All Receivables Documents", "All Payables Documents","Allow Inventory to be Costed"};
+        /*30*/"All Receivables Documents", "All Payables Documents","Allow Inventory to be Costed","Sample Sales Narrations"};
             string[] sysLovsDynQrys = { "", "",
         "select distinct trim(to_char(accnt_id,'999999999999999999999999999999')) a, accnt_name b, '' c, org_id d, accnt_num e from accb.accb_chart_of_accnts where (accnt_type = 'EX' and is_prnt_accnt = '0' and is_enabled = '1' and is_contra = '1' and org.does_prsn_hv_accnt_id({:prsn_id},accnt_id)>0) order by accnt_num",
         "select distinct trim(to_char(accnt_id,'999999999999999999999999999999')) a, accnt_name b, '' c, org_id d, accnt_num e from accb.accb_chart_of_accnts where (accnt_type = 'R' and is_prnt_accnt = '0' and is_enabled = '1' and is_contra = '1' and org.does_prsn_hv_accnt_id({:prsn_id},accnt_id)>0) order by accnt_num",
@@ -557,7 +632,7 @@ namespace SystemAdministration.Classes
         "where (1=1) order by y.rcvbls_invc_hdr_id DESC",
         "select distinct ''||y.pybls_invc_hdr_id a, y.pybls_invc_number b, '' c, y.org_id d, y.pybls_invc_hdr_id g " +
         "from accb.accb_pybls_invc_hdr y " +
-        "where (1=1) order by y.pybls_invc_hdr_id DESC",""
+        "where (1=1) order by y.pybls_invc_hdr_id DESC","",""
         };
             string[] pssblVals = {
         "4", "Retail Customer", "Retail Customer"
@@ -600,7 +675,10 @@ namespace SystemAdministration.Classes
        ,"29", "Labour Costs", "Labour Costs"
        ,"29", "Rental Costs", "Rental Costs"
        ,"29", "Utility Costs", "Utility Costs"
-       ,"32","YES","Allow Inventory to be Costed"};
+       ,"32","YES","Allow Inventory to be Costed"
+       ,"33","Lay Away","Lay Away"
+       ,"33","Outright Purchase","Outright Purchase"
+       ,"33","Hire Purchase","Hire Purchase"};
 
             Global.myNwMainFrm.cmmnCode.createSysLovs(sysLovs, sysLovsDynQrys, sysLovsDesc);
             Global.myNwMainFrm.cmmnCode.createSysLovsPssblVals(sysLovs, pssblVals);
@@ -674,16 +752,17 @@ namespace SystemAdministration.Classes
 
         public void loadPersonMdl()
         {
-            //For Accounting
+            //For Person
             string[] dfltPrvldgs = {"View Person", "View Basic Person Data", 
 		/*2*/ "View Curriculum Vitae", "View Basic Person Assignments", 
     /*4*/ "View Person Pay Item Assignments", "View SQL", "View Record History",
     /*7*/ "Add Person Info","Edit Person Info","Delete Person Info",
     /*10*/"Add Basic Assignments", "Edit Basic Assignments", "Delete Basic Assignments",
-    /*13*/"Add Pay Item Assignments", "Edit Pay Item Assignments", "Delete Pay Item Assignments",
-      "View Banks",
+    /*13*/"Add Pay Item Assignments", "Edit Pay Item Assignments", "Delete Pay Item Assignments","View Banks",
     /*17*/"Define Assignment Templates", "Edit Assignment Templates", "Delete Assignment Templates",
-      "View Assignment Templates"};
+    /*20*/"View Assignment Templates", "Manage My Firm",
+    /* 22 */ "View Leave Management", "Add Leave Management", "Edit Leave Management", "Delete Leave Management", 
+    /* 26 */"View Other Person's Absences"}; ;
 
             string[] subGrpNames = { "Person Data" };
             string[] mainTableNames = { "prs.prsn_names_nos" };
@@ -693,7 +772,10 @@ namespace SystemAdministration.Classes
             "about people in your organization!";
             string audit_tbl_name = "prs.prsn_audit_trail_tbl";
             String smplRoleName = "Basic Person Data Administrator";
-
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -724,6 +806,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "General Setup Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -769,6 +855,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Internal Payments Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -807,6 +897,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Events And Attendance Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -833,6 +927,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Generic Module Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -867,6 +965,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Self-Service Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -915,6 +1017,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Organization Setup Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;
@@ -928,8 +1034,8 @@ namespace SystemAdministration.Classes
             Global.myNwMainFrm.cmmnCode.checkNAssignReqrmnts();
             string[] sysLovs = { "Account Segment Values", "Control Account Segment Values" };
             string[] sysLovsDesc = { "Account Segment Values", "Control Account Segment Values" };
-            string[] sysLovsDynQrys = { "Select segment_value a, segment_description b, '' c, segment_id d, is_enabled e from org.org_segment_values y",
-            "Select segment_value a, segment_description b, '' c, segment_id d, is_enabled e from org.org_segment_values y where y.has_sub_ledgers='1'"};
+            string[] sysLovsDynQrys = { "Select segment_value a, segment_description b, '' c, segment_id d, is_enabled e, ''||dpndnt_sgmnt_val_id f from org.org_segment_values y",
+            "Select segment_value a, segment_description b, '' c, segment_id d, is_enabled e, ''||dpndnt_sgmnt_val_id f from org.org_segment_values y where y.has_sub_ledgers='1'"};
             //string[] pssblVals = {};
             Global.myNwMainFrm.cmmnCode.createSysLovs(sysLovs, sysLovsDynQrys, sysLovsDesc);
             //Global.myNwMainFrm.cmmnCode.createSysLovsPssblVals(sysLovs, pssblVals);
@@ -952,6 +1058,10 @@ namespace SystemAdministration.Classes
 
             String smplRoleName = "Reports And Processes Administrator";
 
+            if (Global.myNwMainFrm.cmmnCode.getEnbldPssblValID(myName, Global.myNwMainFrm.cmmnCode.getLovID("All Enabled Modules")) <= 0)
+            {
+                return;
+            }
             Global.myNwMainFrm.cmmnCode.DefaultPrvldgs = dfltPrvldgs;
             Global.myNwMainFrm.cmmnCode.SubGrpNames = subGrpNames;
             Global.myNwMainFrm.cmmnCode.MainTableNames = mainTableNames;

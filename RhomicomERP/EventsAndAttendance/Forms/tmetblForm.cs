@@ -2588,7 +2588,7 @@ namespace EventsAndAttendance.Forms
           {
             Global.createEvent(Global.mnFrm.cmCde.Org_id,
               eventName, eventDesc, evntType, true, prsnID, groupType, grpID, tmTblSsn, hgstSsn, sltPrty,
-              evntClsfctn, vnuID, groupName, attndMtrcLOV, scoreLblLOV);
+              evntClsfctn, vnuID, groupName, attndMtrcLOV, scoreLblLOV,-1,-1);
             Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":L" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 225, 0));
             eventID = Global.getEventID(eventName, Global.mnFrm.cmCde.Org_id);
             //rownum++;

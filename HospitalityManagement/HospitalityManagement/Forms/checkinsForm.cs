@@ -248,17 +248,41 @@ namespace HospitalityManagement.Forms
                 this.arrvlFromTextBox.Text = dtst.Tables[0].Rows[i][16].ToString();
                 this.prcdngToTextBox.Text = dtst.Tables[0].Rows[i][17].ToString();
                 this.otherInfoTextBox.Text = dtst.Tables[0].Rows[i][18].ToString();
+
                 this.pymntTermsTextBox.Text = dtst.Tables[0].Rows[i][34].ToString();
                 this.docStatusTextBox.Text = dtst.Tables[0].Rows[i][20].ToString();
                 this.autoBalscheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][32].ToString());
-                this.useNightsRadioButton.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][33].ToString());
-                this.useDaysRadioButton.Checked = !this.useNightsRadioButton.Checked;
+                /* this.useNightsRadioButton.Checked = dtst.Tables[0].Rows[i][33].ToString() == "1" ? true : false;
+                 this.useDaysRadioButton.Checked = dtst.Tables[0].Rows[i][33].ToString() == "0" ? true : false;
+                 this.useHoursRadioButton.Checked = dtst.Tables[0].Rows[i][33].ToString() == "2" ? true : false;*/
+                var calMthd = "";
+                if (dtst.Tables[0].Rows[i][33].ToString() == "0")
+                {
+                    calMthd = "Nights";
+                }
+                else if (dtst.Tables[0].Rows[i][33].ToString() == "1")
+                {
+                    calMthd = "Days";
+                }
+                else if (dtst.Tables[0].Rows[i][33].ToString() == "2")
+                {
+                    calMthd = "Hours";
+                }
+                else if (dtst.Tables[0].Rows[i][33].ToString() == "3")
+                {
+                    calMthd = "Months";
+                }
+                else if (dtst.Tables[0].Rows[i][33].ToString() == "4")
+                {
+                    calMthd = "Years";
+                }
+                else
+                {
+                    calMthd = "Term";
+                }
                 string orgnlItm = dtst.Tables[0].Rows[i][2].ToString();
                 this.docTypeComboBox.Items.Clear();
                 this.docTypeComboBox.Items.Add(orgnlItm);
-                //if (this.editRec == false)
-                //{
-                //}
                 this.docTypeComboBox.SelectedItem = orgnlItm;
                 EventArgs e = new EventArgs();
                 this.obey_evnts = true;
@@ -268,11 +292,13 @@ namespace HospitalityManagement.Forms
                 orgnlItm = dtst.Tables[0].Rows[i][3].ToString();
                 this.fcltyTypeComboBox.Items.Clear();
                 this.fcltyTypeComboBox.Items.Add(orgnlItm);
-                //if (this.editRec == false)
-                //{
-                //}
                 this.fcltyTypeComboBox.SelectedItem = orgnlItm;
 
+
+                orgnlItm = calMthd;
+                //this.useNightsComboBox.Items.Clear();
+                this.useNightsComboBox.Items.Add(orgnlItm);
+                this.useNightsComboBox.SelectedItem = orgnlItm;
                 if (this.docTypeComboBox.Text == "Check-In")
                 {
                     this.mainItemID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
@@ -386,7 +412,7 @@ namespace HospitalityManagement.Forms
             this.endDteTextBox.Text = "";
             this.mainItemID = -1;
             this.autoBalscheckBox.Checked = true;
-            this.useNightsRadioButton.Checked = true;
+            //this.useNightsRadioButton.Checked = true;
             this.srvcTypeIDTextBox.Text = "-1";
             this.srvcTypeTextBox.Text = "";
             this.roomIDTextBox.Text = "-1";
@@ -430,6 +456,7 @@ namespace HospitalityManagement.Forms
                 this.fcltyTypeComboBox.Items.Clear();
                 this.docTypeComboBox.Items.Clear();
                 this.docIDPrfxComboBox.Items.Clear();
+                this.useNightsComboBox.Items.Clear();
             }
             this.obey_evnts = prv;
         }
@@ -492,8 +519,6 @@ namespace HospitalityManagement.Forms
 
             this.pymntMthdTextBox.ReadOnly = false;
             this.pymntMthdTextBox.BackColor = Color.FromArgb(255, 255, 128);
-            this.useDaysRadioButton.AutoCheck = true;
-            this.useNightsRadioButton.AutoCheck = true;
 
             this.invcCurrTextBox.ReadOnly = false;
             this.invcCurrTextBox.BackColor = Color.FromArgb(255, 255, 128);
@@ -530,6 +555,23 @@ namespace HospitalityManagement.Forms
                 this.fcltyTypeComboBox.Items.Add(selItm);
                 this.fcltyTypeComboBox.SelectedItem = selItm;
             }
+
+            selItm = this.useNightsComboBox.Text;
+            this.useNightsComboBox.Items.Clear();
+            this.useNightsComboBox.Items.Add("Nights");
+            this.useNightsComboBox.Items.Add("Days");
+            this.useNightsComboBox.Items.Add("Hours");
+            this.useNightsComboBox.Items.Add("Months");
+            this.useNightsComboBox.Items.Add("Years");
+            this.useNightsComboBox.Items.Add("Term");
+            if (this.addRec == true)
+            {
+            }
+            if (this.editRec == true)
+            {
+                //this.useNightsComboBox.Items.Add(selItm);
+                this.useNightsComboBox.SelectedItem = selItm;
+            }
             this.obey_evnts = prv;
         }
 
@@ -545,8 +587,6 @@ namespace HospitalityManagement.Forms
             this.editButton.Enabled = this.editRecs;
             this.cancelButton.Enabled = false;
 
-            this.useDaysRadioButton.AutoCheck = false;
-            this.useNightsRadioButton.AutoCheck = false;
             this.docIDNumTextBox.ReadOnly = true;
             this.docIDNumTextBox.BackColor = Color.WhiteSmoke;
             this.strtDteTextBox.ReadOnly = true;
@@ -2208,16 +2248,22 @@ namespace HospitalityManagement.Forms
             DateTime dte2 = DateTime.ParseExact(endDte, "dd-MMM-yyyy HH:mm:ss",
          System.Globalization.CultureInfo.InvariantCulture);
             DateTime wrkngDte;
-            if (this.useNightsRadioButton.Checked)
+            if (this.useNightsComboBox.Text == "Nights")
             {
                 wrkngDte = DateTime.ParseExact(dte1.ToString("dd-MMM-yyyy 00:00:00"), "dd-MMM-yyyy HH:mm:ss",
            System.Globalization.CultureInfo.InvariantCulture).AddDays(1);
             }
-            else
+            else if (this.useNightsComboBox.Text == "Days" || this.useNightsComboBox.Text == "Months" || this.useNightsComboBox.Text == "Years")
             {
                 wrkngDte = DateTime.ParseExact(dte1.ToString("dd-MMM-yyyy 00:00:00"), "dd-MMM-yyyy HH:mm:ss",
            System.Globalization.CultureInfo.InvariantCulture);
             }
+            else
+            {
+                wrkngDte = DateTime.ParseExact(dte1.ToString("dd-MMM-yyyy HH:mm:ss"), "dd-MMM-yyyy HH:mm:ss",
+           System.Globalization.CultureInfo.InvariantCulture);
+            }
+
             if (dte2 < wrkngDte)
             {
                 dte2 = wrkngDte.AddHours(1);
@@ -2231,7 +2277,7 @@ namespace HospitalityManagement.Forms
                            //  rwidx = -1;
                            //}
             bool cmbine = true;
-            if (cmbine)
+            if (cmbine && this.useNightsComboBox.Text != "Hours")
             {
                 double prevPrice = sellingPrcs;
                 string extrDescs = wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss");
@@ -2246,7 +2292,7 @@ namespace HospitalityManagement.Forms
                     this.obey_evnts = false;
                     this.itemsDataGridView.EndEdit();
                     System.Windows.Forms.Application.DoEvents();
-                    tstPrice = Global.getTrnsDatePrice(srvsTypID, wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss"));
+                    tstPrice = Global.getTrnsDatePrice(srvsTypID, wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss"), this.useNightsComboBox.Text);
                     if (tstPrice < 0)
                     {
                         tstPrice = sellingPrcs;
@@ -2347,7 +2393,27 @@ namespace HospitalityManagement.Forms
                     }
 
                     //this.itemsDataGridView.CurrentCell = this.itemsDataGridView.Rows[idx].Cells[4];
-                    wrkngDte = wrkngDte.AddDays(1);
+
+                    if (this.useNightsComboBox.Text == "Nights" || this.useNightsComboBox.Text == "Days")
+                    {
+                        wrkngDte = wrkngDte.AddDays(1);
+                    }
+                    else if (this.useNightsComboBox.Text == "Months")
+                    {
+                        wrkngDte = wrkngDte.AddMonths(1);
+                    }
+                    else if (this.useNightsComboBox.Text == "Years")
+                    {
+                        wrkngDte = wrkngDte.AddYears(1);
+                    }
+                    else if (this.useNightsComboBox.Text == "Hours")
+                    {
+                        wrkngDte = wrkngDte.AddHours(1);
+                    }
+                    else
+                    {
+                        wrkngDte = dte2;
+                    }
                     if (wrkngDte >= dte2)
                     {
                         //this.obey_evnts = true;
@@ -2388,64 +2454,149 @@ namespace HospitalityManagement.Forms
                     //rwidx++;
                 }
             }
+            else if (cmbine && this.useNightsComboBox.Text == "Hours")
+            {
+                double prevPrice = sellingPrcs;
+                string extrDescs = wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss");
+                int cntr = 0;
+                double unitPrice = 0;
+                double tstPrice = 0;
+                this.itemsDataGridView.EndEdit();
+                System.Windows.Forms.Application.DoEvents();
+
+                this.itemsDataGridView.EndEdit();
+                System.Windows.Forms.Application.DoEvents();
+                tstPrice = Global.getTrnsDatePrice(srvsTypID, wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss"), this.useNightsComboBox.Text);
+                if (tstPrice < 0)
+                {
+                    tstPrice = sellingPrcs;
+                }
+                double dys = dte2.Subtract(dte1).TotalHours;
+                double qty = Math.Round(dys, 4);
+                if ((tstPrice != prevPrice) || cntr == 0)
+                {
+                    prevPrice = tstPrice;
+                    unitPrice = Math.Round((double)this.exchRateNumUpDwn.Value * tstPrice, 2);
+                    if (cntr == 0)
+                    {
+                        extrDescs = wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss");
+                    }
+                    else
+                    {
+                        extrDescs += "-" + wrkngDte.AddDays(-1).ToString("dd-MMM-yyyy HH:mm:ss");
+                        this.itemsDataGridView.Rows[rwidx].Cells[28].Value = extrDescs;
+
+                        extrDescs = wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss");
+                    }
+                    int idx = this.isItemThere(itmID, unitPrice);
+                    if (idx < 0)
+                    {
+                        rwidx = this.getFreeRowIdx();
+                        if (rwidx > this.itemsDataGridView.Rows.Count || rwidx < 0)
+                        {
+                            this.createSalesDocRows(1);
+                            rwidx = this.itemsDataGridView.Rows.Count - 1;
+                        }
+                    }
+                    else
+                    {
+                        rwidx = idx;
+                    }
+
+                    this.obey_evnts = false;
+                    //this.itemsDataGridView.Rows[rwidx].Cells[15].Value = lineID;
+                    this.itemsDataGridView.Rows[rwidx].Cells[12].Value = itmID;
+                    this.itemsDataGridView.Rows[rwidx].Cells[29].Value = docID;
+                    this.itemsDataGridView.Rows[rwidx].Cells[13].Value = storeids;
+                    this.itemsDataGridView.Rows[rwidx].Cells[0].Value = itmNms;
+                    if (this.itemsDataGridView.Rows[rwidx].Cells[31].Value.ToString() == "")
+                    {
+                        this.itemsDataGridView.Rows[rwidx].Cells[31].Value = itmDescs;
+                    }
+                    this.itemsDataGridView.Rows[rwidx].Cells[2].Value = itmDescs;
+
+                    this.itemsDataGridView.Rows[rwidx].Cells[4].Value = qty;
+                    this.itemsDataGridView.Rows[rwidx].Cells[5].Value = uomNm;
+                    this.itemsDataGridView.Rows[rwidx].Cells[7].Value = unitPrice;
+                    this.itemsDataGridView.Rows[rwidx].Cells[8].Value = (qty * unitPrice).ToString("#,##0.00");
+                    this.itemsDataGridView.Rows[rwidx].Cells[10].Value = Global.getOldstItmCnsgmts(itmID, 1);
+                    if (idx < 0)
+                    {
+                        this.itemsDataGridView.Rows[rwidx].Cells[17].Value = taxNms;
+                        this.itemsDataGridView.Rows[rwidx].Cells[19].Value = taxIDs;
+                        this.itemsDataGridView.Rows[rwidx].Cells[20].Value = dscntNms;
+                        this.itemsDataGridView.Rows[rwidx].Cells[22].Value = dscntIDs;
+                        this.itemsDataGridView.Rows[rwidx].Cells[23].Value = chrgeNms;
+                        this.itemsDataGridView.Rows[rwidx].Cells[25].Value = chrgeIDs;
+                    }
+                    this.itemsDataGridView.Rows[rwidx].Cells[27].Value = true;
+                    cntr++;
+                }
+                else
+                {
+                    //this.obey_evnts = true;
+                    this.obey_evnts = false;
+
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+
+                    qty = double.Parse(this.itemsDataGridView.Rows[rwidx].Cells[4].Value.ToString());
+                    double qty1 = double.Parse(this.itemsDataGridView.Rows[rwidx].Cells[30].Value.ToString());
+                    this.itemsDataGridView.Rows[rwidx].Cells[4].Value = qty;
+
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+
+                    this.itemsDataGridView.Rows[rwidx].Cells[8].Value = (qty * qty1 * unitPrice).ToString("#,##0.00");
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+                    this.itemsDataGridView.Rows[rwidx].Cells[10].Value = Global.getOldstItmCnsgmts(itmID, (double)(qty + 1));
+                    this.itemsDataGridView.Rows[rwidx].Cells[27].Value = true;
+                    this.itemsDataGridView.Rows[rwidx].Cells[29].Value = docID;
+                    this.obey_evnts = false;
+
+                }
+                wrkngDte = dte2;
+                if (wrkngDte >= dte2)
+                {
+                    //this.obey_evnts = true;
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+                    this.Refresh();
+
+                    extrDescs += "-" + wrkngDte.AddDays(-1).ToString("dd-MMM-yyyy HH:mm:ss");
+                    this.itemsDataGridView.Rows[rwidx].Cells[28].Value = extrDescs;
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+
+                    qty = double.Parse(this.itemsDataGridView.Rows[rwidx].Cells[4].Value.ToString());
+                    double qty1 = double.Parse(this.itemsDataGridView.Rows[rwidx].Cells[30].Value.ToString());
+                    if (mltplyAdlts && this.noOfAdultsNumUpDwn.Value > 0)
+                    {
+                        qty = qty * (double)this.noOfAdultsNumUpDwn.Value;
+                    }
+                    if (mltplyChldrn && this.noOfChdrnNumUpDwn.Value > 0)
+                    {
+                        qty = qty * (double)this.noOfChdrnNumUpDwn.Value;
+                    }
+                    this.itemsDataGridView.Rows[rwidx].Cells[4].Value = (qty);
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+
+                    this.itemsDataGridView.Rows[rwidx].Cells[8].Value = (qty1 * qty * unitPrice).ToString("#,##0.00");
+                    this.itemsDataGridView.EndEdit();
+                    System.Windows.Forms.Application.DoEvents();
+                    this.itemsDataGridView.Rows[rwidx].Cells[10].Value = Global.getOldstItmCnsgmts(itmID, (double)(qty));
+                    this.itemsDataGridView.Rows[rwidx].Cells[27].Value = true;
+                    this.obey_evnts = false;
+                }
+            }
             else
             {
-                //while (wrkngDte < dte2)
-                //{
-                //  this.itemsDataGridView.EndEdit();
-                //  System.Windows.Forms.Application.DoEvents();
-
-                //  int idx = this.isItemThere(itmID, unitPrice);
-                //  if (idx <= 0)
-                //  {
-                //    rwidx = this.getFreeRowIdx();
-                //    if (rwidx > this.itemsDataGridView.Rows.Count || rwidx < 0)
-                //    {
-                //      this.createSalesDocRows(1);
-                //      rwidx = this.itemsDataGridView.Rows.Count - 1;
-                //    }
-                //  }
-                //  else
-                //  {
-                //    rwidx = idx;
-                //  }
-                //  this.obey_evnts = false;
-                //  this.itemsDataGridView.EndEdit();
-                //  System.Windows.Forms.Application.DoEvents();
-                //  double tstPrice = Global.getTrnsDatePrice(srvsTypID, wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss"));
-                //  double unitPrice = 0;
-                //  if (tstPrice > 0)
-                //  {
-                //    unitPrice = Math.Round((double)this.exchRateNumUpDwn.Value * tstPrice, 2);
-                //  }
-                //  else
-                //  {
-                //    unitPrice = Math.Round((double)this.exchRateNumUpDwn.Value * sellingPrcs, 2);
-                //  }
-
-                //  this.itemsDataGridView.Rows[rwidx].Cells[12].Value = itmID;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[13].Value = storeids;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[0].Value = itmNms;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[2].Value = itmDescs;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[4].Value = "1";
-                //  this.itemsDataGridView.Rows[rwidx].Cells[5].Value = uomNm;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[7].Value = unitPrice;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[8].Value = unitPrice;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[10].Value = Global.getOldstItmCnsgmts(itmID, 1);
-
-                //  this.itemsDataGridView.Rows[rwidx].Cells[17].Value = taxNms;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[19].Value = taxIDs;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[20].Value = dscntNms;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[22].Value = dscntIDs;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[23].Value = chrgeNms;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[25].Value = chrgeIDs;
-                //  this.itemsDataGridView.Rows[rwidx].Cells[28].Value = wrkngDte.ToString("dd-MMM-yyyy HH:mm:ss");
-                //  //this.itemsDataGridView.CurrentCell = this.itemsDataGridView.Rows[idx].Cells[4];
-                //  wrkngDte = wrkngDte.AddDays(1);
-                //  rwidx++;
-                //}
             }
-            int idx1 = this.isItemThere(this.mainItemID);
+            /*int idx1 = this.isItemThere(this.mainItemID);
             if (idx1 >= 0)
             {
                 double tst1 = 0;
@@ -2485,14 +2636,13 @@ namespace HospitalityManagement.Forms
                 {
                     this.itemsDataGridView.Rows[idx1].Cells[4].Value = qty;
                 }
-            }
+            }*/
             this.obey_evnts = true;
             System.Windows.Forms.Application.DoEvents();
             //System.Windows.Forms.Application.DoEvents();
             this.itemsDataGridView.Focus();
             SendKeys.Send("{TAB}");
             SendKeys.Send("{HOME}");
-
         }
 
         private void pymntMthdLOVSearch(bool autoLoad)
@@ -4576,7 +4726,7 @@ namespace HospitalityManagement.Forms
                   int.Parse(this.sponsorSiteIDTextBox.Text), int.Parse(this.sponseeIDTextBox.Text),
                   int.Parse(this.sponseeSiteIDTextBox.Text), this.arrvlFromTextBox.Text, this.prcdngToTextBox.Text,
                   this.otherInfoTextBox.Text, this.fcltyTypeComboBox.Text, this.docStatusTextBox.Text, -1, "",
-                  this.useNightsRadioButton.Checked);
+                   this.useNightsComboBox.Text);
 
                 this.docIDTextBox.Text = Global.mnFrm.cmCde.getGnrlRecID(
           "hotl.checkins_hdr",
@@ -4638,7 +4788,7 @@ namespace HospitalityManagement.Forms
            int.Parse(this.sponsorSiteIDTextBox.Text), int.Parse(this.sponseeIDTextBox.Text),
            int.Parse(this.sponseeSiteIDTextBox.Text), this.arrvlFromTextBox.Text, this.prcdngToTextBox.Text,
            this.otherInfoTextBox.Text, this.fcltyTypeComboBox.Text, this.docStatusTextBox.Text, -1, "",
-                  this.useNightsRadioButton.Checked);
+                 this.useNightsComboBox.Text);
 
                 Global.updtSalesDocHdr(long.Parse(this.salesDocIDTextBox.Text), this.salesDocNumTextBox.Text,
                   this.otherInfoTextBox.Text, this.salesDocTypeTextBox.Text, this.strtDteTextBox.Text.Substring(0, 11)
@@ -4716,10 +4866,10 @@ namespace HospitalityManagement.Forms
             string rcvblDoctype = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_rcvbls_invc_hdr",
               "rcvbls_invc_hdr_id", "rcvbls_invc_type", rcvblHdrID);
 
-            if (docStatus == "Approved" && Global.mnFrm.cmCde.doesDteTmeExceedIntrvl(Global.getRcvblsDocLastUpdate(rcvblHdrID, rcvblDoctype), "1 day"))
+            /*if (docStatus == "Approved" && Global.mnFrm.cmCde.doesDteTmeExceedIntrvl(Global.getRcvblsDocLastUpdate(rcvblHdrID, rcvblDoctype), "1 day"))
             {
                 return;
-            }
+            }*/
             DataSet dtst = Global.get_One_SalesDcLines(srcDocID);
             double grndAmnt = Global.getSalesDocGrndAmnt(srcDocID);
             // Grand Total
@@ -4838,6 +4988,7 @@ namespace HospitalityManagement.Forms
                         snglDscnt = this.getDscntLessTax(txID, Global.getSalesDocCodesAmnt(dscntID, unitAmnt, 1));
                         dscntAmnts1 = this.getDscntLessTax(txID, Global.getSalesDocCodesAmnt(dscntID, unitAmnt, qnty));
                         dscntAmnts += dscntAmnts1;
+                        //MessageBox.Show(dscntAmnts1.ToString());
                         tmp = Global.mnFrm.cmCde.getGnrlRecNm(
                    "scm.scm_tax_codes", "code_id", "code_name", dscntID);
                         smmryID = Global.getSalesSmmryItmID("3Discount", dscntID,
@@ -5124,11 +5275,11 @@ namespace HospitalityManagement.Forms
                     {
                         if (int.Parse(codeIDs[j]) > 0)
                         {
-                            txAmnts1 = Global.getSalesDocCodesAmnt(int.Parse(codeIDs[j]), 1, 1);
-                            txAmnts1 = orgnlDscnt / (1.0 + txAmnts1);
-                            txAmnts += txAmnts1;
+                            txAmnts1 += Global.getSalesDocCodesAmnt(int.Parse(codeIDs[j]), 1, 1);
                         }
                     }
+                    txAmnts1 = orgnlDscnt / (1.0 + txAmnts1);
+                    txAmnts += txAmnts1;
                 }
                 else
                 {
@@ -5141,6 +5292,8 @@ namespace HospitalityManagement.Forms
             {
                 txAmnts = orgnlDscnt;
             }
+            //MessageBox.Show(orgnlDscnt.ToString());
+
             return txAmnts;
         }
 
@@ -5930,7 +6083,24 @@ namespace HospitalityManagement.Forms
 
             if (this.pageNo == 1)
             {
-                Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                //Image img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                Image img = global::HospitalityManagement.Properties.Resources.actions_document_preview;
+                string folderNm = Global.mnFrm.cmCde.getOrgImgsDrctry();
+                string storeFileNm = Global.mnFrm.cmCde.Org_id.ToString() + ".png";
+                if (Global.mnFrm.cmCde.myComputer.FileSystem.FileExists(folderNm + @"\" + storeFileNm))
+                {
+                    System.IO.FileStream rs = new System.IO.FileStream(folderNm + @"\" + storeFileNm,
+                   System.IO.FileMode.OpenOrCreate,
+                   System.IO.FileAccess.ReadWrite, System.IO.FileShare.ReadWrite);
+                    Byte[] imgRead = new Byte[rs.Length];
+                    rs.Read(imgRead, 0, Convert.ToInt32(rs.Length));
+                    img = Image.FromStream(rs);
+                    rs.Close();
+                }
+                else
+                {
+                    img = Global.mnFrm.cmCde.getDBImageFile(Global.mnFrm.cmCde.Org_id.ToString() + ".png", 0);
+                }
                 float picWdth = 100.00F;
                 float picHght = (float)(picWdth / img.Width) * (float)img.Height;
 
@@ -7197,7 +7367,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
 
                 if (itmID == this.mainItemID)
                 {
-                    DateTime dte1;
+                    /*DateTime dte1;
 
                     if (this.useNightsRadioButton.Checked)
                     {
@@ -7234,7 +7404,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                         Global.mnFrm.cmCde.showMsg("Quantity in Row(" + (i + 1).ToString() +
                 ") does not agree with the Start Date and End Dates Specified! Please Correct this First!", 0);
                         return false;
-                    }
+                    }*/
                 }
                 //Global.mnFrm.cmCde.showSQLNoPermsn(cnsgmntIDs + "/" + tst1 + "/" + Global.getCnsgmtsQtySum(cnsgmntIDs));
                 if (tst1 > Global.getCnsgmtsQtySum(cnsgmntIDs))
@@ -9324,7 +9494,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
         private void rejectDoc()
         {
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -9332,7 +9502,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             //Global.updtActnPrcss(7);//Invetory Import Process
             //Global.mnFrm.cmCde.showMsg(this.salesApprvlStatusTextBox.Text, 0);
@@ -9415,7 +9585,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
 
             this.cancelButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -9423,7 +9593,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = this.rvrsApprval(dateStr);
@@ -9642,6 +9812,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
 
         private void autoBals(string srcDocType)
         {
+            return;
             //DataSet dtst = Global.get_DocSmryLns(docHdrID, docTyp);
             //for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             //{
@@ -9760,7 +9931,6 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                         {
                             Global.updateSmmryItm(smmryID, "5Grand Total", Math.Round(grndAmnt + msChrgAmnts, 2), true, chrgSmmryNm);
                         }
-
                     }
                     //Total Payments    
                     grndAmnt = grndAmnt + msChrgAmnts;
@@ -10013,7 +10183,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
 
             this.badDebtButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             int witcntr = 0;
             do
             {
@@ -10021,7 +10191,7 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
                 isAnyRnng = Global.isThereANActvActnPrcss("7", "10 second");//Invetory Import Process
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
+            while (isAnyRnng == true);*/
 
             string dateStr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
             bool sccs = true;// this.rvrsApprval(dateStr);
@@ -10126,6 +10296,23 @@ AND to_timestamp(end_date,'YYYY-MM-DD HH24:MI:SS'))))";
             else
             {
                 Global.mnFrm.cmCde.showSQLNoPermsn(txtStr);
+            }
+        }
+
+        private void useNightsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (this.shdObeyEvts() == false)
+            {
+                return;
+            }
+            if (this.addRec == false && this.editRec == false)
+            {
+                //this.useDaysRadioButton.Checked = !this.useDaysRadioButton.Checked;
+            }
+            else
+            {
+                this.autoCalDays();
             }
         }
     }

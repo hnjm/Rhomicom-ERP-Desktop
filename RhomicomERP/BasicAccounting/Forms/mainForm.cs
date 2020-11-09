@@ -21,6 +21,7 @@ namespace Accounting.Forms
         cadmaFunctions.NavFuncs myNav = new cadmaFunctions.NavFuncs();
         //public NpgsqlConnection gnrlSQLConn = new NpgsqlConnection();
         public Int64 usr_id = -1;
+        public Int64 prsn_id = -1;
         public int[] role_st_id = new int[0];
         public Int64 lgn_num = -1;
         public int Og_id = -1;
@@ -114,6 +115,7 @@ namespace Accounting.Forms
         public string subldgr_SQL = "";
         public string blsDet_SQL = "";
         public string accntStmntSQL = "";
+        public string accntCshBkStmntSQL = "";
         bool obey_bls_evnts = false;
         //Budget Panel Variables;
         Int64 bdgt_cur_indx = 0;
@@ -125,6 +127,7 @@ namespace Accounting.Forms
         bool obey_bdgt_evnts = false;
         bool addbdgt = false;
         bool editbdgt = false;
+        bool isBdgtDplct = false;
         bool addBudgets = false;
         bool editBudgets = false;
         bool delBudgets = false;
@@ -183,7 +186,7 @@ namespace Accounting.Forms
             Global.mnFrm.cmCde.Role_Set_IDs = this.role_st_id;
             Global.mnFrm.cmCde.User_id = this.usr_id;
             Global.mnFrm.cmCde.Org_id = this.Og_id;
-
+            this.prsn_id = Global.mnFrm.cmCde.getUserPrsnID(this.usr_id);
             this.trnsctnsPanel.Visible = false;
             this.trnsSearchPanel.Visible = false;
             this.trialBalancePanel.Visible = false;
@@ -263,6 +266,7 @@ namespace Accounting.Forms
             this.balsShtTabPage.BackColor = clrs[0];
             this.subLedgerTabPage.BackColor = clrs[0];
             this.accntStmntTabPage.BackColor = clrs[0];
+            this.cashBookTabPage.BackColor = clrs[0];
             System.Windows.Forms.Application.DoEvents();
 
             Global.refreshRqrdVrbls();
@@ -295,6 +299,8 @@ namespace Accounting.Forms
                   , "Suspense Account", false, -1, "A", false, true, false, false, 100, false, -1, this.funCurID, true, "",
                   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
             }
+            Global.mnFrm.cmCde.updateDataNoParams("UPDATE accb.accb_trnsctn_batches SET avlbl_for_postng='1' WHERE avlbl_for_postng='0' and batch_source !='Manual';");
+            Global.mnFrm.cmCde.updateDataNoParams("UPDATE accb.accb_rcvbls_invc_hdr SET cstmrs_doc_num=rcvbls_invc_number WHERE cstmrs_doc_num='' or cstmrs_doc_num IS NULL;");
             System.Windows.Forms.Application.DoEvents();
             this.populateTreeView();
             System.Windows.Forms.Application.DoEvents();
@@ -310,7 +316,6 @@ namespace Accounting.Forms
                 this.loadCorrectPanel(this.leftTreeView.Nodes[0].Text);
             }
             this.obey_evnts = true;
-
         }
 
         private void mainForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
@@ -421,6 +426,14 @@ namespace Accounting.Forms
                         continue;
                     }
                 }
+                else if (i == 7)
+                {
+                    if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[0] +
+                    "~" + Global.dfltPrvldgs[30]) == false)
+                    {
+                        continue;
+                    }
+                }
                 else if (i == 8)
                 {
                     if (CommonCode.CommonCodes.ModulesNeeded == "Point of Sale Only")
@@ -439,8 +452,13 @@ namespace Accounting.Forms
                     {
                         continue;
                     }
-                    else if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[0] +
+                    else if ((i == 9 || i == 10) && Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[0] +
                      "~" + Global.dfltPrvldgs[i + 22]) == false)
+                    {
+                        continue;
+                    }
+                    else if ((i == 0 || i == 1 || i == 3) && Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[0] +
+                   "~" + Global.dfltPrvldgs[i + 1]) == false)
                     {
                         continue;
                     }
@@ -493,6 +511,12 @@ namespace Accounting.Forms
                 }
 
 
+                this.mjrClsfctnTextBox.Items.Clear();
+                this.mjrClsfctnTextBox.Items.Add("");
+                for (int a = 0; a < Global.cashFlowClsfctns.Length; a++)
+                {
+                    this.mjrClsfctnTextBox.Items.Add(Global.cashFlowClsfctns[a]);
+                }
                 this.loadAccntChrtPanel();
                 this.loadIMAPanel();
             }
@@ -552,6 +576,29 @@ namespace Accounting.Forms
                 this.showATab(ref this.tabPage4);
                 this.changeOrg();
                 this.obey_evnts = false;
+                this.rptSgmntTextBox.Text = "";
+                this.rptSgmnt1TextBox.Text = "-1";
+                this.rptSgmnt2TextBox.Text = "-1";
+                this.rptSgmnt3TextBox.Text = "-1";
+                this.rptSgmnt4TextBox.Text = "-1";
+                this.rptSgmnt5TextBox.Text = "-1";
+                this.rptSgmnt6TextBox.Text = "-1";
+                this.rptSgmnt7TextBox.Text = "-1";
+                this.rptSgmnt8TextBox.Text = "-1";
+                this.rptSgmnt9TextBox.Text = "-1";
+                this.rptSgmnt10TextBox.Text = "-1";
+
+                this.pnlRptSgmntTextBox.Text = "";
+                this.pnlRptSgmnt1TextBox.Text = "-1";
+                this.pnlRptSgmnt2TextBox.Text = "-1";
+                this.pnlRptSgmnt3TextBox.Text = "-1";
+                this.pnlRptSgmnt4TextBox.Text = "-1";
+                this.pnlRptSgmnt5TextBox.Text = "-1";
+                this.pnlRptSgmnt6TextBox.Text = "-1";
+                this.pnlRptSgmnt7TextBox.Text = "-1";
+                this.pnlRptSgmnt8TextBox.Text = "-1";
+                this.pnlRptSgmnt9TextBox.Text = "-1";
+                this.pnlRptSgmnt10TextBox.Text = "-1";
                 if (this.tbalDteTextBox.Text == "")
                 {
                     this.tbalDteTextBox.Text = DateTime.ParseExact(
@@ -628,8 +675,22 @@ namespace Accounting.Forms
                     this.endDteAccntStmntTextBox.Text = DateTime.ParseExact(
                       "01" + Global.mnFrm.cmCde.getFrmtdDB_Date_time().Substring(2), "dd-MMM-yyyy HH:mm:ss",
                       System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1).ToString("dd-MMM-yyyy 23:59:59");
-                this.obey_evnts = true;
+                this.accntClassComboBox.Items.Clear();
+                for (int a = 0; a < Global.cashFlowClsfctns.Length; a++)
+                {
+                    this.accntClassComboBox.Items.Add(Global.cashFlowClsfctns[a]);
+                }
+                this.accntClassComboBox.SelectedIndex = 0;
 
+                if (this.cshBkStrtDteTextBox.Text == "")
+                    this.cshBkStrtDteTextBox.Text = DateTime.ParseExact(
+                      Global.mnFrm.cmCde.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
+                      System.Globalization.CultureInfo.InvariantCulture).ToString("01-MMM-yyyy 00:00:00");
+                if (this.cshBkEndDteTextBox.Text == "")
+                    this.cshBkEndDteTextBox.Text = DateTime.ParseExact(
+                      "01" + Global.mnFrm.cmCde.getFrmtdDB_Date_time().Substring(2), "dd-MMM-yyyy HH:mm:ss",
+                      System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1).ToString("dd-MMM-yyyy 23:59:59");
+                this.obey_evnts = true;
             }
             else if (inpt_name == menuItems[5])
             {
@@ -1354,9 +1415,9 @@ namespace Accounting.Forms
             if (this.dsplySizeChrtComboBox.Text == ""
              || int.TryParse(this.dsplySizeChrtComboBox.Text, out dsply) == false)
             {
-                this.dsplySizeChrtComboBox.Text = Global.mnFrm.cmCde.get_CurPlcy_Mx_Dsply_Recs().ToString();
+                this.dsplySizeChrtComboBox.Text = "200"; Global.mnFrm.cmCde.get_CurPlcy_Mx_Dsply_Recs().ToString();
             }
-            this.groupBox4.Text = "CHART OF ACCOUNTS BALANCE DETAILS (" + funcCurCode + ")";
+            //this.groupBox4.Text = "CHART OF ACCOUNTS BALANCE DETAILS (" + funcCurCode + ")";
             this.funcCurrLabel.Text = "FUNCTIONAL CURRENCY BALANCE (" + funcCurCode + ")";
             this.accntCurrLabel.Text = "ACCOUNT CURRENCY BALANCE (" + funcCurCode + ")";
             this.is_last_chrt = false;
@@ -1421,6 +1482,11 @@ namespace Accounting.Forms
                 return;
             }
             this.obey_chrt_evnts = false;
+            /*if (this.editChrtButton.Text == "STOP")
+            {
+                this.editChrtButton.Text = "EDIT";
+                this.editChrtButton_Click(this.editChrtButton, e);
+            }*/
             if (this.editChrt == false)
             {
                 this.clearChrtInfo();
@@ -1632,8 +1698,7 @@ namespace Accounting.Forms
             {
                 if (this.netBalNumericUpDown.Value != 0
                   || this.crdtBalNumericUpDown.Value != 0
-                  || this.dbtBalNumericUpDown.Value != 0
-                  || this.accntSgmnt1TextBox.Text != "-1")
+                  || this.dbtBalNumericUpDown.Value != 0)
                 {
                     this.isPrntAccntsCheckBox.Enabled = false;
                     this.isContraCheckBox.Enabled = false;
@@ -1659,7 +1724,13 @@ namespace Accounting.Forms
                     this.accntCrncyNmTextBox.Enabled = true;
                     this.accntCurrButton.Enabled = true;
                 }
-                if (this.accntSgmnt1TextBox.Text != "-1")
+                this.accntNumTextBox.ReadOnly = false;
+                this.accntNumTextBox.BackColor = Color.FromArgb(255, 255, 118);
+                this.accntNameTextBox.ReadOnly = false;
+                this.accntNameTextBox.BackColor = Color.FromArgb(255, 255, 118);
+                this.accntDescTextBox.ReadOnly = false;
+                this.accntDescTextBox.BackColor = Color.FromArgb(255, 255, 118);
+                /*if (this.accntSgmnt1TextBox.Text != "-1")
                 {
                     this.accntNumTextBox.ReadOnly = true;
                     this.accntNumTextBox.BackColor = Color.WhiteSmoke;
@@ -1670,13 +1741,8 @@ namespace Accounting.Forms
                 }
                 else
                 {
-                    this.accntNumTextBox.ReadOnly = false;
-                    this.accntNumTextBox.BackColor = Color.FromArgb(255, 255, 118);
-                    this.accntNameTextBox.ReadOnly = false;
-                    this.accntNameTextBox.BackColor = Color.FromArgb(255, 255, 118);
-                    this.accntDescTextBox.ReadOnly = false;
-                    this.accntDescTextBox.BackColor = Color.FromArgb(255, 255, 118);
-                }
+                    
+                }*/
             }
             this.obey_chrt_evnts = true;
         }
@@ -1707,7 +1773,7 @@ namespace Accounting.Forms
             }
             DataSet dtst = Global.get_Basic_ChrtDet(this.searchForChrtTextBox.Text,
              this.searchInChrtComboBox.Text, this.chrt_cur_indx, int.Parse(this.dsplySizeChrtComboBox.Text)
-             , Global.mnFrm.cmCde.Org_id);
+             , Global.mnFrm.cmCde.Org_id, this.mjrClsfctnTextBox.Text, this.mnrClsfctnTextBox.Text);
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
                 this.last_chrt_num = Global.mnFrm.cmCde.navFuncts.startIndex() + i;
@@ -1834,8 +1900,13 @@ namespace Accounting.Forms
         private void prpareForChrtEdit()
         {
             this.saveChrtButton.Enabled = true;
-
-            if (this.accntSgmnt1TextBox.Text != "-1")
+            this.accntNumTextBox.ReadOnly = false;
+            this.accntNumTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.accntNameTextBox.ReadOnly = false;
+            this.accntNameTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.accntDescTextBox.ReadOnly = false;
+            this.accntDescTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            /*if (this.accntSgmnt1TextBox.Text != "-1")
             {
                 this.accntNumTextBox.ReadOnly = true;
                 this.accntNumTextBox.BackColor = Color.WhiteSmoke;
@@ -1852,7 +1923,7 @@ namespace Accounting.Forms
                 this.accntNameTextBox.BackColor = Color.FromArgb(255, 255, 118);
                 this.accntDescTextBox.ReadOnly = false;
                 this.accntDescTextBox.BackColor = Color.FromArgb(255, 255, 118);
-            }
+            }*/
             this.accClsfctnComboBox.BackColor = Color.White;
 
             this.accntCrncyNmTextBox.ReadOnly = false;
@@ -1945,7 +2016,7 @@ namespace Accounting.Forms
             {
                 this.is_last_chrt = true;
                 this.totl_chrt = Global.get_Total_Chrts(this.searchForChrtTextBox.Text,
-                 this.searchInChrtComboBox.Text, Global.mnFrm.cmCde.Org_id);
+                 this.searchInChrtComboBox.Text, Global.mnFrm.cmCde.Org_id, this.mjrClsfctnTextBox.Text, this.mnrClsfctnTextBox.Text);
                 this.updtChrtTotals();
                 this.chrt_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -2047,10 +2118,10 @@ namespace Accounting.Forms
                     Global.mnFrm.cmCde.showMsg("No record to Edit!", 0);
                     return;
                 }
+                /*|| this.accntSgmnt1TextBox.Text != "-1"*/
                 if (this.netBalNumericUpDown.Value != 0
                   || this.dbtBalNumericUpDown.Value != 0
-                  || this.crdtBalNumericUpDown.Value != 0
-                  || this.accntSgmnt1TextBox.Text != "-1")
+                  || this.crdtBalNumericUpDown.Value != 0)
                 {
                     this.isPrntAccntsCheckBox.Enabled = false;
                     this.isContraCheckBox.Enabled = false;
@@ -2068,8 +2139,8 @@ namespace Accounting.Forms
                 this.editChrt = true;
                 this.prpareForChrtEdit();
                 this.addChrtButton.Enabled = false;
-                this.editChrtButton.Enabled = false;
-                this.deleteChrtButton.Enabled = false;
+                this.editChrtButton.Enabled = true;
+                this.deleteChrtButton.Enabled = this.delAccounts;
                 this.editChrtButton.Text = "STOP";
                 this.editAcntMenuItem.Text = "STOP EDITING";
             }
@@ -2297,6 +2368,22 @@ namespace Accounting.Forms
                 Global.mnFrm.cmCde.showMsg("New Account Name is already in use in this Organization!", 0);
                 return;
             }
+            int oldCmbntnID = Global.mnFrm.cmCde.getAccountCmbntnID(Global.mnFrm.cmCde.Org_id,
+                 int.Parse(this.accntSgmnt1TextBox.Text),
+                 int.Parse(this.accntSgmnt2TextBox.Text),
+                 int.Parse(this.accntSgmnt3TextBox.Text),
+                 int.Parse(this.accntSgmnt4TextBox.Text),
+                 int.Parse(this.accntSgmnt5TextBox.Text),
+                 int.Parse(this.accntSgmnt6TextBox.Text),
+                 int.Parse(this.accntSgmnt7TextBox.Text),
+                 int.Parse(this.accntSgmnt8TextBox.Text),
+                 int.Parse(this.accntSgmnt9TextBox.Text),
+                 int.Parse(this.accntSgmnt10TextBox.Text));
+            if (oldCmbntnID > 0 && oldCmbntnID != int.Parse(this.accntIDTextBox.Text))
+            {
+                Global.mnFrm.cmCde.showMsg("This combination of Segment Values is already present in this Organization!", 0);
+                return;
+            }
             if (this.addChrt == true)
             {
                 Global.createChrt(Global.mnFrm.cmCde.Org_id,
@@ -2320,6 +2407,7 @@ namespace Accounting.Forms
                  int.Parse(this.accntSgmnt9TextBox.Text),
                  int.Parse(this.accntSgmnt10TextBox.Text),
                  int.Parse(this.mappedAccntIDTextBox.Text));
+                oldAccntNosID = Global.mnFrm.cmCde.getAccntID(this.accntNumTextBox.Text, Global.mnFrm.cmCde.Org_id);
                 this.saveChrtButton.Enabled = false;
                 this.addChrt = false;
                 this.editChrt = false;
@@ -2357,6 +2445,76 @@ namespace Accounting.Forms
                     this.accntsChrtListView.SelectedItems[0].SubItems[1].Text = this.accntNumTextBox.Text;
                     this.accntsChrtListView.SelectedItems[0].SubItems[2].Text = this.accntNameTextBox.Text;
                 }
+            }
+
+            if (oldAccntNosID > 0)
+            {
+                //Get Report Classifications on the Natural Acount Segment and Save
+                int sgmntID = Global.mnFrm.cmCde.getSegmentID("NaturalAccount", Global.mnFrm.cmCde.Org_id);
+                if (sgmntID > 0)
+                {
+                    int sgmntNum = -1;
+                    int.TryParse(Global.mnFrm.cmCde.getGnrlRecNm("org.org_acnt_sgmnts", "segment_id", "segment_number", sgmntID), out sgmntNum);
+                    int ntrlSgmntValID = -1;
+                    switch (sgmntNum)
+                    {
+                        case 1:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt1TextBox.Text);
+                            break;
+                        case 2:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt2TextBox.Text);
+                            break;
+                        case 3:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt3TextBox.Text);
+                            break;
+                        case 4:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt4TextBox.Text);
+                            break;
+                        case 5:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt5TextBox.Text);
+                            break;
+                        case 6:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt6TextBox.Text);
+                            break;
+                        case 7:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt7TextBox.Text);
+                            break;
+                        case 8:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt8TextBox.Text);
+                            break;
+                        case 9:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt9TextBox.Text);
+                            break;
+                        case 10:
+                            ntrlSgmntValID = int.Parse(this.accntSgmnt10TextBox.Text);
+                            break;
+                        default:
+                            break;
+                    }
+                    if (sgmntNum > 0 && ntrlSgmntValID > 0)
+                    {
+                        DataSet rptClsDtSt = Global.get_SgmntVal_RptClsfctns(ntrlSgmntValID);
+                        for (int h = 0; h < rptClsDtSt.Tables[0].Rows.Count; h++)
+                        {
+                            long rptClsfID = Global.get_RptClsfctnID(rptClsDtSt.Tables[0].Rows[h][1].ToString(),
+                                rptClsDtSt.Tables[0].Rows[h][2].ToString(), oldAccntNosID);
+                            if (rptClsfID <= 0)
+                            {
+                                rptClsfID = Global.getNewRptClsfLnID();
+                                Global.createRptClsfctn(rptClsfID, rptClsDtSt.Tables[0].Rows[h][1].ToString(),
+                                    rptClsDtSt.Tables[0].Rows[h][2].ToString(), oldAccntNosID);
+                            }
+                            else
+                            {
+                                Global.updateRptClsfctn(rptClsfID, rptClsDtSt.Tables[0].Rows[h][1].ToString(),
+                                    rptClsDtSt.Tables[0].Rows[h][2].ToString(), oldAccntNosID);
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.editChrt == true)
+            {
                 Global.mnFrm.cmCde.showMsg("Record Saved!", 3);
             }
         }
@@ -3722,9 +3880,7 @@ namespace Accounting.Forms
             DataSet dtst = Global.get_Batch_Trns_NoStatus(long.Parse(this.batchIDTextBox.Text));
             long ttltrns = dtst.Tables[0].Rows.Count;
             //ttltrns > 0 &&
-            if ((this.batchSourceLabel.Text != "Manual" && this.batchSourceLabel.Text != "Manual Batch Reversal")
-              && (Global.get_ScmIntrfcTrnsCnt(long.Parse(this.batchIDTextBox.Text)) > 0
-              || Global.get_PayIntrfcTrnsCnt(long.Parse(this.batchIDTextBox.Text)) > 0))
+            if ((this.batchSourceLabel.Text != "Manual" && this.batchSourceLabel.Text != "Manual Batch Reversal"))
             {
                 if (Global.mnFrm.cmCde.showMsg("Force Deleting/Voiding Batches \r\nthat came from other Modules " +
                 "and have Transactions in them can have serious consequences of your Accounting System! \r\nAre you sure you want to Proceed??", 1) == DialogResult.No)
@@ -3740,24 +3896,18 @@ namespace Accounting.Forms
                 {
                     return;
                 }
-                /*Global.mnFrm.cmCde.showMsg("Cannot Void Batches \r\nthat came from other Modules " +
-                "and have been Posted!", 0);
-                return;*/
             }
             if (this.batchStatusLabel.Text == "Posted" && this.batchSourceLabel.Text == "Manual Batch Reversal")
             {
                 Global.mnFrm.cmCde.showMsg("Cannot Reverse Posted Reversal Batches Please Key the Original Transactions in a New Batch!", 0);
                 return;
             }
-            /*&&
-              this.batchSourceLabel.Text != "Period Close Process"*/
             if (this.batchStatusLabel.Text == "Not Posted")
             {
                 if (Global.mnFrm.cmCde.showMsg("This batch is NOT POSTED so it will be DELETED.\r\nAre you sure you want to DELETE the selected" +
                  "\r\nBatch and all its Transactions? \r\nThis Action cannot be undone!", 1)
                  == DialogResult.No)
                 {
-                    //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
                     return;
                 }
                 else
@@ -3845,7 +3995,6 @@ namespace Accounting.Forms
                  "\r\nBatch and all its Transactions? \r\nThis Action cannot be undone!", 1)
                  == DialogResult.No)
                 {
-                    //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
                     return;
                 }
                 else
@@ -4024,18 +4173,28 @@ namespace Accounting.Forms
 
         private void postTrnsButton_Click(object sender, EventArgs e)
         {
+            /*string updtSQL = @"UPDATE accb.accb_trnsctn_details 
+      SET dbt_amount=round(dbt_amount,2), crdt_amount=round(crdt_amount,2),
+net_amount = round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)
+      WHERE dbt_amount!=round(dbt_amount,2) or crdt_amount!=round(crdt_amount,2)
+or net_amount != round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)";
+            Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
+            if (this.trnsBatchListView.SelectedItems.Count > 0)
+            {
+                this.populateTrnsDet(long.Parse(this.trnsBatchListView.SelectedItems[0].SubItems[2].Text));
+            }
             if (this.backgroundWorker1.IsBusy == true)
             {
                 return;
-            }
+            }*/
             if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[21]) == false)
             {
                 Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
                  " this action!\nContact your System Administrator!", 0);
                 return;
             }
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            //this.backgroundWorker1.WorkerReportsProgress = true;
+            //this.backgroundWorker1.WorkerSupportsCancellation = true;
 
             if (this.batchIDTextBox.Text == "" ||
           this.batchIDTextBox.Text == "-1" ||
@@ -4087,19 +4246,8 @@ Check the ff Days:" + "\r\n";
                 Global.mnFrm.cmCde.showMsg(msg1, 4);
                 return;
             }
-
-            double aesum = Global.get_COA_AESum(Global.mnFrm.cmCde.Org_id);
-            double crlsum = Global.get_COA_CRLSum(Global.mnFrm.cmCde.Org_id);
-            if (aesum
-             != crlsum)
-            {
-                Global.mnFrm.cmCde.showMsg("Cannot Post this Batch Since Current GL is not Balanced!\r\nPlease correct the Imbalance First!", 0);
-                return;
-            }
-
             if (Global.mnFrm.cmCde.showMsg("REMEMBER! Transactions once posted CANNOT be edited!\r\nAre you sure you want to POST this Batch?", 1) == DialogResult.No)
             {
-                //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
                 return;
             }
 
@@ -4112,12 +4260,64 @@ Check the ff Days:" + "\r\n";
 
             System.Windows.Forms.Application.DoEvents();
 
-            string dateStr = DateTime.ParseExact(
+            /*string dateStr = DateTime.ParseExact(
          Global.mnFrm.cmCde.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
          System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
             Object[] args = {this.batchIDTextBox.Text,
-            Global.mnFrm.cmCde.Org_id.ToString(), dateStr, net_accnt.ToString()};
-            this.backgroundWorker1.RunWorkerAsync(args);
+            Global.mnFrm.cmCde.Org_id.ToString(), dateStr, net_accnt.ToString()};*/
+            if (Global.mnFrm.cmCde.isThereANActvPrcss("5") == "1")
+            {
+                Global.mnFrm.cmCde.showMsg("Sorry an Account Posting Process is already on-going!\r\nKindly try again in a few minutes!", 0);
+                return;
+            }
+            else
+            {
+                string reportName = "Post GL Transaction Batches-Web";
+                long rptID = -1;
+                rptID = Global.mnFrm.cmCde.getGnrlRecID("rpt.rpt_reports", "report_name", "report_id", reportName);
+                if (rptID <= 0)
+                {
+                    Global.mnFrm.cmCde.showMsg("Cannot Find the Required Background Processes!\r\n" +
+                    "Please visit Reports & Processes to get them Set Up and Try Again!", 0);
+                    return;
+                }
+
+                string datestr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
+                string reportTitle = reportName.ToUpper();
+                string paramRepsNVals = "{:orgID}~" + Global.mnFrm.cmCde.Org_id.ToString() + "|{:p_batch_id}~" + this.batchIDTextBox.Text;
+                //Global.mnFrm.cmCde.updateANActvPrcss("5", "1");
+                DialogResult dgres = Global.mnFrm.cmCde.showRptParamsDiaglog(rptID, Global.mnFrm.cmCde, paramRepsNVals, reportTitle);
+                Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
+
+                // Global.mnFrm.cmCde.updateANActvPrcss("5", "1");
+                /*this.progressBar1.Value = 50;
+                System.Windows.Forms.Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
+                DataSet dtstfnl = Global.pg_Post_Gl_Trns(long.Parse(this.batchIDTextBox.Text),
+                     Global.myBscActn.user_id, "", Global.mnFrm.cmCde.Org_id, -1, "0");
+                for (int i = 0; i < dtstfnl.Tables[0].Rows.Count; i++)
+                {
+                    Global.mnFrm.cmCde.showMsg(dtstfnl.Tables[0].Rows[i][0].ToString().Replace("<br/>", "\r\n"), 3);
+                    Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
+                    this.progressBar1.Value = 0;
+                }*/
+                if (this.batchSourceLabel.Text == "Period Close Process")
+                {
+                    Global.updatePrdCloseStatus(long.Parse(this.batchIDTextBox.Text));
+                }
+                System.Windows.Forms.Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
+                this.addTrnsButton.Enabled = this.addTrscns;
+                this.addTrnsTmpltButton.Enabled = this.addTrscnsFrmTmp;
+                this.imprtTrnsTmpltButton.Enabled = this.addTrscns;
+                this.exprtTrnsTmpltButton.Enabled = true;
+                this.postTrnsButton.Enabled = this.postTrscns;
+                this.cancelRunButton.Enabled = false;
+                this.loadAccntTrnsPanel();
+                System.Windows.Forms.Application.DoEvents();
+                System.Windows.Forms.Application.DoEvents();
+            }
+            //this.backgroundWorker1.RunWorkerAsync(args);
         }
 
         private void reloadAcntChrtBals(int netaccntid)
@@ -4126,11 +4326,6 @@ Check the ff Days:" + "\r\n";
          Global.mnFrm.cmCde.getDB_Date_time(), "yyyy-MM-dd HH:mm:ss",
          System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MMM-yyyy HH:mm:ss");
             DataSet dtst = Global.get_All_Chrt_Det(Global.mnFrm.cmCde.Org_id);
-            //DataSet dtst = Global.get_Batch_Accnts(btchid);
-            //if (dateStr.Length > 10)
-            //{
-            //  dateStr = dateStr.Substring(0, 10);
-            //}
             for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
             {
                 string[] rslt = Global.getAccntLstDailyBalsInfo(
@@ -4340,37 +4535,12 @@ Check the ff Days:" + "\r\n";
                 string btchSrc = Global.mnFrm.cmCde.getGnrlRecNm(
                   "accb.accb_trnsctn_batches", "batch_id", "batch_source", long.Parse((string)myargs[0]));
                 //Check if no other accounting process is running
-                bool isAnyRnng = true;
-                int witcntr = 0;
-                do
-                {
-                    witcntr++;
-                    isAnyRnng = Global.isThereANActvActnPrcss("1,2,3,4,5,6", "10 second");
-                    if (worker.CancellationPending == true)
-                    {
-                        e.Cancel = true;
-                        this.addTrnsButton.Enabled = this.addTrscns;
-                        this.addTrnsTmpltButton.Enabled = this.addTrscnsFrmTmp;
-                        this.imprtTrnsTmpltButton.Enabled = this.addTrscns;
-                        this.exprtTrnsTmpltButton.Enabled = true;
-                        this.postTrnsButton.Enabled = this.postTrscns;
-                        this.cancelRunButton.Enabled = false;
-                        this.loadAccntTrnsPanel();
-                        return;
-                    }
-                    else
-                    {
-                        worker.ReportProgress(Convert.ToInt32((witcntr) * (10.00 / (witcntr + 2))) + 0);
-                    }
-                }
-                while (isAnyRnng == true);
-
                 //Validating Entries
                 if (btchSrc != "Period Close Process")
                 {
                     for (int i = 0; i < ttltrns; i++)
                     {
-                        Global.updtActnPrcss(5);
+                        //Global.updtActnPrcss(5);
                         if (worker.CancellationPending == true)
                         {
                             e.Cancel = true;
@@ -4381,6 +4551,7 @@ Check the ff Days:" + "\r\n";
                             this.postTrnsButton.Enabled = this.postTrscns;
                             this.cancelRunButton.Enabled = false;
                             this.loadAccntTrnsPanel();
+                            Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
                             return;
                         }
                         else
@@ -4404,6 +4575,7 @@ Check the ff Days:" + "\r\n";
                                 "\r\nACCOUNT: " + dtst.Tables[0].Rows[i][1].ToString() + "." + dtst.Tables[0].Rows[i][2].ToString() +
                                 "\r\nAMOUNT: " + netAmnt +
                                 "\r\nDATE: " + lnDte, 0);
+                                Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
                                 return;
                             }
                         }
@@ -4413,27 +4585,8 @@ Check the ff Days:" + "\r\n";
 
                 for (int i = 0; i < ttltrns; i++)
                 {
-                    Global.updtActnPrcss(5);
-                    //if (worker.CancellationPending == true)
-                    //{
-                    //  //e.Cancel = true;
-                    //  //this.addTrnsButton.Enabled = this.addTrscns;
-                    //  //this.addTrnsTmpltButton.Enabled = this.addTrscnsFrmTmp;
-                    //  //this.imprtTrnsTmpltButton.Enabled = this.addTrscns;
-                    //  //this.exprtTrnsTmpltButton.Enabled = true;
-                    //  //this.postTrnsButton.Enabled = this.postTrscns;
-                    //  //this.cancelRunButton.Enabled = false;
-                    //  //this.loadAccntTrnsPanel();
-                    //  //break;
-                    //}
-                    //else
-                    //{
+                    //Global.updtActnPrcss(5);
                     System.Windows.Forms.Application.DoEvents();
-
-                    //Update the corresponding account balance and 
-                    //update net income balance as well if type is R or EX
-                    //update control account if any
-                    //update accnt curr bals if different from 
                     int accntCurrID = int.Parse(dtst.Tables[0].Rows[i][17].ToString());
                     int funcCurr = int.Parse(dtst.Tables[0].Rows[i][7].ToString());
                     double accntCurrAmnt = double.Parse(dtst.Tables[0].Rows[i][15].ToString());
@@ -4549,6 +4702,8 @@ Check the ff Days:" + "\r\n";
             "\r\nSuccessfully Reloaded Chart of Account Balances!"
             , log_tbl, dateStr);
                 System.Windows.Forms.Application.DoEvents();
+                Global.updateBatchStatus(long.Parse(this.batchIDTextBox.Text));
+                Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
                 double aesum = Global.get_COA_AESum(int.Parse((string)myargs[1]));
                 double crlsum = Global.get_COA_CRLSum(int.Parse((string)myargs[1]));
                 if (aesum != crlsum)
@@ -4556,137 +4711,20 @@ Check the ff Days:" + "\r\n";
                     Global.mnFrm.cmCde.updateLogMsg(msg_id,
                "\r\nBatch of Transactions caused an " +
                       "IMBALANCE in the Accounting! A+E=" + aesum + "\r\nC+R+L=" + crlsum + "\r\nDiff=" + (aesum - crlsum), log_tbl, dateStr);
-                    string errmsg = "";
-
-                    Global.mnFrm.cmCde.updateLogMsg(msg_id,
-               "\r\n" + errmsg + "\r\nProcess to undo the posted transactions " +
-               "is about to start...!", log_tbl, dateStr);
-                    System.Windows.Forms.Application.DoEvents();
-                    System.Windows.Forms.Application.DoEvents();
-                    //Global.mnFrm.cmCde.showMsg("Batch of Transactions caused an " +
-                    ////  "IMBALANCE in the Accounting !", 0);
-                    for (int i = 0; i < ttltrns; i++)
+                    string asAtDate = Global.getMinUnpstdTrnsDte(Global.mnFrm.cmCde.Org_id);
+                    if (asAtDate != "")
                     {
-                        Global.updtActnPrcss(5);
-                        int accntCurrID = int.Parse(dtst.Tables[0].Rows[i][17].ToString());
-                        int funcCurr = int.Parse(dtst.Tables[0].Rows[i][7].ToString());
-                        double accntCurrAmnt = double.Parse(dtst.Tables[0].Rows[i][15].ToString());
-                        string acctyp = Global.mnFrm.cmCde.getAccntType(
-                         int.Parse(dtst.Tables[0].Rows[i][9].ToString()));
-                        bool hsBnUpdt = Global.hsTrnsUptdAcntBls(
-                          long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-                        dtst.Tables[0].Rows[i][6].ToString(),
-                          int.Parse(dtst.Tables[0].Rows[i][9].ToString()));
-
-                        if (hsBnUpdt == true)
-                        {
-                            double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                            double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                            double net1 = double.Parse(dtst.Tables[0].Rows[i][10].ToString());
-
-                            if (funCurID != accntCurrID)
-                            {
-                                Global.undoPostAccntCurrTransaction(int.Parse(dtst.Tables[0].Rows[i][9].ToString()),
-                                 Global.getSign(dbt1) * accntCurrAmnt,
-                                 Global.getSign(crdt1) * accntCurrAmnt,
-                                 Global.getSign(net1) * accntCurrAmnt,
-                                 dtst.Tables[0].Rows[i][6].ToString(),
-                                 long.Parse(dtst.Tables[0].Rows[i][0].ToString()), accntCurrID);
-                            }
-                            Global.undoPostTransaction(int.Parse(dtst.Tables[0].Rows[i][9].ToString()),
-                             double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                             double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                             double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                            dtst.Tables[0].Rows[i][6].ToString(),
-                                long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                        }
-                        hsBnUpdt = Global.hsTrnsUptdAcntBls(
-                        long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-                      dtst.Tables[0].Rows[i][6].ToString(),
-                        net_accnt);
-                        if (hsBnUpdt == true)
-                        {
-                            if (acctyp == "R")
-                            {
-                                Global.undoPostTransaction(net_accnt,
-                            double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                            double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                            double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                               dtst.Tables[0].Rows[i][6].ToString(),
-                                   long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                            }
-                            else if (acctyp == "EX")
-                            {
-                                Global.undoPostTransaction(net_accnt,
-                            double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                            double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                            (double)(-1) * double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                               dtst.Tables[0].Rows[i][6].ToString(),
-                                   long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                            }
-                        }
-
-                        //get control accnt id
-                        int cntrlAcntID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "control_account_id", int.Parse(dtst.Tables[0].Rows[i][9].ToString())));
-                        if (cntrlAcntID > 0)
-                        {
-                            hsBnUpdt = Global.hsTrnsUptdAcntBls(
-                              long.Parse(dtst.Tables[0].Rows[i][0].ToString()),
-                            dtst.Tables[0].Rows[i][6].ToString(),
-                              cntrlAcntID);
-
-                            if (hsBnUpdt == true)
-                            {
-                                int cntrlAcntCurrID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm(
-                        "accb.accb_chart_of_accnts", "accnt_id", "crncy_id", cntrlAcntID));
-
-                                double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                                double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                                double net1 = double.Parse(dtst.Tables[0].Rows[i][10].ToString());
-
-                                if (funCurID != cntrlAcntCurrID && cntrlAcntCurrID == accntCurrID)
-                                {
-                                    Global.undoPostAccntCurrTransaction(cntrlAcntID,
-                                     Global.getSign(dbt1) * accntCurrAmnt,
-                                     Global.getSign(crdt1) * accntCurrAmnt,
-                                     Global.getSign(net1) * accntCurrAmnt,
-                                     dtst.Tables[0].Rows[i][6].ToString(),
-                                     long.Parse(dtst.Tables[0].Rows[i][0].ToString()), accntCurrID);
-                                }
-                                Global.undoPostTransaction(cntrlAcntID,
-                                 double.Parse(dtst.Tables[0].Rows[i][4].ToString()),
-                                 double.Parse(dtst.Tables[0].Rows[i][5].ToString()),
-                                 double.Parse(dtst.Tables[0].Rows[i][10].ToString()),
-                                dtst.Tables[0].Rows[i][6].ToString(),
-                                    long.Parse(dtst.Tables[0].Rows[i][0].ToString()));
-                            }
-                        }
-                        Global.chngeTrnsStatus(long.Parse(dtst.Tables[0].Rows[i][0].ToString()), "0");
-                        Global.mnFrm.cmCde.updateLogMsg(msg_id,
-                  "\r\nSuccessfully unposted transaction ID= " + dtst.Tables[0].Rows[i][0].ToString()
-                  , log_tbl, dateStr);
-                        worker.ReportProgress(Convert.ToInt32((ttltrns - (i + 1)) * (99 / ttltrns)));
-                        System.Windows.Forms.Application.DoEvents();
-                        //}
+                        this.correctImblnsProcess(asAtDate);
                     }
-                    //Call Accnts Chart Bals Update
-                    worker.ReportProgress(10);
-                    this.reloadAcntChrtBals(long.Parse((string)myargs[0]), net_accnt);
-                    worker.ReportProgress(0);
-                    Global.mnFrm.cmCde.updateLogMsg(msg_id,
-               "\r\nSuccessfully Reloaded Original Chart of Account Balances!"
-               , log_tbl, dateStr);
-                    System.Windows.Forms.Application.DoEvents();
                 }
                 else
                 {
-                    Global.updateBatchStatus(long.Parse(this.batchIDTextBox.Text));
                     Global.mnFrm.cmCde.updateLogMsg(msg_id,
                "\r\nBatch of Transactions POSTED SUCCESSFULLY!"
                , log_tbl, dateStr);
-                    worker.ReportProgress(100);
-                    System.Windows.Forms.Application.DoEvents();
                 }
+                worker.ReportProgress(100);
+                System.Windows.Forms.Application.DoEvents();
             }
             catch (Exception ex)
             {
@@ -4694,6 +4732,99 @@ Check the ff Days:" + "\r\n";
             }
         }
 
+        private void correctImblnsProcess(string asAtDate)
+        {
+            try
+            {
+                int suspns_accnt = Global.get_Suspns_Accnt(Global.mnFrm.cmCde.Org_id);
+                int ret_accnt = Global.get_Rtnd_Erngs_Accnt(Global.mnFrm.cmCde.Org_id);
+                int net_accnt = Global.get_Net_Income_Accnt(Global.mnFrm.cmCde.Org_id);
+                string trnsAftaDate = DateTime.ParseExact(
+        asAtDate, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+
+                DataSet dtst = new DataSet();
+                //Global.get_WrongNetBalncs(Global.mnFrm.cmCde.Org_id);
+                Global.mnFrm.cmCde.updateDataNoParams(@"DELETE FROM accb.accb_accnt_daily_bals WHERE  daily_bals_id IN  (Select tbl1.db1 from (Select count(daily_bals_id), accnt_id, as_at_date, MAX(daily_bals_id) db1 from accb.accb_accnt_daily_bals 
+                                                        GROUP BY  accnt_id, as_at_date
+                                                        HAVING count(daily_bals_id)>1) tbl1)");
+
+                Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE accb.accb_accnt_daily_bals a SET dbt_bal=0, crdt_bal=0, net_balance=0 WHERE as_at_date>='" + trnsAftaDate.Replace("'", "''") + "'");
+
+                string updtSQL = @"UPDATE accb.accb_trnsctn_details 
+      SET dbt_amount=round(dbt_amount,2), crdt_amount=round(crdt_amount,2),
+net_amount = round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)
+      WHERE dbt_amount!=round(dbt_amount,2) or crdt_amount!=round(crdt_amount,2)
+or net_amount != round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)";
+                Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
+
+                DateTime StartDate = DateTime.ParseExact(
+            trnsAftaDate + " 00:00:00", "yyyy-MM-dd HH:mm:ss",
+            System.Globalization.CultureInfo.InvariantCulture);
+                DateTime EndDate = DateTime.ParseExact(
+                      "01" + Global.mnFrm.cmCde.getFrmtdDB_Date_time().Substring(2, 9) + " 23:59:59", "dd-MMM-yyyy HH:mm:ss",
+                      System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1);
+
+                for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
+                {
+                    trnsAftaDate = date.ToString("yyyy-MM-dd");
+                    dtst = Global.get_WrongBalncs(Global.mnFrm.cmCde.Org_id, trnsAftaDate);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                    {
+                        string acctyp = Global.mnFrm.cmCde.getAccntType(int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+
+                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                        double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+
+                        Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                         dbt1,
+                         crdt1,
+                         net1,
+                         dtst.Tables[0].Rows[i][7].ToString(), -993);
+                    }
+                    //Global.updtActnPrcss(5, 50);
+                    dtst = Global.get_WrongHsSubLdgrBalncs(Global.mnFrm.cmCde.Org_id, trnsAftaDate);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                    {
+                        string acctyp = Global.mnFrm.cmCde.getAccntType(
+                         int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                        double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+                        Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                         dbt1,
+                         crdt1,
+                         net1,
+                         dtst.Tables[0].Rows[i][7].ToString(), -993);
+                    }
+                    //Global.updtActnPrcss(5, 50);
+                    dtst = Global.get_WrongNetIncmBalncs(Global.mnFrm.cmCde.Org_id, trnsAftaDate);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                    {
+                        string acctyp = Global.mnFrm.cmCde.getAccntType(
+                         int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+
+                        double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                        double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                        double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+                        Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                         dbt1,
+                         crdt1,
+                         net1,
+                         dtst.Tables[0].Rows[i][7].ToString(), -993);
+                    }
+                }
+                //Global.updtActnPrcss(5, 1);
+
+                //Global.updtActnPrcss(5, 50);
+                this.reloadAcntChrtBals(net_accnt);
+            }
+            catch (Exception ex)
+            {
+                //DO Nothing
+            }
+        }
         private void addTrnsTmpltButton_Click(object sender, EventArgs e)
         {
             this.addTrnsFrmTmpButton_Click(this.addTrnsFrmTmpButton, e);
@@ -5566,14 +5697,14 @@ Check the ff Days:" + "\r\n";
         private void populateTrialBals(string balsDate)
         {
             //Check if no other accounting process is running
-            bool isAnyRnng = true;
-            do
-            {
-                isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
-                System.Windows.Forms.Application.DoEvents();
-            }
-            while (isAnyRnng == true);
-            Global.updtActnPrcss(1);
+            /* bool isAnyRnng = true;
+             do
+             {
+                 isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
+                 System.Windows.Forms.Application.DoEvents();
+             }
+             while (isAnyRnng == true);
+             Global.updtActnPrcss(1);*/
             this.statusLoadLabel.Visible = true;
             this.statusLoadPictureBox.Visible = true;
             this.trialBalListView.Visible = false;
@@ -5583,24 +5714,46 @@ Check the ff Days:" + "\r\n";
             DataSet dtst = new DataSet();
             if (int.Parse(this.tbalsAcctIDTextBox.Text) <= 0)
             {
-                dtst = Global.get_TrialBalance(Global.mnFrm.cmCde.Org_id, balsDate);
+                dtst = Global.get_TrialBalance(Global.mnFrm.cmCde.Org_id, balsDate, (int)this.tbalsNumUpDown.Value
+                    , int.Parse(this.rptSgmnt1TextBox.Text)
+                    , int.Parse(this.rptSgmnt2TextBox.Text)
+                    , int.Parse(this.rptSgmnt3TextBox.Text)
+                    , int.Parse(this.rptSgmnt4TextBox.Text)
+                    , int.Parse(this.rptSgmnt5TextBox.Text)
+                    , int.Parse(this.rptSgmnt6TextBox.Text)
+                    , int.Parse(this.rptSgmnt7TextBox.Text)
+                    , int.Parse(this.rptSgmnt8TextBox.Text)
+                    , int.Parse(this.rptSgmnt9TextBox.Text)
+                    , int.Parse(this.rptSgmnt10TextBox.Text));
             }
             else
             {
-                dtst = Global.get_TrialBalance(Global.mnFrm.cmCde.Org_id, balsDate, int.Parse(this.tbalsAcctIDTextBox.Text));
+                dtst = Global.get_TrialBalance1(Global.mnFrm.cmCde.Org_id, balsDate, int.Parse(this.tbalsAcctIDTextBox.Text)
+                    , int.Parse(this.rptSgmnt1TextBox.Text)
+                    , int.Parse(this.rptSgmnt2TextBox.Text)
+                    , int.Parse(this.rptSgmnt3TextBox.Text)
+                    , int.Parse(this.rptSgmnt4TextBox.Text)
+                    , int.Parse(this.rptSgmnt5TextBox.Text)
+                    , int.Parse(this.rptSgmnt6TextBox.Text)
+                    , int.Parse(this.rptSgmnt7TextBox.Text)
+                    , int.Parse(this.rptSgmnt8TextBox.Text)
+                    , int.Parse(this.rptSgmnt9TextBox.Text)
+                    , int.Parse(this.rptSgmnt10TextBox.Text));
             }
             this.trialBalListView.Items.Clear();
             int count = dtst.Tables[0].Rows.Count;
-            string funccur = Global.mnFrm.cmCde.getPssblValNm(
-             Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id));
+            string funccur = Global.mnFrm.cmCde.getPssblValNm(Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id));
             this.trialBalGroupBox.Text = "TRIAL BALANCE AS AT " + balsDate + " (" + funccur + ")";
-            double dbtsum = 0;// Global.get_COA_dbtSum(Global.mnFrm.cmCde.Org_id);
-            double crdtsum = 0;// Global.get_COA_crdtSum(Global.mnFrm.cmCde.Org_id);
+            double dbtsum = 0;
+            double crdtsum = 0;
+            double dbtsum1 = 0;
+            double crdtsum1 = 0;
             int cntr = 0;
+            bool useNetPostns = this.useNetPosCheckBox.Checked;
+            bool useSgmntVals = this.useNetPosCheckBox.Checked;
             for (int i = 0; i < count; i++)
             {
-                //;
-                Global.updtActnPrcss(1);
+                //Global.updtActnPrcss(1);
                 this.trialBalProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
                 if (dtst.Tables[0].Rows[i][7].ToString() == "1")
                 {
@@ -5608,40 +5761,67 @@ Check the ff Days:" + "\r\n";
                     if (int.Parse(this.tbalsAcctIDTextBox.Text) <= 0)
                     {
                         tDtSt = Global.get_TBals_Prnt_Accnts(int.Parse(dtst.Tables[0].Rows[i][0].ToString())
-                      , this.tbalDteTextBox.Text);
+                      , this.tbalDteTextBox.Text, useNetPostns
+                    , int.Parse(this.rptSgmnt1TextBox.Text)
+                    , int.Parse(this.rptSgmnt2TextBox.Text)
+                    , int.Parse(this.rptSgmnt3TextBox.Text)
+                    , int.Parse(this.rptSgmnt4TextBox.Text)
+                    , int.Parse(this.rptSgmnt5TextBox.Text)
+                    , int.Parse(this.rptSgmnt6TextBox.Text)
+                    , int.Parse(this.rptSgmnt7TextBox.Text)
+                    , int.Parse(this.rptSgmnt8TextBox.Text)
+                    , int.Parse(this.rptSgmnt9TextBox.Text)
+                    , int.Parse(this.rptSgmnt10TextBox.Text));
                     }
                     else
                     {
                         tDtSt = Global.get_Bals_Prnt_Accnts(int.Parse(dtst.Tables[0].Rows[i][0].ToString())
-                      , this.tbalDteTextBox.Text);
+                      , this.tbalDteTextBox.Text, useNetPostns
+                    , int.Parse(this.rptSgmnt1TextBox.Text)
+                    , int.Parse(this.rptSgmnt2TextBox.Text)
+                    , int.Parse(this.rptSgmnt3TextBox.Text)
+                    , int.Parse(this.rptSgmnt4TextBox.Text)
+                    , int.Parse(this.rptSgmnt5TextBox.Text)
+                    , int.Parse(this.rptSgmnt6TextBox.Text)
+                    , int.Parse(this.rptSgmnt7TextBox.Text)
+                    , int.Parse(this.rptSgmnt8TextBox.Text)
+                    , int.Parse(this.rptSgmnt9TextBox.Text)
+                    , int.Parse(this.rptSgmnt10TextBox.Text));
                     }
                     double amnt1 = 0;
                     double amnt2 = 0;
                     double amnt3 = 0;
+                    double amnt4 = 0;
                     if (tDtSt.Tables[0].Rows.Count > 0 && !this.shwBalsVarnCheckBox.Checked)
                     {
                         double.TryParse(tDtSt.Tables[0].Rows[0][0].ToString(), out amnt1);
                         double.TryParse(tDtSt.Tables[0].Rows[0][1].ToString(), out amnt2);
                         double.TryParse(tDtSt.Tables[0].Rows[0][2].ToString(), out amnt3);
                     }
-                    if (amnt2 > amnt1)
+                    if (useNetPostns)
                     {
-                        amnt2 = amnt2 - amnt1;
-                        amnt1 = 0;
-                    }
-                    else
-                    {
-                        amnt1 = amnt1 - amnt2;
-                        amnt2 = 0;
+                        if (amnt2 > amnt1)
+                        {
+                            amnt2 = amnt2 - amnt1;
+                            amnt4 = amnt1;
+                            amnt1 = 0;
+                        }
+                        else
+                        {
+                            amnt1 = amnt1 - amnt2;
+                            amnt4 = amnt2;
+                            amnt2 = 0;
+                        }
                     }
                     ListViewItem nwItem = new ListViewItem(new string[] {
-    (1 + cntr).ToString(),
+                    (1 + cntr).ToString(),
                     "",dtst.Tables[0].Rows[i][1].ToString(),
-          dtst.Tables[0].Rows[i][1].ToString()+"."+dtst.Tables[0].Rows[i][2].ToString().ToUpper(),
-          amnt1.ToString("#,##0.00"),
-    amnt2.ToString("#,##0.00"),
-    amnt3.ToString("#,##0.00")
-,"",dtst.Tables[0].Rows[i][0].ToString(),""});
+                      dtst.Tables[0].Rows[i][1].ToString()+"."+dtst.Tables[0].Rows[i][2].ToString().ToUpper(),
+                      (amnt1+amnt4).ToString("#,##0.00"),
+                    (amnt2+amnt4).ToString("#,##0.00"),
+                    amnt3.ToString("#,##0.00"), "",
+                        dtst.Tables[0].Rows[i][0].ToString(), ""});
+
                     if (this.smmryTBalsCheckBox.Checked == false
                       || dtst.Tables[0].Rows[i][1].ToString().Substring(0, 1) != " ")
                     {
@@ -5651,6 +5831,47 @@ Check the ff Days:" + "\r\n";
                     }
                     this.trialBalListView.Items.Add(nwItem);
                     cntr++;
+                    if (int.Parse(dtst.Tables[0].Rows[i][10].ToString()) == 1)
+                    {
+                        if (!this.shwBalsVarnCheckBox.Checked)
+                        {
+                            if (useNetPostns)
+                            {
+                                if (amnt2 > amnt1)
+                                {
+                                    amnt2 = amnt2 - amnt1;
+                                    amnt1 = 0;
+                                }
+                                else
+                                {
+                                    amnt1 = amnt1 - amnt2;
+                                    amnt2 = 0;
+                                }
+                            }
+                        }
+                        if (this.shwBalsVarnCheckBox.Checked)
+                        {
+                            double netamnt = 0;
+                            if (dtst.Tables[0].Rows[i][8].ToString() == "A"
+                              || dtst.Tables[0].Rows[i][8].ToString() == "EX")
+                            {
+                                netamnt = amnt1 - amnt2;
+                            }
+                            else
+                            {
+                                netamnt = amnt2 - amnt1;
+                            }
+                            //get_Accnt_TrnsSum
+                            amnt1 -= Global.get_Accnt_BalsTrnsSum(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                              "dbt_amount", balsDate);
+                            amnt2 -= Global.get_Accnt_BalsTrnsSum(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                              "crdt_amount", balsDate);
+                            amnt3 -= netamnt;
+                        }
+                        //MessageBox.Show(amnt1.ToString() + ":" + amnt2.ToString());
+                        dbtsum1 += amnt1 + amnt4;
+                        crdtsum1 += amnt2 + amnt4;
+                    }
                 }
                 else
                 {
@@ -5662,15 +5883,18 @@ Check the ff Days:" + "\r\n";
                     double.TryParse(dtst.Tables[0].Rows[i][5].ToString(), out amnt3);
                     if (!this.shwBalsVarnCheckBox.Checked)
                     {
-                        if (amnt2 > amnt1)
+                        if (useNetPostns)
                         {
-                            amnt2 = amnt2 - amnt1;
-                            amnt1 = 0;
-                        }
-                        else
-                        {
-                            amnt1 = amnt1 - amnt2;
-                            amnt2 = 0;
+                            if (amnt2 > amnt1)
+                            {
+                                amnt2 = amnt2 - amnt1;
+                                amnt1 = 0;
+                            }
+                            else
+                            {
+                                amnt1 = amnt1 - amnt2;
+                                amnt2 = 0;
+                            }
                         }
                     }
                     if (this.shwBalsVarnCheckBox.Checked)
@@ -5692,13 +5916,15 @@ Check the ff Days:" + "\r\n";
                           "crdt_amount", balsDate);
                         amnt3 -= netamnt;
                     }
-
                     if (amnt3 == 0 && this.hideZeroAccntCheckBox1.Checked == true)
                     {
                         continue;
                     }
-                    dbtsum += amnt1;
-                    crdtsum += amnt2;
+                    if (int.Parse(dtst.Tables[0].Rows[i][10].ToString()) == 1)
+                    {
+                        dbtsum += amnt1;
+                        crdtsum += amnt2;
+                    }
                     if (this.smmryTBalsCheckBox.Checked == true)
                     {
                         continue;
@@ -5718,10 +5944,13 @@ Check the ff Days:" + "\r\n";
                 }
                 System.Windows.Forms.Application.DoEvents();
             }
-            ListViewItem nwItem1 = new ListViewItem(new string[] {
-      "",
-      "","","TOTAL = ", dbtsum.ToString("#,##0.00"), crdtsum.ToString("#,##0.00"),
-            (dbtsum-crdtsum).ToString("#,##0.00"),"","",""});
+            if (dbtsum != dbtsum1 || crdtsum != crdtsum1)
+            {
+                dbtsum = dbtsum1;
+                crdtsum = crdtsum1;
+            }
+            ListViewItem nwItem1 = new ListViewItem(new string[] {"", "", "", "TOTAL = ", dbtsum.ToString("#,##0.00"), crdtsum.ToString("#,##0.00"),
+            (dbtsum-crdtsum).ToString("#,##0.00"), "", "", ""});
             nwItem1.BackColor = Color.WhiteSmoke;
             nwItem1.Font = new Font("Tahoma", 10, FontStyle.Bold | FontStyle.Underline);
             //nwItem1.ForeColor = Color.White;
@@ -5736,14 +5965,14 @@ Check the ff Days:" + "\r\n";
         private void populateSubledgerBals(string balsDate)
         {
             //Check if no other accounting process is running
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             do
             {
                 isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
                 System.Windows.Forms.Application.DoEvents();
             }
             while (isAnyRnng == true);
-            Global.updtActnPrcss(4);
+            Global.updtActnPrcss(4);*/
             this.statusLoadLabel.Visible = true;
             this.statusLoadPictureBox.Visible = true;
             this.subledgerListView.Visible = false;
@@ -5762,7 +5991,7 @@ Check the ff Days:" + "\r\n";
             for (int i = 0; i < count; i++)
             {
                 //;
-                Global.updtActnPrcss(4);
+                //Global.updtActnPrcss(4);
                 this.subledgrProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
                 if (dtst.Tables[0].Rows[i][6].ToString() == "1")
                 {
@@ -5836,21 +6065,21 @@ Check the ff Days:" + "\r\n";
         private void populateAccntStmntBals(int accntID, string strDate, string endDate)
         {
             //Check if no other accounting process is running
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             do
             {
                 isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
                 System.Windows.Forms.Application.DoEvents();
             }
-            while (isAnyRnng == true);
-            Global.updtActnPrcss(4);
+            while (isAnyRnng == true); 
+             Global.updtActnPrcss(4);*/
             this.statusLoadLabel.Visible = true;
             this.statusLoadPictureBox.Visible = true;
             this.accntStmntListView.Visible = false;
             System.Windows.Forms.Application.DoEvents();
 
             this.acctStmntProgressBar.Value = 10;
-            DataSet dtst = Global.get_AccntStmntTransactions(accntID, strDate, endDate, true, 0, 0);
+            DataSet dtst = Global.get_AccntStmntTransactions(accntID, strDate, endDate, true, 0, 0, false, false, this.shwIntrfcTrnsCheckBox.Checked);
             this.accntStmntListView.Items.Clear();
             int count = dtst.Tables[0].Rows.Count;
             string funccur = Global.mnFrm.cmCde.getPssblValNm(
@@ -5923,7 +6152,7 @@ Check the ff Days:" + "\r\n";
             for (int i = 0; i < count; i++)
             {
                 //;
-                Global.updtActnPrcss(4);
+                //Global.updtActnPrcss(4);
                 this.acctStmntProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
                 double amnt1 = 0;
                 double amnt2 = 0;
@@ -5980,7 +6209,6 @@ Check the ff Days:" + "\r\n";
             this.statusLoadPictureBox.Visible = false;
             this.accntStmntListView.Visible = true;
             System.Windows.Forms.Application.DoEvents();
-
         }
 
         private void genRptTrialBalButton_Click(object sender, EventArgs e)
@@ -5993,9 +6221,7 @@ Check the ff Days:" + "\r\n";
             }
             this.genRptTrialBalButton.Enabled = false;
             System.Windows.Forms.Application.DoEvents();
-
-            this.populateTrialBals(
-                  this.tbalDteTextBox.Text);
+            this.populateTrialBals(this.tbalDteTextBox.Text);
             this.genRptTrialBalButton.Enabled = true;
             this.trialBalListView.Focus();
         }
@@ -7550,14 +7776,14 @@ Check the ff Days:" + "\r\n";
         private void populatePrftNLoss()
         {
             //Check if no other accounting process is running
-            bool isAnyRnng = true;
+            /*bool isAnyRnng = true;
             do
             {
                 isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
                 System.Windows.Forms.Application.DoEvents();
             }
             while (isAnyRnng == true);
-            Global.updtActnPrcss(2);
+            Global.updtActnPrcss(2);*/
             this.statusLoadLabel.Visible = true;
             this.statusLoadPictureBox.Visible = true;
             this.plListView.Visible = false;
@@ -7574,31 +7800,72 @@ Check the ff Days:" + "\r\n";
             DataSet dtst = new DataSet();
             if (int.Parse(this.pnlAccntIDTextBox.Text) <= 0)
             {
-                dtst = Global.get_PrftNLoss_Accnts(Global.mnFrm.cmCde.Org_id);
+                dtst = Global.get_PrftNLoss_Accnts(Global.mnFrm.cmCde.Org_id, (int)this.pnlNumUpDown.Value
+                    , int.Parse(this.pnlRptSgmnt1TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt2TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt3TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt4TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt5TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt6TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt7TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt8TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt9TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt10TextBox.Text));
             }
             else
             {
-                dtst = Global.get_PrftNLoss_Accnts(Global.mnFrm.cmCde.Org_id, int.Parse(this.pnlAccntIDTextBox.Text));
+                dtst = Global.get_PrftNLoss_Accnts1(Global.mnFrm.cmCde.Org_id, int.Parse(this.pnlAccntIDTextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt1TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt2TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt3TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt4TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt5TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt6TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt7TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt8TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt9TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt10TextBox.Text));
             }
             int count = dtst.Tables[0].Rows.Count;
             string funccur = Global.mnFrm.cmCde.getPssblValNm(
              Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id));
             this.plGroupBox.Text = "PROFIT & LOSS STATEMENT BETWEEN " +
              this.plDate1TextBox.Text.ToUpper() + " and " + this.plDate2TextBox.Text.ToUpper() + " (" + funccur + ")";
+            double rvnsum1 = 0;
+            double expsum1 = 0;
             double rvnsum = 0;
             double expsum = 0;
             int cntr = 0;
             for (int i = 0; i < count; i++)
             {
-                Global.updtActnPrcss(2);
+                //Global.updtActnPrcss(2);
 
                 this.plProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
                 if (dtst.Tables[0].Rows[i][3].ToString() == "1"
                   || dtst.Tables[0].Rows[i][5].ToString() == "1")
                 {
-                    double ttlV = Global.get_Accnt_Usr_TrnsSumRcsv(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                    double ttlV = Global.get_Accnt_Usr_TrnsSumRcsv2(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
                       this.plDate1TextBox.Text,
-                      this.plDate2TextBox.Text);
+                      this.plDate2TextBox.Text
+                    , int.Parse(this.pnlRptSgmnt1TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt2TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt3TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt4TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt5TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt6TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt7TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt8TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt9TextBox.Text)
+                    , int.Parse(this.pnlRptSgmnt10TextBox.Text));
+
+                    if (int.Parse(dtst.Tables[0].Rows[i][7].ToString()) == 1 && dtst.Tables[0].Rows[i][4].ToString() == "R")
+                    {
+                        rvnsum1 = ttlV;
+                    }
+                    else if (int.Parse(dtst.Tables[0].Rows[i][7].ToString()) == 1 && dtst.Tables[0].Rows[i][4].ToString() == "EX")
+                    {
+                        expsum1 = ttlV;
+                    }
                     ListViewItem nwItem = new ListViewItem(new string[] {
     (1 + cntr).ToString(),
     "", dtst.Tables[0].Rows[i][1].ToString(),
@@ -7651,6 +7918,12 @@ Check the ff Days:" + "\r\n";
             if (int.Parse(this.pnlAccntIDTextBox.Text) <= 0)
             {
                 double netsum = rvnsum - expsum;
+                if (rvnsum == 0 && expsum == 0)
+                {
+                    rvnsum = rvnsum1;
+                    expsum = expsum1;
+                    netsum = rvnsum - expsum;
+                }
                 ListViewItem nwItem1 = new ListViewItem(new string[] {
              "",
              "","","","","","",""});
@@ -7759,7 +8032,7 @@ Check the ff Days:" + "\r\n";
                 Global.mnFrm.cmCde.showMsg("Please select an Account First!", 0);
                 return;
             }
-            else
+            else if (this.plListView.SelectedItems[0].SubItems[5].Text != "")
             {
                 int accIDIn = int.Parse(this.plListView.SelectedItems[0].SubItems[5].Text);
                 string isPrnt = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "(CASE WHEN is_prnt_accnt='1' THEN is_prnt_accnt ELSE has_sub_ledgers END)", accIDIn);
@@ -7820,6 +8093,282 @@ Check the ff Days:" + "\r\n";
         #endregion
 
         #region "MONTHLY STATEMENT..."
+        private void populateMnthlyStatement()
+        {
+            //Check if no other accounting process is running
+            /*bool isAnyRnng = true;
+            do
+            {
+                isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
+                System.Windows.Forms.Application.DoEvents();
+            }
+            while (isAnyRnng == true);
+            Global.updtActnPrcss(2);*/
+            this.statusLoadLabel.Visible = true;
+            this.statusLoadPictureBox.Visible = true;
+            this.periodStmntListView.Visible = false;
+            System.Windows.Forms.Application.DoEvents();
+            this.mnthlyProgressBar.Value = 0;
+            this.periodStmntListView.Items.Clear();
+            if (this.mnthlyStrtDteTextBox.Text == "" || this.mnthlyEndDteTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Start Date and End Date must be entered!", 0);
+                return;
+            }
+            this.mnthlyProgressBar.Value = 10;
+            List<string> dteArray1 = Global.getBdgtDates(this.mnthlyStrtDteTextBox.Text,
+              this.mnthlyEndDteTextBox.Text, this.mnthlyDrtnComboBox.Text);
+            this.periodStmntListView.Columns.Clear();
+            this.periodStmntListView.Columns.Add("No.", 35);
+            this.periodStmntListView.Columns.Add("Account Number", 0);
+            this.periodStmntListView.Columns.Add("Account Name", 300);
+            this.periodStmntListView.Columns.Add("accnt_id", 0);
+            this.periodStmntListView.Columns.Add("is_parnt", 0);
+            this.periodStmntListView.Columns.Add("Opening Balance", 100);
+            int nwColsCnt = 0;
+            int prdlyCntr = 1;
+            for (int a = 0; a < dteArray1.Count; a++)
+            {
+                int rem = 0;
+                Math.DivRem(a, 2, out rem);
+                if (rem == 0)
+                {
+                    string colNm = "";
+                    if (this.mnthlyDrtnComboBox.Text == "Yearly")
+                    {
+                        colNm = DateTime.Parse(dteArray1[a]).ToString("yyyy");
+                    }
+                    else if (this.mnthlyDrtnComboBox.Text == "Half Yearly"
+                      || this.mnthlyDrtnComboBox.Text == "Quarterly")
+                    {
+                        colNm = DateTime.Parse(dteArray1[a]).ToString("MMM-")
+                        + DateTime.Parse(dteArray1[a + 1]).ToString("MMM (yyyy)");
+                    }
+                    else if (this.mnthlyDrtnComboBox.Text == "Monthly")
+                    {
+                        colNm = DateTime.Parse(dteArray1[a]).ToString("MMM-yyyy");
+                    }
+                    else
+                    {
+                        colNm = this.mnthlyDrtnComboBox.Text.Replace("ly", "") + prdlyCntr.ToString();
+                        prdlyCntr++;
+                    }
+                    this.periodStmntListView.Columns.Add(colNm, 100);
+                    nwColsCnt++;
+                }
+            }
+            this.periodStmntListView.Columns.Add("Closing Balance", 100);
+            string accTyp = this.mnthlyAccTypComboBox.Text.Substring(0, 2).Trim();
+            if (this.mnthlyAccTypComboBox.Text == "R -REVENUE/EX-EXPENSE")
+            {
+                accTyp = "R','EX";
+            }
+            else if (this.mnthlyAccTypComboBox.Text == "Balance Sheet Accounts")
+            {
+                accTyp = "A','L','EQ";
+            }
+            else if (accTyp == "Al")
+            {
+                accTyp = "A','L','EQ','R','EX";
+            }
+            DataSet dtst = Global.get_Type_Accnts(Global.mnFrm.cmCde.Org_id, accTyp
+                    , int.Parse(this.pbpSgmnt1TextBox.Text)
+                    , int.Parse(this.pbpSgmnt2TextBox.Text)
+                    , int.Parse(this.pbpSgmnt3TextBox.Text)
+                    , int.Parse(this.pbpSgmnt4TextBox.Text)
+                    , int.Parse(this.pbpSgmnt5TextBox.Text)
+                    , int.Parse(this.pbpSgmnt6TextBox.Text)
+                    , int.Parse(this.pbpSgmnt7TextBox.Text)
+                    , int.Parse(this.pbpSgmnt8TextBox.Text)
+                    , int.Parse(this.pbpSgmnt9TextBox.Text)
+                    , int.Parse(this.pbpSgmnt10TextBox.Text));
+
+            int count = dtst.Tables[0].Rows.Count;
+            string funccur = Global.mnFrm.cmCde.getPssblValNm(
+             Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id));
+            this.periodGroupBox.Text = "PERIOD BY PERIOD ACCOUNT TRNS. SUM FROM " +
+             this.mnthlyStrtDteTextBox.Text.ToUpper() + " TO " + this.mnthlyEndDteTextBox.Text.ToUpper() + " (" + funccur + ")";
+            //double rvnsum = 0;
+            //double expsum = 0;
+            int cntr = 0;
+            string opngBalsDte = DateTime.Parse(this.mnthlyStrtDteTextBox.Text).AddDays(-1).ToString("dd-MMM-yyyy 23:59:59");
+            string clsngBalsDte = DateTime.Parse(this.mnthlyEndDteTextBox.Text).ToString("dd-MMM-yyyy 23:59:59");
+            double periodVal = 0;
+            double prevPeriodVal = 0;
+            double opngBals = 0;
+            double clsngBals = 0;
+            for (int i = 0; i < count; i++)
+            {
+                //Global.updtActnPrcss(2);
+                periodVal = 0;
+                prevPeriodVal = 0;
+                opngBals = 0;
+                clsngBals = 0;
+                this.mnthlyProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
+                if (dtst.Tables[0].Rows[i][3].ToString() == "1"
+                  || dtst.Tables[0].Rows[i][5].ToString() == "1")
+                {
+                    opngBals = Global.get_Accnt_BalsSumRcsv2(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                    opngBalsDte
+                    , int.Parse(this.pbpSgmnt1TextBox.Text)
+                    , int.Parse(this.pbpSgmnt2TextBox.Text)
+                    , int.Parse(this.pbpSgmnt3TextBox.Text)
+                    , int.Parse(this.pbpSgmnt4TextBox.Text)
+                    , int.Parse(this.pbpSgmnt5TextBox.Text)
+                    , int.Parse(this.pbpSgmnt6TextBox.Text)
+                    , int.Parse(this.pbpSgmnt7TextBox.Text)
+                    , int.Parse(this.pbpSgmnt8TextBox.Text)
+                    , int.Parse(this.pbpSgmnt9TextBox.Text)
+                    , int.Parse(this.pbpSgmnt10TextBox.Text));
+                    prevPeriodVal = opngBals;
+                    clsngBals += opngBals;
+
+                    ListViewItem nwItem = new ListViewItem(new string[] {
+    (1 + cntr).ToString(), dtst.Tables[0].Rows[i][1].ToString(),
+    dtst.Tables[0].Rows[i][1].ToString() +
+    "." + dtst.Tables[0].Rows[i][2].ToString().ToUpper(),
+    dtst.Tables[0].Rows[i][0].ToString(),
+    dtst.Tables[0].Rows[i][3].ToString(),
+    opngBals.ToString("#,##0.00")});
+
+                    for (int a = 0; a < dteArray1.Count; a++)
+                    {
+                        int rem = 0;
+                        Math.DivRem(a, 2, out rem);
+                        if (rem == 1)
+                        {
+                            periodVal = Global.get_Accnt_Usr_TrnsSumRcsv2(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                         dteArray1[a - 1], dteArray1[a]
+                    , int.Parse(this.pbpSgmnt1TextBox.Text)
+                    , int.Parse(this.pbpSgmnt2TextBox.Text)
+                    , int.Parse(this.pbpSgmnt3TextBox.Text)
+                    , int.Parse(this.pbpSgmnt4TextBox.Text)
+                    , int.Parse(this.pbpSgmnt5TextBox.Text)
+                    , int.Parse(this.pbpSgmnt6TextBox.Text)
+                    , int.Parse(this.pbpSgmnt7TextBox.Text)
+                    , int.Parse(this.pbpSgmnt8TextBox.Text)
+                    , int.Parse(this.pbpSgmnt9TextBox.Text)
+                    , int.Parse(this.pbpSgmnt10TextBox.Text));// - prevPeriodVal;
+                            clsngBals += periodVal;// -prevPeriodVal;
+                            //periodVal = Global.get_Accnt_Usr_TrnsSumRcsv(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                            //dteArray1[a - 1],
+                            //dteArray1[a]);
+                            //clsngBals += periodVal;
+                            //            if (dtst.Tables[0].Rows[i][4].ToString() == "R"
+                            //|| dtst.Tables[0].Rows[i][4].ToString() == "EX")
+                            //            {
+                            //            }
+                            //            else
+                            //            {
+                            //            }
+                            //- prevPeriodVal;
+
+                            prevPeriodVal += periodVal;
+
+                            nwItem.SubItems.Add(periodVal.ToString("#,##0.00"));
+                        }
+                    }
+
+                    nwItem.SubItems.Add(clsngBals.ToString("#,##0.00"));
+
+                    nwItem.UseItemStyleForSubItems = true;
+                    nwItem.BackColor = Color.WhiteSmoke;
+                    nwItem.Font = new Font("Tahoma", 8.5F, FontStyle.Bold);
+                    this.periodStmntListView.Items.Add(nwItem);
+                    cntr++;
+                }
+                else
+                {
+                    opngBals = Global.getAccntLstDailyNetBals(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                     opngBalsDte);
+                    prevPeriodVal = opngBals;
+                    clsngBals += opngBals;
+
+                    ListViewItem nwItem = new ListViewItem(new string[] {
+    (1 + cntr).ToString(), dtst.Tables[0].Rows[i][1].ToString(),
+    dtst.Tables[0].Rows[i][1].ToString() +
+    "." + dtst.Tables[0].Rows[i][2].ToString(),
+    dtst.Tables[0].Rows[i][0].ToString(),
+    dtst.Tables[0].Rows[i][3].ToString(),
+    opngBals.ToString("#,##0.00")});
+
+                    for (int a = 0; a < dteArray1.Count; a++)
+                    {
+                        int rem = 0;
+                        Math.DivRem(a, 2, out rem);
+                        if (rem == 1)
+                        {
+                            periodVal = Global.get_Accnt_Usr_TrnsSum(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                            dteArray1[a - 1],
+                            dteArray1[a]);
+                            clsngBals += periodVal;
+                            //            if (dtst.Tables[0].Rows[i][4].ToString() == "R"
+                            //|| dtst.Tables[0].Rows[i][4].ToString() == "EX")
+                            //            {
+                            //            }
+                            //            else
+                            //            {
+                            //              periodVal = Global.getAccntLstDailyNetBals(int.Parse(dtst.Tables[0].Rows[i][0].ToString()),
+                            //           dteArray1[a]);// -prevPeriodVal;
+                            //              clsngBals += periodVal - prevPeriodVal;
+                            //            }
+                            prevPeriodVal = periodVal;
+
+                            nwItem.SubItems.Add(periodVal.ToString("#,##0.00"));
+                        }
+                    }
+
+                    nwItem.SubItems.Add(clsngBals.ToString("#,##0.00"));
+
+                    this.periodStmntListView.Items.Add(nwItem);
+                    cntr++;
+                }
+                System.Windows.Forms.Application.DoEvents();
+            }
+            //double rvnsum = Global.get_AccntType_TrnsSum(Global.mnFrm.cmCde.Org_id,
+            // "R", this.mnthlyStrtDteTextBox.Text, this.mnthlyEndDteTextBox.Text);
+            //double expsum = Global.get_AccntType_TrnsSum(Global.mnFrm.cmCde.Org_id,
+            // "EX", this.mnthlyStrtDteTextBox.Text, this.mnthlyEndDteTextBox.Text);
+            double tstVal = 0;
+            double wrkngValue = 0;
+            int q = 0;
+            //int itmsCnt = this.periodStmntListView.Items.Count;
+            bool isNum = false;
+            for (q = 0; q < this.periodStmntListView.Items.Count; q++)
+            {
+                wrkngValue = 0;
+                for (int j = 5; j < this.periodStmntListView.Columns.Count; j++)
+                {
+                    isNum = double.TryParse(this.periodStmntListView.Items[q].SubItems[j].Text, out tstVal);
+                    if (isNum)
+                    {
+                        wrkngValue += tstVal;
+                    }
+                    else
+                    {
+                        isNum = false;
+                        break;
+                    }
+                }
+                this.periodStmntListView.Items[q].Text = (q + 1).ToString();
+                if (wrkngValue != 0)
+                {
+                    //this.periodStmntListView.Items[q].SubItems[this.periodStmntListView.Columns.Count - 1].Text = wrkngValue.ToString("#,##0.00");
+                }
+                else if (this.periodStmntListView.Items[q].Font.Bold == false && this.hideZeroMnthlyCheckBox.Checked
+                  && isNum == true)
+                {
+                    this.periodStmntListView.Items.RemoveAt(q);
+                    q--;
+                }
+                System.Windows.Forms.Application.DoEvents();
+            }
+            this.mnthlyProgressBar.Value = 100;
+            this.statusLoadLabel.Visible = false;
+            this.statusLoadPictureBox.Visible = false;
+            this.periodStmntListView.Visible = true;
+            System.Windows.Forms.Application.DoEvents();
+        }
 
         private void mnthlyDate1Button_Click(object sender, EventArgs e)
         {
@@ -7846,8 +8395,18 @@ Check the ff Days:" + "\r\n";
 
         private void genMnthlyRptButton_Click(object sender, EventArgs e)
         {
-            Global.mnFrm.cmCde.showMsg("Sorry! Feature not available in this edition!\nContact your the Software Provider!", 0);
-            return;
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[5]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            this.genMthlyRptButton.Enabled = false;
+            System.Windows.Forms.Application.DoEvents();
+
+            this.populateMnthlyStatement();
+            this.genMthlyRptButton.Enabled = true;
+            this.periodStmntListView.Focus();
         }
 
         private void exptExclMnthlyMenuItem_Click(object sender, EventArgs e)
@@ -7928,15 +8487,6 @@ Check the ff Days:" + "\r\n";
         #region "CASH FLOW STATEMENT..."
         private void populateCashFlowStatement()
         {
-            //Check if no other accounting process is running
-            bool isAnyRnng = true;
-            do
-            {
-                isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
-                System.Windows.Forms.Application.DoEvents();
-            }
-            while (isAnyRnng == true);
-            Global.updtActnPrcss(2);
             this.statusLoadLabel.Visible = true;
             this.statusLoadPictureBox.Visible = true;
             this.cashFlowListView.Visible = false;
@@ -8082,7 +8632,6 @@ Check the ff Days:" + "\r\n";
                 {
                     opngBalsDte = DateTime.Parse(dteArray1[z]).AddDays(-1).ToString("dd-MMM-yyyy 23:59:59");
                     clsngBalsDte = DateTime.Parse(dteArray1[z + 1]).ToString("dd-MMM-yyyy 23:59:59");
-
                     //dteArray1[z] dteArray1[z+1]
                     cntr = 0;
                     colCntr++;
@@ -8108,8 +8657,18 @@ Check the ff Days:" + "\r\n";
                                 {
                                     if (b == 0)
                                     {
-                                        wrkngValue = Global.getCashFlowAccBlsSum(
-                                          loopingClsfctns[i], opngBalsDte, Global.mnFrm.cmCde.Org_id) * loopingNegations[i];
+                                        wrkngValue = Global.getCashFlowAccBlsSum2(
+                                          loopingClsfctns[i], opngBalsDte, Global.mnFrm.cmCde.Org_id
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text)) * loopingNegations[i];
 
                                         nwItem.SubItems.Add(wrkngValue.ToString("#,##0.00"));
                                         cashOpngBals = wrkngValue;
@@ -8127,8 +8686,18 @@ Check the ff Days:" + "\r\n";
                             }
                             else
                             {
-                                wrkngValue = Global.getCashFlowAccBlsSum(
-                  loopingClsfctns[i], opngBalsDte, Global.mnFrm.cmCde.Org_id) * loopingNegations[i];
+                                wrkngValue = Global.getCashFlowAccBlsSum2(
+                  loopingClsfctns[i], opngBalsDte, Global.mnFrm.cmCde.Org_id
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text)) * loopingNegations[i];
                                 cashOpngBals = wrkngValue;
                                 this.cashFlowListView.Items[cntr].SubItems[colCntr].Text = wrkngValue.ToString("#,##0.00");
                                 cntr++;
@@ -8171,8 +8740,18 @@ Check the ff Days:" + "\r\n";
                                 {
                                     if (b == 0)
                                     {
-                                        cashClsngBals = Global.getCashFlowAccBlsSum(
-                    loopingClsfctns[i], clsngBalsDte, Global.mnFrm.cmCde.Org_id) * loopingNegations[i];
+                                        cashClsngBals = Global.getCashFlowAccBlsSum2(
+                    loopingClsfctns[i], clsngBalsDte, Global.mnFrm.cmCde.Org_id
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text)) * loopingNegations[i];
 
                                         wrkngValue = cashClsngBals - cashOpngBals;
                                         nwItem.SubItems.Add(wrkngValue.ToString("#,##0.00"));
@@ -8209,13 +8788,21 @@ Check the ff Days:" + "\r\n";
                                 nwItem.BackColor = Color.WhiteSmoke;
                                 nwItem.Font = new Font("Tahoma", 8.5F, FontStyle.Bold);
                                 this.cashFlowListView.Items.Add(nwItem);
-
-
                             }
                             else
                             {
-                                cashClsngBals = Global.getCashFlowAccBlsSum(
-                  loopingClsfctns[i], clsngBalsDte, Global.mnFrm.cmCde.Org_id) * loopingNegations[i];
+                                cashClsngBals = Global.getCashFlowAccBlsSum2(
+                  loopingClsfctns[i], clsngBalsDte, Global.mnFrm.cmCde.Org_id
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text)) * loopingNegations[i];
 
                                 wrkngValue = netOprtngActvts + netInvstngActvts + netFncngActvts;
                                 this.cashFlowListView.Items[cntr].SubItems[colCntr].Text = wrkngValue.ToString("#,##0.00");
@@ -8271,8 +8858,18 @@ Check the ff Days:" + "\r\n";
                                 {
                                     if (b == 0)
                                     {
-                                        wrkngValue = Global.get_CashFlow_Usr_TrnsSum(
-                    loopingClsfctns[i], dteArray1[z], dteArray1[z + 1]) * loopingNegations[i];
+                                        wrkngValue = Global.get_CashFlow_Usr_TrnsSum2(
+                    loopingClsfctns[i], dteArray1[z], dteArray1[z + 1]
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text)) * loopingNegations[i];
                                         if (loopingClsfctns[i].Contains("Operating Activities"))
                                         {
                                             netOprtngActvts += wrkngValue;
@@ -8303,8 +8900,18 @@ Check the ff Days:" + "\r\n";
                             }
                             else
                             {
-                                wrkngValue = Global.get_CashFlow_Usr_TrnsSum(
-                loopingClsfctns[i], dteArray1[z], dteArray1[z + 1]) * loopingNegations[i];
+                                wrkngValue = Global.get_CashFlow_Usr_TrnsSum2(
+                loopingClsfctns[i], dteArray1[z], dteArray1[z + 1]
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text)) * loopingNegations[i];
                                 if (loopingClsfctns[i].Contains("Operating Activities"))
                                 {
                                     netOprtngActvts += wrkngValue;
@@ -8324,8 +8931,18 @@ Check the ff Days:" + "\r\n";
                         System.Windows.Forms.Application.DoEvents();
                         if (this.cashFlowTypComboBox.Text.Contains("Detail"))
                         {
-                            DataSet dtst = Global.get_Clsfctn_Accnts(Global.mnFrm.cmCde.Org_id,
-                              loopingClsfctns[i]);
+                            DataSet dtst = Global.get_Clsfctn_Accnts2(Global.mnFrm.cmCde.Org_id,
+                              loopingClsfctns[i]
+                                            , int.Parse(this.cflwSgmnt1TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt2TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt3TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt4TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt5TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt6TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt7TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt8TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt9TextBox.Text)
+                                            , int.Parse(this.cflwSgmnt10TextBox.Text));
                             for (int c = 0; c < dtst.Tables[0].Rows.Count; c++)
                             {
                                 System.Windows.Forms.Application.DoEvents();
@@ -8491,6 +9108,7 @@ Check the ff Days:" + "\r\n";
             int q = 0;
             //int itmsCnt = this.cashFlowListView.Items.Count;
             bool isNum = false;
+            //Compute Last Column Totals
             for (q = 0; q < this.cashFlowListView.Items.Count; q++)
             {
                 wrkngValue = 0;
@@ -8642,15 +9260,6 @@ Check the ff Days:" + "\r\n";
         #region "BALANCE SHEET..."
         private void populateBlsDet()
         {
-            //Check if no other accounting process is running
-            bool isAnyRnng = true;
-            do
-            {
-                isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
-                System.Windows.Forms.Application.DoEvents();
-            }
-            while (isAnyRnng == true);
-            Global.updtActnPrcss(3);
             this.obey_bls_evnts = false;
             this.blsListView.Items.Clear();
             this.statusLoadLabel.Visible = true;
@@ -8660,7 +9269,17 @@ Check the ff Days:" + "\r\n";
 
             DataSet dtst = Global.get_Bls_Det(
              Global.mnFrm.cmCde.Org_id,
-                  this.asAtDteTextBox.Text);
+                  this.asAtDteTextBox.Text, (int)this.balsShtAcntLvlNumUpDown.Value
+                    , int.Parse(this.blShtSgmnt1TextBox.Text)
+                    , int.Parse(this.blShtSgmnt2TextBox.Text)
+                    , int.Parse(this.blShtSgmnt3TextBox.Text)
+                    , int.Parse(this.blShtSgmnt4TextBox.Text)
+                    , int.Parse(this.blShtSgmnt5TextBox.Text)
+                    , int.Parse(this.blShtSgmnt6TextBox.Text)
+                    , int.Parse(this.blShtSgmnt7TextBox.Text)
+                    , int.Parse(this.blShtSgmnt8TextBox.Text)
+                    , int.Parse(this.blShtSgmnt9TextBox.Text)
+                    , int.Parse(this.blShtSgmnt10TextBox.Text));
 
             this.blsProgressBar.Value = 0;
             this.blsListView.Items.Clear();
@@ -8674,17 +9293,44 @@ Check the ff Days:" + "\r\n";
             double bls_assetsum = 0;
             double bls_networthsum = 0;
             double bls_liabltysum = 0;
+            double bls_assetsum1 = 0;
+            double bls_networthsum1 = 0;
+            double bls_liabltysum1 = 0;
             int cntr = 0;
             for (int i = 0; i < count; i++)
             {
-                Global.updtActnPrcss(3);
+                // Global.updtActnPrcss(3);
                 //;
                 this.blsProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
                 if (dtst.Tables[0].Rows[i][5].ToString() == "1")
                 {
-                    double ttlV = Global.get_Accnt_BalsSumRcsv(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
-            this.asAtDteTextBox.Text);
-
+                    double ttlV = Global.get_Accnt_BalsSumRcsv2(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                        this.asAtDteTextBox.Text
+                    , int.Parse(this.blShtSgmnt1TextBox.Text)
+                    , int.Parse(this.blShtSgmnt2TextBox.Text)
+                    , int.Parse(this.blShtSgmnt3TextBox.Text)
+                    , int.Parse(this.blShtSgmnt4TextBox.Text)
+                    , int.Parse(this.blShtSgmnt5TextBox.Text)
+                    , int.Parse(this.blShtSgmnt6TextBox.Text)
+                    , int.Parse(this.blShtSgmnt7TextBox.Text)
+                    , int.Parse(this.blShtSgmnt8TextBox.Text)
+                    , int.Parse(this.blShtSgmnt9TextBox.Text)
+                    , int.Parse(this.blShtSgmnt10TextBox.Text));
+                    if (int.Parse(dtst.Tables[0].Rows[i][8].ToString()) == 1)
+                    {
+                        if (dtst.Tables[0].Rows[i][6].ToString() == "A")
+                        {
+                            bls_assetsum1 += ttlV;
+                        }
+                        else if (dtst.Tables[0].Rows[i][6].ToString() == "EQ")
+                        {
+                            bls_networthsum1 += ttlV;
+                        }
+                        else if (dtst.Tables[0].Rows[i][6].ToString() == "L")
+                        {
+                            bls_liabltysum1 += ttlV;
+                        }
+                    }
                     ListViewItem nwItem = new ListViewItem(new string[] {
              (1 + cntr).ToString(),
               "",
@@ -8721,7 +9367,6 @@ Check the ff Days:" + "\r\n";
                     {
                         bls_liabltysum += netamnt;
                     }
-
                     if (this.blsSmmryCheckBox.Checked == true)
                     {
                         continue;
@@ -8729,7 +9374,7 @@ Check the ff Days:" + "\r\n";
                     ListViewItem nwItem = new ListViewItem(new string[] {
              (1 + cntr).ToString(),"",
              dtst.Tables[0].Rows[i][2].ToString(),
-            dtst.Tables[0].Rows[i][2].ToString().ToUpper()+"."+dtst.Tables[0].Rows[i][3].ToString(),
+             dtst.Tables[0].Rows[i][2].ToString().ToUpper()+"."+dtst.Tables[0].Rows[i][3].ToString(),
              netamnt.ToString("#,##0.00"),
              dtst.Tables[0].Rows[i][1].ToString(),""});
                     this.blsListView.Items.Add(nwItem);
@@ -8740,10 +9385,17 @@ Check the ff Days:" + "\r\n";
             bls_assetsum = Math.Round(bls_assetsum, 2);
             bls_networthsum = Math.Round(bls_networthsum, 2);
             bls_liabltysum = Math.Round(bls_liabltysum, 2);
-
+            bls_assetsum1 = Math.Round(bls_assetsum1, 2);
+            bls_networthsum1 = Math.Round(bls_networthsum1, 2);
+            bls_liabltysum1 = Math.Round(bls_liabltysum1, 2);
+            if (bls_assetsum1 != bls_assetsum)
+            {
+                bls_assetsum = Math.Round(bls_assetsum1, 2);
+                bls_networthsum = Math.Round(bls_networthsum1, 2);
+                bls_liabltysum = Math.Round(bls_liabltysum1, 2);
+            }
             ListViewItem nwItem1 = new ListViewItem(new string[] {
-             "",
-             "","","","","",""});
+             "", "", "", "", "", "", ""});
             this.blsListView.Items.Add(nwItem1);
 
             ListViewItem nwItem2 = new ListViewItem(new string[] {
@@ -8830,7 +9482,7 @@ Check the ff Days:" + "\r\n";
 
         private void vwSQLBlsMenuItem_Click(object sender, EventArgs e)
         {
-            Global.mnFrm.cmCde.showSQL(Global.mnFrm.bls_SQL, 10);
+            Global.mnFrm.cmCde.showSQL(Global.mnFrm.blshtSQLStmnt, 10);
         }
 
         private void vwTrnsBlsMenuItem_Click(object sender, EventArgs e)
@@ -8846,7 +9498,7 @@ Check the ff Days:" + "\r\n";
                 Global.mnFrm.cmCde.showMsg("Please select an Account First!", 0);
                 return;
             }
-            else
+            else if (this.blsListView.SelectedItems[0].SubItems[5].Text != "")
             {
                 int accIDIn = int.Parse(this.blsListView.SelectedItems[0].SubItems[5].Text);
                 string isPrnt = Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "(CASE WHEN is_prnt_accnt='1' THEN is_prnt_accnt ELSE has_sub_ledgers END)", accIDIn);
@@ -9001,6 +9653,9 @@ Check the ff Days:" + "\r\n";
             this.budgetDescTextBox.Text = this.budgetListView.SelectedItems[0].SubItems[3].Text;
             this.isBdgActiveCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(
              this.budgetListView.SelectedItems[0].SubItems[4].Text);
+            this.startDteTextBox.Text = this.budgetListView.SelectedItems[0].SubItems[5].Text;
+            this.endDteTextBox.Text = this.budgetListView.SelectedItems[0].SubItems[6].Text;
+            this.prdTypComboBox.SelectedItem = this.budgetListView.SelectedItems[0].SubItems[7].Text;
 
             this.loadBdgtDetPanel();
             this.obey_bdgt_evnts = true;
@@ -9022,7 +9677,10 @@ Check the ff Days:" + "\r\n";
     (Global.mnFrm.cmCde.navFuncts.startIndex() + i).ToString(),
     dtst.Tables[0].Rows[i][1].ToString(),dtst.Tables[0].Rows[i][0].ToString(),
     dtst.Tables[0].Rows[i][2].ToString(),
-    dtst.Tables[0].Rows[i][3].ToString()});
+    dtst.Tables[0].Rows[i][3].ToString(),
+    dtst.Tables[0].Rows[i][4].ToString(),
+    dtst.Tables[0].Rows[i][5].ToString(),
+    dtst.Tables[0].Rows[i][6].ToString()});
                 this.budgetListView.Items.Add(nwItem);
             }
             this.correctBdgtNavLbls(dtst);
@@ -9080,6 +9738,9 @@ Check the ff Days:" + "\r\n";
             this.budgetIDTextBox.Text = "-1";
             this.budgetNmTextBox.Text = "";
             this.budgetDescTextBox.Text = "";
+            this.startDteTextBox.Text = "";
+            this.endDteTextBox.Text = "";
+            this.prdTypComboBox.SelectedItem = "Monthly";
             this.isBdgActiveCheckBox.Checked = false;
             this.budgetDetListView.Items.Clear();
             this.last_bdgtDt_num = 0;
@@ -9094,6 +9755,11 @@ Check the ff Days:" + "\r\n";
             this.budgetNmTextBox.BackColor = Color.FromArgb(255, 255, 118);
             this.budgetDescTextBox.ReadOnly = false;
             this.budgetDescTextBox.BackColor = Color.White;
+            this.startDteTextBox.ReadOnly = false;
+            this.startDteTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.endDteTextBox.ReadOnly = false;
+            this.endDteTextBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.prdTypComboBox.BackColor = Color.FromArgb(255, 255, 118);
         }
 
         private void disableBdgtEdit()
@@ -9104,6 +9770,11 @@ Check the ff Days:" + "\r\n";
             this.budgetNmTextBox.BackColor = Color.WhiteSmoke;
             this.budgetDescTextBox.ReadOnly = true;
             this.budgetDescTextBox.BackColor = Color.WhiteSmoke;
+            this.startDteTextBox.ReadOnly = true;
+            this.startDteTextBox.BackColor = Color.WhiteSmoke;
+            this.endDteTextBox.ReadOnly = true;
+            this.endDteTextBox.BackColor = Color.WhiteSmoke;
+            this.prdTypComboBox.BackColor = Color.WhiteSmoke;
         }
 
         private bool shdObeyBdgtEvts()
@@ -9399,6 +10070,21 @@ Check the ff Days:" + "\r\n";
                 Global.mnFrm.cmCde.showMsg("Please enter a Budget Name!", 0);
                 return;
             }
+            if (this.startDteTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please enter a Start Date!", 0);
+                return;
+            }
+            if (this.endDteTextBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please enter an End Date!", 0);
+                return;
+            }
+            if (this.prdTypComboBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please select a Period Type!", 0);
+                return;
+            }
             long oldBdgtID = Global.mnFrm.cmCde.getBdgtID(this.budgetNmTextBox.Text,
          Global.mnFrm.cmCde.Org_id);
             if (oldBdgtID > 0
@@ -9422,7 +10108,7 @@ Check the ff Days:" + "\r\n";
             {
                 Global.createBudget(Global.mnFrm.cmCde.Org_id,
                   this.budgetNmTextBox.Text, this.budgetDescTextBox.Text,
-                  this.isBdgActiveCheckBox.Checked);
+                  this.isBdgActiveCheckBox.Checked, this.startDteTextBox.Text, this.endDteTextBox.Text, this.prdTypComboBox.Text);
                 this.saveBdgButton.Enabled = false;
                 this.addbdgt = false;
                 this.editbdgt = false;
@@ -9436,7 +10122,8 @@ Check the ff Days:" + "\r\n";
             {
                 Global.updateBudget(long.Parse(this.budgetIDTextBox.Text),
                   this.budgetNmTextBox.Text, this.budgetDescTextBox.Text,
-                  this.isBdgActiveCheckBox.Checked);
+                  this.isBdgActiveCheckBox.Checked, this.startDteTextBox.Text,
+                  this.endDteTextBox.Text, this.prdTypComboBox.Text);
                 this.saveBdgButton.Enabled = false;
                 this.editbdgt = false;
                 this.editBdgButton.Enabled = this.addBudgets;
@@ -9468,6 +10155,9 @@ Check the ff Days:" + "\r\n";
         private void exptBdgtTmpltButton_Click(object sender, EventArgs e)
         {
             bdgtTmpDiag nwDiag = new bdgtTmpDiag();
+            nwDiag.startDteTextBox.Text = this.startDteTextBox.Text;
+            nwDiag.endDteTextBox.Text = this.endDteTextBox.Text;
+            nwDiag.prdTypComboBox.SelectedItem = this.prdTypComboBox.Text;
             DialogResult dgres = nwDiag.ShowDialog();
             if (dgres == DialogResult.OK)
             {
@@ -10475,16 +11165,15 @@ Check the ff Days:" + "\r\n";
                 return;
             }
             addBdgtLineDiag nwDiag = new addBdgtLineDiag();
-
             nwDiag.orgid = Global.mnFrm.cmCde.Org_id;
             nwDiag.bdgtID = long.Parse(this.budgetIDTextBox.Text);
-            nwDiag.bdgtDtID = long.Parse(this.budgetDetListView.SelectedItems[0].SubItems[8].Text);
-            nwDiag.startDteTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[5].Text;
-            nwDiag.endDteTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[6].Text;
+            nwDiag.bdgtDtID = long.Parse(this.budgetDetListView.SelectedItems[0].SubItems[9].Text);
+            nwDiag.startDteTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[6].Text;
+            nwDiag.endDteTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[7].Text;
             double amntLmt = double.Parse(this.budgetDetListView.SelectedItems[0].SubItems[3].Text);
             nwDiag.amntNumericUpDown.Value = (Decimal)amntLmt;
-            nwDiag.actionComboBox.SelectedItem = this.budgetDetListView.SelectedItems[0].SubItems[7].Text;
-            nwDiag.accntIDTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[9].Text;
+            nwDiag.actionComboBox.SelectedItem = this.budgetDetListView.SelectedItems[0].SubItems[8].Text;
+            nwDiag.accntIDTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[10].Text;
             nwDiag.accntNumTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[1].Text;
             nwDiag.accntNameTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[2].Text;
 
@@ -10520,7 +11209,7 @@ Check the ff Days:" + "\r\n";
             }
             for (int a = 0; a < this.budgetDetListView.SelectedItems.Count; a++)
             {
-                Global.deleteOneBdgtDet(long.Parse(this.budgetDetListView.SelectedItems[a].SubItems[8].Text),
+                Global.deleteOneBdgtDet(long.Parse(this.budgetDetListView.SelectedItems[a].SubItems[9].Text),
                   this.budgetNmTextBox.Text);
             }
             this.populateBdgDtListVw();
@@ -10738,7 +11427,9 @@ Check the ff Days:" + "\r\n";
                 if (this.batchSourceLabel.Text == "Manual"
             || int.Parse(this.trnsDetListView.SelectedItems[i].SubItems[12].Text) == suspns_accnt)
                 {
-                    Global.deleteTransaction(long.Parse(this.trnsDetListView.SelectedItems[i].SubItems[8].Text));
+                    long trnsID = -1;
+                    long.TryParse(this.trnsDetListView.SelectedItems[i].SubItems[8].Text, out trnsID);
+                    Global.deleteTransaction(trnsID);
                 }
             }
             this.populateTrnsDet(long.Parse(this.batchIDTextBox.Text));
@@ -12213,8 +12904,10 @@ Check the ff Days:" + "\r\n";
         private void resetChrtButton_Click(object sender, EventArgs e)
         {
             this.searchInChrtComboBox.SelectedIndex = 0;
+            this.mjrClsfctnTextBox.SelectedIndex = 0;
+            this.mnrClsfctnTextBox.Text = "";
             this.searchForChrtTextBox.Text = "%";
-            this.dsplySizeChrtComboBox.Text = Global.mnFrm.cmCde.get_CurPlcy_Mx_Dsply_Recs().ToString();
+            this.dsplySizeChrtComboBox.Text = "200";// Global.mnFrm.cmCde.get_CurPlcy_Mx_Dsply_Recs().ToString();
             this.chrt_cur_indx = 0;
             this.rfrshChrtButton_Click(this.rfrshChrtButton, e);
         }
@@ -12407,12 +13100,6 @@ Check the ff Days:" + "\r\n";
                     Global.mnFrm.cmCde.showMsg("Please define a suspense Account First!", 0);
                     return;
                 }
-                //if (this.coaAEBalNumericUpDown.Value -
-                //  this.coaCRLBalNumericUpDown.Value == 0)
-                //{
-                //  Global.mnFrm.cmCde.showMsg("There's no Imbalance to correct!", 0);
-                //  return;
-                //}
                 int ret_accnt = Global.get_Rtnd_Erngs_Accnt(Global.mnFrm.cmCde.Org_id);
                 int net_accnt = Global.get_Net_Income_Accnt(Global.mnFrm.cmCde.Org_id);
                 if (ret_accnt == -1)
@@ -12425,207 +13112,146 @@ Check the ff Days:" + "\r\n";
                     Global.mnFrm.cmCde.showMsg("Until a Net Income Account is defined\r\n no Transaction can be posted into the Accounting!", 0);
                     return;
                 }
-
+                Global.mnFrm.cmCde.selectDate(ref this.bals2DteTextBox);
+                string trnsAftaDate = DateTime.ParseExact(
+         this.bals2DteTextBox.Text, "dd-MMM-yyyy HH:mm:ss",
+         System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
                 if (Global.mnFrm.cmCde.showMsg("Are you sure you want to Perform this Action!", 1) == DialogResult.No)
                 {
                     return;
                 }
+                if (Global.mnFrm.cmCde.isThereANActvPrcss("5") == "1")
+                {
+                    Global.mnFrm.cmCde.showMsg("Sorry an Account Posting Process is already on-going!\r\nKindly try again in a few minutes!", 0);
+                    return;
+                }
+                else
+                {
+                    Global.mnFrm.cmCde.updateANActvPrcss("5", "1");
+                }
                 this.waitLabel.Visible = true;
                 this.correctImblnsButton.Enabled = false;
                 System.Windows.Forms.Application.DoEvents();
-                bool isAnyRnng = true;
-                do
-                {
-                    isAnyRnng = Global.isThereANActvActnPrcss("1,2,3,4,5,6", "10 second");
-                    System.Windows.Forms.Application.DoEvents();
-                }
-                while (isAnyRnng == true);
-
-
-                //bool isAnyRnng = true;
-                //int witcntr = 0;
-                //do
-                //{
-                //  witcntr++;
-                //  isAnyRnng = Global.isThereANActvActnPrcss("1,2,3,4,5,6", "10 second");
-                //  System.Windows.Forms.Application.DoEvents();
-                //}
-                //while (isAnyRnng == true);
-
-                /*PROCEDURE FOR RELOADING ACCOUNT BALANCES
-            1. Correct all Trns Det Net Balance Amount
-            2. Get all wrong daily bals values
-                 */
-                Global.updtActnPrcss(5, 90);
                 this.waitLabel.Visible = true;
                 System.Windows.Forms.Application.DoEvents();
 
                 Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
-                DataSet dtst = Global.get_WrongNetBalncs(Global.mnFrm.cmCde.Org_id);
+                DateTime StartDate = DateTime.ParseExact(
+              trnsAftaDate + " 00:00:00", "yyyy-MM-dd HH:mm:ss",
+              System.Globalization.CultureInfo.InvariantCulture);
+                /* DataSet dtst = Global.pg_CorrectImblnsProcess(StartDate.ToString("DD-MMM-YYYY HH:mm:ss"), Global.mnFrm.cmCde.Org_id, Global.myBscActn.user_id);
+                 for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                 {
+                     Global.mnFrm.cmCde.showMsg(dtst.Tables[0].Rows[i][0].ToString(), 3);
+                 }*/
 
-                for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                string reportName = "Auto-Correct Gl Imbalances";
+                long rptID = -1;
+                rptID = Global.mnFrm.cmCde.getGnrlRecID("rpt.rpt_reports", "report_name", "report_id", reportName);
+                if (rptID <= 0)
                 {
-                    double netAmnt = double.Parse(dtst.Tables[0].Rows[i][8].ToString());
-                    long trnsID = long.Parse(dtst.Tables[0].Rows[i][0].ToString());
-                    string updtSQL = @"UPDATE accb.accb_trnsctn_details 
-SET net_amount=" + netAmnt + @" 
-   WHERE transctn_id=" + trnsID;
-                    Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
-
-                    Global.updtActnPrcss(5, 90);
-                    System.Windows.Forms.Application.DoEvents();
-                }
-                this.waitLabel.Visible = true;
-                System.Windows.Forms.Application.DoEvents();
-
-                dtst = Global.get_WrongBalncs(Global.mnFrm.cmCde.Org_id);
-                this.waitLabel.Visible = true;
-                System.Windows.Forms.Application.DoEvents();
-                for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
-                {
-                    Global.updtActnPrcss(5, 30);
-                    System.Windows.Forms.Application.DoEvents();
-                    string acctyp = Global.mnFrm.cmCde.getAccntType(
-                     int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
-
-                    double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                    double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                    double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
-
-
-                    Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
-                     dbt1,
-                     crdt1,
-                     net1,
-                     dtst.Tables[0].Rows[i][7].ToString(), -993);
-
-
-                    if (acctyp == "R")
-                    {
-                        Global.postTransaction(net_accnt,
-                       dbt1,
-                       crdt1,
-                       net1,
-                        dtst.Tables[0].Rows[i][7].ToString(), -993);
-                    }
-                    else if (acctyp == "EX")
-                    {
-                        Global.postTransaction(net_accnt,
-                       dbt1,
-                       crdt1,
-                    (double)(-1) * net1,
-                        dtst.Tables[0].Rows[i][7].ToString(), -993);
-                    }
-
-
-                    //get control accnt id
-                    int cntrlAcntID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm("accb.accb_chart_of_accnts", "accnt_id", "control_account_id", int.Parse(dtst.Tables[0].Rows[i][1].ToString())));
-                    if (cntrlAcntID > 0)
-                    {
-                        Global.postTransaction(cntrlAcntID,
-                       dbt1,
-                       crdt1,
-                       net1,
-                         dtst.Tables[0].Rows[i][7].ToString(), -993);
-
-                    }
-                    //this.reloadOneAcntChrtBals(int.Parse(dtst.Tables[0].Rows[i][1].ToString()), net_accnt);
+                    Global.mnFrm.cmCde.showMsg("Cannot Find the Required Background Processes!\r\n" +
+                    "Please visit Reports & Processes to get them Set Up and Try Again!", 0);
+                    return;
                 }
 
-                Global.updtActnPrcss(5, 50);
-                this.reloadAcntChrtBals(net_accnt);
+                //string datestr = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
+                string reportTitle = reportName.ToUpper();
+                string paramRepsNVals = "{:orgID}~" + Global.mnFrm.cmCde.Org_id.ToString() + "|{:p_asAtDate}~" + StartDate.ToString("dd-MMM-yyyy HH:mm:ss");
+                //Global.mnFrm.cmCde.updateANActvPrcss("5", "1");
+                DialogResult dgres = Global.mnFrm.cmCde.showRptParamsDiaglog(rptID, Global.mnFrm.cmCde, paramRepsNVals, reportTitle);
+                Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
+                /* DataSet dtst = Global.get_WrongNetBalncs(Global.mnFrm.cmCde.Org_id);
+                 Global.mnFrm.cmCde.updateDataNoParams(@"DELETE FROM accb.accb_accnt_daily_bals WHERE  daily_bals_id IN  (Select tbl1.db1 from (Select count(daily_bals_id), accnt_id, as_at_date, MAX(daily_bals_id) db1 from accb.accb_accnt_daily_bals 
+                                                         GROUP BY  accnt_id, as_at_date
+                                                         HAVING count(daily_bals_id)>1) tbl1)");
+                 Global.mnFrm.cmCde.updateDataNoParams(@"UPDATE accb.accb_accnt_daily_bals a SET dbt_bal=0, crdt_bal=0, net_balance=0 WHERE as_at_date>='" + trnsAftaDate.Replace("'", "''") + "'");
+                string updtSQL = @"UPDATE accb.accb_trnsctn_details 
+       SET dbt_amount=round(dbt_amount,2), crdt_amount=round(crdt_amount,2),
+ net_amount = round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)
+       WHERE dbt_amount!=round(dbt_amount,2) or crdt_amount!=round(crdt_amount,2)
+ or net_amount != round((CASE WHEN accb.get_accnt_type(accnt_id) IN ('A','EX') THEN (dbt_amount-crdt_amount) ELSE (crdt_amount-dbt_amount) END),2)";
+                 Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
+                 this.waitLabel.Visible = true;
+                 System.Windows.Forms.Application.DoEvents();
+                 DateTime StartDate = DateTime.ParseExact(
+             trnsAftaDate + " 00:00:00", "yyyy-MM-dd HH:mm:ss",
+             System.Globalization.CultureInfo.InvariantCulture);
+                 DateTime EndDate = DateTime.ParseExact(
+                       "01" + Global.mnFrm.cmCde.getFrmtdDB_Date_time().Substring(2, 9) + " 23:59:59", "dd-MMM-yyyy HH:mm:ss",
+                       System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1);
+                 for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
+                 {
+                     trnsAftaDate = date.ToString("yyyy-MM-dd");
+                     dtst = Global.get_WrongBalncs(Global.mnFrm.cmCde.Org_id, trnsAftaDate);
+                     this.waitLabel.Visible = true;
+                     System.Windows.Forms.Application.DoEvents();
+                     for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                     {
+                         System.Windows.Forms.Application.DoEvents();
+                         string acctyp = Global.mnFrm.cmCde.getAccntType(int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
 
-                dtst = Global.get_WrongNetIncmBalncs(Global.mnFrm.cmCde.Org_id);
-                this.waitLabel.Visible = true;
+                         double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                         double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                         double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+
+                         Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                          dbt1,
+                          crdt1,
+                          net1,
+                          dtst.Tables[0].Rows[i][7].ToString(), -993);
+                     }
+                     dtst = Global.get_WrongHsSubLdgrBalncs(Global.mnFrm.cmCde.Org_id, trnsAftaDate);
+                     this.waitLabel.Visible = true;
+                     System.Windows.Forms.Application.DoEvents();
+                     for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                     {
+                         System.Windows.Forms.Application.DoEvents();
+                         string acctyp = Global.mnFrm.cmCde.getAccntType(
+                          int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+                         double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                         double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                         double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+                         Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                          dbt1,
+                          crdt1,
+                          net1,
+                          dtst.Tables[0].Rows[i][7].ToString(), -993);
+                     }
+                     dtst = Global.get_WrongNetIncmBalncs(Global.mnFrm.cmCde.Org_id, trnsAftaDate);
+                     this.waitLabel.Visible = true;
+                     System.Windows.Forms.Application.DoEvents();
+                     for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                     {
+                         System.Windows.Forms.Application.DoEvents();
+                         string acctyp = Global.mnFrm.cmCde.getAccntType(
+                          int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
+
+                         double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
+                         double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
+                         double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
+
+
+                         Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
+                          dbt1,
+                          crdt1,
+                          net1,
+                          dtst.Tables[0].Rows[i][7].ToString(), -993);
+                     }
+                 }
+
+                 this.reloadAcntChrtBals(net_accnt);*/
+                Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
+                this.waitLabel.Visible = false;
+                this.correctImblnsButton.Enabled = true;
                 System.Windows.Forms.Application.DoEvents();
-                for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
-                {
-                    Global.updtActnPrcss(5, 30);
-                    System.Windows.Forms.Application.DoEvents();
-                    string acctyp = Global.mnFrm.cmCde.getAccntType(
-                     int.Parse(dtst.Tables[0].Rows[i][1].ToString()));
-
-                    double dbt1 = double.Parse(dtst.Tables[0].Rows[i][4].ToString());
-                    double crdt1 = double.Parse(dtst.Tables[0].Rows[i][5].ToString());
-                    double net1 = double.Parse(dtst.Tables[0].Rows[i][6].ToString());
-
-
-                    Global.postTransaction(int.Parse(dtst.Tables[0].Rows[i][1].ToString()),
-                     dbt1,
-                     crdt1,
-                     net1,
-                     dtst.Tables[0].Rows[i][7].ToString(), -993);
-
-
-
-                    //this.reloadOneAcntChrtBals(int.Parse(dtst.Tables[0].Rows[i][1].ToString()), net_accnt);
-                }
-
-                Global.updtActnPrcss(5, 50);
-                this.reloadOneAcntChrtBals(net_accnt, net_accnt);
-
-                string errmsg = "";
-                decimal aesum = (decimal)Global.get_COA_AESum(Global.mnFrm.cmCde.Org_id);
-                decimal crlsum = (decimal)Global.get_COA_CRLSum(Global.mnFrm.cmCde.Org_id);
+                this.waitLabel.Visible = false;
                 System.Windows.Forms.Application.DoEvents();
-                if (aesum
-                 != crlsum)
-                {
-                    Global.updtActnPrcss(5, 10);
-                    if (this.postIntoSuspnsAccnt(aesum,
-                      crlsum, Global.mnFrm.cmCde.Org_id, false, ref errmsg) == false
-                      && errmsg != "")
-                    {
-                        Global.mnFrm.cmCde.showMsg(errmsg, 0);
-                    }
-                }
-
-                this.reloadOneAcntChrtBals(suspns_accnt, net_accnt);
-
-                //        Global.postTransaction(net_accnt,
-                //dbt1,
-                //crdt1,
-                //net1,
-                //dtst.Tables[0].Rows[i][7].ToString(), -993);
-
-                //errmsg = "";
-                //aesum = (decimal)Global.get_COA_ASum(Global.mnFrm.cmCde.Org_id);
-                //crlsum = (decimal)Global.get_COA_CLSum(Global.mnFrm.cmCde.Org_id);
-                //System.Windows.Forms.Application.DoEvents();
-                //if (aesum
-                // != crlsum)
-                //{
-                //  Global.updtActnPrcss(5, 10);
-                //  if (this.postIntoSuspnsAccnt(aesum,
-                //    crlsum, Global.mnFrm.cmCde.Org_id, false, ref errmsg) == false
-                //    && errmsg != "")
-                //  {
-                //    Global.mnFrm.cmCde.showMsg(errmsg, 0);
-                //  }
-                //}
-                //this.reloadOneAcntChrtBals(suspns_accnt, net_accnt);
-                ////Get Net Balance on Suspense Account
-                //string trnsDate = Global.mnFrm.cmCde.getFrmtdDB_Date_time();
-                //double lstNetBals = Global.getAccntLstDailyNetBals(suspns_accnt, trnsDate);
-                //double lstDbtBals = Global.getAccntLstDailyDbtBals(suspns_accnt, trnsDate);
-                //double lstCrdtBals = Global.getAccntLstDailyCrdtBals(suspns_accnt, trnsDate);
-                //if (lstDbtBals
-                // != lstCrdtBals)
-                //{
-                //  Global.updtActnPrcss(5, 10);
-                //  if (this.postIntoSuspnsAccnt((decimal)lstDbtBals,
-                //    (decimal)lstCrdtBals, Global.mnFrm.cmCde.Org_id, true, ref errmsg) == false
-                //    && errmsg != "")
-                //  {
-                //    Global.mnFrm.cmCde.showMsg(errmsg, 0);
-                //  }
-                //}
-
-                Global.updtActnPrcss(5, 1);
                 this.rfrshChrtButton_Click(this.rfrshChrtButton, e);
             }
             catch (Exception ex)
             {
+                Global.mnFrm.cmCde.updateANActvPrcss("5", "0");
                 this.waitLabel.Visible = false;
                 this.correctImblnsButton.Enabled = true;
                 System.Windows.Forms.Application.DoEvents();
@@ -14327,6 +14953,18 @@ SET net_amount=" + netAmnt + @"
             this.obey_evnts = false;
             this.tbalsAcctIDTextBox.Text = "-1";
             this.tbalsAcctNmTextBox.Text = "";
+            this.rptSgmntTextBox.Text = "";
+            this.rptSgmnt1TextBox.Text = "-1";
+            this.rptSgmnt2TextBox.Text = "-1";
+            this.rptSgmnt3TextBox.Text = "-1";
+            this.rptSgmnt4TextBox.Text = "-1";
+            this.rptSgmnt5TextBox.Text = "-1";
+            this.rptSgmnt6TextBox.Text = "-1";
+            this.rptSgmnt7TextBox.Text = "-1";
+            this.rptSgmnt8TextBox.Text = "-1";
+            this.rptSgmnt9TextBox.Text = "-1";
+            this.rptSgmnt10TextBox.Text = "-1";
+            this.tbalsNumUpDown.Value = 1;
             this.obey_evnts = true;
             this.txtChngd = false;
             this.smmryTBalsCheckBox.Checked = true;
@@ -14363,6 +15001,18 @@ SET net_amount=" + netAmnt + @"
             this.obey_evnts = false;
             this.pnlAccntIDTextBox.Text = "-1";
             this.pnlAccntNmTextBox.Text = "";
+            this.pnlRptSgmntTextBox.Text = "";
+            this.pnlRptSgmnt1TextBox.Text = "-1";
+            this.pnlRptSgmnt2TextBox.Text = "-1";
+            this.pnlRptSgmnt3TextBox.Text = "-1";
+            this.pnlRptSgmnt4TextBox.Text = "-1";
+            this.pnlRptSgmnt5TextBox.Text = "-1";
+            this.pnlRptSgmnt6TextBox.Text = "-1";
+            this.pnlRptSgmnt7TextBox.Text = "-1";
+            this.pnlRptSgmnt8TextBox.Text = "-1";
+            this.pnlRptSgmnt9TextBox.Text = "-1";
+            this.pnlRptSgmnt10TextBox.Text = "-1";
+            this.pnlNumUpDown.Value = 1;
             this.obey_evnts = true;
             this.txtChngd = false;
             this.pnlSmmryCheckBox.Checked = true;
@@ -14411,8 +15061,114 @@ SET net_amount=" + netAmnt + @"
 
         private void segmentsButton_Click(object sender, EventArgs e)
         {
-            Global.mnFrm.cmCde.showMsg("Sorry! Feature not available in this edition!\nContact your the Software Provider!", 0);
-            return;
+            if (this.editAccounts && this.editChrtButton.Text == "EDIT")
+            {
+                this.editChrtButton.PerformClick();
+            }
+            if (int.Parse(this.accntIDTextBox.Text) <= 0 && this.addChrt == false)
+            {
+                Global.mnFrm.cmCde.showMsg("Please select an Account First!", 0);
+                return;
+            }
+            string nwAcctNum = "";
+            string nwAcctName = "";
+            int ntrlAcntSgmtVal = -1;
+            bool allwNtrlAcntEdit = this.editAccounts;
+            if (this.editAccounts == true)
+            {
+                if (this.netBalNumericUpDown.Value != 0
+                  || this.crdtBalNumericUpDown.Value != 0
+                  || this.dbtBalNumericUpDown.Value != 0)
+                {
+                    allwNtrlAcntEdit = false;
+                }
+            }
+            int accntSgmnt1 = int.Parse(this.accntSgmnt1TextBox.Text);
+            int accntSgmnt2 = int.Parse(this.accntSgmnt2TextBox.Text);
+            int accntSgmnt3 = int.Parse(this.accntSgmnt3TextBox.Text);
+            int accntSgmnt4 = int.Parse(this.accntSgmnt4TextBox.Text);
+            int accntSgmnt5 = int.Parse(this.accntSgmnt5TextBox.Text);
+            int accntSgmnt6 = int.Parse(this.accntSgmnt6TextBox.Text);
+            int accntSgmnt7 = int.Parse(this.accntSgmnt7TextBox.Text);
+            int accntSgmnt8 = int.Parse(this.accntSgmnt8TextBox.Text);
+            int accntSgmnt9 = int.Parse(this.accntSgmnt9TextBox.Text);
+            int accntSgmnt10 = int.Parse(this.accntSgmnt10TextBox.Text);
+            bool isForRpt = false;
+            //CommonCode.CommonCodes cCde = Global.mnFrm.cmCde;
+            DialogResult dgrs = Global.mnFrm.cmCde.showAcntSegmentsDiag(ref nwAcctNum, ref nwAcctName, ref ntrlAcntSgmtVal, ref allwNtrlAcntEdit,
+                 ref accntSgmnt1, ref accntSgmnt2, ref accntSgmnt3, ref accntSgmnt4, ref accntSgmnt5, ref accntSgmnt6, ref accntSgmnt7
+                   , ref accntSgmnt8, ref accntSgmnt9, ref accntSgmnt10, int.Parse(this.accntIDTextBox.Text), this.editAccounts, isForRpt, Global.mnFrm.cmCde);
+            if (dgrs == DialogResult.OK)
+            {
+                this.accntNumTextBox.Text = nwAcctNum;
+                this.accntNameTextBox.Text = nwAcctName;
+
+                this.accntSgmnt1TextBox.Text = accntSgmnt1.ToString();
+                this.accntSgmnt2TextBox.Text = accntSgmnt2.ToString();
+                this.accntSgmnt3TextBox.Text = accntSgmnt3.ToString();
+                this.accntSgmnt4TextBox.Text = accntSgmnt4.ToString();
+                this.accntSgmnt5TextBox.Text = accntSgmnt5.ToString();
+                this.accntSgmnt6TextBox.Text = accntSgmnt6.ToString();
+                this.accntSgmnt7TextBox.Text = accntSgmnt7.ToString();
+                this.accntSgmnt8TextBox.Text = accntSgmnt8.ToString();
+                this.accntSgmnt9TextBox.Text = accntSgmnt9.ToString();
+                this.accntSgmnt10TextBox.Text = accntSgmnt10.ToString();
+
+                if (allwNtrlAcntEdit == true)
+                {
+                    //Get Natural Account Details and Change Corresponding Fields
+                    DataSet dtst = Global.get_One_SgmntValDet(ntrlAcntSgmtVal);
+                    for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
+                    {
+                        this.accntTypeComboBox.Items.Clear();
+                        if (dtst.Tables[0].Rows[i][14].ToString() == "A")
+                        {
+                            this.accntTypeComboBox.Items.Add("A -ASSET");
+                        }
+                        else if (dtst.Tables[0].Rows[i][14].ToString() == "EQ")
+                        {
+                            this.accntTypeComboBox.Items.Add("EQ-EQUITY");
+                        }
+                        else if (dtst.Tables[0].Rows[i][14].ToString() == "L")
+                        {
+                            this.accntTypeComboBox.Items.Add("L -LIABILITY");
+                        }
+                        else if (dtst.Tables[0].Rows[i][14].ToString() == "R")
+                        {
+                            this.accntTypeComboBox.Items.Add("R -REVENUE");
+                        }
+                        else if (dtst.Tables[0].Rows[i][14].ToString() == "EX")
+                        {
+                            this.accntTypeComboBox.Items.Add("EX-EXPENSE");
+                        }
+                        if (this.accntTypeComboBox.Items.Count > 0)
+                        {
+                            this.accntTypeComboBox.SelectedIndex = 0;
+                        }
+                        this.isEnabledAccntsCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][6].ToString());
+
+                        this.isPrntAccntsCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][15].ToString());
+                        this.isRetEarnsCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][16].ToString());
+                        this.isNetIncmCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][17].ToString());
+                        this.isContraCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][13].ToString());
+                        this.rptLnNoUpDown.Value = Decimal.Parse(dtst.Tables[0].Rows[i][19].ToString());
+                        this.hasSubldgrCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][20].ToString());
+                        this.isSuspensCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][23].ToString());
+                        this.cntrlAccntIDTextBox.Text = dtst.Tables[0].Rows[i][21].ToString();
+                        this.cntrlAccntTextBox.Text = Global.mnFrm.cmCde.getSegmentVal(int.Parse(dtst.Tables[0].Rows[i][21].ToString())) + "." +
+                                Global.mnFrm.cmCde.getSegmentValDesc(int.Parse(dtst.Tables[0].Rows[i][21].ToString()));
+                        this.accntCurrIDTextBox.Text = dtst.Tables[0].Rows[i][22].ToString();
+                        this.accntCrncyNmTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(int.Parse(dtst.Tables[0].Rows[i][22].ToString()));
+                        this.mappedAccntIDTextBox.Text = dtst.Tables[0].Rows[i][25].ToString();
+                        this.accClsfctnComboBox.SelectedItem = dtst.Tables[0].Rows[i][24].ToString();
+                        this.mappedAccntTextBox.Text = Global.mnFrm.cmCde.getAccntNum(int.Parse(dtst.Tables[0].Rows[i][25].ToString()))
+                            + "." + Global.mnFrm.cmCde.getAccntName(int.Parse(dtst.Tables[0].Rows[i][25].ToString()));
+                        this.parntAccntButton.PerformClick();
+                    }
+                }
+            }
+            //Global.mnFrm.cmCde = cCde;
+            Global.refreshRqrdVrbls();
         }
 
         private void budgetDetListView_DoubleClick(object sender, EventArgs e)
@@ -14460,5 +15216,1065 @@ SET net_amount=" + netAmnt + @"
             }
         }
 
+        private void exprtCmbntnsButton_Click(object sender, EventArgs e)
+        {
+            string rspnse = Interaction.InputBox("What Account Code Combinations will you like to Export?" +
+              "\r\n1=Only Balance Sheet Account Combinations" +
+              "\r\n2=Only Assets && Liabilities Account Combinations" +
+              "\r\n3=Only Income Statement Account Combinations" +
+              "\r\n4=Only Revenue Account Combinations" +
+              "\r\n5=Only Expenditure Account Combinations" +
+              "\r\n6=Only Asset Account Combinations" +
+              "\r\n7=Only Liability Account Combinations" +
+              "\r\n8=Only Equity Account Combinations" +
+              "\r\n9=All Account Combinations" +
+            "\r\n10-1000000=Specify Number of Combinations\r\n",
+              "Rhomicom", "1", (Global.mnFrm.cmCde.myComputer.Screen.Bounds.Width / 2) - 170,
+              (Global.mnFrm.cmCde.myComputer.Screen.Bounds.Height / 2) - 100);
+            if (rspnse.Equals(string.Empty) || rspnse.Equals(null))
+            {
+                //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
+                return;
+            }
+            int rsponse = 0;
+            bool rsps = int.TryParse(rspnse, out rsponse);
+            if (rsps == false)
+            {
+                Global.mnFrm.cmCde.showMsg("Invalid Option! Expecting 1-1000000", 4);
+                return;
+            }
+            if (rsponse < 1 || rsponse > 1000000)
+            {
+                Global.mnFrm.cmCde.showMsg("Invalid Option! Expecting 1-1000000", 4);
+                return;
+            }
+            Global.mnFrm.cmCde.exprtCmbntnsTmp(rsponse);
+        }
+
+        private void mappedAccntButton_Click(object sender, EventArgs e)
+        {
+            this.mappedAcntLOVSearch();
+        }
+
+        private void mappedAcntLOVSearch()
+        {
+            if (!this.mappedAccntTextBox.Text.Contains("%"))
+            {
+                this.mappedAccntTextBox.Text = "%" + this.mappedAccntTextBox.Text.Replace(" ", "%") + "%";
+                this.mappedAccntIDTextBox.Text = "-1";
+            }
+            int grpOrgID = Global.mnFrm.cmCde.getGrpOrgID();
+            string[] selVals = new string[1];
+            selVals[0] = this.mappedAccntIDTextBox.Text;
+            DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+              Global.mnFrm.cmCde.getLovID("Transaction Accounts"), ref selVals,
+              true, true, grpOrgID,
+             this.parentAccntTextBox.Text, "Both", true);
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < selVals.Length; i++)
+                {
+                    this.mappedAccntIDTextBox.Text = selVals[i];
+                    this.mappedAccntTextBox.Text = Global.mnFrm.cmCde.getAccntNum(int.Parse(selVals[i]))
+                    + "." + Global.mnFrm.cmCde.getAccntName(int.Parse(selVals[i]));
+                }
+            }
+        }
+
+        private void cshBkStrtDteButton_Click(object sender, EventArgs e)
+        {
+            Global.mnFrm.cmCde.selectDate(ref this.cshBkStrtDteTextBox);
+        }
+
+        private void cshBkEndDteButton_Click(object sender, EventArgs e)
+        {
+            Global.mnFrm.cmCde.selectDate(ref this.cshBkEndDteTextBox);
+            this.cshBkEndDteTextBox.Text = this.cshBkEndDteTextBox.Text.Replace("00:00:00", "23:59:59");
+        }
+
+        private void exprtExclCshBkButton_Click(object sender, EventArgs e)
+        {
+            //cashBookListView
+            Global.mnFrm.cmCde.exprtToExcelSelective(this.cashBookListView, this.cashBookGroupBox.Text);
+        }
+
+        private void gnrtRptCshBkButton_Click(object sender, EventArgs e)
+        {
+
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[4]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+
+            if (this.accntClassComboBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please Indicate the Account Classification First!", 0);
+                return;
+            }
+
+            this.gnrtRptCshBkButton.Enabled = false;
+            System.Windows.Forms.Application.DoEvents();
+            this.populateCashBkStmnt(this.accntClassComboBox.Text,
+                  this.cshBkStrtDteTextBox.Text, this.cshBkEndDteTextBox.Text);
+            this.gnrtRptCshBkButton.Enabled = true;
+            this.cashBookListView.Focus();
+        }
+
+        private void populateCashBkStmnt(string accntClass, string strDate, string endDate)
+        {
+            //Check if no other accounting process is running
+            /*bool isAnyRnng = true;
+            do
+            {
+                isAnyRnng = Global.isThereANActvActnPrcss("5", "10 second");
+                System.Windows.Forms.Application.DoEvents();
+            }
+            while (isAnyRnng == true);
+            Global.updtActnPrcss(4);*/
+            this.statusLoadLabel.Visible = true;
+            this.statusLoadPictureBox.Visible = true;
+            this.cashBookListView.Visible = false;
+            System.Windows.Forms.Application.DoEvents();
+
+            this.cashBkProgressBar.Value = 10;
+            DataSet dtst = Global.get_AccntClassStmntTrns(accntClass, strDate, endDate, true, 0, 0);
+            this.cashBookListView.Items.Clear();
+            DataSet accntsDtSt = Global.get_AccntClassAccounts(accntClass);
+            int count = dtst.Tables[0].Rows.Count;
+            string funccur = Global.mnFrm.cmCde.getPssblValNm(
+             Global.mnFrm.cmCde.getOrgFuncCurID(Global.mnFrm.cmCde.Org_id));
+            this.cashBookGroupBox.Text = accntClass.ToUpper() + "'s TRANSACTIONS FROM " + strDate + " TO " + endDate + " (" + funccur + ")";
+
+            double dbtsum = 0;
+            double crdtsum = 0;
+
+            string opngbalsDate = DateTime.ParseExact(strDate, "dd-MMM-yyyy HH:mm:ss",
+                System.Globalization.CultureInfo.InvariantCulture).AddSeconds(-1).ToString("dd-MMM-yyyy HH:mm:ss");
+
+            double opngBals = 0;
+            double closngBals = 0;
+
+            this.cashBookListView.Columns.Clear();
+            this.cashBookListView.Columns.Add("No.", 35);
+            this.cashBookListView.Columns.Add("Transaction ID", 0);
+            this.cashBookListView.Columns.Add("Transaction Description", 350);
+            this.cashBookListView.Columns.Add("Ref.Doc.No.", 100);
+            this.cashBookListView.Columns.Add("Transaction Date", 100);
+            this.cashBookListView.Columns.Add("accnt_id", 0);
+            this.cashBookListView.Columns.Add("Account Num", 0);
+            this.cashBookListView.Columns.Add("Batch Name", 0);
+            int ttlAccnts = accntsDtSt.Tables[0].Rows.Count;
+            string[] lineVals = new string[8 + ttlAccnts];
+            System.Windows.Forms.Application.DoEvents();
+
+            //MessageBox.Show("ttlAccnts1:" + ttlAccnts);
+            for (int t = 0; t < ttlAccnts; t++)
+            {
+                int accntID = int.Parse(accntsDtSt.Tables[0].Rows[t][0].ToString());
+                opngBals = Global.getAccntLstDailyNetBals(accntID, opngbalsDate);
+                string colNm = Global.mnFrm.cmCde.getAccntNum(accntID) +
+                      "." + Global.mnFrm.cmCde.getAccntName(accntID);
+                this.cashBookListView.Columns.Add(colNm, 100);
+                this.cashBookListView.Columns[8 + t].TextAlign = HorizontalAlignment.Right;
+                // MessageBox.Show("ttlAccnts1:" + ttlAccnts);
+                if (t == 0)
+                {
+                    lineVals[0] = "";
+                    lineVals[1] = "";
+                    lineVals[2] = "OPENING BALANCE";
+                    lineVals[3] = "";
+                    lineVals[4] = "";//opngbalsDate
+                    lineVals[5] = "";
+                    lineVals[6] = "";
+                    lineVals[7] = "";
+                    lineVals[8] = opngBals.ToString("#,##0.00");
+                    for (int s = 1; s < ttlAccnts; s++)
+                    {
+                        lineVals[8 + s] = "";
+                    }
+
+                    ListViewItem nwItem1 = new ListViewItem(lineVals);
+                    nwItem1.BackColor = Color.Lime;
+                    nwItem1.Font = new Font("Tahoma", 10, FontStyle.Bold | FontStyle.Underline);
+                    this.cashBookListView.Items.Add(nwItem1);
+                }
+                else
+                {
+                    this.cashBookListView.Items[0].SubItems[8 + t].Text = opngBals.ToString("#,##0.00");
+                }
+                System.Windows.Forms.Application.DoEvents();
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                //Global.updtActnPrcss(4);
+                this.cashBkProgressBar.Value = 10 + (int)(((double)i / (double)count) * 90);
+                double amnt1 = 0;
+                double amnt2 = 0;
+                double amnt3 = 0;
+                double.TryParse(dtst.Tables[0].Rows[i][4].ToString(), out amnt1);
+                double.TryParse(dtst.Tables[0].Rows[i][5].ToString(), out amnt2);
+                double.TryParse(dtst.Tables[0].Rows[i][10].ToString(), out amnt3);
+
+                if (amnt2 >= amnt1)
+                {
+                    amnt2 = amnt2 - amnt1;
+                    amnt1 = 0;
+                }
+                else
+                {
+                    amnt1 = amnt1 - amnt2;
+                    amnt2 = 0;
+                }
+                dbtsum += amnt1;
+                crdtsum += amnt2;
+                opngBals += amnt3;
+
+                lineVals[0] = (1 + i).ToString();
+                lineVals[1] = dtst.Tables[0].Rows[i][0].ToString();
+                lineVals[2] = dtst.Tables[0].Rows[i][3].ToString();
+                lineVals[3] = dtst.Tables[0].Rows[i][23].ToString();
+                lineVals[4] = dtst.Tables[0].Rows[i][6].ToString();
+                lineVals[5] = dtst.Tables[0].Rows[i][9].ToString();
+                lineVals[6] = dtst.Tables[0].Rows[i][1].ToString();
+                lineVals[7] = dtst.Tables[0].Rows[i][11].ToString();
+                for (int s = 0; s < ttlAccnts; s++)
+                {
+                    int accntID = int.Parse(accntsDtSt.Tables[0].Rows[s][0].ToString());
+                    if (int.Parse(dtst.Tables[0].Rows[i][9].ToString()) == accntID)
+                    {
+                        lineVals[8 + s] = amnt3.ToString("#,##0.00");
+                    }
+                    else
+                    {
+                        lineVals[8 + s] = "";
+                    }
+                }
+                ListViewItem nwItem1 = new ListViewItem(lineVals);
+                nwItem1.BackColor = Color.White;
+                nwItem1.Font = new Font("Tahoma", 8.25F, FontStyle.Regular);
+                this.cashBookListView.Items.Add(nwItem1);
+                System.Windows.Forms.Application.DoEvents();
+            }
+
+            for (int t = 0; t < ttlAccnts; t++)
+            {
+                int accntID = int.Parse(accntsDtSt.Tables[0].Rows[t][0].ToString());
+                closngBals = Global.getAccntLstDailyNetBals(accntID, endDate);
+                if (t == 0)
+                {
+                    lineVals[0] = "";
+                    lineVals[1] = "";
+                    lineVals[2] = "CLOSING BALANCE";
+                    lineVals[3] = "";
+                    lineVals[4] = "";//endDate
+                    lineVals[5] = "";
+                    lineVals[6] = "";
+                    lineVals[7] = "";
+                    lineVals[8] = closngBals.ToString("#,##0.00");
+                    for (int s = 1; s < ttlAccnts; s++)
+                    {
+                        lineVals[8 + s] = "";
+                    }
+
+                    ListViewItem nwItem1 = new ListViewItem(lineVals);
+                    nwItem1.BackColor = Color.Lime;
+                    nwItem1.Font = new Font("Tahoma", 10, FontStyle.Bold | FontStyle.Underline);
+                    this.cashBookListView.Items.Add(nwItem1);
+                }
+                else
+                {
+                    this.cashBookListView.Items[count + 1].SubItems[8 + t].Text = closngBals.ToString("#,##0.00");
+                }
+                System.Windows.Forms.Application.DoEvents();
+            }
+            this.cashBkProgressBar.Value = 100;
+            this.statusLoadLabel.Visible = false;
+            this.statusLoadPictureBox.Visible = false;
+            this.cashBookListView.Visible = true;
+            System.Windows.Forms.Application.DoEvents();
+
+        }
+
+        private void vwSQLCshBkMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.mnFrm.cmCde.showSQL(Global.mnFrm.accntCshBkStmntSQL, 10);
+        }
+
+        private void cashBookListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[2]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            if (this.cashBookListView.SelectedItems.Count <= 0)
+            {
+                return;
+            }
+
+            if (this.cashBookListView.SelectedItems[0].SubItems[1].Text == "")
+            {
+                return;
+            }
+            vwTrnsctnsDiag nwDiag = new vwTrnsctnsDiag();
+            nwDiag.my_org_id = Global.mnFrm.cmCde.Org_id;
+            nwDiag.accnt_name = "";
+            nwDiag.accntid = -1;
+            nwDiag.trnsctnID = long.Parse(this.cashBookListView.SelectedItems[0].SubItems[1].Text);
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void vwTrnsCshBkMenuItem_Click(object sender, EventArgs e)
+        {
+            this.cashBookListView_DoubleClick(this.cashBookListView, e);
+        }
+
+        private void openBatchCshBkMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.accntStmntListView.SelectedItems.Count == 1)
+            {
+                string btchN = this.cashBookListView.SelectedItems[0].SubItems[7].Text;
+                if (btchN != "")
+                {
+                    this.searchForTrnsTextBox.Text = btchN;
+                    this.searchInTrnsComboBox.SelectedItem = "Batch Name";
+                    this.loadCorrectPanel("Journal Entries");
+                    this.showUnpostedCheckBox.Checked = false;
+                    if (this.shwMyBatchesCheckBox.Enabled == true)
+                    {
+                        this.shwMyBatchesCheckBox.Checked = false;
+                    }
+                    this.rfrshTrnsButton.PerformClick();
+                }
+            }
+        }
+
+        private void exprtExclCshBkMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.mnFrm.cmCde.exprtToExcelSelective(this.cashBookListView, this.cashBookGroupBox.Text);
+        }
+
+        private void smmryTBalsCheckBox_Click(object sender, EventArgs e)
+        {
+            if (this.smmryTBalsCheckBox.Checked)
+            {
+                this.tbalsNumUpDown.Value = 1;
+            }
+            else
+            {
+                this.tbalsNumUpDown.Value = 100;
+            }
+        }
+
+        private void pnlSmmryCheckBox_Click(object sender, EventArgs e)
+        {
+            if (this.pnlSmmryCheckBox.Checked)
+            {
+                this.pnlNumUpDown.Value = 1;
+            }
+            else
+            {
+                this.pnlNumUpDown.Value = 100;
+            }
+        }
+
+        private void tbalRptSgmntButton_Click(object sender, EventArgs e)
+        {
+            string nwAcctNum = "";
+            string nwAcctName = "";
+            int ntrlAcntSgmtVal = -1;
+            bool allwNtrlAcntEdit = true;
+            int accntSgmnt1 = int.Parse(this.rptSgmnt1TextBox.Text);
+            int accntSgmnt2 = int.Parse(this.rptSgmnt2TextBox.Text);
+            int accntSgmnt3 = int.Parse(this.rptSgmnt3TextBox.Text);
+            int accntSgmnt4 = int.Parse(this.rptSgmnt4TextBox.Text);
+            int accntSgmnt5 = int.Parse(this.rptSgmnt5TextBox.Text);
+            int accntSgmnt6 = int.Parse(this.rptSgmnt6TextBox.Text);
+            int accntSgmnt7 = int.Parse(this.rptSgmnt7TextBox.Text);
+            int accntSgmnt8 = int.Parse(this.rptSgmnt8TextBox.Text);
+            int accntSgmnt9 = int.Parse(this.rptSgmnt9TextBox.Text);
+            int accntSgmnt10 = int.Parse(this.rptSgmnt10TextBox.Text);
+            bool isForRpt = true;
+
+            DialogResult dgrs = Global.mnFrm.cmCde.showAcntSegmentsDiag(ref nwAcctNum, ref nwAcctName, ref ntrlAcntSgmtVal, ref allwNtrlAcntEdit,
+                 ref accntSgmnt1, ref accntSgmnt2, ref accntSgmnt3, ref accntSgmnt4, ref accntSgmnt5, ref accntSgmnt6, ref accntSgmnt7
+                   , ref accntSgmnt8, ref accntSgmnt9, ref accntSgmnt10, -1, true, isForRpt, Global.mnFrm.cmCde);
+            if (dgrs == DialogResult.OK)
+            {
+                this.rptSgmntTextBox.Text = nwAcctNum;
+                this.rptSgmnt1TextBox.Text = accntSgmnt1.ToString();
+                this.rptSgmnt2TextBox.Text = accntSgmnt2.ToString();
+                this.rptSgmnt3TextBox.Text = accntSgmnt3.ToString();
+                this.rptSgmnt4TextBox.Text = accntSgmnt4.ToString();
+                this.rptSgmnt5TextBox.Text = accntSgmnt5.ToString();
+                this.rptSgmnt6TextBox.Text = accntSgmnt6.ToString();
+                this.rptSgmnt7TextBox.Text = accntSgmnt7.ToString();
+                this.rptSgmnt8TextBox.Text = accntSgmnt8.ToString();
+                this.rptSgmnt9TextBox.Text = accntSgmnt9.ToString();
+                this.rptSgmnt10TextBox.Text = accntSgmnt10.ToString();
+            }
+            Global.refreshRqrdVrbls();
+        }
+
+        private void blsSmmryCheckBox_Click(object sender, EventArgs e)
+        {
+            if (this.blsSmmryCheckBox.Checked)
+            {
+                this.balsShtAcntLvlNumUpDown.Value = 1;
+            }
+            else
+            {
+                this.balsShtAcntLvlNumUpDown.Value = 100;
+            }
+        }
+
+        private void pnlSgmntButton_Click(object sender, EventArgs e)
+        {
+            string nwAcctNum = "";
+            string nwAcctName = "";
+            int ntrlAcntSgmtVal = -1;
+            bool allwNtrlAcntEdit = true;
+            int accntSgmnt1 = int.Parse(this.pnlRptSgmnt1TextBox.Text);
+            int accntSgmnt2 = int.Parse(this.pnlRptSgmnt2TextBox.Text);
+            int accntSgmnt3 = int.Parse(this.pnlRptSgmnt3TextBox.Text);
+            int accntSgmnt4 = int.Parse(this.pnlRptSgmnt4TextBox.Text);
+            int accntSgmnt5 = int.Parse(this.pnlRptSgmnt5TextBox.Text);
+            int accntSgmnt6 = int.Parse(this.pnlRptSgmnt6TextBox.Text);
+            int accntSgmnt7 = int.Parse(this.pnlRptSgmnt7TextBox.Text);
+            int accntSgmnt8 = int.Parse(this.pnlRptSgmnt8TextBox.Text);
+            int accntSgmnt9 = int.Parse(this.pnlRptSgmnt9TextBox.Text);
+            int accntSgmnt10 = int.Parse(this.pnlRptSgmnt10TextBox.Text);
+            bool isForRpt = true;
+
+            DialogResult dgrs = Global.mnFrm.cmCde.showAcntSegmentsDiag(ref nwAcctNum, ref nwAcctName, ref ntrlAcntSgmtVal, ref allwNtrlAcntEdit,
+                 ref accntSgmnt1, ref accntSgmnt2, ref accntSgmnt3, ref accntSgmnt4, ref accntSgmnt5, ref accntSgmnt6, ref accntSgmnt7
+                   , ref accntSgmnt8, ref accntSgmnt9, ref accntSgmnt10, -1, true, isForRpt, Global.mnFrm.cmCde);
+            if (dgrs == DialogResult.OK)
+            {
+                this.pnlRptSgmntTextBox.Text = nwAcctNum;
+                this.pnlRptSgmnt1TextBox.Text = accntSgmnt1.ToString();
+                this.pnlRptSgmnt2TextBox.Text = accntSgmnt2.ToString();
+                this.pnlRptSgmnt3TextBox.Text = accntSgmnt3.ToString();
+                this.pnlRptSgmnt4TextBox.Text = accntSgmnt4.ToString();
+                this.pnlRptSgmnt5TextBox.Text = accntSgmnt5.ToString();
+                this.pnlRptSgmnt6TextBox.Text = accntSgmnt6.ToString();
+                this.pnlRptSgmnt7TextBox.Text = accntSgmnt7.ToString();
+                this.pnlRptSgmnt8TextBox.Text = accntSgmnt8.ToString();
+                this.pnlRptSgmnt9TextBox.Text = accntSgmnt9.ToString();
+                this.pnlRptSgmnt10TextBox.Text = accntSgmnt10.ToString();
+            }
+            Global.refreshRqrdVrbls();
+        }
+
+        private void rprtClsfctnsButton_Click(object sender, EventArgs e)
+        {
+            if (this.editAccounts && this.editChrtButton.Text == "EDIT")
+            {
+                this.editChrtButton.PerformClick();
+            }
+            if (int.Parse(this.accntIDTextBox.Text) <= 0 && this.addChrt == false)
+            {
+                Global.mnFrm.cmCde.showMsg("Please select an Account First!", 0);
+                return;
+            }
+            long accntID = long.Parse(this.accntIDTextBox.Text);
+            Global.mnFrm.cmCde.showAcntClsfctnsDiag(ref accntID, this.editChrt, Global.mnFrm.cmCde);
+        }
+
+        private void vwSprtngDetailsButton_Click(object sender, EventArgs e)
+        {
+            bool cnEdt = Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[23]);
+            if (this.budgetDetListView.SelectedItems.Count <= 0)
+            {
+                Global.mnFrm.cmCde.showMsg("Please select the Budget Line to edit!", 0);
+                return;
+            }
+            long bdgtDtID = -1;
+            long.TryParse(this.budgetDetListView.SelectedItems[0].SubItems[9].Text, out bdgtDtID);
+            int accountID = -1;
+            int.TryParse(this.budgetDetListView.SelectedItems[0].SubItems[10].Text, out accountID);
+            double actualAmnt = -1;
+            double.TryParse(this.budgetDetListView.SelectedItems[0].SubItems[4].Text.Replace(",", ""), out actualAmnt);
+            if (bdgtDtID <= 0 || accountID <= 0)
+            {
+                Global.mnFrm.cmCde.showMsg("Please select a valid Budget Line First!", 0);
+                return;
+            }
+            if (bdgtDtID > 0 && accountID > 0)
+            {
+                bdgtAmntBreakDwnDiag nwDiag = new bdgtAmntBreakDwnDiag();
+                nwDiag.editMode = cnEdt;
+                nwDiag.inptAccountID = accountID;
+                nwDiag.trnsaction_id = bdgtDtID;
+                nwDiag.budgetID = long.Parse(this.budgetIDTextBox.Text);
+                nwDiag.inStartDate = this.budgetDetListView.SelectedItems[0].SubItems[6].Text;
+                nwDiag.inEndDate = this.budgetDetListView.SelectedItems[0].SubItems[7].Text;
+                if (nwDiag.ShowDialog() == DialogResult.OK)
+                {
+                    double nwBdgtAmnt = (double)Math.Round(nwDiag.ttlNumUpDwn.Value, 2);
+                    Global.updateBdgtDetAmnt(bdgtDtID, accountID, nwBdgtAmnt);
+                    //this.budgetDetListView.SelectedItems[0].SubItems[3].Text = nwBdgtAmnt.ToString();
+                    //this.budgetDetListView.SelectedItems[0].SubItems[5].Text = (nwBdgtAmnt - actualAmnt).ToString();                    
+                }
+                if (this.budgetListView.SelectedItems.Count > 0)
+                {
+                    this.populateBdgtDet(long.Parse(this.budgetListView.SelectedItems[0].SubItems[2].Text));
+                }
+            }
+            /*nwDiag.orgid = Global.mnFrm.cmCde.Org_id;
+            nwDiag.bdgtID = long.Parse(this.budgetIDTextBox.Text);
+            nwDiag.bdgtDtID = long.Parse(this.budgetDetListView.SelectedItems[0].SubItems[8].Text);
+            nwDiag.startDteTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[5].Text;
+            nwDiag.endDteTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[6].Text;
+            double amntLmt = double.Parse(this.budgetDetListView.SelectedItems[0].SubItems[3].Text);
+            nwDiag.amntNumericUpDown.Value = (Decimal)amntLmt;
+            nwDiag.actionComboBox.SelectedItem = this.budgetDetListView.SelectedItems[0].SubItems[7].Text;
+            nwDiag.accntIDTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[9].Text;
+            nwDiag.accntNumTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[1].Text;
+            nwDiag.accntNameTextBox.Text = this.budgetDetListView.SelectedItems[0].SubItems[2].Text;
+
+            DialogResult dgRes = nwDiag.ShowDialog();
+            if (dgRes == DialogResult.OK)
+            {
+                if (this.budgetListView.SelectedItems.Count > 0)
+                {
+                    this.populateBdgtDet(long.Parse(this.budgetListView.SelectedItems[0].SubItems[2].Text));
+                }
+            }*/
+        }
+
+        private void exprtRprtClsfctnsButton_Click(object sender, EventArgs e)
+        {
+            string rspnse = Interaction.InputBox("How many Report Classifications will you like to Export?" +
+              "\r\n1=No Report Classifications(Empty Template)" +
+              "\r\n2=All Report Classifications" +
+              "\r\n3-Infinity=Specify the exact number of Report Classifications to Export\r\n",
+              "Rhomicom", "1", (Global.mnFrm.cmCde.myComputer.Screen.Bounds.Width / 2) - 170,
+              (Global.mnFrm.cmCde.myComputer.Screen.Bounds.Height / 2) - 100);
+            if (rspnse.Equals(string.Empty) || rspnse.Equals(null))
+            {
+                //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
+                return;
+            }
+            int rsponse = 0;
+            bool rsps = int.TryParse(rspnse, out rsponse);
+            if (rsps == false)
+            {
+                Global.mnFrm.cmCde.showMsg("Invalid Option! Expecting a Number Above Zero", 4);
+                return;
+            }
+            if (rsponse < 1)
+            {
+                Global.mnFrm.cmCde.showMsg("Invalid Option! Expecting a Number Above Zero", 4);
+                return;
+            }
+            this.exprtRptClsfctnsTmp(rsponse);
+        }
+
+        private void exprtRptClsfctnsTmp(int exprtTyp)
+        {
+            System.Windows.Forms.Application.DoEvents();
+            Global.mnFrm.cmCde.clearPrvExclFiles();
+            Global.mnFrm.cmCde.exclApp = new Microsoft.Office.Interop.Excel.Application();
+            Global.mnFrm.cmCde.exclApp.WindowState = Excel.XlWindowState.xlNormal;
+            Global.mnFrm.cmCde.exclApp.Visible = true;
+            CommonCode.CommonCodes.SetWindowPos((IntPtr)Global.mnFrm.cmCde.exclApp.Hwnd, CommonCode.CommonCodes.HWND_TOP, 0, 0, 0, 0, CommonCode.CommonCodes.SWP_NOMOVE | CommonCode.CommonCodes.SWP_NOSIZE | CommonCode.CommonCodes.SWP_SHOWWINDOW);
+
+            Global.mnFrm.cmCde.nwWrkBk = Global.mnFrm.cmCde.exclApp.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+            Global.mnFrm.cmCde.nwWrkBk.Worksheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+            Global.mnFrm.cmCde.trgtSheets = new Excel.Worksheet[1];
+
+            Global.mnFrm.cmCde.trgtSheets[0] = (Excel.Worksheet)Global.mnFrm.cmCde.nwWrkBk.Worksheets[1];
+
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B2:C3", Type.Missing).MergeCells = true;
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B2:C3", Type.Missing).Value2 = Global.mnFrm.cmCde.getOrgName(Global.mnFrm.cmCde.Org_id).ToUpper();
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B2:C3", Type.Missing).Font.Bold = true;
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B2:C3", Type.Missing).Font.Size = 13;
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B2:C3", Type.Missing).WrapText = true;
+            Global.mnFrm.cmCde.trgtSheets[0].Shapes.AddPicture(Global.mnFrm.cmCde.getOrgImgsDrctry() + @"\" + Global.mnFrm.cmCde.Org_id + ".png",
+                Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 1, 1, 50, 50);
+
+            ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, 1]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+            ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, 1]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
+            ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, 1]).Font.Bold = true;
+            ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, 1]).Value2 = "No.";
+            string[] hdngs = { "Account Number**", "Account Description**", "Main Report Classification", "Sub-Report Classification", "Cash Flow Statement Classification" };
+
+            for (int a = 0; a < hdngs.Length; a++)
+            {
+                ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, (a + 2)]).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 162, 192));
+                ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, (a + 2)]).Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(255, 255, 255));
+                ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, (a + 2)]).Font.Bold = true;
+                ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[5, (a + 2)]).Value2 = hdngs[a].ToUpper();
+            }
+
+            if (exprtTyp >= 2)
+            {
+                DataSet dtst = new DataSet();
+                if (exprtTyp == 2)
+                {
+                    dtst = Global.get_One_RptClsfctns(10000000, 0);
+                }
+                else if (exprtTyp >= 3)
+                {
+                    dtst = Global.get_One_RptClsfctns(exprtTyp, 0);
+                }
+                for (int a = 0; a < dtst.Tables[0].Rows.Count; a++)
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 1]).Value2 = a + 1;
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 2]).Value2 = "'" + dtst.Tables[0].Rows[a][0].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 3]).Value2 = dtst.Tables[0].Rows[a][1].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 4]).Value2 = dtst.Tables[0].Rows[a][2].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 5]).Value2 = dtst.Tables[0].Rows[a][3].ToString();
+                    ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[(a + 6), 6]).Value2 = dtst.Tables[0].Rows[a][4].ToString();
+                }
+            }
+            else
+            {
+            }
+
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("A1:A65535", Type.Missing).ColumnWidth = 10;
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("A1:A65535", Type.Missing).WrapText = true;
+
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Columns.AutoFit();
+            Global.mnFrm.cmCde.trgtSheets[0].get_Range("B1:Z65535", Type.Missing).Rows.AutoFit();
+        }
+
+        private void imprtRprtClsfctnsButton_Click(object sender, EventArgs e)
+        {
+            if (Global.mnFrm.cmCde.showMsg("Are you sure you want to Import Report Classifications\r\n to Overwrite the existing Field Labels shown here?", 1) == DialogResult.No)
+            {
+                return;
+            }
+            this.openFileDialog1.RestoreDirectory = true;
+            this.openFileDialog1.Filter = "All Files|*.*|Excel Files|*.xls;*.xlsx";
+            this.openFileDialog1.FilterIndex = 2;
+            this.openFileDialog1.Title = "Select an Excel File to Upload...";
+            this.openFileDialog1.FileName = "";
+            if (this.openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.imprttRprtClsfctnsTmp(this.openFileDialog1.FileName);
+            }
+        }
+
+        private void imprttRprtClsfctnsTmp(string filename)
+        {
+            System.Windows.Forms.Application.DoEvents();
+            Global.mnFrm.cmCde.clearPrvExclFiles();
+            Global.mnFrm.cmCde.exclApp = new Microsoft.Office.Interop.Excel.Application();
+            Global.mnFrm.cmCde.exclApp.WindowState = Excel.XlWindowState.xlNormal;
+            Global.mnFrm.cmCde.exclApp.Visible = true;
+            CommonCode.CommonCodes.SetWindowPos((IntPtr)Global.mnFrm.cmCde.exclApp.Hwnd, CommonCode.CommonCodes.HWND_TOP, 0, 0, 0, 0, CommonCode.CommonCodes.SWP_NOMOVE | CommonCode.CommonCodes.SWP_NOSIZE | CommonCode.CommonCodes.SWP_SHOWWINDOW);
+
+            Global.mnFrm.cmCde.nwWrkBk = Global.mnFrm.cmCde.exclApp.Workbooks.Open(filename, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+
+            Global.mnFrm.cmCde.trgtSheets = new Excel.Worksheet[1];
+
+            Global.mnFrm.cmCde.trgtSheets[0] = (Excel.Worksheet)Global.mnFrm.cmCde.nwWrkBk.Worksheets[1];
+            string accntVal = "";
+            string accntDesc = "";
+            string majCtgry = "";
+            string MinCtgry = "";
+            string cshFlwClsfctn = "";
+            int rownum = 5;
+            char[] w = { '\'' };
+            do
+            {
+                try
+                {
+                    accntVal = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 2]).Value2.ToString().Trim(w);
+                }
+                catch (Exception ex)
+                {
+                    accntVal = "";
+                }
+                try
+                {
+                    accntDesc = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 3]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    accntDesc = "";
+                }
+                try
+                {
+                    majCtgry = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 4]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    majCtgry = "";
+                }
+                try
+                {
+                    MinCtgry = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 5]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MinCtgry = "";
+                }
+                try
+                {
+                    cshFlwClsfctn = ((Microsoft.Office.Interop.Excel.Range)Global.mnFrm.cmCde.trgtSheets[0].Cells[rownum, 6]).Value2.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cshFlwClsfctn = "";
+                }
+                if (rownum == 5)
+                {
+                    string[] hdngs = { "Account Number**", "Account Description**", "Main Report Classification", "Sub-Report Classification", "Cash Flow Statement Classification" };
+
+                    if (accntVal != hdngs[0].ToUpper()
+                      || accntDesc != hdngs[1].ToUpper()
+                      || majCtgry != hdngs[2].ToUpper()
+                      || MinCtgry != hdngs[3].ToUpper()
+                      || cshFlwClsfctn != hdngs[4].ToUpper())
+                    {
+                        Global.mnFrm.cmCde.showMsg("The Excel File you Selected is not a Valid Template\r\nfor importing records here.", 0);
+                        return;
+                    }
+                    rownum++;
+                    continue;
+                }
+                if (accntVal != "" && majCtgry != "")
+                {
+                    int accntID = Global.mnFrm.cmCde.getAccntID(accntVal, Global.mnFrm.cmCde.Org_id);
+                    string errMsg = "";
+                    long oldClsfctnID = Global.get_RptClsfctnID(majCtgry, MinCtgry, accntID);
+                    if (oldClsfctnID <= 0 && accntID > 0)
+                    {
+                        oldClsfctnID = Global.getNewRptClsfLnID();
+                        Global.createRptClsfctnImprt(oldClsfctnID, majCtgry, MinCtgry, accntID, cshFlwClsfctn);
+                        Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":Q" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.FromArgb(0, 255, 0));
+                    }
+                    else if (accntID > 0)
+                    {
+                        Global.updateRptClsfctnImprt(oldClsfctnID, majCtgry, MinCtgry, accntID, cshFlwClsfctn);
+                        Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":Q" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
+                    }
+                    else
+                    {
+                        Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":Q" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightPink);
+                    }
+                }
+                else
+                {
+                    Global.mnFrm.cmCde.trgtSheets[0].get_Range("A" + rownum + ":Q" + rownum + "", Type.Missing).Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+                }
+                rownum++;
+            }
+            while (accntVal != "");
+            System.Windows.Forms.Application.DoEvents();
+        }
+
+        private void isBdgActiveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void duplicateBdgtButton_Click(object sender, EventArgs e)
+        {
+            return;
+            if (this.budgetIDTextBox.Text == "" || this.budgetIDTextBox.Text == "-1")
+            {
+                Global.mnFrm.cmCde.showMsg("No record to Duplicate!", 0);
+                return;
+            }
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[22]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            this.budgetNmTextBox.Text = "(Duplicate) " + this.budgetNmTextBox.Text;
+            this.editBdgButton_Click(this.editBdgButton, e);
+            this.budgetIDTextBox.Text = "-1";
+            this.addbdgt = true;
+            this.editbdgt = false;
+            this.isBdgtDplct = true;
+        }
+
+        private void autoLoadBdgtButton_Click(object sender, EventArgs e)
+        {
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[22]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            if (long.Parse(this.budgetIDTextBox.Text) <= 0)
+            {
+                Global.mnFrm.cmCde.showMsg("Please select a saved Budget First!", 0);
+                return;
+            }
+            if (this.budgetIDTextBox.Text == "" ||
+              this.budgetIDTextBox.Text == "-1")
+            {
+                Global.mnFrm.cmCde.showMsg("Please select the budget to import into!", 0);
+                return;
+            }
+            bdgtTmpDiag nwDiag = new bdgtTmpDiag();
+            nwDiag.startDteTextBox.Text = this.startDteTextBox.Text;
+            nwDiag.endDteTextBox.Text = this.endDteTextBox.Text;
+            nwDiag.prdTypComboBox.SelectedItem = this.prdTypComboBox.Text;
+            DialogResult dgres = nwDiag.ShowDialog();
+            if (dgres == DialogResult.OK)
+            {
+                /*string rspnse = Interaction.InputBox("Indicate whether you want Budget Amounts Included?" +
+                  "\r\n1=No Budget Amounts(Empty Template)" +
+                  "\r\n2=All Budget Amounts" +
+                "\r\n",
+                  "Rhomicom", "1", (Global.mnFrm.cmCde.myComputer.Screen.Bounds.Width / 2) - 170,
+                  (Global.mnFrm.cmCde.myComputer.Screen.Bounds.Height / 2) - 100);
+                if (rspnse.Equals(string.Empty) || rspnse.Equals(null))
+                {
+                    //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
+                    return;
+                }
+                bool rsps = long.TryParse(rspnse, out rsponse);
+                if (rsps == false)
+                {
+                    Global.mnFrm.cmCde.showMsg("Invalid Option! Expecting a Number: 1 or 2", 4);
+                    return;
+                }
+                if (rsponse < 1 || rsponse > 2)
+                {
+                    Global.mnFrm.cmCde.showMsg("Invalid Option! Expecting a Number: 1 or 2", 4);
+                    return;
+                }*/
+                long rsponse = 1000000000;
+                Global.mnFrm.cmCde.autoLoadBdgtTmp(nwDiag.startDteTextBox.Text,
+                   nwDiag.endDteTextBox.Text, nwDiag.prdTypComboBox.Text,
+                   long.Parse(this.budgetIDTextBox.Text), rsponse);
+                this.populateBdgtDet(long.Parse(this.budgetIDTextBox.Text));
+            }
+        }
+
+        private void startDteButton_Click(object sender, EventArgs e)
+        {
+            Global.mnFrm.cmCde.selectDate(ref this.startDteTextBox);
+            if (this.startDteTextBox.Text.Length > 11)
+            {
+                this.startDteTextBox.Text = this.startDteTextBox.Text.Substring(0, 11) + " 00:00:00";
+            }
+        }
+
+        private void endDteButton_Click(object sender, EventArgs e)
+        {
+            Global.mnFrm.cmCde.selectDate(ref this.endDteTextBox);
+            if (this.endDteTextBox.Text.Length > 11)
+            {
+                this.endDteTextBox.Text = this.endDteTextBox.Text.Substring(0, 11) + " 23:59:59";
+            }
+        }
+
+        private void startDteTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.shdObeyBdgtEvts() == false)
+            {
+                return;
+            }
+            this.txtChngd = true;
+        }
+
+        private void startDteTextBox_Leave(object sender, EventArgs e)
+        {
+            if (this.txtChngd == false)
+            {
+                return;
+            }
+            this.txtChngd = false;
+            TextBox mytxt = (TextBox)sender;
+            this.trnsDteLOVSrch(mytxt);
+            this.txtChngd = false;
+        }
+
+        private void trnsDteLOVSrch(TextBox mytxt)
+        {
+            DateTime dte1 = DateTime.Now;
+            bool sccs = DateTime.TryParse(mytxt.Text, out dte1);
+            if (!sccs)
+            {
+                dte1 = DateTime.Now;
+            }
+            mytxt.Text = dte1.ToString("dd-MMM-yyyy HH:mm:ss");
+        }
+
+        private void blShtSgmntButton_Click(object sender, EventArgs e)
+        {
+            string nwAcctNum = "";
+            string nwAcctName = "";
+            int ntrlAcntSgmtVal = -1;
+            bool allwNtrlAcntEdit = true;
+            int accntSgmnt1 = int.Parse(this.blShtSgmnt1TextBox.Text);
+            int accntSgmnt2 = int.Parse(this.blShtSgmnt2TextBox.Text);
+            int accntSgmnt3 = int.Parse(this.blShtSgmnt3TextBox.Text);
+            int accntSgmnt4 = int.Parse(this.blShtSgmnt4TextBox.Text);
+            int accntSgmnt5 = int.Parse(this.blShtSgmnt5TextBox.Text);
+            int accntSgmnt6 = int.Parse(this.blShtSgmnt6TextBox.Text);
+            int accntSgmnt7 = int.Parse(this.blShtSgmnt7TextBox.Text);
+            int accntSgmnt8 = int.Parse(this.blShtSgmnt8TextBox.Text);
+            int accntSgmnt9 = int.Parse(this.blShtSgmnt9TextBox.Text);
+            int accntSgmnt10 = int.Parse(this.blShtSgmnt10TextBox.Text);
+            bool isForRpt = true;
+
+            DialogResult dgrs = Global.mnFrm.cmCde.showAcntSegmentsDiag(ref nwAcctNum, ref nwAcctName, ref ntrlAcntSgmtVal, ref allwNtrlAcntEdit,
+                 ref accntSgmnt1, ref accntSgmnt2, ref accntSgmnt3, ref accntSgmnt4, ref accntSgmnt5, ref accntSgmnt6, ref accntSgmnt7
+                   , ref accntSgmnt8, ref accntSgmnt9, ref accntSgmnt10, -1, true, isForRpt, Global.mnFrm.cmCde);
+            if (dgrs == DialogResult.OK)
+            {
+                this.blShtSgmntTextBox.Text = nwAcctNum;
+                this.blShtSgmnt1TextBox.Text = accntSgmnt1.ToString();
+                this.blShtSgmnt2TextBox.Text = accntSgmnt2.ToString();
+                this.blShtSgmnt3TextBox.Text = accntSgmnt3.ToString();
+                this.blShtSgmnt4TextBox.Text = accntSgmnt4.ToString();
+                this.blShtSgmnt5TextBox.Text = accntSgmnt5.ToString();
+                this.blShtSgmnt6TextBox.Text = accntSgmnt6.ToString();
+                this.blShtSgmnt7TextBox.Text = accntSgmnt7.ToString();
+                this.blShtSgmnt8TextBox.Text = accntSgmnt8.ToString();
+                this.blShtSgmnt9TextBox.Text = accntSgmnt9.ToString();
+                this.blShtSgmnt10TextBox.Text = accntSgmnt10.ToString();
+            }
+            Global.refreshRqrdVrbls();
+        }
+
+        private void pbpSgmntButton_Click(object sender, EventArgs e)
+        {
+            string nwAcctNum = "";
+            string nwAcctName = "";
+            int ntrlAcntSgmtVal = -1;
+            bool allwNtrlAcntEdit = true;
+            int accntSgmnt1 = int.Parse(this.pbpSgmnt1TextBox.Text);
+            int accntSgmnt2 = int.Parse(this.pbpSgmnt2TextBox.Text);
+            int accntSgmnt3 = int.Parse(this.pbpSgmnt3TextBox.Text);
+            int accntSgmnt4 = int.Parse(this.pbpSgmnt4TextBox.Text);
+            int accntSgmnt5 = int.Parse(this.pbpSgmnt5TextBox.Text);
+            int accntSgmnt6 = int.Parse(this.pbpSgmnt6TextBox.Text);
+            int accntSgmnt7 = int.Parse(this.pbpSgmnt7TextBox.Text);
+            int accntSgmnt8 = int.Parse(this.pbpSgmnt8TextBox.Text);
+            int accntSgmnt9 = int.Parse(this.pbpSgmnt9TextBox.Text);
+            int accntSgmnt10 = int.Parse(this.pbpSgmnt10TextBox.Text);
+            bool isForRpt = true;
+
+            DialogResult dgrs = Global.mnFrm.cmCde.showAcntSegmentsDiag(ref nwAcctNum, ref nwAcctName, ref ntrlAcntSgmtVal, ref allwNtrlAcntEdit,
+                 ref accntSgmnt1, ref accntSgmnt2, ref accntSgmnt3, ref accntSgmnt4, ref accntSgmnt5, ref accntSgmnt6, ref accntSgmnt7
+                   , ref accntSgmnt8, ref accntSgmnt9, ref accntSgmnt10, -1, true, isForRpt, Global.mnFrm.cmCde);
+            if (dgrs == DialogResult.OK)
+            {
+                this.pbpSgmntTextBox.Text = nwAcctNum;
+                this.pbpSgmnt1TextBox.Text = accntSgmnt1.ToString();
+                this.pbpSgmnt2TextBox.Text = accntSgmnt2.ToString();
+                this.pbpSgmnt3TextBox.Text = accntSgmnt3.ToString();
+                this.pbpSgmnt4TextBox.Text = accntSgmnt4.ToString();
+                this.pbpSgmnt5TextBox.Text = accntSgmnt5.ToString();
+                this.pbpSgmnt6TextBox.Text = accntSgmnt6.ToString();
+                this.pbpSgmnt7TextBox.Text = accntSgmnt7.ToString();
+                this.pbpSgmnt8TextBox.Text = accntSgmnt8.ToString();
+                this.pbpSgmnt9TextBox.Text = accntSgmnt9.ToString();
+                this.pbpSgmnt10TextBox.Text = accntSgmnt10.ToString();
+            }
+            Global.refreshRqrdVrbls();
+        }
+
+        private void cflwSgmntButton_Click(object sender, EventArgs e)
+        {
+            string nwAcctNum = "";
+            string nwAcctName = "";
+            int ntrlAcntSgmtVal = -1;
+            bool allwNtrlAcntEdit = true;
+            int accntSgmnt1 = int.Parse(this.cflwSgmnt1TextBox.Text);
+            int accntSgmnt2 = int.Parse(this.cflwSgmnt2TextBox.Text);
+            int accntSgmnt3 = int.Parse(this.cflwSgmnt3TextBox.Text);
+            int accntSgmnt4 = int.Parse(this.cflwSgmnt4TextBox.Text);
+            int accntSgmnt5 = int.Parse(this.cflwSgmnt5TextBox.Text);
+            int accntSgmnt6 = int.Parse(this.cflwSgmnt6TextBox.Text);
+            int accntSgmnt7 = int.Parse(this.cflwSgmnt7TextBox.Text);
+            int accntSgmnt8 = int.Parse(this.cflwSgmnt8TextBox.Text);
+            int accntSgmnt9 = int.Parse(this.cflwSgmnt9TextBox.Text);
+            int accntSgmnt10 = int.Parse(this.cflwSgmnt10TextBox.Text);
+            bool isForRpt = true;
+
+            DialogResult dgrs = Global.mnFrm.cmCde.showAcntSegmentsDiag(ref nwAcctNum, ref nwAcctName, ref ntrlAcntSgmtVal, ref allwNtrlAcntEdit,
+                 ref accntSgmnt1, ref accntSgmnt2, ref accntSgmnt3, ref accntSgmnt4, ref accntSgmnt5, ref accntSgmnt6, ref accntSgmnt7
+                   , ref accntSgmnt8, ref accntSgmnt9, ref accntSgmnt10, -1, true, isForRpt, Global.mnFrm.cmCde);
+            if (dgrs == DialogResult.OK)
+            {
+                this.cflwSgmntTextBox.Text = nwAcctNum;
+                this.cflwSgmnt1TextBox.Text = accntSgmnt1.ToString();
+                this.cflwSgmnt2TextBox.Text = accntSgmnt2.ToString();
+                this.cflwSgmnt3TextBox.Text = accntSgmnt3.ToString();
+                this.cflwSgmnt4TextBox.Text = accntSgmnt4.ToString();
+                this.cflwSgmnt5TextBox.Text = accntSgmnt5.ToString();
+                this.cflwSgmnt6TextBox.Text = accntSgmnt6.ToString();
+                this.cflwSgmnt7TextBox.Text = accntSgmnt7.ToString();
+                this.cflwSgmnt8TextBox.Text = accntSgmnt8.ToString();
+                this.cflwSgmnt9TextBox.Text = accntSgmnt9.ToString();
+                this.cflwSgmnt10TextBox.Text = accntSgmnt10.ToString();
+            }
+            Global.refreshRqrdVrbls();
+        }
+
+        private void clearClsfctnsButton_Click(object sender, EventArgs e)
+        {
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[13]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            if (Global.mnFrm.cmCde.showMsg("Are you SURE you want to CLEAR ALL ACCOUNT CLASSIFICATIONS?" +
+             "\r\nThis action cannot be undone!" +
+             "\r\n\r\nMAKE SURE YOU HAVE EXPORTED CURRENT CLASSIFICATIONS TO EXCEL BEFORE PROCEEDING!!!", 1) == DialogResult.No)
+            {
+                //Global.mnFrm.cmCde.showMsg("Operation Cancelled!", 4);
+                return;
+            }
+            string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
+            Global.mnFrm.cmCde.selectDataNoParams("DELETE FROM accb.accb_account_clsfctns WHERE account_id " +
+                "IN (Select z.accnt_id FROM accb.accb_chart_of_accnts z where z.org_id =" + Global.mnFrm.cmCde.Org_id + ")");
+            string updtSQL = "UPDATE accb.accb_chart_of_accnts SET " +
+                   "account_clsfctn='', last_update_by = " + Global.mnFrm.cmCde.User_id + ", " +
+                   "last_update_date = '" + dateStr +
+                   "' WHERE (org_id=" + Global.mnFrm.cmCde.Org_id + ")";
+            Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
+            Global.mnFrm.cmCde.showMsg("Classifications Cleared Successfully!", 3);
+        }
+
+        private void mnrClsfctnButton_Click(object sender, EventArgs e)
+        {
+            int[] selVals = new int[1];
+            int lovID = Global.mnFrm.cmCde.getLovID("Account Classifications");
+            selVals[0] = Global.mnFrm.cmCde.getPssblValID(this.mnrClsfctnTextBox.Text, lovID);
+            this.srchWrd = "%";
+            DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                lovID, ref selVals,
+                true, false, this.srchWrd, "Both", true);
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < selVals.Length; i++)
+                {
+                    this.mnrClsfctnTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(
+                      selVals[i]);
+                }
+                this.rfrshChrtButton.PerformClick();
+            }
+        }
+
+        private void mjrClsfctnTextBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.shdObeyChrtEvts() == false)
+            {
+                return;
+            }
+            this.rfrshChrtButton.PerformClick();
+        }
     }
 }

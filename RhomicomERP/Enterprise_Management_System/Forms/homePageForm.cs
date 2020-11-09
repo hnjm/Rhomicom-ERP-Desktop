@@ -9,6 +9,7 @@ using Enterprise_Management_System.Classes;
 using System.Reflection;
 using System.IO;
 using Enterprise_Management_System.Dialogs;
+using System.Net;
 
 namespace Enterprise_Management_System.Forms
 {
@@ -52,6 +53,7 @@ namespace Enterprise_Management_System.Forms
 
         private void homePageForm_Load(object sender, EventArgs e)
         {
+            this.label17.SendToBack();
             this.connectDBPanel.Dock = DockStyle.Fill;
             this.connectDBPanel.Visible = true;
             this.loginPanel.Dock = DockStyle.Fill;
@@ -116,8 +118,7 @@ namespace Enterprise_Management_System.Forms
                     Global.myNwMainFrm.logoutActions();
                 }
             }
-            else if (Global.login_number <= 0 &&
-                   CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open)
+            else if (Global.login_number <= 0 && CommonCode.CommonCodes.DatabaseNm != "")
             {
                 Global.myNwMainFrm.loginToolStripMenuItem.PerformClick();
             }
@@ -369,7 +370,29 @@ namespace Enterprise_Management_System.Forms
                     this.paymntButton.Visible = true;
                     this.paymntButton.Width = 328;
                     this.paymntButton.Height = 99;
-                    this.tableLayoutPanel1.ColumnStyles.RemoveAt(0);
+                    //this.tableLayoutPanel1.ColumnStyles.RemoveAt(0);
+                }
+                else if (CommonCode.CommonCodes.ModulesNeeded == "Accounting + Payroll + Person Records + Events Only")
+                {
+                    this.accntngButton.Visible = true;
+                    this.invButton.Visible = false;
+                    this.prsnDataButton.Visible = true;
+                    this.paymntButton.Visible = true;
+                    this.attndButton.Visible = true;
+                    this.basicMdlsFlowLayoutPanel.Controls.Add(this.attndButton);
+                    this.attndButton.Width = 161;
+                    this.attndButton.Height = 99;
+                }
+                else if (CommonCode.CommonCodes.ModulesNeeded == "Accounting + Payroll + Person Records + Projects Only")
+                {
+                    this.accntngButton.Visible = true;
+                    this.invButton.Visible = false;
+                    this.prsnDataButton.Visible = true;
+                    this.paymntButton.Visible = true;
+                    this.attndButton.Visible = true;
+                    this.basicMdlsFlowLayoutPanel.Controls.Add(this.projectMgmntButton);
+                    this.projectMgmntButton.Width = 161;
+                    this.projectMgmntButton.Height = 99;
                 }
                 else if (CommonCode.CommonCodes.ModulesNeeded == "Basic Modules Only")
                 {
@@ -795,12 +818,12 @@ namespace Enterprise_Management_System.Forms
         public void loadConnectDiag()
         {
             this.loadConnFiles();
-
-            if (CommonCode.CommonCodes.AutoConnect)
-            {
-                CommonCode.CommonCodes.AutoConnect = false;
-                this.OKButton.PerformClick();
-            }
+            this.OKButton.PerformClick();
+            this.statusLoadLabel.Visible = false;
+            /* if (CommonCode.CommonCodes.AutoConnect)
+             {
+                 CommonCode.CommonCodes.AutoConnect = false;
+             }*/
         }
 
 
@@ -809,7 +832,7 @@ namespace Enterprise_Management_System.Forms
         {
             this.OKButton.Enabled = false;
             //System.Windows.Forms.Application.DoEvents();
-            if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open)
+            if (CommonCode.CommonCodes.DatabaseNm != "")
             {
                 this.OKButton.Enabled = true;
                 //System.Windows.Forms.Application.DoEvents();
@@ -828,11 +851,9 @@ namespace Enterprise_Management_System.Forms
 
             Global.myNwMainFrm.statusLoadLabel.Visible = true;
             Global.myNwMainFrm.statusLoadPictureBox.Visible = true;
-            //System.Windows.Forms.Application.DoEvents();
+            CommonCode.CommonCodes.DatabaseNm = "";
             this.do_connection();
-
-            if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open
-                  && CommonCode.CommonCodes.GlobalSQLConn.FullState != ConnectionState.Broken)
+            if (CommonCode.CommonCodes.DatabaseNm != "")
             {
                 if (CommonCode.CommonCodes.DatabaseNm == "test_database")
                 {
@@ -845,8 +866,6 @@ namespace Enterprise_Management_System.Forms
             VALUES ('1. No DB Patch Available. Database must be restored using this APP!', '" + Global.myNwMainFrm.cmnCdMn.getDB_Date_time() + "', '" + patchVrsnNm + "')";
                         Global.myNwMainFrm.cmnCdMn.executeGnrlDDLSQL(gnrlSQL);
                     }
-                    //this.OKButton.Enabled = true;
-                    //System.Windows.Forms.Application.DoEvents();
                 }
 
                 string srcpath = Application.StartupPath + "\\prereq\\Images";
@@ -865,8 +884,8 @@ namespace Enterprise_Management_System.Forms
 
                 Global.myNwMainFrm.loginToolStripMenuItem.Enabled = true;
 
-                Global.myNwMainFrm.timer1.Interval = 1000;
-                Global.myNwMainFrm.timer1.Enabled = true;
+                //Global.myNwMainFrm.timer1.Interval = 1000;
+                //Global.myNwMainFrm.timer1.Enabled = true;
 
                 Global.myNwMainFrm.loginToolStripMenuItem.PerformClick();
             }
@@ -953,8 +972,7 @@ namespace Enterprise_Management_System.Forms
             this.storedConnsComboBox.Items.Clear();
             for (int i = 0; i < smplFiles.Length; i++)
             {
-                if (!smplFiles[i].Contains("customize.rho")
-                    && !smplFiles[i].Contains("ActiveDB.rho"))
+                if (smplFiles[i].Contains("ActiveDB.rho"))
                 {
                     this.storedConnsComboBox.Items.Add(smplFiles[i].Replace(Application.StartupPath + @"\DBInfo\", ""));
                 }
@@ -981,6 +999,16 @@ namespace Enterprise_Management_System.Forms
                     this.unameTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
                     this.dbaseTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
                     this.portTextBox.Text = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    CommonCode.CommonCodes.PgDirPath = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    CommonCode.CommonCodes.JavaPath = Global.myNwMainFrm.cmnCdMn.decrypt(fileReader.ReadLine(), CommonCode.CommonCodes.OrgnlAppKey);
+                    if (CommonCode.CommonCodes.JavaPath == "")
+                    {
+                        CommonCode.CommonCodes.JavaPath = Global.myNwMainFrm.cmnCdMn.GetJavaInstallationPath();
+                        if (!CommonCode.CommonCodes.JavaPath.Contains("\\bin"))
+                        {
+                            CommonCode.CommonCodes.JavaPath = CommonCode.CommonCodes.JavaPath + "\\bin";
+                        }
+                    }
                     fileReader.Close();
                     fileReader = null;
                 }
@@ -1036,16 +1064,65 @@ namespace Enterprise_Management_System.Forms
             Global.myNwMainFrm.statusLoadLabel.Text = "Connecting...Please Wait...";
             try
             {
+                CommonCode.CommonCodes.DatabaseNm = "";
                 string connStr = String.Format("Server={0};Port={1};" +
                 "User Id={2};Password={3};Database={4};Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout={5};CommandTimeout={6};",
                 this.hostTextBox.Text, this.portTextBox.Text, this.unameTextBox.Text,
-                this.pwdTextBox.Text, this.dbaseTextBox.Text, "60", "1200");
+                this.pwdTextBox.Text, this.dbaseTextBox.Text, "10", "1200");
                 CommonCode.CommonCodes.ConnStr = connStr;
-                CommonCode.CommonCodes.DatabaseNm = this.dbaseTextBox.Text;
                 CommonCode.CommonCodes.GlobalSQLConn.ConnectionString = connStr;
+                System.Windows.Forms.Application.DoEvents();
+                //System.Windows.Forms.Application.DoEvents();
+                //this.Refresh();
+                int portNum = 5432;
+                int.TryParse(this.portTextBox.Text, out portNum);
+                /*string curIPAddrs = Global.myNwMainFrm.cmnCdMn.getMachDetails()[2];
+                IPAddress address;
+                bool isVldIP4Adrs = IPAddress.TryParse(this.hostTextBox.Text, out address);
+                if (isVldIP4Adrs)
+                {
+                    if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        isVldIP4Adrs = true;
+                    }
+                    else
+                    {
+                        isVldIP4Adrs = false;
+                    }
+                    if (isVldIP4Adrs)
+                    {
+                        if (Global.myNwMainFrm.cmnCdMn.CheckSrvrAvlblty(this.hostTextBox.Text, portNum) == false)
+                        {
+                            this.OKButton.Enabled = true;
+                            Global.myNwMainFrm.connectionFailed = true;
+                            Application.DoEvents();
+                            Application.DoEvents();
+                            Global.myNwMainFrm.statusLoadLabel.Text = "Loading Modules...Please Wait...";
+                            Global.myNwMainFrm.statusLoadLabel.Visible = false;
+                            Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
+                            //System.Windows.Forms.Application.DoEvents();
+                            Global.myNwMainFrm.cmnCdMn.showMsg("Error Connecting to Database!\r\nCouldn't Ping!\r\n", 4);
+                            return;
+                        }
+                    }
+                }
+                else if (this.hostTextBox.Text != "localhost")
+                {
+                    this.OKButton.Enabled = true;
+                    Global.myNwMainFrm.connectionFailed = true;
+                    Application.DoEvents();
+                    Application.DoEvents();
+                    Global.myNwMainFrm.statusLoadLabel.Text = "Loading Modules...Please Wait...";
+                    Global.myNwMainFrm.statusLoadLabel.Visible = false;
+                    Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
+                    //System.Windows.Forms.Application.DoEvents();
+                    Global.myNwMainFrm.cmnCdMn.showMsg("Error Connecting to Database!\r\nCouldn't Ping!\r\n", 4);
+                    return;
+                }*/
                 CommonCode.CommonCodes.GlobalSQLConn.Open();
+                CommonCode.CommonCodes.DatabaseNm = this.dbaseTextBox.Text;
 
-                if (CommonCode.CommonCodes.GlobalSQLConn.State == ConnectionState.Open)
+                if (CommonCode.CommonCodes.DatabaseNm != "")
                 {
                     Global.db_server = this.hostTextBox.Text;
                     Global.db_name = this.dbaseTextBox.Text;
@@ -1139,7 +1216,7 @@ namespace Enterprise_Management_System.Forms
                     {
                         CommonCode.CommonCodes.ModulesNeeded = "Person Records Only";
                     }*/
-                    this.saveConnFile();
+                    //this.saveConnFile();
                     if (System.IO.Directory.Exists(Application.StartupPath + "\\Images\\" + CommonCode.CommonCodes.Db_dbase) == false)
                     {
                         System.IO.Directory.CreateDirectory(Application.StartupPath + "\\Images\\" + CommonCode.CommonCodes.Db_dbase);
@@ -1158,7 +1235,16 @@ namespace Enterprise_Management_System.Forms
                 Global.myNwMainFrm.statusLoadLabel.Text = "Loading Modules...Please Wait...";
                 Global.myNwMainFrm.statusLoadLabel.Visible = false;
                 Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
-                //System.Windows.Forms.Application.DoEvents();
+
+                CommonCode.CommonCodes.GlobalSQLConn = null;
+                CommonCode.CommonCodes.DatabaseNm = "";
+                Global.db_server = "";
+                Global.db_name = "";
+                CommonCode.CommonCodes.Db_host = "";
+                CommonCode.CommonCodes.Db_port = "";
+                CommonCode.CommonCodes.Db_dbase = "";
+                CommonCode.CommonCodes.Db_uname = "";
+                CommonCode.CommonCodes.Db_pwd = "";
                 Global.myNwMainFrm.cmnCdMn.showMsg("Error Connecting to Database!\r\n", 4);// + ex.Message + "\r\n" + ex.InnerException + "\r\n" + ex.StackTrace, 4);
             }
         }
@@ -1239,9 +1325,10 @@ namespace Enterprise_Management_System.Forms
         {
             try
             {
-                if (CommonCode.CommonCodes.GlobalSQLConn.State != ConnectionState.Open)
+                if (CommonCode.CommonCodes.DatabaseNm == "")
                 {
                     CommonCode.CommonCodes.GlobalSQLConn.ConnectionString = CommonCode.CommonCodes.ConnStr;
+                    CommonCode.CommonCodes.DatabaseNm = CommonCode.CommonCodes.Db_dbase;
                     CommonCode.CommonCodes.GlobalSQLConn.Open();
                 }
                 Global.db_server = CommonCode.CommonCodes.GlobalSQLConn.Host;
@@ -1374,13 +1461,13 @@ namespace Enterprise_Management_System.Forms
 
         private void inboxButton_Click_1(object sender, EventArgs e)
         {
-
             System.Diagnostics.Process processDB = System.Diagnostics.Process.Start(Application.StartupPath + @"\DBConfig.exe");
         }
 
         private void openFilesButton_Click(object sender, EventArgs e)
         {
-            Global.myNwMainFrm.localStorageMenuItem.PerformClick();
+            //Global.myNwMainFrm.localStorageMenuItem.PerformClick();
+            Global.myNwMainFrm.operationalManualsToolStripMenuItem.PerformClick();
         }
 
 

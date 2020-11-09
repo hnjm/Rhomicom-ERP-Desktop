@@ -77,23 +77,23 @@ namespace OrganizationSetup.Classes
         #region "INSERT STATEMENTS..."
         public static void createOrg(string orgnm, int prntID, string resAdrs, string pstlAdrs, string webste
             , int crncyid, string email, string contacts, int orgtypID, bool isenbld, string orgdesc,
-            string orgslogan, int noOfSegmnts, string segDelimiter)
+            string orgslogan, int noOfSegmnts, string segDelimiter, int locSgmtNum, int sublocSgmtNum)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = "INSERT INTO org.org_details(" +
                      "org_name, parent_org_id, res_addrs, pstl_addrs, " +
                      "email_addrsses, websites, cntct_nos, org_typ_id, " +
                      "org_logo, is_enabled, created_by, creation_date, last_update_by, " +
-                                 "last_update_date, oprtnl_crncy_id, org_desc, org_slogan, no_of_accnt_sgmnts, segment_delimiter) " +
+                                 "last_update_date, oprtnl_crncy_id, org_desc, org_slogan, no_of_accnt_sgmnts, " +
+                                 "segment_delimiter, loc_sgmnt_number, sub_loc_sgmnt_number) " +
              "VALUES ('" + orgnm.Replace("'", "''") + "', " + prntID + ", '" + resAdrs.Replace("'", "''") +
              "', '" + pstlAdrs.Replace("'", "''") + "', '" + email.Replace("'", "''") + "', " +
                      "'" + webste.Replace("'", "''") + "', '" + contacts.Replace("'", "''") +
-                     "', " + orgtypID + ", '', '" +
-                     Global.mnFrm.cmCde.cnvrtBoolToBitStr(isenbld) + "', " +
+                     "', " + orgtypID + ", '', '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(isenbld) + "', " +
                      "" + Global.myOrgStp.user_id + ", '" + dateStr + "', " + Global.myOrgStp.user_id +
                      ", '" + dateStr + "', " + crncyid +
                      ", '" + orgdesc.Replace("'", "''") + "', '" + orgslogan.Replace("'", "''") +
-                     ", " + noOfSegmnts + ", '" + segDelimiter.Replace("'", "''") + "')";
+                     "', " + noOfSegmnts + ", '" + segDelimiter.Replace("'", "''") + "', " + locSgmtNum + ", " + sublocSgmtNum + ")";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
             Global.updtOrgImg(Global.mnFrm.cmCde.getOrgID(orgnm));
         }
@@ -113,16 +113,19 @@ namespace OrganizationSetup.Classes
             Global.updtDivImg(Global.mnFrm.cmCde.getDivID(divnm, Global.mnFrm.cmCde.Org_id));
         }
 
-        public static void createSite(int orgid, string sitenm, string siteDesc, bool isenbld)
+        public static void createSite(int orgid, string sitenm, string siteDesc, bool isenbld, string allwdGrp, string allwdGrpID, int siteTypeID, int dfltDivID)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = "INSERT INTO org.org_sites_locations(" +
                      "location_code_name, org_id, is_enabled, created_by, " +
-                     "creation_date, last_update_by, last_update_date, site_desc) " +
+                     "creation_date, last_update_by, last_update_date, site_desc, allwd_group_type, allwd_group_value, site_type_id, lnkd_div_id) " +
              "VALUES ('" + sitenm.Replace("'", "''") + "', " + orgid + ", '" +
                      Global.mnFrm.cmCde.cnvrtBoolToBitStr(isenbld) + "', " +
                      "" + Global.myOrgStp.user_id + ", '" + dateStr + "', " + Global.myOrgStp.user_id +
-                     ", '" + dateStr + "', '" + siteDesc.Replace("'", "''") + "')";
+                     ", '" + dateStr + "', '" + siteDesc.Replace("'", "''") + "', '" + allwdGrp.Replace("'", "''") +
+                     "', '" + allwdGrpID.Replace("'", "''") + "', " + siteTypeID +
+                     ", " + dfltDivID +
+                     ")";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
@@ -377,7 +380,7 @@ namespace OrganizationSetup.Classes
 
         public static void updateOrgDet(int orgid, string orgnm, int prntID, string resAdrs, string pstlAdrs, string webste
        , int crncyid, string email, string contacts, int orgtypID, bool isenbld, string orgdesc
-            , string orgslogan, int noOfSegmnts, string segDelimiter)
+            , string orgslogan, int noOfSegmnts, string segDelimiter, int locSgmtNum, int sublocSgmtNum)
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
@@ -392,7 +395,10 @@ namespace OrganizationSetup.Classes
                      ", org_desc = '" + orgdesc.Replace("'", "''") +
                      "', org_slogan='" + orgslogan.Replace("'", "''") +
                      "', no_of_accnt_sgmnts = " + noOfSegmnts +
-                     ", segment_delimiter = '" + segDelimiter.Replace("'", "''") + "' " +
+                     ", segment_delimiter = '" + segDelimiter.Replace("'", "''") +
+                     "', loc_sgmnt_number = " + locSgmtNum +
+                     ", sub_loc_sgmnt_number = " + sublocSgmtNum +
+                     " " +
              "WHERE (org_id = " + orgid + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
@@ -447,15 +453,20 @@ namespace OrganizationSetup.Classes
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
 
-        public static void updateSiteDet(int siteid, string sitenm, string siteDesc, bool isenbld)
+        public static void updateSiteDet(int siteid, string sitenm, string siteDesc, bool isenbld, string allwdGrp, string allwdGrpID, int siteTypeID, int dfltDivID)
         {
             Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string updtSQL = "UPDATE org.org_sites_locations SET " +
                      "location_code_name = '" + sitenm.Replace("'", "''") + "', " +
                      "is_enabled = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(isenbld) +
-                     "', site_desc = '" + siteDesc.Replace("'", "''") + "', last_update_by = " + Global.myOrgStp.user_id + ", " +
-                     "last_update_date = '" + dateStr + "' " +
+                     "', site_desc = '" + siteDesc.Replace("'", "''") + "', last_update_by = " + Global.myOrgStp.user_id +
+                     ", last_update_date = '" + dateStr +
+                     "', allwd_group_type = '" + allwdGrp.Replace("'", "''") +
+                     "', allwd_group_value = '" + allwdGrpID.Replace("'", "''") +
+                     "', site_type_id = " + siteTypeID +
+                     ", lnkd_div_id = " + dfltDivID +
+                     " " +
              "WHERE (location_id = " + siteid + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
@@ -609,7 +620,8 @@ namespace OrganizationSetup.Classes
              "email_addrsses, websites, cntct_nos, org_typ_id, (select c.pssbl_value from gst.gen_stp_lov_values " +
              "c where c.pssbl_value_id = a.org_typ_id) org_typ_nm, org_logo, is_enabled, oprtnl_crncy_id, " +
              "(select d.pssbl_value from gst.gen_stp_lov_values " +
-                 "d where d.pssbl_value_id = a.oprtnl_crncy_id) crcy_code, org_desc, org_slogan, no_of_accnt_sgmnts, segment_delimiter FROM org.org_details a " +
+                 "d where d.pssbl_value_id = a.oprtnl_crncy_id) crcy_code, org_desc, org_slogan, " +
+                 "no_of_accnt_sgmnts, segment_delimiter, loc_sgmnt_number,sub_loc_sgmnt_number FROM org.org_details a " +
           "WHERE ((a.org_id = " + orgid + ")) ORDER BY a.org_id";
             //Global.mnFrm.orgDet_SQL = strSql;
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
@@ -619,7 +631,7 @@ namespace OrganizationSetup.Classes
         public static DataSet get_One_SegmentDet(int segNum, int orgid)
         {
             string strSql = "";
-            strSql = @"SELECT segment_id, segment_name_prompt, system_clsfctn 
+            strSql = @"SELECT segment_id, segment_name_prompt, system_clsfctn, prnt_sgmnt_number 
         FROM org.org_acnt_sgmnts a  WHERE((a.org_id = " + orgid + " and a.segment_number = " + segNum + "))";
             //Global.mnFrm.orgDet_SQL = strSql;
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
@@ -640,22 +652,22 @@ namespace OrganizationSetup.Classes
         }
 
         public static void createAcntSegment(long orgID,
-     int segmntNum, string segmntName, string sysClsfctn)
+     int segmntNum, string segmntName, string sysClsfctn, int prntSegmentNum)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = @"INSERT INTO org.org_acnt_sgmnts (
             segment_number, segment_name_prompt, system_clsfctn, 
             created_by, creation_date, last_update_by, last_update_date, 
-            org_id) " +
+            org_id, prnt_sgmnt_number) " +
                   "VALUES (" + segmntNum + ", '" + segmntName.Replace("'", "''") + "', '" + sysClsfctn.Replace("'", "''") +
                   "', " + Global.myOrgStp.user_id + ", '" + dateStr +
                   "', " + Global.myOrgStp.user_id + ", '" + dateStr +
-                  "', " + orgID + ")";
+                  "', " + orgID + "," + prntSegmentNum + ")";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
         public static void updtAcntSegment(long segmntID,
-     int segmntNum, string segmntName, string sysClsfctn)
+     int segmntNum, string segmntName, string sysClsfctn, int prntSegmentNum)
         {
             string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
             string insSQL = @"UPDATE org.org_acnt_sgmnts SET 
@@ -663,7 +675,7 @@ namespace OrganizationSetup.Classes
                   "', system_clsfctn='" + sysClsfctn.Replace("'", "''") +
                   "', last_update_by=" + Global.myOrgStp.user_id +
                   ", last_update_date='" + dateStr +
-                  "' WHERE segment_id=" + segmntID + " ";
+                  "', prnt_sgmnt_number=" + prntSegmentNum + " WHERE segment_id=" + segmntID + " ";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
@@ -679,7 +691,8 @@ namespace OrganizationSetup.Classes
                  "email_addrsses, websites, cntct_nos, org_typ_id, (select c.pssbl_value from gst.gen_stp_lov_values " +
                  "c where c.pssbl_value_id = a.org_typ_id) org_typ_nm, org_logo, is_enabled, oprtnl_crncy_id, " +
                  "(select d.pssbl_value from gst.gen_stp_lov_values " +
-                      "d where d.pssbl_value_id = a.oprtnl_crncy_id) crcy_code, org_desc, org_slogan, no_of_accnt_sgmnts, segment_delimiter FROM org.org_details a " +
+                      "d where d.pssbl_value_id = a.oprtnl_crncy_id) crcy_code, org_desc, org_slogan, " +
+                      "no_of_accnt_sgmnts, segment_delimiter, loc_sgmnt_number,sub_loc_sgmnt_number FROM org.org_details a " +
               "WHERE ((a.org_name ilike '" + searchWord.Replace("'", "''") +
                  "')) ORDER BY a.org_id LIMIT " + limit_size +
                  " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
@@ -691,7 +704,8 @@ namespace OrganizationSetup.Classes
             "email_addrsses, websites, cntct_nos, org_typ_id, (select c.pssbl_value from gst.gen_stp_lov_values " +
             "c where c.pssbl_value_id = a.org_typ_id) org_typ_nm, org_logo, is_enabled, oprtnl_crncy_id, " +
             "(select d.pssbl_value from gst.gen_stp_lov_values " +
-            "d where d.pssbl_value_id = a.oprtnl_crncy_id) crcy_code, org_desc, org_slogan FROM org.org_details a " +
+            "d where d.pssbl_value_id = a.oprtnl_crncy_id) crcy_code, org_desc, org_slogan, " +
+            "no_of_accnt_sgmnts, segment_delimiter, loc_sgmnt_number,sub_loc_sgmnt_number FROM org.org_details a " +
             "WHERE (((select b.org_name FROM " +
             "org.org_details b where b.org_id = a.parent_org_id) ilike '" + searchWord.Replace("'", "''") +
             "')) ORDER BY a.org_id LIMIT " + limit_size +
@@ -1050,7 +1064,8 @@ namespace OrganizationSetup.Classes
         public static DataSet get_One_Site_Det(int siteID)
         {
             string strSql = "";
-            strSql = "SELECT a.location_id, a.location_code_name, a.site_desc, a.is_enabled " +
+            strSql = @"SELECT a.location_id, a.location_code_name, a.site_desc, a.is_enabled, 
+                a.allwd_group_type, a.allwd_group_value, a.site_type_id, gst.get_pssbl_val(a.site_type_id), a.lnkd_div_id, org.get_div_name(a.lnkd_div_id) div_name " +
              "FROM org.org_sites_locations a " +
              "WHERE(a.location_id = " + siteID + ")";
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
@@ -1064,7 +1079,7 @@ namespace OrganizationSetup.Classes
             string strSql = "";
             if (searchIn == "Site Name")
             {
-                strSql = "SELECT a.location_id, a.location_code_name " +
+                strSql = "SELECT a.location_id, REPLACE(a.location_code_name || '.' || a.site_desc, '.' || a.location_code_name,'') " +
                 "FROM org.org_sites_locations a " +
                 "WHERE ((a.location_code_name ilike '" + searchWord.Replace("'", "''") +
                  "') AND (org_id = " + orgID + ")) ORDER BY a.location_id LIMIT " + limit_size +
@@ -1072,7 +1087,7 @@ namespace OrganizationSetup.Classes
             }
             else if (searchIn == "Site Description")
             {
-                strSql = "SELECT a.location_id, a.location_code_name " +
+                strSql = "SELECT a.location_id, REPLACE(a.location_code_name || '.' || a.site_desc, '.' || a.location_code_name,'') " +
                 "FROM org.org_sites_locations a " +
                 "WHERE ((a.site_desc ilike '" + searchWord.Replace("'", "''") +
                  "') AND (org_id = " + orgID + ")) ORDER BY a.location_id LIMIT " + limit_size +
@@ -2009,7 +2024,8 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
     string allwdGrpTyp, string allwdGrpVal, bool isEnbld, int prntSegmentID,
     bool isContra, string accntType, bool isParent, bool isRetainedErngs,
     bool isNetIncome, int accntTypID, int reportLineNo, bool hsSubLdgrs,
-    int contrlAcntID, int crncyID, bool isSuspenseAcnt, string acntClsfctn, int mappedAcntID)
+    int contrlAcntID, int crncyID, bool isSuspenseAcnt, string acntClsfctn,
+    int mappedAcntID, bool enblCmbtnsCheckBox, int dpndntValId)
         {
             if (isRetainedErngs == true)
             {
@@ -2031,7 +2047,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
             org_id, is_contra, accnt_type, is_prnt_accnt, is_retained_earnings, 
             is_net_income, accnt_typ_id, report_line_no, has_sub_ledgers, 
             control_account_id, crncy_id, is_suspens_accnt, account_clsfctn, 
-            mapped_grp_accnt_id) " +
+            mapped_grp_accnt_id, enable_cmbntns, dpndnt_sgmnt_val_id) " +
                   "VALUES (" + segmentID +
                   ",'" + segmentVal.Replace("'", "''") +
                   "', '" + segmentDesc.Replace("'", "''") +
@@ -2057,7 +2073,8 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
                   ", '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(isSuspenseAcnt) +
                   "', '" + acntClsfctn.Replace("'", "''") +
                   "', " + mappedAcntID +
-                  ")";
+                  ", '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(enblCmbtnsCheckBox) +
+                  "', " + dpndntValId + ")";
             Global.mnFrm.cmCde.insertDataNoParams(insSQL);
         }
 
@@ -2065,7 +2082,7 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
     string allwdGrpTyp, string allwdGrpVal, bool isEnbld, int prntSegmentID,
     bool isContra, string accntType, bool isParent, bool isRetainedErngs,
     bool isNetIncome, int accntTypID, int reportLineNo, bool hsSubLdgrs,
-    int contrlAcntID, int crncyID, bool isSuspenseAcnt, string acntClsfctn, int mappedAcntID, int segmnetID)
+    int contrlAcntID, int crncyID, bool isSuspenseAcnt, string acntClsfctn, int mappedAcntID, int segmnetID, bool enblCmbtnsCheckBox, int dpndntValId)
         {
             if (isRetainedErngs == true)
             {
@@ -2105,7 +2122,8 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
        ", is_suspens_accnt ='" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(isSuspenseAcnt) +
        "', account_clsfctn ='" + acntClsfctn.Replace("'", "''") +
        "', mapped_grp_accnt_id =" + mappedAcntID +
-       " WHERE (segment_value_id =" + segmentValID + ")";
+       ", enable_cmbntns = '" + Global.mnFrm.cmCde.cnvrtBoolToBitStr(enblCmbtnsCheckBox) +
+       "', dpndnt_sgmnt_val_id=" + dpndntValId + " WHERE (segment_value_id =" + segmentValID + ")";
             Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
         }
 
@@ -2189,10 +2207,11 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
        a.org_id, a.is_contra, a.accnt_type, a.is_prnt_accnt, a.is_retained_earnings, 
        a.is_net_income, a.accnt_typ_id, a.report_line_no, a.has_sub_ledgers, 
        a.control_account_id, a.crncy_id, a.is_suspens_accnt, a.account_clsfctn, 
-       a.mapped_grp_accnt_id, b.segment_number
+       a.mapped_grp_accnt_id, b.segment_number, a.enable_cmbntns, 
+       org.get_sgmnt_val_desc(a.dpndnt_sgmnt_val_id), a.dpndnt_sgmnt_val_id
   FROM org.org_segment_values a, org.org_acnt_sgmnts b " +
              "WHERE(a.segment_id = b.segment_id and b.segment_id = " + segmentID + ") ORDER BY a.segment_value LIMIT " + limit_size +
-              " OFFSET " + (Math.Abs(offset * limit_size)).ToString(); ;
+              " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
 
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             //Global.taxFrm.rec_SQL = strSql;
@@ -2207,32 +2226,111 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
        a.org_id, a.is_contra, a.accnt_type, a.is_prnt_accnt, a.is_retained_earnings, 
        a.is_net_income, a.accnt_typ_id, a.report_line_no, a.has_sub_ledgers, 
        a.control_account_id, a.crncy_id, a.is_suspens_accnt, a.account_clsfctn, 
-       a.mapped_grp_accnt_id, b.segment_number
+       a.mapped_grp_accnt_id, b.segment_number, a.enable_cmbntns, 
+       org.get_sgmnt_id(b.prnt_sgmnt_number), a.dpndnt_sgmnt_val_id  
   FROM org.org_segment_values a, org.org_acnt_sgmnts b " +
              "WHERE(a.segment_id = b.segment_id and a.segment_value_id = " + segmentValID + ")";
-
             DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
             //Global.taxFrm.rec_SQL = strSql;
             return dtst;
         }
 
-        public static DataSet get_Basic_SgmntVals(string searchWord, string searchIn,
-     Int64 offset, int limit_size, int segmentID)
+        public static DataSet get_One_RptClsfctns(int limit_size, int offset)
+        {
+            string strSql = @"SELECT b.segment_value, b.segment_description, a.maj_rpt_ctgry, a.min_rpt_ctgry 
+  FROM org.org_account_clsfctns a, org.org_segment_values b WHERE(a.account_id= b.segment_value_id)  
+ORDER BY b.segment_value, a.maj_rpt_ctgry, a.min_rpt_ctgry LIMIT " + limit_size +
+              " OFFSET " + (Math.Abs(offset * limit_size)).ToString();
+
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            return dtst;
+        }
+        public static int get_RptClsfctnID(string majCtgrName, string minCtgrName, int accntID)
+        {
+            string strSql = @"SELECT account_clsfctn_id from org.org_account_clsfctns where account_id=" + accntID +
+              " and lower(maj_rpt_ctgry)='" + majCtgrName.Replace("'", "''").ToLower() +
+              "' and lower(min_rpt_ctgry)='" + minCtgrName.Replace("'", "''").ToLower() + "'";
+
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return int.Parse(dtst.Tables[0].Rows[0][0].ToString());
+            }
+            //Global.taxFrm.rec_SQL = strSql;
+            return -1;
+        }
+
+        public static long getNewRptClsfLnID()
+        {
+            string strSql = "select nextval('org.org_account_clsfctns_account_clsfctn_id_seq')";
+            DataSet dtst = Global.mnFrm.cmCde.selectDataNoParams(strSql);
+            if (dtst.Tables[0].Rows.Count > 0)
+            {
+                return long.Parse(dtst.Tables[0].Rows[0][0].ToString());
+            }
+            return -1;
+        }
+
+        public static void createRptClsfctn(long clsfctnID, string majCtgrName, string minCtgrName, int accntID)
+        {
+            string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
+            string insSQL = @"INSERT INTO org.org_account_clsfctns(
+            account_clsfctn_id, account_id, maj_rpt_ctgry, min_rpt_ctgry, 
+            created_by, creation_date, last_update_by, last_update_date) " +
+                  "VALUES (" + clsfctnID + ", " + accntID + ", '" + majCtgrName.Replace("'", "''") +
+                  "', '" + minCtgrName.Replace("'", "''") +
+                  "', " + Global.mnFrm.cmCde.User_id + ", '" + dateStr +
+                  "', " + Global.mnFrm.cmCde.User_id + ", '" + dateStr +
+                  "')";
+            Global.mnFrm.cmCde.insertDataNoParams(insSQL);
+        }
+
+        public static void updateRptClsfctn(long clsfctnID, string majCtgrName, string minCtgrName, int accntID)
+        {
+            Global.mnFrm.cmCde.Extra_Adt_Trl_Info = "";
+            string dateStr = Global.mnFrm.cmCde.getDB_Date_time();
+            string updtSQL = "UPDATE org.org_account_clsfctns SET " +
+                  "maj_rpt_ctgry='" + majCtgrName.Replace("'", "''") +
+                  "', min_rpt_ctgry='" + minCtgrName.Replace("'", "''") +
+                  "',account_id=" + accntID +
+                  ", last_update_by = " + Global.mnFrm.cmCde.User_id + ", " +
+                  "last_update_date = '" + dateStr +
+                  "' WHERE (account_clsfctn_id =" + clsfctnID + ")";
+            Global.mnFrm.cmCde.updateDataNoParams(updtSQL);
+        }
+
+        public static DataSet get_Basic_SgmntVals(string searchWord, string searchIn, Int64 offset, int limit_size, int segmentID)
         {
             string strSql = "";
-            string whrcls = " AND (a.segment_value ilike '" + searchWord.Replace("'", "''") +
-               "' or a.segment_description ilike '" + searchWord.Replace("'", "''") +
+            string whrcls = "";
+            if (searchIn == "Dependent Value")
+            {
+                whrcls = " AND ((COALESCE(org.get_sgmnt_val(dpndnt_sgmnt_val_id),'')||'.'||COALESCE(org.get_sgmnt_val_desc(dpndnt_sgmnt_val_id),'')) ilike '" + searchWord.Replace("'", "''") +
+                               "')";
+            }
+            else if (searchIn == "Value/Description")
+            {
+                whrcls = " AND (segment_value ilike '" + searchWord.Replace("'", "''") +
+               "' or segment_description ilike '" + searchWord.Replace("'", "''") +
                "')";
-            string subSql = @"SELECT segment_value_id,segment_value,segment_description,space||segment_value||'.'||segment_description account_number_name, is_prnt_accnt, accnt_type,accnt_typ_id, prnt_segment_value_id, control_account_id, depth, path, cycle 
-      FROM suborg WHERE 1=1 ORDER BY accnt_typ_id, path";
+            }
+            else
+            {
+                whrcls = " AND (segment_value ilike '" + searchWord.Replace("'", "''") +
+               "' or segment_description ilike '" + searchWord.Replace("'", "''") +
+               "' or (COALESCE(org.get_sgmnt_val(dpndnt_sgmnt_val_id),'')||'.'||COALESCE(org.get_sgmnt_val_desc(dpndnt_sgmnt_val_id),'')) ilike '" + searchWord.Replace("'", "''") +
+                               "')";
+            }
+            string subSql = @"SELECT segment_value_id,segment_value,segment_description,space||segment_value||'.'||segment_description account_number_name, is_prnt_accnt, accnt_type,accnt_typ_id, prnt_segment_value_id, control_account_id,dpndnt_sgmnt_val_id, depth, path, cycle 
+      FROM suborg WHERE 1=1 " + whrcls + @" ORDER BY accnt_typ_id, path";
 
-            strSql = @"WITH RECURSIVE suborg(segment_value_id, segment_value, segment_description, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_segment_value_id, control_account_id, depth, path, cycle, space) AS 
+            strSql = @"WITH RECURSIVE suborg(segment_value_id, segment_value, segment_description, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_segment_value_id, control_account_id,dpndnt_sgmnt_val_id, depth, path, cycle, space) AS 
       ( 
-      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id, 1, ARRAY[a.segment_value||'']::character varying[], false, '' opad 
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id,a.dpndnt_sgmnt_val_id, 1, ARRAY[a.segment_value||'']::character varying[], false, '' opad 
       FROM org.org_segment_values a 
-        WHERE ((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=-1 AND (a.segment_id = " + segmentID + ")" + whrcls + @") 
+        WHERE ((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=-1 AND (a.segment_id = " + segmentID + @")) 
       UNION ALL        
-      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id, sd.depth + 1, 
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id,a.dpndnt_sgmnt_val_id, sd.depth + 1, 
       path || a.segment_value, 
       a.segment_value = ANY(path), space || '      '
       FROM org.org_segment_values a, suborg AS sd 
@@ -2249,19 +2347,35 @@ to_char(to_timestamp(a.creation_date,'YYYY-MM-DD HH24:MI:SS'),'DD-Mon-YYYY  HH24
         public static long get_Total_SgmntVals(string searchWord, string searchIn, int segmentID)
         {
             string strSql = "";
-            string whrcls = " AND (a.segment_value ilike '" + searchWord.Replace("'", "''") +
-               "' or a.segment_description ilike '" + searchWord.Replace("'", "''") +
+            string whrcls = "";
+            if (searchIn == "Dependent Value")
+            {
+                whrcls = " AND ((COALESCE(org.get_sgmnt_val(dpndnt_sgmnt_val_id),'')||'.'||COALESCE(org.get_sgmnt_val_desc(dpndnt_sgmnt_val_id),'')) ilike '" + searchWord.Replace("'", "''") +
+                               "')";
+            }
+            else if (searchIn == "Value/Description")
+            {
+                whrcls = " AND (segment_value ilike '" + searchWord.Replace("'", "''") +
+               "' or segment_description ilike '" + searchWord.Replace("'", "''") +
                "')";
+            }
+            else
+            {
+                whrcls = " AND (segment_value ilike '" + searchWord.Replace("'", "''") +
+               "' or segment_description ilike '" + searchWord.Replace("'", "''") +
+               "' or (COALESCE(org.get_sgmnt_val(dpndnt_sgmnt_val_id),'')||'.'||COALESCE(org.get_sgmnt_val_desc(dpndnt_sgmnt_val_id),'')) ilike '" + searchWord.Replace("'", "''") +
+                               "')";
+            }
             string subSql = @"SELECT count(segment_value_id) 
-      FROM suborg";
+      FROM suborg WHERE 1=1" + whrcls + @"";
 
-            strSql = @"WITH RECURSIVE suborg(segment_value_id, segment_value, segment_description, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_segment_value_id, control_account_id, depth, path, cycle, space) AS 
+            strSql = @"WITH RECURSIVE suborg(segment_value_id, segment_value, segment_description, is_prnt_accnt, accnt_type, accnt_typ_id, prnt_segment_value_id, control_account_id, dpndnt_sgmnt_val_id, depth, path, cycle, space) AS 
       ( 
-      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id, 1, ARRAY[a.segment_value||'']::character varying[], false, '' opad 
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id,a.dpndnt_sgmnt_val_id, 1, ARRAY[a.segment_value||'']::character varying[], false, '' opad 
       FROM org.org_segment_values a 
-        WHERE ((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=-1 AND (a.segment_id = " + segmentID + ")" + whrcls + @") 
+        WHERE ((CASE WHEN a.prnt_segment_value_id<=0 THEN a.control_account_id ELSE a.prnt_segment_value_id END)=-1 AND (a.segment_id = " + segmentID + @")) 
       UNION ALL        
-      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id, sd.depth + 1, 
+      SELECT a.segment_value_id, a.segment_value, a.segment_description, a.is_prnt_accnt, a.accnt_type,a.accnt_typ_id, a.prnt_segment_value_id, a.control_account_id,a.dpndnt_sgmnt_val_id, sd.depth + 1, 
       path || a.segment_value, 
       a.segment_value = ANY(path), space || '      '
       FROM org.org_segment_values a, suborg AS sd 

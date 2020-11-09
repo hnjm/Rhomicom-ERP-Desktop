@@ -123,7 +123,7 @@ namespace StoresAndInventoryManager.Forms
                     }
                     else
                     {
-                        if ((i == 8 || i == 11 || i == 12) && CommonCode.CommonCodes.ModulesNeeded == "Point of Sale Only")
+                        if ((i == 12) && CommonCode.CommonCodes.ModulesNeeded == "Point of Sale Only")
                         {
                             continue;
                         }

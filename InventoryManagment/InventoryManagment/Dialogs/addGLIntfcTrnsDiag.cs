@@ -240,7 +240,7 @@ this.trnsDateTextBox.Text), 15);
         Global.mnFrm.cmCde.showMsg("Please indicate the Entered Currency!", 0);
         return;
       }
-      double netAmnt = (double)Global.dbtOrCrdtAccntMultiplier(int.Parse(this.accntIDTextBox.Text),
+      double netAmnt = (double) Global.dbtOrCrdtAccntMultiplier(int.Parse(this.accntIDTextBox.Text),
 this.incrsDcrsComboBox.Text.Substring(0, 1)) * (double)this.funcCurAmntNumUpDwn.Value;
 
       if (!Global.mnFrm.cmCde.isTransPrmttd(

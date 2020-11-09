@@ -337,10 +337,7 @@ namespace Accounting.Dialogs
                 Global.mnFrm.cmCde.showMsg("Please select a Record First!", 0);
                 return;
             }
-            Global.mnFrm.cmCde.showRecHstry(
-              Global.mnFrm.cmCde.get_Gnrl_Rec_Hstry(long.Parse(
-              this.ratesDataGridView.SelectedRows[0].Cells[10].Value.ToString()),
-              "accb.accb_exchange_rates", "rate_id"), 9);
+            Global.mnFrm.cmCde.showRecHstry(Global.mnFrm.cmCde.get_Gnrl_Rec_Hstry(long.Parse(this.ratesDataGridView.SelectedRows[0].Cells[10].Value.ToString()), "accb.accb_exchange_rates", "rate_id"), 9);
         }
 
         private void dsplySizeDetComboBox_TextChanged(object sender, EventArgs e)

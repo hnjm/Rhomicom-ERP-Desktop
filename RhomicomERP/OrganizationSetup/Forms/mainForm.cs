@@ -329,9 +329,9 @@ namespace OrganizationSetup.Forms
             }
             else
             {
-                if (Global.mnFrm.cmCde.Org_id <= 0)
+                if (int.Parse(this.orgIDTextBox.Text) <= 0)
                 {
-                    Global.mnFrm.cmCde.showMsg("Please Use Select Roles to Choose an Organisation First!", 0);
+                    Global.mnFrm.cmCde.showMsg("Please Create an Organisation and Select it First!", 0);
                     return;
                 }
                 if (inpt_name == menuItems[1])
@@ -637,6 +637,7 @@ namespace OrganizationSetup.Forms
             {
                 this.orgDet_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
+
             if (this.orgDet_cur_indx < 0)
             {
                 this.orgDet_cur_indx = 0;
@@ -741,6 +742,10 @@ namespace OrganizationSetup.Forms
                 this.orgTypTextBox.Text = dtst.Tables[0].Rows[i][10].ToString();
                 this.orgEnabledCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][12].ToString());
                 this.orgDescTextBox.Text = dtst.Tables[0].Rows[i][15].ToString();
+                this.noOfSgmntsNumUpDown.Value = decimal.Parse(dtst.Tables[0].Rows[i][17].ToString());
+                this.delimiterComboBox.SelectedItem = dtst.Tables[0].Rows[i][18].ToString();
+                this.locSgmtNoNumericUpDown.Value = decimal.Parse(dtst.Tables[0].Rows[i][19].ToString());
+                this.subLocSgmtNoNumericUpDown.Value = decimal.Parse(dtst.Tables[0].Rows[i][20].ToString());
                 Global.mnFrm.cmCde.getDBImageFile(dtst.Tables[0].Rows[i][11].ToString(), 0, ref this.orgLogoPictureBox);
             }
             this.obey_orgDet_evnts = true;
@@ -774,6 +779,8 @@ namespace OrganizationSetup.Forms
                 this.orgDescTextBox.Text = dtst.Tables[0].Rows[i][15].ToString();
                 this.noOfSgmntsNumUpDown.Value = decimal.Parse(dtst.Tables[0].Rows[i][17].ToString());
                 this.delimiterComboBox.SelectedItem = dtst.Tables[0].Rows[i][18].ToString();
+                this.locSgmtNoNumericUpDown.Value = decimal.Parse(dtst.Tables[0].Rows[i][19].ToString());
+                this.subLocSgmtNoNumericUpDown.Value = decimal.Parse(dtst.Tables[0].Rows[i][20].ToString());
                 this.orgEnabledCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][12].ToString());
                 Global.mnFrm.cmCde.getDBImageFile(dtst.Tables[0].Rows[i][11].ToString(), 0, ref this.orgLogoPictureBox);
             }
@@ -833,6 +840,8 @@ namespace OrganizationSetup.Forms
             this.orgDescTextBox.Text = "";
             this.sloganTextBox.Text = "";
             this.noOfSgmntsNumUpDown.Value = 1;
+            this.locSgmtNoNumericUpDown.Value = 0;
+            this.subLocSgmtNoNumericUpDown.Value = 0;
             this.delimiterComboBox.SelectedIndex = 1;
             this.orgEnabledCheckBox.Checked = false;
             this.orgLogoPictureBox.Image = OrganizationSetup.Properties.Resources.blank;
@@ -861,10 +870,16 @@ namespace OrganizationSetup.Forms
             this.orgDescTextBox.ReadOnly = false;
             this.orgDescTextBox.BackColor = Color.White;
             this.sloganTextBox.ReadOnly = false;
-            this.sloganTextBox.BackColor = Color.White;
+            this.sloganTextBox.BackColor = Color.White; 
             this.noOfSgmntsNumUpDown.ReadOnly = false;
             this.noOfSgmntsNumUpDown.BackColor = Color.FromArgb(255, 255, 118);
             this.noOfSgmntsNumUpDown.Increment = 1;
+            this.locSgmtNoNumericUpDown.ReadOnly = false;
+            this.locSgmtNoNumericUpDown.BackColor = Color.FromArgb(255, 255, 118);
+            this.locSgmtNoNumericUpDown.Increment = 1;
+            this.subLocSgmtNoNumericUpDown.ReadOnly = false;
+            this.subLocSgmtNoNumericUpDown.BackColor = Color.FromArgb(255, 255, 118);
+            this.subLocSgmtNoNumericUpDown.Increment = 1;
             this.delimiterComboBox.BackColor = Color.FromArgb(255, 255, 118);
         }
 
@@ -909,6 +924,12 @@ namespace OrganizationSetup.Forms
             this.noOfSgmntsNumUpDown.ReadOnly = true;
             this.noOfSgmntsNumUpDown.BackColor = Color.WhiteSmoke;
             this.noOfSgmntsNumUpDown.Increment = 0;
+            this.locSgmtNoNumericUpDown.ReadOnly = true;
+            this.locSgmtNoNumericUpDown.BackColor = Color.WhiteSmoke;
+            this.locSgmtNoNumericUpDown.Increment = 0;
+            this.subLocSgmtNoNumericUpDown.ReadOnly = true;
+            this.subLocSgmtNoNumericUpDown.BackColor = Color.WhiteSmoke;
+            this.subLocSgmtNoNumericUpDown.Increment = 0;
             this.delimiterComboBox.BackColor = Color.WhiteSmoke;
         }
 
@@ -1093,7 +1114,8 @@ namespace OrganizationSetup.Forms
                     this.websiteTextBox.Text, int.Parse(this.crncyIDTextBox.Text),
                     this.emailAddrsTextBox.Text, this.contactNosTextBox.Text,
                     int.Parse(this.orgTypIDTextBox.Text), this.orgEnabledCheckBox.Checked,
-                    this.orgDescTextBox.Text, this.sloganTextBox.Text, (int)this.noOfSgmntsNumUpDown.Value, this.delimiterComboBox.Text);
+                    this.orgDescTextBox.Text, this.sloganTextBox.Text, (int)this.noOfSgmntsNumUpDown.Value, 
+                    this.delimiterComboBox.Text, (int)this.locSgmtNoNumericUpDown.Value, (int)this.subLocSgmtNoNumericUpDown.Value);
                 this.saveOrgDetButton.Enabled = false;
                 this.addOrg = false;
                 this.editOrg = false;
@@ -1118,7 +1140,8 @@ namespace OrganizationSetup.Forms
                     this.websiteTextBox.Text, int.Parse(this.crncyIDTextBox.Text),
                     this.emailAddrsTextBox.Text, this.contactNosTextBox.Text,
                     int.Parse(this.orgTypIDTextBox.Text), this.orgEnabledCheckBox.Checked,
-                    this.orgDescTextBox.Text, this.sloganTextBox.Text, (int)this.noOfSgmntsNumUpDown.Value, this.delimiterComboBox.Text);
+                    this.orgDescTextBox.Text, this.sloganTextBox.Text, (int)this.noOfSgmntsNumUpDown.Value, 
+                    this.delimiterComboBox.Text, (int)this.locSgmtNoNumericUpDown.Value, (int)this.subLocSgmtNoNumericUpDown.Value);
                 this.saveGridView(int.Parse(this.orgIDTextBox.Text));
                 this.saveOrgDetButton.Enabled = false;
                 this.editOrg = false;
@@ -1188,21 +1211,20 @@ namespace OrganizationSetup.Forms
                     int segmentNum = int.Parse(this.accntSgmntsDataGridView.Rows[i].Cells[0].Value.ToString());
                     string segmentName = this.accntSgmntsDataGridView.Rows[i].Cells[1].Value.ToString();
                     string sysClsfctn = this.accntSgmntsDataGridView.Rows[i].Cells[3].Value.ToString();
-
+                    int prntSegmentNum = int.Parse(this.accntSgmntsDataGridView.Rows[i].Cells[6].Value.ToString());
                     if (segmentID <= 0)
                     {
                         segmentID = Global.get_SegmnetID(hdrID, segmentNum);
                     }
-
                     if (segmentID <= 0)
                     {
-                        Global.createAcntSegment(hdrID, segmentNum, segmentName, sysClsfctn);
+                        Global.createAcntSegment(hdrID, segmentNum, segmentName, sysClsfctn, prntSegmentNum);
                         svd++;
                         this.accntSgmntsDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
                     }
                     else
                     {
-                        Global.updtAcntSegment(segmentID, segmentNum, segmentName, sysClsfctn);
+                        Global.updtAcntSegment(segmentID, segmentNum, segmentName, sysClsfctn, prntSegmentNum);
                         svd++;
                         this.accntSgmntsDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Lime;
                     }
@@ -1526,7 +1548,7 @@ namespace OrganizationSetup.Forms
             this.obey_divDet_evnts = false;
             DataSet dtst = Global.get_Basic_DivDet(this.searchForDivTextBox.Text,
                 this.searchInDivComboBox.Text, this.divDet_cur_indx,
-                int.Parse(this.dsplySizeDivComboBox.Text), Global.mnFrm.cmCde.Org_id);
+                int.Parse(this.dsplySizeDivComboBox.Text), int.Parse(this.orgIDTextBox.Text));
             this.divListView.Items.Clear();
 
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
@@ -1578,7 +1600,7 @@ namespace OrganizationSetup.Forms
             this.disableDivEdit();
             this.obey_divDet_evnts = false;
             DataSet dtst = Global.get_Basic_DivDet(this.searchForDivTextBox.Text,
-                this.searchInDivComboBox.Text, this.divDet_cur_indx, 1, Global.mnFrm.cmCde.Org_id);
+                this.searchInDivComboBox.Text, this.divDet_cur_indx, 1, int.Parse(this.orgIDTextBox.Text));
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
                 this.last_div_num = Global.mnFrm.cmCde.navFuncts.startIndex() + i;
@@ -1706,7 +1728,7 @@ namespace OrganizationSetup.Forms
             {
                 this.is_last_divDet = true;
                 this.totl_divDet = Global.get_Total_DivDet(this.searchForDivTextBox.Text,
-                    this.searchInDivComboBox.Text, Global.mnFrm.cmCde.Org_id);
+                    this.searchInDivComboBox.Text, int.Parse(this.orgIDTextBox.Text));
                 this.updtDivDetTotals();
                 this.divDet_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -1826,7 +1848,7 @@ namespace OrganizationSetup.Forms
                 Global.mnFrm.cmCde.showMsg("Please enter a Division Type!", 0);
                 return;
             }
-            long oldDivID = Global.mnFrm.cmCde.getDivID(this.divNameTextBox.Text, Global.mnFrm.cmCde.Org_id);
+            long oldDivID = Global.mnFrm.cmCde.getDivID(this.divNameTextBox.Text, int.Parse(this.orgIDTextBox.Text));
             if (oldDivID > 0
              && this.addDiv == true)
             {
@@ -1842,7 +1864,7 @@ namespace OrganizationSetup.Forms
             }
             if (this.addDiv == true)
             {
-                Global.createDiv(Global.mnFrm.cmCde.Org_id,
+                Global.createDiv(int.Parse(this.orgIDTextBox.Text),
                     this.divNameTextBox.Text, int.Parse(this.parentDivIDTextBox.Text),
                     int.Parse(this.divTypIDTextBox.Text), this.isDivEnbldCheckBox.Checked, this.divDescTextBox.Text);
                 this.saveDivButton.Enabled = false;
@@ -1893,7 +1915,7 @@ namespace OrganizationSetup.Forms
             selVals[0] = this.parentDivIDTextBox.Text;
             DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                 Global.mnFrm.cmCde.getLovID("Divisions/Groups"), ref selVals,
-                true, false, Global.mnFrm.cmCde.Org_id,
+                true, false, int.Parse(this.orgIDTextBox.Text),
              this.srchWrd, "Both", true);
             if (dgRes == DialogResult.OK)
             {
@@ -1944,7 +1966,7 @@ namespace OrganizationSetup.Forms
         //  {
         //    return;
         //  }
-        //  this.populateDivDet(Global.mnFrm.cmCde.getDivID(e.Node.Text, Global.mnFrm.cmCde.Org_id));
+        //  this.populateDivDet(Global.mnFrm.cmCde.getDivID(e.Node.Text, int.Parse(this.orgIDTextBox.Text)));
         //}
 
         private void divListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -2170,6 +2192,53 @@ namespace OrganizationSetup.Forms
                 this.siteNameTextBox.Text = dtst.Tables[0].Rows[i][1].ToString();
                 this.siteDescTextBox.Text = dtst.Tables[0].Rows[i][2].ToString();
                 this.isEnabledSitesCheckBox.Checked = Global.mnFrm.cmCde.cnvrtBitStrToBool(dtst.Tables[0].Rows[i][3].ToString());
+                if (editSite == false)
+                {
+                    this.grpComboBox.Items.Clear();
+                    this.grpComboBox.Items.Add(dtst.Tables[0].Rows[i][4].ToString());
+                }
+                this.grpComboBox.SelectedItem = dtst.Tables[0].Rows[i][4].ToString();
+                this.grpNmIDTextBox.Text = dtst.Tables[0].Rows[i][5].ToString();
+                if (this.grpComboBox.Text == "Divisions/Groups")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getDivName(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Grade")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGrdName(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Job")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getJobName(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Position")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPosName(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Site/Location")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getSiteNameDesc(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Person Type")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Working Hour Type")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getWkhName(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Gathering Type")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGathName(int.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                else if (this.grpComboBox.Text == "Single Person")
+                {
+                    this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPrsnName(long.Parse(dtst.Tables[0].Rows[i][5].ToString()));
+                }
+                this.siteTypeIDTextBox.Text = dtst.Tables[0].Rows[i][6].ToString();
+                this.siteTypeTextBox.Text = dtst.Tables[0].Rows[i][7].ToString();
+                this.dfltAcntGrpIDTextBox.Text = dtst.Tables[0].Rows[i][8].ToString();
+                this.dfltAcntGrpTextBox.Text = dtst.Tables[0].Rows[i][9].ToString();
             }
             this.obey_site_evnts = true;
         }
@@ -2180,7 +2249,7 @@ namespace OrganizationSetup.Forms
             this.disableSiteEdit();
             this.obey_site_evnts = false;
             DataSet dtst = Global.get_Basic_Site(this.searchForSiteTextBox.Text,
-                this.searchInSiteComboBox.Text, this.site_cur_indx, int.Parse(this.dsplySizeSiteComboBox.Text), Global.mnFrm.cmCde.Org_id);
+                this.searchInSiteComboBox.Text, this.site_cur_indx, int.Parse(this.dsplySizeSiteComboBox.Text), int.Parse(this.orgIDTextBox.Text));
             this.sitesListView.Items.Clear();
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
@@ -2243,6 +2312,14 @@ namespace OrganizationSetup.Forms
             this.siteIDTextBox.Text = "-1";
             this.siteDescTextBox.Text = "";
             this.isEnabledSitesCheckBox.Checked = false;
+            this.grpComboBox.Items.Clear();
+            this.grpNmTextBox.Text = "";
+            this.grpNmIDTextBox.Text = "-1";
+
+            this.siteTypeIDTextBox.Text = "-1";
+            this.siteTypeTextBox.Text = "";
+            this.dfltAcntGrpIDTextBox.Text = "-1";
+            this.dfltAcntGrpTextBox.Text = "";
             this.obey_site_evnts = true;
         }
 
@@ -2253,6 +2330,29 @@ namespace OrganizationSetup.Forms
             this.siteNameTextBox.BackColor = Color.FromArgb(255, 255, 118);
             this.siteDescTextBox.ReadOnly = false;
             this.siteDescTextBox.BackColor = Color.White;
+            this.grpNmTextBox.ReadOnly = false;
+            this.grpNmTextBox.BackColor = Color.White;
+            this.siteTypeTextBox.BackColor = Color.White;
+            this.siteTypeTextBox.ReadOnly = true;
+            this.dfltAcntGrpTextBox.BackColor = Color.White;
+            this.dfltAcntGrpTextBox.ReadOnly = true;
+            this.grpComboBox.BackColor = Color.FromArgb(255, 255, 118);
+            this.obey_site_evnts = false;
+            string orgItm = this.grpComboBox.Text;
+            this.grpComboBox.Items.Clear();
+            this.grpComboBox.Items.Add("Everyone");
+            this.grpComboBox.Items.Add("Divisions/Groups");
+            this.grpComboBox.Items.Add("Grade");
+            this.grpComboBox.Items.Add("Job");
+            this.grpComboBox.Items.Add("Position");
+            this.grpComboBox.Items.Add("Site/Location");
+            this.grpComboBox.Items.Add("Person Type");
+            this.grpComboBox.Items.Add("Single Person");
+            if (this.editSite == true)
+            {
+                this.grpComboBox.SelectedItem = orgItm;
+            }
+            this.obey_site_evnts = true;
         }
 
         private void disableSiteEdit()
@@ -2265,6 +2365,13 @@ namespace OrganizationSetup.Forms
             this.siteIDTextBox.BackColor = Color.WhiteSmoke;
             this.siteDescTextBox.ReadOnly = true;
             this.siteDescTextBox.BackColor = Color.WhiteSmoke;
+            this.dfltAcntGrpTextBox.BackColor = Color.WhiteSmoke;
+            this.dfltAcntGrpTextBox.ReadOnly = true;
+            this.grpComboBox.BackColor = Color.WhiteSmoke;
+            this.grpNmTextBox.ReadOnly = true;
+            this.grpNmTextBox.BackColor = Color.WhiteSmoke;
+            this.siteTypeTextBox.BackColor = Color.WhiteSmoke;
+            this.siteTypeTextBox.ReadOnly = true;
         }
 
         private bool shdObeySiteEvts()
@@ -2295,7 +2402,7 @@ namespace OrganizationSetup.Forms
             {
                 this.is_last_site = true;
                 this.totl_site = Global.get_Total_Sites(this.searchForSiteTextBox.Text,
-                    this.searchInSiteComboBox.Text, Global.mnFrm.cmCde.Org_id);
+                    this.searchInSiteComboBox.Text, int.Parse(this.orgIDTextBox.Text));
                 this.updtSiteTotals();
                 this.site_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -2368,7 +2475,7 @@ namespace OrganizationSetup.Forms
                 Global.mnFrm.cmCde.showMsg("Please enter a Site name!", 0);
                 return;
             }
-            long oldSiteID = Global.mnFrm.cmCde.getSiteID(this.siteNameTextBox.Text, Global.mnFrm.cmCde.Org_id);
+            long oldSiteID = Global.mnFrm.cmCde.getSiteID(this.siteNameTextBox.Text, int.Parse(this.orgIDTextBox.Text));
             if (oldSiteID > 0
              && this.addSite == true)
             {
@@ -2382,11 +2489,17 @@ namespace OrganizationSetup.Forms
                 Global.mnFrm.cmCde.showMsg("New Site/Location's Name is already in use in this Organisation!", 0);
                 return;
             }
-
+            if (this.grpComboBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please select an Allowed Group!", 0);
+                return;
+            }
             if (this.addSite == true)
             {
-                Global.createSite(Global.mnFrm.cmCde.Org_id, this.siteNameTextBox.Text,
-                    this.siteDescTextBox.Text, this.isEnabledSitesCheckBox.Checked);
+                Global.createSite(int.Parse(this.orgIDTextBox.Text), this.siteNameTextBox.Text,
+                    this.siteDescTextBox.Text, this.isEnabledSitesCheckBox.Checked,
+                    this.grpComboBox.Text, this.grpNmIDTextBox.Text, int.Parse(this.siteTypeIDTextBox.Text),
+                    int.Parse(this.dfltAcntGrpIDTextBox.Text));
 
                 this.saveSiteButton.Enabled = false;
                 this.addSite = false;
@@ -2399,7 +2512,9 @@ namespace OrganizationSetup.Forms
             else if (this.editSite == true)
             {
                 Global.updateSiteDet(int.Parse(this.siteIDTextBox.Text), this.siteNameTextBox.Text,
-                    this.siteDescTextBox.Text, this.isEnabledSitesCheckBox.Checked);
+                    this.siteDescTextBox.Text, this.isEnabledSitesCheckBox.Checked,
+                    this.grpComboBox.Text, this.grpNmIDTextBox.Text, int.Parse(this.siteTypeIDTextBox.Text),
+                    int.Parse(this.dfltAcntGrpIDTextBox.Text));
 
                 this.saveSiteButton.Enabled = false;
                 this.editSite = false;
@@ -2660,7 +2775,7 @@ namespace OrganizationSetup.Forms
             this.disableJobsEdit();
             this.obey_jobs_evnts = false;
             DataSet dtst = Global.get_Basic_Job(this.searchForJobsTextBox.Text,
-                this.searchInJobsComboBox.Text, this.jobs_cur_indx, int.Parse(this.dsplySizeJobsComboBox.Text), Global.mnFrm.cmCde.Org_id);
+                this.searchInJobsComboBox.Text, this.jobs_cur_indx, int.Parse(this.dsplySizeJobsComboBox.Text), int.Parse(this.orgIDTextBox.Text));
             this.jobListView.Items.Clear();
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
@@ -2709,7 +2824,7 @@ namespace OrganizationSetup.Forms
             this.disableJobsEdit();
             this.obey_jobs_evnts = false;
             DataSet dtst = Global.get_Basic_Job(this.searchForJobsTextBox.Text,
-                this.searchInJobsComboBox.Text, this.jobs_cur_indx, int.Parse(this.dsplySizeJobsComboBox.Text), Global.mnFrm.cmCde.Org_id);
+                this.searchInJobsComboBox.Text, this.jobs_cur_indx, int.Parse(this.dsplySizeJobsComboBox.Text), int.Parse(this.orgIDTextBox.Text));
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
                 this.last_job_num = Global.mnFrm.cmCde.navFuncts.startIndex() + i;
@@ -2823,7 +2938,7 @@ namespace OrganizationSetup.Forms
             {
                 this.is_last_job = true;
                 this.totl_jobs = Global.get_Total_Job(this.searchForJobsTextBox.Text,
-                    this.searchInJobsComboBox.Text, Global.mnFrm.cmCde.Org_id);
+                    this.searchInJobsComboBox.Text, int.Parse(this.orgIDTextBox.Text));
                 this.updtJobsTotals();
                 this.jobs_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -2842,7 +2957,7 @@ namespace OrganizationSetup.Forms
             selVals[0] = this.parentJobIDTextBox.Text;
             DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
                 Global.mnFrm.cmCde.getLovID("Jobs"), ref selVals, true,
-                false, Global.mnFrm.cmCde.Org_id,
+                false, int.Parse(this.orgIDTextBox.Text),
              this.srchWrd, "Both", true);
             if (dgRes == DialogResult.OK)
             {
@@ -2920,7 +3035,7 @@ namespace OrganizationSetup.Forms
                 return;
             }
             long oldJobID = Global.mnFrm.cmCde.getJobID(this.jobNameTextBox.Text,
-                Global.mnFrm.cmCde.Org_id);
+                int.Parse(this.orgIDTextBox.Text));
             if (oldJobID > 0
              && this.addJob == true)
             {
@@ -2937,7 +3052,7 @@ namespace OrganizationSetup.Forms
 
             if (this.addJob == true)
             {
-                Global.createJob(Global.mnFrm.cmCde.Org_id, this.jobNameTextBox.Text,
+                Global.createJob(int.Parse(this.orgIDTextBox.Text), this.jobNameTextBox.Text,
                     int.Parse(this.parentJobIDTextBox.Text),
                     this.jobDescTextBox.Text, this.isEnabldJobsCheckBox.Checked);
 
@@ -3219,7 +3334,7 @@ namespace OrganizationSetup.Forms
             this.gradesListView.Items.Clear();
             DataSet dtst = Global.get_Basic_Grade(this.searchForGrdTextBox.Text,
                 this.searchInGrdComboBox.Text, this.grd_cur_indx,
-                int.Parse(this.dsplySizeGrdComboBox.Text), Global.mnFrm.cmCde.Org_id);
+                int.Parse(this.dsplySizeGrdComboBox.Text), int.Parse(this.orgIDTextBox.Text));
 
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
             {
@@ -3361,7 +3476,7 @@ namespace OrganizationSetup.Forms
             {
                 this.is_last_grd = true;
                 this.totl_grd = Global.get_Total_Grades(this.searchForGrdTextBox.Text,
-                    this.searchInGrdComboBox.Text, Global.mnFrm.cmCde.Org_id);
+                    this.searchInGrdComboBox.Text, int.Parse(this.orgIDTextBox.Text));
                 this.updtGrdsTotals();
                 this.grd_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -3436,7 +3551,7 @@ namespace OrganizationSetup.Forms
             }
 
             long oldGrdID = Global.mnFrm.cmCde.getGrdID(this.gradeNameTextBox.Text,
-                Global.mnFrm.cmCde.Org_id);
+                int.Parse(this.orgIDTextBox.Text));
             if (oldGrdID > 0
              && this.addgrd == true)
             {
@@ -3453,7 +3568,7 @@ namespace OrganizationSetup.Forms
 
             if (this.addgrd == true)
             {
-                Global.createGrd(Global.mnFrm.cmCde.Org_id, this.gradeNameTextBox.Text,
+                Global.createGrd(int.Parse(this.orgIDTextBox.Text), this.gradeNameTextBox.Text,
                     int.Parse(this.parntGradeIDTextBox.Text),
                     this.gradeCommentsTextBox.Text, this.isEnabledGradeCheckBox.Checked);
 
@@ -3490,7 +3605,7 @@ namespace OrganizationSetup.Forms
             string[] selVals = new string[1];
             selVals[0] = this.parntGradeIDTextBox.Text;
             DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
-                Global.mnFrm.cmCde.getLovID("Grades"), ref selVals, true, false, Global.mnFrm.cmCde.Org_id,
+                Global.mnFrm.cmCde.getLovID("Grades"), ref selVals, true, false, int.Parse(this.orgIDTextBox.Text),
              this.srchWrd, "Both", true);
             if (dgRes == DialogResult.OK)
             {
@@ -3755,7 +3870,7 @@ namespace OrganizationSetup.Forms
             this.obey_pos_evnts = false;
             DataSet dtst = Global.get_Basic_Pos(this.searchForPosTextBox.Text,
                 this.searchInPosComboBox.Text, this.pos_cur_indx,
-                int.Parse(this.dsplySizePosComboBox.Text), Global.mnFrm.cmCde.Org_id);
+                int.Parse(this.dsplySizePosComboBox.Text), int.Parse(this.orgIDTextBox.Text));
             this.positionListView.Items.Clear();
 
             for (int i = 0; i < dtst.Tables[0].Rows.Count; i++)
@@ -3898,7 +4013,7 @@ namespace OrganizationSetup.Forms
             {
                 this.is_last_pos = true;
                 this.totl_pos = Global.get_Total_Pos(this.searchForPosTextBox.Text,
-                    this.searchInPosComboBox.Text, Global.mnFrm.cmCde.Org_id);
+                    this.searchInPosComboBox.Text, int.Parse(this.orgIDTextBox.Text));
                 this.updtPosTotals();
                 this.pos_cur_indx = Global.mnFrm.cmCde.navFuncts.totalGroups - 1;
             }
@@ -3973,7 +4088,7 @@ namespace OrganizationSetup.Forms
             }
 
             long oldPosID = Global.mnFrm.cmCde.getPosID(this.positionNameTextBox.Text,
-                Global.mnFrm.cmCde.Org_id);
+                int.Parse(this.orgIDTextBox.Text));
             if (oldPosID > 0
              && this.addpos == true)
             {
@@ -3991,7 +4106,7 @@ namespace OrganizationSetup.Forms
 
             if (this.addpos == true)
             {
-                Global.createPos(Global.mnFrm.cmCde.Org_id, this.positionNameTextBox.Text,
+                Global.createPos(int.Parse(this.orgIDTextBox.Text), this.positionNameTextBox.Text,
                     int.Parse(this.parntPositionIDTextBox.Text),
                     this.positionDescTextBox.Text, this.isEnabledPosCheckBox.Checked);
 
@@ -4044,7 +4159,7 @@ namespace OrganizationSetup.Forms
             string[] selVals = new string[1];
             selVals[0] = this.parntPositionIDTextBox.Text;
             DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
-                Global.mnFrm.cmCde.getLovID("Positions"), ref selVals, true, false, Global.mnFrm.cmCde.Org_id,
+                Global.mnFrm.cmCde.getLovID("Positions"), ref selVals, true, false, int.Parse(this.orgIDTextBox.Text),
              this.srchWrd, "Both", true);
             if (dgRes == DialogResult.OK)
             {
@@ -4516,6 +4631,7 @@ namespace OrganizationSetup.Forms
                     this.accntSgmntsDataGridView.Rows[rowIdx].Cells[3].Value = dtst.Tables[0].Rows[0][2].ToString();
                     this.accntSgmntsDataGridView.Rows[rowIdx].Cells[4].Value = "Attached Values";
                     this.accntSgmntsDataGridView.Rows[rowIdx].Cells[5].Value = dtst.Tables[0].Rows[0][0].ToString();
+                    this.accntSgmntsDataGridView.Rows[rowIdx].Cells[6].Value = dtst.Tables[0].Rows[0][3].ToString();
                 }
                 else
                 {
@@ -4524,6 +4640,7 @@ namespace OrganizationSetup.Forms
                     this.accntSgmntsDataGridView.Rows[rowIdx].Cells[3].Value = "Other";
                     this.accntSgmntsDataGridView.Rows[rowIdx].Cells[4].Value = "Attached Values";
                     this.accntSgmntsDataGridView.Rows[rowIdx].Cells[5].Value = -1;
+                    this.accntSgmntsDataGridView.Rows[rowIdx].Cells[6].Value = -1;
                 }
             }
             System.Windows.Forms.Application.DoEvents();
@@ -4535,6 +4652,8 @@ namespace OrganizationSetup.Forms
             this.accntSgmntsDataGridView.ReadOnly = false;
             this.accntSgmntsDataGridView.Columns[0].ReadOnly = true;
             this.accntSgmntsDataGridView.Columns[0].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.accntSgmntsDataGridView.Columns[6].ReadOnly = false;
+            this.accntSgmntsDataGridView.Columns[6].DefaultCellStyle.BackColor = Color.White;
             this.accntSgmntsDataGridView.Columns[1].ReadOnly = false;
             this.accntSgmntsDataGridView.Columns[1].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 128);
             this.accntSgmntsDataGridView.Columns[2].ReadOnly = true;
@@ -4549,13 +4668,14 @@ namespace OrganizationSetup.Forms
             this.accntSgmntsDataGridView.DefaultCellStyle.ForeColor = Color.Black;
             this.accntSgmntsDataGridView.Columns[0].ReadOnly = true;
             this.accntSgmntsDataGridView.Columns[0].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.accntSgmntsDataGridView.Columns[6].ReadOnly = true;
+            this.accntSgmntsDataGridView.Columns[6].DefaultCellStyle.BackColor = Color.WhiteSmoke;
             this.accntSgmntsDataGridView.Columns[1].ReadOnly = true;
             this.accntSgmntsDataGridView.Columns[1].DefaultCellStyle.BackColor = Color.WhiteSmoke;
             this.accntSgmntsDataGridView.Columns[2].ReadOnly = true;
             this.accntSgmntsDataGridView.Columns[2].DefaultCellStyle.BackColor = Color.WhiteSmoke;
             this.accntSgmntsDataGridView.Columns[3].ReadOnly = true;
             this.accntSgmntsDataGridView.Columns[3].DefaultCellStyle.BackColor = Color.WhiteSmoke;
-
         }
 
         private void accntSgmntsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -4575,7 +4695,6 @@ namespace OrganizationSetup.Forms
             {
                 this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[0].Value = "-1";
             }
-
             if (this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[1].Value == null)
             {
                 this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[1].Value = "";
@@ -4592,14 +4711,240 @@ namespace OrganizationSetup.Forms
             {
                 this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[5].Value = -1;
             }
-
+            if (this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[6].Value == null)
+            {
+                this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[6].Value = -1;
+            }
             if (e.ColumnIndex == 4)
             {
-                Global.mnFrm.cmCde.showMsg("Sorry! Feature not available in this edition!\nContact your the Software Provider!", 0);
-                this.obey_orgDet_evnts = true;
-                return;
+                if (this.editOrgDetButton.Text == "EDIT")
+                {
+                    this.editOrgDetButton.PerformClick();
+                }
+                if (this.addOrg == false && this.editOrg == false)
+                {
+                    Global.mnFrm.cmCde.showMsg("Must be in ADD/EDIT mode First!", 0);
+                    this.obey_orgDet_evnts = true;
+                    return;
+                }
+                int segmentID = int.Parse(this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[5].Value.ToString());
+                int sgmntValID = -1;
+                int nD_segmentNum = int.Parse(this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString());
+                int dpndntSegmentID = -1;
+                int dpndntsegmentNum = int.Parse(this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[6].Value.ToString());
+                if (dpndntsegmentNum >= 1)
+                {
+                    dpndntSegmentID = int.Parse(Global.mnFrm.cmCde.getGnrlRecNm("org.org_acnt_sgmnts", "segment_number", "segment_id", dpndntsegmentNum));
+                }
+                else
+                {
+                    dpndntSegmentID = -1;
+                }
+                string nD_sysClsfctn = this.accntSgmntsDataGridView.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+                DialogResult dgrs = Global.mnFrm.cmCde.showSgmntValuesDiag(ref sgmntValID, segmentID, nD_segmentNum, dpndntSegmentID, 
+                    nD_sysClsfctn, int.Parse(this.orgIDTextBox.Text), true, false, srchWrd, "All Fields", false, Global.mnFrm.cmCde);
+                if (dgrs == DialogResult.OK)
+                {
+                }
             }
             this.obey_orgDet_evnts = true;
+        }
+
+        private void grpComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.shdObeySiteEvts() == false)
+            {
+                return;
+            }
+            this.grpNmIDTextBox.Text = "-1";
+            this.grpNmTextBox.Text = "";
+            if (this.grpComboBox.Text == "Everyone")
+            {
+                this.grpNmTextBox.BackColor = Color.WhiteSmoke;
+                this.grpNmTextBox.Enabled = false;
+                this.grpNmButton.Enabled = false;
+            }
+            else
+            {
+                this.grpNmTextBox.BackColor = Color.FromArgb(255, 255, 118);
+                this.grpNmTextBox.Enabled = true;
+                this.grpNmButton.Enabled = true;
+            }
+        }
+
+        private void grpNmButton_Click(object sender, EventArgs e)
+        {
+            if (this.addSite == false && this.editSite == false)
+            {
+                this.editSiteButton.PerformClick();
+            }
+            if (this.addSite == false && this.editSite == false)
+            {
+                Global.mnFrm.cmCde.showMsg("Must be in ADD/EDIT mode First!", 0);
+                return;
+            }
+            if (this.grpComboBox.Text == "")
+            {
+                Global.mnFrm.cmCde.showMsg("Please select a Group Type!", 0);
+                return;
+            }
+            string[] selVals = new string[1];
+            selVals[0] = this.grpNmIDTextBox.Text;
+            string grpCmbo = "";
+            if (this.grpComboBox.Text == "Divisions/Groups")
+            {
+                grpCmbo = "Divisions/Groups";
+            }
+            else if (this.grpComboBox.Text == "Grade")
+            {
+                grpCmbo = "Grades";
+            }
+            else if (this.grpComboBox.Text == "Job")
+            {
+                grpCmbo = "Jobs";
+            }
+            else if (this.grpComboBox.Text == "Position")
+            {
+                grpCmbo = "Positions";
+            }
+            else if (this.grpComboBox.Text == "Site/Location")
+            {
+                grpCmbo = "Sites/Locations";
+            }
+            else if (this.grpComboBox.Text == "Person Type")
+            {
+                grpCmbo = "Person Types";
+            }
+            else if (this.grpComboBox.Text == "Working Hour Type")
+            {
+                grpCmbo = "Working Hours";
+            }
+            else if (this.grpComboBox.Text == "Gathering Type")
+            {
+                grpCmbo = "Gathering Types";
+            }
+            else if (this.grpComboBox.Text == "Single Person")
+            {
+                grpCmbo = "Active Persons";
+            }
+            int[] selVal1s = new int[1];
+
+            DialogResult dgRes;
+            if (this.grpComboBox.Text != "Person Type")
+            {
+                dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                Global.mnFrm.cmCde.getLovID(grpCmbo), ref selVals, true, true, int.Parse(this.orgIDTextBox.Text),
+               this.srchWrd, "Both", true);
+            }
+            else
+            {
+                dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                Global.mnFrm.cmCde.getLovID("Person Types"), ref selVal1s, true, true,
+               this.srchWrd, "Both", true);
+            }
+            int slctn = 0;
+            if (this.grpComboBox.Text != "Person Type")
+            {
+                slctn = selVals.Length;
+            }
+            else
+            {
+                slctn = selVal1s.Length;
+            }
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < slctn; i++)
+                {
+                    this.grpNmIDTextBox.Text = selVals[i];
+                    if (this.grpComboBox.Text == "Divisions/Groups")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getDivName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Grade")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGrdName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Job")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getJobName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Position")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPosName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Site/Location")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getSiteNameDesc(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Person Type")
+                    {
+                        this.grpNmIDTextBox.Text = selVal1s[i].ToString();
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(selVal1s[i]);
+                    }
+                    else if (this.grpComboBox.Text == "Working Hour Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getWkhName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Gathering Type")
+                    {
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getGathName(int.Parse(selVals[i]));
+                    }
+                    else if (this.grpComboBox.Text == "Single Person")
+                    {
+                        this.grpNmIDTextBox.Text = Global.mnFrm.cmCde.getPrsnID(selVals[i]).ToString();
+                        this.grpNmTextBox.Text = Global.mnFrm.cmCde.getPrsnName(selVals[i]);
+                    }
+                }
+            }
+        }
+
+        private void siteTypeButton_Click(object sender, EventArgs e)
+        {
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[17]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            //Division Types
+            int[] selValIDs = new int[1];
+            selValIDs[0] = int.Parse(this.siteTypeIDTextBox.Text);
+            DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                Global.mnFrm.cmCde.getLovID("Site Types"), ref selValIDs, true, true,
+             this.srchWrd, "Both", true);
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < selValIDs.Length; i++)
+                {
+                    this.siteTypeIDTextBox.Text = selValIDs[i].ToString();
+                    this.siteTypeTextBox.Text = Global.mnFrm.cmCde.getPssblValNm(selValIDs[i]);
+                }
+            }
+        }
+
+        private void dfltAcntGrpButton_Click(object sender, EventArgs e)
+        {
+            if (Global.mnFrm.cmCde.test_prmssns(Global.dfltPrvldgs[17]) == false)
+            {
+                Global.mnFrm.cmCde.showMsg("You don't have permission to perform" +
+                 " this action!\nContact your System Administrator!", 0);
+                return;
+            }
+            string[] selVals = new string[1];
+            selVals[0] = this.dfltAcntGrpIDTextBox.Text;
+            DialogResult dgRes = Global.mnFrm.cmCde.showPssblValDiag(
+                Global.mnFrm.cmCde.getLovID("Divisions/Groups"), ref selVals,
+                true, false, int.Parse(this.orgIDTextBox.Text),
+             this.srchWrd, "Both", true);
+            if (dgRes == DialogResult.OK)
+            {
+                for (int i = 0; i < selVals.Length; i++)
+                {
+                    this.dfltAcntGrpIDTextBox.Text = selVals[i];
+                    this.dfltAcntGrpTextBox.Text = Global.mnFrm.cmCde.getDivName(int.Parse(selVals[i]));
+                }
+            }
         }
     }
 }

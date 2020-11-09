@@ -45,8 +45,39 @@ namespace Enterprise_Management_System.Forms
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.dsplayInfoPanel = new System.Windows.Forms.Panel();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dbServerDateLabel = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.loadMdlsLabel = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.autoRfrshNumUpDwn = new System.Windows.Forms.NumericUpDown();
+            this.autoRfrshCheckBox = new System.Windows.Forms.CheckBox();
+            this.curRoleLabel = new System.Windows.Forms.TextBox();
+            this.userLogTimeLabel = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.userLabel = new System.Windows.Forms.Label();
+            this.dbServerTimeLabel = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.openHelpButton = new System.Windows.Forms.Button();
+            this.openCalcButton = new System.Windows.Forms.Button();
+            this.openNoteButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.restartButton = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.connectDBPanel = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.statusLoadLabel = new System.Windows.Forms.Label();
             this.delButton = new System.Windows.Forms.Button();
             this.imageList4 = new System.Windows.Forms.ImageList(this.components);
             this.storedConnsComboBox = new System.Windows.Forms.ComboBox();
@@ -71,52 +102,16 @@ namespace Enterprise_Management_System.Forms
             this.loginDbButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.pwd1TextBox = new System.Windows.Forms.TextBox();
-            this.dsplayInfoPanel = new System.Windows.Forms.Panel();
-            this.openCalcButton = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dbServerDateLabel = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.loadMdlsLabel = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.autoRfrshNumUpDwn = new System.Windows.Forms.NumericUpDown();
-            this.autoRfrshCheckBox = new System.Windows.Forms.CheckBox();
-            this.curRoleLabel = new System.Windows.Forms.TextBox();
-            this.userLogTimeLabel = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.userLabel = new System.Windows.Forms.Label();
-            this.dbServerTimeLabel = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.openNoteButton = new System.Windows.Forms.Button();
-            this.openFilesButton = new System.Windows.Forms.Button();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.inboxButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
-            this.restartButton = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.otherMdlsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.attndButton = new System.Windows.Forms.Button();
             this.appointmentsButton = new System.Windows.Forms.Button();
             this.projectMgmntButton = new System.Windows.Forms.Button();
             this.hospitalityButton = new System.Windows.Forms.Button();
-            this.aboutRhoButton = new System.Windows.Forms.Button();
             this.basicMdlsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.accntngButton = new System.Windows.Forms.Button();
             this.prsnDataButton = new System.Windows.Forms.Button();
             this.invButton = new System.Windows.Forms.Button();
             this.paymntButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.connectButton = new System.Windows.Forms.Button();
-            this.loginButton = new System.Windows.Forms.Button();
-            this.changePswdButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.switchRoleButton = new System.Windows.Forms.Button();
             this.manualsButton = new System.Windows.Forms.Button();
@@ -126,6 +121,12 @@ namespace Enterprise_Management_System.Forms
             this.setupOrgButton = new System.Windows.Forms.Button();
             this.rptsButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.inboxButton = new System.Windows.Forms.Button();
+            this.connectButton = new System.Windows.Forms.Button();
+            this.aboutRhoButton = new System.Windows.Forms.Button();
+            this.changePswdButton = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
@@ -133,19 +134,19 @@ namespace Enterprise_Management_System.Forms
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.dsplayInfoPanel.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoRfrshNumUpDwn)).BeginInit();
             this.connectDBPanel.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.loginPanel.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.dsplayInfoPanel.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoRfrshNumUpDwn)).BeginInit();
             this.otherMdlsFlowLayoutPanel.SuspendLayout();
             this.basicMdlsFlowLayoutPanel.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.extraMdlsFlowLayoutPanel.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -223,6 +224,7 @@ namespace Enterprise_Management_System.Forms
             this.imageList3.Images.SetKeyName(9, "network_48.png");
             this.imageList3.Images.SetKeyName(10, "dscnt.png");
             this.imageList3.Images.SetKeyName(11, "49.png");
+            this.imageList3.Images.SetKeyName(12, "Help111.png");
             // 
             // groupBox3
             // 
@@ -391,9 +393,9 @@ namespace Enterprise_Management_System.Forms
             // panel5
             // 
             this.panel5.AutoScroll = true;
+            this.panel5.Controls.Add(this.loginPanel);
             this.panel5.Controls.Add(this.dsplayInfoPanel);
             this.panel5.Controls.Add(this.connectDBPanel);
-            this.panel5.Controls.Add(this.loginPanel);
             this.panel5.Controls.Add(this.label17);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(223, 137);
@@ -401,380 +403,38 @@ namespace Enterprise_Management_System.Forms
             this.panel5.Size = new System.Drawing.Size(394, 225);
             this.panel5.TabIndex = 38;
             // 
-            // connectDBPanel
-            // 
-            this.connectDBPanel.AutoScroll = true;
-            this.connectDBPanel.BackColor = System.Drawing.Color.Transparent;
-            this.connectDBPanel.Controls.Add(this.groupBox5);
-            this.connectDBPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.connectDBPanel.Location = new System.Drawing.Point(0, 0);
-            this.connectDBPanel.Name = "connectDBPanel";
-            this.connectDBPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.connectDBPanel.Size = new System.Drawing.Size(394, 225);
-            this.connectDBPanel.TabIndex = 22;
-            this.connectDBPanel.Visible = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.delButton);
-            this.groupBox5.Controls.Add(this.storedConnsComboBox);
-            this.groupBox5.Controls.Add(this.label21);
-            this.groupBox5.Controls.Add(this.label9);
-            this.groupBox5.Controls.Add(this.unameTextBox);
-            this.groupBox5.Controls.Add(this.portTextBox);
-            this.groupBox5.Controls.Add(this.OKButton);
-            this.groupBox5.Controls.Add(this.label13);
-            this.groupBox5.Controls.Add(this.cancelButton);
-            this.groupBox5.Controls.Add(this.dbaseTextBox);
-            this.groupBox5.Controls.Add(this.label20);
-            this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Controls.Add(this.hostTextBox);
-            this.groupBox5.Controls.Add(this.pwdTextBox);
-            this.groupBox5.Controls.Add(this.label19);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.ForeColor = System.Drawing.Color.White;
-            this.groupBox5.Location = new System.Drawing.Point(8, 8);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(378, 209);
-            this.groupBox5.TabIndex = 37;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Connect to Database";
-            // 
-            // delButton
-            // 
-            this.delButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.delButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delButton.ForeColor = System.Drawing.Color.Black;
-            this.delButton.ImageKey = "delete.png";
-            this.delButton.ImageList = this.imageList4;
-            this.delButton.Location = new System.Drawing.Point(326, 23);
-            this.delButton.Name = "delButton";
-            this.delButton.Size = new System.Drawing.Size(28, 23);
-            this.delButton.TabIndex = 156;
-            this.delButton.UseVisualStyleBackColor = true;
-            this.delButton.Click += new System.EventHandler(this.delButton_Click);
-            // 
-            // imageList4
-            // 
-            this.imageList4.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList4.ImageStream")));
-            this.imageList4.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList4.Images.SetKeyName(0, "delete.png");
-            // 
-            // storedConnsComboBox
-            // 
-            this.storedConnsComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.storedConnsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storedConnsComboBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.storedConnsComboBox.ForeColor = System.Drawing.Color.Black;
-            this.storedConnsComboBox.FormattingEnabled = true;
-            this.storedConnsComboBox.Location = new System.Drawing.Point(122, 24);
-            this.storedConnsComboBox.Name = "storedConnsComboBox";
-            this.storedConnsComboBox.Size = new System.Drawing.Size(204, 21);
-            this.storedConnsComboBox.TabIndex = 142;
-            this.storedConnsComboBox.SelectedIndexChanged += new System.EventHandler(this.storedConnsComboBox_SelectedIndexChanged);
-            // 
-            // label21
-            // 
-            this.label21.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(21, 129);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(99, 13);
-            this.label21.TabIndex = 154;
-            this.label21.Text = "User Name:";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(21, 28);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 13);
-            this.label9.TabIndex = 150;
-            this.label9.Text = "Stored Links:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // unameTextBox
-            // 
-            this.unameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.unameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.unameTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unameTextBox.ForeColor = System.Drawing.Color.Black;
-            this.unameTextBox.Location = new System.Drawing.Point(122, 125);
-            this.unameTextBox.Name = "unameTextBox";
-            this.unameTextBox.Size = new System.Drawing.Size(204, 21);
-            this.unameTextBox.TabIndex = 146;
-            this.unameTextBox.Click += new System.EventHandler(this.unameTextBox_Click);
-            this.unameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
-            // 
-            // portTextBox
-            // 
-            this.portTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.portTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.portTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portTextBox.ForeColor = System.Drawing.Color.Black;
-            this.portTextBox.Location = new System.Drawing.Point(122, 100);
-            this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(204, 21);
-            this.portTextBox.TabIndex = 145;
-            this.portTextBox.Click += new System.EventHandler(this.portTextBox_Click);
-            this.portTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
-            // 
-            // OKButton
-            // 
-            this.OKButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.OKButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OKButton.ForeColor = System.Drawing.Color.Black;
-            this.OKButton.Location = new System.Drawing.Point(121, 174);
-            this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(114, 24);
-            this.OKButton.TabIndex = 148;
-            this.OKButton.Text = "Connect";
-            this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
-            // 
-            // label13
-            // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(21, 104);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(99, 13);
-            this.label13.TabIndex = 153;
-            this.label13.Text = "Port:";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cancelButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.ForeColor = System.Drawing.Color.Black;
-            this.cancelButton.Location = new System.Drawing.Point(237, 174);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(89, 24);
-            this.cancelButton.TabIndex = 149;
-            this.cancelButton.Text = "Exit";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // dbaseTextBox
-            // 
-            this.dbaseTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dbaseTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.dbaseTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbaseTextBox.ForeColor = System.Drawing.Color.Black;
-            this.dbaseTextBox.Location = new System.Drawing.Point(122, 75);
-            this.dbaseTextBox.Name = "dbaseTextBox";
-            this.dbaseTextBox.Size = new System.Drawing.Size(204, 21);
-            this.dbaseTextBox.TabIndex = 144;
-            this.dbaseTextBox.Click += new System.EventHandler(this.dbaseTextBox_Click);
-            this.dbaseTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
-            // 
-            // label20
-            // 
-            this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(21, 54);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(99, 13);
-            this.label20.TabIndex = 151;
-            this.label20.Text = "Host:";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label18
-            // 
-            this.label18.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(21, 79);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(99, 13);
-            this.label18.TabIndex = 152;
-            this.label18.Text = "Database:";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // hostTextBox
-            // 
-            this.hostTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.hostTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.hostTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hostTextBox.ForeColor = System.Drawing.Color.Black;
-            this.hostTextBox.Location = new System.Drawing.Point(122, 50);
-            this.hostTextBox.Name = "hostTextBox";
-            this.hostTextBox.Size = new System.Drawing.Size(204, 21);
-            this.hostTextBox.TabIndex = 143;
-            this.hostTextBox.Click += new System.EventHandler(this.hostTextBox_Click);
-            this.hostTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
-            // 
-            // pwdTextBox
-            // 
-            this.pwdTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pwdTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.pwdTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwdTextBox.ForeColor = System.Drawing.Color.Black;
-            this.pwdTextBox.Location = new System.Drawing.Point(122, 150);
-            this.pwdTextBox.Name = "pwdTextBox";
-            this.pwdTextBox.PasswordChar = '*';
-            this.pwdTextBox.Size = new System.Drawing.Size(204, 21);
-            this.pwdTextBox.TabIndex = 147;
-            this.pwdTextBox.Click += new System.EventHandler(this.pwdTextBox_Click);
-            this.pwdTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
-            // 
-            // label19
-            // 
-            this.label19.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(21, 154);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(99, 13);
-            this.label19.TabIndex = 155;
-            this.label19.Text = "Password:";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // loginPanel
-            // 
-            this.loginPanel.BackColor = System.Drawing.Color.Transparent;
-            this.loginPanel.Controls.Add(this.groupBox4);
-            this.loginPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.loginPanel.Location = new System.Drawing.Point(0, 0);
-            this.loginPanel.Name = "loginPanel";
-            this.loginPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.loginPanel.Size = new System.Drawing.Size(394, 225);
-            this.loginPanel.TabIndex = 23;
-            this.loginPanel.Visible = false;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.uname1TextBox);
-            this.groupBox4.Controls.Add(this.cancelLgnButton);
-            this.groupBox4.Controls.Add(this.label23);
-            this.groupBox4.Controls.Add(this.loginDbButton);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.pwd1TextBox);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(8, 8);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(378, 209);
-            this.groupBox4.TabIndex = 18;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "LOGIN TO THE CONNECTED DATABASE";
-            // 
-            // uname1TextBox
-            // 
-            this.uname1TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.uname1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.uname1TextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uname1TextBox.ForeColor = System.Drawing.Color.Black;
-            this.uname1TextBox.Location = new System.Drawing.Point(150, 72);
-            this.uname1TextBox.Name = "uname1TextBox";
-            this.uname1TextBox.Size = new System.Drawing.Size(150, 21);
-            this.uname1TextBox.TabIndex = 14;
-            this.uname1TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uname1TextBox_KeyDown);
-            // 
-            // cancelLgnButton
-            // 
-            this.cancelLgnButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cancelLgnButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelLgnButton.ForeColor = System.Drawing.Color.Black;
-            this.cancelLgnButton.Location = new System.Drawing.Point(225, 124);
-            this.cancelLgnButton.Name = "cancelLgnButton";
-            this.cancelLgnButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelLgnButton.TabIndex = 17;
-            this.cancelLgnButton.Text = "Cancel";
-            this.cancelLgnButton.UseVisualStyleBackColor = true;
-            this.cancelLgnButton.Click += new System.EventHandler(this.cancelLgnButton_Click);
-            // 
-            // label23
-            // 
-            this.label23.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(80, 75);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(71, 13);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "User Name:";
-            // 
-            // loginDbButton
-            // 
-            this.loginDbButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loginDbButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginDbButton.ForeColor = System.Drawing.Color.Black;
-            this.loginDbButton.Location = new System.Drawing.Point(149, 124);
-            this.loginDbButton.Name = "loginDbButton";
-            this.loginDbButton.Size = new System.Drawing.Size(75, 23);
-            this.loginDbButton.TabIndex = 16;
-            this.loginDbButton.Text = "Login";
-            this.loginDbButton.UseVisualStyleBackColor = true;
-            this.loginDbButton.Click += new System.EventHandler(this.loginDbButton_Click);
-            // 
-            // label22
-            // 
-            this.label22.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(80, 100);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(64, 13);
-            this.label22.TabIndex = 13;
-            this.label22.Text = "Password:";
-            // 
-            // pwd1TextBox
-            // 
-            this.pwd1TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pwd1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pwd1TextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwd1TextBox.ForeColor = System.Drawing.Color.Black;
-            this.pwd1TextBox.Location = new System.Drawing.Point(150, 97);
-            this.pwd1TextBox.Name = "pwd1TextBox";
-            this.pwd1TextBox.PasswordChar = '*';
-            this.pwd1TextBox.Size = new System.Drawing.Size(150, 21);
-            this.pwd1TextBox.TabIndex = 15;
-            this.pwd1TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uname1TextBox_KeyDown);
-            // 
             // dsplayInfoPanel
             // 
             this.dsplayInfoPanel.AutoScroll = true;
             this.dsplayInfoPanel.Controls.Add(this.loginButton);
             this.dsplayInfoPanel.Controls.Add(this.groupBox2);
-            this.dsplayInfoPanel.Controls.Add(this.openFilesButton);
+            this.dsplayInfoPanel.Controls.Add(this.openHelpButton);
+            this.dsplayInfoPanel.Controls.Add(this.openCalcButton);
+            this.dsplayInfoPanel.Controls.Add(this.openNoteButton);
             this.dsplayInfoPanel.Controls.Add(this.refreshButton);
-            this.dsplayInfoPanel.Controls.Add(this.inboxButton);
             this.dsplayInfoPanel.Controls.Add(this.exitButton);
             this.dsplayInfoPanel.Controls.Add(this.restartButton);
-            this.dsplayInfoPanel.Controls.Add(this.connectButton);
             this.dsplayInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dsplayInfoPanel.Location = new System.Drawing.Point(0, 0);
             this.dsplayInfoPanel.Name = "dsplayInfoPanel";
             this.dsplayInfoPanel.Size = new System.Drawing.Size(394, 225);
             this.dsplayInfoPanel.TabIndex = 36;
             // 
-            // openCalcButton
+            // loginButton
             // 
-            this.openCalcButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.openCalcButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.openCalcButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
-            this.openCalcButton.ImageKey = "calc.png";
-            this.openCalcButton.ImageList = this.imageList3;
-            this.openCalcButton.Location = new System.Drawing.Point(5, 153);
-            this.openCalcButton.Name = "openCalcButton";
-            this.openCalcButton.Size = new System.Drawing.Size(138, 35);
-            this.openCalcButton.TabIndex = 26;
-            this.openCalcButton.Text = "CALCULATOR";
-            this.openCalcButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.openCalcButton.UseVisualStyleBackColor = false;
-            this.openCalcButton.Click += new System.EventHandler(this.openCalcButton_Click);
+            this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.loginButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginButton.ImageKey = "53.png";
+            this.loginButton.ImageList = this.imageList3;
+            this.loginButton.Location = new System.Drawing.Point(136, 181);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(138, 35);
+            this.loginButton.TabIndex = 1;
+            this.loginButton.Text = "&LOGIN";
+            this.loginButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // groupBox2
             // 
@@ -1035,6 +695,38 @@ namespace Enterprise_Management_System.Forms
             this.label14.Text = "Server Time:";
             this.label14.Visible = false;
             // 
+            // openHelpButton
+            // 
+            this.openHelpButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.openHelpButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.openHelpButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
+            this.openHelpButton.ImageKey = "Help111.png";
+            this.openHelpButton.ImageList = this.imageList3;
+            this.openHelpButton.Location = new System.Drawing.Point(280, 14);
+            this.openHelpButton.Name = "openHelpButton";
+            this.openHelpButton.Size = new System.Drawing.Size(83, 35);
+            this.openHelpButton.TabIndex = 7;
+            this.openHelpButton.Text = "HELP";
+            this.openHelpButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.openHelpButton.UseVisualStyleBackColor = false;
+            this.openHelpButton.Click += new System.EventHandler(this.openFilesButton_Click);
+            // 
+            // openCalcButton
+            // 
+            this.openCalcButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.openCalcButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.openCalcButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
+            this.openCalcButton.ImageKey = "calc.png";
+            this.openCalcButton.ImageList = this.imageList3;
+            this.openCalcButton.Location = new System.Drawing.Point(136, 14);
+            this.openCalcButton.Name = "openCalcButton";
+            this.openCalcButton.Size = new System.Drawing.Size(138, 35);
+            this.openCalcButton.TabIndex = 26;
+            this.openCalcButton.Text = "CALCULATOR";
+            this.openCalcButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.openCalcButton.UseVisualStyleBackColor = false;
+            this.openCalcButton.Click += new System.EventHandler(this.openCalcButton_Click);
+            // 
             // openNoteButton
             // 
             this.openNoteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -1042,30 +734,14 @@ namespace Enterprise_Management_System.Forms
             this.openNoteButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
             this.openNoteButton.ImageKey = "newspaper.png";
             this.openNoteButton.ImageList = this.imageList3;
-            this.openNoteButton.Location = new System.Drawing.Point(5, 194);
+            this.openNoteButton.Location = new System.Drawing.Point(32, 14);
             this.openNoteButton.Name = "openNoteButton";
-            this.openNoteButton.Size = new System.Drawing.Size(138, 35);
+            this.openNoteButton.Size = new System.Drawing.Size(98, 35);
             this.openNoteButton.TabIndex = 27;
             this.openNoteButton.Text = "NOTEPAD";
             this.openNoteButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.openNoteButton.UseVisualStyleBackColor = false;
             this.openNoteButton.Click += new System.EventHandler(this.openNoteButton_Click);
-            // 
-            // openFilesButton
-            // 
-            this.openFilesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.openFilesButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.openFilesButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
-            this.openFilesButton.ImageKey = "119.png";
-            this.openFilesButton.ImageList = this.imageList3;
-            this.openFilesButton.Location = new System.Drawing.Point(280, 14);
-            this.openFilesButton.Name = "openFilesButton";
-            this.openFilesButton.Size = new System.Drawing.Size(83, 35);
-            this.openFilesButton.TabIndex = 7;
-            this.openFilesButton.Text = "OPEN";
-            this.openFilesButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.openFilesButton.UseVisualStyleBackColor = false;
-            this.openFilesButton.Click += new System.EventHandler(this.openFilesButton_Click);
             // 
             // refreshButton
             // 
@@ -1083,22 +759,6 @@ namespace Enterprise_Management_System.Forms
             this.refreshButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.refreshButton.UseVisualStyleBackColor = false;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            // 
-            // inboxButton
-            // 
-            this.inboxButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.inboxButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.inboxButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
-            this.inboxButton.ImageKey = "Btn2.ico";
-            this.inboxButton.ImageList = this.imageList3;
-            this.inboxButton.Location = new System.Drawing.Point(32, 14);
-            this.inboxButton.Name = "inboxButton";
-            this.inboxButton.Size = new System.Drawing.Size(98, 35);
-            this.inboxButton.TabIndex = 8;
-            this.inboxButton.Text = "DB CONFIG";
-            this.inboxButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.inboxButton.UseVisualStyleBackColor = false;
-            this.inboxButton.Click += new System.EventHandler(this.inboxButton_Click_1);
             // 
             // exitButton
             // 
@@ -1133,19 +793,369 @@ namespace Enterprise_Management_System.Forms
             this.restartButton.Visible = false;
             this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
             // 
-            // label16
-            // 
-            this.label16.Location = new System.Drawing.Point(5, 232);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(100, 32);
-            this.label16.TabIndex = 24;
-            // 
             // label17
             // 
             this.label17.Location = new System.Drawing.Point(263, 5);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(100, 139);
             this.label17.TabIndex = 25;
+            // 
+            // connectDBPanel
+            // 
+            this.connectDBPanel.AutoScroll = true;
+            this.connectDBPanel.BackColor = System.Drawing.Color.Transparent;
+            this.connectDBPanel.Controls.Add(this.groupBox5);
+            this.connectDBPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.connectDBPanel.Location = new System.Drawing.Point(0, 0);
+            this.connectDBPanel.Name = "connectDBPanel";
+            this.connectDBPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.connectDBPanel.Size = new System.Drawing.Size(394, 225);
+            this.connectDBPanel.TabIndex = 22;
+            this.connectDBPanel.Visible = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.statusLoadLabel);
+            this.groupBox5.Controls.Add(this.delButton);
+            this.groupBox5.Controls.Add(this.storedConnsComboBox);
+            this.groupBox5.Controls.Add(this.label21);
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.unameTextBox);
+            this.groupBox5.Controls.Add(this.portTextBox);
+            this.groupBox5.Controls.Add(this.OKButton);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.cancelButton);
+            this.groupBox5.Controls.Add(this.dbaseTextBox);
+            this.groupBox5.Controls.Add(this.label20);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.hostTextBox);
+            this.groupBox5.Controls.Add(this.pwdTextBox);
+            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.ForeColor = System.Drawing.Color.White;
+            this.groupBox5.Location = new System.Drawing.Point(8, 8);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(378, 209);
+            this.groupBox5.TabIndex = 37;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Connect to Database";
+            // 
+            // statusLoadLabel
+            // 
+            this.statusLoadLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.statusLoadLabel.BackColor = System.Drawing.Color.White;
+            this.statusLoadLabel.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLoadLabel.ForeColor = System.Drawing.Color.Blue;
+            this.statusLoadLabel.Location = new System.Drawing.Point(47, 51);
+            this.statusLoadLabel.Name = "statusLoadLabel";
+            this.statusLoadLabel.Size = new System.Drawing.Size(291, 21);
+            this.statusLoadLabel.TabIndex = 157;
+            this.statusLoadLabel.Text = "Connecting to Database... Please Wait....";
+            this.statusLoadLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.statusLoadLabel.Visible = false;
+            // 
+            // delButton
+            // 
+            this.delButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.delButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delButton.ForeColor = System.Drawing.Color.Black;
+            this.delButton.ImageKey = "delete.png";
+            this.delButton.ImageList = this.imageList4;
+            this.delButton.Location = new System.Drawing.Point(323, 214);
+            this.delButton.Name = "delButton";
+            this.delButton.Size = new System.Drawing.Size(28, 23);
+            this.delButton.TabIndex = 156;
+            this.delButton.UseVisualStyleBackColor = true;
+            this.delButton.Click += new System.EventHandler(this.delButton_Click);
+            // 
+            // imageList4
+            // 
+            this.imageList4.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList4.ImageStream")));
+            this.imageList4.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList4.Images.SetKeyName(0, "delete.png");
+            // 
+            // storedConnsComboBox
+            // 
+            this.storedConnsComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.storedConnsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storedConnsComboBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.storedConnsComboBox.ForeColor = System.Drawing.Color.Black;
+            this.storedConnsComboBox.FormattingEnabled = true;
+            this.storedConnsComboBox.Location = new System.Drawing.Point(119, 215);
+            this.storedConnsComboBox.Name = "storedConnsComboBox";
+            this.storedConnsComboBox.Size = new System.Drawing.Size(204, 21);
+            this.storedConnsComboBox.TabIndex = 142;
+            this.storedConnsComboBox.SelectedIndexChanged += new System.EventHandler(this.storedConnsComboBox_SelectedIndexChanged);
+            // 
+            // label21
+            // 
+            this.label21.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label21.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Location = new System.Drawing.Point(18, 320);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(99, 13);
+            this.label21.TabIndex = 154;
+            this.label21.Text = "User Name:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(18, 219);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(99, 13);
+            this.label9.TabIndex = 150;
+            this.label9.Text = "Stored Links:";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // unameTextBox
+            // 
+            this.unameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.unameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.unameTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unameTextBox.ForeColor = System.Drawing.Color.Black;
+            this.unameTextBox.Location = new System.Drawing.Point(119, 316);
+            this.unameTextBox.Name = "unameTextBox";
+            this.unameTextBox.Size = new System.Drawing.Size(204, 21);
+            this.unameTextBox.TabIndex = 146;
+            this.unameTextBox.Click += new System.EventHandler(this.unameTextBox_Click);
+            this.unameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
+            // 
+            // portTextBox
+            // 
+            this.portTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.portTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.portTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.portTextBox.ForeColor = System.Drawing.Color.Black;
+            this.portTextBox.Location = new System.Drawing.Point(119, 291);
+            this.portTextBox.Name = "portTextBox";
+            this.portTextBox.Size = new System.Drawing.Size(204, 21);
+            this.portTextBox.TabIndex = 145;
+            this.portTextBox.Click += new System.EventHandler(this.portTextBox_Click);
+            this.portTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
+            // 
+            // OKButton
+            // 
+            this.OKButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.OKButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OKButton.ForeColor = System.Drawing.Color.Black;
+            this.OKButton.Location = new System.Drawing.Point(118, 365);
+            this.OKButton.Name = "OKButton";
+            this.OKButton.Size = new System.Drawing.Size(114, 24);
+            this.OKButton.TabIndex = 148;
+            this.OKButton.Text = "Connect";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(18, 295);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(99, 13);
+            this.label13.TabIndex = 153;
+            this.label13.Text = "Port:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cancelButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.ForeColor = System.Drawing.Color.Black;
+            this.cancelButton.Location = new System.Drawing.Point(234, 365);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(89, 24);
+            this.cancelButton.TabIndex = 149;
+            this.cancelButton.Text = "Exit";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // dbaseTextBox
+            // 
+            this.dbaseTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dbaseTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.dbaseTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbaseTextBox.ForeColor = System.Drawing.Color.Black;
+            this.dbaseTextBox.Location = new System.Drawing.Point(119, 266);
+            this.dbaseTextBox.Name = "dbaseTextBox";
+            this.dbaseTextBox.Size = new System.Drawing.Size(204, 21);
+            this.dbaseTextBox.TabIndex = 144;
+            this.dbaseTextBox.Click += new System.EventHandler(this.dbaseTextBox_Click);
+            this.dbaseTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
+            // 
+            // label20
+            // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label20.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.Location = new System.Drawing.Point(18, 245);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(99, 13);
+            this.label20.TabIndex = 151;
+            this.label20.Text = "Host:";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.White;
+            this.label18.Location = new System.Drawing.Point(18, 270);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(99, 13);
+            this.label18.TabIndex = 152;
+            this.label18.Text = "Database:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // hostTextBox
+            // 
+            this.hostTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.hostTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.hostTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hostTextBox.ForeColor = System.Drawing.Color.Black;
+            this.hostTextBox.Location = new System.Drawing.Point(119, 241);
+            this.hostTextBox.Name = "hostTextBox";
+            this.hostTextBox.Size = new System.Drawing.Size(204, 21);
+            this.hostTextBox.TabIndex = 143;
+            this.hostTextBox.Click += new System.EventHandler(this.hostTextBox_Click);
+            this.hostTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
+            // 
+            // pwdTextBox
+            // 
+            this.pwdTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pwdTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pwdTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pwdTextBox.ForeColor = System.Drawing.Color.Black;
+            this.pwdTextBox.Location = new System.Drawing.Point(119, 341);
+            this.pwdTextBox.Name = "pwdTextBox";
+            this.pwdTextBox.PasswordChar = '*';
+            this.pwdTextBox.Size = new System.Drawing.Size(204, 21);
+            this.pwdTextBox.TabIndex = 147;
+            this.pwdTextBox.Click += new System.EventHandler(this.pwdTextBox_Click);
+            this.pwdTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwdTextBox_KeyDown);
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.White;
+            this.label19.Location = new System.Drawing.Point(18, 345);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(99, 13);
+            this.label19.TabIndex = 155;
+            this.label19.Text = "Password:";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // loginPanel
+            // 
+            this.loginPanel.BackColor = System.Drawing.Color.Transparent;
+            this.loginPanel.Controls.Add(this.groupBox4);
+            this.loginPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loginPanel.Location = new System.Drawing.Point(0, 0);
+            this.loginPanel.Name = "loginPanel";
+            this.loginPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.loginPanel.Size = new System.Drawing.Size(394, 225);
+            this.loginPanel.TabIndex = 23;
+            this.loginPanel.Visible = false;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.uname1TextBox);
+            this.groupBox4.Controls.Add(this.cancelLgnButton);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.loginDbButton);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.pwd1TextBox);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
+            this.groupBox4.Location = new System.Drawing.Point(8, 8);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(378, 209);
+            this.groupBox4.TabIndex = 18;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "LOGIN TO THE CONNECTED DATABASE";
+            // 
+            // uname1TextBox
+            // 
+            this.uname1TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.uname1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.uname1TextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uname1TextBox.ForeColor = System.Drawing.Color.Black;
+            this.uname1TextBox.Location = new System.Drawing.Point(150, 72);
+            this.uname1TextBox.Name = "uname1TextBox";
+            this.uname1TextBox.Size = new System.Drawing.Size(150, 21);
+            this.uname1TextBox.TabIndex = 14;
+            this.uname1TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uname1TextBox_KeyDown);
+            // 
+            // cancelLgnButton
+            // 
+            this.cancelLgnButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cancelLgnButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelLgnButton.ForeColor = System.Drawing.Color.Black;
+            this.cancelLgnButton.Location = new System.Drawing.Point(225, 124);
+            this.cancelLgnButton.Name = "cancelLgnButton";
+            this.cancelLgnButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelLgnButton.TabIndex = 17;
+            this.cancelLgnButton.Text = "Cancel";
+            this.cancelLgnButton.UseVisualStyleBackColor = true;
+            this.cancelLgnButton.Click += new System.EventHandler(this.cancelLgnButton_Click);
+            // 
+            // label23
+            // 
+            this.label23.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.White;
+            this.label23.Location = new System.Drawing.Point(80, 75);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(71, 13);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "User Name:";
+            // 
+            // loginDbButton
+            // 
+            this.loginDbButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loginDbButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginDbButton.ForeColor = System.Drawing.Color.Black;
+            this.loginDbButton.Location = new System.Drawing.Point(149, 124);
+            this.loginDbButton.Name = "loginDbButton";
+            this.loginDbButton.Size = new System.Drawing.Size(75, 23);
+            this.loginDbButton.TabIndex = 16;
+            this.loginDbButton.Text = "Login";
+            this.loginDbButton.UseVisualStyleBackColor = true;
+            this.loginDbButton.Click += new System.EventHandler(this.loginDbButton_Click);
+            // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.White;
+            this.label22.Location = new System.Drawing.Point(80, 100);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(64, 13);
+            this.label22.TabIndex = 13;
+            this.label22.Text = "Password:";
+            // 
+            // pwd1TextBox
+            // 
+            this.pwd1TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pwd1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.pwd1TextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pwd1TextBox.ForeColor = System.Drawing.Color.Black;
+            this.pwd1TextBox.Location = new System.Drawing.Point(150, 97);
+            this.pwd1TextBox.Name = "pwd1TextBox";
+            this.pwd1TextBox.PasswordChar = '*';
+            this.pwd1TextBox.Size = new System.Drawing.Size(150, 21);
+            this.pwd1TextBox.TabIndex = 15;
+            this.pwd1TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.uname1TextBox_KeyDown);
             // 
             // otherMdlsFlowLayoutPanel
             // 
@@ -1231,26 +1241,6 @@ namespace Enterprise_Management_System.Forms
             this.hospitalityButton.UseVisualStyleBackColor = false;
             this.hospitalityButton.Click += new System.EventHandler(this.hospitalityButton_Click);
             // 
-            // aboutRhoButton
-            // 
-            this.aboutRhoButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.aboutRhoButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.aboutRhoButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aboutRhoButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.aboutRhoButton.ImageKey = "1.png";
-            this.aboutRhoButton.ImageList = this.imageList1;
-            this.aboutRhoButton.Location = new System.Drawing.Point(5, 13);
-            this.aboutRhoButton.MinimumSize = new System.Drawing.Size(152, 62);
-            this.aboutRhoButton.Name = "aboutRhoButton";
-            this.aboutRhoButton.Size = new System.Drawing.Size(152, 64);
-            this.aboutRhoButton.TabIndex = 6;
-            this.aboutRhoButton.Text = "ABOUT RHOMICOM";
-            this.aboutRhoButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.aboutRhoButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.aboutRhoButton.UseVisualStyleBackColor = false;
-            this.aboutRhoButton.Visible = false;
-            this.aboutRhoButton.Click += new System.EventHandler(this.aboutRhoButton_Click);
-            // 
             // basicMdlsFlowLayoutPanel
             // 
             this.basicMdlsFlowLayoutPanel.Controls.Add(this.accntngButton);
@@ -1330,72 +1320,6 @@ namespace Enterprise_Management_System.Forms
             this.paymntButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.paymntButton.UseVisualStyleBackColor = false;
             this.paymntButton.Click += new System.EventHandler(this.paymntButton_Click);
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.AutoScroll = true;
-            this.flowLayoutPanel3.Controls.Add(this.aboutRhoButton);
-            this.flowLayoutPanel3.Controls.Add(this.changePswdButton);
-            this.flowLayoutPanel3.Controls.Add(this.openCalcButton);
-            this.flowLayoutPanel3.Controls.Add(this.openNoteButton);
-            this.flowLayoutPanel3.Controls.Add(this.label16);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 137);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(2, 10, 0, 0);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(10, 224);
-            this.flowLayoutPanel3.TabIndex = 41;
-            this.flowLayoutPanel3.Visible = false;
-            // 
-            // connectButton
-            // 
-            this.connectButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.connectButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.connectButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectButton.ImageKey = "network_48.png";
-            this.connectButton.ImageList = this.imageList3;
-            this.connectButton.Location = new System.Drawing.Point(136, 14);
-            this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(138, 35);
-            this.connectButton.TabIndex = 0;
-            this.connectButton.Text = "&CONNECT TO DB";
-            this.connectButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.connectButton.UseVisualStyleBackColor = false;
-            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
-            // 
-            // loginButton
-            // 
-            this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.loginButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.ImageKey = "53.png";
-            this.loginButton.ImageList = this.imageList3;
-            this.loginButton.Location = new System.Drawing.Point(136, 181);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(138, 35);
-            this.loginButton.TabIndex = 1;
-            this.loginButton.Text = "&LOGIN";
-            this.loginButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.loginButton.UseVisualStyleBackColor = false;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
-            // 
-            // changePswdButton
-            // 
-            this.changePswdButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.changePswdButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.changePswdButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changePswdButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.changePswdButton.ImageKey = "SecurityLock.png";
-            this.changePswdButton.ImageList = this.imageList1;
-            this.changePswdButton.Location = new System.Drawing.Point(5, 83);
-            this.changePswdButton.MinimumSize = new System.Drawing.Size(152, 62);
-            this.changePswdButton.Name = "changePswdButton";
-            this.changePswdButton.Size = new System.Drawing.Size(173, 64);
-            this.changePswdButton.TabIndex = 3;
-            this.changePswdButton.Text = "CHANGE MY &PASSWORD";
-            this.changePswdButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.changePswdButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.changePswdButton.UseVisualStyleBackColor = false;
-            this.changePswdButton.Click += new System.EventHandler(this.changePswdButton_Click);
             // 
             // flowLayoutPanel4
             // 
@@ -1543,6 +1467,99 @@ namespace Enterprise_Management_System.Forms
             this.panel3.Size = new System.Drawing.Size(1277, 84);
             this.panel3.TabIndex = 44;
             // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.AutoScroll = true;
+            this.flowLayoutPanel3.Controls.Add(this.inboxButton);
+            this.flowLayoutPanel3.Controls.Add(this.connectButton);
+            this.flowLayoutPanel3.Controls.Add(this.aboutRhoButton);
+            this.flowLayoutPanel3.Controls.Add(this.changePswdButton);
+            this.flowLayoutPanel3.Controls.Add(this.label16);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 137);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(2, 10, 0, 0);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(214, 224);
+            this.flowLayoutPanel3.TabIndex = 41;
+            this.flowLayoutPanel3.Visible = false;
+            // 
+            // inboxButton
+            // 
+            this.inboxButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.inboxButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.inboxButton.Font = new System.Drawing.Font("Tahoma", 7.6F);
+            this.inboxButton.ImageKey = "Btn2.ico";
+            this.inboxButton.ImageList = this.imageList3;
+            this.inboxButton.Location = new System.Drawing.Point(5, 13);
+            this.inboxButton.Name = "inboxButton";
+            this.inboxButton.Size = new System.Drawing.Size(98, 35);
+            this.inboxButton.TabIndex = 8;
+            this.inboxButton.Text = "DB CONFIG";
+            this.inboxButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.inboxButton.UseVisualStyleBackColor = false;
+            this.inboxButton.Click += new System.EventHandler(this.inboxButton_Click_1);
+            // 
+            // connectButton
+            // 
+            this.connectButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.connectButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.connectButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.connectButton.ImageKey = "network_48.png";
+            this.connectButton.ImageList = this.imageList3;
+            this.connectButton.Location = new System.Drawing.Point(5, 54);
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(138, 35);
+            this.connectButton.TabIndex = 0;
+            this.connectButton.Text = "&CONNECT TO DB";
+            this.connectButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.connectButton.UseVisualStyleBackColor = false;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            // 
+            // aboutRhoButton
+            // 
+            this.aboutRhoButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.aboutRhoButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.aboutRhoButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aboutRhoButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.aboutRhoButton.ImageKey = "1.png";
+            this.aboutRhoButton.ImageList = this.imageList1;
+            this.aboutRhoButton.Location = new System.Drawing.Point(5, 95);
+            this.aboutRhoButton.MinimumSize = new System.Drawing.Size(152, 62);
+            this.aboutRhoButton.Name = "aboutRhoButton";
+            this.aboutRhoButton.Size = new System.Drawing.Size(152, 64);
+            this.aboutRhoButton.TabIndex = 6;
+            this.aboutRhoButton.Text = "ABOUT RHOMICOM";
+            this.aboutRhoButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.aboutRhoButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.aboutRhoButton.UseVisualStyleBackColor = false;
+            this.aboutRhoButton.Visible = false;
+            this.aboutRhoButton.Click += new System.EventHandler(this.aboutRhoButton_Click);
+            // 
+            // changePswdButton
+            // 
+            this.changePswdButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.changePswdButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.changePswdButton.Font = new System.Drawing.Font("Tahoma", 7.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changePswdButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.changePswdButton.ImageKey = "SecurityLock.png";
+            this.changePswdButton.ImageList = this.imageList1;
+            this.changePswdButton.Location = new System.Drawing.Point(5, 165);
+            this.changePswdButton.MinimumSize = new System.Drawing.Size(152, 62);
+            this.changePswdButton.Name = "changePswdButton";
+            this.changePswdButton.Size = new System.Drawing.Size(173, 64);
+            this.changePswdButton.TabIndex = 3;
+            this.changePswdButton.Text = "CHANGE MY &PASSWORD";
+            this.changePswdButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.changePswdButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.changePswdButton.UseVisualStyleBackColor = false;
+            this.changePswdButton.Click += new System.EventHandler(this.changePswdButton_Click);
+            // 
+            // label16
+            // 
+            this.label16.Location = new System.Drawing.Point(5, 232);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(100, 32);
+            this.label16.TabIndex = 24;
+            // 
             // label7
             // 
             this.label7.Location = new System.Drawing.Point(1213, 427);
@@ -1587,22 +1604,22 @@ namespace Enterprise_Management_System.Forms
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.dsplayInfoPanel.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoRfrshNumUpDwn)).EndInit();
             this.connectDBPanel.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.loginPanel.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.dsplayInfoPanel.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoRfrshNumUpDwn)).EndInit();
             this.otherMdlsFlowLayoutPanel.ResumeLayout(false);
             this.basicMdlsFlowLayoutPanel.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.extraMdlsFlowLayoutPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1638,7 +1655,7 @@ namespace Enterprise_Management_System.Forms
     private System.Windows.Forms.Button exitButton;
     private System.Windows.Forms.ImageList imageList3;
     private System.Windows.Forms.Button inboxButton;
-    private System.Windows.Forms.Button openFilesButton;
+    private System.Windows.Forms.Button openHelpButton;
     public System.Windows.Forms.Button appointmentsButton;
     private System.Windows.Forms.Panel panel5;
     private System.Windows.Forms.Label label16;
@@ -1707,5 +1724,6 @@ namespace Enterprise_Management_System.Forms
         public System.Windows.Forms.Button accntngButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Label statusLoadLabel;
     }
 }

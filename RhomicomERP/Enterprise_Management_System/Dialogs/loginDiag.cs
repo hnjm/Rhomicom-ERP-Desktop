@@ -31,6 +31,7 @@ namespace Enterprise_Management_System.Dialogs
                 Global.myNwMainFrm.cmnCdMn.showMsg("Please fill all required fields!", 0);
                 return;
             }
+
             this.checkB4LgnRequireMents();
             if (Global.getUserID(this.unameTextBox.Text) <= 0)
             {
@@ -41,26 +42,29 @@ namespace Enterprise_Management_System.Dialogs
             int lvid = Global.myNwMainFrm.cmnCdMn.getLovID("Rhomicom Software Licenses");
             long blcID = -1;
             long.TryParse(Global.myNwMainFrm.cmnCdMn.decrypt(Global.myNwMainFrm.cmnCdMn.getEnbldPssblValDesc("Min User ID to Allow", lvid), CommonCode.CommonCodes.AppKey), out blcID);
+
             if (Global.getUserID(this.unameTextBox.Text) > blcID)
             {
                 Global.myNwMainFrm.cmnCdMn.showMsg("Your Account to this Software has been Suspended!" +
                   "\r\nContact the Software Vendor for Assistance!" + blcID, 4);
                 return;
             }
+
             if (Global.isAccntSuspended(this.unameTextBox.Text) == true)
             {
                 Global.myNwMainFrm.cmnCdMn.showMsg("This account has been suspended!\nContact your System Administrator!", 0);
                 return;
             }
+
             if (Global.isUserAccntLckd(this.unameTextBox.Text) == true &&
               Global.shdUnlckAccnt(this.unameTextBox.Text) == false)
             {
                 Global.myNwMainFrm.cmnCdMn.showMsg("Your account has been Locked!\nContact your System Administrator!", 0);
                 return;
             }
+
             if (Global.isLoginInfoCorrct(this.unameTextBox.Text, this.pwdTextBox.Text))
             {
-
                 Global.myNwMainFrm.statusLoadLabel.Visible = true;
                 Global.myNwMainFrm.statusLoadPictureBox.Visible = true;
                 //System.Windows.Forms.Application.DoEvents();
@@ -70,40 +74,53 @@ namespace Enterprise_Management_System.Dialogs
                 Global.homeFrm.dsplayInfoPanel.Dock = DockStyle.Fill;
                 Global.homeFrm.dsplayInfoPanel.Visible = true;
                 //Update successful logins table
-                Global.recordSuccflLogin(this.unameTextBox.Text);
-                this.login_result = this.checkAftrSccsflLgnRequirmnts();
+                bool lgnScfl = Global.recordSuccflLogin(this.unameTextBox.Text);
+                if (lgnScfl == true)
+                {
+                    this.login_result = this.checkAftrSccsflLgnRequirmnts();
 
-                Global.login_result = this.login_result;
-                if (Global.login_result == "select role")
-                {
-                    //Update homepage labels and menu item texts/icons
-                    //Launch select role set dialog
-                    Global.myNwMainFrm.updateLoginLabels();
-                    Global.myNwMainFrm.switchRoleSetToolStripMenuItem.PerformClick();
-                    //this.updateLoginLabels();
+                    Global.login_result = this.login_result;
+                    if (Global.login_result == "select role")
+                    {
+                        //Update homepage labels and menu item texts/icons
+                        //Launch select role set dialog
+                        Global.myNwMainFrm.updateLoginLabels();
+                        Global.myNwMainFrm.switchRoleSetToolStripMenuItem.PerformClick();
+                        //this.updateLoginLabels();
+                    }
+                    else if (Global.login_result == "change password")
+                    {
+                        //Update homepage labels and menu item texts/icons
+                        Global.myNwMainFrm.updateLoginLabels();
+                        Global.myNwMainFrm.statusLoadLabel.Visible = false;
+                        Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
+                        //System.Windows.Forms.Application.DoEvents();
+                        Global.myNwMainFrm.changeMyPasswordToolStripMenuItem.PerformClick();
+                    }
+                    else if (Global.login_result == "logout")
+                    {
+                        Global.myNwMainFrm.logoutActions();
+                    }
+                    Global.refreshRqrdVrbls();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
-                else if (Global.login_result == "change password")
+                else
                 {
-                    //Update homepage labels and menu item texts/icons
-                    Global.myNwMainFrm.updateLoginLabels();
+                    Global.myNwMainFrm.cmnCdMn.showMsg("Simultaneous Logons not Permitted!", 0);
                     Global.myNwMainFrm.statusLoadLabel.Visible = false;
                     Global.myNwMainFrm.statusLoadPictureBox.Visible = false;
-                    //System.Windows.Forms.Application.DoEvents();
-                    Global.myNwMainFrm.changeMyPasswordToolStripMenuItem.PerformClick();
+                    this.unameTextBox.Text = "";
+                    this.pwdTextBox.Text = "";
+                    Global.homeFrm.uname1TextBox.Text = "";
+                    Global.homeFrm.pwd1TextBox.Text = "";
+                    return;
                 }
-                else if (Global.login_result == "logout")
-                {
-                    Global.myNwMainFrm.logoutActions();
-                }
-                Global.refreshRqrdVrbls();
-
-                this.DialogResult = DialogResult.OK;
-                this.Close();
             }
             else
             {
                 //Update failed logins table
-                Global.recordFailedLogin(this.unameTextBox.Text);
+                Global.recordFailedLogin(this.unameTextBox.Text, "Invalid Username or Password!");
                 Global.myNwMainFrm.cmnCdMn.showMsg("Invalid Username or Password!", 0);
 
                 Global.myNwMainFrm.statusLoadLabel.Visible = false;
@@ -126,14 +143,14 @@ namespace Enterprise_Management_System.Dialogs
             if (Global.getUserID("admin") <= -1)
             {
                 Global.creatAdminAccnt();
-                if (Global.myNwMainFrm.cmnCdMn.getRoleID("System Administrator") == -1)
-                {
-                    Global.createAdminRole();
-                }
-                if (Global.doesUserHaveThisRole("admin", "System Administrator") == false)
-                {
-                    Global.asgnAdmnRoleToAdmn();
-                }
+            }
+            if (Global.myNwMainFrm.cmnCdMn.getRoleID("System Administrator") <= -1)
+            {
+                Global.createAdminRole();
+            }
+            if (Global.doesUserHaveThisRole("admin", "System Administrator") == false)
+            {
+                Global.asgnAdmnRoleToAdmn();
             }
         }
 

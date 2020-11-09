@@ -20,7 +20,6 @@ namespace REMSCustomRunner
     {
         static Thread threadOne = null;   //Updates Process Runner Status
         static Thread threadFive = null;  //Thread for running the actual Code behind the Request Run if this is the
-
         static string runnerName = "";
 
         static Program()
@@ -55,7 +54,6 @@ namespace REMSCustomRunner
                         Global.dataBasDir = args[9].Trim('"');
                         Global.errorLog += args[8] + "\r\n" + args[9] + "\r\n";
                     }
-
                     string[] macDet = Global.getMachDetails();
                     Global.errorLog += "\r\n" + "PID: " + Global.pid + " Running on: " + macDet[0] + " / " + macDet[1] + " / " + macDet[2];
                     Global.runID = long.Parse(args[6]);
@@ -67,7 +65,6 @@ namespace REMSCustomRunner
                         Global.rnUser_ID = long.Parse(Global.getGnrlRecNm("rpt.rpt_report_runs", "rpt_run_id", "run_by", Global.runID));
                         Global.UsrsOrg_ID = Global.getUsrOrgID(Global.rnUser_ID);
                     }
-
                     Global.writeToLog();
                     if (Global.globalSQLConn.State == ConnectionState.Open)
                     {
@@ -169,7 +166,6 @@ namespace REMSCustomRunner
             }
             finally
             {
-
             }
         }
 
@@ -511,6 +507,8 @@ namespace REMSCustomRunner
                         }
 
                         String rpt_SQL = "";
+                        String preRpt_SQL = "";
+                        String pstRpt_SQL = "";
                         if (alertID > 0 && msgSentID <= 0)
                         {
                             rpt_SQL = Global.get_Alert_SQL(alertID);
@@ -518,6 +516,8 @@ namespace REMSCustomRunner
                         else
                         {
                             rpt_SQL = Global.get_Rpt_SQL(rpt_id);
+                            preRpt_SQL = Global.get_PreRpt_SQL(rpt_id);
+                            pstRpt_SQL = Global.get_PstRpt_SQL(rpt_id);
                         }
                         //Program.updatePrgrm(prgmID);
                         for (int i = 0; i < arry1.Length; i++)
@@ -579,8 +579,9 @@ namespace REMSCustomRunner
                             {
                                 string paramSqlRep = Global.getGnrlRecNm("rpt.rpt_report_parameters",
                                   "parameter_id", "paramtr_rprstn_nm_in_query", pID);
-                                rpt_SQL = rpt_SQL.Replace(paramSqlRep,
-                        arry2[i]);
+                                rpt_SQL = rpt_SQL.Replace(paramSqlRep, arry2[i]);
+                                preRpt_SQL = preRpt_SQL.Replace(paramSqlRep, arry2[i]);
+                                pstRpt_SQL = pstRpt_SQL.Replace(paramSqlRep, arry2[i]);
                                 if (paramSqlRep == "{:toPrsnID}")
                                 {
                                     toPrsnID = long.Parse(arry2[i]);
@@ -646,22 +647,48 @@ namespace REMSCustomRunner
                         rpt_SQL = rpt_SQL.Replace("{:usrID}", Global.rnUser_ID.ToString());
                         rpt_SQL = rpt_SQL.Replace("{:msgID}", msg_id.ToString());
                         rpt_SQL = rpt_SQL.Replace("{:orgID}", Global.UsrsOrg_ID.ToString());
+                        rpt_SQL = rpt_SQL.Replace("{:rptRunID}", Global.runID.ToString());
 
-                        if (rptType == "Command Line Script")
+                        preRpt_SQL = preRpt_SQL.Replace("{:usrID}", Global.rnUser_ID.ToString());
+                        preRpt_SQL = preRpt_SQL.Replace("{:msgID}", msg_id.ToString());
+                        preRpt_SQL = preRpt_SQL.Replace("{:orgID}", Global.UsrsOrg_ID.ToString());
+                        preRpt_SQL = preRpt_SQL.Replace("{:rptRunID}", Global.runID.ToString());
+
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:usrID}", Global.rnUser_ID.ToString());
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:msgID}", msg_id.ToString());
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:orgID}", Global.UsrsOrg_ID.ToString());
+                        pstRpt_SQL = pstRpt_SQL.Replace("{:rptRunID}", Global.runID.ToString());
+
+                        if (rptType == "Command Line Script-Windows")
                         {
                             rpt_SQL = rpt_SQL.Replace("{:host_name}", Global.Hostnme);
                             rpt_SQL = rpt_SQL.Replace("{:portnum}", Global.Portnum);
+
+                            preRpt_SQL = preRpt_SQL.Replace("{:host_name}", Global.Hostnme);
+                            preRpt_SQL = preRpt_SQL.Replace("{:portnum}", Global.Portnum);
+
+                            pstRpt_SQL = pstRpt_SQL.Replace("{:host_name}", Global.Hostnme);
+                            pstRpt_SQL = pstRpt_SQL.Replace("{:portnum}", Global.Portnum);
                         }
 
                         //NB. Be updating all report run statuses and percentages in the table
                         Global.updateLogMsg(msg_id,
+                "\r\n\r\n\r\nPre-Report/Process SQL being executed is ==>\r\n\r\n" + preRpt_SQL,
+                log_tbl, dateStr, Global.rnUser_ID);
+                        Global.updateLogMsg(msg_id,
                 "\r\n\r\n\r\nReport/Process SQL being executed is ==>\r\n\r\n" + rpt_SQL,
+                log_tbl, dateStr, Global.rnUser_ID);
+                        Global.updateLogMsg(msg_id,
+                "\r\n\r\n\r\nPost-Report/Process SQL being executed is ==>\r\n\r\n" + pstRpt_SQL,
                 log_tbl, dateStr, Global.rnUser_ID);
 
                         //1. Execute SQL to get a dataset
                         Global.updateRptRn(rpt_run_id, "Running SQL...", 40);
                         //Program.updatePrgrm(prgmID);
-
+                        if (preRpt_SQL.Trim() != "")
+                        {
+                            Global.executeGnrlSQL(preRpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
+                        }
                         //worker.ReportProgress(40);
                         DataSet dtst = null;
                         if (rptType == "Database Function")
@@ -672,9 +699,9 @@ namespace REMSCustomRunner
                                 Program.updatePhoneNumbers(prgmID);
                             }
                         }
-                        else if (rptType == "Command Line Script")
+                        else if (rptType == "Command Line Script-Windows")
                         {
-                            rpt_SQL = rpt_SQL.Replace("{:db_password}", Global.Pswd);
+                            rpt_SQL = rpt_SQL.Replace("{:db_password}", Global.Pswd.Replace("%", "%%").Replace("^", "^^").Replace("&", "^&").Replace("<", "^<").Replace(">", "^>").Replace("|", "^|"));
 
                             string batchFilnm = Global.appStatPath + "/" + "REM_DBBackup" + rpt_run_id.ToString() + ".bat";
                             System.IO.StreamWriter sw = new System.IO.StreamWriter(batchFilnm);
@@ -714,13 +741,13 @@ namespace REMSCustomRunner
                             if (processDB.ExitCode != 0)
                             {
                                 Global.updateLogMsg(msg_id,
-                  "\r\n\r\nCommand Line Script Successfully Run!\r\n\r\n",
+                  "\r\n\r\nCommand Line Script-Windows Successfully Run!\r\n\r\n",
                   log_tbl, dateStr, Global.rnUser_ID);
                             }
                             else
                             {
                                 Global.updateLogMsg(msg_id,
-                  "\r\n\r\nCommand Line Script Successfully Run!\r\n\r\n",
+                  "\r\n\r\nCommand Line Script-Windows Successfully Run!\r\n\r\n",
                   log_tbl, dateStr, Global.rnUser_ID);
                             }
                             //System.Diagnostics.Process processDB = System.Diagnostics.Process.Start(@"REM_DBBackup.bat");
@@ -733,7 +760,7 @@ namespace REMSCustomRunner
 
                             System.IO.File.Delete(batchFilnm);
                         }
-                        else if (rptName != "Pay Run Master Sheet Report")
+                        else if (!rptName.Contains("Pay Run Master Sheet"))
                         {
                             dtst = Global.selectDataNoParams(rpt_SQL.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""));
                         }
@@ -903,11 +930,110 @@ namespace REMSCustomRunner
                                 uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
                             }
                         }
-                        else if (rptName == "Pay Run Master Sheet Report")
+                        else if (rptName == "Letter of Admission (GhIE)")
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.letterOfAdmssnGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.letterOfAdmssnGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName == "Letter of Attestation (GhIE)")
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.letterAttstnGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.letterAttstnGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName == "Letter of Due Diligence (GhIE)")
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.letterDueDlgncGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.letterDueDlgncGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName.Contains("Annual Dues and Levies (GhIE)"))
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.annualDuesLeviesGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.annualDuesLeviesGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName.Contains("Annual Dues and Levies (KoM)"))
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.annualDuesLeviesKoM(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.annualDuesLeviesKoM(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName.Contains("Company Debt Reminder Letter (GhIE)")
+                            || rptName.Contains("Company Dues Debt Reminder Letter (GhIE)"))
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.summaryDuesLeviesGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.summaryDuesLeviesGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName.Contains("Seminar Debt Reminder Letter (GhIE)"))
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Program.companySeminarDebtGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Program.companySeminarDebtGhIE(dtst, Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc");
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".doc";
+                            }
+                        }
+                        else if (rptName.Contains("Pay Run Master Sheet"))
                         {
                             DataSet hdrdtst = Global.selectDataNoParams(
-                              "Select distinct tbl1.item_name, tbl1.pay_run_priority, tbl1.payment_date from (" +
-                              rpt_SQL.Replace("\r\n", "").Replace("\n", "").Replace("\r", "") + ") tbl1 order by 2, 1");
+                              "Select distinct tbl1.item_name, tbl1.pay_run_priority, MAX(tbl1.payment_date) from (" +
+                              rpt_SQL.Replace("\r\n", "").Replace("\n", "").Replace("\r", "") + ") tbl1 group by 1,2 order by 2, 1");
 
                             DataSet prsnDtSt = Global.selectDataNoParams("Select distinct '''' || tbl1.id_num staff_id, tbl1.full_name from (" +
                 rpt_SQL.Replace("\r\n", "").Replace("\n", "").Replace("\r", "") + ") tbl1 order by 1, 2");
@@ -984,6 +1110,26 @@ namespace REMSCustomRunner
                                 uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".xls";
                             }
                         }
+                        else if (rptName == "BOG Prudential Returns Report")
+                        {
+                            Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
+                            if (outputUsd == "PDF")
+                            {
+                                Global.exprtBOGReturns(dtst,
+                   Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf",
+                 rptTitle, colsToGrp, colsToCnt, colsToSum, colsToAvrg, colsToFrmt
+                   , isfirst, islast, shdAppnd, fromDate, toDate);
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            }
+                            else
+                            {
+                                Global.exprtBOGReturns(dtst,
+                               Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".xls",
+                             rptTitle, colsToGrp, colsToCnt, colsToSum, colsToAvrg, colsToFrmt
+                               , isfirst, islast, shdAppnd, fromDate, toDate);
+                                uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".xls";
+                            }
+                        }
                         else if (rptName == "Pay Run SSF Returns Report")
                         {
                             DataSet hdrdtst = Global.selectDataNoParams(
@@ -1011,14 +1157,15 @@ namespace REMSCustomRunner
                                 uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".xls";
                             }
                         }
-                        else if (rptName == "Company Bills (Dues/Levies) Report")
+                        else if (rptName == "Company Bills (Dues/Levies) Report"
+                            || rptName == "Company Bills (Dues Only) Report")
                         {
                             DataSet hdrdtst = Global.selectDataNoParams(
                               "Select distinct tbl1.item_code_name, tbl1.cmpny, SUM(tbl1.amnt) from (" +
                               rpt_SQL.Replace("\r\n", "").Replace("\n", "").Replace("\r", "") + ") tbl1 group by 1,2 order by 1");
 
                             DataSet prsnDtSt = Global.selectDataNoParams("Select distinct '''' || tbl1.id_no \"GhIE No. \"," +
-                            "tbl1.fullnm \"Full Name\", tbl1.Grade \"Class\", tbl1.Division from (" +
+                            "tbl1.fullnm \"Full Name\", tbl1.Grade \"Class\", tbl1.Division, tbl1.staff_no \"Staff No.\" from (" +
                 rpt_SQL.Replace("\r\n", "").Replace("\n", "").Replace("\r", "") + ") tbl1 order by 1, 2");
 
                             Global.updateRptRn(rpt_run_id, "Formatting Output...", 60);
@@ -1050,6 +1197,29 @@ namespace REMSCustomRunner
                 "\r\n\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
                             }
                         }
+                        else if (rptName == "Bill Run Results Letter (GhIE)")
+                        {
+                            Global.exprtBillRunSlipPDFGhIE(msPayID, toPrsnID, ref errMsg,
+              Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf", rptTitle, yrStr);
+                            uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            if (errMsg != "")
+                            {
+                                Global.updateLogMsg(msg_id,
+                "\r\n\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                            }
+                        }
+                        else if (rptName == "Bill Run Results Letter (KoM)")
+                        {
+                            Global.exprtBillRunSlipPDFKoM(msPayStrtDte, msPayEndDte, rpt_SQL, ref errMsg,
+              Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf", rptTitle, yrStr);
+                            uptFileUrl = Global.getRptDrctry() + @"\" + rpt_run_id.ToString() + ".pdf";
+                            if (errMsg != "")
+                            {
+                                Global.updateLogMsg(msg_id,
+                "\r\n\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
+                            }
+
+                        }
                         else if (rptName == "Bill Run Results Slip")
                         {
                             Global.exprtBillRunSlipPDF(msPayID, toPrsnID, ref errMsg,
@@ -1071,6 +1241,9 @@ namespace REMSCustomRunner
                                 Global.updateLogMsg(msg_id,
                 "\r\n\r\n" + errMsg, log_tbl, dateStr, Global.rnUser_ID);
                             }
+                        }
+                        else if (rptName == "Letter of Attestation")
+                        {
                         }
 
                         int totl = 0;
@@ -1269,6 +1442,10 @@ namespace REMSCustomRunner
                                 Thread.Sleep(1500);
                             }
 
+                            if (pstRpt_SQL.Trim() != "")
+                            {
+                                Global.executeGnrlSQL(pstRpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
+                            }
                             Global.updateLogMsg(msg_id,
                   "\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
                             Global.updateRptRn(rpt_run_id, "Completed!", 100);
@@ -1282,6 +1459,10 @@ namespace REMSCustomRunner
                         }
                         else
                         {
+                            if (pstRpt_SQL.Trim() != "")
+                            {
+                                Global.executeGnrlSQL(pstRpt_SQL.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " "));
+                            }
                             Global.updateLogMsg(msg_id,
                   "\r\n\r\nSQL Statement yielded no Results!", log_tbl, dateStr, Global.rnUser_ID);
                             Global.updateLogMsg(msg_id,
@@ -1808,6 +1989,551 @@ namespace REMSCustomRunner
             }
         }
 
+        private static void letterOfAdmssnGhIE(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+                                                 //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "GhIE/PF";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Executive Secretary-" + Global.getPosHldrName("Executive Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                int a = 0;
+                int majCnter = 0;
+                for (a = 0; a < 1; a++)
+                {
+                    majCnter += 1;
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    string refNum = mnDtSt.Tables[0].Rows[a][0].ToString();
+                    // Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                    //int.TryParse(num, out refNum);
+                    //refNum++;
+                    strSB += (prfx + " " + refNum.PadLeft(5, '0')) + "\r\n\r\n";
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+
+                    string fullNm = mnDtSt.Tables[0].Rows[a][1].ToString() + " (" + mnDtSt.Tables[0].Rows[a][0].ToString() + ")";
+                    string prsnAddrs = mnDtSt.Tables[0].Rows[a][15].ToString() + "\r\n" + mnDtSt.Tables[0].Rows[a][5].ToString();
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    strSB += (fullNm + "\r\n" + prsnAddrs) + "\r\n\r\n";
+                    if (mnDtSt.Tables[0].Rows[a][3].ToString() == "Female")
+                    {
+                        strSB += ("Dear Madam,") + "\r\n\r\n";
+                    }
+                    else
+                    {
+                        strSB += ("Dear Sir,") + "\r\n\r\n";
+                    }
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    oPara2.Range.Text = "APPLICATION FOR MEMBERSHIP AS " + artcl + " " + grdNm.ToUpper();
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 11;
+                    //string mstr = Environment.NewLine;
+                    string mstr = "We are pleased to inform you that your application for admission into the Ghana Institution of Engineers (GhIE) in the class of " + grdNm + " has been approved. ";
+                    mstr += "Your election to membership in this class is governed by the provision of the constitution of the GhIE. ";
+                    //mstr += Environment.NewLine;
+                    //mstr += "New entrants to this class are required to pay the following:";
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara31;
+                    oPara31 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara31.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara31.Range.Font.Bold = 0;
+                    oPara31.Range.Font.Name = "Arial";
+                    oPara31.Range.Font.Size = 11;
+                    //string mstr = Environment.NewLine;
+                    mstr = "";
+                    mstr += "New entrants to this class are required to pay the following:";
+
+                    oPara31.Range.Text = (mstr);
+                    oPara31.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara31.Range.InsertParagraphAfter();
+                    oPara31.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara4;
+                    oPara4 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara4.Format.SpaceAfter = 1;
+                    oPara4.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara4.Range.Font.Bold = 0;
+                    oPara4.Range.Font.Name = "Arial";
+                    oPara4.Range.Font.Size = 11;
+                    oPara4.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                    int ttl = mnDtSt.Tables[0].Rows.Count;
+                    double ttl1 = 0;
+
+
+                    Word.Table scndTable = oDoc.Tables.Add(oPara4.Range, 1, 2, ref s_missing, ref s_missing);
+                    scndTable.BottomPadding = 0;
+                    scndTable.Spacing = 0;
+
+                    scndTable.Borders.Enable = 1;
+                    string[] itms = new string[ttl + 1];
+                    double[] amnt = new double[ttl + 1];
+                    //Word.Row row in scndTable.Rows
+                    for (int k = 0; k < ttl + 2; k++)
+                    {
+                        if (k == 0)
+                        {
+                            itms[k] = "Description";
+                            amnt[k] = 0;
+                        }
+                        else if (k <= ttl)
+                        {
+                            itms[k] = mnDtSt.Tables[0].Rows[k - 1][11].ToString();
+                            amnt[k] = double.Parse(mnDtSt.Tables[0].Rows[k - 1][13].ToString());
+                            //Global.errorLog += itms[k] + "/" + amnt[k].ToString();
+                            //Global.writeToLog();
+                        }
+                        if (k > 0)
+                        {
+                            scndTable.Rows.Add(ref s_missing);
+                        }
+                        //scndTable.Rows[k + 1].Height = 0.2F;
+                        foreach (Word.Cell cell in scndTable.Rows[k + 1].Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 0;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Arial";
+                            cell.Range.Font.Size = 11;
+                            cell.Range.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdAuto;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.SpaceAfter = 1;
+                            if (k == 0)
+                            {
+                                cell.Range.Font.Bold = 1;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorGray25;
+                                if (cell.ColumnIndex == 1)
+                                {
+                                    cell.Width = 300;
+                                    cell.Range.Text = "Description";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else
+                                {
+                                    cell.Width = 100;
+                                    cell.Range.Text = "Amount (GH₵)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                }
+                            }
+                            else
+                            {
+                                cell.Range.Font.Bold = 0;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                if (k <= ttl)
+                                {
+                                    if (cell.ColumnIndex == 1)
+                                    {
+                                        cell.Width = 300;
+                                        cell.Range.Text = itms[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else
+                                    {
+                                        cell.Width = 100;
+                                        cell.Range.Text = amnt[k].ToString("#,##0.00");
+                                        ttl1 += amnt[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                    }
+                                }
+                            }
+                        }
+                        //if (row.Index > 1)
+                        //{
+                        //  k++;
+                        //}
+                        if (k == ttl + 2 - 1)
+                        {
+                            //scndTable.Rows.Add(ref s_missing);
+                            scndTable.Cell((k + 1), 1).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 1).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 1).Range.Font.Size = 12;
+                            scndTable.Cell((k + 1), 1).Width = 300;
+                            scndTable.Cell((k + 1), 1).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 1).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 1).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 1).Range.Text = "TOTAL";
+
+                            scndTable.Cell((k + 1), 2).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 2).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 2).Range.Font.Size = 12;
+                            scndTable.Cell((k + 1), 2).Borders.Enable = 1;
+                            scndTable.Cell((k + 1), 2).Width = 100;
+                            scndTable.Cell((k + 1), 2).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 2).Range.Text = "GH₵" + ttl1.ToString("#,##0.00");
+                            //}
+                            break;
+                        }
+                    }
+
+                    oPara4.Range.InsertParagraphAfter();
+                    //oPara4.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara5;
+                    oPara5 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara5.Format.SpaceAfter = 1;
+                    oPara5.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara5.Range.Font.Bold = 1;
+                    oPara5.Range.Font.Name = "Arial";
+                    oPara5.Range.Font.Size = 11;
+                    System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+                    string title = textInfo.ToTitleCase(Global.DecimalToWords((decimal)ttl1) + " Ghana Cedis");
+                    mstr = "";
+                    mstr += "To finalize the arrangements for your entry, kindly remit " + "GH₵" + ttl1.ToString("#,##0.00");
+                    mstr += " (" + title + ") to cover these financial obligations.";
+                    oPara5.Range.Text = mstr;
+                    oPara5.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara5.Range.InsertParagraphAfter();
+                    oPara5.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara6;
+                    oPara6 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara6.Format.SpaceAfter = 1;
+                    oPara6.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara6.Range.Font.Bold = 0;
+                    oPara6.Range.Font.Name = "Arial";
+                    oPara6.Range.Font.Size = 11;
+                    mstr = "";
+                    mstr += "Please ensure that all cheques are crossed and made payable to the GHANA INSTITUTION OF ENGINEERS. ";
+                    mstr += "Cheques drawn on banks outside Accra should be endorsed \"Commission on Drawers Account\".";
+                    oPara6.Range.Text = mstr;
+                    oPara6.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara6.Range.InsertParagraphAfter();
+                    oPara6.Range.InsertAfter(Environment.NewLine);
+                    oPara6.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 11;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 11;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Executive Secretary");
+                    strSB += "\r\n";
+                    strSB += "Executive Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
+                    Global.minimizeMemory();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog += ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
         private static void AddressesOfPersons(DataSet mnDtSt, string wrdFileNm)
         {
             try
@@ -2201,6 +2927,3254 @@ namespace REMSCustomRunner
                     Global.updateRptRn(Global.runID, "Completed!", 100);
 
                     Global.minimizeMemory();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog += ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
+        private static void annualDuesLeviesGhIE(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+                                                 //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "GhIE/PF";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Executive Secretary-" + Global.getPosHldrName("Executive Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                int a = 0;
+                int majCnter = 0;
+                for (a = 0; a < 1; a++)
+                {
+                    majCnter += 1;
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    string refNum = mnDtSt.Tables[0].Rows[a][0].ToString();// Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                                                                           //int.TryParse(num, out refNum);
+                                                                           //refNum++;
+                    strSB += (prfx + " " + refNum.ToString().PadLeft(5, '0')) + " (" + Global.getGhIEGradeSymbol(mnDtSt.Tables[0].Rows[a][2].ToString()) + ")" + "\r\n\r\n";
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+                    // + " (" + mnDtSt.Tables[0].Rows[a][0].ToString() + ")"
+                    string fullNm = mnDtSt.Tables[0].Rows[a][1].ToString();
+                    string prsnAddrs = mnDtSt.Tables[0].Rows[a][15].ToString() + "\r\n" + mnDtSt.Tables[0].Rows[a][5].ToString();
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    //string prsnAddrs = fullNm + " (" + mnDtSt.Tables[0].Rows[a][2].ToString() + ")" + mnDtSt.Tables[0].Rows[a][5].ToString() + "" + mnDtSt.Tables[0].Rows[a][5].ToString();
+
+                    strSB += (fullNm + "\r\n" + prsnAddrs).Replace("\r\n\r\n", "\r\n") + "\r\n\r\n";
+                    //if (mnDtSt.Tables[0].Rows[a][3].ToString() == "Female")
+                    //{
+                    //  strSB += ("Dear Madam,") + "\r\n\r\n";
+                    //}
+                    //else
+                    //{
+                    //}
+                    strSB += ("Dear Member,") + "\r\n";
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    string curYear = Global.getDB_Date_time().Substring(0, 4);
+                    oPara2.Range.Text = "ANNUAL DUES AND LEVIES FOR " + curYear;
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertParagraphAfter();
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 10;
+                    //string mstr = Environment.NewLine;
+                    string mstr = "ANNUAL DUES                                                                                                                                    " +
+                      "Please find below your Annual Dues and Levies for the year " + curYear + " based on rates, ";
+                    mstr += "approved by the last Annual General Meeting. Kindly note the conditions governing Annual Dues. (see below)";
+                    //mstr += Environment.NewLine;
+                    //mstr += "New entrants to this class are required to pay the following:";
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    //oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara31;
+                    oPara31 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara31.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara31.Range.Font.Bold = 0;
+                    oPara31.Range.Font.Name = "Arial";
+                    oPara31.Range.Font.Size = 10;
+                    //string mstr = Environment.NewLine;
+                    mstr = "";
+                    mstr += "WELFARE FUND REGISTRATION\r\nMembers are to note the current onetime payment of the welfare fund.";
+
+                    oPara31.Range.Text = (mstr);
+                    oPara31.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara31.Range.InsertParagraphAfter();
+                    oPara31.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara4;
+                    oPara4 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara4.Format.SpaceAfter = 1;
+                    oPara4.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara4.Range.Font.Bold = 0;
+                    oPara4.Range.Font.Name = "Arial";
+                    oPara4.Range.Font.Size = 10;
+                    oPara4.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                    int ttl = mnDtSt.Tables[0].Rows.Count;
+                    double ttl1 = 0;
+
+
+                    Word.Table scndTable = oDoc.Tables.Add(oPara4.Range, 1, 3, ref s_missing, ref s_missing);
+                    scndTable.BottomPadding = 0;
+                    scndTable.Spacing = 0;
+
+                    scndTable.Borders.Enable = 1;
+                    string[] itms = new string[ttl + 1];
+                    double[] amnt = new double[ttl + 1];
+                    //Word.Row row in scndTable.Rows
+                    for (int k = 0; k < ttl + 2; k++)
+                    {
+                        if (k == 0)
+                        {
+                            itms[k] = "Description";
+                            amnt[k] = 0;
+                        }
+                        else if (k <= ttl)
+                        {
+                            itms[k] = mnDtSt.Tables[0].Rows[k - 1][11].ToString();
+                            amnt[k] = double.Parse(mnDtSt.Tables[0].Rows[k - 1][13].ToString());
+                            //Global.errorLog += itms[k] + "/" + amnt[k].ToString();
+                            //Global.writeToLog();
+                        }
+                        if (k > 0)
+                        {
+                            scndTable.Rows.Add(ref s_missing);
+                        }
+                        //scndTable.Rows[k + 1].Height = 0.2F;
+                        foreach (Word.Cell cell in scndTable.Rows[k + 1].Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 0;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Arial";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdAuto;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.SpaceAfter = 1;
+                            if (k == 0)
+                            {
+                                cell.Range.Font.Bold = 1;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorGray25;
+                                if (cell.ColumnIndex == 1)
+                                {
+                                    cell.Width = 40;
+                                    cell.Range.Text = "No.";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else if (cell.ColumnIndex == 2)
+                                {
+                                    cell.Width = 300;
+                                    cell.Range.Text = "Description";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else
+                                {
+                                    cell.Width = 100;
+                                    cell.Range.Text = "Amount (GH₵)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                }
+                            }
+                            else
+                            {
+                                cell.Range.Font.Bold = 0;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                if (k <= ttl)
+                                {
+                                    if (cell.ColumnIndex == 1)
+                                    {
+                                        cell.Width = 40;
+                                        cell.Range.Text = (k).ToString();
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else if (cell.ColumnIndex == 2)
+                                    {
+                                        cell.Width = 300;
+                                        cell.Range.Text = itms[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else
+                                    {
+                                        cell.Width = 100;
+                                        cell.Range.Text = amnt[k].ToString("#,##0.00");
+                                        ttl1 += amnt[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                    }
+                                }
+                            }
+                        }
+                        //if (row.Index > 1)
+                        //{
+                        //  k++;
+                        //}
+                        if (k == ttl + 2 - 1)
+                        {
+                            //scndTable.Rows.Add(ref s_missing);
+                            scndTable.Cell((k + 1), 1).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 1).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 1).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 1).Width = 40;
+                            scndTable.Cell((k + 1), 1).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 1).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 1).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 1).Range.Text = " ";
+
+                            scndTable.Cell((k + 1), 2).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 2).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 2).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 2).Width = 300;
+                            scndTable.Cell((k + 1), 2).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 2).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 2).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 2).Range.Text = "PAYMENT DUE";
+
+                            scndTable.Cell((k + 1), 3).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 3).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 3).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 3).Borders.Enable = 1;
+                            scndTable.Cell((k + 1), 3).Width = 100;
+                            scndTable.Cell((k + 1), 3).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 3).Range.Text = "GH₵" + ttl1.ToString("#,##0.00");
+                            //}
+                            break;
+                        }
+                    }
+
+                    oPara4.Range.InsertParagraphAfter();
+                    //oPara4.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara5;
+                    oPara5 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara5.Format.SpaceAfter = 1;
+                    oPara5.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara5.Range.Font.Bold = 1;
+                    oPara5.Range.Font.Name = "Arial";
+                    oPara5.Range.Font.Size = 10;
+                    mstr = "";
+                    mstr += "Counting on your usual cooperation for prompt payment.";
+                    oPara5.Range.Text = mstr;
+                    oPara5.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara5.Range.InsertParagraphAfter();
+                    oPara5.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 10;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 10;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Executive Secretary");
+                    strSB += "\r\n";
+                    strSB += "Executive Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.InsertParagraphAfter();
+                    oPara8.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara6;
+                    oPara6 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara6.Format.SpaceAfter = 1;
+                    oPara6.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara6.Range.Font.Bold = 0;
+                    oPara6.Range.Font.Name = "Arial";
+                    oPara6.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "Art 11.0 Entrance Fees Dues and Levies";
+                    oPara6.Range.Text = mstr;
+                    oPara6.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    //oPara6.Range.InsertParagraphAfter();
+                    oPara6.Range.InsertAfter(Environment.NewLine);
+                    //oPara6.Range.InsertAfter(Environment.NewLine);
+                    Microsoft.Office.Interop.Word.Paragraph oPara61;
+                    oPara61 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara61.Format.SpaceAfter = 1;
+                    oPara61.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara61.Range.Font.Bold = 0;
+                    oPara61.Range.Font.Name = "Arial";
+                    oPara61.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "Sub Section 11.4 Any member of any class whose annual subscription dues is more than twelve months in arrears shall not be entitled to attend ";
+                    mstr += "or take part in any meeting of the institution or to receive any notice or publication of the institution that may be issued, or exercise any rights or privileges of membership until such dues are paid in full.";
+                    oPara61.Range.Text = mstr;
+                    oPara61.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara61.Range.InsertParagraphAfter();
+                    oPara61.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara62;
+                    oPara62 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara62.Format.SpaceAfter = 1;
+                    oPara62.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara62.Range.Font.Bold = 0;
+                    oPara62.Range.Font.Name = "Arial";
+                    oPara62.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "                     11.5 Any member of any class whose annual dues is two years in arrears may by resolution of the Council be excluded                     from the Institution, and the defaulter shall thereupon cease to be a member and shall be removed from the Roll of Register. ";
+                    mstr += "or take part in any meeting of the institution or to receive any notice or publication of the institution that may be issued, or exercise any rights or privileges of membership until such dues are paid in full.";
+                    mstr += "\r\n\r\nNotwithstanding such exclusion the defaulter shall not be relieved from the liability for the payment of the arrears of subscriptions due and calculated up to the thirty-first day of December preceding exclusion of the member.";
+                    oPara62.Range.Text = mstr;
+                    oPara62.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara62.Range.InsertParagraphAfter();
+                    oPara62.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara63;
+                    oPara63 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara63.Format.SpaceAfter = 1;
+                    oPara63.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara63.Range.Font.Bold = 0;
+                    oPara63.Range.Font.Name = "Arial";
+                    oPara63.Range.Font.Size = 8;
+                    mstr = "Art 19.0\r\n";
+                    mstr += "Sub Section 19.1 The annual members statement of account and dues to be sent to all members by 1st December each year shall include a form for confirmation of change of address, if any. ";
+                    mstr += "All members shall be required to use this service to inform the institution of their current addresses. (see attached for the form)";
+                    //mstr += "\r\n\r\nNot withstanding such exclusion the defaulter shall not be relieved from the liability for the payment of the arrears of subscriptions due and calculated up to the thirty-first day of December preceding exclusion of the member.";
+                    oPara63.Range.Text = mstr;
+                    oPara63.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara63.Range.InsertParagraphAfter();
+                    oPara63.Range.InsertAfter(Environment.NewLine);
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara641;
+                    oPara641 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara641.Format.SpaceAfter = 1;
+                    oPara641.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara641.Range.Font.Bold = 1;
+                    oPara641.Range.Font.Underline  = Word.WdUnderline.wdUnderlineSingle;
+                    oPara641.Range.Font.Name = "Arial";
+                    oPara641.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "NOTE";
+                    oPara641.Range.Text = mstr;
+                    oPara641.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara641.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara64;
+                    oPara64 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara64.Format.SpaceAfter = 1;
+                    oPara64.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara64.Range.Font.Bold = 0;
+                    oPara64.Range.Font.Name = "Tahoma";
+                    oPara64.Range.Font.Size = 8;
+                    oPara64.Range.Borders.InsideLineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    oPara64.Range.Borders.InsideLineWidth = Word.WdLineWidth.wdLineWidth075pt;
+                    oPara64.Range.Borders.InsideColor = Word.WdColor.wdColorBlack;
+                    oPara64.Range.Borders.OutsideLineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    oPara64.Range.Borders.OutsideLineWidth = Word.WdLineWidth.wdLineWidth075pt;
+                    oPara64.Range.Borders.OutsideColor = Word.WdColor.wdColorBlack;
+                    oPara64.Range.Borders.Enable  = 1;
+                    mstr = "You can pay through the following bank accounts: in the name of Ghana Institution of Engineers.\r\n";
+                    mstr += "Ecobank A/C No: 0030134406664901 Ring Road Central\r\n";
+                    mstr += "Fidelity Bank A/C No: 108000007601 Ridge Tower\r\n";
+                    mstr += "Standard Chartered Ghana A/C No: 0100116424000 Opeibea House Accra.\r\n\r\n";
+                    mstr += "Please indicate name and GhIE No. on the payment slip and email as scanned copy to dues@ghie.org.gh";
+                    //mstr += "\r\n\r\nNot withstanding such exclusion the defaulter shall not be relieved from the liability for the payment of the arrears of subscriptions due and calculated up to the thirty-first day of December preceding exclusion of the member.";
+                    oPara64.Range.Text = mstr;
+                    oPara64.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    object objStart = 0;
+                    object objEnd = 0 + mstr.IndexOf("Y");
+
+                    Word.Range rngBold = oWord.ActiveDocument.Range(ref objStart, ref objEnd);
+                    rngBold.Bold = 1;
+                    rngBold.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+
+                    //objStart = oPara64.Range.Start + mstr.IndexOf("Ecobank");
+                    //objEnd = oPara64.Range.Start + mstr.IndexOf("Ring");
+
+                    //rngBold = oWord.ActiveDocument.Range(ref objStart, ref objEnd);
+                    //rngBold.Bold = 1;
+
+                    oPara64.Range.InsertParagraphAfter();
+                    oPara64.Range.InsertAfter(Environment.NewLine);
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    Global.errorLog += svFleNm.ToString();
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog +=ex.Message+"\r\n"+ ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
+        private static void companySeminarDebtGhIE(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+                                                 //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "GhIE/CMT/PGC/10/598";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 12;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Executive Secretary-" + Global.getPosHldrName("Executive Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                //int a = 0;
+                int nwCmpnyIdx = 0;
+                for (int a = 0; a < mnDtSt.Tables[0].Rows.Count;)
+                {
+                    //if (mnDtSt.Tables[0].Rows[a][3].ToString()
+                    //  == mnDtSt.Tables[0].Rows[nwCmpnyIdx][3].ToString())
+                    //{
+                    //}
+                    //else
+                    //{
+                    //  nwCmpnyIdx = a;
+                    //  oDoc.Paragraphs.PageBreakBefore = 1;
+                    //}
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    //int refcntr = 0;
+                    //string refNum = Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                    //int.TryParse(refNum, out refcntr);
+                    //refcntr++;
+                    strSB += (prfx /*+ " " + refcntr.ToString().PadLeft(5, '0')*/) + "\r\n\r\n";
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+
+                    string cmpnyfullNm = mnDtSt.Tables[0].Rows[nwCmpnyIdx][3].ToString();
+                    string prsnAddrs = mnDtSt.Tables[0].Rows[nwCmpnyIdx][4].ToString();
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    strSB += ("The Head, Human Resource Department\r\n" + cmpnyfullNm + "\r\n" + prsnAddrs) + "\r\n\r\n";
+                    //if (mnDtSt.Tables[0].Rows[a][3].ToString() == "Female")
+                    //{
+                    //  strSB += ("Dear Madam,") + "\r\n\r\n";
+                    //}
+                    //else
+                    //{
+                    //}
+                    strSB += ("Dear Sir/Madam,") + "\r\n\r\n";
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    //string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    //string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    oPara2.Range.Text = mnDtSt.Tables[0].Rows[nwCmpnyIdx][6].ToString().ToUpper();
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertParagraphAfter();
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 12;
+                    //string mstr = Environment.NewLine;
+                    string eveDtes = "from " + mnDtSt.Tables[0].Rows[nwCmpnyIdx][7].ToString() + " to " + mnDtSt.Tables[0].Rows[nwCmpnyIdx][8].ToString();
+                    if (mnDtSt.Tables[0].Rows[nwCmpnyIdx][7].ToString() ==
+                      mnDtSt.Tables[0].Rows[nwCmpnyIdx][8].ToString())
+                    {
+                        eveDtes = "on " + mnDtSt.Tables[0].Rows[nwCmpnyIdx][7].ToString();
+                    }
+                    string mstr = "\r\n";
+                    mstr += "The following participant(s) from your organisation attended a seminar at the Ghana Institution of Engineers (GhIE) Engineers Centre, Roman Ridge, Accra, " + eveDtes;
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara4;
+                    oPara4 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara4.Format.SpaceAfter = 1;
+                    oPara4.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara4.Range.Font.Bold = 0;
+                    oPara4.Range.Font.Name = "Arial";
+                    oPara4.Range.Font.Size = 12;
+                    oPara4.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                    int ttl = int.Parse(mnDtSt.Tables[0].Rows[nwCmpnyIdx][2].ToString());
+                    //double ttl1 = 0;
+
+
+                    Word.Table scndTable = oDoc.Tables.Add(oPara4.Range, 1, 3, ref s_missing, ref s_missing);
+                    scndTable.BottomPadding = 0;
+                    scndTable.Spacing = 0;
+
+                    scndTable.Borders.Enable = 0;
+                    int rwCntr = 0;
+                    string[] mbrNms = new string[ttl + 1];
+                    string[] itms = new string[ttl + 1];
+                    double[] amnt = new double[ttl + 1];
+                    //Word.Row row in scndTable.Rows
+                    for (int k = 0; k < ttl + 2; k++)
+                    {
+                        if (k == 0)
+                        {
+                            mbrNms[k] = "Participant(s)";
+                            itms[k] = "Fee (GH₵)";
+                            amnt[k] = 0;
+                        }
+                        else if (k <= ttl)
+                        {
+                            mbrNms[k] = mnDtSt.Tables[0].Rows[nwCmpnyIdx + k - 1][0].ToString();
+                            itms[k] = mnDtSt.Tables[0].Rows[nwCmpnyIdx + k - 1][1].ToString() + " x " + mnDtSt.Tables[0].Rows[nwCmpnyIdx + k - 1][2].ToString();
+                            amnt[k] = double.Parse(mnDtSt.Tables[0].Rows[nwCmpnyIdx + k - 1][5].ToString());
+                            //Global.errorLog += itms[k] + "/" + amnt[k].ToString();
+                            //Global.writeToLog();
+                        }
+                        if (rwCntr > 0)
+                        {
+                            scndTable.Rows.Add(ref s_missing);
+                        }
+                        //scndTable.Rows[k + 1].Height = 0.2F;
+                        foreach (Word.Cell cell in scndTable.Rows[rwCntr + 1].Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 0;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Arial";
+                            cell.Range.Font.Size = 9;
+                            cell.Range.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdAuto;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.SpaceAfter = 1;
+                            if (k == 0)
+                            {
+                                cell.Range.Font.Bold = 1;
+                                //cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorGray25;
+                                if (cell.ColumnIndex == 1)
+                                {
+                                    cell.Width = 250;
+                                    cell.Range.Text = "Participant(s)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else if (cell.ColumnIndex == 2)
+                                {
+                                    cell.Width = 70;
+                                    cell.Range.Text = "Fee (GH₵)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else
+                                {
+                                    cell.Width = 70;
+                                    cell.Range.Text = "Total (GH₵)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                }
+                            }
+                            else
+                            {
+                                cell.Range.Font.Bold = 0;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                if (k <= ttl)
+                                {
+                                    if (cell.ColumnIndex == 1)
+                                    {
+                                        cell.Width = 250;
+                                        cell.Range.Text = mbrNms[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else if (cell.ColumnIndex == 2)
+                                    {
+                                        cell.Width = 70;
+                                        if (k == (1))
+                                        {
+                                            cell.Range.Text = itms[k];
+                                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cell.Width = 70;
+                                        if (k == (1))
+                                        {
+                                            cell.Range.Font.Bold = 1;
+                                            cell.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineDouble;
+
+                                            cell.Range.Text = amnt[k].ToString("#,##0.00");
+                                            //ttl1 += amnt[k];
+                                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                        }
+                                    }
+                                }
+                            }
+
+                            //if (row.Index > 1)
+                            //{
+                            //  k++;
+                            //}
+                            if (k == ttl + 2 - 1)
+                            {
+                                //scndTable.Rows.Add(ref s_missing);
+                                //scndTable.Cell((k + 1), 1).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                //scndTable.Cell((k + 1), 1).Range.Font.Bold = 1;
+                                //scndTable.Cell((k + 1), 1).Range.Font.Size = 9;
+                                //scndTable.Cell((k + 1), 1).Width = 200;
+                                //scndTable.Cell((k + 1), 1).Borders.Enable = 0;
+                                //scndTable.Cell((k + 1), 1).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //scndTable.Cell((k + 1), 1).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                //scndTable.Cell((k + 1), 1).Range.Text = " ";
+
+                                //scndTable.Cell((k + 1), 2).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                //scndTable.Cell((k + 1), 2).Range.Font.Bold = 1;
+                                //scndTable.Cell((k + 1), 2).Range.Font.Size = 9;
+                                //scndTable.Cell((k + 1), 2).Width = 200;
+                                //scndTable.Cell((k + 1), 2).Borders.Enable = 0;
+                                //scndTable.Cell((k + 1), 2).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //scndTable.Cell((k + 1), 2).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                //scndTable.Cell((k + 1), 2).Range.Text = "PAYMENT DUE";
+
+                                //scndTable.Cell((k + 1), 3).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                //scndTable.Cell((k + 1), 3).Range.Font.Bold = 1;
+                                //scndTable.Cell((k + 1), 3).Range.Font.Size = 9;
+                                //scndTable.Cell((k + 1), 3).Borders.Enable = 1;
+                                //scndTable.Cell((k + 1), 3).Width = 100;
+                                //scndTable.Cell((k + 1), 3).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                //scndTable.Cell((k + 1), 3).Range.Text = "GH₵" + ttl1.ToString("#,##0.00");
+                                //}
+                                break;
+                            }
+                        }
+                        rwCntr++;
+                    }
+                    oPara4.Range.InsertParagraphAfter();
+                    //oPara4.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara5;
+                    oPara5 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara5.Format.SpaceAfter = 1;
+                    oPara5.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara5.Range.Font.Bold = 0;
+                    oPara5.Range.Font.Name = "Arial";
+                    oPara5.Range.Font.Size = 12;
+                    System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+                    //string title = textInfo.ToTitleCase(Global.DecimalToWords((decimal)ttl1) + " Ghana Cedis");
+                    mstr = "";
+                    mstr += "GhIE is yet to receive their fee for the seminar.";
+                    mstr += "\r\n\r\nWe shall be very grateful if you could arrange to let us have a cheque covering the fee as soon as possible. ";
+                    mstr += "\r\n\r\nWe count on your usual cooperation. ";
+                    oPara5.Range.Text = mstr;
+                    oPara5.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara5.Range.InsertParagraphAfter();
+                    oPara5.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 12;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 12;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Executive Secretary");
+                    strSB += "\r\n";
+                    strSB += "Executive Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.InsertParagraphAfter();
+                    oPara8.Range.InsertAfter(Environment.NewLine);
+                    object pgBrk = (object)Word.WdBreakType.wdPageBreak;
+                    oDoc.Words.Last.InsertBreak(ref pgBrk);
+                    nwCmpnyIdx += ttl;
+                    a = nwCmpnyIdx;
+                    if (nwCmpnyIdx >= mnDtSt.Tables[0].Rows.Count)
+                    {
+                        break;
+                    }
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog += ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
+        private static void summaryDuesLeviesGhIE(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+                                                 //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "GhIE/CMT/MBR";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Executive Secretary-" + Global.getPosHldrName("Executive Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                int a = 0;
+                int majCnter = 0;
+                for (a = 0; a < 1; a++)
+                {
+                    majCnter += 1;
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    int refcntr = 0;
+                    string refNum = Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                    int.TryParse(refNum, out refcntr);
+                    refcntr++;
+                    strSB += (prfx + " " + refcntr.ToString().PadLeft(5, '0')) + "\r\n\r\n";
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+
+                    string cmpnyfullNm = mnDtSt.Tables[0].Rows[a][6].ToString();
+                    string prsnAddrs = mnDtSt.Tables[0].Rows[a][7].ToString();
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    strSB += ("The Chief Executive\r\n" + cmpnyfullNm + "\r\n" + prsnAddrs) + "\r\n\r\n";
+                    //if (mnDtSt.Tables[0].Rows[a][3].ToString() == "Female")
+                    //{
+                    //  strSB += ("Dear Madam,") + "\r\n\r\n";
+                    //}
+                    //else
+                    //{
+                    //}
+                    strSB += ("Dear Sir,") + "\r\n";
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    //string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    oPara2.Range.Text = "ANNUAL DUES & LEVIES FOR ENGINEERING PRACTITIONERS";
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertParagraphAfter();
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 10;
+                    //string mstr = Environment.NewLine;
+                    string mstr = "";
+                    mstr += "We have attached a list of Engineering Practitioners in your employment and their Annual Dues due for payment to the Ghana Institution of Engineers (GhIE).";
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    //oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara4;
+                    oPara4 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara4.Format.SpaceAfter = 1;
+                    oPara4.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara4.Range.Font.Bold = 0;
+                    oPara4.Range.Font.Name = "Arial";
+                    oPara4.Range.Font.Size = 10;
+                    oPara4.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                    int ttl = mnDtSt.Tables[0].Rows.Count;
+                    double ttl1 = 0;
+
+
+                    Word.Table scndTable = oDoc.Tables.Add(oPara4.Range, 1, 3, ref s_missing, ref s_missing);
+                    scndTable.BottomPadding = 0;
+                    scndTable.Spacing = 0;
+
+                    scndTable.Borders.Enable = 1;
+                    string[] mbrNms = new string[ttl + 1];
+                    string[] itms = new string[ttl + 1];
+                    double[] amnt = new double[ttl + 1];
+                    //Word.Row row in scndTable.Rows
+                    for (int k = 0; k < ttl + 2; k++)
+                    {
+                        if (k == 0)
+                        {
+                            mbrNms[k] = "Engineering Practitioners";
+                            itms[k] = "Item Description";
+                            amnt[k] = 0;
+                        }
+                        else if (k <= ttl)
+                        {
+                            mbrNms[k] = mnDtSt.Tables[0].Rows[k - 1][1].ToString() +
+                              " (" + mnDtSt.Tables[0].Rows[k - 1][0].ToString() + ")" +
+                              " (" + mnDtSt.Tables[0].Rows[k - 1][5].ToString() + ")";
+                            itms[k] = mnDtSt.Tables[0].Rows[k - 1][2].ToString();
+                            amnt[k] = double.Parse(mnDtSt.Tables[0].Rows[k - 1][3].ToString());
+                            //Global.errorLog += itms[k] + "/" + amnt[k].ToString();
+                            //Global.writeToLog();
+                        }
+                        if (k > 0)
+                        {
+                            scndTable.Rows.Add(ref s_missing);
+                        }
+                        //scndTable.Rows[k + 1].Height = 0.2F;
+                        foreach (Word.Cell cell in scndTable.Rows[k + 1].Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 0;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Arial";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdAuto;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.SpaceAfter = 1;
+                            if (k == 0)
+                            {
+                                cell.Range.Font.Bold = 1;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorGray25;
+                                if (cell.ColumnIndex == 1)
+                                {
+                                    cell.Width = 200;
+                                    cell.Range.Text = "Engineering Practitioners";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else if (cell.ColumnIndex == 2)
+                                {
+                                    cell.Width = 200;
+                                    cell.Range.Text = "Item Description";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else
+                                {
+                                    cell.Width = 100;
+                                    cell.Range.Text = "Amount (GH₵)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                }
+                            }
+                            else
+                            {
+                                cell.Range.Font.Bold = 0;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                if (k <= ttl)
+                                {
+                                    if (cell.ColumnIndex == 1)
+                                    {
+                                        cell.Width = 200;
+                                        cell.Range.Text = mbrNms[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else if (cell.ColumnIndex == 2)
+                                    {
+                                        cell.Width = 200;
+                                        cell.Range.Text = itms[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else
+                                    {
+                                        cell.Width = 100;
+                                        cell.Range.Text = amnt[k].ToString("#,##0.00");
+                                        ttl1 += amnt[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                    }
+                                }
+                            }
+                        }
+                        //if (row.Index > 1)
+                        //{
+                        //  k++;
+                        //}
+                        if (k == ttl + 2 - 1)
+                        {
+                            //scndTable.Rows.Add(ref s_missing);
+                            scndTable.Cell((k + 1), 1).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 1).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 1).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 1).Width = 200;
+                            scndTable.Cell((k + 1), 1).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 1).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 1).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 1).Range.Text = " ";
+
+                            scndTable.Cell((k + 1), 2).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 2).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 2).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 2).Width = 200;
+                            scndTable.Cell((k + 1), 2).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 2).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 2).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 2).Range.Text = "PAYMENT DUE";
+
+                            scndTable.Cell((k + 1), 3).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 3).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 3).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 3).Borders.Enable = 1;
+                            scndTable.Cell((k + 1), 3).Width = 100;
+                            scndTable.Cell((k + 1), 3).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 3).Range.Text = "GH₵" + ttl1.ToString("#,##0.00");
+                            //}
+                            break;
+                        }
+                    }
+
+                    oPara4.Range.InsertParagraphAfter();
+                    //oPara4.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara5;
+                    oPara5 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara5.Format.SpaceAfter = 1;
+                    oPara5.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara5.Range.Font.Bold = 0;
+                    oPara5.Range.Font.Name = "Arial";
+                    oPara5.Range.Font.Size = 10;
+                    System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+                    string title = textInfo.ToTitleCase(Global.DecimalToWords((decimal)ttl1) + " Ghana Cedis");
+                    mstr = "";
+                    mstr += "The total bill is " + "GH₵" + ttl1.ToString("#,##0.00") +
+                      " (" + title + ") and we urge you to take note accordingly for prompt payment.";
+                    mstr += "\r\n\r\nWe count on your utmost cooperation to get all your Engineering Practitioners duly registered if you have not done so, and those registered to be of Good Standing.";
+                    oPara5.Range.Text = mstr;
+                    oPara5.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara5.Range.InsertParagraphAfter();
+                    oPara5.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 10;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 10;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Executive Secretary");
+                    strSB += "\r\n";
+                    strSB += "Executive Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.InsertParagraphAfter();
+                    oPara8.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara6;
+                    oPara6 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara6.Format.SpaceAfter = 1;
+                    oPara6.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara6.Range.Font.Bold = 1;
+                    oPara6.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+                    oPara6.Range.Font.Name = "Arial";
+                    oPara6.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "Background";
+                    oPara6.Range.Text = mstr;
+                    oPara6.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    //oPara6.Range.InsertParagraphAfter();
+                    oPara6.Range.InsertAfter(Environment.NewLine);
+                    //oPara6.Range.InsertAfter(Environment.NewLine);
+                    Microsoft.Office.Interop.Word.Paragraph oPara61;
+                    oPara61 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara61.Format.SpaceAfter = 1;
+                    oPara61.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara61.Range.Font.Bold = 0;
+                    oPara61.Range.Font.Name = "Arial";
+                    oPara61.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "It is necessary and for that matter even more imperative for Employers to ensure that their Engineering Practitioners are registered with their professional bodies and are of Good Standing, in order not to breach the Law.  (Please see below).";
+                    oPara61.Range.Text = mstr;
+                    oPara61.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara61.Range.InsertParagraphAfter();
+                    oPara61.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara611;
+                    oPara611 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara611.Format.SpaceAfter = 1;
+                    oPara611.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara611.Range.Font.Bold = 1;
+                    oPara611.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+                    oPara611.Range.Font.Name = "Arial";
+                    oPara611.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "NRCD 143 18 (3) States";
+                    oPara611.Range.Text = mstr;
+                    oPara611.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    //oPara6.Range.InsertParagraphAfter();
+                    oPara611.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara62;
+                    oPara62 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara62.Format.SpaceAfter = 1;
+                    oPara62.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara62.Range.Font.Bold = 0;
+                    oPara62.Range.Font.Name = "Arial";
+                    oPara62.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "“No person shall practise any profession in respect of which a professional body has been registered under this Decree unless he has been duly registered by the Registrar under this section.”";
+                    oPara62.Range.Text = mstr;
+                    oPara62.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara62.Range.InsertParagraphAfter();
+                    oPara62.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara612;
+                    oPara612 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara612.Format.SpaceAfter = 1;
+                    oPara612.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara612.Range.Font.Bold = 1;
+                    oPara612.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+                    oPara612.Range.Font.Name = "Arial";
+                    oPara612.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "NRCD 143 (21) States";
+                    oPara612.Range.Text = mstr;
+                    oPara612.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    //oPara6.Range.InsertParagraphAfter();
+                    oPara612.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara63;
+                    oPara63 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara63.Format.SpaceAfter = 1;
+                    oPara63.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara63.Range.Font.Bold = 0;
+                    oPara63.Range.Font.Name = "Arial";
+                    oPara63.Range.Font.Size = 8;
+                    mstr = "“Where an offence under this Decree is committed by a body of persons then every president, vice president, chairman, vice chairman, director or partner and every officer of that body shall also be guilty of that offence if he is proved to have directly or indirectly whether by any act or omission permitted to be done the act or omission which constitutes the offence.”";
+                    //mstr += "\r\n\r\nNot withstanding such exclusion the defaulter shall not be relieved from the liability for the payment of the arrears of subscriptions due and calculated up to the thirty-first day of December preceding exclusion of the member.";
+                    oPara63.Range.Text = mstr;
+                    oPara63.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara63.Range.InsertParagraphAfter();
+                    oPara63.Range.InsertAfter(Environment.NewLine);
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara613;
+                    oPara613 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara613.Format.SpaceAfter = 1;
+                    oPara613.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara613.Range.Font.Bold = 1;
+                    oPara613.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+                    oPara613.Range.Font.Name = "Arial";
+                    oPara613.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "Engineering Council Act, 2011, (Act 819) Section 13 (1) States";
+                    oPara613.Range.Text = mstr;
+                    oPara613.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    //oPara6.Range.InsertParagraphAfter();
+                    oPara613.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara64;
+                    oPara64 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara64.Format.SpaceAfter = 1;
+                    oPara64.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara64.Range.Font.Bold = 0;
+                    oPara64.Range.Font.Name = "Arial";
+                    oPara64.Range.Font.Size = 8;
+                    mstr = "(1)A person shall not offer engineering services or practice engineering unless that person is registered in accordance with this Act.";
+                    oPara64.Range.Text = mstr;
+                    oPara64.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara64.Range.InsertParagraphAfter();
+                    oPara64.Range.InsertAfter(Environment.NewLine);
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara614;
+                    oPara614 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara614.Format.SpaceAfter = 1;
+                    oPara614.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara614.Range.Font.Bold = 1;
+                    oPara614.Range.Font.Underline = Microsoft.Office.Interop.Word.WdUnderline.wdUnderlineSingle;
+                    oPara614.Range.Font.Name = "Arial";
+                    oPara614.Range.Font.Size = 8;
+                    mstr = "";
+                    mstr += "Engineering Council Act, 2011, (Act 819) Section 33 (1) States";
+                    oPara614.Range.Text = mstr;
+                    oPara614.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    //oPara6.Range.InsertParagraphAfter();
+                    oPara614.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara65;
+                    oPara65 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara65.Format.SpaceAfter = 1;
+                    oPara65.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara65.Range.Font.Bold = 0;
+                    oPara65.Range.Font.Name = "Arial";
+                    oPara65.Range.Font.Size = 8;
+                    mstr = "Subject to this Act, a person shall not operate an engineering firm, unless there is a registered engineering practitioner in partnership, joint venture or other permanent association with that person.";
+                    oPara65.Range.Text = mstr;
+                    oPara65.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara65.Range.InsertParagraphAfter();
+                    oPara65.Range.InsertAfter(Environment.NewLine);
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog += ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
+        private static void letterDueDlgncGhIE(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+                                                 //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "GhIE/PF";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Executive Secretary-" + Global.getPosHldrName("Executive Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                int a = 0;
+                int majCnter = 0;
+                for (a = 0; a < 1; a++)
+                {
+                    majCnter += 1;
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    string refNum = mnDtSt.Tables[0].Rows[a][0].ToString();
+                    // Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                    //int.TryParse(num, out refNum);
+                    //refNum++;
+                    strSB += (prfx + " " + refNum.PadLeft(5, '0')) + "\r\n\r\n";
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+
+                    string fullNm = mnDtSt.Tables[0].Rows[a][1].ToString();
+                    string prsnAddrs = "";
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    strSB += (prsnAddrs) + "\r\n\r\n";
+                    strSB += ("Dear Sir/Madam,") + "\r\n\r\n";
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    oPara2.Range.Text = "LETTER FOR DUE DILIGENCE";
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 11;
+                    //string mstr = Environment.NewLine;
+                    string mstr = "The Ghana Institution of Engineers has received an application from " + fullNm +
+                      " to become a member of the Institution. You will find attached the certificate he presented in consideration of his application.";
+                    //mstr += Environment.NewLine;
+                    //mstr += "New entrants to this class are required to pay the following:";
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara31;
+                    oPara31 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara31.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara31.Range.Font.Bold = 0;
+                    oPara31.Range.Font.Name = "Arial";
+                    oPara31.Range.Font.Size = 11;
+                    //string mstr = Environment.NewLine;
+                    mstr = "To enable us process his application, we would be grateful if you could kindly confirm the certificate attached and also provide us with the course outline.\r\n\r\n\r\nWe look forward to your early response.";
+
+                    oPara31.Range.Text = (mstr);
+                    oPara31.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara31.Range.InsertParagraphAfter();
+                    oPara31.Range.InsertAfter(Environment.NewLine);
+                    oPara31.Range.InsertAfter(Environment.NewLine);
+
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 11;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 11;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Executive Secretary");
+                    strSB += "\r\n";
+                    strSB += "Executive Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
+                    Global.minimizeMemory();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog += ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
+        private static void letterAttstnGhIE(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc";
+                /* \endofdoc is a predefined bookmark */
+                //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "GhIE/PF";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Executive Secretary-" + Global.getPosHldrName("Executive Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                int a = 0;
+                int majCnter = 0;
+                for (a = 0; a < 1; a++)
+                {
+                    majCnter += 1;
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    string refNum = mnDtSt.Tables[0].Rows[a][0].ToString();
+                    // Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                    //int.TryParse(num, out refNum);
+                    //refNum++;
+                    strSB += (prfx + " " + refNum.PadLeft(5, '0')) + "\r\n\r\n";
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+
+                    string fullNm = mnDtSt.Tables[0].Rows[a][1].ToString();
+                    string prsnAddrs = "";
+                    string heshe = "he";
+                    //mnDtSt.Tables[0].Rows[0][12].ToString()
+                    if (mnDtSt.Tables[0].Rows[0][3].ToString() == "Female")
+                    {
+                        heshe = "she";
+                    }
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    strSB += (prsnAddrs) + "\r\n\r\n";
+                    strSB += ("Dear Sir/Madam,") + "\r\n\r\n";
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    oPara2.Range.Text = "LETTER OF ATTESTATION - " + fullNm;
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara21;
+                    oPara21 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara21.Format.SpaceAfter = 1;
+                    oPara21.Range.Font.Bold = 0;
+                    oPara21.Range.Font.Name = "Arial";
+                    oPara21.Range.Font.Size = 10;
+                    oPara21.Range.Text = "";
+                    oPara21.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara21.Range.InsertAfter(Environment.NewLine);
+                    //oPara21.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 11;
+                    //string mstr = Environment.NewLine;
+                    string mstr = "We write to confirm that " + fullNm + ", " +
+                      mnDtSt.Tables[0].Rows[0][12].ToString() + " is " + mnDtSt.Tables[0].Rows[0][10].ToString()
+                      + " " + mnDtSt.Tables[0].Rows[0][2].ToString() +
+                      " of Good Standing of the Ghana Institution of Engineers (GhIE) with registration number " +
+                      mnDtSt.Tables[0].Rows[0][0].ToString() + ".\r\n\r\n" + fullNm + ", " +
+                      mnDtSt.Tables[0].Rows[0][12].ToString() + " is " + mnDtSt.Tables[0].Rows[0][10].ToString()
+                      + " " + mnDtSt.Tables[0].Rows[0][11].ToString() +
+                      " Engineer and " + heshe + " is competent to undertake any high level professional assignment/project in his field.\r\n\r\nWe would be grateful for any assistance that you could give to " + fullNm
+                      + "." + "\r\n\r\nWe anticipate your kind cooperation.";
+                    //mstr += Environment.NewLine;
+                    //mstr += "New entrants to this class are required to pay the following:";
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 11;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 11;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Executive Secretary");
+                    strSB += "\r\n";
+                    strSB += "Executive Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    //Global.updtEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"), refNum.ToString().PadLeft(5, '0'));
+
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
+                    Global.minimizeMemory();
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.errorLog += ex.InnerException + "\r\n" + ex.StackTrace;
+                Global.writeToLog();
+            }
+        }
+
+        private static void annualDuesLeviesKoM(DataSet mnDtSt, string wrdFileNm)
+        {
+            try
+            {
+                //this.cancelButton.Text = "Cancel";
+                //this.progressLabel.Text = "Exporting Report to Word Document...---0% Complete";
+                ////this.progressBar1.Value = (int)(((Decimal)j / (Decimal)l) * 100);
+                System.Windows.Forms.Application.DoEvents();
+                Global.errorLog += "Inside Letter";
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+                                                 //Global.writeToLog();
+                Microsoft.Office.Interop.Word.Application oWord = new Microsoft.Office.Interop.Word.Application();
+                oWord.Visible = false;
+                //oWord.Activate();
+                //oWord.ShowMe();
+                object s_missing = System.Reflection.Missing.Value;
+                object lnkToFile = false;
+                object saveWithDoc = true;
+                object oFalse = false;
+                object oTrue = true;
+
+                Microsoft.Office.Interop.Word.Document oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+
+                //SETTING FOCUES ON THE PAGE HEADER TO EMBED THE WATERMARK
+
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekCurrentPageHeader;
+                //THE LOGO IS ASSIGNED TO A SHAPE OBJECT SO THAT WE CAN USE ALL THE
+                //SHAPE FORMATTING OPTIONS PRESENT FOR THE SHAPE OBJECT
+                Word.InlineShape logoCustom = null;
+                //THE PATH OF THE LOGO FILE TO BE EMBEDDED IN THE HEADER
+                String logoPath = Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png";
+                System.IO.File.Copy(Global.getOrgImgsDrctry() + @"\" + Global.UsrsOrg_ID.ToString() + ".png",
+                  Global.getRptDrctry() + @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png", true);
+                Global.errorLog += logoPath;
+                Global.writeToLog();
+                if (Global.callngAppType == "DESKTOP")
+                {
+                    Global.upldImgsFTP(9, Global.getRptDrctry(), @"\amcharts_2100\images\" + Global.UsrsOrg_ID.ToString() + ".png");
+                }
+                Color c = Color.FromArgb(0, 112, 155);
+                var myWdColor = (Microsoft.Office.Interop.Word.WdColor)(c.R + 0x100 * c.G + 0x10000 * c.B);
+                //Org Name
+                string orgNm = Global.getOrgName(Global.UsrsOrg_ID);
+                string resAddrs = Global.getOrgResAddrs(Global.UsrsOrg_ID);
+                string pstl = Global.getOrgPstlAddrs(Global.UsrsOrg_ID);
+                //Contacts Nos
+                string cntcts = Global.getOrgContactNos(Global.UsrsOrg_ID);
+                //Email Address
+                string email = Global.getOrgEmailAddrs(Global.UsrsOrg_ID);
+                string webste = Global.getOrgWebsite(Global.UsrsOrg_ID);
+                string prfx = "KoM";
+                //int refNum = 0;
+
+
+                //Add header into the document
+                foreach (Microsoft.Office.Interop.Word.Section section in oDoc.Sections)
+                {
+                    //Get the header range and add the header details.
+                    Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, ref oMissing, ref oMissing, ref oMissing);
+                    headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    headerRange.Font.Color = myWdColor;
+                    headerRange.Font.Size = 8;
+                    //headerRange.Text = "Header text goes here";
+
+                    //Create a 5X5 table and insert some dummy record
+                    Word.Table firstTable = oDoc.Tables.Add(headerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].Color = myWdColor;
+                    firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderBottom].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    foreach (Word.Row row in firstTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = 70;
+                                logoCustom = cell.Range.InlineShapes.AddPicture(logoPath, ref oFalse, ref oTrue, ref oMissing);
+                                logoCustom.Select();
+                                logoCustom.ScaleWidth = 23;
+                                logoCustom.ScaleHeight = 23;
+                            }
+                            //Data row
+                            else
+                            {
+                                Word.Table firstTable1 = oDoc.Tables.Add(cell.Range, 2, 2, ref s_missing, ref s_missing);
+                                //object bfrRow = Microsoft.Office.Interop.Word.Row;
+                                firstTable1.Rows.Add(ref s_missing);
+                                firstTable1.Rows[1].Cells[1].Width = 400;
+                                firstTable1.Rows[1].Cells[1].Range.Font.Size = 15;
+                                firstTable1.Rows[1].Cells[1].Range.Text = orgNm.Replace("\r\n", "");
+                                firstTable1.Rows[1].Cells[1].Borders.Enable = 0;
+                                firstTable1.Rows[2].Cells[1].Width = 400;
+                                firstTable1.Rows[2].Cells[1].Range.Font.Size = 8;
+                                //firstTable1.Rows[2].Cells[1].Range.Text = resAddrs.Replace("\r\n", "");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + resAddrs.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + pstl.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + cntcts.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" " + "\r\n");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter("  " + email.Replace("\r\n", ""));
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(" ");
+                                firstTable1.Rows[2].Cells[1].Range.InsertAfter(", Website: " + webste.Replace("\r\n", ""));
+
+                                firstTable1.Rows[2].Cells[1].Borders.Enable = 0;
+
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                                //firstTable1.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                                cell.Width = 430;
+                                //cell.Range.InsertAfter("\r\n");
+                                //cell.Range.InsertAfter(" " + orgNm.Replace("\r\n", ""));
+                                //cell.Range.InsertAfter(" " + "\r\n");
+                                //cell.Range.InsertAfter("\r\n");
+                            }
+                        }
+                    }
+                }
+
+                //Add the footers into the document
+                foreach (Microsoft.Office.Interop.Word.Section wordSection in oDoc.Sections)
+                {
+                    //Get the footer range and add the footer details.
+                    Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.Color = myWdColor;
+                    footerRange.Font.Size = 10;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //footerRange.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    Word.Table footerTable = oDoc.Tables.Add(footerRange, 1, 2, ref s_missing, ref s_missing);
+
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    footerTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].Color = myWdColor;
+                    //firstTable.Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineWidth = Microsoft.Office.Interop.Word.WdLineWidth.wdLineWidth150pt;
+                    string prsdnt = "President-" + Global.getPosHldrName("President");
+                    string execSec = "Finance Secretary-" + Global.getPosHldrName("Finance Secretary");
+                    int prsPortn = (int)(((double)prsdnt.Length / (double)(prsdnt.Length + execSec.Length)) * 500);
+
+                    foreach (Word.Row row in footerTable.Rows)
+                    {
+                        foreach (Word.Cell cell in row.Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 1;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Tahoma";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.Color = myWdColor;
+                            //cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            if (cell.ColumnIndex == 1)
+                            {
+                                cell.Width = prsPortn;
+                                cell.Range.Text = prsdnt;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                            }
+                            //Data row
+                            else
+                            {
+                                cell.Width = 500 - prsPortn;
+                                cell.Range.Text = execSec;
+                                cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            }
+                        }
+                    }
+                }
+
+
+                //SETTING FOCUES BACK TO DOCUMENT
+                oWord.ActiveWindow.ActivePane.View.SeekView = Word.WdSeekView.wdSeekMainDocument;
+                oWord.ActiveWindow.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceSingle;
+                oWord.ActiveWindow.Selection.ParagraphFormat.SpaceAfter = 0.2F;
+                oDoc.PageSetup.Orientation = Microsoft.Office.Interop.Word.WdOrientation.wdOrientPortrait;
+                /*
+                1. Select overall score and overall rating
+                2. select all sub items to know the number
+                3. select all sub sub observations etc
+                4. loop through the sub-major items and fill the table accordingly
+                5. within this loop, go through the sub sub findings and display them as well*/
+
+                int a = 0;
+                int majCnter = 0;
+                for (a = 0; a < 1; a++)
+                {
+                    majCnter += 1;
+                    Microsoft.Office.Interop.Word.Paragraph oPara1;
+                    oPara1 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara1.Range.Font.Bold = 0;
+                    oPara1.Range.Font.Name = "Arial";
+                    oPara1.Range.Font.Size = 12;
+                    //oPara1.Range.Text = majCnter.ToString() + ".0   " + selDetDtSt.Tables[0].Rows[a][1].ToString();
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //StringBuilder strSB = new StringBuilder();
+                    string strSB = "";
+                    //strSB.AppendLine("\r\n");
+                    string refNum = mnDtSt.Tables[0].Rows[a][0].ToString();// Global.getEnbldPssblValDesc(prfx, Global.getEnbldLovID("Reference Numbers for Letters"));
+                                                                           //int.TryParse(num, out refNum);
+                                                                           //refNum++;
+                    strSB += (prfx + " " + refNum.ToString().PadLeft(5, '0')) + "\r\n\r\n";
+                    //" (" + Global.getGhIEGradeSymbol(mnDtSt.Tables[0].Rows[a][2].ToString()) + ")" +
+                    strSB += (Global.getFrmtdDB_Date_time().Substring(0, 11)) + "\r\n\r\n";
+                    // + " (" + mnDtSt.Tables[0].Rows[a][0].ToString() + ")"
+                    string fullNm = mnDtSt.Tables[0].Rows[a][1].ToString();
+                    string prsnAddrs = mnDtSt.Tables[0].Rows[a][15].ToString() + "\r\n" + mnDtSt.Tables[0].Rows[a][5].ToString();
+                    if (prsnAddrs == "")
+                    {
+                        prsnAddrs = "<<ADDRESS>>";
+                    }
+                    //string prsnAddrs = fullNm + " (" + mnDtSt.Tables[0].Rows[a][2].ToString() + ")" + mnDtSt.Tables[0].Rows[a][5].ToString() + "" + mnDtSt.Tables[0].Rows[a][5].ToString();
+
+                    strSB += (fullNm + "\r\n" + prsnAddrs).Replace("\r\n\r\n", "\r\n") + "\r\n\r\n";
+                    //if (mnDtSt.Tables[0].Rows[a][3].ToString() == "Female")
+                    //{
+                    //  strSB += ("Dear Madam,") + "\r\n\r\n";
+                    //}
+                    //else
+                    //{
+                    //}
+                    strSB += ("Dear Member,") + "\r\n";
+                    oPara1.Range.Text = strSB;
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+                    //oPara1.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara2;
+                    oPara2 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara2.Format.SpaceAfter = 1;
+                    oPara2.Range.Font.Bold = 1;
+                    oPara2.Range.Font.Name = "Arial";
+                    oPara2.Range.Font.Size = 12;
+                    string grdNm = mnDtSt.Tables[0].Rows[a][2].ToString();
+                    string artcl = mnDtSt.Tables[0].Rows[a][10].ToString().ToUpper();
+                    oPara2.Range.Text = "OUTSTANDING DUES BALANCE";
+                    oPara2.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+                    oPara2.Range.InsertParagraphAfter();
+                    //oPara2.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara3;
+                    oPara3 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara3.Format.SpaceAfter = 1;
+                    //oPara3.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara3.Range.Font.Bold = 0;
+                    oPara3.Range.Font.Name = "Arial";
+                    oPara3.Range.Font.Size = 10;
+                    //string mstr = Environment.NewLine;
+                    string mstr = "Please find below your Outstanding Dues Balance from previous years and including the current year: ";
+                    //mstr += Environment.NewLine;
+                    //mstr += "New entrants to this class are required to pay the following:";
+
+                    oPara3.Range.Text = (mstr);
+                    oPara3.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    //oPara3.Range.InsertParagraphAfter();
+                    oPara3.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara4;
+                    oPara4 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara4.Format.SpaceAfter = 1;
+                    oPara4.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara4.Range.Font.Bold = 0;
+                    oPara4.Range.Font.Name = "Arial";
+                    oPara4.Range.Font.Size = 10;
+                    oPara4.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                    int ttl = mnDtSt.Tables[0].Rows.Count;
+                    double ttl1 = 0;
+
+
+                    Word.Table scndTable = oDoc.Tables.Add(oPara4.Range, 1, 3, ref s_missing, ref s_missing);
+                    scndTable.BottomPadding = 0;
+                    scndTable.Spacing = 0;
+
+                    scndTable.Borders.Enable = 1;
+                    string[] itms = new string[ttl + 1];
+                    double[] amnt = new double[ttl + 1];
+                    //Word.Row row in scndTable.Rows
+                    for (int k = 0; k < ttl + 2; k++)
+                    {
+                        if (k == 0)
+                        {
+                            itms[k] = "Description";
+                            amnt[k] = 0;
+                        }
+                        else if (k <= ttl)
+                        {
+                            itms[k] = mnDtSt.Tables[0].Rows[k - 1][11].ToString();
+                            amnt[k] = double.Parse(mnDtSt.Tables[0].Rows[k - 1][13].ToString());
+                            //Global.errorLog += itms[k] + "/" + amnt[k].ToString();
+                            //Global.writeToLog();
+                        }
+                        if (k > 0)
+                        {
+                            scndTable.Rows.Add(ref s_missing);
+                        }
+                        //scndTable.Rows[k + 1].Height = 0.2F;
+                        foreach (Word.Cell cell in scndTable.Rows[k + 1].Cells)
+                        {
+                            //Header row
+                            cell.Range.Font.Bold = 0;
+                            //other format properties goes here
+                            cell.Range.Font.Name = "Arial";
+                            cell.Range.Font.Size = 8;
+                            cell.Range.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdAuto;
+                            //Center alignment for the Header cells
+                            cell.VerticalAlignment = Microsoft.Office.Interop.Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                            cell.Range.ParagraphFormat.SpaceAfter = 1;
+                            if (k == 0)
+                            {
+                                cell.Range.Font.Bold = 1;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorGray25;
+                                if (cell.ColumnIndex == 1)
+                                {
+                                    cell.Width = 40;
+                                    cell.Range.Text = "No.";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else if (cell.ColumnIndex == 2)
+                                {
+                                    cell.Width = 300;
+                                    cell.Range.Text = "Description";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                }
+                                else
+                                {
+                                    cell.Width = 100;
+                                    cell.Range.Text = "Amount (GH₵)";
+                                    cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                }
+                            }
+                            else
+                            {
+                                cell.Range.Font.Bold = 0;
+                                cell.Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                                if (k <= ttl)
+                                {
+                                    if (cell.ColumnIndex == 1)
+                                    {
+                                        cell.Width = 40;
+                                        cell.Range.Text = (k).ToString();
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else if (cell.ColumnIndex == 2)
+                                    {
+                                        cell.Width = 300;
+                                        cell.Range.Text = itms[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                                    }
+                                    else
+                                    {
+                                        cell.Width = 100;
+                                        cell.Range.Text = amnt[k].ToString("#,##0.00");
+                                        ttl1 += amnt[k];
+                                        cell.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                                    }
+                                }
+                            }
+                        }
+                        //if (row.Index > 1)
+                        //{
+                        //  k++;
+                        //}
+                        if (k == ttl + 2 - 1)
+                        {
+                            //scndTable.Rows.Add(ref s_missing);
+                            scndTable.Cell((k + 1), 1).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 1).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 1).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 1).Width = 40;
+                            scndTable.Cell((k + 1), 1).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 1).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 1).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 1).Range.Text = " ";
+
+                            scndTable.Cell((k + 1), 2).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 2).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 2).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 2).Width = 300;
+                            scndTable.Cell((k + 1), 2).Borders.Enable = 0;
+                            scndTable.Cell((k + 1), 2).Borders[Microsoft.Office.Interop.Word.WdBorderType.wdBorderTop].LineStyle = Microsoft.Office.Interop.Word.WdLineStyle.wdLineStyleSingle;
+                            scndTable.Cell((k + 1), 2).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 2).Range.Text = "PAYMENT DUE";
+
+                            scndTable.Cell((k + 1), 3).Shading.BackgroundPatternColor = Microsoft.Office.Interop.Word.WdColor.wdColorWhite;
+                            scndTable.Cell((k + 1), 3).Range.Font.Bold = 1;
+                            scndTable.Cell((k + 1), 3).Range.Font.Size = 9;
+                            scndTable.Cell((k + 1), 3).Borders.Enable = 1;
+                            scndTable.Cell((k + 1), 3).Width = 100;
+                            scndTable.Cell((k + 1), 3).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight;
+                            scndTable.Cell((k + 1), 3).Range.Text = "GH₵" + ttl1.ToString("#,##0.00");
+                            //}
+                            break;
+                        }
+                    }
+
+                    oPara4.Range.InsertParagraphAfter();
+                    //oPara4.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara5;
+                    oPara5 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara5.Format.SpaceAfter = 1;
+                    oPara5.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara5.Range.Font.Bold = 1;
+                    oPara5.Range.Font.Name = "Arial";
+                    oPara5.Range.Font.Size = 10;
+                    mstr = "";
+                    mstr += "Counting on your usual cooperation for prompt payment.";
+                    oPara5.Range.Text = mstr;
+                    oPara5.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oPara5.Range.InsertParagraphAfter();
+                    oPara5.Range.InsertParagraphAfter();
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara7;
+                    oPara7 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara7.Format.SpaceAfter = 1;
+                    oPara7.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara7.Range.Font.Bold = 0;
+                    oPara7.Range.Font.Name = "Arial";
+                    oPara7.Range.Font.Size = 10;
+                    mstr = "";
+                    mstr += "Yours faithfully, ";
+                    oPara7.Range.Text = mstr;
+                    oPara7.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+                    oPara7.Range.InsertAfter(Environment.NewLine);
+
+                    Microsoft.Office.Interop.Word.Paragraph oPara8;
+                    oPara8 = oDoc.Paragraphs.Add(ref oMissing);
+                    oPara8.Format.SpaceAfter = 0;
+                    oPara8.Format.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.Font.Bold = 1;
+                    oPara8.Range.Font.Name = "Arial";
+                    oPara8.Range.Font.Italic = 1;
+                    oPara8.Range.Font.Size = 10;
+                    strSB = "";
+                    strSB += Global.getPosHldrName("Finance Secretary");
+                    strSB += "\r\n";
+                    strSB += "Finance Secretary";
+                    oPara8.Range.Text = strSB;
+                    oPara8.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                    oPara8.Range.InsertParagraphAfter();
+                    oPara8.Range.InsertAfter(Environment.NewLine);
+
+                }
+
+
+                //end p;
+
+                //this.progressLabel.Text = "Exporting Report to Word Document---....100% Complete";
+                //this.progressBar1.Value = 100;
+                //this.cancelButton.Text = "Finish";
+                if (true)
+                {
+                    object svFleNm = (object)wrdFileNm;
+                    //Global.errorLog += svFleNm.ToString();
+                    Global.updateRptRn(Global.runID, "Storing Output...", 80);
+                    object flFrmt = s_missing;
+                    if (wrdFileNm.Contains(".pdf"))
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
+                    }
+                    else
+                    {
+                        flFrmt = (object)Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocument;
+                    }
+                    object nllVal = null;
+                    oDoc.SaveAs(ref svFleNm, ref flFrmt,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing, ref s_missing,
+                        ref s_missing, ref s_missing);
+                    if (Global.callngAppType == "DESKTOP")
+                    {
+                        if (wrdFileNm.Contains(".pdf"))
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".pdf");
+                        }
+                        else
+                        {
+                            Global.upldImgsFTP(9, Global.getRptDrctry(), Global.runID.ToString() + ".doc");
+                        }
+                    }
+                    //worker.ReportProgress(80);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSaving Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateRptRnOutpt(rpt_run_id, rptOutpt);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Saved Report Output...", log_tbl, dateStr, Global.rnUser_ID);
+                    //          Global.updateLogMsg(msg_id,
+                    //"\r\n\r\nSuccessfully Completed Process/Report Run...", log_tbl, dateStr, Global.rnUser_ID);
+                    object savChngs = Word.WdSaveOptions.wdDoNotSaveChanges;
+                    oDoc.Close(ref savChngs, ref s_missing, ref s_missing);
+                    oDoc = null;
+                    oWord.Quit(ref savChngs, ref s_missing, ref s_missing);
+                    oWord = null;
+                    Global.updateRptRn(Global.runID, "Completed!", 100);
+
                 }
             }
             catch (Exception ex)
